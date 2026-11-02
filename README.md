@@ -50,7 +50,7 @@ Subsystems: `engine`, `fuel_energy`, `hull_armor`, `life_support`, `navigation_c
 
 Place a `ship_hatch` block (creative: Building Blocks tab) and right-click it to board the ship. You arrive in the sealed capsule room in the `intersolarsystem:ship_interior` dimension. Right-clicking the hatch in the wall leaves the ship again, next to the hatch you boarded through. If that hatch is gone, you are put at the world spawn. The hatch cannot be broken inside the ship.
 
-The ship save (`ship_state.dat`) is format version 5; older saves are migrated when loaded (`ShipStateMigrations`).
+The ship save (`ship_state.dat`) is format version 6; older saves are migrated when loaded (`ShipStateMigrations`).
 
 ## Flight
 
@@ -71,6 +71,7 @@ The technology is salvaged, not invented. Chests in abandoned mineshafts, dungeo
 | Repair Station | 5 scrap metal, 1 iron ingot, 2 salvaged wiring, 1 salvaged circuit |
 | Rusted Panel (x2) | 4 scrap metal; a panel breaks back down into 2 scrap metal |
 | Multitool | 2 iron ingots, 1 salvaged circuit, 1 salvaged wiring, 3 scrap metal |
+| Navigation Console | 2 glass panes, 1 compass, 2 salvaged circuits, 1 salvaged wiring, 3 scrap metal |
 
 ## Hidden faults, diagnostics and test hops
 
@@ -92,6 +93,17 @@ Using a repair kit on an incident opens a minigame; the server checks the answer
 | Fire | none: the kit puts it out |
 
 **Multitool** (craftable, 48 uses): held in the off hand during a repair, a light fault (subsystem at 40% or above) is fixed without a minigame, and harder ones get a smaller board.
+
+## Navigation and travel
+
+The **Navigation Console** (inside the ship; craftable: glass panes, a compass, salvaged circuits, wiring and scrap) opens the star chart: the Solar System as an orrery strip, every destination with its travel time for this ship's engine, the current launch window and a launch button.
+
+- **Time:** one real day of travel is 2400 ticks (the agreed 10x speed-up). The engine tier divides it (x1, x3, x10, x30; `/iss ship engine <1-4>` for testing). Outside the launch window the trip takes up to 50% longer; the console counts down to the next best window. With the first engine the Moon is ~6 minutes away, Mars ~7 hours.
+- **Destinations now:** surface flights on Earth (`/iss ship fly <x> <z>`) and a **free-return loop around the Moon** (out, around and back home, ~12 minutes with the first engine). The other bodies are listed with their times but locked until their worlds exist.
+- **Travel events** (flights over two minutes, rolled once a minute from the flight's seed): **meteor shower** (right-click the navigation console within 30 s to steer clear, costs a little fuel; otherwise the hull and sensors take hits), **solar flare** (electronics and life support damaged), **system failure** (an incident on the worst subsystem), **drifting wreck** (salvage drifts in through the airlock), **strange signals** (fragments of what happened to the other expeditions).
+- Time follows the world's game time: if the server pauses, so does the journey.
+
+The ship save is format version 6 (adds the engine tier and the flight plan).
 
 ## Ship HUD
 
