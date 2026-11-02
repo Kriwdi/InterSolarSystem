@@ -103,7 +103,23 @@ The **Navigation Console** (inside the ship; craftable: glass panes, a compass, 
 - **Travel events** (flights over two minutes, rolled once a minute from the flight's seed): **meteor shower** (right-click the navigation console within 30 s to steer clear, costs a little fuel; otherwise the hull and sensors take hits), **solar flare** (electronics and life support damaged), **system failure** (an incident on the worst subsystem), **drifting wreck** (salvage drifts in through the airlock), **strange signals** (fragments of what happened to the other expeditions).
 - Time follows the world's game time: if the server pauses, so does the journey.
 
-The ship save is format version 6 (adds the engine tier and the flight plan).
+The ship save is format version 6 (adds the engine tier, the flight plan, the landing dimension and the last surface site).
+
+## Earth orbit and the ISS
+
+Choose **Earth Orbit (ISS)** on the navigation console: the ship climbs to orbit (30 s with the first engine) and docks at the derelict International Space Station in the orbit dimension. From orbit, choose **Earth** to come back down to the last landing site; the Moon loop returns to where it started.
+
+- **Orbit:** black sky with the sun, moon and stars, a day-night cycle, no mobs. **Microgravity:** gravity at 15% and no fall damage. Inside the ship the stabiliser gives artificial gravity; below 20% the ship's gravity drops too.
+- **Vacuum:** without all four space suit pieces and oxygen, the air runs out in about 15 seconds, then you drown.
+- **Space suit** (helmet, suit, trousers, boots; craftable, or found on the ISS): the suit is the oxygen tank, one point per second in vacuum, about ten minutes full. Inside the ship, with life support at 20% or more, it refills quickly. An O₂ gauge shows above the hotbar; in orbit without a sealed suit the HUD flashes a vacuum warning.
+- **The ISS:** built on the first docking. Harmony with the docking port and platform, then Destiny, Unity and the gold-foil Russian segment (Zarya, Zvezda); windows with the Earth's limb, ceiling lights, breached hull plates, the main truss with two masts and four solar wings with missing cells. Six supply containers hold salvage, food, suit parts and multitools. Every station block can be mined for salvage.
+
+| Recipe | Ingredients |
+|---|---|
+| Space Helmet | 2 scrap metal, 1 salvaged circuit, 2 wool, 1 glass pane |
+| Space Suit | 5 wool, 2 salvaged wiring, 1 iron ingot, 1 scrap metal |
+| Space Suit Trousers | 6 wool, 1 scrap metal |
+| Space Boots | 2 wool, 2 scrap metal, 2 leather |
 
 ## Ship HUD
 
