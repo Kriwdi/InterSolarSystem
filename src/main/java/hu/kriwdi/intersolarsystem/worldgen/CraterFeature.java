@@ -17,10 +17,13 @@ import hu.kriwdi.intersolarsystem.content.ModBlocks;
 
 /**
  * An impact crater: a bowl carved into the surface, a raised rim, and bright fresh ejecta around it (young craters
- * also throw rays). Radius at most 11 so the crater stays inside the area a feature may change.
+ * also throw rays). A feature may only touch the chunks next to its own, so everything stays within
+ * {@link #MAX_REACH} blocks of the centre: radius at most 9, rays only where they still fit.
  */
 public record CraterFeature(int minRadius, int maxRadius) implements Feature {
-	public static final int LIMIT = 11;
+	public static final int LIMIT = 9;
+	/** The origin lies inside its chunk, and the neighbouring chunks reach 16 blocks further. */
+	public static final int MAX_REACH = 16;
 	public static final MapCodec<CraterFeature> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			Codec.intRange(2, LIMIT).fieldOf("min_radius").forGetter(CraterFeature::minRadius),
 			Codec.intRange(2, LIMIT).fieldOf("max_radius").forGetter(CraterFeature::maxRadius)
@@ -55,7 +58,9 @@ public record CraterFeature(int minRadius, int maxRadius) implements Feature {
 		int high = Math.max(minRadius, maxRadius);
 		int radius = low + random.nextInt(high - low + 1);
 		boolean young = random.nextInt(3) == 0;
-		int reach = (int) Math.ceil(radius * (1.0 + RIM_WIDTH)) + (young ? 3 : 0);
+		int rimReach = (int) Math.ceil(radius * (1.0 + RIM_WIDTH));
+		boolean rays = young && rimReach + 3 <= MAX_REACH;
+		int reach = Math.min(MAX_REACH, rimReach + (rays ? 3 : 0));
 		int centreTop = origin.getY() - 1;
 		BlockState fresh = ModBlocks.FRESH_REGOLITH.defaultBlockState();
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
@@ -82,7 +87,7 @@ public record CraterFeature(int minRadius, int maxRadius) implements Feature {
 					}
 					pos.set(x, top, z);
 					level.setBlock(pos, fresh, 2);
-				} else if (young) {
+				} else if (rays) {
 					// Rays of bright ejecta: thin spokes reaching past the rim.
 					double angle = Math.atan2(dz, dx);
 					if (Math.abs(Math.sin(angle * 4 + rayPhase)) > 0.94 && random.nextInt(3) > 0) {

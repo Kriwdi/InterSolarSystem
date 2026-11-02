@@ -56,10 +56,15 @@ public final class MoonSites {
 	private MoonSites() {
 	}
 
+	/** The base's west end wall stands on its own column; it is there once the sites are built. */
 	public static boolean built(ServerLevel moon) {
-		BlockPos marker = surface(moon, BASE[0], BASE[1]);
-		return moon.getBlockState(marker.below()).is(ModBlocks.STATION_HULL)
-				|| moon.getBlockState(marker).is(ModBlocks.STATION_HULL);
+		BlockPos top = surface(moon, BASE[0] - 9, BASE[1] - 1);
+		for (int dy = 0; dy < 16; dy++) {
+			if (moon.getBlockState(top.below(dy)).is(ModBlocks.STATION_HULL)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/** Builds every site if Tranquility Base is not there yet. */
