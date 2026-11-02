@@ -1,1 +1,269 @@
-{"parent":"minecraft:block/cube_all","textures":{"all":"intersolarsystem:block/diagnostic_console"}}
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "intersolarsystem:block/diagnostic_console_cabinet",
+    "cab": "intersolarsystem:block/diagnostic_console_cabinet",
+    "keys": "intersolarsystem:block/diagnostic_console_keys",
+    "screen": "intersolarsystem:block/diagnostic_console_screen",
+    "housing": "intersolarsystem:block/diagnostic_console_housing",
+    "red": "intersolarsystem:block/ship_hatch_wheel"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        0,
+        2
+      ],
+      "to": [
+        15,
+        8,
+        16
+      ],
+      "faces": {
+        "north": {
+          "texture": "#cab",
+          "uv": [
+            1,
+            2,
+            15,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#cab",
+          "uv": [
+            0,
+            8,
+            14,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#cab",
+          "uv": [
+            1,
+            8,
+            15,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#cab",
+          "uv": [
+            2,
+            8,
+            16,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#cab"
+        },
+        "down": {
+          "texture": "#cab",
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "from": [
+        1,
+        7,
+        2
+      ],
+      "to": [
+        15,
+        9,
+        10
+      ],
+      "faces": {
+        "north": {
+          "texture": "#housing"
+        },
+        "east": {
+          "texture": "#housing"
+        },
+        "south": {
+          "texture": "#housing"
+        },
+        "west": {
+          "texture": "#housing"
+        },
+        "up": {
+          "texture": "#keys",
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ]
+        },
+        "down": {
+          "texture": "#housing"
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          8,
+          6
+        ],
+        "axis": "x",
+        "angle": 22.5
+      }
+    },
+    {
+      "from": [
+        2,
+        8,
+        11
+      ],
+      "to": [
+        14,
+        16,
+        15
+      ],
+      "faces": {
+        "north": {
+          "texture": "#housing"
+        },
+        "east": {
+          "texture": "#housing"
+        },
+        "south": {
+          "texture": "#housing"
+        },
+        "west": {
+          "texture": "#housing"
+        },
+        "up": {
+          "texture": "#housing"
+        },
+        "down": {
+          "texture": "#housing"
+        }
+      }
+    },
+    {
+      "from": [
+        3,
+        9,
+        10.9
+      ],
+      "to": [
+        13,
+        15,
+        11
+      ],
+      "faces": {
+        "north": {
+          "texture": "#screen",
+          "uv": [
+            1,
+            2,
+            15,
+            14
+          ]
+        }
+      },
+      "shade": false
+    },
+    {
+      "from": [
+        2,
+        15.5,
+        10
+      ],
+      "to": [
+        14,
+        16,
+        11
+      ],
+      "faces": {
+        "north": {
+          "texture": "#housing"
+        },
+        "east": {
+          "texture": "#housing"
+        },
+        "south": {
+          "texture": "#housing"
+        },
+        "west": {
+          "texture": "#housing"
+        },
+        "up": {
+          "texture": "#housing"
+        },
+        "down": {
+          "texture": "#housing"
+        }
+      }
+    },
+    {
+      "from": [
+        12.5,
+        16,
+        13
+      ],
+      "to": [
+        13.5,
+        19,
+        14
+      ],
+      "faces": {
+        "north": {
+          "texture": "#housing"
+        },
+        "east": {
+          "texture": "#housing"
+        },
+        "south": {
+          "texture": "#housing"
+        },
+        "west": {
+          "texture": "#housing"
+        },
+        "up": {
+          "texture": "#housing"
+        },
+        "down": {
+          "texture": "#housing"
+        }
+      }
+    },
+    {
+      "from": [
+        12.25,
+        19,
+        12.75
+      ],
+      "to": [
+        13.75,
+        20,
+        14.25
+      ],
+      "faces": {
+        "north": {
+          "texture": "#red"
+        },
+        "east": {
+          "texture": "#red"
+        },
+        "south": {
+          "texture": "#red"
+        },
+        "west": {
+          "texture": "#red"
+        },
+        "up": {
+          "texture": "#red"
+        },
+        "down": {
+          "texture": "#red"
+        }
+      }
+    }
+  ]
+}

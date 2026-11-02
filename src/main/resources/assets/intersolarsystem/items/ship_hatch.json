@@ -1,1 +1,6 @@
-{"model":{"type":"minecraft:model","model":"intersolarsystem:block/ship_hatch"}}
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "intersolarsystem:block/ship_hatch"
+  }
+}

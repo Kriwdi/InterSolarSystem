@@ -1,1 +1,6 @@
-{"parent":"minecraft:item/generated","textures":{"layer0":"intersolarsystem:item/salvaged_circuit"}}
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "intersolarsystem:item/salvaged_circuit"
+  }
+}

@@ -1,12 +1,14 @@
 package hu.kriwdi.intersolarsystem.ship;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 import hu.kriwdi.intersolarsystem.content.ModBlocks;
+import hu.kriwdi.intersolarsystem.content.ShipFacingBlock;
 import hu.kriwdi.intersolarsystem.ship.ShipInteriorLayout.Piece;
 import hu.kriwdi.intersolarsystem.ship.ShipInteriorLayout.Placement;
 
@@ -35,6 +37,13 @@ public final class ShipInteriorBuilder {
 		ShipInteriorLayout layout = ShipInteriorLayout.capsule();
 		fillIfAir(interior, layout.station(), ModBlocks.REPAIR_STATION.defaultBlockState());
 		fillIfAir(interior, layout.console(), ModBlocks.DIAGNOSTIC_CONSOLE.defaultBlockState());
+		// Rooms built before blocks could face a direction: turn the hatch to face into the room.
+		ShipInteriorLayout.Cell cell = layout.hatch();
+		BlockPos pos = ShipDimensions.ANCHOR.offset(cell.dx(), cell.dy(), cell.dz());
+		BlockState hatch = interior.getBlockState(pos);
+		if (hatch.getBlock() == ModBlocks.SHIP_HATCH && hatch.getValue(ShipFacingBlock.FACING) != Direction.SOUTH) {
+			interior.setBlock(pos, hatch.setValue(ShipFacingBlock.FACING, Direction.SOUTH), Block.UPDATE_ALL);
+		}
 	}
 
 	private static void fillIfAir(ServerLevel interior, ShipInteriorLayout.Cell cell, BlockState state) {
@@ -49,7 +58,8 @@ public final class ShipInteriorBuilder {
 		return switch (piece) {
 			case HULL_PANEL -> ModBlocks.RUSTED_PANEL.defaultBlockState();
 			case LIGHT -> Blocks.SEA_LANTERN.defaultBlockState();
-			case HATCH -> ModBlocks.SHIP_HATCH.defaultBlockState();
+			// The hatch is in the wall at z = 0 and faces into the room.
+			case HATCH -> ModBlocks.SHIP_HATCH.defaultBlockState().setValue(ShipFacingBlock.FACING, Direction.SOUTH);
 			case REPAIR_STATION -> ModBlocks.REPAIR_STATION.defaultBlockState();
 			case DIAGNOSTIC_CONSOLE -> ModBlocks.DIAGNOSTIC_CONSOLE.defaultBlockState();
 			case AIR -> Blocks.AIR.defaultBlockState();

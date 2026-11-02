@@ -1,1 +1,19 @@
-{"variants":{"":{"model":"intersolarsystem:block/ship_hatch"}}}
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/ship_hatch"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/ship_hatch",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/ship_hatch",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/ship_hatch",
+      "y": 270
+    }
+  }
+}

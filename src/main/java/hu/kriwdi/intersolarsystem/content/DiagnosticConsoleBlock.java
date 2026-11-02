@@ -17,9 +17,10 @@ import hu.kriwdi.intersolarsystem.ship.ShipRepair;
  * The ship's diagnostic console. Right-click: scan for hidden faults and estimate the takeoff risk. Sneak + right-click
  * (twice, to confirm): start a test hop. Works only inside the ship.
  */
-public class DiagnosticConsoleBlock extends ShipHullBlock {
+public class DiagnosticConsoleBlock extends ShipFacingBlock {
 	public DiagnosticConsoleBlock(Properties properties) {
-		super(properties);
+		// Desk with keyboard, and the monitor at the back (matches the model).
+		super(properties, new double[] {1, 0, 1, 15, 10, 16}, new double[] {2, 8, 10, 14, 16, 15});
 	}
 
 	@Override

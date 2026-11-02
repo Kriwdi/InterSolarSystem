@@ -27,11 +27,11 @@ public final class ModBlocks {
 					.pushReaction(PushReaction.IMMOVEABLE));
 
 	public static final Block REPAIR_STATION = register("repair_station", RepairStationBlock::new,
-			BlockBehaviour.Properties.of().strength(3.0F, 3600000.0F).sound(SoundType.METAL)
+			BlockBehaviour.Properties.of().strength(3.0F, 3600000.0F).sound(SoundType.METAL).noOcclusion()
 					.pushReaction(PushReaction.IMMOVEABLE));
 
 	public static final Block DIAGNOSTIC_CONSOLE = register("diagnostic_console", DiagnosticConsoleBlock::new,
-			BlockBehaviour.Properties.of().strength(3.0F, 3600000.0F).sound(SoundType.METAL).lightLevel(state -> 7)
+			BlockBehaviour.Properties.of().strength(3.0F, 3600000.0F).sound(SoundType.METAL).lightLevel(state -> 7).noOcclusion()
 					.pushReaction(PushReaction.IMMOVEABLE));
 
 	private ModBlocks() {

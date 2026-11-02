@@ -1,1 +1,19 @@
-{"variants":{"":{"model":"intersolarsystem:block/repair_station"}}}
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/repair_station"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/repair_station",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/repair_station",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/repair_station",
+      "y": 270
+    }
+  }
+}

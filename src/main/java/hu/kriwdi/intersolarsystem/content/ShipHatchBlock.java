@@ -11,7 +11,8 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import hu.kriwdi.intersolarsystem.ship.ShipBoarding;
 
-public class ShipHatchBlock extends ShipHullBlock {
+/** The ship's door. A full block (so a hatch in a hull wall keeps the wall sealed) with the valve wheel on its front. */
+public class ShipHatchBlock extends ShipFacingBlock {
 	public ShipHatchBlock(Properties properties) {
 		super(properties);
 	}

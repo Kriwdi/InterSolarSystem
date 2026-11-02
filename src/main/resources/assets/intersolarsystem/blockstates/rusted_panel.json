@@ -1,1 +1,17 @@
-{"variants":{"":{"model":"intersolarsystem:block/rusted_panel"}}}
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/rusted_panel",
+        "weight": 3
+      },
+      {
+        "model": "intersolarsystem:block/rusted_panel_2",
+        "weight": 2
+      },
+      {
+        "model": "intersolarsystem:block/rusted_panel_3"
+      }
+    ]
+  }
+}
