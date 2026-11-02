@@ -31,7 +31,7 @@ class ShipStateFaultsTest {
 		ShipState loaded = roundTrip(state);
 		assertEquals(state.diagnostics(), loaded.diagnostics());
 		assertEquals(ShipFlightKind.TEST, loaded.flightKind());
-		assertEquals(5, loaded.formatVersion());
+		assertEquals(ShipState.CURRENT_FORMAT_VERSION, loaded.formatVersion());
 	}
 
 	@Test
