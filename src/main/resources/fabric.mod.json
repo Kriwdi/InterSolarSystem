@@ -5,9 +5,9 @@
 	"name": "InterSolarSystem",
 	"description": "Post-apocalyptic space survival: salvage, repair and fly a ship from a dead Earth towards Proxima.",
 	"authors": [
-		"maku"
+		"Kriwdi"
 	],
-	"license": "CC0-1.0",
+	"license": "LicenseRef-All-Rights-Reserved",
 	"icon": "assets/intersolarsystem/icon.png",
 	"environment": "*",
 	"entrypoints": {
