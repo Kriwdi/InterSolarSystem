@@ -1,4 +1,11 @@
 # Classes whose signatures (public + protected) the API probe workflow prints (one per line).
-net.minecraft.client.gui.components.events.ContainerEventHandler
-net.minecraft.client.gui.components.events.GuiEventListener
-net.minecraft.client.KeyMapping
+net.minecraft.world.level.block.HorizontalDirectionalBlock
+net.minecraft.world.level.block.Block
+net.minecraft.world.level.block.state.BlockBehaviour
+net.minecraft.world.level.block.state.StateDefinition$Builder
+net.minecraft.world.item.context.BlockPlaceContext
+net.minecraft.world.phys.shapes.Shapes
+net.minecraft.world.level.block.state.properties.BlockStateProperties
+net.minecraft.world.level.block.Rotation
+net.minecraft.world.level.block.Mirror
+net.minecraft.core.Direction

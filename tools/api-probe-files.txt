@@ -1,1 +1,8 @@
 # Resource files printed from the jars (format references).
+assets/minecraft/blockstates/furnace.json
+assets/minecraft/models/block/lectern.json
+assets/minecraft/blockstates/lectern.json
+assets/minecraft/textures/block/sculk.png.mcmeta
+assets/minecraft/models/block/template_campfire.json
+assets/minecraft/items/compass.json
+assets/minecraft/models/block/grindstone.json
