@@ -70,6 +70,7 @@ The technology is salvaged, not invented. Chests in abandoned mineshafts, dungeo
 | Diagnostic Console | 5 scrap metal, 1 glass pane, 2 salvaged circuits, 1 redstone |
 | Repair Station | 5 scrap metal, 1 iron ingot, 2 salvaged wiring, 1 salvaged circuit |
 | Rusted Panel (x2) | 4 scrap metal; a panel breaks back down into 2 scrap metal |
+| Multitool | 2 iron ingots, 1 salvaged circuit, 1 salvaged wiring, 3 scrap metal |
 
 ## Hidden faults, diagnostics and test hops
 
@@ -79,9 +80,18 @@ A worn subsystem (below 70%) can pick up a **hidden fault** at every landing (up
 - **Test hop**: sneak + right-click the console twice within 5 seconds. The ship lifts off and lands back on the spot (10 s + 15 s + 5 s). Every hidden fault breaks out as an incident (as many as the incident limit allows), the takeoff risk is halved and the ship wears half as much.
 - Known faults are marked with a red warning sign on the HUD. A repair kit at the station fixes, in this order: the most urgent incident, a known hidden fault, the worst subsystem.
 
-## Wiring minigame
+## Repair minigames
 
-Using a repair kit on a **short circuit** opens a wiring board: click a wire end on the left, then the end of the same colour on the right. When all wires are joined, the server checks the answer. Correct: the incident is fixed and the kit is used up. Wrong: sparks, the subsystem loses 5% and the incident stays. Worse navigation/comms means more wires (3 at 70% and above, 4 from 35%, otherwise 5). The game does not pause while the board is open, and the kit must stay in the main hand.
+Using a repair kit on an incident opens a minigame; the server checks the answer, and only a correct one fixes the incident and uses up the kit. A failed repair costs the subsystem 5% and the incident stays. The game does not pause, and the kit must stay in the main hand. The worse the damaged subsystem, the bigger the board.
+
+| Incident | Minigame |
+|---|---|
+| Short circuit | **Wiring**: join each coloured terminal on the left to the same colour on the right |
+| Overheating | **Valve**: close the valve (button or space) while the sweeping needle is in the green band, once per round |
+| Leak, pressure loss | **Pressure**: move units through the valves until every tank sits on the yellow line, within a move limit |
+| Fire | none: the kit puts it out |
+
+**Multitool** (craftable, 48 uses): held in the off hand during a repair, a light fault (subsystem at 40% or above) is fixed without a minigame, and harder ones get a smaller board.
 
 ## Ship HUD
 
@@ -89,6 +99,7 @@ Inside the ship a panel in the top-left corner shows the flight phase and countd
 
 ## Development notes
 
+- **Art standard:** every block, item, structure and mob is detailed and shaped where it can be: models built from elements instead of plain cubes, facing directions, random texture variants, animated textures, shading and outlines in the pixel art. Textures come from `tools/art/make_textures.py`, block models and blockstates from `tools/art/make_models.py`, and `tools/art/render_model.py <model> <out.png> [facing]` renders an isometric preview without the game. `AssetsTest` validates all models, blockstates, item definitions and textures.
 - **Translations** live in one table, `ModLangTable` (all three languages per key). After editing it run `python3 tools/sync_lang.py` (or `./gradlew runDatagen`); `LangTableTest` fails if the committed lang files are out of date.
 - **Recipes** are plain data files in `src/main/resources/data/intersolarsystem/recipe`.
 - **CI** (`.github/workflows/build.yml`) builds, runs the unit tests and a dedicated-server smoke test that loads all recipes, loot and models and fails on any error from the mod.

@@ -102,3 +102,7 @@ Minden új funkciónak ezekhez kell igazodnia; ha ütközik velük, szólni kell
 - Új ötletek, amelyek nem az aktuális fázishoz tartoznak, az Ötletdobozba kerülnek, nem épülnek be.
 - Ha valami túl nagy falat, kockázatos, vagy a becslések irreálisak, azt ki kell mondani.
 - A leírt tervtől eltérő ötletet nem vezetünk be csendben: javaslat, indoklás, és a tulajdonos döntése.
+
+# LÁTVÁNYI ELV (2026-11-02)
+
+Minden struktúra, új tárgy, blokk és mob textúragazdag és részletes, és ahol lehet, formás: a "minden egy nagy kocka" helyett elemekből épített modellek, irányítható blokkok, véletlen textúraváltozatok, animált textúrák, árnyékolt és körvonalazott pixel-art, a modellhez illő ütközési forma. A Minecraft összes adottságát ki kell használni. Eszközök: `tools/art/` (generátorok és előnézet-renderelő).
