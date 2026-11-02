@@ -41,6 +41,11 @@ public final class ShipRepair {
 			}
 			case INCIDENT -> {
 				ShipIncident incident = choice.incident().orElseThrow();
+				if (ShipWiringRepair.needsMinigame(incident)) {
+					// The kit is only used up when the server accepts the wiring.
+					ShipWiringRepair.start(server, player, incident);
+					return;
+				}
 				if (state.resolveIncident(incident)) {
 					kit.consume(1, player);
 					player.sendSystemMessage(Component.translatable("message.intersolarsystem.ship.repair_incident",

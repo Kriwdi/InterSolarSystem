@@ -1,15 +1,4 @@
 # Classes whose signatures (public + protected) the API probe workflow prints (one per line).
-net.minecraft.client.gui.screens.Screen
-net.minecraft.client.gui.components.events.AbstractContainerEventHandler
-net.minecraft.client.gui.GuiGraphicsExtractor
-net.minecraft.client.input.MouseButtonEvent
-net.minecraft.client.input.KeyEvent
-net.minecraft.client.Minecraft
-net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry
-net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
-net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking$Context
-net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
-net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking$Context
-net.minecraft.network.codec.StreamCodec
-net.minecraft.network.codec.ByteBufCodecs
-net.minecraft.server.level.ServerPlayer
+net.minecraft.client.gui.components.events.ContainerEventHandler
+net.minecraft.client.gui.components.events.GuiEventListener
+net.minecraft.client.KeyMapping
