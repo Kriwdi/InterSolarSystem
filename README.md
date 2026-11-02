@@ -2,6 +2,22 @@
 
 Post-apocalyptic space survival mod for Minecraft 26.3 (Fabric). Salvage a dead Earth, keep a ship alive, and fly towards Proxima.
 
+## Download (dev builds)
+
+Every push is built by GitHub Actions. The latest jar is on the [`ci-builds` branch](../../tree/ci-builds/jar) (with `build.log` and `BUILD_INFO.txt`), and also as an artifact on each run under the **Actions** tab. Put the jar in `.minecraft/mods` next to Fabric API (Minecraft 26.3, Fabric Loader 0.20.1+, Java 25).
+
+## Project layout
+
+| Path | Contents |
+|---|---|
+| `src/main/java` | Common/server code (`core`, `ship`, `travel`, `space`, `worldgen`, `survival`, `content`) |
+| `src/main/resources` | `fabric.mod.json`, hand-made assets (models, textures, blockstates) |
+| `src/main/generated` | Datagen output (lang files, loot tables) – committed |
+| `src/client/java` | Client-only code (HUD, client state) and datagen providers |
+| `src/test/java` | Unit tests |
+| `docs/` | Project brief, roadmap, status reports, phase specs and plans |
+| `.github/workflows` | CI build |
+
 ## Requirements
 
 - JDK 25
