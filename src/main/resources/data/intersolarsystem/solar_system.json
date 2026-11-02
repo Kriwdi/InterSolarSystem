@@ -1,5 +1,5 @@
 {
-  "__comment": "Travel data for the navigation console. transfer_days: real-world one-way transfer time from Earth (minimum-energy route, rounded); synodic_days: real-world time between launch windows from Earth. Times in game are divided by 10 and by the engine multiplier. Order = order on the console. status: surface (Earth), orbit (dock in Earth orbit), flyby (free-return loop), locked.",
+  "__comment": "Travel data for the navigation console. transfer_days: real-world one-way transfer time from Earth (minimum-energy route, rounded); synodic_days: real-world time between launch windows from Earth. Times in game are divided by 10 and by the engine multiplier. Order = order on the console. status: surface (Earth), orbit (dock in Earth orbit), flyby (free-return loop), landing (has its own world), locked.",
   "bodies": [
     {
       "id": "earth",
@@ -22,7 +22,7 @@
       "parent": "earth",
       "transfer_days": 3,
       "synodic_days": 29.5,
-      "status": "flyby"
+      "status": "landing"
     },
     {
       "id": "venus",

@@ -1,0 +1,106 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "intersolarsystem:block/lunar_flag",
+    "flag": "intersolarsystem:block/lunar_flag",
+    "pole": "intersolarsystem:block/flag_pole"
+  },
+  "elements": [
+    {
+      "from": [
+        7.5,
+        0,
+        7.5
+      ],
+      "to": [
+        8.5,
+        16,
+        8.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#pole"
+        },
+        "east": {
+          "texture": "#pole"
+        },
+        "south": {
+          "texture": "#pole"
+        },
+        "west": {
+          "texture": "#pole"
+        },
+        "up": {
+          "texture": "#pole"
+        },
+        "down": {
+          "texture": "#pole"
+        }
+      }
+    },
+    {
+      "from": [
+        8.5,
+        15,
+        7.75
+      ],
+      "to": [
+        20,
+        15.5,
+        8.25
+      ],
+      "faces": {
+        "north": {
+          "texture": "#pole"
+        },
+        "east": {
+          "texture": "#pole"
+        },
+        "south": {
+          "texture": "#pole"
+        },
+        "west": {
+          "texture": "#pole"
+        },
+        "up": {
+          "texture": "#pole"
+        },
+        "down": {
+          "texture": "#pole"
+        }
+      }
+    },
+    {
+      "from": [
+        8.5,
+        6,
+        8
+      ],
+      "to": [
+        20,
+        15,
+        8
+      ],
+      "faces": {
+        "north": {
+          "texture": "#flag",
+          "uv": [
+            0,
+            2,
+            15,
+            11
+          ]
+        },
+        "south": {
+          "texture": "#flag",
+          "uv": [
+            15,
+            2,
+            0,
+            11
+          ]
+        }
+      }
+    }
+  ]
+}

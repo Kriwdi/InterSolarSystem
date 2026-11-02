@@ -598,10 +598,6 @@ public final class ModLangTable {
 				"dock at ISS",
 				"ISS-Andockung",
 				"dokkolás az ISS-en");
-		add(rows, "screen.intersolarsystem.nav.deorbit",
-				"Ready to deorbit: back to the last landing site on Earth",
-				"Bereit zum Wiedereintritt: zurück zum letzten Landeplatz auf der Erde",
-				"Visszatérés kész: vissza az utolsó földi leszállóhelyre");
 		add(rows, "screen.intersolarsystem.nav.to_orbit",
 				"Climb to orbit and dock at the ISS: %s",
 				"Aufstieg in den Orbit und Andocken an der ISS: %s",
@@ -658,6 +654,94 @@ public final class ModLangTable {
 				"Solar Array Cell",
 				"Solarzellenfeld",
 				"Napelemcella");
+		add(rows, "screen.intersolarsystem.nav.deorbit",
+				"Back down to Earth, to the last landing site: %s",
+				"Zurück zur Erde, zum letzten Landeplatz: %s",
+				"Vissza a Földre, az utolsó leszállóhelyre: %s");
+		add(rows, "screen.intersolarsystem.nav.status.landing",
+				"landing",
+				"Landung",
+				"leszállás");
+		add(rows, "screen.intersolarsystem.nav.landing",
+				"Land on the %s near Tranquility Base: %s",
+				"Landung auf dem %s bei der Tranquility-Basis: %s",
+				"Leszállás itt: %s, a Tranquility bázis mellett: %s");
+		add(rows, "screen.intersolarsystem.nav.landed_here",
+				"The ship stands on the %s (%s to here)",
+				"Das Schiff steht auf dem %s (%s bis hierher)",
+				"A hajó itt áll: %s (%s ide)");
+		add(rows, "message.intersolarsystem.moon.landed",
+				"Touchdown on the Moon, Sea of Tranquility. Apollo 11 is just to the west. Suit up: there is no air out there",
+				"Aufsetzen auf dem Mond, Meer der Ruhe. Apollo 11 liegt westlich. Raumanzug anlegen: draußen gibt es keine Luft",
+				"Leszállás a Holdon, a Nyugalom tengerén. Az Apollo 11 nyugatra van. Vedd fel a ruhát: odakint nincs levegő");
+		add(rows, "block.intersolarsystem.lunar_rock",
+				"Lunar Rock (Anorthosite)",
+				"Mondgestein (Anorthosit)",
+				"Holdkőzet (anortozit)");
+		add(rows, "block.intersolarsystem.lunar_regolith",
+				"Lunar Regolith",
+				"Mondregolith",
+				"Holdi regolit");
+		add(rows, "block.intersolarsystem.mare_regolith",
+				"Mare Regolith",
+				"Mare-Regolith",
+				"Mare-regolit");
+		add(rows, "block.intersolarsystem.fresh_regolith",
+				"Fresh Ejecta",
+				"Frisches Auswurfmaterial",
+				"Friss becsapódási törmelék");
+		add(rows, "block.intersolarsystem.mare_basalt",
+				"Mare Basalt",
+				"Mare-Basalt",
+				"Mare-bazalt");
+		add(rows, "block.intersolarsystem.helium3_regolith",
+				"Helium-3 Rich Regolith",
+				"Helium-3-reiches Regolith",
+				"Hélium-3-ban gazdag regolit");
+		add(rows, "block.intersolarsystem.ilmenite_ore",
+				"Ilmenite Ore",
+				"Ilmeniterz",
+				"Ilmenitérc");
+		add(rows, "block.intersolarsystem.lander_engine",
+				"Descent Engine Bell",
+				"Abstiegstriebwerk",
+				"Leszállóhajtómű-fúvóka");
+		add(rows, "block.intersolarsystem.lunar_flag",
+				"Faded Flag",
+				"Verblichene Flagge",
+				"Kifakult zászló");
+		add(rows, "block.intersolarsystem.rover_wheel",
+				"Rover Wheel (Wire Mesh)",
+				"Roverrad (Drahtgeflecht)",
+				"Holdjáró-kerék (drótháló)");
+		add(rows, "block.intersolarsystem.antenna_dish",
+				"High-Gain Antenna",
+				"Richtantenne",
+				"Nagy nyereségű antenna");
+		add(rows, "block.intersolarsystem.data_terminal",
+				"Data Terminal",
+				"Datenterminal",
+				"Adatterminál");
+		add(rows, "lore.intersolarsystem.terminal.header",
+				"[Tranquility Base - log %s]",
+				"[Tranquility-Basis - Protokoll %s]",
+				"[Tranquility bázis - %s. napló]");
+		add(rows, "lore.intersolarsystem.terminal.0",
+				"Day 1. The last supply flight is down. Twelve of us. The view of Earth is the worst part: it used to be blue.",
+				"Tag 1. Der letzte Versorgungsflug ist gelandet. Wir sind zwölf. Der Blick auf die Erde ist das Schlimmste: sie war einmal blau.",
+				"1. nap. Leszállt az utolsó ellátmányjárat. Tizenketten vagyunk. A Föld látványa a legrosszabb: valaha kék volt.");
+		add(rows, "lore.intersolarsystem.terminal.1",
+				"Day 212. The Ark ships need helium-3. We are mining the regolith around the clock. The ilmenite gives us oxygen.",
+				"Tag 212. Die Archen brauchen Helium-3. Wir fördern rund um die Uhr Regolith. Das Ilmenit liefert uns Sauerstoff.",
+				"212. nap. A Bárkáknak hélium-3 kell. Éjjel-nappal bányásszuk a regolitot. Az ilmenitből nyerjük az oxigént.");
+		add(rows, "lore.intersolarsystem.terminal.2",
+				"Day 390. Ark-3 left orbit today. There was no seat for us. They said the next ship would come back for the base.",
+				"Tag 390. Arche-3 hat heute den Orbit verlassen. Für uns war kein Platz. Sie sagten, das nächste Schiff holt die Basis ab.",
+				"390. nap. A Bárka-3 ma elhagyta a pályát. Nekünk nem jutott hely. Azt mondták, a következő hajó visszajön a bázisért.");
+		add(rows, "lore.intersolarsystem.terminal.3",
+				"Day 412. Hydroponics failing. Three of us left. If you are reading this, the codes for the seed vault are in the Svalbard log. Take the helium. Go.",
+				"Tag 412. Hydrokultur fällt aus. Wir sind noch drei. Wer das liest: die Codes für den Saatgutbunker stehen im Svalbard-Logbuch. Nimm das Helium. Flieg.",
+				"412. nap. Leáll a hidrokultúra. Hárman maradtunk. Ha ezt olvasod: a magbank kódjai a svalbardi naplóban vannak. Vidd a héliumot. Indulj.");
 		check(rows);
 		return List.copyOf(rows);
 	}

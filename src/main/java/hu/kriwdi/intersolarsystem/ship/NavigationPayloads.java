@@ -16,16 +16,28 @@ public final class NavigationPayloads {
 	}
 
 	/** Server -> client: open the console with the ship's engine tier, the server's game time and whether it can launch. */
-	public record Open(int engineTier, long gameTime, boolean canLaunch, boolean inOrbit) implements CustomPacketPayload {
+	/** {@code here}: where the ship is ("earth", "earth_orbit", "moon"). */
+	public record Open(int engineTier, long gameTime, boolean canLaunch, String here) implements CustomPacketPayload {
 		public static final CustomPacketPayload.Type<Open> TYPE = new CustomPacketPayload.Type<>(ModIds.id("nav_open"));
 		public static final StreamCodec<ByteBuf, Open> CODEC = StreamCodec.of(
 				(buf, p) -> {
 					VarInt.write(buf, p.engineTier());
 					buf.writeLong(p.gameTime());
 					buf.writeBoolean(p.canLaunch());
-					buf.writeBoolean(p.inOrbit());
+					byte[] here = p.here().getBytes(java.nio.charset.StandardCharsets.UTF_8);
+					VarInt.write(buf, here.length);
+					buf.writeBytes(here);
 				},
-				buf -> new Open(VarInt.read(buf), buf.readLong(), buf.readBoolean(), buf.readBoolean()));
+				buf -> {
+					int engine = VarInt.read(buf);
+					long time = buf.readLong();
+					boolean launch = buf.readBoolean();
+					int length = Math.max(0, Math.min(MAX_ID_LENGTH, VarInt.read(buf)));
+					byte[] bytes = new byte[Math.min(length, buf.readableBytes())];
+					buf.readBytes(bytes);
+					buf.skipBytes(buf.readableBytes());
+					return new Open(engine, time, launch, new String(bytes, java.nio.charset.StandardCharsets.UTF_8));
+				});
 
 		@Override
 		public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {

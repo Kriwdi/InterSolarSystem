@@ -41,22 +41,27 @@ public class NavigationScreen extends Screen {
 	private final int engineTier;
 	private final long serverTimeAtOpen;
 	private final boolean canLaunch;
-	private final boolean inOrbit;
+	private final String here;
 	private final List<CelestialBody> bodies = SolarSystem.bodies();
 	private int ticks;
 	private int selected = 1;
 	private boolean launched;
 
-	public NavigationScreen(int engineTier, long gameTime, boolean canLaunch, boolean inOrbit) {
+	public NavigationScreen(int engineTier, long gameTime, boolean canLaunch, String here) {
 		super(Component.translatable("screen.intersolarsystem.nav.title"));
 		this.engineTier = engineTier;
 		this.serverTimeAtOpen = gameTime;
 		this.canLaunch = canLaunch;
-		this.inOrbit = inOrbit;
+		this.here = here;
 	}
 
 	private boolean launchable(CelestialBody b) {
-		return canLaunch && !launched && ShipNavigation.reachable(b, inOrbit);
+		return canLaunch && !launched && ShipNavigation.reachable(b, here);
+	}
+
+	/** Travel time of a leg from where the ship is now. */
+	private long legTicks(CelestialBody b) {
+		return TravelMath.legTicks(here, b.id(), engineTier, now());
 	}
 
 	private int left() {
@@ -179,13 +184,15 @@ public class NavigationScreen extends Screen {
 			Component status = Component.translatable("screen.intersolarsystem.nav.status." + b.status().name()
 					.toLowerCase(java.util.Locale.ROOT));
 			int statusColour = switch (b.status()) {
-				case SURFACE -> inOrbit ? ShipPanel.GOOD : ShipPanel.HINT;
-				case ORBIT -> inOrbit ? ShipPanel.HINT : ShipPanel.GOOD;
-				case FLYBY -> ShipPanel.GOOD;
+				case SURFACE, ORBIT, LANDING -> b.id().equals(here) ? ShipPanel.HINT : ShipPanel.GOOD;
+				case FLYBY -> ShipPanel.reachableColour(ShipNavigation.reachable(b, here));
 				case LOCKED -> 0xFF6B737A;
 			};
 			g.text(font, status, x + 96, ry + 3, statusColour);
-			if (b.transferDays() > 0) {
+			if (!b.id().equals(here) && b.status() != CelestialBody.Status.LOCKED) {
+				String time = TravelMath.formatDuration(legTicks(b));
+				g.text(font, time, x + w - 4 - font.width(time), ry + 3, ShipPanel.TEXT);
+			} else if (b.transferDays() > 0 && b.status() == CelestialBody.Status.LOCKED) {
 				String time = TravelMath.formatDuration(TravelMath.oneWayTicks(b, engineTier, now()));
 				g.text(font, time, x + w - 4 - font.width(time), ry + 3, ShipPanel.TEXT);
 			}
@@ -194,15 +201,29 @@ public class NavigationScreen extends Screen {
 
 	private void drawDetails(GuiGraphicsExtractor g, int x, int y) {
 		CelestialBody b = bodies.get(selected);
+		boolean isHere = b.id().equals(here);
 		if (b.status() == CelestialBody.Status.SURFACE) {
-			g.text(font, Component.translatable(inOrbit ? "screen.intersolarsystem.nav.deorbit"
-					: "screen.intersolarsystem.nav.surface_hint"), x, y, inOrbit ? ShipPanel.GOOD : ShipPanel.HINT);
+			g.text(font, Component.translatable(isHere ? "screen.intersolarsystem.nav.surface_hint"
+					: "screen.intersolarsystem.nav.deorbit", TravelMath.formatDuration(legTicks(b))), x, y,
+					isHere ? ShipPanel.HINT : ShipPanel.GOOD);
 			return;
 		}
 		if (b.status() == CelestialBody.Status.ORBIT) {
-			g.text(font, Component.translatable(inOrbit ? "screen.intersolarsystem.nav.in_orbit"
-					: "screen.intersolarsystem.nav.to_orbit", TravelMath.formatDuration(
-							TravelMath.oneWayTicks(b, engineTier, now()))), x, y, inOrbit ? ShipPanel.HINT : ShipPanel.GOOD);
+			g.text(font, Component.translatable(isHere ? "screen.intersolarsystem.nav.in_orbit"
+					: "screen.intersolarsystem.nav.to_orbit", TravelMath.formatDuration(legTicks(b))), x, y,
+					isHere ? ShipPanel.HINT : ShipPanel.GOOD);
+			return;
+		}
+		if (b.status() == CelestialBody.Status.LANDING) {
+			g.text(font, Component.translatable(isHere ? "screen.intersolarsystem.nav.landed_here"
+					: "screen.intersolarsystem.nav.landing", Component.translatable(b.translationKey()),
+					TravelMath.formatDuration(legTicks(b))), x, y, isHere ? ShipPanel.HINT : ShipPanel.GOOD);
+			double factor = TravelMath.windowFactor(b, now());
+			int penalty = (int) Math.round((factor - 1.0) * 100);
+			if (!isHere && penalty > 2) {
+				g.text(font, Component.translatable("screen.intersolarsystem.nav.window_next", penalty,
+						TravelMath.formatDuration(TravelMath.ticksToNextWindow(b, now()))), x, y + 12, ShipPanel.WARN);
+			}
 			return;
 		}
 		double factor = TravelMath.windowFactor(b, now());

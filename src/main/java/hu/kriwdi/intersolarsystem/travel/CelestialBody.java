@@ -22,10 +22,10 @@ public record CelestialBody(String id, Kind kind, Optional<String> parent, doubl
 
 	/**
 	 * SURFACE: Earth's surface (back down from orbit). ORBIT: dock in orbit. FLYBY: a free-return loop. LOCKED: shown,
-	 * not reachable yet.
+	 * not reachable yet. LANDING: the body has its own world to land on.
 	 */
 	public enum Status {
-		SURFACE, ORBIT, FLYBY, LOCKED;
+		SURFACE, ORBIT, FLYBY, LANDING, LOCKED;
 
 		static Status of(String id) {
 			return valueOf(id.toUpperCase(Locale.ROOT));

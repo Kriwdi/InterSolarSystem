@@ -23,6 +23,7 @@ public class InterSolarSystem implements ModInitializer {
 		ModItems.initialize();
 		ModBlocks.initialize();
 		ModLoot.initialize();
+		hu.kriwdi.intersolarsystem.worldgen.ModWorldgen.initialize();
 		ShipNetworking.register();
 		ShipCommands.register();
 		ShipFlightController.register();

@@ -1,5 +1,6 @@
 package hu.kriwdi.intersolarsystem.space;
 
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 
 import net.minecraft.core.Holder;
@@ -28,6 +29,9 @@ import hu.kriwdi.intersolarsystem.ship.ShipSubsystem;
  */
 public final class SpaceEnvironment {
 	public static final double ORBIT_GRAVITY_FACTOR = -0.85;
+	/** One sixth of Earth's gravity. */
+	public static final double MOON_GRAVITY_FACTOR = -0.83;
+	public static final int MOON_SIZE = 5500;
 	public static final double FAILED_STABILISER_GRAVITY_FACTOR = -0.6;
 	public static final int STABILISER_FAILURE = 20;
 	public static final int LIFE_SUPPORT_MINIMUM = 20;
@@ -41,6 +45,13 @@ public final class SpaceEnvironment {
 
 	public static void register() {
 		ServerTickEvents.END_SERVER_TICK.register(SpaceEnvironment::tick);
+		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+			// The Moon is 5500 blocks across (scaled against the 20 000-block Earth).
+			ServerLevel moon = server.getLevel(ShipDimensions.MOON);
+			if (moon != null) {
+				moon.getWorldBorder().setSize(MOON_SIZE);
+			}
+		});
 	}
 
 	private static void tick(MinecraftServer server) {
@@ -48,8 +59,10 @@ public final class SpaceEnvironment {
 		long now = server.overworld().getGameTime();
 		for (ServerPlayer player : server.getPlayerList().getPlayers()) {
 			boolean orbit = player.level().dimension().equals(ShipDimensions.ORBIT);
+			boolean moon = player.level().dimension().equals(ShipDimensions.MOON);
 			boolean interior = player.level().dimension().equals(ShipDimensions.INTERIOR);
 			double gravity = orbit ? ORBIT_GRAVITY_FACTOR
+					: moon ? MOON_GRAVITY_FACTOR
 					: interior && ship.condition(ShipSubsystem.STABILIZER) < STABILISER_FAILURE
 							? FAILED_STABILISER_GRAVITY_FACTOR : 0.0;
 			setModifier(player, Attributes.GRAVITY, GRAVITY_ID, gravity, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
@@ -58,7 +71,7 @@ public final class SpaceEnvironment {
 			if (player.isCreative() || player.isSpectator()) {
 				continue;
 			}
-			if (orbit) {
+			if (orbit || moon) {
 				breathe(player, now);
 			} else if (interior && ship.condition(ShipSubsystem.LIFE_SUPPORT) >= LIFE_SUPPORT_MINIMUM && now % 5 == 0) {
 				refill(player);

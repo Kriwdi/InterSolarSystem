@@ -54,6 +54,25 @@ public final class TravelMath {
 		return Math.max(1, Math.round(ticks));
 	}
 
+	/**
+	 * Distance of a place from Earth's surface in real travel days: Earth 0, Earth orbit 0.25, everything else its
+	 * transfer time. A leg between two places takes the difference (orbit to Moon is shorter than surface to Moon).
+	 */
+	public static double placeDays(String placeId) {
+		if ("earth".equals(placeId)) {
+			return 0.0;
+		}
+		return SolarSystem.byId(placeId).map(CelestialBody::transferDays).orElse(0.0);
+	}
+
+	/** Ticks for a leg from one place to another, with the launch window of the farther one. */
+	public static long legTicks(String from, String to, int engineTier, long gameTime) {
+		double days = Math.abs(placeDays(to) - placeDays(from));
+		String far = placeDays(to) >= placeDays(from) ? to : from;
+		double window = SolarSystem.byId(far).map(b -> windowFactor(b, gameTime)).orElse(1.0);
+		return Math.max(1, Math.round(days * REAL_DAY_TICKS / multiplier(engineTier) * window));
+	}
+
 	/** A free-return loop: out, around the body and back. */
 	public static long flybyTicks(CelestialBody body, int engineTier, long gameTime) {
 		return 2 * oneWayTicks(body, engineTier, gameTime);

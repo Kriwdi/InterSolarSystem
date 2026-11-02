@@ -11,6 +11,7 @@ import hu.kriwdi.intersolarsystem.content.ModBlocks;
 import hu.kriwdi.intersolarsystem.content.ModLoot;
 import hu.kriwdi.intersolarsystem.ship.ShipDimensions;
 import hu.kriwdi.intersolarsystem.space.IssLayout;
+import hu.kriwdi.intersolarsystem.space.MoonSites;
 import hu.kriwdi.intersolarsystem.space.OrbitStation;
 
 import org.slf4j.Logger;
@@ -39,6 +40,7 @@ public final class SmokeTest {
 				LOGGER.info("[SMOKETEST] salvage pool in {} chest loot tables", injected);
 			}
 			checkStation(server);
+			checkMoon(server);
 			LOGGER.info("[SMOKETEST] server started, stopping");
 			server.halt(false);
 		});
@@ -67,5 +69,37 @@ public final class SmokeTest {
 		} else {
 			LOGGER.info("[SMOKETEST] ISS built, docking port and 6 supply containers ready");
 		}
+	}
+
+	/** Generates the Moon around the landing zone, builds the sites and samples the surface materials. */
+	private static void checkMoon(MinecraftServer server) {
+		ServerLevel moon = server.getLevel(ShipDimensions.MOON);
+		if (moon == null) {
+			LOGGER.error("[SMOKETEST-FAIL] moon dimension is missing");
+			return;
+		}
+		MoonSites.ensureBuilt(moon);
+		if (!MoonSites.built(moon)) {
+			LOGGER.error("[SMOKETEST-FAIL] Tranquility Base was not built");
+		}
+		java.util.Map<String, Integer> top = new java.util.TreeMap<>();
+		int lowest = Integer.MAX_VALUE;
+		int highest = Integer.MIN_VALUE;
+		for (int x = -400; x <= 400; x += 16) {
+			for (int z = -400; z <= 400; z += 16) {
+				moon.getChunk(x >> 4, z >> 4);
+				int h = moon.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.WORLD_SURFACE, x, z);
+				lowest = Math.min(lowest, h);
+				highest = Math.max(highest, h);
+				String block = net.minecraft.core.registries.BuiltInRegistries.BLOCK
+						.getKey(moon.getBlockState(new BlockPos(x, h - 1, z)).getBlock()).toString();
+				top.merge(block, 1, Integer::sum);
+			}
+		}
+		LOGGER.info("[SMOKETEST] Moon surface heights {}..{}, top blocks {}", lowest, highest, top);
+		if (!top.containsKey("intersolarsystem:lunar_regolith") || !top.containsKey("intersolarsystem:mare_regolith")) {
+			LOGGER.error("[SMOKETEST-FAIL] the Moon has no regolith highlands and maria");
+		}
+		LOGGER.info("[SMOKETEST] Moon border {}", moon.getWorldBorder().getSize());
 	}
 }

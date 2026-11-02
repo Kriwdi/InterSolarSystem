@@ -13,6 +13,7 @@ import hu.kriwdi.intersolarsystem.client.repair.ValveScreen;
 import hu.kriwdi.intersolarsystem.client.repair.WiringScreen;
 import hu.kriwdi.intersolarsystem.ship.ShipDimensions;
 import hu.kriwdi.intersolarsystem.ship.ShipInteriorBuilder;
+import hu.kriwdi.intersolarsystem.space.MoonSites;
 import hu.kriwdi.intersolarsystem.space.OrbitStation;
 
 /**
@@ -42,7 +43,7 @@ public class SceneScreenshots implements FabricClientGameTest {
 			context.takeScreenshot("02_ship_hatch");
 
 			// The ship's screens.
-			context.setScreen(() -> new NavigationScreen(1, 30_000L, true, false));
+			context.setScreen(() -> new NavigationScreen(1, 30_000L, true, "earth"));
 			context.waitTicks(20);
 			context.takeScreenshot("03_navigation");
 			context.setScreen(() -> new WiringScreen(42L, 5));
@@ -84,6 +85,34 @@ public class SceneScreenshots implements FabricClientGameTest {
 			context.waitTicks(30);
 			context.takeScreenshot("11_space_suit");
 			context.runOnClient(client -> client.options.setCameraType(CameraType.FIRST_PERSON));
+
+			// The Moon: Apollo 11, Tranquility Base, the landscape and the Earth in the sky (lunar noon, then night).
+			game.getServer().runOnServer(server -> MoonSites.ensureBuilt(server.getLevel(ShipDimensions.MOON)));
+			game.getServer().runCommand("time set 17700");
+			MoonSites.Apollo a11 = MoonSites.APOLLO.get(0);
+			int y = game.getServer().computeOnServer(server -> server.getLevel(ShipDimensions.MOON)
+					.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING, a11.x(), a11.z()));
+			game.getServer().runCommand("execute in intersolarsystem:moon run tp @a " + (a11.x() + 7) + " " + (y + 2)
+					+ " " + (a11.z() + 6) + " 135 20");
+			context.waitTicks(160);
+			context.takeScreenshot("12_moon_apollo11");
+			game.getServer().runCommand("execute in intersolarsystem:moon run tp @a " + (MoonSites.BASE[0] - 16) + " "
+					+ (y + 6) + " " + (MoonSites.BASE[1] - 14) + " -45 25");
+			context.waitTicks(80);
+			context.takeScreenshot("13_moon_tranquility_base");
+			game.getServer().runCommand("execute in intersolarsystem:moon run tp @a " + a11.x() + " " + (y + 40) + " "
+					+ a11.z() + " 0 35");
+			context.waitTicks(120);
+			context.takeScreenshot("14_moon_landscape");
+			for (int yaw : new int[] {0, 90, 180, 270}) {
+				game.getServer().runCommand("execute in intersolarsystem:moon run tp @a " + a11.x() + " " + (y + 4) + " "
+						+ a11.z() + " " + yaw + " -45");
+				context.waitTicks(20);
+				context.takeScreenshot("15_moon_sky_yaw" + yaw);
+			}
+			game.getServer().runCommand("time set 53100");
+			context.waitTicks(40);
+			context.takeScreenshot("16_moon_night_sky");
 		}
 	}
 }

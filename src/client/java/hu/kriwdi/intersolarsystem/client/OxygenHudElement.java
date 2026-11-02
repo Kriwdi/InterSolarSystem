@@ -28,7 +28,8 @@ public class OxygenHudElement implements HudElement {
 		if (player == null || minecraft.level == null) {
 			return;
 		}
-		boolean orbit = minecraft.level.dimension().equals(ShipDimensions.ORBIT);
+		boolean orbit = minecraft.level.dimension().equals(ShipDimensions.ORBIT)
+				|| minecraft.level.dimension().equals(ShipDimensions.MOON);
 		boolean wearing = player.getItemBySlot(EquipmentSlot.CHEST).getItem() == ModItems.SPACE_SUIT;
 		if (!orbit && !wearing) {
 			return;

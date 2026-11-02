@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "intersolarsystem:block/lander_engine"
+    }
+  }
+}

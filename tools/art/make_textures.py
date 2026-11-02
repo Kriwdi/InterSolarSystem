@@ -872,6 +872,147 @@ def earth():
         save(sheet, "environment/celestial/earth/phase_" + str(phase), frametime=40)
 
 
+def moon_blocks():
+    import math
+
+    def dusty(seed, base, spread, pebbles, pebble_cols, pit=None):
+        rnd = random.Random(seed)
+        img = Image.new("RGBA", (16, 16))
+        px = img.load()
+        for y in range(16):
+            for x in range(16):
+                px[x, y] = shade(base, 1 + rnd.uniform(-spread, spread))
+        for _ in range(pebbles):
+            x, y = rnd.randrange(16), rnd.randrange(16)
+            px[x, y] = rnd.choice(pebble_cols)
+            if rnd.random() < 0.4 and x < 15:
+                px[x + 1, y] = shade(px[x, y], 0.8)
+        if pit:
+            cx, cy, r = pit
+            for y in range(16):
+                for x in range(16):
+                    d = math.hypot(x - cx, y - cy)
+                    if d <= r:
+                        px[x, y] = shade(px[x, y], 0.78 + 0.1 * (x - cx) / r)
+                    elif d <= r + 1:
+                        px[x, y] = shade(px[x, y], 1.1)
+        return img
+
+    save(dusty(201, hexc("8f8d89"), 0.07, 18, [hexc("6f6c68"), hexc("b0aea8"), hexc("5d5b58")], (11, 5, 1.6)),
+         "block/lunar_regolith")
+    save(dusty(202, hexc("4d4c4b"), 0.07, 16, [hexc("3a3938"), hexc("6b6967"), hexc("2e2d2c")], (4, 10, 1.4)),
+         "block/mare_regolith")
+    save(dusty(203, hexc("c9c6bf"), 0.05, 12, [hexc("e8e5de"), hexc("a8a59e")]), "block/fresh_regolith")
+    # Anorthosite: pale rock with white plagioclase grains and darker cracks.
+    rock = dusty(204, hexc("a19e97"), 0.06, 26, [hexc("d9d6ce"), hexc("cdcac2"), hexc("7a7770")])
+    px = rock.load()
+    for (x0, y0, dx, dy, n) in [(2, 3, 1, 1, 5), (9, 12, 1, -1, 4), (12, 1, 0, 1, 4)]:
+        for i in range(n):
+            if 0 <= x0 + dx * i < 16 and 0 <= y0 + dy * i < 16:
+                px[x0 + dx * i, y0 + dy * i] = hexc("6b6862")
+    save(rock, "block/lunar_rock")
+    # Mare basalt: dark, fine-grained, with vesicles (gas bubbles).
+    basalt = dusty(205, hexc("3b3a3c"), 0.08, 10, [hexc("2a292b"), hexc("4e4d50")])
+    px = basalt.load()
+    for (x, y) in [(3, 4), (10, 2), (12, 9), (5, 12), (8, 7)]:
+        px[x, y] = hexc("18171a")
+        px[x + 1, y] = hexc("262528")
+    save(basalt, "block/mare_basalt")
+    # Helium-3 regolith: regolith with faint glinting grains (solar wind implanted in the dust).
+    he = Image.open(TEX / "block/lunar_regolith.png").convert("RGBA")
+    px = he.load()
+    rnd = random.Random(206)
+    for _ in range(9):
+        x, y = rnd.randrange(16), rnd.randrange(16)
+        px[x, y] = hexc("c9f2ff")
+        if x + 1 < 16:
+            px[x + 1, y] = hexc("7fb7cc")
+    save(he, "block/helium3_regolith")
+    # Ilmenite: black metallic crystals in basalt.
+    ilm = Image.open(TEX / "block/mare_basalt.png").convert("RGBA")
+    px = ilm.load()
+    for (x, y) in [(2, 2), (3, 2), (2, 3), (9, 5), (10, 5), (10, 6), (5, 10), (6, 10), (6, 11), (12, 12), (13, 12),
+                   (12, 13)]:
+        px[x, y] = hexc("0c0c10")
+    for (x, y) in [(3, 2), (10, 5), (6, 10), (13, 12)]:
+        px[x, y] = hexc("8d95a8")
+    save(ilm, "block/ilmenite_ore")
+
+    # Lander engine bell: dark nozzle with heat-blued ring.
+    eng = Image.new("RGBA", (16, 16), hexc("1d1d20"))
+    px = eng.load()
+    for y in range(16):
+        for x in range(16):
+            r = math.hypot(x - 7.5, y - 7.5)
+            if r < 6.5:
+                px[x, y] = hexc("0a0a0c") if r < 4 else hexc("3a3f6a") if r < 5 else hexc("5a5f7a")
+            elif r < 7.5:
+                px[x, y] = hexc("7a7f88")
+    save(eng, "block/lander_engine")
+
+    # Flag: stars and stripes bleached almost white by fifty years of unfiltered sunlight.
+    flag = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    px = flag.load()
+    for y in range(2, 11):
+        for x in range(0, 15):
+            stripe = (y - 2) % 2 == 0
+            c = hexc("d8cfcf") if stripe else hexc("efeae6")
+            if x < 6 and y < 7:
+                c = hexc("c9cde0") if (x + y) % 2 else hexc("eef0f6")
+            px[x, y] = c
+    save(flag, "block/lunar_flag")
+    pole = Image.new("RGBA", (16, 16), hexc("c9ccd0"))
+    save(pole, "block/flag_pole")
+
+    # Rover wheel: woven wire mesh with chevron treads.
+    wheel = Image.new("RGBA", (16, 16))
+    px = wheel.load()
+    for y in range(16):
+        for x in range(16):
+            px[x, y] = hexc("8a8f94") if (x + y) % 2 else hexc("5c6166")
+            if (x + y * 2) % 6 == 0:
+                px[x, y] = hexc("b9c0c6")
+    save(wheel, "block/rover_wheel")
+    hub = metal_base(207, light=4)
+    save(hub, "block/rover_hub")
+
+    # Antenna dish: white mesh with a gold feed in the middle.
+    dish = Image.new("RGBA", (16, 16))
+    px = dish.load()
+    for y in range(16):
+        for x in range(16):
+            r = math.hypot(x - 7.5, y - 7.5)
+            c = WHITE[3] if (x % 3 and y % 3) else WHITE[1]
+            if r < 2:
+                c = hexc("c99a2e")
+            px[x, y] = c
+    save(dish, "block/antenna_dish")
+
+    # Data terminal: animated green text scrolling on a cracked screen; a dented casing.
+    frames = 8
+    sheet = Image.new("RGBA", (16, 16 * frames))
+    rnd = random.Random(208)
+    lines = [[rnd.randrange(1, 13) for _ in range(20)]]
+    for f in range(frames):
+        fr = Image.new("RGBA", (16, 16), hexc("06120b"))
+        px = fr.load()
+        for row in range(5):
+            length = (row * 5 + f * 3) % 11 + 2
+            y = 2 + row * 3
+            for x in range(1, 1 + length):
+                px[x, y] = hexc("5dfa98") if row != (f % 5) else hexc("c8ffd8")
+        if f % 2 == 0:
+            px[2 + (f * 2) % 10, 14] = hexc("e8fff2")
+        for (x, y) in [(10, 3), (11, 4), (11, 5), (12, 6), (13, 6)]:
+            px[x, y] = hexc("8fa6a0")
+        sheet.paste(fr, (0, f * 16))
+    save(sheet, "block/data_terminal_screen", frametime=5)
+    case = metal_base(209, light=2)
+    bevel(case, 0, 0, 15, 15)
+    grime(case, 210, 0.2)
+    save(case, "block/data_terminal_case")
+
+
 # ---------------------------------------------------------------- items
 def items():
     o = OUTLINE
@@ -1017,4 +1158,5 @@ if __name__ == "__main__":
     suit_items()
     suit_layers()
     earth()
+    moon_blocks()
     print("textures written")

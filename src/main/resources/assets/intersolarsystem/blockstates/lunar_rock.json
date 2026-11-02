@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/lunar_rock"
+      },
+      {
+        "model": "intersolarsystem:block/lunar_rock",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/lunar_rock",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/lunar_rock",
+        "y": 270
+      }
+    ]
+  }
+}

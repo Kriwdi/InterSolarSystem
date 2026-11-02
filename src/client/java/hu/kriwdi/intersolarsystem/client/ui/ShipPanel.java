@@ -58,6 +58,10 @@ public final class ShipPanel {
 		g.centeredText(font, label, x + w / 2, y + (h - 8) / 2, TEXT);
 	}
 
+	public static int reachableColour(boolean reachable) {
+		return reachable ? GOOD : HINT;
+	}
+
 	public static int brighten(int argb) {
 		int r = Math.min(255, ((argb >> 16) & 0xFF) + 30);
 		int gr = Math.min(255, ((argb >> 8) & 0xFF) + 30);

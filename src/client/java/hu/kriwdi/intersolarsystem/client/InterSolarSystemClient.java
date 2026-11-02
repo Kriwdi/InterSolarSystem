@@ -39,7 +39,7 @@ public class InterSolarSystemClient implements ClientModInitializer {
 			Minecraft minecraft = context.client();
 			minecraft.execute(() -> minecraft.setScreenAndShow(
 					new NavigationScreen(payload.engineTier(), payload.gameTime(), payload.canLaunch(),
-							payload.inOrbit())));
+							payload.here())));
 		});
 		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> ClientShipStatus.clear());
 		HudElementRegistry.addLast(ModIds.id("ship_status"), new ShipHudElement());

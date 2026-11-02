@@ -201,6 +201,78 @@ def station_blocks():
     item_from_block("solar_panel", "block/solar_panel")
 
 
+def moon_blocks():
+    for name in ("lunar_rock", "lunar_regolith", "mare_regolith", "fresh_regolith", "mare_basalt", "helium3_regolith",
+                 "ilmenite_ore"):
+        write(ASSETS / "models/block" / (name + ".json"),
+              {"parent": "minecraft:block/cube_all", "textures": {"all": NS + "block/" + name}})
+        # Natural ground: random rotations break up the tiling.
+        write(ASSETS / "blockstates" / (name + ".json"), {"variants": {"": [
+            {"model": NS + "block/" + name}, {"model": NS + "block/" + name, "y": 90},
+            {"model": NS + "block/" + name, "y": 180}, {"model": NS + "block/" + name, "y": 270}]}})
+        item_from_block(name, "block/" + name)
+    write(ASSETS / "models/block/lander_engine.json", {"parent": "minecraft:block/cube_bottom_top" if False else
+                                                      "minecraft:block/cube_all",
+                                                      "textures": {"all": NS + "block/lander_engine"}})
+    write(ASSETS / "blockstates/lander_engine.json", {"variants": {"": {"model": NS + "block/lander_engine"}}})
+    item_from_block("lander_engine", "block/lander_engine")
+
+    # Flag: pole with the cloth hanging from a top bar (no wind on the Moon: the bar holds it out).
+    t = {"particle": "block/lunar_flag", "flag": "block/lunar_flag", "pole": "block/flag_pole"}
+    model("block/lunar_flag", t, [
+        box((7.5, 0, 7.5), (8.5, 16, 8.5), "pole"),
+        box((8.5, 15, 7.75), (20, 15.5, 8.25), "pole"),
+        box((8.5, 6, 8), (20, 15, 8), {"north": "flag", "south": "flag"}, faces=("north", "south"),
+            uv={"north": (0, 2, 15, 11), "south": (15, 2, 0, 11)}),
+    ])
+    facing_blockstate("lunar_flag", "block/lunar_flag")
+    item_from_block("lunar_flag", "block/lunar_flag")
+
+    # Rover wheel: a mesh tyre (octagon from two boxes) on a hub, axle towards the rover.
+    t = {"particle": "block/rover_wheel", "mesh": "block/rover_wheel", "hub": "block/rover_hub"}
+    model("block/rover_wheel", t, [
+        box((5, 1, 3), (11, 13, 13), "mesh"),
+        box((5, 3, 1), (11, 11, 15), "mesh"),
+        box((4, 5, 5), (12, 9, 11), "hub"),
+        box((11, 6, 7), (16, 8, 9), "hub"),
+    ])
+    facing_blockstate("rover_wheel", "block/rover_wheel")
+    item_from_block("rover_wheel", "block/rover_wheel")
+
+    # High-gain antenna: an open umbrella dish on a mast.
+    t = {"particle": "block/antenna_dish", "dish": "block/antenna_dish", "mast": "block/flag_pole"}
+    model("block/antenna_dish", t, [
+        box((7.5, 0, 7.5), (8.5, 7, 8.5), "mast"),
+        box((3, 7, 3), (13, 8, 13), "dish"),
+        box((1, 8, 5), (15, 9, 11), "dish"),
+        box((5, 8, 1), (11, 9, 15), "dish"),
+        box((2, 9, 2), (14, 10, 4), "dish"),
+        box((2, 9, 12), (14, 10, 14), "dish"),
+        box((7.5, 8, 7.5), (8.5, 11, 8.5), "mast"),
+    ])
+    write(ASSETS / "blockstates/antenna_dish.json", {"variants": {"": {"model": NS + "block/antenna_dish"}}})
+    item_from_block("antenna_dish", "block/antenna_dish")
+
+    # Data terminal: a desk unit with a slanted, flickering screen.
+    t = {"particle": "block/data_terminal_case", "case": "block/data_terminal_case",
+         "screen": "block/data_terminal_screen"}
+    model("block/data_terminal", t, [
+        box((2, 0, 3), (14, 7, 13), "case", cull=("down",)),
+        box((3, 7, 7), (13, 15, 11), "case", rotation={"origin": [8, 7, 9], "axis": "x", "angle": -22.5}),
+        box((4, 8, 6.9), (12, 14, 7), {"north": "screen"}, faces=("north",), uv={"north": (0, 0, 16, 16)},
+            rotation={"origin": [8, 7, 9], "axis": "x", "angle": -22.5}, shade=False),
+    ])
+    variants = {}
+    for facing, y in (("north", 0), ("east", 90), ("south", 180), ("west", 270)):
+        for log in range(4):
+            v = {"model": NS + "block/data_terminal"}
+            if y:
+                v["y"] = y
+            variants["facing=" + facing + ",log=" + str(log)] = v
+    write(ASSETS / "blockstates/data_terminal.json", {"variants": variants})
+    item_from_block("data_terminal", "block/data_terminal")
+
+
 def ship_hatch():
     t = {"particle": "block/ship_hatch_frame", "frame": "block/ship_hatch_frame", "door": "block/ship_hatch_door",
          "wheel": "block/ship_hatch_wheel", "metal": "block/rusted_panel"}
@@ -261,6 +333,7 @@ if __name__ == "__main__":
     navigation_console()
     ship_hatch()
     station_blocks()
+    moon_blocks()
     rusted_panel()
     items()
     print("models written")

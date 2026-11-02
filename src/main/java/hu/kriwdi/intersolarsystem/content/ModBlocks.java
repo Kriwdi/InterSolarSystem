@@ -61,6 +61,48 @@ public final class ModBlocks {
 			p -> new ShapedBlock(p, new double[] {0, 7, 0, 16, 9, 16}),
 			BlockBehaviour.Properties.of().strength(1.5F, 3.0F).sound(SoundType.GLASS).noOcclusion());
 
+	// The Moon (phase 6).
+	public static final Block LUNAR_ROCK = register("lunar_rock", Block::new,
+			BlockBehaviour.Properties.of().strength(1.8F, 6.0F).sound(SoundType.STONE).requiresCorrectToolForDrops());
+
+	public static final Block LUNAR_REGOLITH = register("lunar_regolith", Block::new,
+			BlockBehaviour.Properties.of().strength(0.6F).sound(SoundType.SAND));
+
+	public static final Block MARE_REGOLITH = register("mare_regolith", Block::new,
+			BlockBehaviour.Properties.of().strength(0.6F).sound(SoundType.SAND));
+
+	public static final Block FRESH_REGOLITH = register("fresh_regolith", Block::new,
+			BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.SAND));
+
+	public static final Block MARE_BASALT = register("mare_basalt", Block::new,
+			BlockBehaviour.Properties.of().strength(2.0F, 6.0F).sound(SoundType.BASALT).requiresCorrectToolForDrops());
+
+	public static final Block HELIUM3_REGOLITH = register("helium3_regolith", Block::new,
+			BlockBehaviour.Properties.of().strength(0.8F).sound(SoundType.SAND).lightLevel(state -> 2));
+
+	public static final Block ILMENITE_ORE = register("ilmenite_ore", Block::new,
+			BlockBehaviour.Properties.of().strength(3.0F, 6.0F).sound(SoundType.BASALT).requiresCorrectToolForDrops());
+
+	// Relics on the Moon.
+	public static final Block LANDER_ENGINE = register("lander_engine", Block::new,
+			BlockBehaviour.Properties.of().strength(3.0F, 6.0F).sound(SoundType.METAL));
+
+	public static final Block LUNAR_FLAG = register("lunar_flag",
+			p -> new ShipFacingBlock(p, new double[] {7, 0, 7, 9, 16, 9}),
+			BlockBehaviour.Properties.of().strength(1.0F).sound(SoundType.WOOL).noOcclusion().noCollision());
+
+	public static final Block ROVER_WHEEL = register("rover_wheel",
+			p -> new ShipFacingBlock(p, new double[] {4, 0, 1, 12, 14, 15}),
+			BlockBehaviour.Properties.of().strength(2.0F).sound(SoundType.CHAIN).noOcclusion());
+
+	public static final Block ANTENNA_DISH = register("antenna_dish",
+			p -> new ShapedBlock(p, new double[] {1, 6, 1, 15, 10, 15}, new double[] {7, 0, 7, 9, 6, 9}),
+			BlockBehaviour.Properties.of().strength(2.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block DATA_TERMINAL = register("data_terminal", DataTerminalBlock::new,
+			BlockBehaviour.Properties.of().strength(3.0F, 6.0F).sound(SoundType.METAL).lightLevel(state -> 5)
+					.noOcclusion());
+
 	private ModBlocks() {
 	}
 
@@ -88,6 +130,18 @@ public final class ModBlocks {
 					tab.accept(STATION_LIGHT);
 					tab.accept(TRUSS);
 					tab.accept(SOLAR_PANEL);
+					tab.accept(LUNAR_ROCK);
+					tab.accept(LUNAR_REGOLITH);
+					tab.accept(MARE_REGOLITH);
+					tab.accept(FRESH_REGOLITH);
+					tab.accept(MARE_BASALT);
+					tab.accept(HELIUM3_REGOLITH);
+					tab.accept(ILMENITE_ORE);
+					tab.accept(LANDER_ENGINE);
+					tab.accept(LUNAR_FLAG);
+					tab.accept(ROVER_WHEEL);
+					tab.accept(ANTENNA_DISH);
+					tab.accept(DATA_TERMINAL);
 				});
 	}
 }
