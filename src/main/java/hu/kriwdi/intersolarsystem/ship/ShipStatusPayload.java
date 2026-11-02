@@ -42,6 +42,10 @@ public record ShipStatusPayload(ShipStatusSnapshot snapshot) implements CustomPa
 			VarInt.write(buf, i.type().ordinal());
 			VarInt.write(buf, i.remainingTicks());
 		}
+		VarInt.write(buf, s.knownFaults().size());
+		for (ShipSubsystem fault : s.knownFaults()) {
+			VarInt.write(buf, fault.ordinal());
+		}
 	}
 
 	private static ShipStatusPayload decode(ByteBuf buf) {
@@ -77,8 +81,19 @@ public record ShipStatusPayload(ShipStatusSnapshot snapshot) implements CustomPa
 						ShipIncidentType.values()[typeOrdinal], incidentRemaining));
 			}
 		}
+		List<ShipSubsystem> knownFaults = new ArrayList<>();
+		if (buf.isReadable()) {
+			int faultCount = Math.min(Math.max(0, VarInt.read(buf)), MAX_SUBSYSTEMS);
+			for (int i = 0; i < faultCount; i++) {
+				int ordinal = VarInt.read(buf);
+				if (ordinal >= 0 && ordinal < ShipSubsystem.values().length
+						&& !knownFaults.contains(ShipSubsystem.values()[ordinal])) {
+					knownFaults.add(ShipSubsystem.values()[ordinal]);
+				}
+			}
+		}
 		buf.skipBytes(buf.readableBytes());
-		return new ShipStatusPayload(new ShipStatusSnapshot(phase, remaining, conditions, incidents));
+		return new ShipStatusPayload(new ShipStatusSnapshot(phase, remaining, conditions, incidents, knownFaults));
 	}
 
 	@Override

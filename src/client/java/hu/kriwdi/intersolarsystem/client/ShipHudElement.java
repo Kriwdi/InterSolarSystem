@@ -27,6 +27,8 @@ public class ShipHudElement implements HudElement {
 	private static final int TEXT = 0xFFFFFFFF;
 	private static final int BAR_BACKGROUND = 0xFF333333;
 	private static final int ALERT = 0xFFFF5555;
+	/** Shown after the percentage of a subsystem with a known, unfixed hidden fault. */
+	private static final String FAULT_MARK = "\u26A0";
 
 	@Override
 	public void extractRenderState(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker) {
@@ -52,7 +54,7 @@ public class ShipHudElement implements HudElement {
 		int percentWidth = 0;
 		for (ShipHudModel.SubsystemRow row : model.subsystems()) {
 			nameWidth = Math.max(nameWidth, font.width(Component.translatable(ShipCommands.subsystemKey(row.subsystem()))));
-			percentWidth = Math.max(percentWidth, font.width(row.percent() + "%"));
+			percentWidth = Math.max(percentWidth, font.width(row.percent() + "% " + FAULT_MARK));
 		}
 		int widest = Math.max(font.width(phase), nameWidth + GAP + BAR_WIDTH + GAP + percentWidth);
 		Component[] alerts = new Component[model.incidents().size()];
@@ -77,6 +79,9 @@ public class ShipHudElement implements HudElement {
 			int filled = BAR_WIDTH * row.percent() / 100;
 			graphics.fill(barX, y + 1, barX + filled, y + font.lineHeight, severityColor(row.severity()));
 			graphics.text(font, row.percent() + "%", barX + BAR_WIDTH + GAP, y, TEXT);
+			if (row.knownFault()) {
+				graphics.text(font, FAULT_MARK, barX + BAR_WIDTH + GAP + font.width(row.percent() + "% "), y, ALERT);
+			}
 			y += lineHeight;
 		}
 		for (int i = 0; i < alerts.length; i++) {

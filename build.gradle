@@ -111,3 +111,14 @@ tasks.register("printProbeClasspath") {
 		files.each { println it.absolutePath }
 	}
 }
+
+// CI smoke test: `./gradlew runServer -Psmoketest` starts the dedicated server, which stops itself once fully loaded.
+if (project.hasProperty("smoketest")) {
+	loom {
+		runs {
+			server {
+				vmArg "-Dintersolarsystem.smoketest=true"
+			}
+		}
+	}
+}

@@ -19,5 +19,6 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
 		dropSelf(ModBlocks.RUSTED_PANEL);
 		dropSelf(ModBlocks.SHIP_HATCH);
 		dropSelf(ModBlocks.REPAIR_STATION);
+		dropSelf(ModBlocks.DIAGNOSTIC_CONSOLE);
 	}
 }

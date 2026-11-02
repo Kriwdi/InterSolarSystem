@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "intersolarsystem:rusted_panel"
+  ],
+  "result": {
+    "id": "intersolarsystem:scrap_metal",
+    "count": 2
+  }
+}

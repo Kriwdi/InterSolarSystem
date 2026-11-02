@@ -53,7 +53,8 @@ public final class ShipCommands {
 			long now = source.getServer().overworld().getGameTime();
 			source.sendSuccess(() -> Component.translatable("command.intersolarsystem.ship.phase_remaining",
 					ShipFlightTimeline.formatClock(
-							ShipFlightTimeline.remainingTicks(state.phase(), state.phaseStartedTick(), now))), false);
+							ShipFlightTimeline.remainingTicks(state.flightKind(), state.phase(), state.phaseStartedTick(),
+									now))), false);
 		}
 		long nowTick = source.getServer().overworld().getGameTime();
 		for (ShipIncident incident : state.hazards().incidents()) {

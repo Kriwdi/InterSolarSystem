@@ -18,6 +18,13 @@ public final class ModItems {
 
 	public static final Item REPAIR_KIT = register("repair_kit", Item::new, new Item.Properties().stacksTo(16));
 
+	/** Salvaged technology (phase 3a): found in ruins, crafted into repair kits and ship parts. */
+	public static final Item SCRAP_METAL = register("scrap_metal", Item::new, new Item.Properties());
+
+	public static final Item SALVAGED_WIRING = register("salvaged_wiring", Item::new, new Item.Properties());
+
+	public static final Item SALVAGED_CIRCUIT = register("salvaged_circuit", Item::new, new Item.Properties());
+
 	private ModItems() {
 	}
 
@@ -31,6 +38,9 @@ public final class ModItems {
 				.register(tab -> {
 					tab.accept(SCRAP_SENSOR);
 					tab.accept(REPAIR_KIT);
+					tab.accept(SCRAP_METAL);
+					tab.accept(SALVAGED_WIRING);
+					tab.accept(SALVAGED_CIRCUIT);
 				});
 	}
 }

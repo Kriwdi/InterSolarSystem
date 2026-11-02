@@ -24,7 +24,8 @@ public record ShipHudModel(PhaseLine phase, List<SubsystemRow> subsystems, List<
 	public record PhaseLine(String translationKey, Optional<String> clock) {
 	}
 
-	public record SubsystemRow(ShipSubsystem subsystem, int percent, Severity severity) {
+	/** {@code knownFault}: a diagnostic scan or a test hop found a hidden fault here that is not fixed yet. */
+	public record SubsystemRow(ShipSubsystem subsystem, int percent, Severity severity, boolean knownFault) {
 	}
 
 	public record IncidentRow(ShipSubsystem subsystem, ShipIncidentType type, String clock, boolean blinking) {
@@ -48,7 +49,7 @@ public record ShipHudModel(PhaseLine phase, List<SubsystemRow> subsystems, List<
 		List<SubsystemRow> subsystems = new ArrayList<>();
 		for (ShipSubsystem s : ShipSubsystem.values()) {
 			int percent = snapshot.conditions().get(s.ordinal());
-			subsystems.add(new SubsystemRow(s, percent, Severity.of(percent)));
+			subsystems.add(new SubsystemRow(s, percent, Severity.of(percent), snapshot.knownFaults().contains(s)));
 		}
 		List<IncidentRow> incidents = snapshot.incidents().stream()
 				.map(i -> new Object[] {i, remainingNow(i.remainingTicks(), receivedAtTick, nowTick)})

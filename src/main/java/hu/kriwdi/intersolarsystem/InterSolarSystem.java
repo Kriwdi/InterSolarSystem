@@ -4,7 +4,9 @@ import net.fabricmc.api.ModInitializer;
 
 import hu.kriwdi.intersolarsystem.content.ModBlocks;
 import hu.kriwdi.intersolarsystem.content.ModItems;
+import hu.kriwdi.intersolarsystem.content.ModLoot;
 import hu.kriwdi.intersolarsystem.core.ModIds;
+import hu.kriwdi.intersolarsystem.core.SmokeTest;
 import hu.kriwdi.intersolarsystem.ship.ShipCommands;
 import hu.kriwdi.intersolarsystem.ship.ShipFlightController;
 import hu.kriwdi.intersolarsystem.ship.ShipNetworking;
@@ -19,9 +21,11 @@ public class InterSolarSystem implements ModInitializer {
 	public void onInitialize() {
 		ModItems.initialize();
 		ModBlocks.initialize();
+		ModLoot.initialize();
 		ShipNetworking.register();
 		ShipCommands.register();
 		ShipFlightController.register();
+		SmokeTest.register();
 		LOGGER.info("InterSolarSystem initialized");
 	}
 }

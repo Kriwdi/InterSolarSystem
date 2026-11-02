@@ -5,12 +5,13 @@ import java.util.List;
 
 /** What the server tells players inside the ship about the ship. Built from {@link ShipState}; clients only display it. */
 public record ShipStatusSnapshot(ShipFlightPhase phase, int remainingTicks, List<Integer> conditions,
-		List<IncidentView> incidents) {
+		List<IncidentView> incidents, List<ShipSubsystem> knownFaults) {
 	public record IncidentView(ShipSubsystem subsystem, ShipIncidentType type, int remainingTicks) {
 	}
 
 	/** The parts of a snapshot that mean "something changed"; timers are left out on purpose. */
-	public record StructuralKey(ShipFlightPhase phase, List<Integer> conditions, List<IncidentKey> incidents) {
+	public record StructuralKey(ShipFlightPhase phase, List<Integer> conditions, List<IncidentKey> incidents,
+			List<ShipSubsystem> knownFaults) {
 	}
 
 	public record IncidentKey(ShipSubsystem subsystem, ShipIncidentType type) {
@@ -19,6 +20,12 @@ public record ShipStatusSnapshot(ShipFlightPhase phase, int remainingTicks, List
 	public ShipStatusSnapshot {
 		conditions = List.copyOf(conditions);
 		incidents = List.copyOf(incidents);
+		knownFaults = List.copyOf(knownFaults);
+	}
+
+	public ShipStatusSnapshot(ShipFlightPhase phase, int remainingTicks, List<Integer> conditions,
+			List<IncidentView> incidents) {
+		this(phase, remainingTicks, conditions, incidents, List.of());
 	}
 
 	public static ShipStatusSnapshot from(ShipState state, long nowTick) {
@@ -30,8 +37,11 @@ public record ShipStatusSnapshot(ShipFlightPhase phase, int remainingTicks, List
 		for (ShipIncident i : state.hazards().incidents()) {
 			incidents.add(new IncidentView(i.subsystem(), i.type(), clampToInt(i.deadlineTick() - nowTick)));
 		}
-		long remaining = ShipFlightTimeline.remainingTicks(state.phase(), state.phaseStartedTick(), nowTick);
-		return new ShipStatusSnapshot(state.phase(), clampToInt(remaining), conditions, incidents);
+		long remaining = ShipFlightTimeline.remainingTicks(state.flightKind(), state.phase(), state.phaseStartedTick(),
+				nowTick);
+		List<ShipSubsystem> known = state.diagnostics().revealed().stream().map(ShipLatentFault::subsystem).sorted()
+				.toList();
+		return new ShipStatusSnapshot(state.phase(), clampToInt(remaining), conditions, incidents, known);
 	}
 
 	/** Shown when the server speaks a packet format this client does not know: a neutral, all-fine status. */
@@ -49,6 +59,6 @@ public record ShipStatusSnapshot(ShipFlightPhase phase, int remainingTicks, List
 
 	public StructuralKey structuralKey() {
 		return new StructuralKey(phase, conditions,
-				incidents.stream().map(i -> new IncidentKey(i.subsystem(), i.type())).toList());
+				incidents.stream().map(i -> new IncidentKey(i.subsystem(), i.type())).toList(), knownFaults);
 	}
 }

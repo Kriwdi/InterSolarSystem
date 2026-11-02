@@ -27,13 +27,21 @@ public final class ShipInteriorBuilder {
 		}
 	}
 
-	/** Rooms built before the repair station existed get it later; only an empty (air) cell is filled. */
+	/**
+	 * Rooms built before the repair station or the diagnostic console existed get them later; only an empty (air) cell
+	 * is filled, so nothing a player put there is replaced.
+	 */
 	public static void ensureStation(ServerLevel interior) {
-		ShipInteriorLayout.Cell cell = ShipInteriorLayout.capsule().station();
+		ShipInteriorLayout layout = ShipInteriorLayout.capsule();
+		fillIfAir(interior, layout.station(), ModBlocks.REPAIR_STATION.defaultBlockState());
+		fillIfAir(interior, layout.console(), ModBlocks.DIAGNOSTIC_CONSOLE.defaultBlockState());
+	}
+
+	private static void fillIfAir(ServerLevel interior, ShipInteriorLayout.Cell cell, BlockState state) {
 		BlockPos pos = ShipDimensions.ANCHOR.offset(cell.dx(), cell.dy(), cell.dz());
 		interior.getChunk(pos.getX() >> 4, pos.getZ() >> 4);
 		if (interior.getBlockState(pos).isAir()) {
-			interior.setBlock(pos, ModBlocks.REPAIR_STATION.defaultBlockState(), Block.UPDATE_ALL);
+			interior.setBlock(pos, state, Block.UPDATE_ALL);
 		}
 	}
 
@@ -43,6 +51,7 @@ public final class ShipInteriorBuilder {
 			case LIGHT -> Blocks.SEA_LANTERN.defaultBlockState();
 			case HATCH -> ModBlocks.SHIP_HATCH.defaultBlockState();
 			case REPAIR_STATION -> ModBlocks.REPAIR_STATION.defaultBlockState();
+			case DIAGNOSTIC_CONSOLE -> ModBlocks.DIAGNOSTIC_CONSOLE.defaultBlockState();
 			case AIR -> Blocks.AIR.defaultBlockState();
 		};
 	}

@@ -302,6 +302,66 @@ public final class ModLangTable {
 				"The repair station only works inside the ship",
 				"Die Reparaturstation funktioniert nur im Schiff",
 				"A javítóállomás csak a hajó belsejében működik");
+		add(rows, "block.intersolarsystem.diagnostic_console",
+				"Diagnostic Console",
+				"Diagnosekonsole",
+				"Diagnosztikai konzol");
+		add(rows, "item.intersolarsystem.scrap_metal",
+				"Scrap Metal",
+				"Altmetall",
+				"Fémhulladék");
+		add(rows, "item.intersolarsystem.salvaged_wiring",
+				"Salvaged Wiring",
+				"Geborgene Verkabelung",
+				"Kimentett vezeték");
+		add(rows, "item.intersolarsystem.salvaged_circuit",
+				"Salvaged Circuit",
+				"Geborgener Schaltkreis",
+				"Kimentett áramkör");
+		add(rows, "message.intersolarsystem.ship.repair_fault",
+				"You fixed the hidden fault in %s",
+				"Du hast den versteckten Fehler in %s behoben",
+				"Kijavítottad a rejtett hibát: %s");
+		add(rows, "message.intersolarsystem.ship.station_needs_kit_fault",
+				"Use a repair kit here. Known hidden fault: %s",
+				"Benutze hier ein Reparaturset. Bekannter versteckter Fehler: %s",
+				"Használj itt javítókészletet. Ismert rejtett hiba: %s");
+		add(rows, "message.intersolarsystem.ship.scan_cooldown",
+				"The diagnostic scan is still recalibrating (%s)",
+				"Der Diagnosescan kalibriert sich noch (%s)",
+				"A diagnosztika még kalibrál (%s)");
+		add(rows, "message.intersolarsystem.ship.scan_done",
+				"Scan complete: %s known hidden fault(s), %s new",
+				"Scan abgeschlossen: %s bekannte versteckte Fehler, %s neu",
+				"Vizsgálat kész: %s ismert rejtett hiba, ebből %s új");
+		add(rows, "message.intersolarsystem.ship.scan_fault_line",
+				" - hidden fault: %s",
+				" - versteckter Fehler: %s",
+				" - rejtett hiba: %s");
+		add(rows, "message.intersolarsystem.ship.scan_risk",
+				"Estimated takeoff risk: %s%% (only what the scan could see)",
+				"Geschätztes Startrisiko: %s%% (nur was der Scan sehen konnte)",
+				"Becsült felszállási kockázat: %s%% (csak amit a vizsgálat látott)");
+		add(rows, "message.intersolarsystem.ship.test_confirm",
+				"Test hop: sneak and use the console again within 5 seconds to confirm",
+				"Testsprung: zum Bestätigen innerhalb von 5 Sekunden erneut schleichend benutzen",
+				"Tesztfelszállás: a megerősítéshez 5 másodpercen belül guggolva használd újra a konzolt");
+		add(rows, "message.intersolarsystem.ship.test_started",
+				"Test hop started: the ship lifts off and lands back here",
+				"Testsprung gestartet: das Schiff hebt ab und landet wieder hier",
+				"Tesztfelszállás indul: a hajó felemelkedik, majd ugyanide száll vissza");
+		add(rows, "message.intersolarsystem.ship.test_found",
+				"Test hop: %s hidden fault(s) broke out, %s of them unknown before",
+				"Testsprung: %s versteckte Fehler sind aufgetreten, %s davon waren unbekannt",
+				"Tesztfelszállás: %s rejtett hiba jött elő, ebből %s eddig ismeretlen volt");
+		add(rows, "message.intersolarsystem.ship.test_clean",
+				"Test hop: no hidden faults found",
+				"Testsprung: keine versteckten Fehler gefunden",
+				"Tesztfelszállás: nem jött elő rejtett hiba");
+		add(rows, "message.intersolarsystem.ship.takeoff_failed",
+				"TAKEOFF FAILED! An explosion at the launch site, the ship is badly damaged",
+				"START FEHLGESCHLAGEN! Eine Explosion am Startplatz, das Schiff ist schwer beschädigt",
+				"SIKERTELEN FELSZÁLLÁS! Robbanás a kilövőhelyen, a hajó súlyosan megsérült");
 		check(rows);
 		return List.copyOf(rows);
 	}

@@ -30,6 +30,10 @@ public final class ModBlocks {
 			BlockBehaviour.Properties.of().strength(3.0F, 3600000.0F).sound(SoundType.METAL)
 					.pushReaction(PushReaction.IMMOVEABLE));
 
+	public static final Block DIAGNOSTIC_CONSOLE = register("diagnostic_console", DiagnosticConsoleBlock::new,
+			BlockBehaviour.Properties.of().strength(3.0F, 3600000.0F).sound(SoundType.METAL).lightLevel(state -> 7)
+					.pushReaction(PushReaction.IMMOVEABLE));
+
 	private ModBlocks() {
 	}
 
@@ -49,6 +53,7 @@ public final class ModBlocks {
 					tab.accept(RUSTED_PANEL);
 					tab.accept(SHIP_HATCH);
 					tab.accept(REPAIR_STATION);
+					tab.accept(DIAGNOSTIC_CONSOLE);
 				});
 	}
 }

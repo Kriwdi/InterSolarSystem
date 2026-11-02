@@ -33,8 +33,14 @@ public final class ShipFlightController {
 
 	public static void register() {
 		ServerTickEvents.END_SERVER_TICK.register(ShipFlightController::tick);
-		ServerLifecycleEvents.SERVER_STARTED.register(server -> ShipStatusSync.reset());
-		ServerLifecycleEvents.SERVER_STOPPED.register(server -> ShipStatusSync.reset());
+		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+			ShipStatusSync.reset();
+			ShipDiagnosticScan.reset();
+		});
+		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
+			ShipStatusSync.reset();
+			ShipDiagnosticScan.reset();
+		});
 	}
 
 	private static void tick(MinecraftServer server) {
@@ -56,7 +62,8 @@ public final class ShipFlightController {
 		if (phase == ShipFlightPhase.FLIGHT) {
 			rollIncidents(server, state, now);
 		}
-		Optional<ShipFlightPhase> due = ShipFlightTimeline.dueTransition(phase, state.phaseStartedTick(), now);
+		Optional<ShipFlightPhase> due = ShipFlightTimeline.dueTransition(state.flightKind(), phase,
+				state.phaseStartedTick(), now);
 		if (due.isPresent()) {
 			transition(server, state, due.get(), now);
 		}
@@ -113,26 +120,69 @@ public final class ShipFlightController {
 	 * messages come last because losing them costs nothing.
 	 */
 	private static void transition(MinecraftServer server, ShipState state, ShipFlightPhase to, long now) {
+		ShipFlightKind kind = state.flightKind();
 		switch (to) {
 			case FLIGHT -> {
+				double risk = ShipFaultRules.launchRisk(ShipRepair.conditions(state), state.diagnostics().faults(), false,
+						kind == ShipFlightKind.TEST);
+				if (ShipFaultRules.isDisaster(state.hazards().seed(), risk)) {
+					ShipDisaster.failTakeoff(server, state, now);
+					return;
+				}
 				removeHatch(server, state);
-				state.applyWear(ShipWear.forTransition(to));
+				state.applyWear(ShipWear.forTransition(to, kind));
 				state.advancePhase(now);
 				playInterior(server, SoundEvents.FIREWORK_ROCKET_LAUNCH);
+				if (kind == ShipFlightKind.TEST) {
+					surfaceFaults(server, state, now);
+				}
 			}
 			case LANDING -> {
-				state.applyWear(ShipWear.forTransition(to));
+				state.applyWear(ShipWear.forTransition(to, kind));
 				state.advancePhase(now);
 				playInterior(server, SoundEvents.BEACON_ACTIVATE);
 			}
 			case LANDED -> {
 				ShipLanding.Landing landing = ShipLanding.place(server, state);
-				state.applyWear(ShipWear.forTransition(to));
+				state.applyWear(ShipWear.forTransition(to, kind));
+				state.addFaults(ShipFaultRules.rollLandingFaults(state.hazards().seed(), ShipRepair.conditions(state),
+						faultySubsystems(state)));
 				state.advancePhase(now);
 				ShipLanding.announce(server, landing);
 				playInterior(server, SoundEvents.ANVIL_LAND);
 			}
 			default -> state.advancePhase(now);
+		}
+	}
+
+	private static Set<ShipSubsystem> faultySubsystems(ShipState state) {
+		Set<ShipSubsystem> set = EnumSet.noneOf(ShipSubsystem.class);
+		state.diagnostics().faults().forEach(f -> set.add(f.subsystem()));
+		return set;
+	}
+
+	/**
+	 * A test hop shakes every hidden fault loose: all become known, and as many as the incident limit allows break out
+	 * as incidents right away (worst subsystem first), so the crew can see and fix them while still near home.
+	 */
+	private static void surfaceFaults(MinecraftServer server, ShipState state, long now) {
+		java.util.List<ShipLatentFault> fresh = state.revealAllFaults();
+		java.util.List<ShipLatentFault> all = state.diagnostics().faults().stream()
+				.sorted(java.util.Comparator.comparingInt((ShipLatentFault f) -> state.condition(f.subsystem()))).toList();
+		for (ShipLatentFault fault : all) {
+			ShipIncident incident = new ShipIncident(fault.subsystem(), ShipIncidentRules.typeFor(fault.subsystem()),
+					now + ShipIncidentRules.INCIDENT_DEADLINE_TICKS);
+			if (state.addIncident(incident)) {
+				broadcast(server, Component.translatable("message.intersolarsystem.ship.incident",
+						Component.translatable(ShipCommands.incidentKey(incident.type())),
+						Component.translatable(ShipCommands.subsystemKey(incident.subsystem()))));
+			}
+		}
+		broadcast(server, all.isEmpty()
+				? Component.translatable("message.intersolarsystem.ship.test_clean")
+				: Component.translatable("message.intersolarsystem.ship.test_found", all.size(), fresh.size()));
+		if (!all.isEmpty()) {
+			playInterior(server, SoundEvents.BEACON_DEACTIVATE);
 		}
 	}
 
@@ -147,14 +197,14 @@ public final class ShipFlightController {
 		});
 	}
 
-	private static void broadcast(MinecraftServer server, Component message) {
+	static void broadcast(MinecraftServer server, Component message) {
 		ServerLevel interior = server.getLevel(ShipDimensions.INTERIOR);
 		if (interior != null) {
 			interior.players().forEach(p -> p.sendSystemMessage(message));
 		}
 	}
 
-	private static void playInterior(MinecraftServer server, SoundEvent sound) {
+	static void playInterior(MinecraftServer server, SoundEvent sound) {
 		ServerLevel interior = server.getLevel(ShipDimensions.INTERIOR);
 		if (interior == null) {
 			return;

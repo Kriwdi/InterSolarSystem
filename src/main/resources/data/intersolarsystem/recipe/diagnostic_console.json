@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": "intersolarsystem:scrap_metal",
+    "G": "minecraft:glass_pane",
+    "C": "intersolarsystem:salvaged_circuit",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    "SGS",
+    "CRC",
+    "SSS"
+  ],
+  "result": {
+    "id": "intersolarsystem:diagnostic_console"
+  }
+}
