@@ -4,6 +4,8 @@ on:
   push:
     branches-ignore:
       - ci-builds
+      - ci-screens
+      - ci-probe
   workflow_dispatch:
 
 permissions:

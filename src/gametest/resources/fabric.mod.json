@@ -1,0 +1,15 @@
+{
+	"schemaVersion": 1,
+	"id": "intersolarsystem-gametest",
+	"version": "1.0.0",
+	"name": "InterSolarSystem client game tests",
+	"environment": "client",
+	"entrypoints": {
+		"fabric-client-gametest": [
+			"hu.kriwdi.intersolarsystem.gametest.SceneScreenshots"
+		]
+	},
+	"depends": {
+		"intersolarsystem": "*"
+	}
+}

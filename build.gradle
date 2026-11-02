@@ -26,6 +26,14 @@ fabricApi {
 	configureDataGeneration() {
 		client = true
 	}
+	// Client game tests (src/gametest): start a real client in CI, build scenes and take screenshots.
+	configureTests {
+		createSourceSet = true
+		modId = "intersolarsystem-gametest"
+		enableGameTests = false
+		enableClientGameTests = true
+		eula = true
+	}
 }
 
 dependencies {
@@ -39,6 +47,14 @@ dependencies {
 	testImplementation platform("org.junit:junit-bom:5.11.4")
 	testImplementation "org.junit.jupiter:junit-jupiter"
 	testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+}
+
+// The client game tests use the client classes (screens) too.
+sourceSets {
+	gametest {
+		compileClasspath += client.output
+		runtimeClasspath += client.output
+	}
 }
 
 // Tests also see the client source set (pure client-side logic and the datagen lang table).
