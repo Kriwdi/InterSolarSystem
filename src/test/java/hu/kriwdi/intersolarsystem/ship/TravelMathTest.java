@@ -17,7 +17,7 @@ class TravelMathTest {
 	@Test
 	void catalogueLoadsWithEarthAndMoon() {
 		assertEquals("earth", SolarSystem.bodies().get(0).id());
-		assertEquals(CelestialBody.Status.FLYBY, body("moon").status());
+		assertEquals(CelestialBody.Status.LANDING, body("moon").status());
 		assertTrue(SolarSystem.bodies().size() >= 10);
 	}
 
@@ -58,5 +58,27 @@ class TravelMathTest {
 		assertEquals("6:00", TravelMath.formatDuration(7200));
 		assertEquals("7h 00m", TravelMath.formatDuration(504000));
 		assertEquals("3d 1h", TravelMath.formatDuration(5256000));
+	}
+
+	@Test
+	void legsFollowTheDistanceBetweenPlaces() {
+		assertEquals(Math.round(0.25 * 2400), TravelMath.legTicks("earth", "earth_orbit", 1, 0));
+		assertEquals(Math.round(0.25 * 2400), TravelMath.legTicks("earth_orbit", "earth", 1, 0));
+		assertEquals(Math.round(2.75 * 2400), TravelMath.legTicks("earth_orbit", "moon", 1, 0));
+		assertEquals(3 * 2400, TravelMath.legTicks("moon", "earth", 1, 0));
+	}
+
+	@Test
+	void reachabilityDependsOnWhereTheShipIs() {
+		CelestialBody moon = body("moon");
+		CelestialBody orbit = body("earth_orbit");
+		CelestialBody earth = body("earth");
+		assertTrue(ShipNavigation.reachable(moon, "earth"));
+		assertTrue(ShipNavigation.reachable(moon, "earth_orbit"));
+		assertTrue(!ShipNavigation.reachable(moon, "moon"));
+		assertTrue(ShipNavigation.reachable(orbit, "moon"));
+		assertTrue(ShipNavigation.reachable(earth, "moon"));
+		assertTrue(!ShipNavigation.reachable(earth, "earth"));
+		assertTrue(!ShipNavigation.reachable(body("mars"), "moon"));
 	}
 }
