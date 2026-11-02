@@ -37,10 +37,10 @@ jobs:
           done
           if [ -s tools/api-probe-grep.txt ]; then
             # Lists classes in the jars whose name matches a pattern (to find renamed classes).
-            for jar in $(cat classpath.txt); do unzip -Z1 "$jar" 2>/dev/null | sed "s|^|$(basename $jar): |"; done > out/all-classes.txt
+            for jar in $(cat classpath.txt); do [ -f "$jar" ] && { unzip -Z1 "$jar" 2>/dev/null | sed "s|^|$(basename $jar): |" || true; }; done > out/all-classes.txt
             grep -v '^\s*#' tools/api-probe-grep.txt | grep -v '^\s*$' | while read -r pat; do
               echo "===== grep $pat" >> out/grep.txt
-              grep -E "$pat" out/all-classes.txt | head -n 60 >> out/grep.txt
+              { grep -E "$pat" out/all-classes.txt | head -n 60 || true; } >> out/grep.txt
             done
             rm out/all-classes.txt
           fi
