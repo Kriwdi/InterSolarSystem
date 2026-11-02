@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.RandomizableContainer;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.resources.ResourceKey;
@@ -45,7 +45,10 @@ public final class OrbitStation {
 			orbit.getChunk(pos.getX() >> 4, pos.getZ() >> 4);
 			orbit.setBlock(pos, stateFor(p.piece()), Block.UPDATE_CLIENTS);
 			if (p.piece() == IssLayout.Piece.SUPPLY) {
-				RandomizableContainer.setBlockEntityLootTable(orbit, orbit.getRandom(), pos, SUPPLY_LOOT);
+				if (orbit.getBlockEntity(pos) instanceof RandomizableContainerBlockEntity container) {
+					container.setLootTable(SUPPLY_LOOT);
+					container.setLootTableSeed(orbit.getRandom().nextLong());
+				}
 			}
 		}
 	}
