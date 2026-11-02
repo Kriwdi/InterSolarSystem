@@ -16,7 +16,7 @@ public final class RepairBoardPayloads {
 	private RepairBoardPayloads() {
 	}
 
-	private static RepairMinigame kind(int ordinal) {
+	private static RepairMinigame kindOf(int ordinal) {
 		RepairMinigame[] values = RepairMinigame.values();
 		return ordinal >= 0 && ordinal < values.length ? values[ordinal] : RepairMinigame.WIRING;
 	}
@@ -30,7 +30,7 @@ public final class RepairBoardPayloads {
 					buf.writeLong(p.seed());
 					VarInt.write(buf, p.size());
 				},
-				buf -> new Open(kind(VarInt.read(buf)), buf.readLong(), VarInt.read(buf)));
+				buf -> new Open(kindOf(VarInt.read(buf)), buf.readLong(), VarInt.read(buf)));
 
 		@Override
 		public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
@@ -51,7 +51,7 @@ public final class RepairBoardPayloads {
 					}
 				},
 				buf -> {
-					RepairMinigame kind = kind(VarInt.read(buf));
+					RepairMinigame kind = kindOf(VarInt.read(buf));
 					long seed = buf.readLong();
 					int count = Math.max(0, Math.min(MAX_ANSWER, VarInt.read(buf)));
 					int[] answer = new int[count];
