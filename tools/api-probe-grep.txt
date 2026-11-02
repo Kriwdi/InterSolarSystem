@@ -1,2 +1,5 @@
 # Regex.
-client/gametest/v1/.*class
+net/minecraft/client/renderer/.*Light.*class
+net/minecraft/world/attribute/EnvironmentAttributes.*class
+data/minecraft/timeline/.*json
+shaders/.*light.*

@@ -1,1 +1,9 @@
-# none
+data/minecraft/dimension_type/overworld.json
+data/minecraft/dimension_type/the_end.json
+data/minecraft/worldgen/biome/the_void.json
+data/minecraft/worldgen/biome/the_end.json
+data/minecraft/timeline/day.json
+data/minecraft/timeline/overworld_day.json
+data/minecraft/tags/timeline/in_overworld.json
+assets/minecraft/shaders/core/lightmap.fsh
+assets/minecraft/shaders/program/lightmap.fsh
