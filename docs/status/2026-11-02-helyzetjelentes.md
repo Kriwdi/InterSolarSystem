@@ -42,3 +42,11 @@ Előzmény: `2026-10-29-helyzetjelentes.md` (az architektúra, az elvek és a 26
 ## Ötletdoboz
 
 Lásd a 3. fázis spec végét és a korábbi jelentést; újak: roncsérzékelő iránymutatással, választható blokkromboló robbanás, navigációs konzol a `/iss ship fly` helyett.
+
+## Kliens-ellenőrzés (képernyőképek, CI)
+
+- A kliens a CI-ban Vulkan (lavapipe) hátterrel indul; a `ci-screens` ágon minden push után friss képek vannak.
+- Javítva: a pályán kék volt az ég (a `minecraft:the_void` biome égszíne felülírta a dimenzióét) → saját `orbital_void` biome fekete éggel.
+- Javítva: a Holdon a `MOTION_BLOCKING` heightmap a világ aljáét (0) adta vissza, így az Apollo-helyszínek és a bázis a föld alá épültek, és a leszállás is oda tett volna → oszlop-letapogatás (`MoonSites.surface`), a füsttesztben ellenőrizve.
+- Az Apollo-leszálló formásabb: nyolcszögletű arany leszállófokozat, ezüst felszállófokozat ablakkal, dokkolóalagúttal és radarral.
+- A Föld fázisa a Holdról helyes: holdi délben „újföld” (sötét korong), holdi éjjel „teljes Föld”.
