@@ -8,6 +8,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 
+import hu.kriwdi.intersolarsystem.content.ModItems;
+
 /** Server-side repair at the repair station. */
 public final class ShipRepair {
 	private ShipRepair() {
@@ -41,13 +43,20 @@ public final class ShipRepair {
 			}
 			case INCIDENT -> {
 				ShipIncident incident = choice.incident().orElseThrow();
-				if (ShipWiringRepair.needsMinigame(incident)) {
-					// The kit is only used up when the server accepts the wiring.
-					ShipWiringRepair.start(server, player, incident);
+				java.util.Optional<RepairMinigame> game = RepairMinigame.forIncident(incident.type());
+				boolean multitool = hasMultitool(player);
+				boolean skip = multitool
+						&& state.condition(incident.subsystem()) >= RepairMinigame.MULTITOOL_SKIP_CONDITION;
+				if (game.isPresent() && !skip) {
+					// The kit is only used up when the server accepts the minigame answer.
+					ShipRepairBoards.open(server, player, game.get(), incident, multitool);
 					return;
 				}
 				if (state.resolveIncident(incident)) {
 					kit.consume(1, player);
+					if (game.isPresent()) {
+						useMultitool(player);
+					}
 					player.sendSystemMessage(Component.translatable("message.intersolarsystem.ship.repair_incident",
 							Component.translatable(ShipCommands.incidentKey(incident.type())),
 							Component.translatable(ShipCommands.subsystemKey(incident.subsystem()))));
@@ -85,6 +94,24 @@ public final class ShipRepair {
 					"message.intersolarsystem.ship.station_needs_kit",
 					Component.translatable(ShipCommands.subsystemKey(choice.subsystem().orElseThrow()))));
 			case NOTHING -> player.sendSystemMessage(Component.translatable("message.intersolarsystem.ship.repair_nothing"));
+		}
+	}
+
+	/** A multitool held in the off hand makes repairs easier. */
+	public static boolean hasMultitool(ServerPlayer player) {
+		return player.getOffhandItem().getItem() == ModItems.MULTITOOL;
+	}
+
+	/** Wears the off-hand multitool by one use; it breaks when worn out. */
+	public static void useMultitool(ServerPlayer player) {
+		ItemStack tool = player.getOffhandItem();
+		if (tool.getItem() != ModItems.MULTITOOL || player.isCreative()) {
+			return;
+		}
+		tool.setDamageValue(tool.getDamageValue() + 1);
+		if (tool.getDamageValue() >= tool.getMaxDamage()) {
+			tool.shrink(1);
+			player.playSound(net.minecraft.sounds.SoundEvents.ITEM_BREAK.value(), 1.0F, 1.0F);
 		}
 	}
 

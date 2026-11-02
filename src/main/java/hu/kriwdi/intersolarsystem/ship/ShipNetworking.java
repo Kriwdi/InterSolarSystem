@@ -12,11 +12,11 @@ public final class ShipNetworking {
 	/** Registers the packets. Must run on both sides before any receiver is registered. */
 	public static void register() {
 		PayloadTypeRegistry.clientboundPlay().register(ShipStatusPayload.TYPE, ShipStatusPayload.CODEC);
-		PayloadTypeRegistry.clientboundPlay().register(WiringPayloads.Open.TYPE, WiringPayloads.Open.CODEC);
-		PayloadTypeRegistry.serverboundPlay().register(WiringPayloads.Result.TYPE, WiringPayloads.Result.CODEC);
-		ServerPlayNetworking.registerGlobalReceiver(WiringPayloads.Result.TYPE, (payload, context) -> {
+		PayloadTypeRegistry.clientboundPlay().register(RepairBoardPayloads.Open.TYPE, RepairBoardPayloads.Open.CODEC);
+		PayloadTypeRegistry.serverboundPlay().register(RepairBoardPayloads.Result.TYPE, RepairBoardPayloads.Result.CODEC);
+		ServerPlayNetworking.registerGlobalReceiver(RepairBoardPayloads.Result.TYPE, (payload, context) -> {
 			ServerPlayer player = context.player();
-			context.server().execute(() -> ShipWiringRepair.handleResult(context.server(), player, payload));
+			context.server().execute(() -> ShipRepairBoards.handleResult(context.server(), player, payload));
 		});
 	}
 }

@@ -60,11 +60,20 @@ class WiringPuzzleTest {
 	}
 
 	@Test
-	void sizeIsClampedAndFollowsNavigation() {
+	void sizeIsClampedAndFollowsTheSubsystemCondition() {
 		assertEquals(WiringPuzzle.MIN_WIRES, WiringPuzzle.of(1L, 0).size());
 		assertEquals(WiringPuzzle.MAX_WIRES, WiringPuzzle.of(1L, 99).size());
-		assertEquals(3, WiringPuzzle.wiresFor(100));
-		assertEquals(4, WiringPuzzle.wiresFor(50));
-		assertEquals(5, WiringPuzzle.wiresFor(10));
+		assertEquals(4, RepairMinigame.WIRING.size(100, false));
+		assertEquals(5, RepairMinigame.WIRING.size(50, false));
+		assertEquals(6, RepairMinigame.WIRING.size(10, false));
+		assertEquals(3, RepairMinigame.WIRING.size(100, true));
+		assertEquals(5, RepairMinigame.WIRING.size(10, true));
+	}
+
+	@Test
+	void incidentsMapToTheirMinigame() {
+		assertEquals(java.util.Optional.of(RepairMinigame.VALVE), RepairMinigame.forIncident(ShipIncidentType.OVERHEAT));
+		assertEquals(java.util.Optional.of(RepairMinigame.PRESSURE), RepairMinigame.forIncident(ShipIncidentType.LEAK));
+		assertEquals(java.util.Optional.empty(), RepairMinigame.forIncident(ShipIncidentType.FIRE));
 	}
 }

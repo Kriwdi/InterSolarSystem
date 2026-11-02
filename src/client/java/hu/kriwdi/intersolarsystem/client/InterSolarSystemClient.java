@@ -9,7 +9,10 @@ import net.minecraft.client.Minecraft;
 
 import hu.kriwdi.intersolarsystem.core.ModIds;
 import hu.kriwdi.intersolarsystem.ship.ShipStatusPayload;
-import hu.kriwdi.intersolarsystem.ship.WiringPayloads;
+import hu.kriwdi.intersolarsystem.client.repair.PressureScreen;
+import hu.kriwdi.intersolarsystem.client.repair.ValveScreen;
+import hu.kriwdi.intersolarsystem.client.repair.WiringScreen;
+import hu.kriwdi.intersolarsystem.ship.RepairBoardPayloads;
 
 public class InterSolarSystemClient implements ClientModInitializer {
 	@Override
@@ -23,9 +26,13 @@ public class InterSolarSystemClient implements ClientModInitializer {
 				}
 			});
 		});
-		ClientPlayNetworking.registerGlobalReceiver(WiringPayloads.Open.TYPE, (payload, context) -> {
+		ClientPlayNetworking.registerGlobalReceiver(RepairBoardPayloads.Open.TYPE, (payload, context) -> {
 			Minecraft minecraft = context.client();
-			minecraft.execute(() -> minecraft.setScreenAndShow(new WiringScreen(payload.seed(), payload.wires())));
+			minecraft.execute(() -> minecraft.setScreenAndShow(switch (payload.kind()) {
+				case WIRING -> new WiringScreen(payload.seed(), payload.size());
+				case VALVE -> new ValveScreen(payload.seed(), payload.size());
+				case PRESSURE -> new PressureScreen(payload.seed(), payload.size());
+			}));
 		});
 		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> ClientShipStatus.clear());
 		HudElementRegistry.addLast(ModIds.id("ship_status"), new ShipHudElement());

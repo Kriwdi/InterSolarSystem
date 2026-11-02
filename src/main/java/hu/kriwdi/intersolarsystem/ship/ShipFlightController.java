@@ -36,12 +36,12 @@ public final class ShipFlightController {
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
 			ShipStatusSync.reset();
 			ShipDiagnosticScan.reset();
-			ShipWiringRepair.reset();
+			ShipRepairBoards.reset();
 		});
 		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
 			ShipStatusSync.reset();
 			ShipDiagnosticScan.reset();
-			ShipWiringRepair.reset();
+			ShipRepairBoards.reset();
 		});
 	}
 

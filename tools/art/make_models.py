@@ -164,9 +164,11 @@ def rusted_panel():
 
 
 def items():
-    for name in ("repair_kit", "scrap_sensor", "scrap_metal", "salvaged_wiring", "salvaged_circuit"):
+    handheld = {"multitool"}
+    for name in ("repair_kit", "scrap_sensor", "scrap_metal", "salvaged_wiring", "salvaged_circuit", "multitool"):
+        parent = "minecraft:item/handheld" if name in handheld else "minecraft:item/generated"
         write(ASSETS / "models/item" / (name + ".json"),
-              {"parent": "minecraft:item/generated", "textures": {"layer0": NS + "item/" + name}})
+              {"parent": parent, "textures": {"layer0": NS + "item/" + name}})
         write(ASSETS / "items" / (name + ".json"),
               {"model": {"type": "minecraft:model", "model": NS + "item/" + name}})
 

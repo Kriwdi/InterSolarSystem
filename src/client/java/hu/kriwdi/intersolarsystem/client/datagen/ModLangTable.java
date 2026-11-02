@@ -370,18 +370,54 @@ public final class ModLangTable {
 				"Click a wire on the left, then the same colour on the right",
 				"Klicke links ein Kabel, dann rechts die gleiche Farbe",
 				"Kattints egy bal oldali vezetékre, majd jobbra az azonos színűre");
-		add(rows, "message.intersolarsystem.ship.wiring_expired",
+		add(rows, "message.intersolarsystem.ship.board_expired",
 				"The repair board is no longer valid",
 				"Die Reparaturtafel ist nicht mehr gültig",
 				"A javítópanel már nem érvényes");
-		add(rows, "message.intersolarsystem.ship.wiring_no_kit",
-				"Hold the repair kit in your main hand while wiring",
-				"Halte beim Verkabeln das Reparaturset in der Haupthand",
-				"Vezetékezés közben tartsd a javítókészletet a fő kezedben");
-		add(rows, "message.intersolarsystem.ship.wiring_wrong",
+		add(rows, "message.intersolarsystem.ship.board_no_kit",
+				"Hold the repair kit in your main hand while repairing",
+				"Halte beim Reparieren das Reparaturset in der Haupthand",
+				"Javítás közben tartsd a javítókészletet a fő kezedben");
+		add(rows, "message.intersolarsystem.ship.board_failed.wiring",
 				"Sparks fly! Wrong wiring damaged %s by %s%%",
 				"Funken sprühen! Falsche Verkabelung hat %s um %s%% beschädigt",
 				"Szikrák! A rossz bekötés megrongálta ezt: %s (−%s%%)");
+		add(rows, "message.intersolarsystem.ship.board_failed.valve",
+				"The valve slipped and the temperature spiked: %s lost %s%%",
+				"Das Ventil rutschte ab, die Temperatur schoss hoch: %s verlor %s%%",
+				"Megcsúszott a szelep, felszökött a hő: %s −%s%%");
+		add(rows, "message.intersolarsystem.ship.board_failed.pressure",
+				"The pressure surged through the seals: %s lost %s%%",
+				"Der Druck schlug durch die Dichtungen: %s verlor %s%%",
+				"A nyomás áttörte a tömítéseket: %s −%s%%");
+		add(rows, "screen.intersolarsystem.valve.title",
+				"Overheating: Close the Cooling Valve",
+				"Überhitzung: Kühlventil schließen",
+				"Túlmelegedés: zárd el a hűtőszelepet");
+		add(rows, "screen.intersolarsystem.valve.hint",
+				"Close the valve while the needle is in the green band (space)",
+				"Schließe das Ventil, wenn die Nadel im grünen Bereich ist (Leertaste)",
+				"Zárd el, amikor a mutató a zöld sávban van (szóköz)");
+		add(rows, "screen.intersolarsystem.valve.close",
+				"CLOSE VALVE",
+				"VENTIL ZU",
+				"SZELEP ZÁR");
+		add(rows, "screen.intersolarsystem.pressure.title",
+				"Pressure Loss: Equalise the Tanks",
+				"Druckverlust: Tanks ausgleichen",
+				"Nyomásvesztés: egyenlítsd ki a tartályokat");
+		add(rows, "screen.intersolarsystem.pressure.hint",
+				"Use the valves to bring every tank to the yellow line",
+				"Bringe mit den Ventilen jeden Tank auf die gelbe Linie",
+				"A szelepekkel hozz minden tartályt a sárga vonalig");
+		add(rows, "screen.intersolarsystem.pressure.moves",
+				"Valve operations left: %s",
+				"Verbleibende Ventilbetätigungen: %s",
+				"Hátralévő szelepműveletek: %s");
+		add(rows, "item.intersolarsystem.multitool",
+				"Multitool",
+				"Multiwerkzeug",
+				"Multiszerszám");
 		check(rows);
 		return List.copyOf(rows);
 	}

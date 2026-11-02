@@ -25,6 +25,9 @@ public final class ModItems {
 
 	public static final Item SALVAGED_CIRCUIT = register("salvaged_circuit", Item::new, new Item.Properties());
 
+	/** Held in the off hand during repairs: light faults need no minigame, harder ones get a smaller board. */
+	public static final Item MULTITOOL = register("multitool", Item::new, new Item.Properties().durability(48));
+
 	private ModItems() {
 	}
 
@@ -41,6 +44,7 @@ public final class ModItems {
 					tab.accept(SCRAP_METAL);
 					tab.accept(SALVAGED_WIRING);
 					tab.accept(SALVAGED_CIRCUIT);
+					tab.accept(MULTITOOL);
 				});
 	}
 }

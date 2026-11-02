@@ -29,18 +29,6 @@ public record WiringPuzzle(long seed, int[] left, int[] right) {
 		return new WiringPuzzle(seed, left, right);
 	}
 
-	/**
-	 * How many wires a repair needs: 3 with good navigation/comms (the diagnostic display shows the circuit), more as it
-	 * degrades, so a worn ship is harder to fix.
-	 */
-	public static int wiresFor(int navigationCondition) {
-		int condition = ShipState.clamp(navigationCondition);
-		if (condition >= 70) {
-			return 3;
-		}
-		return condition >= 35 ? 4 : 5;
-	}
-
 	public int size() {
 		return left.length;
 	}

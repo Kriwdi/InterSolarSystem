@@ -497,6 +497,28 @@ def items():
         "x": hexc("3b2a1d"), "i": hexc("b9c0c6")})
     save(circuit, "item/salvaged_circuit")
 
+    # Multitool: red grip with a yellow band (bottom left), steel body, pliers jaws open at the top right.
+    multitool = grid([
+        "...........oo...",
+        "..........oHHo..",
+        "..........oHmo.o",
+        "...........omoHo",
+        "..........oMmHmo",
+        ".........oMmmoo.",
+        "........oMmMo...",
+        ".......oMmMo....",
+        "......oKMMo.....",
+        ".....oRRKo......",
+        "....oRRrYo......",
+        "...oRRrYo.......",
+        "..oRRrro........",
+        ".oRRrro.........",
+        ".odRro..........",
+        "..oo............",
+    ], {"o": o, "H": hexc("dfe3e6"), "m": hexc("9aa1a7"), "M": hexc("6b737a"), "K": hexc("2b2f33"),
+        "R": hexc("c8402d"), "r": hexc("8e2219"), "d": hexc("5e1510"), "Y": hexc("e8b830")})
+    save(multitool, "item/multitool")
+
 
 if __name__ == "__main__":
     rusted_panels()
