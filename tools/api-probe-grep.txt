@@ -1,2 +1,4 @@
 # Regex.
-worldgen/material_rule/.*json
+structure/igloo.*
+structure/shipwreck/.*nbt
+worldgen/structure/.*json
