@@ -114,7 +114,7 @@ public final class MoonSites {
 		set(moon, c.offset(0, 1, 0), ModBlocks.LANDER_ENGINE.defaultBlockState());
 		for (int[] leg : new int[][] {{-2, -2}, {2, -2}, {-2, 2}, {2, 2}}) {
 			set(moon, c.offset(leg[0], 0, leg[1]), Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE.defaultBlockState());
-			set(moon, c.offset(leg[0], 1, leg[1]), Blocks.LIGHTNING_ROD.defaultBlockState());
+			set(moon, c.offset(leg[0], 1, leg[1]), Blocks.IRON_BARS.defaultBlockState());
 		}
 		set(moon, c.offset(0, 1, -2), Blocks.LADDER.defaultBlockState().setValue(LadderBlock.FACING, Direction.NORTH));
 		set(moon, c.offset(0, 0, -2), Blocks.LADDER.defaultBlockState().setValue(LadderBlock.FACING, Direction.NORTH));
@@ -136,7 +136,7 @@ public final class MoonSites {
 				set(moon, r.offset(1, 0, dz), ModBlocks.TRUSS.defaultBlockState());
 			}
 			set(moon, r.offset(1, 1, 0), ModBlocks.ANTENNA_DISH.defaultBlockState());
-			set(moon, r.offset(1, 1, 3), Blocks.LIGHTNING_ROD.defaultBlockState());
+			set(moon, r.offset(1, 1, 3), Blocks.IRON_BARS.defaultBlockState());
 		}
 	}
 
