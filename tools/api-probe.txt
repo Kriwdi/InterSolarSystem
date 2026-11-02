@@ -1,3 +1,2 @@
 # Classes.
-net.minecraft.world.level.block.entity.BarrelBlockEntity
-net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity
+net.minecraft.client.renderer.LevelRenderer

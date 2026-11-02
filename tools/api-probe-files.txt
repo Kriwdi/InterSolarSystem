@@ -1,1 +1,6 @@
-# none
+# Files.
+data/minecraft/worldgen/noise_settings/end.json
+data/minecraft/worldgen/configured_feature/ice_spike.json
+data/minecraft/worldgen/placed_feature/ice_spike.json
+data/minecraft/worldgen/biome/snowy_plains.json
+data/minecraft/worldgen/noise_settings/floating_islands.json

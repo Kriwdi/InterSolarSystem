@@ -1,2 +1,5 @@
 # Regex.
-RandomizableContainer
+world/attribute/
+levelgen/feature/Feature.class
+client/renderer/.*Pipeline
+fabric/api/client/rendering/v1/.*

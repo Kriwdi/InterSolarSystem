@@ -56,6 +56,23 @@ jobs:
             done
             rm out/all-classes.txt
           fi
+      - name: Decompiled sources
+        shell: bash
+        run: |
+          # Prints decompiled Minecraft sources for the classes in tools/api-sources.txt (to read how vanilla does it).
+          if [ -s tools/api-sources.txt ]; then
+            ./gradlew genSources -q > /dev/null 2>&1 || ./gradlew genSourcesWithVineflower -q > /dev/null 2>&1 || true
+            find ~/.gradle .gradle -name "*sources*.jar" 2>/dev/null | grep -i minecraft > sources-jars.txt || true
+            cat sources-jars.txt
+            mkdir -p out/src
+            { grep -v '^\s*#' tools/api-sources.txt | grep -v '^\s*$' || true; } | while read -r cls; do
+              path="${cls//.//}.java"
+              for jar in $(cat sources-jars.txt); do
+                if unzip -p "$jar" "$path" > "out/src/${cls}.java" 2>/dev/null && [ -s "out/src/${cls}.java" ]; then break; fi
+              done
+              [ -s "out/src/${cls}.java" ] || echo "NOT FOUND: $cls" >> out/src/missing.txt
+            done
+          fi
       - name: Publish
         shell: bash
         run: |

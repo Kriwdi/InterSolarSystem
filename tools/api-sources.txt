@@ -1,0 +1,6 @@
+# Classes whose decompiled source the API probe workflow publishes to ci-probe/src.
+net.minecraft.client.renderer.SkyRenderer
+net.minecraft.client.renderer.state.level.SkyRenderState
+net.minecraft.world.level.levelgen.feature.Feature
+net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
+net.minecraft.world.attribute.EnvironmentAttributes
