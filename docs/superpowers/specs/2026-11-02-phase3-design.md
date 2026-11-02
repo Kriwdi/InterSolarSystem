@@ -12,9 +12,9 @@ A hajó eddig "csak" kopott, és a javítókészletet nem lehetett megszerezni, 
 
 | Szelet | Tartalom | Állapot |
 |---|---|---|
-| 3a | Kimentés és gyártás: hulladék-alkatrészek, javítókészlet recept, zsákmány a vanilla romokban, rozsdás panel szétszedése | ebben a körben |
-| 3b | Rejtett hibák, diagnosztikai konzol, tesztfelszállás, katasztrofális felszállás | ebben a körben |
-| 3c | Első minigame: vezetékezés (rövidzárlat javítása) | következő kör (GUI API ellenőrzése után) |
+| 3a | Kimentés és gyártás: hulladék-alkatrészek, javítókészlet recept, zsákmány a vanilla romokban, rozsdás panel szétszedése | kész |
+| 3b | Rejtett hibák, diagnosztikai konzol, tesztfelszállás, katasztrofális felszállás | kész |
+| 3c | Első minigame: vezetékezés (rövidzárlat javítása) | kész |
 | 3d | További minigame-ek (szelepbeállítás, nyomáskiegyenlítés), a felszerelés csökkenti a minigame-ek számát | később |
 
 ## Döntések (alacsony tét, eldöntve; ha nem tetszik, könnyen változtatható)

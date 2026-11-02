@@ -50,7 +50,7 @@ Subsystems: `engine`, `fuel_energy`, `hull_armor`, `life_support`, `navigation_c
 
 Place a `ship_hatch` block (creative: Building Blocks tab) and right-click it to board the ship. You arrive in the sealed capsule room in the `intersolarsystem:ship_interior` dimension. Right-clicking the hatch in the wall leaves the ship again, next to the hatch you boarded through. If that hatch is gone, you are put at the world spawn. The hatch cannot be broken inside the ship.
 
-The ship save (`ship_state.dat`) is format version 4; older saves are migrated when loaded (`ShipStateMigrations`).
+The ship save (`ship_state.dat`) is format version 5; older saves are migrated when loaded (`ShipStateMigrations`).
 
 ## Flight
 
@@ -58,14 +58,38 @@ From inside the ship (OP): `/iss ship fly <x> <z>` flies the ship to an Overworl
 
 ## Wear, incidents and repair
 
-Every flight wears the subsystems out (about -8 on the engine per flight). Below 20% the engine or the landing/launch unit blocks takeoff. During flight, every 10 s a roll may cause an **incident** on a damaged subsystem (more likely the worse it is; nothing happens at 70% and above). An incident has a 60 s deadline: fix it with a **Repair Kit** at the **Repair Station** inside the ship (right-click the station with the kit), or the subsystem loses 25%. Without an incident, a kit restores the worst subsystem by 25%. The rolls come from a seed saved at takeoff, so reloading does not change the outcome. Get kits from the creative inventory (Ingredients) or `/give @s intersolarsystem:repair_kit`. `/iss ship info` shows active incidents.
+Every flight wears the subsystems out (about -8 on the engine per flight). Below 20% the engine or the landing/launch unit blocks takeoff. During flight, every 10 s a roll may cause an **incident** on a damaged subsystem (more likely the worse it is; nothing happens at 70% and above). An incident has a 60 s deadline: fix it with a **Repair Kit** at the **Repair Station** inside the ship (right-click the station with the kit), or the subsystem loses 25%. Without an incident, a kit restores the worst subsystem by 25%. The rolls come from a seed saved at takeoff, so reloading does not change the outcome. `/iss ship info` shows active incidents.
+
+## Salvage and crafting
+
+The technology is salvaged, not invented. Chests in abandoned mineshafts, dungeons, shipwrecks (supply), desert and jungle temples, ruined portals, stronghold corridors, ancient cities, pillager outposts, igloos and village toolsmiths carry **Scrap Metal**, **Salvaged Wiring**, **Salvaged Circuits** and occasionally a ready Repair Kit. (These move into the dead Earth's own ruins in phase 7.)
+
+| Recipe | Ingredients |
+|---|---|
+| Repair Kit | 2 scrap metal, 1 salvaged wiring, 1 iron ingot, 1 salvaged circuit |
+| Diagnostic Console | 5 scrap metal, 1 glass pane, 2 salvaged circuits, 1 redstone |
+| Repair Station | 5 scrap metal, 1 iron ingot, 2 salvaged wiring, 1 salvaged circuit |
+| Rusted Panel (x2) | 4 scrap metal; a panel breaks back down into 2 scrap metal |
+
+## Hidden faults, diagnostics and test hops
+
+A worn subsystem (below 70%) can pick up a **hidden fault** at every landing (up to 50% chance at 0%). Hidden faults show nowhere, but they add to the **takeoff risk**: a fault in the engine, fuel/energy or landing/launch unit, or one of those below 40%, can make a takeoff fail. A failed takeoff is an explosion at the launch site (it hurts creatures but breaks no blocks), the ship stays where it is and takes heavy damage (engine and landing unit -30, hull -20, everything else -10).
+
+- **Diagnostic Console** (inside the ship): right-click to scan. Each hidden fault is found with 50% + half the navigation/comms condition. The scan lists the known faults and estimates the takeoff risk, but only from what it found. One scan per minute.
+- **Test hop**: sneak + right-click the console twice within 5 seconds. The ship lifts off and lands back on the spot (10 s + 15 s + 5 s). Every hidden fault breaks out as an incident (as many as the incident limit allows), the takeoff risk is halved and the ship wears half as much.
+- Known faults are marked with a red warning sign on the HUD. A repair kit at the station fixes, in this order: the most urgent incident, a known hidden fault, the worst subsystem.
+
+## Wiring minigame
+
+Using a repair kit on a **short circuit** opens a wiring board: click a wire end on the left, then the end of the same colour on the right. When all wires are joined, the server checks the answer. Correct: the incident is fixed and the kit is used up. Wrong: sparks, the subsystem loses 5% and the incident stays. Worse navigation/comms means more wires (3 at 70% and above, 4 from 35%, otherwise 5). The game does not pause while the board is open, and the kit must stay in the main hand.
 
 ## Ship HUD
 
 Inside the ship a panel in the top-left corner shows the flight phase and countdown, the condition of the eight subsystems (green at 70% and above, amber 20-69%, red below 20%, with the percentage) and the active incidents with their time left (they blink in the last 15 seconds). The server sends the status once per second, immediately when something changes, and as soon as a player enters the ship; the client only draws it. The old action bar countdown is gone.
 
-## Layout
+## Development notes
 
-- `src/main` – common and server code, `hu.kriwdi.intersolarsystem.{core,ship,travel,space,worldgen,survival,content}`
-- `src/client` – client-only code and datagen
-- `docs/superpowers` – design specs and implementation plans
+- **Translations** live in one table, `ModLangTable` (all three languages per key). After editing it run `python3 tools/sync_lang.py` (or `./gradlew runDatagen`); `LangTableTest` fails if the committed lang files are out of date.
+- **Recipes** are plain data files in `src/main/resources/data/intersolarsystem/recipe`.
+- **CI** (`.github/workflows/build.yml`) builds, runs the unit tests and a dedicated-server smoke test that loads all recipes, loot and models and fails on any error from the mod.
+- **API probe** (`.github/workflows/api-probe.yml`, run manually): prints the real 26.3 signatures of the classes listed in `tools/api-probe.txt` to the `ci-probe` branch, so code is written against the actual API.
