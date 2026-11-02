@@ -1,6 +1,1 @@
-# Resource files.
-data/minecraft/dimension_type/the_end.json
-data/minecraft/dimension_type/overworld.json
-data/minecraft/worldgen/biome/the_void.json
-assets/minecraft/equipment/iron.json
-data/minecraft/worldgen/world_preset/normal.json
+# none

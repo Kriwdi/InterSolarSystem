@@ -13,6 +13,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.storage.LevelData;
 
 import hu.kriwdi.intersolarsystem.content.ModBlocks;
+import hu.kriwdi.intersolarsystem.space.OrbitStation;
 import hu.kriwdi.intersolarsystem.ship.ShipInteriorLayout.Cell;
 import hu.kriwdi.intersolarsystem.ship.ShipLandingSearch.Column;
 

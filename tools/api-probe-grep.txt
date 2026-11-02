@@ -1,5 +1,2 @@
-# Regex patterns.
-DimensionRenderingRegistry
-client/rendering/v1/.*Sky
-environment/.*Attribute
-client/renderer/.*Sky
+# Regex.
+RandomizableContainer
