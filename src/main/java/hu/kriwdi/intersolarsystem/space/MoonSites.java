@@ -118,15 +118,25 @@ public final class MoonSites {
 			}
 		}
 		BlockPos c = new BlockPos(apollo.x(), y, apollo.z());
-		// Descent stage: gold-foil body on four legs with footpads, a ladder on the front leg.
+		// Descent stage: an octagonal gold-foil body (full 3x3 ring below, a cross above so the corners read as
+		// chamfers), the descent engine bell in the middle, on four legs with footpads and a ladder on the front leg.
 		for (int dx = -1; dx <= 1; dx++) {
 			for (int dz = -1; dz <= 1; dz++) {
 				set(moon, c.offset(dx, 1, dz), ModBlocks.STATION_FOIL.defaultBlockState());
-				set(moon, c.offset(dx, 2, dz), (dx == 0 && dz == 0)
-						? ModBlocks.LANDER_ENGINE.defaultBlockState() : ModBlocks.STATION_FOIL.defaultBlockState());
+				if (dx == 0 || dz == 0) {
+					set(moon, c.offset(dx, 2, dz), ModBlocks.STATION_FOIL.defaultBlockState());
+				}
 			}
 		}
 		set(moon, c.offset(0, 1, 0), ModBlocks.LANDER_ENGINE.defaultBlockState());
+		// Ascent stage: a smaller silver cabin with the commander's window to the front (north, above the ladder),
+		// the docking tunnel on top and the rendezvous radar dish on the side.
+		set(moon, c.offset(0, 3, 0), ModBlocks.STATION_HULL.defaultBlockState());
+		set(moon, c.offset(-1, 3, 0), ModBlocks.STATION_HULL.defaultBlockState());
+		set(moon, c.offset(1, 3, 0), ModBlocks.STATION_HULL.defaultBlockState());
+		set(moon, c.offset(0, 3, -1), ModBlocks.STATION_WINDOW.defaultBlockState());
+		set(moon, c.offset(0, 4, 0), ModBlocks.TRUSS.defaultBlockState());
+		set(moon, c.offset(1, 4, 0), ModBlocks.ANTENNA_DISH.defaultBlockState());
 		for (int[] leg : new int[][] {{-2, -2}, {2, -2}, {-2, 2}, {2, 2}}) {
 			set(moon, c.offset(leg[0], 0, leg[1]), Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE.defaultBlockState());
 			set(moon, c.offset(leg[0], 1, leg[1]), Blocks.IRON_BARS.defaultBlockState());

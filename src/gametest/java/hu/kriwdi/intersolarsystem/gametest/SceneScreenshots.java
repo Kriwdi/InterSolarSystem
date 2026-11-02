@@ -100,8 +100,8 @@ public class SceneScreenshots implements FabricClientGameTest {
 					+ (surfaceY(game, MoonSites.BASE[0] - 16, MoonSites.BASE[1] - 14) + 6) + " " + (MoonSites.BASE[1] - 14) + " -45 25");
 			context.waitTicks(80);
 			context.takeScreenshot("13_moon_tranquility_base");
-			game.getServer().runCommand("execute in intersolarsystem:moon run tp @a " + a11.x() + " " + (y + 40) + " "
-					+ a11.z() + " 0 35");
+			game.getServer().runCommand("execute in intersolarsystem:moon run tp @a " + a11.x() + " " + (y + 18) + " "
+					+ (a11.z() - 30) + " 0 25");
 			context.waitTicks(120);
 			context.takeScreenshot("14_moon_landscape");
 			for (int yaw : new int[] {0, 90, 180, 270}) {
