@@ -78,10 +78,20 @@ public final class MoonSites {
 		buildBase(moon);
 	}
 
-	/** First air block above the ground at (x, z), loading the chunk. */
-	static BlockPos surface(ServerLevel level, int x, int z) {
+	/**
+	 * First block above solid ground at (x, z), loading the chunk. Scans the column itself instead of trusting a
+	 * heightmap: on the Moon the MOTION_BLOCKING heightmap came back as the world bottom, which buried the sites.
+	 */
+	public static BlockPos surface(ServerLevel level, int x, int z) {
 		level.getChunk(x >> 4, z >> 4);
-		return new BlockPos(x, level.getHeight(Heightmap.Types.MOTION_BLOCKING, x, z), z);
+		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(x, level.getMaxY(), z);
+		for (; pos.getY() > level.getMinY(); pos.move(0, -1, 0)) {
+			BlockState state = level.getBlockState(pos);
+			if (!state.isAir() && !state.getCollisionShape(level, pos).isEmpty()) {
+				return pos.above().immutable();
+			}
+		}
+		return new BlockPos(x, level.getHeight(Heightmap.Types.WORLD_SURFACE, x, z), z);
 	}
 
 	private static void set(ServerLevel level, BlockPos pos, BlockState state) {

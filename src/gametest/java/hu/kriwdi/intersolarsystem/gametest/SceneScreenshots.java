@@ -119,9 +119,7 @@ public class SceneScreenshots implements FabricClientGameTest {
 	/** Surface height of a Moon column. Level#getHeight does not load chunks (it returns the world bottom), so load first. */
 	private static int surfaceY(TestSingleplayerContext game, int x, int z) {
 		return game.getServer().computeOnServer(server -> {
-			var moon = server.getLevel(ShipDimensions.MOON);
-			moon.getChunk(x >> 4, z >> 4);
-			return moon.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING, x, z);
+			return MoonSites.surface(server.getLevel(ShipDimensions.MOON), x, z).getY();
 		});
 	}
 }

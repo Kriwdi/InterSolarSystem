@@ -41,6 +41,9 @@ public final class ShipLanding {
 	 * world's minimum height, so the chunk is loaded first (the ship lands while everyone is inside the ship).
 	 */
 	private static int surfaceHeight(ServerLevel level, int x, int z) {
+		if (level.dimension() == ShipDimensions.MOON) {
+			return hu.kriwdi.intersolarsystem.space.MoonSites.surface(level, x, z).getY();
+		}
 		level.getChunk(x >> 4, z >> 4);
 		return level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
 	}

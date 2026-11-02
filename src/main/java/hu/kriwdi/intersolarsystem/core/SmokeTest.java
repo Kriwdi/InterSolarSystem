@@ -82,6 +82,21 @@ public final class SmokeTest {
 		if (!MoonSites.built(moon)) {
 			LOGGER.error("[SMOKETEST-FAIL] Tranquility Base was not built");
 		}
+		{
+			int bx = MoonSites.BASE[0];
+			int bz = MoonSites.BASE[1];
+			moon.getChunk(bx >> 4, bz >> 4);
+			LOGGER.info("[SMOKETEST] Moon heightmaps at the base: motion_blocking={} world_surface={} scanned={}",
+					moon.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING, bx, bz),
+					moon.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.WORLD_SURFACE, bx, bz),
+					MoonSites.surface(moon, bx, bz).getY());
+			for (MoonSites.Apollo apollo : MoonSites.APOLLO) {
+				int ground = MoonSites.surface(moon, apollo.x() + 12, apollo.z() + 12).getY();
+				if (ground < 40) {
+					LOGGER.error("[SMOKETEST-FAIL] Moon ground near {} is at y={}", apollo, ground);
+				}
+			}
+		}
 		java.util.Map<String, Integer> top = new java.util.TreeMap<>();
 		int lowest = Integer.MAX_VALUE;
 		int highest = Integer.MIN_VALUE;
