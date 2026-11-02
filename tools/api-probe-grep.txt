@@ -1,5 +1,2 @@
 # Regex.
-net/minecraft/client/renderer/.*Light.*class
-net/minecraft/world/attribute/EnvironmentAttributes.*class
-data/minecraft/timeline/.*json
-shaders/.*light.*
+fabric/api/creativetab/.*class

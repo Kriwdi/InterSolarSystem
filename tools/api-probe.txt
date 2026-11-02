@@ -1,7 +1,3 @@
-# Classes.
-net.fabricmc.fabric.api.client.gametest.v1.FabricClientGameTest
-net.fabricmc.fabric.api.client.gametest.v1.context.ClientGameTestContext
-net.fabricmc.fabric.api.client.gametest.v1.context.TestSingleplayerContext
-net.fabricmc.fabric.api.client.gametest.v1.world.TestWorldBuilder
-net.fabricmc.fabric.api.client.gametest.v1.context.TestServerContext
-net.fabricmc.fabric.api.client.gametest.v1.TestInput
+net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab
+net.minecraft.world.item.CreativeModeTab$Builder
+net.minecraft.world.item.CreativeModeTab$Output

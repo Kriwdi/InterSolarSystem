@@ -1,7 +1,1 @@
-# Decompiled sources to read (fully qualified class names).
-net.minecraft.world.attribute.EnvironmentAttributes
-net.minecraft.client.renderer.LightTexture
-net.minecraft.client.renderer.Lightmap
-net.minecraft.client.renderer.state.LightmapRenderState
-net.minecraft.client.renderer.LightmapRenderStateExtractor
-net.minecraft.client.renderer.fog.FogRenderer
+# none
