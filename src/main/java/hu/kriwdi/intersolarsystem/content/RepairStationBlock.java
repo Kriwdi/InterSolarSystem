@@ -11,9 +11,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
+import hu.kriwdi.intersolarsystem.ship.ShipDimensions;
 import hu.kriwdi.intersolarsystem.ship.ShipRepair;
 
-/** The ship's repair station: use a repair kit on it to fix an incident or the worst subsystem. */
+/**
+ * The ship's repair station: use a repair kit on it to fix an incident or the worst subsystem. It only works inside the
+ * ship; other items pass through so blocks can still be placed against it.
+ */
 public class RepairStationBlock extends ShipHullBlock {
 	public RepairStationBlock(Properties properties) {
 		super(properties);
@@ -23,9 +27,13 @@ public class RepairStationBlock extends ShipHullBlock {
 	protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player,
 			InteractionHand hand, BlockHitResult hit) {
 		if (stack.getItem() != ModItems.REPAIR_KIT) {
-			return InteractionResult.TRY_WITH_EMPTY_HAND;
+			return stack.isEmpty() ? InteractionResult.TRY_WITH_EMPTY_HAND : InteractionResult.PASS;
 		}
 		if (level instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer) {
+			if (!isInsideShip(level)) {
+				ShipRepair.showOutsideShip(serverPlayer);
+				return InteractionResult.SUCCESS_SERVER;
+			}
 			ShipRepair.useKit(serverLevel.getServer(), serverPlayer, stack);
 			return InteractionResult.SUCCESS_SERVER;
 		}
@@ -36,9 +44,17 @@ public class RepairStationBlock extends ShipHullBlock {
 	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player,
 			BlockHitResult hit) {
 		if (level instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer) {
+			if (!isInsideShip(level)) {
+				ShipRepair.showOutsideShip(serverPlayer);
+				return InteractionResult.SUCCESS_SERVER;
+			}
 			ShipRepair.showNeedsKit(serverLevel.getServer(), serverPlayer);
 			return InteractionResult.SUCCESS_SERVER;
 		}
 		return InteractionResult.SUCCESS;
+	}
+
+	private static boolean isInsideShip(Level level) {
+		return level.dimension().equals(ShipDimensions.INTERIOR);
 	}
 }

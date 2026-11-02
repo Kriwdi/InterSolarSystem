@@ -52,15 +52,26 @@ public final class ShipRepair {
 		}
 	}
 
-	/** Using the station without a kit: says what it is for and what is worst. */
+	/** Using the station without a kit: says what a kit would fix first (an active incident before wear). */
 	public static void showNeedsKit(MinecraftServer server, ServerPlayer player) {
 		ShipState state = ShipStateAccess.get(server);
-		ShipRepairRules.Choice choice = ShipRepairRules.choose(java.util.List.of(), conditions(state));
-		if (choice.kind() == ShipRepairRules.Kind.NOTHING) {
-			player.sendSystemMessage(Component.translatable("message.intersolarsystem.ship.repair_nothing"));
-		} else {
-			player.sendSystemMessage(Component.translatable("message.intersolarsystem.ship.station_needs_kit",
+		ShipRepairRules.Choice choice = ShipRepairRules.choose(state.hazards().incidents(), conditions(state));
+		switch (choice.kind()) {
+			case INCIDENT -> {
+				ShipIncident incident = choice.incident().orElseThrow();
+				player.sendSystemMessage(Component.translatable("message.intersolarsystem.ship.station_needs_kit_incident",
+						Component.translatable(ShipCommands.incidentKey(incident.type())),
+						Component.translatable(ShipCommands.subsystemKey(incident.subsystem()))));
+			}
+			case SUBSYSTEM -> player.sendSystemMessage(Component.translatable(
+					"message.intersolarsystem.ship.station_needs_kit",
 					Component.translatable(ShipCommands.subsystemKey(choice.subsystem().orElseThrow()))));
+			case NOTHING -> player.sendSystemMessage(Component.translatable("message.intersolarsystem.ship.repair_nothing"));
 		}
+	}
+
+	/** The station is part of the ship's systems and does nothing anywhere else. */
+	public static void showOutsideShip(ServerPlayer player) {
+		player.sendSystemMessage(Component.translatable("message.intersolarsystem.ship.station_outside"));
 	}
 }

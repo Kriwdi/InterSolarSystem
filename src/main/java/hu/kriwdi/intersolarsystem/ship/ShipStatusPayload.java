@@ -12,10 +12,15 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import hu.kriwdi.intersolarsystem.core.ModIds;
 
 /**
- * Server -> client: the ship status. Enum ordinals are on the wire, which is fine because client and server must run
- * the same mod version; the decoder is lenient so a mismatch cannot crash the client.
+ * Server -> client: the ship status. Starts with a format number and the subsystem count, so a client of another mod
+ * version reads what it understands (unknown subsystems are skipped, missing ones shown as 100%) instead of
+ * misreading the rest. Enum ordinals are on the wire; the decoder is lenient so a mismatch cannot crash the client.
  */
 public record ShipStatusPayload(ShipStatusSnapshot snapshot) implements CustomPacketPayload {
+	/** Bump when the layout after the header changes in a way older clients cannot skip. */
+	public static final int FORMAT = 1;
+	private static final int MAX_SUBSYSTEMS = 64;
+
 	public static final CustomPacketPayload.Type<ShipStatusPayload> TYPE =
 			new CustomPacketPayload.Type<>(ModIds.id("ship_status"));
 
@@ -24,8 +29,10 @@ public record ShipStatusPayload(ShipStatusSnapshot snapshot) implements CustomPa
 
 	private static void encode(ByteBuf buf, ShipStatusPayload payload) {
 		ShipStatusSnapshot s = payload.snapshot();
+		VarInt.write(buf, FORMAT);
 		VarInt.write(buf, s.phase().ordinal());
 		VarInt.write(buf, s.remainingTicks());
+		VarInt.write(buf, ShipSubsystem.values().length);
 		for (ShipSubsystem subsystem : ShipSubsystem.values()) {
 			VarInt.write(buf, s.conditions().get(subsystem.ordinal()));
 		}
@@ -38,13 +45,25 @@ public record ShipStatusPayload(ShipStatusSnapshot snapshot) implements CustomPa
 	}
 
 	private static ShipStatusPayload decode(ByteBuf buf) {
+		int format = VarInt.read(buf);
+		if (format != FORMAT) {
+			buf.skipBytes(buf.readableBytes());
+			return new ShipStatusPayload(ShipStatusSnapshot.unknown());
+		}
 		int phaseOrdinal = VarInt.read(buf);
 		ShipFlightPhase phase = phaseOrdinal >= 0 && phaseOrdinal < ShipFlightPhase.values().length
 				? ShipFlightPhase.values()[phaseOrdinal] : ShipFlightPhase.LANDED;
 		int remaining = Math.max(0, VarInt.read(buf));
+		int sent = Math.min(Math.max(0, VarInt.read(buf)), MAX_SUBSYSTEMS);
 		List<Integer> conditions = new ArrayList<>();
-		for (int i = 0; i < ShipSubsystem.values().length; i++) {
-			conditions.add(ShipState.clamp(VarInt.read(buf)));
+		for (int i = 0; i < sent; i++) {
+			int value = ShipState.clamp(VarInt.read(buf));
+			if (i < ShipSubsystem.values().length) {
+				conditions.add(value);
+			}
+		}
+		while (conditions.size() < ShipSubsystem.values().length) {
+			conditions.add(ShipState.MAX_CONDITION);
 		}
 		int count = Math.min(Math.max(0, VarInt.read(buf)), ShipIncidentRules.MAX_ACTIVE);
 		List<ShipStatusSnapshot.IncidentView> incidents = new ArrayList<>();

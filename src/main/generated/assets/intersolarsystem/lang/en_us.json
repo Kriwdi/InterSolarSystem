@@ -38,6 +38,8 @@
   "message.intersolarsystem.ship.repair_nothing": "Nothing needs repair",
   "message.intersolarsystem.ship.repair_subsystem": "%s restored by %s%%",
   "message.intersolarsystem.ship.station_needs_kit": "Use a repair kit here. Worst subsystem: %s",
+  "message.intersolarsystem.ship.station_needs_kit_incident": "Use a repair kit here. Urgent: %s in %s",
+  "message.intersolarsystem.ship.station_outside": "The repair station only works inside the ship",
   "ship.intersolarsystem.hull.cargo_miner": "Cargo/Mining Ship",
   "ship.intersolarsystem.hull.mothership": "Mothership",
   "ship.intersolarsystem.hull.rescue_capsule": "Rescue Capsule",

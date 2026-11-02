@@ -38,6 +38,8 @@
   "message.intersolarsystem.ship.repair_nothing": "Nincs mit javítani",
   "message.intersolarsystem.ship.repair_subsystem": "%s helyreállítva: %s%%",
   "message.intersolarsystem.ship.station_needs_kit": "Használj itt javítókészletet. Legrosszabb alrendszer: %s",
+  "message.intersolarsystem.ship.station_needs_kit_incident": "Használj itt javítókészletet. Sürgős: %s itt: %s",
+  "message.intersolarsystem.ship.station_outside": "A javítóállomás csak a hajó belsejében működik",
   "ship.intersolarsystem.hull.cargo_miner": "Teher-/bányászhajó",
   "ship.intersolarsystem.hull.mothership": "Anyahajó",
   "ship.intersolarsystem.hull.rescue_capsule": "Mentőkapszula",

@@ -38,6 +38,8 @@
   "message.intersolarsystem.ship.repair_nothing": "Nichts muss repariert werden",
   "message.intersolarsystem.ship.repair_subsystem": "%s um %s%% wiederhergestellt",
   "message.intersolarsystem.ship.station_needs_kit": "Benutze hier ein Reparaturset. Schlechtestes Subsystem: %s",
+  "message.intersolarsystem.ship.station_needs_kit_incident": "Benutze hier ein Reparaturset. Dringend: %s bei %s",
+  "message.intersolarsystem.ship.station_outside": "Die Reparaturstation funktioniert nur im Schiff",
   "ship.intersolarsystem.hull.cargo_miner": "Fracht-/Bergbauschiff",
   "ship.intersolarsystem.hull.mothership": "Mutterschiff",
   "ship.intersolarsystem.hull.rescue_capsule": "Rettungskapsel",

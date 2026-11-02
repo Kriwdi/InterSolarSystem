@@ -55,6 +55,7 @@ jobs:
           cp build/libs/*.jar out/jar/ 2>/dev/null || true
           rm -f out/jar/*-sources.jar
           cp build.log out/ 2>/dev/null || true
+          mkdir -p out/test-results && cp build/test-results/test/*.xml out/test-results/ 2>/dev/null || true
           echo "Commit: ${GITHUB_SHA}" > out/BUILD_INFO.txt
           echo "Branch: ${GITHUB_REF_NAME}" >> out/BUILD_INFO.txt
           echo "Status: ${{ job.status }}" >> out/BUILD_INFO.txt

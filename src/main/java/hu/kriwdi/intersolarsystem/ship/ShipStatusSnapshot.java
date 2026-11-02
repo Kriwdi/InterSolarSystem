@@ -34,6 +34,15 @@ public record ShipStatusSnapshot(ShipFlightPhase phase, int remainingTicks, List
 		return new ShipStatusSnapshot(state.phase(), clampToInt(remaining), conditions, incidents);
 	}
 
+	/** Shown when the server speaks a packet format this client does not know: a neutral, all-fine status. */
+	public static ShipStatusSnapshot unknown() {
+		List<Integer> conditions = new ArrayList<>();
+		for (int i = 0; i < ShipSubsystem.values().length; i++) {
+			conditions.add(ShipState.MAX_CONDITION);
+		}
+		return new ShipStatusSnapshot(ShipFlightPhase.LANDED, 0, conditions, List.of());
+	}
+
 	private static int clampToInt(long value) {
 		return (int) Math.max(0, Math.min(Integer.MAX_VALUE, value));
 	}

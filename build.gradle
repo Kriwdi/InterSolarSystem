@@ -41,8 +41,18 @@ dependencies {
 	testRuntimeOnly "org.junit.platform:junit-platform-launcher"
 }
 
+// Tests also see the client source set (pure client-side logic and the datagen lang table).
+sourceSets {
+	test {
+		compileClasspath += client.output
+		runtimeClasspath += client.output
+	}
+}
+
 test {
 	useJUnitPlatform()
+	// The lang test compares the table with the committed files in src/main/generated.
+	systemProperty "intersolarsystem.projectDir", project.projectDir.absolutePath
 }
 
 processResources {
