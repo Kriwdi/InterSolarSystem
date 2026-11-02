@@ -1,11 +1,12 @@
-# Classes whose signatures (public + protected) the API probe workflow prints (one per line).
-net.minecraft.world.level.block.HorizontalDirectionalBlock
-net.minecraft.world.level.block.Block
-net.minecraft.world.level.block.state.BlockBehaviour
-net.minecraft.world.level.block.state.StateDefinition$Builder
-net.minecraft.world.item.context.BlockPlaceContext
-net.minecraft.world.phys.shapes.Shapes
-net.minecraft.world.level.block.state.properties.BlockStateProperties
-net.minecraft.world.level.block.Rotation
-net.minecraft.world.level.block.Mirror
-net.minecraft.core.Direction
+# Classes whose signatures the API probe prints.
+net.minecraft.world.entity.ai.attributes.Attributes
+net.minecraft.world.entity.ai.attributes.AttributeInstance
+net.minecraft.world.entity.ai.attributes.AttributeModifier
+net.minecraft.world.item.equipment.ArmorMaterial
+net.minecraft.world.item.equipment.ArmorType
+net.minecraft.world.item.equipment.EquipmentAsset
+net.minecraft.world.item.equipment.EquipmentAssets
+net.minecraft.world.item.Item$Properties
+net.minecraft.world.entity.EquipmentSlot
+net.minecraft.world.entity.LivingEntity
+net.minecraft.world.damagesource.DamageSources
