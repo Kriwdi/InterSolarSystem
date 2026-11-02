@@ -93,3 +93,11 @@ publishing {
 		// retrieving dependencies.
 	}
 }
+
+// Development helper for the "API probe" workflow: prints the compile classpath (Minecraft + Fabric API jars).
+tasks.register("printProbeClasspath") {
+	def files = sourceSets.client.compileClasspath
+	doLast {
+		files.each { println it.absolutePath }
+	}
+}

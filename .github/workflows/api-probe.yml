@@ -1,0 +1,51 @@
+name: API probe
+
+# Development helper: prints the real signatures of Minecraft / Fabric API classes for the pinned versions, so code is
+# written against the actual 26.3 API instead of from memory. Lists classes in tools/api-probe.txt (one fully qualified
+# name per line, '#' comments allowed) and publishes the javap output to the ci-probe branch.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 25
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Resolve classpath
+        shell: bash
+        run: |
+          chmod +x gradlew
+          ./gradlew printProbeClasspath -q > classpath.txt
+          wc -l classpath.txt
+      - name: Run javap
+        shell: bash
+        run: |
+          mkdir -p out
+          CP=$(paste -sd: classpath.txt)
+          grep -v '^\s*#' tools/api-probe.txt | grep -v '^\s*$' | while read -r cls; do
+            echo "===== $cls" >> out/probe.txt
+            javap -cp "$CP" -public "$cls" >> out/probe.txt 2>&1 || echo "NOT FOUND: $cls" >> out/probe.txt
+          done
+          if [ -s tools/api-probe-grep.txt ]; then
+            # Lists classes in the jars whose name matches a pattern (to find renamed classes).
+            for jar in $(cat classpath.txt); do unzip -Z1 "$jar" 2>/dev/null | sed "s|^|$(basename $jar): |"; done > out/all-classes.txt
+            grep -v '^\s*#' tools/api-probe-grep.txt | grep -v '^\s*$' | while read -r pat; do
+              echo "===== grep $pat" >> out/grep.txt
+              grep -E "$pat" out/all-classes.txt | head -n 60 >> out/grep.txt
+            done
+            rm out/all-classes.txt
+          fi
+      - name: Publish
+        shell: bash
+        run: |
+          cd out && git init -q -b ci-probe && git config user.email ci@example.com && git config user.name ci
+          git add -A && git commit -qm "probe ${GITHUB_SHA}" && git push -f -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" ci-probe
