@@ -786,6 +786,92 @@ def suit_layers():
     save(legs, "entity/equipment/humanoid_leggings/space_suit")
 
 
+def value_noise(seed, size, cells):
+    """Smooth periodic value noise in 0..1 on a size x size grid (wraps horizontally for a rotating globe)."""
+    import math
+    rnd = random.Random(seed)
+    grid_ = [[rnd.random() for _ in range(cells + 1)] for _ in range(cells + 1)]
+    for row in grid_:
+        row[cells] = row[0]
+    out = [[0.0] * size for _ in range(size)]
+    for y in range(size):
+        for x in range(size):
+            fx, fy = x / size * cells, y / size * cells
+            ix, iy = int(fx), int(fy)
+            tx, ty = fx - ix, fy - iy
+            tx, ty = tx * tx * (3 - 2 * tx), ty * ty * (3 - 2 * ty)
+            a = grid_[iy][ix] + (grid_[iy][ix + 1] - grid_[iy][ix]) * tx
+            b = grid_[iy + 1][ix] + (grid_[iy + 1][ix + 1] - grid_[iy + 1][ix]) * tx
+            out[y][x] = a + (b - a) * ty
+    return out
+
+
+def earth():
+    """The dead Earth seen from space: dusty brown continents, dark oceans, grey dust storms drifting over a slowly
+    turning globe (16 frames), in 8 lighting phases like the vanilla moon (0 = full, 4 = new)."""
+    import math
+    W = 128
+    land = [[0.0] * W for _ in range(W)]
+    for seed, cells, weight in ((501, 4, 0.55), (502, 8, 0.3), (503, 16, 0.15)):
+        n = value_noise(seed, W, cells)
+        for y in range(W):
+            for x in range(W):
+                land[y][x] += n[y][x] * weight
+    clouds = [[0.0] * W for _ in range(W)]
+    for seed, cells, weight in ((511, 8, 0.6), (512, 16, 0.4)):
+        n = value_noise(seed, W, cells)
+        for y in range(W):
+            for x in range(W):
+                clouds[y][x] += n[y][x] * weight
+    R = 30
+    S = 64
+    frames = 16
+    ocean = (hexc("12263f"), hexc("1d3a5c"))
+    ground = (hexc("4a3a28"), hexc("6e563a"), hexc("8a7458"), hexc("a39478"))
+    for phase in range(8):
+        sheet = Image.new("RGBA", (S, S * frames))
+        # Light direction: phase 0 full (lit from the viewer), 4 new; the terminator sweeps across the disc.
+        angle = phase / 8.0 * 2 * math.pi
+        lx, lz = math.sin(angle), math.cos(angle)
+        for f in range(frames):
+            img = Image.new("RGBA", (S, S), (0, 0, 0, 255))
+            px = img.load()
+            spin = f / frames
+            for y in range(S):
+                for x in range(S):
+                    dx, dy = (x - S / 2 + 0.5) / R, (y - S / 2 + 0.5) / R
+                    r2 = dx * dx + dy * dy
+                    if r2 > 1.18:
+                        continue
+                    if r2 > 1.0:
+                        # Thin, dim atmosphere: a hazy brown-blue rim.
+                        t = (math.sqrt(r2) - 1.0) / 0.086
+                        a = max(0.0, 1.0 - t)
+                        light = max(0.0, (dx * lx * 0.0) + lz * 0.6 + 0.4 + dx * lx)
+                        c = mix(hexc("000000"), hexc("6f87a0"), min(1.0, a * 0.8 * min(1.0, light + 0.2)))
+                        px[x, y] = c
+                        continue
+                    dz = math.sqrt(1.0 - r2)
+                    lon = (math.atan2(dx, dz) / (2 * math.pi) + 0.5 + spin) % 1.0
+                    lat = math.asin(max(-1.0, min(1.0, dy))) / math.pi + 0.5
+                    u, v = int(lon * W) % W, int(lat * (W - 1))
+                    h = land[v][u]
+                    if h > 0.52:
+                        c = ground[min(3, int((h - 0.52) * 14))]
+                    else:
+                        c = ocean[0] if h < 0.42 else ocean[1]
+                    if lat < 0.08 or lat > 0.92:
+                        c = mix(c, hexc("b9c0c6"), 0.7)
+                    cl = clouds[v][(u + int(spin * W * 0.5)) % W]
+                    if cl > 0.6:
+                        c = mix(c, hexc("a49a8a"), min(0.85, (cl - 0.6) * 4))
+                    lit = dx * lx + dz * lz
+                    shade_ = max(0.0, min(1.0, lit * 1.4 + 0.15))
+                    px[x, y] = shade(c, 0.04 + 0.96 * shade_)
+            sheet.paste(img, (0, f * S))
+        save(sheet, "environment/celestial/earth/phase_" + str(phase), frametime=40)
+
+
 # ---------------------------------------------------------------- items
 def items():
     o = OUTLINE
@@ -930,4 +1016,5 @@ if __name__ == "__main__":
     items()
     suit_items()
     suit_layers()
+    earth()
     print("textures written")

@@ -14,6 +14,9 @@ public final class ShipDimensions {
 	/** Earth orbit: the shared space dimension with the ISS (defined by datapack JSON). */
 	public static final ResourceKey<Level> ORBIT = ResourceKey.create(Registries.DIMENSION, ModIds.id("orbit"));
 
+	/** The Moon (defined by datapack JSON). */
+	public static final ResourceKey<Level> MOON = ResourceKey.create(Registries.DIMENSION, ModIds.id("moon"));
+
 	/** Lowest corner of the interior room inside {@link #INTERIOR}. */
 	public static final BlockPos ANCHOR = new BlockPos(0, 64, 0);
 

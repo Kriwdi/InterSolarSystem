@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "hu.kriwdi.intersolarsystem.client.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "SkyRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
