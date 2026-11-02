@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 
 import hu.kriwdi.intersolarsystem.core.ModIds;
 import hu.kriwdi.intersolarsystem.ship.ShipStatusPayload;
+import hu.kriwdi.intersolarsystem.ship.WiringPayloads;
 
 public class InterSolarSystemClient implements ClientModInitializer {
 	@Override
@@ -21,6 +22,10 @@ public class InterSolarSystemClient implements ClientModInitializer {
 					ClientShipStatus.set(payload.snapshot(), minecraft.level.getGameTime(), minecraft.level);
 				}
 			});
+		});
+		ClientPlayNetworking.registerGlobalReceiver(WiringPayloads.Open.TYPE, (payload, context) -> {
+			Minecraft minecraft = context.client();
+			minecraft.execute(() -> minecraft.setScreenAndShow(new WiringScreen(payload.seed(), payload.wires())));
 		});
 		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> ClientShipStatus.clear());
 		HudElementRegistry.addLast(ModIds.id("ship_status"), new ShipHudElement());

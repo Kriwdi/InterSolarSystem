@@ -362,6 +362,26 @@ public final class ModLangTable {
 				"TAKEOFF FAILED! An explosion at the launch site, the ship is badly damaged",
 				"START FEHLGESCHLAGEN! Eine Explosion am Startplatz, das Schiff ist schwer beschädigt",
 				"SIKERTELEN FELSZÁLLÁS! Robbanás a kilövőhelyen, a hajó súlyosan megsérült");
+		add(rows, "screen.intersolarsystem.wiring.title",
+				"Short Circuit: Rewire the Panel",
+				"Kurzschluss: Verkabelung erneuern",
+				"Rövidzárlat: vezetékezd újra a panelt");
+		add(rows, "screen.intersolarsystem.wiring.hint",
+				"Click a wire on the left, then the same colour on the right",
+				"Klicke links ein Kabel, dann rechts die gleiche Farbe",
+				"Kattints egy bal oldali vezetékre, majd jobbra az azonos színűre");
+		add(rows, "message.intersolarsystem.ship.wiring_expired",
+				"The repair board is no longer valid",
+				"Die Reparaturtafel ist nicht mehr gültig",
+				"A javítópanel már nem érvényes");
+		add(rows, "message.intersolarsystem.ship.wiring_no_kit",
+				"Hold the repair kit in your main hand while wiring",
+				"Halte beim Verkabeln das Reparaturset in der Haupthand",
+				"Vezetékezés közben tartsd a javítókészletet a fő kezedben");
+		add(rows, "message.intersolarsystem.ship.wiring_wrong",
+				"Sparks fly! Wrong wiring damaged %s by %s%%",
+				"Funken sprühen! Falsche Verkabelung hat %s um %s%% beschädigt",
+				"Szikrák! A rossz bekötés megrongálta ezt: %s (−%s%%)");
 		check(rows);
 		return List.copyOf(rows);
 	}
