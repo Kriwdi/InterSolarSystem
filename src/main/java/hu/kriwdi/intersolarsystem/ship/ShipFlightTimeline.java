@@ -8,15 +8,23 @@ public final class ShipFlightTimeline {
 	}
 
 	public static long remainingTicks(ShipFlightPhase phase, long startedTick, long nowTick) {
+		return remainingTicks(ShipFlightKind.NORMAL, phase, startedTick, nowTick);
+	}
+
+	public static long remainingTicks(ShipFlightKind kind, ShipFlightPhase phase, long startedTick, long nowTick) {
 		if (phase == ShipFlightPhase.LANDED) {
 			return 0;
 		}
 		long elapsed = Math.max(0, nowTick - startedTick);
-		return Math.max(0, phase.durationTicks() - elapsed);
+		return Math.max(0, kind.durationTicks(phase) - elapsed);
 	}
 
 	public static boolean isDue(ShipFlightPhase phase, long startedTick, long nowTick) {
-		return phase != ShipFlightPhase.LANDED && remainingTicks(phase, startedTick, nowTick) == 0;
+		return isDue(ShipFlightKind.NORMAL, phase, startedTick, nowTick);
+	}
+
+	public static boolean isDue(ShipFlightKind kind, ShipFlightPhase phase, long startedTick, long nowTick) {
+		return phase != ShipFlightPhase.LANDED && remainingTicks(kind, phase, startedTick, nowTick) == 0;
 	}
 
 	public static Optional<ShipFlightPhase> next(ShipFlightPhase phase) {
@@ -30,7 +38,12 @@ public final class ShipFlightTimeline {
 
 	/** The phase to switch to now, if the current one has run out. */
 	public static Optional<ShipFlightPhase> dueTransition(ShipFlightPhase phase, long startedTick, long nowTick) {
-		return isDue(phase, startedTick, nowTick) ? next(phase) : Optional.empty();
+		return dueTransition(ShipFlightKind.NORMAL, phase, startedTick, nowTick);
+	}
+
+	public static Optional<ShipFlightPhase> dueTransition(ShipFlightKind kind, ShipFlightPhase phase, long startedTick,
+			long nowTick) {
+		return isDue(kind, phase, startedTick, nowTick) ? next(phase) : Optional.empty();
 	}
 
 	/** Remaining time as {@code m:ss}, rounded up to whole seconds. */

@@ -1,0 +1,8 @@
+# Resource files printed from the jars (format references).
+data/minecraft/recipe/iron_pickaxe.json
+data/minecraft/recipe/flint_and_steel.json
+data/minecraft/loot_table/chests/abandoned_mineshaft.json
+data/minecraft/loot_table/blocks/iron_block.json
+assets/minecraft/items/redstone.json
+assets/minecraft/blockstates/crafting_table.json
+assets/minecraft/models/block/crafting_table.json

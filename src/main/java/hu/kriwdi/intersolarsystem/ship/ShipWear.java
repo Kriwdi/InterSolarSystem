@@ -8,6 +8,15 @@ public final class ShipWear {
 	private ShipWear() {
 	}
 
+	/** A test hop wears the ship half as much (rounded up) as a real flight. */
+	public static Map<ShipSubsystem, Integer> forTransition(ShipFlightPhase to, ShipFlightKind kind) {
+		Map<ShipSubsystem, Integer> wear = forTransition(to);
+		if (kind == ShipFlightKind.TEST) {
+			wear.replaceAll((subsystem, amount) -> (amount + 1) / 2);
+		}
+		return wear;
+	}
+
 	/** Positive amounts to subtract, per subsystem, when the ship switches to {@code to}. */
 	public static Map<ShipSubsystem, Integer> forTransition(ShipFlightPhase to) {
 		Map<ShipSubsystem, Integer> wear = new EnumMap<>(ShipSubsystem.class);

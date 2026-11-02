@@ -33,8 +33,20 @@ jobs:
           CP=$(paste -sd: classpath.txt)
           grep -v '^\s*#' tools/api-probe.txt | grep -v '^\s*$' | while read -r cls; do
             echo "===== $cls" >> out/probe.txt
-            javap -cp "$CP" -public "$cls" >> out/probe.txt 2>&1 || echo "NOT FOUND: $cls" >> out/probe.txt
+            javap -cp "$CP" -protected "$cls" >> out/probe.txt 2>&1 || echo "NOT FOUND: $cls" >> out/probe.txt
           done
+          if [ -s tools/api-probe-files.txt ]; then
+            # Prints resource files from the jars (vanilla recipe / loot table JSON as format reference).
+            grep -v '^\s*#' tools/api-probe-files.txt | grep -v '^\s*$' | while read -r res; do
+              echo "===== $res" >> out/files.txt
+              found=0
+              for jar in $(cat classpath.txt); do
+                if [ -f "$jar" ] && unzip -p "$jar" "$res" >> out/files.txt 2>/dev/null; then found=1; break; fi
+              done
+              [ $found = 1 ] || echo "NOT FOUND" >> out/files.txt
+              echo >> out/files.txt
+            done
+          fi
           if [ -s tools/api-probe-grep.txt ]; then
             # Lists classes in the jars whose name matches a pattern (to find renamed classes).
             for jar in $(cat classpath.txt); do if [ -f "$jar" ]; then unzip -Z1 "$jar" 2>/dev/null | sed "s|^|$(basename $jar): |" || true; fi; done > out/all-classes.txt

@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
  * Persistent state of the world's single ship. Server-owned; clients never store or modify it.
  */
 public class ShipState extends SavedData {
-	public static final int CURRENT_FORMAT_VERSION = 4;
+	public static final int CURRENT_FORMAT_VERSION = 5;
 	public static final int MIN_CONDITION = 0;
 	public static final int MAX_CONDITION = 100;
 
@@ -55,7 +55,9 @@ public class ShipState extends SavedData {
 			Codec.LONG.lenientOptionalFieldOf("phase_started_tick").forGetter(s -> Optional.of(s.phaseStartedTick)),
 			Codec.INT.lenientOptionalFieldOf("destination_x").forGetter(s -> s.destination.map(Destination::x)),
 			Codec.INT.lenientOptionalFieldOf("destination_z").forGetter(s -> s.destination.map(Destination::z)),
-			ShipHazards.CODEC.lenientOptionalFieldOf("hazards").forGetter(s -> Optional.of(s.hazards))
+			ShipHazards.CODEC.lenientOptionalFieldOf("hazards").forGetter(s -> Optional.of(s.hazards)),
+			Codec.STRING.lenientOptionalFieldOf("flight_kind").forGetter(s -> Optional.of(s.flightKind.id())),
+			ShipDiagnostics.CODEC.lenientOptionalFieldOf("diagnostics").forGetter(s -> Optional.of(s.diagnostics))
 	).apply(instance, ShipState::fromRaw));
 
 	/** Decodes through the migrations first, so older saves reach {@link #RAW_CODEC} in the current format. */
@@ -77,6 +79,8 @@ public class ShipState extends SavedData {
 	private long phaseStartedTick;
 	private Optional<Destination> destination = Optional.empty();
 	private ShipHazards hazards = ShipHazards.NONE;
+	private ShipFlightKind flightKind = ShipFlightKind.NORMAL;
+	private ShipDiagnostics diagnostics = ShipDiagnostics.NONE;
 	private ShipHullClass hullClass = ShipHullClass.RESCUE_CAPSULE;
 	private final Map<ShipSubsystem, Integer> conditions = new EnumMap<>(ShipSubsystem.class);
 
@@ -94,7 +98,8 @@ public class ShipState extends SavedData {
 			Map<String, Integer> rawSubsystems, Optional<String> rawDimension, Optional<Integer> rawX,
 			Optional<Integer> rawY, Optional<Integer> rawZ, Optional<Boolean> rawInteriorBuilt,
 			Optional<String> rawPhase, Optional<Long> rawPhaseStartedTick, Optional<Integer> rawDestX,
-			Optional<Integer> rawDestZ, Optional<ShipHazards> rawHazards) {
+			Optional<Integer> rawDestZ, Optional<ShipHazards> rawHazards, Optional<String> rawFlightKind,
+			Optional<ShipDiagnostics> rawDiagnostics) {
 		int version = rawVersion.orElse(CURRENT_FORMAT_VERSION);
 		String hullId = rawHullId.orElse(ShipHullClass.RESCUE_CAPSULE.id());
 		ShipState state = new ShipState();
@@ -126,6 +131,11 @@ public class ShipState extends SavedData {
 			LOGGER.warn("Ignoring incomplete ship destination");
 		}
 		state.hazards = rawHazards.orElse(ShipHazards.NONE);
+		state.flightKind = rawFlightKind.flatMap(ShipFlightKind::fromId).orElseGet(() -> {
+			rawFlightKind.ifPresent(id -> LOGGER.warn("Unknown ship flight kind '{}', using normal", id));
+			return ShipFlightKind.NORMAL;
+		});
+		state.diagnostics = rawDiagnostics.orElse(ShipDiagnostics.NONE);
 		return state;
 	}
 
@@ -175,6 +185,7 @@ public class ShipState extends SavedData {
 		return true;
 	}
 
+	/** Fixes an incident; a hidden fault behind it on the same subsystem is fixed with it. */
 	public boolean resolveIncident(ShipIncident incident) {
 		if (readOnly || !hazards.incidents().contains(incident)) {
 			return false;
@@ -182,8 +193,78 @@ public class ShipState extends SavedData {
 		java.util.List<ShipIncident> next = new java.util.ArrayList<>(hazards.incidents());
 		next.remove(incident);
 		hazards = new ShipHazards(hazards.seed(), hazards.rollsDone(), next);
+		removeFault(incident.subsystem());
 		setDirty();
 		return true;
+	}
+
+	public ShipFlightKind flightKind() {
+		return flightKind;
+	}
+
+	public ShipDiagnostics diagnostics() {
+		return diagnostics;
+	}
+
+	/** Adds hidden faults (unrevealed) to subsystems that have none yet. */
+	public void addFaults(java.util.Set<ShipSubsystem> subsystems) {
+		if (readOnly || subsystems.isEmpty()) {
+			return;
+		}
+		java.util.List<ShipLatentFault> next = new java.util.ArrayList<>(diagnostics.faults());
+		for (ShipSubsystem s : ShipSubsystem.values()) {
+			if (subsystems.contains(s) && !diagnostics.hasFault(s)) {
+				next.add(new ShipLatentFault(s, false));
+			}
+		}
+		diagnostics = diagnostics.withFaults(next);
+		setDirty();
+	}
+
+	public boolean removeFault(ShipSubsystem subsystem) {
+		if (readOnly || !diagnostics.hasFault(subsystem)) {
+			return false;
+		}
+		diagnostics = diagnostics.withFaults(diagnostics.faults().stream().filter(f -> f.subsystem() != subsystem).toList());
+		setDirty();
+		return true;
+	}
+
+	/** Marks every hidden fault as known (test hop, failed takeoff); returns the ones that were new to the crew. */
+	public java.util.List<ShipLatentFault> revealAllFaults() {
+		if (readOnly) {
+			return java.util.List.of();
+		}
+		java.util.List<ShipLatentFault> fresh = diagnostics.faults().stream().filter(f -> !f.revealed()).toList();
+		if (!fresh.isEmpty()) {
+			diagnostics = diagnostics.withFaults(diagnostics.faults().stream().map(ShipLatentFault::reveal).toList());
+			setDirty();
+		}
+		return fresh;
+	}
+
+	/** Stores the result of a diagnostic scan and starts its cooldown. */
+	public void recordScan(java.util.List<ShipLatentFault> faultsAfterScan, long nowTick) {
+		if (readOnly) {
+			return;
+		}
+		diagnostics = new ShipDiagnostics(faultsAfterScan, diagnostics.scansDone() + 1, nowTick);
+		setDirty();
+	}
+
+	/**
+	 * A takeoff that ended in disaster: the ship never left, so it is back to landed at the same site, with no
+	 * destination; the caller applies the damage.
+	 */
+	public void abortTakeoff(long nowTick) {
+		if (readOnly || phase != ShipFlightPhase.TAKEOFF) {
+			return;
+		}
+		phase = ShipFlightPhase.LANDED;
+		phaseStartedTick = nowTick;
+		destination = Optional.empty();
+		flightKind = ShipFlightKind.NORMAL;
+		setDirty();
 	}
 
 	/** Removes incidents whose deadline has passed, damaging their subsystems; returns the expired ones. */
@@ -221,9 +302,15 @@ public class ShipState extends SavedData {
 
 	/** Starts a flight. Only possible while landed and when the save is writable. */
 	public boolean beginTakeoff(int x, int z, long nowTick, long seed) {
+		return beginTakeoff(x, z, nowTick, seed, ShipFlightKind.NORMAL);
+	}
+
+	/** Starts a flight of the given kind. A test hop's destination is where the ship already stands. */
+	public boolean beginTakeoff(int x, int z, long nowTick, long seed, ShipFlightKind kind) {
 		if (readOnly || phase != ShipFlightPhase.LANDED) {
 			return false;
 		}
+		flightKind = kind;
 		phase = ShipFlightPhase.TAKEOFF;
 		phaseStartedTick = nowTick;
 		destination = Optional.of(new Destination(x, z));
@@ -255,6 +342,7 @@ public class ShipState extends SavedData {
 			phaseStartedTick = nowTick;
 			if (next == ShipFlightPhase.LANDED) {
 				destination = Optional.empty();
+				flightKind = ShipFlightKind.NORMAL;
 			}
 			setDirty();
 		});

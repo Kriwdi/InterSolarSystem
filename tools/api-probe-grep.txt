@@ -1,4 +1,3 @@
 # Regex patterns matched against all class names on the classpath.
-GuiGraphics
-recipes/.*Builder
-loot/v3/
+providers/number/
+loot/functions/SetItemCount

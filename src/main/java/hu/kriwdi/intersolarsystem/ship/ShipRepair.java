@@ -13,7 +13,7 @@ public final class ShipRepair {
 	private ShipRepair() {
 	}
 
-	private static Map<ShipSubsystem, Integer> conditions(ShipState state) {
+	static Map<ShipSubsystem, Integer> conditions(ShipState state) {
 		Map<ShipSubsystem, Integer> map = new EnumMap<>(ShipSubsystem.class);
 		for (ShipSubsystem s : ShipSubsystem.values()) {
 			map.put(s, state.condition(s));
@@ -28,8 +28,17 @@ public final class ShipRepair {
 			player.sendSystemMessage(Component.translatable("command.intersolarsystem.ship.read_only"));
 			return;
 		}
-		ShipRepairRules.Choice choice = ShipRepairRules.choose(state.hazards().incidents(), conditions(state));
+		ShipRepairRules.Choice choice = ShipRepairRules.choose(state.hazards().incidents(),
+				state.diagnostics().faults(), conditions(state));
 		switch (choice.kind()) {
+			case FAULT -> {
+				ShipSubsystem subsystem = choice.subsystem().orElseThrow();
+				if (state.removeFault(subsystem)) {
+					kit.consume(1, player);
+					player.sendSystemMessage(Component.translatable("message.intersolarsystem.ship.repair_fault",
+							Component.translatable(ShipCommands.subsystemKey(subsystem))));
+				}
+			}
 			case INCIDENT -> {
 				ShipIncident incident = choice.incident().orElseThrow();
 				if (state.resolveIncident(incident)) {
@@ -55,8 +64,12 @@ public final class ShipRepair {
 	/** Using the station without a kit: says what a kit would fix first (an active incident before wear). */
 	public static void showNeedsKit(MinecraftServer server, ServerPlayer player) {
 		ShipState state = ShipStateAccess.get(server);
-		ShipRepairRules.Choice choice = ShipRepairRules.choose(state.hazards().incidents(), conditions(state));
+		ShipRepairRules.Choice choice = ShipRepairRules.choose(state.hazards().incidents(),
+				state.diagnostics().faults(), conditions(state));
 		switch (choice.kind()) {
+			case FAULT -> player.sendSystemMessage(Component.translatable(
+					"message.intersolarsystem.ship.station_needs_kit_fault",
+					Component.translatable(ShipCommands.subsystemKey(choice.subsystem().orElseThrow()))));
 			case INCIDENT -> {
 				ShipIncident incident = choice.incident().orElseThrow();
 				player.sendSystemMessage(Component.translatable("message.intersolarsystem.ship.station_needs_kit_incident",
