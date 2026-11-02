@@ -22,6 +22,7 @@ public class InterSolarSystem implements ModInitializer {
 	public void onInitialize() {
 		ModItems.initialize();
 		ModBlocks.initialize();
+		hu.kriwdi.intersolarsystem.content.ModCreativeTab.initialize();
 		ModLoot.initialize();
 		hu.kriwdi.intersolarsystem.worldgen.ModWorldgen.initialize();
 		ShipNetworking.register();

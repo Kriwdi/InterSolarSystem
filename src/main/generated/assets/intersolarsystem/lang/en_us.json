@@ -61,6 +61,7 @@
   "item.intersolarsystem.space_helmet": "Space Helmet",
   "item.intersolarsystem.space_pants": "Space Suit Trousers",
   "item.intersolarsystem.space_suit": "Space Suit (Oxygen Tank)",
+  "itemGroup.intersolarsystem": "InterSolarSystem",
   "lore.intersolarsystem.terminal.0": "Day 1. The last supply flight is down. Twelve of us. The view of Earth is the worst part: it used to be blue.",
   "lore.intersolarsystem.terminal.1": "Day 212. The Ark ships need helium-3. We are mining the regolith around the clock. The ilmenite gives us oxygen.",
   "lore.intersolarsystem.terminal.2": "Day 390. Ark-3 left orbit today. There was no seat for us. They said the next ship would come back for the base.",

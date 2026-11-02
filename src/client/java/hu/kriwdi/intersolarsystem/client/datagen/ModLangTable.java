@@ -742,6 +742,10 @@ public final class ModLangTable {
 				"Day 412. Hydroponics failing. Three of us left. If you are reading this, the codes for the seed vault are in the Svalbard log. Take the helium. Go.",
 				"Tag 412. Hydrokultur fällt aus. Wir sind noch drei. Wer das liest: die Codes für den Saatgutbunker stehen im Svalbard-Logbuch. Nimm das Helium. Flieg.",
 				"412. nap. Leáll a hidrokultúra. Hárman maradtunk. Ha ezt olvasod: a magbank kódjai a svalbardi naplóban vannak. Vidd a héliumot. Indulj.");
+		add(rows, "itemGroup.intersolarsystem",
+				"InterSolarSystem",
+				"InterSolarSystem",
+				"InterSolarSystem");
 		check(rows);
 		return List.copyOf(rows);
 	}

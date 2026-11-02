@@ -61,6 +61,7 @@
   "item.intersolarsystem.space_helmet": "Raumhelm",
   "item.intersolarsystem.space_pants": "Raumanzughose",
   "item.intersolarsystem.space_suit": "Raumanzug (Sauerstofftank)",
+  "itemGroup.intersolarsystem": "InterSolarSystem",
   "lore.intersolarsystem.terminal.0": "Tag 1. Der letzte Versorgungsflug ist gelandet. Wir sind zwölf. Der Blick auf die Erde ist das Schlimmste: sie war einmal blau.",
   "lore.intersolarsystem.terminal.1": "Tag 212. Die Archen brauchen Helium-3. Wir fördern rund um die Uhr Regolith. Das Ilmenit liefert uns Sauerstoff.",
   "lore.intersolarsystem.terminal.2": "Tag 390. Arche-3 hat heute den Orbit verlassen. Für uns war kein Platz. Sie sagten, das nächste Schiff holt die Basis ab.",

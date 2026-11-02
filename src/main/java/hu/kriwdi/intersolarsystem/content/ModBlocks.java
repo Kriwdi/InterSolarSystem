@@ -2,14 +2,11 @@ package hu.kriwdi.intersolarsystem.content;
 
 import java.util.function.Function;
 
-import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
-
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -116,32 +113,7 @@ public final class ModBlocks {
 		return block;
 	}
 
+	/** Loads the class, which registers everything above. The items are listed in {@link ModCreativeTab}. */
 	public static void initialize() {
-		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS)
-				.register(tab -> {
-					tab.accept(RUSTED_PANEL);
-					tab.accept(SHIP_HATCH);
-					tab.accept(REPAIR_STATION);
-					tab.accept(DIAGNOSTIC_CONSOLE);
-					tab.accept(NAVIGATION_CONSOLE);
-					tab.accept(STATION_HULL);
-					tab.accept(STATION_FOIL);
-					tab.accept(STATION_WINDOW);
-					tab.accept(STATION_LIGHT);
-					tab.accept(TRUSS);
-					tab.accept(SOLAR_PANEL);
-					tab.accept(LUNAR_ROCK);
-					tab.accept(LUNAR_REGOLITH);
-					tab.accept(MARE_REGOLITH);
-					tab.accept(FRESH_REGOLITH);
-					tab.accept(MARE_BASALT);
-					tab.accept(HELIUM3_REGOLITH);
-					tab.accept(ILMENITE_ORE);
-					tab.accept(LANDER_ENGINE);
-					tab.accept(LUNAR_FLAG);
-					tab.accept(ROVER_WHEEL);
-					tab.accept(ANTENNA_DISH);
-					tab.accept(DATA_TERMINAL);
-				});
 	}
 }

@@ -48,7 +48,7 @@ Subsystems: `engine`, `fuel_energy`, `hull_armor`, `life_support`, `navigation_c
 
 ## Ship hatch and interior
 
-Place a `ship_hatch` block (creative: Building Blocks tab) and right-click it to board the ship. You arrive in the sealed capsule room in the `intersolarsystem:ship_interior` dimension. Right-clicking the hatch in the wall leaves the ship again, next to the hatch you boarded through. If that hatch is gone, you are put at the world spawn. The hatch cannot be broken inside the ship.
+Place a `ship_hatch` block (creative: the InterSolarSystem tab, helmet icon) and right-click it to board the ship. You arrive in the sealed capsule room in the `intersolarsystem:ship_interior` dimension. Right-clicking the hatch in the wall leaves the ship again, next to the hatch you boarded through. If that hatch is gone, you are put at the world spawn. The hatch cannot be broken inside the ship.
 
 The ship save (`ship_state.dat`) is format version 6; older saves are migrated when loaded (`ShipStateMigrations`).
 
