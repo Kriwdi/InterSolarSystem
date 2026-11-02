@@ -23,10 +23,25 @@ public final class ShipNavigation {
 						state.condition(ShipSubsystem.LANDING_LAUNCH));
 	}
 
+	static boolean inOrbit(ShipState state) {
+		return state.landingSite().map(s -> ShipDimensions.ORBIT.identifier().toString().equals(s.dimension()))
+				.orElse(false);
+	}
+
+	/** Whether a body can be chosen from where the ship is now. */
+	public static boolean reachable(CelestialBody body, boolean inOrbit) {
+		return switch (body.status()) {
+			case FLYBY -> true;
+			case ORBIT -> !inOrbit;
+			case SURFACE -> inOrbit;
+			case LOCKED -> false;
+		};
+	}
+
 	public static void open(MinecraftServer server, ServerPlayer player) {
 		ShipState state = ShipStateAccess.get(server);
 		ServerPlayNetworking.send(player, new NavigationPayloads.Open(state.travel().engineTier(),
-				server.overworld().getGameTime(), canLaunch(state)));
+				server.overworld().getGameTime(), canLaunch(state), inOrbit(state)));
 	}
 
 	public static void launch(MinecraftServer server, ServerPlayer player, String bodyId) {
@@ -35,7 +50,7 @@ public final class ShipNavigation {
 			return;
 		}
 		Optional<CelestialBody> body = SolarSystem.byId(bodyId);
-		if (body.isEmpty() || body.get().status() != CelestialBody.Status.FLYBY) {
+		if (body.isEmpty() || !reachable(body.get(), inOrbit(state))) {
 			player.sendSystemMessage(Component.translatable("message.intersolarsystem.nav.unreachable"));
 			return;
 		}
@@ -45,10 +60,34 @@ public final class ShipNavigation {
 			return;
 		}
 		long now = server.overworld().getGameTime();
-		long flightTicks = TravelMath.flybyTicks(body.get(), state.travel().engineTier(), now);
+		long seed = server.overworld().getRandom().nextLong();
+		int tier = state.travel().engineTier();
 		ShipState.LandingSite site = state.landingSite().get();
-		if (state.beginTakeoff(site.x(), site.z(), now, server.overworld().getRandom().nextLong(), ShipFlightKind.NORMAL,
-				body.get().id(), flightTicks)) {
+		boolean started;
+		long flightTicks;
+		switch (body.get().status()) {
+			case ORBIT -> {
+				flightTicks = TravelMath.oneWayTicks(body.get(), tier, now);
+				started = state.beginTakeoff(site.x(), site.z(), now, seed, ShipFlightKind.NORMAL, body.get().id(),
+						flightTicks, ShipDimensions.ORBIT.identifier().toString());
+			}
+			case SURFACE -> {
+				// Back down to where the ship last stood on Earth (or the world spawn).
+				CelestialBody orbit = SolarSystem.byId("earth_orbit").orElse(body.get());
+				flightTicks = TravelMath.oneWayTicks(orbit, tier, now);
+				var spawn = server.getRespawnData().pos();
+				ShipTravel.Surface home = state.travel().surface()
+						.orElse(new ShipTravel.Surface(spawn.getX(), spawn.getZ()));
+				started = state.beginTakeoff(home.x(), home.z(), now, seed, ShipFlightKind.NORMAL, "earth", flightTicks,
+						ShipTravel.OVERWORLD);
+			}
+			default -> {
+				flightTicks = TravelMath.flybyTicks(body.get(), tier, now);
+				started = state.beginTakeoff(site.x(), site.z(), now, seed, ShipFlightKind.NORMAL, body.get().id(),
+						flightTicks);
+			}
+		}
+		if (started) {
 			ShipFlightController.broadcast(server, Component.translatable("message.intersolarsystem.nav.launch",
 					Component.translatable(body.get().translationKey()), ShipFlightTimeline.formatClock(flightTicks)));
 		}

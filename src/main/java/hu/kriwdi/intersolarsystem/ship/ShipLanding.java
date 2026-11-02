@@ -64,7 +64,10 @@ public final class ShipLanding {
 	}
 
 	/** Where the ship landed, and whether it had to fall back to the world spawn. */
-	public record Landing(BlockPos hatch, boolean usedSpawn) {
+	public record Landing(BlockPos hatch, boolean usedSpawn, boolean docked) {
+		public Landing(BlockPos hatch, boolean usedSpawn) {
+			this(hatch, usedSpawn, false);
+		}
 	}
 
 	/**
@@ -73,6 +76,15 @@ public final class ShipLanding {
 	 * {@link #announce} after the phase has advanced.
 	 */
 	public static Landing place(MinecraftServer server, ShipState state) {
+		if (ShipDimensions.ORBIT.identifier().toString().equals(state.travel().landIn())) {
+			ServerLevel orbit = server.getLevel(ShipDimensions.ORBIT);
+			if (orbit != null) {
+				BlockPos hatch = OrbitStation.dock(orbit);
+				state.setLandingSite(new ShipState.LandingSite(orbit.dimension().identifier().toString(),
+						hatch.getX(), hatch.getY(), hatch.getZ()));
+				return new Landing(hatch, false, true);
+			}
+		}
 		ServerLevel overworld = server.overworld();
 		LevelData.RespawnData spawn = server.getRespawnData();
 		BlockPos spawnPos = spawn.pos();
@@ -94,7 +106,8 @@ public final class ShipLanding {
 	}
 
 	public static void announce(MinecraftServer server, Landing landing) {
-		String key = landing.usedSpawn() ? "message.intersolarsystem.ship.landed_spawn" : "message.intersolarsystem.ship.landed";
+		String key = landing.docked() ? "message.intersolarsystem.orbit.docked"
+				: landing.usedSpawn() ? "message.intersolarsystem.ship.landed_spawn" : "message.intersolarsystem.ship.landed";
 		ServerLevel interior = server.getLevel(ShipDimensions.INTERIOR);
 		if (interior != null) {
 			interior.players().forEach(p -> p.sendSystemMessage(

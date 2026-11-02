@@ -149,6 +149,58 @@ def navigation_console():
     item_from_block("navigation_console", "block/navigation_console")
 
 
+def station_blocks():
+    write(ASSETS / "models/block/station_hull.json",
+          {"parent": "minecraft:block/cube_all", "textures": {"all": NS + "block/station_hull"}})
+    write(ASSETS / "models/block/station_hull_2.json",
+          {"parent": "minecraft:block/cube_all", "textures": {"all": NS + "block/station_hull_2"}})
+    write(ASSETS / "blockstates/station_hull.json", {"variants": {"": [
+        {"model": NS + "block/station_hull", "weight": 4},
+        {"model": NS + "block/station_hull", "y": 90, "weight": 2},
+        {"model": NS + "block/station_hull_2"},
+    ]}})
+    item_from_block("station_hull", "block/station_hull")
+    for name in ("station_foil", "station_window", "station_light"):
+        write(ASSETS / "models/block" / (name + ".json"),
+              {"parent": "minecraft:block/cube_all", "textures": {"all": NS + "block/" + name}})
+        variants = {"": {"model": NS + "block/" + name}}
+        if name == "station_foil":
+            variants = {"": [{"model": NS + "block/station_foil"}, {"model": NS + "block/station_foil", "y": 90},
+                             {"model": NS + "block/station_foil", "y": 180}]}
+        write(ASSETS / "blockstates" / (name + ".json"), {"variants": variants})
+        item_from_block(name, "block/" + name)
+
+    # Truss: an open cube frame of square beams with a diagonal brace on each side.
+    t = {"particle": "block/truss", "beam": "block/truss"}
+    els = []
+    for y in (0, 14):
+        els.append(box((0, y, 0), (16, y + 2, 2), "beam"))
+        els.append(box((0, y, 14), (16, y + 2, 16), "beam"))
+        els.append(box((0, y, 2), (2, y + 2, 14), "beam"))
+        els.append(box((14, y, 2), (16, y + 2, 14), "beam"))
+    for (x, z) in ((0, 0), (14, 0), (0, 14), (14, 14)):
+        els.append(box((x, 2, z), (x + 2, 14, z + 2), "beam"))
+    brace = {"origin": [8, 8, 8], "axis": "z", "angle": 45, "rescale": True}
+    braceX = {"origin": [8, 8, 8], "axis": "x", "angle": 45, "rescale": True}
+    els.append(box((1, 7.5, 0.5), (15, 8.5, 1.5), "beam", rotation=brace))
+    els.append(box((1, 7.5, 14.5), (15, 8.5, 15.5), "beam", rotation=dict(brace, angle=-45)))
+    els.append(box((0.5, 7.5, 1), (1.5, 8.5, 15), "beam", rotation=braceX))
+    els.append(box((14.5, 7.5, 1), (15.5, 8.5, 15), "beam", rotation=dict(braceX, angle=-45)))
+    model("block/truss", t, els)
+    write(ASSETS / "blockstates/truss.json", {"variants": {"": {"model": NS + "block/truss"}}})
+    item_from_block("truss", "block/truss")
+
+    # Solar cell: a thin plate, cells on top, wired back underneath.
+    t = {"particle": "block/solar_panel", "cells": "block/solar_panel", "back": "block/solar_panel_back",
+         "frame": "block/truss"}
+    els = [box((0, 7, 0), (16, 9, 16), {"north": "frame", "east": "frame", "south": "frame", "west": "frame",
+                                         "up": "cells", "down": "back"},
+               uv={"north": (0, 7, 16, 9), "south": (0, 7, 16, 9), "east": (0, 7, 16, 9), "west": (0, 7, 16, 9)})]
+    model("block/solar_panel", t, els)
+    write(ASSETS / "blockstates/solar_panel.json", {"variants": {"": {"model": NS + "block/solar_panel"}}})
+    item_from_block("solar_panel", "block/solar_panel")
+
+
 def ship_hatch():
     t = {"particle": "block/ship_hatch_frame", "frame": "block/ship_hatch_frame", "door": "block/ship_hatch_door",
          "wheel": "block/ship_hatch_wheel", "metal": "block/rusted_panel"}
@@ -194,7 +246,8 @@ def rusted_panel():
 
 def items():
     handheld = {"multitool"}
-    for name in ("repair_kit", "scrap_sensor", "scrap_metal", "salvaged_wiring", "salvaged_circuit", "multitool"):
+    for name in ("repair_kit", "scrap_sensor", "scrap_metal", "salvaged_wiring", "salvaged_circuit", "multitool",
+                 "space_helmet", "space_suit", "space_pants", "space_boots"):
         parent = "minecraft:item/handheld" if name in handheld else "minecraft:item/generated"
         write(ASSETS / "models/item" / (name + ".json"),
               {"parent": parent, "textures": {"layer0": NS + "item/" + name}})
@@ -207,6 +260,7 @@ if __name__ == "__main__":
     diagnostic_console()
     navigation_console()
     ship_hatch()
+    station_blocks()
     rusted_panel()
     items()
     print("models written")

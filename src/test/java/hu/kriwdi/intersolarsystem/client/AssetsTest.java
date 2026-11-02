@@ -155,6 +155,21 @@ class AssetsTest {
 	}
 
 	@Test
+	void equipmentAssetsPointAtExistingLayers() throws IOException {
+		for (Path p : files("equipment", ".json")) {
+			JsonObject layers = read(p).getAsJsonObject("layers");
+			for (String layer : layers.keySet()) {
+				for (JsonElement e : layers.getAsJsonArray(layer)) {
+					String tex = e.getAsJsonObject().get("texture").getAsString();
+					Path png = ASSETS.resolve("textures/entity/equipment/" + layer + "/" + tex.substring(NS.length())
+							+ ".png");
+					assertTrue(Files.exists(png), p + ": missing layer " + png);
+				}
+			}
+		}
+	}
+
+	@Test
 	void texturesHaveValidSizes() throws IOException {
 		for (Path p : files("textures", ".png")) {
 			BufferedImage img = ImageIO.read(p.toFile());
@@ -162,7 +177,10 @@ class AssetsTest {
 				fail("unreadable png " + p);
 			}
 			boolean animated = Files.exists(Path.of(p + ".mcmeta"));
-			if (animated) {
+			if (p.toString().replace('\\', '/').contains("/textures/entity/equipment/")) {
+				// Armour layers use the 64x32 player model layout.
+				assertEquals(img.getWidth(), img.getHeight() * 2, p + ": equipment layers are 2:1");
+			} else if (animated) {
 				assertEquals(0, img.getHeight() % img.getWidth(), p + ": animation frames must be square");
 			} else {
 				assertEquals(img.getWidth(), img.getHeight(), p + ": texture must be square (or animated)");

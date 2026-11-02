@@ -12,6 +12,7 @@ import net.minecraft.network.chat.Component;
 
 import hu.kriwdi.intersolarsystem.client.ui.ShipPanel;
 import hu.kriwdi.intersolarsystem.ship.NavigationPayloads;
+import hu.kriwdi.intersolarsystem.ship.ShipNavigation;
 import hu.kriwdi.intersolarsystem.travel.CelestialBody;
 import hu.kriwdi.intersolarsystem.travel.SolarSystem;
 import hu.kriwdi.intersolarsystem.travel.TravelMath;
@@ -26,29 +27,36 @@ public class NavigationScreen extends Screen {
 	private static final int HEIGHT = 270;
 	private static final int ROW = 12;
 	private static final Map<String, Integer> COLOURS = Map.ofEntries(
-			Map.entry("earth", 0xFF3D7BD9), Map.entry("moon", 0xFFC9C9C9), Map.entry("venus", 0xFFE3C27A),
+			Map.entry("earth", 0xFF3D7BD9), Map.entry("earth_orbit", 0xFF9FC4FF), Map.entry("moon", 0xFFC9C9C9), Map.entry("venus", 0xFFE3C27A),
 			Map.entry("mercury", 0xFF9E8F80), Map.entry("mars", 0xFFD0603A), Map.entry("ceres", 0xFF8A857C),
 			Map.entry("jupiter", 0xFFD9A877), Map.entry("saturn", 0xFFE8D29A), Map.entry("uranus", 0xFF9FE0E6),
 			Map.entry("neptune", 0xFF4C6FE0));
 	/** Rough orbit radii in AU, only for placing the bodies on the map strip (log scale). */
 	private static final Map<String, Double> ORBIT_AU = Map.ofEntries(
-			Map.entry("mercury", 0.39), Map.entry("venus", 0.72), Map.entry("earth", 1.0), Map.entry("moon", 1.0),
+			Map.entry("mercury", 0.39), Map.entry("venus", 0.72), Map.entry("earth", 1.0), Map.entry("earth_orbit", 1.0),
+			Map.entry("moon", 1.0),
 			Map.entry("mars", 1.52), Map.entry("ceres", 2.77), Map.entry("jupiter", 5.2), Map.entry("saturn", 9.5),
 			Map.entry("uranus", 19.2), Map.entry("neptune", 30.1));
 
 	private final int engineTier;
 	private final long serverTimeAtOpen;
 	private final boolean canLaunch;
+	private final boolean inOrbit;
 	private final List<CelestialBody> bodies = SolarSystem.bodies();
 	private int ticks;
 	private int selected = 1;
 	private boolean launched;
 
-	public NavigationScreen(int engineTier, long gameTime, boolean canLaunch) {
+	public NavigationScreen(int engineTier, long gameTime, boolean canLaunch, boolean inOrbit) {
 		super(Component.translatable("screen.intersolarsystem.nav.title"));
 		this.engineTier = engineTier;
 		this.serverTimeAtOpen = gameTime;
 		this.canLaunch = canLaunch;
+		this.inOrbit = inOrbit;
+	}
+
+	private boolean launchable(CelestialBody b) {
+		return canLaunch && !launched && ShipNavigation.reachable(b, inOrbit);
 	}
 
 	private int left() {
@@ -100,7 +108,7 @@ public class NavigationScreen extends Screen {
 		drawMap(g, l + 10, mapY(), WIDTH - 20, 36, partialTick);
 		drawList(g, l + 10, listY(), mouseX, mouseY);
 		drawDetails(g, l + 10, launchY() - 30);
-		boolean launchable = canLaunch && !launched && bodies.get(selected).status() == CelestialBody.Status.FLYBY;
+		boolean launchable = launchable(bodies.get(selected));
 		ShipPanel.button(g, font, launchX(), launchY(), 94, 18,
 				Component.translatable("screen.intersolarsystem.nav.launch"),
 				launchable && ShipPanel.inside(mouseX, mouseY, launchX(), launchY(), 94, 18),
@@ -132,8 +140,18 @@ public class NavigationScreen extends Screen {
 				bx += (int) Math.round(Math.cos(a) * 6);
 				by += (int) Math.round(Math.sin(a) * 6);
 			}
-			int size = b.kind() == CelestialBody.Kind.GAS_GIANT ? 3 : b.kind() == CelestialBody.Kind.MOON ? 1 : 2;
 			int colour = COLOURS.getOrDefault(b.id(), 0xFFFFFFFF);
+			if (b.kind() == CelestialBody.Kind.ORBIT) {
+				// Drawn as a thin ring around the Earth.
+				int r = 4;
+				int ring = i == selected ? 0xFF00FFAA : (colour & 0x00FFFFFF) | 0x90000000;
+				g.fill(bx - r, by - r, bx + r + 1, by - r + 1, ring);
+				g.fill(bx - r, by + r, bx + r + 1, by + r + 1, ring);
+				g.fill(bx - r, by - r, bx - r + 1, by + r + 1, ring);
+				g.fill(bx + r, by - r, bx + r + 1, by + r + 1, ring);
+				continue;
+			}
+			int size = b.kind() == CelestialBody.Kind.GAS_GIANT ? 3 : b.kind() == CelestialBody.Kind.MOON ? 1 : 2;
 			if (i == selected) {
 				g.fill(bx - size - 2, by - size - 2, bx + size + 3, by + size + 3, 0x8000FFAA);
 			}
@@ -161,7 +179,8 @@ public class NavigationScreen extends Screen {
 			Component status = Component.translatable("screen.intersolarsystem.nav.status." + b.status().name()
 					.toLowerCase(java.util.Locale.ROOT));
 			int statusColour = switch (b.status()) {
-				case SURFACE -> ShipPanel.HINT;
+				case SURFACE -> inOrbit ? ShipPanel.GOOD : ShipPanel.HINT;
+				case ORBIT -> inOrbit ? ShipPanel.HINT : ShipPanel.GOOD;
 				case FLYBY -> ShipPanel.GOOD;
 				case LOCKED -> 0xFF6B737A;
 			};
@@ -175,8 +194,15 @@ public class NavigationScreen extends Screen {
 
 	private void drawDetails(GuiGraphicsExtractor g, int x, int y) {
 		CelestialBody b = bodies.get(selected);
-		if (b.transferDays() <= 0) {
-			g.text(font, Component.translatable("screen.intersolarsystem.nav.surface_hint"), x, y, ShipPanel.HINT);
+		if (b.status() == CelestialBody.Status.SURFACE) {
+			g.text(font, Component.translatable(inOrbit ? "screen.intersolarsystem.nav.deorbit"
+					: "screen.intersolarsystem.nav.surface_hint"), x, y, inOrbit ? ShipPanel.GOOD : ShipPanel.HINT);
+			return;
+		}
+		if (b.status() == CelestialBody.Status.ORBIT) {
+			g.text(font, Component.translatable(inOrbit ? "screen.intersolarsystem.nav.in_orbit"
+					: "screen.intersolarsystem.nav.to_orbit", TravelMath.formatDuration(
+							TravelMath.oneWayTicks(b, engineTier, now()))), x, y, inOrbit ? ShipPanel.HINT : ShipPanel.GOOD);
 			return;
 		}
 		double factor = TravelMath.windowFactor(b, now());
@@ -210,8 +236,7 @@ public class NavigationScreen extends Screen {
 				}
 			}
 			CelestialBody b = bodies.get(selected);
-			if (ShipPanel.inside(event.x(), event.y(), launchX(), launchY(), 94, 18) && canLaunch && !launched
-					&& b.status() == CelestialBody.Status.FLYBY) {
+			if (ShipPanel.inside(event.x(), event.y(), launchX(), launchY(), 94, 18) && launchable(b)) {
 				launched = true;
 				ClientPlayNetworking.send(new NavigationPayloads.Launch(b.id()));
 				onClose();

@@ -21,5 +21,9 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
 		dropSelf(ModBlocks.REPAIR_STATION);
 		dropSelf(ModBlocks.DIAGNOSTIC_CONSOLE);
 		dropSelf(ModBlocks.NAVIGATION_CONSOLE);
+		for (var block : new net.minecraft.world.level.block.Block[] {ModBlocks.STATION_HULL, ModBlocks.STATION_FOIL,
+				ModBlocks.STATION_WINDOW, ModBlocks.STATION_LIGHT, ModBlocks.TRUSS, ModBlocks.SOLAR_PANEL}) {
+			dropSelf(block);
+		}
 	}
 }

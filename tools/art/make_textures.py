@@ -477,6 +477,315 @@ def navigation_console():
     save(holo, "block/navigation_console_holo")
 
 
+WHITE = [hexc("8f9294"), hexc("b7babb"), hexc("cfd1d0"), hexc("dfe0dc"), hexc("ecece6")]
+
+
+def station():
+    import math
+    # Hull: off-white beta-cloth panels in four quadrants, micrometeorite pits, a little grime.
+    for variant in (1, 2):
+        rnd = random.Random(80 + variant)
+        img = Image.new("RGBA", (16, 16))
+        px = img.load()
+        for y in range(16):
+            for x in range(16):
+                px[x, y] = shade(WHITE[3], 1 + rnd.uniform(-0.03, 0.03))
+        for i in range(16):
+            px[i, 7] = WHITE[1]
+            px[7, i] = WHITE[1]
+            px[i, 8] = WHITE[4]
+            px[8, i] = WHITE[4]
+        bevel(img, 0, 0, 15, 15, hi=1.05, lo=0.8)
+        for _ in range(4):
+            x, y = rnd.randrange(1, 15), rnd.randrange(1, 15)
+            px[x, y] = WHITE[0]
+        if variant == 2:
+            # A yellow EVA handrail with its stand-offs.
+            for x in range(2, 14):
+                px[x, 11] = hexc("e0b52c")
+                px[x, 12] = hexc("9c7a14")
+            for x in (3, 12):
+                px[x, 13] = WHITE[0]
+            for (x, y) in [(4, 3), (11, 4)]:
+                rivet(img, x, y)
+        grime(img, 82 + variant, 0.08)
+        save(img, "block/station_hull" + ("" if variant == 1 else "_2"))
+
+    # Gold foil insulation: crinkled, with creases and a few dark burns.
+    rnd = random.Random(90)
+    foil = Image.new("RGBA", (16, 16))
+    px = foil.load()
+    golds = [hexc("7a5a12"), hexc("a8801f"), hexc("cfa634"), hexc("e8c65a"), hexc("fbe7a0")]
+    for y in range(16):
+        for x in range(16):
+            v = 2 + math.sin(x * 0.9 + y * 0.4) * 0.9 + math.sin(y * 1.3 - x * 0.5) * 0.8 + rnd.uniform(-0.6, 0.6)
+            px[x, y] = golds[max(0, min(4, int(round(v))))]
+    for (x0, y0, x1, y1) in [(0, 4, 15, 6), (3, 15, 12, 0)]:
+        for t in range(16):
+            x = round(x0 + (x1 - x0) * t / 15)
+            y = round(y0 + (y1 - y0) * t / 15)
+            px[x, y] = golds[0]
+    for (x, y) in [(11, 11), (12, 11), (11, 12)]:
+        px[x, y] = hexc("3a2a10")
+    save(foil, "block/station_foil")
+
+    # Window: hull frame around a round porthole, deep space with the blue limb of the Earth.
+    w = Image.open(TEX / "block/station_hull.png").convert("RGBA")
+    px = w.load()
+    for y in range(16):
+        for x in range(16):
+            r = ((x - 7.5) ** 2 + (y - 7.5) ** 2) ** 0.5
+            if r <= 5.6:
+                c = hexc("03060c")
+                earth = ((x - 7.5) ** 2 + (y - 22.0) ** 2) ** 0.5
+                if earth <= 12.5:
+                    c = hexc("1f5fb0") if earth <= 11.6 else hexc("7ec3ff")
+                    if earth <= 11.6 and (x * 7 + y * 3) % 11 == 0:
+                        c = hexc("e8f2ff")
+                if (x, y) in [(4, 4), (9, 3), (11, 6), (5, 7)]:
+                    c = hexc("ffffff")
+                if x - y == 2 and r < 4.5 and earth > 12.5:
+                    c = mix(c, hexc("ffffff"), 0.25)
+                px[x, y] = c
+            elif r <= 6.6:
+                px[x, y] = hexc("4a4f55") if (x + y) % 2 else hexc("6b737a")
+    save(w, "block/station_window")
+
+    # Light panel: a dark housing with two glowing tubes behind a diffuser grid.
+    l = metal_base(91, light=1)
+    px = l.load()
+    for y in range(2, 14):
+        for x in range(2, 14):
+            px[x, y] = hexc("3a3f44")
+        for x in (3, 4, 5):
+            px[x, y] = hexc("fffbe8") if x == 4 else hexc("f3e3b0")
+        for x in (10, 11, 12):
+            px[x, y] = hexc("fffbe8") if x == 11 else hexc("f3e3b0")
+    for y in range(2, 14, 3):
+        for x in range(2, 14):
+            px[x, y] = shade(px[x, y], 0.8)
+    bevel(l, 1, 1, 14, 14, hi=0.75, lo=1.2)
+    bevel(l, 0, 0, 15, 15)
+    save(l, "block/station_light")
+
+    # Truss beam: grey anodised aluminium with lightening holes.
+    t = Image.new("RGBA", (16, 16))
+    px = t.load()
+    rnd = random.Random(93)
+    for y in range(16):
+        for x in range(16):
+            px[x, y] = shade(hexc("9aa0a4"), 1 + rnd.uniform(-0.05, 0.05))
+    for c in range(1, 16, 4):
+        px[c, c] = hexc("4a4f55")
+        px[c, 15 - c] = hexc("4a4f55")
+    bevel(t, 0, 0, 15, 15)
+    save(t, "block/truss")
+
+    # Solar cells: dark blue cells in a silver grid; back side: grey with wiring.
+    sc = Image.new("RGBA", (16, 16))
+    px = sc.load()
+    rnd = random.Random(94)
+    for y in range(16):
+        for x in range(16):
+            if x % 4 == 0 or y % 4 == 0:
+                px[x, y] = hexc("aab4bd")
+            else:
+                c = hexc("1a2f6b") if (x + y) % 2 else hexc("1e3679")
+                if (x % 4 == 1 and y % 4 == 1):
+                    c = hexc("3a5fb8")
+                px[x, y] = shade(c, 1 + rnd.uniform(-0.08, 0.08))
+    for (x, y) in [(6, 9), (7, 9), (6, 10), (13, 2)]:
+        px[x, y] = hexc("0b1430")
+    save(sc, "block/solar_panel")
+    back = metal_base(95, light=2)
+    px = back.load()
+    for x in range(16):
+        px[x, 8] = hexc("8e2219")
+    save(back, "block/solar_panel_back")
+
+
+def suit_items():
+    o = OUTLINE
+    pal = {"o": o, "W": WHITE[4], "w": WHITE[2], "g": WHITE[0], "V": hexc("c99a2e"), "v": hexc("7a5a12"),
+           "R": hexc("e0702a"), "K": hexc("2b2f33"), "B": hexc("3a6fd0"), "Y": hexc("e8b830")}
+    save(grid([
+        "................",
+        ".....oooooo.....",
+        "....oWWWWWWo....",
+        "...oWwwwwwwWo...",
+        "..oWwoooooowWo..",
+        "..oWoVVVVVVoWo..",
+        "..oWoVvVVVVoWo..",
+        "..oWoVVvVVVoWo..",
+        "..oWoVVVVvVoWo..",
+        "..oWwoooooowWo..",
+        "..oWwwwRRwwwWo..",
+        "..ogWWWWWWWWgo..",
+        "..oggggggggggo..",
+        "...oKKKKKKKKo...",
+        "....oooooooo....",
+        "................",
+    ], pal), "item/space_helmet")
+    save(grid([
+        "................",
+        "..oooo....oooo..",
+        ".oWWWWooooWWWWo.",
+        ".oWwwWWWWWWwwWo.",
+        ".oWwWWBYRWWWwWo.",
+        ".oWwWWKKKKWWwWo.",
+        ".oWwWWKgGKWWwWo.",
+        ".oWwoWKKKKWowWo.",
+        ".oWwooWWWWoowWo.",
+        ".oRRo.oRRo.oRRo.",
+        ".oWWo.oWWo.oWWo.",
+        ".ogWo.oWWo.oWgo.",
+        ".oooo.ogWo.oooo.",
+        "......oooo......",
+        "................",
+        "................",
+    ], dict(pal, G=hexc("5dfa98"))), "item/space_suit")
+    save(grid([
+        "................",
+        "...oooooooooo...",
+        "...oKKKKKKKKo...",
+        "...oWWWWWWWWo...",
+        "...oWwwWWwwWo...",
+        "...oWwWooWwWo...",
+        "...oWwWooWwWo...",
+        "...oRRWooWRRo...",
+        "...oWwWooWwWo...",
+        "...oWwWooWwWo...",
+        "...oWwWooWwWo...",
+        "...ogWgoogWgo...",
+        "...oooo..oooo...",
+        "................",
+        "................",
+        "................",
+    ], pal), "item/space_pants")
+    save(grid([
+        "................",
+        "................",
+        "................",
+        "...oooo..oooo...",
+        "...oWWo..oWWo...",
+        "...oRRo..oRRo...",
+        "...oWwo..oWwo...",
+        "...oWwo..oWwo...",
+        "...oWwoo.oWwoo..",
+        "...oWwWWooWwWWo.",
+        "...oggggooggggo.",
+        "...oKKKKooKKKKo.",
+        "....oooo..oooo..",
+        "................",
+        "................",
+        "................",
+    ], pal), "item/space_boots")
+
+
+def suit_layers():
+    """Armour layers on the 64x32 player-model layout: humanoid (helmet, torso, arms, boots) and leggings."""
+    import math
+    rnd = random.Random(96)
+    white = WHITE[3]
+
+    def cloth():
+        return shade(white, 1 + rnd.uniform(-0.04, 0.04))
+
+    def box(px, ox, oy, w, h, d, painter):
+        # Faces of a cube unwrapped Minecraft-style: (top, bottom) on the first row, then right, front, left, back.
+        faces = {"top": (ox + d, oy, w, d), "bottom": (ox + d + w, oy, w, d), "right": (ox, oy + d, d, h),
+                 "front": (ox + d, oy + d, w, h), "left": (ox + d + w, oy + d, d, h),
+                 "back": (ox + d + w + d, oy + d, w, h)}
+        for name, (fx, fy, fw, fh) in faces.items():
+            for y in range(fh):
+                for x in range(fw):
+                    px[fx + x, fy + y] = painter(name, x, y, fw, fh)
+
+    layer = Image.new("RGBA", (64, 32), (0, 0, 0, 0))
+    px = layer.load()
+
+    def helmet(face, x, y, w, h):
+        if face == "front" and 1 <= x <= 6 and 2 <= y <= 5:
+            # Gold sun visor with a reflection.
+            c = hexc("c99a2e") if (x + y) % 5 else hexc("e8c65a")
+            if x - y == 0:
+                c = hexc("fbe7a0")
+            return c
+        if face == "front" and y == 7 and 3 <= x <= 4:
+            return hexc("e0702a")
+        if face in ("right", "left") and 3 <= y <= 4 and 3 <= x <= 4:
+            return hexc("6b737a")
+        if y == h - 1:
+            return WHITE[1]
+        return cloth()
+
+    box(px, 0, 0, 8, 8, 8, helmet)
+
+    def torso(face, x, y, w, h):
+        if face == "front":
+            if y in (2, 3) and 2 <= x <= 5:
+                return [hexc("3a6fd0"), hexc("e8b830"), hexc("e0702a"), hexc("2b2f33")][x - 2]
+            if 5 <= y <= 8 and 2 <= x <= 5:
+                return hexc("2b2f33") if not (y == 6 and x == 3) else hexc("5dfa98")
+            if y == 11:
+                return WHITE[1]
+        if face == "back":
+            # Life-support backpack with an oxygen gauge.
+            if 1 <= x <= 6 and 1 <= y <= 9:
+                c = WHITE[2]
+                if y == 3 and 2 <= x <= 5:
+                    c = hexc("4fc3f7")
+                if x in (1, 6) or y in (1, 9):
+                    c = WHITE[1]
+                return c
+        if face == "top" and (x + y) % 3 == 0:
+            return WHITE[2]
+        return cloth()
+
+    box(px, 16, 16, 8, 12, 4, torso)
+
+    def arm(face, x, y, w, h):
+        if y in (4, 5):
+            return hexc("e0702a")
+        if y >= h - 2:
+            return hexc("6b737a")
+        return cloth()
+
+    box(px, 40, 16, 4, 12, 4, arm)
+
+    def boot(face, x, y, w, h):
+        if y >= h - 2:
+            return hexc("2b2f33")
+        if y >= h - 5:
+            return WHITE[1]
+        if y == h - 6:
+            return hexc("e0702a")
+        return (0, 0, 0, 0)
+
+    box(px, 0, 16, 4, 12, 4, boot)
+    save(layer, "entity/equipment/humanoid/space_suit")
+
+    legs = Image.new("RGBA", (64, 32), (0, 0, 0, 0))
+    px = legs.load()
+
+    def trousers(face, x, y, w, h):
+        if y in (5, 6) and face in ("front", "right", "left"):
+            return hexc("e0702a") if face == "front" else WHITE[1]
+        if face == "front" and y == 8 and x in (1, 2):
+            return hexc("6b737a")
+        return cloth()
+
+    box(px, 0, 16, 4, 12, 4, trousers)
+
+    def waist(face, x, y, w, h):
+        if y >= h - 3:
+            return hexc("6b737a") if y == h - 3 else cloth()
+        return (0, 0, 0, 0)
+
+    box(px, 16, 16, 8, 12, 4, waist)
+    save(legs, "entity/equipment/humanoid_leggings/space_suit")
+
+
 # ---------------------------------------------------------------- items
 def items():
     o = OUTLINE
@@ -617,5 +926,8 @@ if __name__ == "__main__":
     repair_station()
     console()
     navigation_console()
+    station()
     items()
+    suit_items()
+    suit_layers()
     print("textures written")

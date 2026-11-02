@@ -47,7 +47,8 @@ class ShipTravelTest {
 			loaded.advancePhase(i);
 		}
 		assertEquals(ShipFlightPhase.LANDED, loaded.phase());
-		assertEquals(new ShipTravel(3, "earth", 0, 0, Optional.empty()), loaded.travel());
+		assertEquals(new ShipTravel(3, "earth", 0, 0, Optional.empty(), ShipTravel.OVERWORLD, Optional.empty()),
+				loaded.travel());
 	}
 
 	@Test

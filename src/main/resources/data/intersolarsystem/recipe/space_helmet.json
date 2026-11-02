@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": "intersolarsystem:scrap_metal",
+    "C": "intersolarsystem:salvaged_circuit",
+    "W": "#minecraft:wool",
+    "G": "minecraft:glass_pane"
+  },
+  "pattern": [
+    "SCS",
+    "WGW"
+  ],
+  "result": {
+    "id": "intersolarsystem:space_helmet"
+  }
+}

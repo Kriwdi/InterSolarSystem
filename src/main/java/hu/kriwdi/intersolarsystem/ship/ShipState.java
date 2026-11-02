@@ -340,7 +340,8 @@ public class ShipState extends SavedData {
 
 	/** Starts a flight. Only possible while landed and when the save is writable. */
 	public boolean beginTakeoff(int x, int z, long nowTick, long seed) {
-		return beginTakeoff(x, z, nowTick, seed, ShipFlightKind.NORMAL);
+		// A surface flight (/iss ship fly) always comes down on Earth, also from orbit.
+		return beginTakeoff(x, z, nowTick, seed, ShipFlightKind.NORMAL, "earth", 0, ShipTravel.OVERWORLD);
 	}
 
 	/** Starts a flight of the given kind. A test hop's destination is where the ship already stands. */
@@ -348,16 +349,24 @@ public class ShipState extends SavedData {
 		return beginTakeoff(x, z, nowTick, seed, kind, "earth", 0);
 	}
 
+	public boolean beginTakeoff(int x, int z, long nowTick, long seed, ShipFlightKind kind, String target,
+			long flightTicks) {
+		return beginTakeoff(x, z, nowTick, seed, kind, target, flightTicks,
+				landingSite.map(LandingSite::dimension).orElse(ShipTravel.OVERWORLD));
+	}
+
 	/**
 	 * Starts a flight with a plan: {@code target} is "earth" or the id of the body to loop around, {@code flightTicks}
 	 * the length of the flight phase (0: the default for the kind). The ship comes back down at (x, z).
 	 */
 	public boolean beginTakeoff(int x, int z, long nowTick, long seed, ShipFlightKind kind, String target,
-			long flightTicks) {
+			long flightTicks, String landIn) {
 		if (readOnly || phase != ShipFlightPhase.LANDED) {
 			return false;
 		}
-		travel = travel.withPlan(target, Math.max(0, flightTicks));
+		landingSite.filter(s -> ShipTravel.OVERWORLD.equals(s.dimension()))
+				.ifPresent(s -> travel = travel.withSurface(new ShipTravel.Surface(s.x(), s.z())));
+		travel = travel.withPlan(target, Math.max(0, flightTicks), landIn);
 		flightKind = kind;
 		phase = ShipFlightPhase.TAKEOFF;
 		phaseStartedTick = nowTick;

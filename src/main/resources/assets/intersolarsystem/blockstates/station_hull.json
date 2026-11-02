@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/station_hull",
+        "weight": 4
+      },
+      {
+        "model": "intersolarsystem:block/station_hull",
+        "y": 90,
+        "weight": 2
+      },
+      {
+        "model": "intersolarsystem:block/station_hull_2"
+      }
+    ]
+  }
+}

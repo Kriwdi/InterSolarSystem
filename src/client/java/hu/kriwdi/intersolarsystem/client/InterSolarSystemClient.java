@@ -38,9 +38,11 @@ public class InterSolarSystemClient implements ClientModInitializer {
 		ClientPlayNetworking.registerGlobalReceiver(NavigationPayloads.Open.TYPE, (payload, context) -> {
 			Minecraft minecraft = context.client();
 			minecraft.execute(() -> minecraft.setScreenAndShow(
-					new NavigationScreen(payload.engineTier(), payload.gameTime(), payload.canLaunch())));
+					new NavigationScreen(payload.engineTier(), payload.gameTime(), payload.canLaunch(),
+							payload.inOrbit())));
 		});
 		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> ClientShipStatus.clear());
 		HudElementRegistry.addLast(ModIds.id("ship_status"), new ShipHudElement());
+		HudElementRegistry.addLast(ModIds.id("oxygen"), new OxygenHudElement());
 	}
 }

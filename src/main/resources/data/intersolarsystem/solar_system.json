@@ -1,15 +1,87 @@
 {
-  "__comment": "Travel data for the navigation console. transfer_days: real-world one-way transfer time from Earth (minimum-energy route, rounded); synodic_days: real-world time between launch windows from Earth. Times in game are divided by 10 and by the engine multiplier. Order = order on the console.",
+  "__comment": "Travel data for the navigation console. transfer_days: real-world one-way transfer time from Earth (minimum-energy route, rounded); synodic_days: real-world time between launch windows from Earth. Times in game are divided by 10 and by the engine multiplier. Order = order on the console. status: surface (Earth), orbit (dock in Earth orbit), flyby (free-return loop), locked.",
   "bodies": [
-    {"id": "earth", "kind": "planet", "transfer_days": 0, "synodic_days": 0, "status": "surface"},
-    {"id": "moon", "kind": "moon", "parent": "earth", "transfer_days": 3, "synodic_days": 29.5, "status": "flyby"},
-    {"id": "venus", "kind": "planet", "transfer_days": 150, "synodic_days": 584, "status": "locked"},
-    {"id": "mercury", "kind": "planet", "transfer_days": 105, "synodic_days": 116, "status": "locked"},
-    {"id": "mars", "kind": "planet", "transfer_days": 210, "synodic_days": 780, "status": "locked"},
-    {"id": "ceres", "kind": "dwarf_planet", "transfer_days": 460, "synodic_days": 467, "status": "locked"},
-    {"id": "jupiter", "kind": "gas_giant", "transfer_days": 2190, "synodic_days": 399, "status": "locked"},
-    {"id": "saturn", "kind": "gas_giant", "transfer_days": 2220, "synodic_days": 378, "status": "locked", "assist": "jupiter"},
-    {"id": "uranus", "kind": "ice_giant", "transfer_days": 3650, "synodic_days": 370, "status": "locked", "assist": "jupiter"},
-    {"id": "neptune", "kind": "ice_giant", "transfer_days": 4380, "synodic_days": 367, "status": "locked", "assist": "jupiter"}
+    {
+      "id": "earth",
+      "kind": "planet",
+      "transfer_days": 0,
+      "synodic_days": 0,
+      "status": "surface"
+    },
+    {
+      "id": "earth_orbit",
+      "kind": "orbit",
+      "parent": "earth",
+      "transfer_days": 0.25,
+      "synodic_days": 0,
+      "status": "orbit"
+    },
+    {
+      "id": "moon",
+      "kind": "moon",
+      "parent": "earth",
+      "transfer_days": 3,
+      "synodic_days": 29.5,
+      "status": "flyby"
+    },
+    {
+      "id": "venus",
+      "kind": "planet",
+      "transfer_days": 150,
+      "synodic_days": 584,
+      "status": "locked"
+    },
+    {
+      "id": "mercury",
+      "kind": "planet",
+      "transfer_days": 105,
+      "synodic_days": 116,
+      "status": "locked"
+    },
+    {
+      "id": "mars",
+      "kind": "planet",
+      "transfer_days": 210,
+      "synodic_days": 780,
+      "status": "locked"
+    },
+    {
+      "id": "ceres",
+      "kind": "dwarf_planet",
+      "transfer_days": 460,
+      "synodic_days": 467,
+      "status": "locked"
+    },
+    {
+      "id": "jupiter",
+      "kind": "gas_giant",
+      "transfer_days": 2190,
+      "synodic_days": 399,
+      "status": "locked"
+    },
+    {
+      "id": "saturn",
+      "kind": "gas_giant",
+      "transfer_days": 2220,
+      "synodic_days": 378,
+      "status": "locked",
+      "assist": "jupiter"
+    },
+    {
+      "id": "uranus",
+      "kind": "ice_giant",
+      "transfer_days": 3650,
+      "synodic_days": 370,
+      "status": "locked",
+      "assist": "jupiter"
+    },
+    {
+      "id": "neptune",
+      "kind": "ice_giant",
+      "transfer_days": 4380,
+      "synodic_days": 367,
+      "status": "locked",
+      "assist": "jupiter"
+    }
   ]
 }

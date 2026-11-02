@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "W": "#minecraft:wool",
+    "R": "intersolarsystem:salvaged_wiring",
+    "I": "minecraft:iron_ingot",
+    "S": "intersolarsystem:scrap_metal"
+  },
+  "pattern": [
+    "W W",
+    "RIR",
+    "WSW"
+  ],
+  "result": {
+    "id": "intersolarsystem:space_suit"
+  }
+}

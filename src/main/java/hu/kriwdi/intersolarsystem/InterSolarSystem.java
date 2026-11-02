@@ -10,6 +10,7 @@ import hu.kriwdi.intersolarsystem.core.SmokeTest;
 import hu.kriwdi.intersolarsystem.ship.ShipCommands;
 import hu.kriwdi.intersolarsystem.ship.ShipFlightController;
 import hu.kriwdi.intersolarsystem.ship.ShipNetworking;
+import hu.kriwdi.intersolarsystem.space.SpaceEnvironment;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,7 @@ public class InterSolarSystem implements ModInitializer {
 		ShipNetworking.register();
 		ShipCommands.register();
 		ShipFlightController.register();
+		SpaceEnvironment.register();
 		SmokeTest.register();
 		LOGGER.info("InterSolarSystem initialized");
 	}

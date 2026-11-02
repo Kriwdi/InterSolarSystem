@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "W": "#minecraft:wool",
+    "S": "intersolarsystem:scrap_metal"
+  },
+  "pattern": [
+    "WSW",
+    "W W",
+    "W W"
+  ],
+  "result": {
+    "id": "intersolarsystem:space_pants"
+  }
+}

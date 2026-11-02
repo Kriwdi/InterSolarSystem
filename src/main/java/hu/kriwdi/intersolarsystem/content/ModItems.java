@@ -10,6 +10,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.equipment.ArmorType;
 
 import hu.kriwdi.intersolarsystem.core.ModIds;
 
@@ -28,6 +29,18 @@ public final class ModItems {
 	/** Held in the off hand during repairs: light faults need no minigame, harder ones get a smaller board. */
 	public static final Item MULTITOOL = register("multitool", Item::new, new Item.Properties().durability(48));
 
+	public static final Item SPACE_HELMET = register("space_helmet", Item::new,
+			new Item.Properties().humanoidArmor(ModArmor.SPACE_SUIT, ArmorType.HELMET));
+
+	public static final Item SPACE_SUIT = register("space_suit", Item::new,
+			new Item.Properties().humanoidArmor(ModArmor.SPACE_SUIT, ArmorType.CHESTPLATE));
+
+	public static final Item SPACE_PANTS = register("space_pants", Item::new,
+			new Item.Properties().humanoidArmor(ModArmor.SPACE_SUIT, ArmorType.LEGGINGS));
+
+	public static final Item SPACE_BOOTS = register("space_boots", Item::new,
+			new Item.Properties().humanoidArmor(ModArmor.SPACE_SUIT, ArmorType.BOOTS));
+
 	private ModItems() {
 	}
 
@@ -45,6 +58,10 @@ public final class ModItems {
 					tab.accept(SALVAGED_WIRING);
 					tab.accept(SALVAGED_CIRCUIT);
 					tab.accept(MULTITOOL);
+					tab.accept(SPACE_HELMET);
+					tab.accept(SPACE_SUIT);
+					tab.accept(SPACE_PANTS);
+					tab.accept(SPACE_BOOTS);
 				});
 	}
 }

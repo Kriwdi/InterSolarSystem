@@ -590,6 +590,74 @@ public final class ModLangTable {
 				"...this is an automated beacon. The station is empty. Take what you need...",
 				"...dies ist ein automatisches Leuchtfeuer. Die Station ist leer. Nehmt, was ihr braucht...",
 				"...ez egy automata jeladó. Az állomás üres. Vigyétek, amire szükségetek van...");
+		add(rows, "body.intersolarsystem.earth_orbit",
+				"Earth Orbit (ISS)",
+				"Erdumlaufbahn (ISS)",
+				"Föld körüli pálya (ISS)");
+		add(rows, "screen.intersolarsystem.nav.status.orbit",
+				"dock at ISS",
+				"ISS-Andockung",
+				"dokkolás az ISS-en");
+		add(rows, "screen.intersolarsystem.nav.deorbit",
+				"Ready to deorbit: back to the last landing site on Earth",
+				"Bereit zum Wiedereintritt: zurück zum letzten Landeplatz auf der Erde",
+				"Visszatérés kész: vissza az utolsó földi leszállóhelyre");
+		add(rows, "screen.intersolarsystem.nav.to_orbit",
+				"Climb to orbit and dock at the ISS: %s",
+				"Aufstieg in den Orbit und Andocken an der ISS: %s",
+				"Felszállás pályára és dokkolás az ISS-en: %s");
+		add(rows, "screen.intersolarsystem.nav.in_orbit",
+				"The ship is docked at the ISS (%s from the surface)",
+				"Das Schiff ist an der ISS angedockt (%s von der Oberfläche)",
+				"A hajó az ISS-en dokkol (%s a felszíntől)");
+		add(rows, "message.intersolarsystem.orbit.docked",
+				"Docking complete. Welcome aboard what is left of the ISS. Suit up before you open the hatch",
+				"Andocken abgeschlossen. Willkommen auf dem, was von der ISS übrig ist. Raumanzug anlegen, bevor du die Luke öffnest",
+				"Dokkolás kész. Üdv azon, ami az ISS-ből megmaradt. Vedd fel az űrruhát, mielőtt kinyitod a zsilipet");
+		add(rows, "hud.intersolarsystem.vacuum",
+				"VACUUM - NO SUIT SEAL",
+				"VAKUUM - ANZUG NICHT DICHT",
+				"VÁKUUM - NINCS ZÁRT RUHA");
+		add(rows, "item.intersolarsystem.space_helmet",
+				"Space Helmet",
+				"Raumhelm",
+				"Űrsisak");
+		add(rows, "item.intersolarsystem.space_suit",
+				"Space Suit (Oxygen Tank)",
+				"Raumanzug (Sauerstofftank)",
+				"Űrruha (oxigéntartály)");
+		add(rows, "item.intersolarsystem.space_pants",
+				"Space Suit Trousers",
+				"Raumanzughose",
+				"Űrruha-nadrág");
+		add(rows, "item.intersolarsystem.space_boots",
+				"Space Boots",
+				"Raumstiefel",
+				"Űrcsizma");
+		add(rows, "block.intersolarsystem.station_hull",
+				"Station Hull Panel",
+				"Stationsrumpfplatte",
+				"Állomás burkolatpanel");
+		add(rows, "block.intersolarsystem.station_foil",
+				"Insulated Hull (Gold Foil)",
+				"Isolierter Rumpf (Goldfolie)",
+				"Szigetelt burkolat (aranyfólia)");
+		add(rows, "block.intersolarsystem.station_window",
+				"Station Window",
+				"Stationsfenster",
+				"Állomásablak");
+		add(rows, "block.intersolarsystem.station_light",
+				"Station Light Panel",
+				"Stationsleuchtpaneel",
+				"Állomás fénypanel");
+		add(rows, "block.intersolarsystem.truss",
+				"Station Truss",
+				"Stationsgitterträger",
+				"Rácsos főtartó");
+		add(rows, "block.intersolarsystem.solar_panel",
+				"Solar Array Cell",
+				"Solarzellenfeld",
+				"Napelemcella");
 		check(rows);
 		return List.copyOf(rows);
 	}

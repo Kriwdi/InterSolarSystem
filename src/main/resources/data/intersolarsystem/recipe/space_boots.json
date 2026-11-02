@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "W": "#minecraft:wool",
+    "S": "intersolarsystem:scrap_metal",
+    "L": "minecraft:leather"
+  },
+  "pattern": [
+    "W W",
+    "S S",
+    "L L"
+  ],
+  "result": {
+    "id": "intersolarsystem:space_boots"
+  }
+}

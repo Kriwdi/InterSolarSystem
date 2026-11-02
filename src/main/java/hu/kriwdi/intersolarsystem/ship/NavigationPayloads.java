@@ -16,15 +16,16 @@ public final class NavigationPayloads {
 	}
 
 	/** Server -> client: open the console with the ship's engine tier, the server's game time and whether it can launch. */
-	public record Open(int engineTier, long gameTime, boolean canLaunch) implements CustomPacketPayload {
+	public record Open(int engineTier, long gameTime, boolean canLaunch, boolean inOrbit) implements CustomPacketPayload {
 		public static final CustomPacketPayload.Type<Open> TYPE = new CustomPacketPayload.Type<>(ModIds.id("nav_open"));
 		public static final StreamCodec<ByteBuf, Open> CODEC = StreamCodec.of(
 				(buf, p) -> {
 					VarInt.write(buf, p.engineTier());
 					buf.writeLong(p.gameTime());
 					buf.writeBoolean(p.canLaunch());
+					buf.writeBoolean(p.inOrbit());
 				},
-				buf -> new Open(VarInt.read(buf), buf.readLong(), buf.readBoolean()));
+				buf -> new Open(VarInt.read(buf), buf.readLong(), buf.readBoolean(), buf.readBoolean()));
 
 		@Override
 		public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
