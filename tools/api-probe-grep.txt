@@ -1,2 +1,7 @@
 # Regex.
-fabric/api/creativetab/.*class
+GameRule.*class
+world/level/levelgen/structure/pools/.*class
+world/level/levelgen/structure/templatesystem/.*Processor.*class
+data/minecraft/worldgen/feature/.*json
+data/minecraft/worldgen/configured_carver/.*json
+data/minecraft/worldgen/structure_set/.*json

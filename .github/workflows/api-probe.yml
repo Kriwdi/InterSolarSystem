@@ -40,6 +40,15 @@ jobs:
             { grep -v '^\s*#' tools/api-probe-files.txt | grep -v '^\s*$' || true; } | while read -r res; do
               echo "===== $res" >> out/files.txt
               found=0
+              case "$res" in *.nbt)
+                # Binary files (structure templates) are copied as they are into out/raw.
+                mkdir -p out/raw
+                for jar in $(cat classpath.txt); do
+                  if [ -f "$jar" ] && unzip -p "$jar" "$res" > "out/raw/$(basename $res)" 2>/dev/null && [ -s "out/raw/$(basename $res)" ]; then found=1; break; fi
+                done
+                [ $found = 1 ] && echo "copied to raw/" >> out/files.txt || echo "NOT FOUND" >> out/files.txt
+                continue;;
+              esac
               for jar in $(cat classpath.txt); do
                 if [ -f "$jar" ] && unzip -p "$jar" "$res" >> out/files.txt 2>/dev/null; then found=1; break; fi
               done
