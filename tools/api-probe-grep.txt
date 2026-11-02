@@ -1,3 +1,2 @@
 # Regex patterns matched against all class names on the classpath.
-providers/number/
-loot/functions/SetItemCount
+client/gui/screens/Screen

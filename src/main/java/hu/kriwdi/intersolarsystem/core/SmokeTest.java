@@ -2,6 +2,8 @@ package hu.kriwdi.intersolarsystem.core;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 
+import hu.kriwdi.intersolarsystem.content.ModLoot;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +22,13 @@ public final class SmokeTest {
 			return;
 		}
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+			int injected = ModLoot.INJECTED.get();
+			if (injected < ModLoot.SALVAGE_CHESTS.size()) {
+				LOGGER.error("[SMOKETEST-FAIL] salvage pool reached {} of {} chest loot tables", injected,
+						ModLoot.SALVAGE_CHESTS.size());
+			} else {
+				LOGGER.info("[SMOKETEST] salvage pool in {} chest loot tables", injected);
+			}
 			LOGGER.info("[SMOKETEST] server started, stopping");
 			server.halt(false);
 		});

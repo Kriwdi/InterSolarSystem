@@ -1,6 +1,7 @@
 package hu.kriwdi.intersolarsystem.content;
 
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -56,6 +57,9 @@ public final class ModLoot {
 			  ]
 			}""";
 
+	/** How many chest tables got the pool at the last data load (checked by the CI smoke test). */
+	public static final AtomicInteger INJECTED = new AtomicInteger();
+
 	private ModLoot() {
 	}
 
@@ -67,7 +71,10 @@ public final class ModLoot {
 			JsonElement json = JsonParser.parseString(SALVAGE_POOL);
 			DataResult<LootPool> pool = LootPool.CODEC.parse(registries.createSerializationContext(JsonOps.INSTANCE), json);
 			pool.resultOrPartial(error -> LOGGER.error("Could not decode the salvage loot pool: {}", error))
-					.ifPresent(tableBuilder::pool);
+					.ifPresent(p -> {
+						tableBuilder.pool(p);
+						INJECTED.incrementAndGet();
+					});
 		});
 	}
 }
