@@ -14,6 +14,12 @@ public final class ShipNetworking {
 		PayloadTypeRegistry.clientboundPlay().register(ShipStatusPayload.TYPE, ShipStatusPayload.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(RepairBoardPayloads.Open.TYPE, RepairBoardPayloads.Open.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(RepairBoardPayloads.Result.TYPE, RepairBoardPayloads.Result.CODEC);
+		PayloadTypeRegistry.clientboundPlay().register(NavigationPayloads.Open.TYPE, NavigationPayloads.Open.CODEC);
+		PayloadTypeRegistry.serverboundPlay().register(NavigationPayloads.Launch.TYPE, NavigationPayloads.Launch.CODEC);
+		ServerPlayNetworking.registerGlobalReceiver(NavigationPayloads.Launch.TYPE, (payload, context) -> {
+			ServerPlayer player = context.player();
+			context.server().execute(() -> ShipNavigation.launch(context.server(), player, payload.bodyId()));
+		});
 		ServerPlayNetworking.registerGlobalReceiver(RepairBoardPayloads.Result.TYPE, (payload, context) -> {
 			ServerPlayer player = context.player();
 			context.server().execute(() -> ShipRepairBoards.handleResult(context.server(), player, payload));

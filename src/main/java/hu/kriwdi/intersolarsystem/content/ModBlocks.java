@@ -34,6 +34,10 @@ public final class ModBlocks {
 			BlockBehaviour.Properties.of().strength(3.0F, 3600000.0F).sound(SoundType.METAL).lightLevel(state -> 7).noOcclusion()
 					.pushReaction(PushReaction.IMMOVEABLE));
 
+	public static final Block NAVIGATION_CONSOLE = register("navigation_console", NavigationConsoleBlock::new,
+			BlockBehaviour.Properties.of().strength(3.0F, 3600000.0F).sound(SoundType.METAL).lightLevel(state -> 9)
+					.noOcclusion().pushReaction(PushReaction.IMMOVEABLE));
+
 	private ModBlocks() {
 	}
 
@@ -54,6 +58,7 @@ public final class ModBlocks {
 					tab.accept(SHIP_HATCH);
 					tab.accept(REPAIR_STATION);
 					tab.accept(DIAGNOSTIC_CONSOLE);
+					tab.accept(NAVIGATION_CONSOLE);
 				});
 	}
 }

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/navigation_console"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/navigation_console",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/navigation_console",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/navigation_console",
+      "y": 270
+    }
+  }
+}

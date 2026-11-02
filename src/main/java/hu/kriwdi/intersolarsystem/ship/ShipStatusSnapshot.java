@@ -37,8 +37,7 @@ public record ShipStatusSnapshot(ShipFlightPhase phase, int remainingTicks, List
 		for (ShipIncident i : state.hazards().incidents()) {
 			incidents.add(new IncidentView(i.subsystem(), i.type(), clampToInt(i.deadlineTick() - nowTick)));
 		}
-		long remaining = ShipFlightTimeline.remainingTicks(state.flightKind(), state.phase(), state.phaseStartedTick(),
-				nowTick);
+		long remaining = ShipFlightTimeline.remainingTicks(state, nowTick);
 		List<ShipSubsystem> known = state.diagnostics().revealed().stream().map(ShipLatentFault::subsystem).sorted()
 				.toList();
 		return new ShipStatusSnapshot(state.phase(), clampToInt(remaining), conditions, incidents, known);

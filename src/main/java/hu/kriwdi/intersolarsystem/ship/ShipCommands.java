@@ -28,6 +28,11 @@ public final class ShipCommands {
 										.then(Commands.argument("x", IntegerArgumentType.integer())
 												.then(Commands.argument("z", IntegerArgumentType.integer())
 														.executes(ShipCommands::fly))))
+								.then(Commands.literal("engine")
+										.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
+										.then(Commands.argument("tier", IntegerArgumentType.integer(1,
+														hu.kriwdi.intersolarsystem.travel.TravelMath.ENGINE_MULTIPLIERS.length))
+												.executes(ShipCommands::engine)))
 								.then(Commands.literal("set")
 										.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
 										.then(Commands.argument("subsystem", StringArgumentType.word())
@@ -47,14 +52,20 @@ public final class ShipCommands {
 			source.sendSuccess(() -> Component.translatable("command.intersolarsystem.ship.subsystem_line",
 					Component.translatable(subsystemKey(subsystem)), state.condition(subsystem)), false);
 		}
+		source.sendSuccess(() -> Component.translatable("command.intersolarsystem.ship.engine_line",
+				state.travel().engineTier(),
+				hu.kriwdi.intersolarsystem.travel.TravelMath.multiplier(state.travel().engineTier())), false);
 		source.sendSuccess(() -> Component.translatable("command.intersolarsystem.ship.phase",
 				Component.translatable(phaseKey(state.phase()))), false);
+		if (state.phase() != ShipFlightPhase.LANDED && !"earth".equals(state.travel().target())) {
+			source.sendSuccess(() -> Component.translatable("command.intersolarsystem.ship.journey",
+					Component.translatable("body.intersolarsystem." + state.travel().target())), false);
+		}
 		if (state.phase() != ShipFlightPhase.LANDED) {
 			long now = source.getServer().overworld().getGameTime();
 			source.sendSuccess(() -> Component.translatable("command.intersolarsystem.ship.phase_remaining",
 					ShipFlightTimeline.formatClock(
-							ShipFlightTimeline.remainingTicks(state.flightKind(), state.phase(), state.phaseStartedTick(),
-									now))), false);
+							ShipFlightTimeline.remainingTicks(state, now))), false);
 		}
 		long nowTick = source.getServer().overworld().getGameTime();
 		for (ShipIncident incident : state.hazards().incidents()) {
@@ -101,6 +112,20 @@ public final class ShipCommands {
 			return 0;
 		}
 		source.sendSuccess(() -> Component.translatable("command.intersolarsystem.ship.fly_started", x, z), true);
+		return 1;
+	}
+
+	private static int engine(CommandContext<CommandSourceStack> ctx) {
+		CommandSourceStack source = ctx.getSource();
+		ShipState state = ShipStateAccess.get(source.getServer());
+		if (state.isReadOnly()) {
+			source.sendFailure(Component.translatable("command.intersolarsystem.ship.read_only"));
+			return 0;
+		}
+		int tier = IntegerArgumentType.getInteger(ctx, "tier");
+		state.setEngineTier(tier);
+		source.sendSuccess(() -> Component.translatable("command.intersolarsystem.ship.engine", tier,
+				hu.kriwdi.intersolarsystem.travel.TravelMath.multiplier(tier)), true);
 		return 1;
 	}
 

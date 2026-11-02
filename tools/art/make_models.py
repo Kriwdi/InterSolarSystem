@@ -120,6 +120,35 @@ def diagnostic_console():
     item_from_block("diagnostic_console", "block/diagnostic_console")
 
 
+def navigation_console():
+    t = {"particle": "block/navigation_console_frame", "chart": "block/navigation_console_chart",
+         "frame": "block/navigation_console_frame", "column": "block/navigation_console_column",
+         "base": "block/navigation_console_base", "holo": "block/navigation_console_holo",
+         "metal": "block/rusted_panel"}
+    tilt = {"origin": [8, 10, 8], "axis": "x", "angle": 22.5}
+    els = [
+        # Base plate and the cable column.
+        box((2, 0, 2), (14, 2, 14), "base", uv={"north": (2, 14, 14, 16), "south": (2, 14, 14, 16),
+                                                "east": (2, 14, 14, 16), "west": (2, 14, 14, 16)}, cull=("down",)),
+        box((5, 2, 5), (11, 9, 11), "column"),
+        # The chart table, tilted towards the navigator, with the animated star chart as its top.
+        box((1, 9, 1), (15, 11, 15), {"north": "frame", "east": "frame", "south": "frame", "west": "frame",
+                                      "up": "chart", "down": "frame"},
+            uv={"north": (0, 0, 14, 2), "south": (0, 0, 14, 2), "east": (0, 0, 14, 2), "west": (0, 0, 14, 2),
+                "up": (1, 1, 15, 15)},
+            rotation=tilt),
+        # Grab handles on both sides.
+        box((0, 8, 6), (1, 10, 10), "metal"),
+        box((15, 8, 6), (16, 10, 10), "metal"),
+        # Small hologram of the home planet above the far edge.
+        box((7.5, 12, 11.5), (8.5, 13, 12.5), "metal"),
+        box((6.5, 13, 10.5), (9.5, 16, 13.5), "holo", shade=False),
+    ]
+    model("block/navigation_console", t, els)
+    facing_blockstate("navigation_console", "block/navigation_console")
+    item_from_block("navigation_console", "block/navigation_console")
+
+
 def ship_hatch():
     t = {"particle": "block/ship_hatch_frame", "frame": "block/ship_hatch_frame", "door": "block/ship_hatch_door",
          "wheel": "block/ship_hatch_wheel", "metal": "block/rusted_panel"}
@@ -176,6 +205,7 @@ def items():
 if __name__ == "__main__":
     repair_station()
     diagnostic_console()
+    navigation_console()
     ship_hatch()
     rusted_panel()
     items()

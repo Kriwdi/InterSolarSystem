@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
  * Persistent state of the world's single ship. Server-owned; clients never store or modify it.
  */
 public class ShipState extends SavedData {
-	public static final int CURRENT_FORMAT_VERSION = 5;
+	public static final int CURRENT_FORMAT_VERSION = 6;
 	public static final int MIN_CONDITION = 0;
 	public static final int MAX_CONDITION = 100;
 
@@ -57,7 +57,8 @@ public class ShipState extends SavedData {
 			Codec.INT.lenientOptionalFieldOf("destination_z").forGetter(s -> s.destination.map(Destination::z)),
 			ShipHazards.CODEC.lenientOptionalFieldOf("hazards").forGetter(s -> Optional.of(s.hazards)),
 			Codec.STRING.lenientOptionalFieldOf("flight_kind").forGetter(s -> Optional.of(s.flightKind.id())),
-			ShipDiagnostics.CODEC.lenientOptionalFieldOf("diagnostics").forGetter(s -> Optional.of(s.diagnostics))
+			ShipDiagnostics.CODEC.lenientOptionalFieldOf("diagnostics").forGetter(s -> Optional.of(s.diagnostics)),
+			ShipTravel.CODEC.lenientOptionalFieldOf("travel").forGetter(s -> Optional.of(s.travel))
 	).apply(instance, ShipState::fromRaw));
 
 	/** Decodes through the migrations first, so older saves reach {@link #RAW_CODEC} in the current format. */
@@ -81,6 +82,7 @@ public class ShipState extends SavedData {
 	private ShipHazards hazards = ShipHazards.NONE;
 	private ShipFlightKind flightKind = ShipFlightKind.NORMAL;
 	private ShipDiagnostics diagnostics = ShipDiagnostics.NONE;
+	private ShipTravel travel = ShipTravel.NONE;
 	private ShipHullClass hullClass = ShipHullClass.RESCUE_CAPSULE;
 	private final Map<ShipSubsystem, Integer> conditions = new EnumMap<>(ShipSubsystem.class);
 
@@ -99,7 +101,7 @@ public class ShipState extends SavedData {
 			Optional<Integer> rawY, Optional<Integer> rawZ, Optional<Boolean> rawInteriorBuilt,
 			Optional<String> rawPhase, Optional<Long> rawPhaseStartedTick, Optional<Integer> rawDestX,
 			Optional<Integer> rawDestZ, Optional<ShipHazards> rawHazards, Optional<String> rawFlightKind,
-			Optional<ShipDiagnostics> rawDiagnostics) {
+			Optional<ShipDiagnostics> rawDiagnostics, Optional<ShipTravel> rawTravel) {
 		int version = rawVersion.orElse(CURRENT_FORMAT_VERSION);
 		String hullId = rawHullId.orElse(ShipHullClass.RESCUE_CAPSULE.id());
 		ShipState state = new ShipState();
@@ -136,6 +138,7 @@ public class ShipState extends SavedData {
 			return ShipFlightKind.NORMAL;
 		});
 		state.diagnostics = rawDiagnostics.orElse(ShipDiagnostics.NONE);
+		state.travel = rawTravel.orElse(ShipTravel.NONE);
 		return state;
 	}
 
@@ -202,6 +205,40 @@ public class ShipState extends SavedData {
 		return flightKind;
 	}
 
+	public ShipTravel travel() {
+		return travel;
+	}
+
+	/** How long a phase of the current flight lasts: the flight phase follows the flight plan when it has one. */
+	public long phaseDuration(ShipFlightPhase of) {
+		if (of == ShipFlightPhase.FLIGHT && travel.flightTicks() > 0) {
+			return travel.flightTicks();
+		}
+		return flightKind.durationTicks(of);
+	}
+
+	public void setEngineTier(int tier) {
+		ShipTravel next = travel.withEngineTier(tier);
+		if (!readOnly && !next.equals(travel)) {
+			travel = next;
+			setDirty();
+		}
+	}
+
+	public void setTravelEventsDone(int done) {
+		if (!readOnly && travel.eventsDone() != done) {
+			travel = travel.withEventsDone(done);
+			setDirty();
+		}
+	}
+
+	public void setTravelEvent(Optional<ShipTravel.ActiveEvent> event) {
+		if (!readOnly && !travel.event().equals(event)) {
+			travel = travel.withEvent(event);
+			setDirty();
+		}
+	}
+
 	public ShipDiagnostics diagnostics() {
 		return diagnostics;
 	}
@@ -264,6 +301,7 @@ public class ShipState extends SavedData {
 		phaseStartedTick = nowTick;
 		destination = Optional.empty();
 		flightKind = ShipFlightKind.NORMAL;
+		travel = travel.landed();
 		setDirty();
 	}
 
@@ -307,9 +345,19 @@ public class ShipState extends SavedData {
 
 	/** Starts a flight of the given kind. A test hop's destination is where the ship already stands. */
 	public boolean beginTakeoff(int x, int z, long nowTick, long seed, ShipFlightKind kind) {
+		return beginTakeoff(x, z, nowTick, seed, kind, "earth", 0);
+	}
+
+	/**
+	 * Starts a flight with a plan: {@code target} is "earth" or the id of the body to loop around, {@code flightTicks}
+	 * the length of the flight phase (0: the default for the kind). The ship comes back down at (x, z).
+	 */
+	public boolean beginTakeoff(int x, int z, long nowTick, long seed, ShipFlightKind kind, String target,
+			long flightTicks) {
 		if (readOnly || phase != ShipFlightPhase.LANDED) {
 			return false;
 		}
+		travel = travel.withPlan(target, Math.max(0, flightTicks));
 		flightKind = kind;
 		phase = ShipFlightPhase.TAKEOFF;
 		phaseStartedTick = nowTick;
@@ -343,6 +391,7 @@ public class ShipState extends SavedData {
 			if (next == ShipFlightPhase.LANDED) {
 				destination = Optional.empty();
 				flightKind = ShipFlightKind.NORMAL;
+				travel = travel.landed();
 			}
 			setDirty();
 		});

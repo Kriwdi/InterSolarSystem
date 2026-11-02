@@ -41,6 +41,22 @@ public final class ShipIncidentRules {
 		};
 	}
 
+	/** On flights longer than this, incidents roll once a minute instead of every ten seconds. */
+	public static final int LONG_FLIGHT_TICKS = 1200;
+	public static final int LONG_FLIGHT_ROLL_INTERVAL_TICKS = 1200;
+
+	/** Rolls due on a flight of the given length: every 10 s on short hops, once a minute on long journeys. */
+	public static int rollsDue(long elapsedTicks, long flightTicks) {
+		if (flightTicks <= LONG_FLIGHT_TICKS) {
+			return rollsDue(elapsedTicks);
+		}
+		if (elapsedTicks <= 0) {
+			return 0;
+		}
+		long max = flightTicks / LONG_FLIGHT_ROLL_INTERVAL_TICKS;
+		return (int) Math.min(max, elapsedTicks / LONG_FLIGHT_ROLL_INTERVAL_TICKS);
+	}
+
 	/** How many of the flight's rolls are due after {@code elapsedTicks} of the flight phase. */
 	public static int rollsDue(long elapsedTicks) {
 		if (elapsedTicks <= 0) {

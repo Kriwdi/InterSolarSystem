@@ -19,6 +19,27 @@ public final class ShipFlightTimeline {
 		return Math.max(0, kind.durationTicks(phase) - elapsed);
 	}
 
+	/** Time left in a phase of known length. */
+	public static long remainingTicks(ShipFlightPhase phase, long duration, long startedTick, long nowTick) {
+		if (phase == ShipFlightPhase.LANDED) {
+			return 0;
+		}
+		return Math.max(0, duration - Math.max(0, nowTick - startedTick));
+	}
+
+	/** Time left in the ship's current phase, following its flight plan. */
+	public static long remainingTicks(ShipState state, long nowTick) {
+		return remainingTicks(state.phase(), state.phaseDuration(state.phase()), state.phaseStartedTick(), nowTick);
+	}
+
+	/** The phase to switch to now, following the ship's flight plan. */
+	public static Optional<ShipFlightPhase> dueTransition(ShipState state, long nowTick) {
+		if (state.phase() == ShipFlightPhase.LANDED || remainingTicks(state, nowTick) > 0) {
+			return Optional.empty();
+		}
+		return next(state.phase());
+	}
+
 	public static boolean isDue(ShipFlightPhase phase, long startedTick, long nowTick) {
 		return isDue(ShipFlightKind.NORMAL, phase, startedTick, nowTick);
 	}

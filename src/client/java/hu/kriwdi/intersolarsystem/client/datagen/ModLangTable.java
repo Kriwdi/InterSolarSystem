@@ -418,6 +418,178 @@ public final class ModLangTable {
 				"Multitool",
 				"Multiwerkzeug",
 				"Multiszerszám");
+		add(rows, "block.intersolarsystem.navigation_console",
+				"Navigation Console",
+				"Navigationskonsole",
+				"Navigációs konzol");
+		add(rows, "body.intersolarsystem.earth",
+				"Earth",
+				"Erde",
+				"Föld");
+		add(rows, "body.intersolarsystem.moon",
+				"Moon",
+				"Mond",
+				"Hold");
+		add(rows, "body.intersolarsystem.venus",
+				"Venus",
+				"Venus",
+				"Vénusz");
+		add(rows, "body.intersolarsystem.mercury",
+				"Mercury",
+				"Merkur",
+				"Merkúr");
+		add(rows, "body.intersolarsystem.mars",
+				"Mars",
+				"Mars",
+				"Mars");
+		add(rows, "body.intersolarsystem.ceres",
+				"Ceres",
+				"Ceres",
+				"Ceres");
+		add(rows, "body.intersolarsystem.jupiter",
+				"Jupiter",
+				"Jupiter",
+				"Jupiter");
+		add(rows, "body.intersolarsystem.saturn",
+				"Saturn",
+				"Saturn",
+				"Szaturnusz");
+		add(rows, "body.intersolarsystem.uranus",
+				"Uranus",
+				"Uranus",
+				"Uránusz");
+		add(rows, "body.intersolarsystem.neptune",
+				"Neptune",
+				"Neptun",
+				"Neptunusz");
+		add(rows, "screen.intersolarsystem.nav.title",
+				"Navigation: Star Chart",
+				"Navigation: Sternkarte",
+				"Navigáció: csillagtérkép");
+		add(rows, "screen.intersolarsystem.nav.engine",
+				"Engine tier %s (x%s speed)",
+				"Antriebsstufe %s (x%s Tempo)",
+				"Hajtómű %s. szint (x%s sebesség)");
+		add(rows, "screen.intersolarsystem.nav.status.surface",
+				"home",
+				"Heimat",
+				"otthon");
+		add(rows, "screen.intersolarsystem.nav.status.flyby",
+				"flyby loop",
+				"Vorbeiflug",
+				"megkerülés");
+		add(rows, "screen.intersolarsystem.nav.status.locked",
+				"out of reach",
+				"unerreichbar",
+				"elérhetetlen");
+		add(rows, "screen.intersolarsystem.nav.surface_hint",
+				"Surface flights on Earth: /iss ship fly <x> <z>",
+				"Flüge auf der Erde: /iss ship fly <x> <z>",
+				"Repülés a Földön: /iss ship fly <x> <z>");
+		add(rows, "screen.intersolarsystem.nav.window_open",
+				"Launch window: open",
+				"Startfenster: offen",
+				"Indulási ablak: nyitva");
+		add(rows, "screen.intersolarsystem.nav.window_next",
+				"Launch window: +%s%% travel time now, best in %s",
+				"Startfenster: jetzt +%s%% Reisezeit, am besten in %s",
+				"Indulási ablak: most +%s%% út, a legjobb %s múlva");
+		add(rows, "screen.intersolarsystem.nav.flyby",
+				"Free-return loop and back home: %s",
+				"Rundflug mit freier Rückkehr bis nach Hause: %s",
+				"Megkerülés szabad visszatérési pályán, haza: %s");
+		add(rows, "screen.intersolarsystem.nav.locked",
+				"No landing data yet: the ship cannot go there",
+				"Noch keine Landedaten: das Schiff kann nicht dorthin",
+				"Még nincs leszállási adat: a hajó nem mehet oda");
+		add(rows, "screen.intersolarsystem.nav.locked_assist",
+				"No landing data yet (route via a %s swing-by)",
+				"Noch keine Landedaten (Route über Swing-by an %s)",
+				"Még nincs leszállási adat (útvonal: hintamanőver ennél: %s)");
+		add(rows, "screen.intersolarsystem.nav.launch",
+				"LAUNCH",
+				"START",
+				"INDÍTÁS");
+		add(rows, "message.intersolarsystem.nav.unreachable",
+				"That destination is out of reach",
+				"Dieses Ziel ist unerreichbar",
+				"Ez a cél elérhetetlen");
+		add(rows, "message.intersolarsystem.nav.launch",
+				"Course set: %s. Journey time %s. Takeoff sequence started",
+				"Kurs gesetzt: %s. Reisezeit %s. Startsequenz eingeleitet",
+				"Irány beállítva: %s. Az út hossza %s. A felszállási sorozat elindult");
+		add(rows, "command.intersolarsystem.ship.engine",
+				"Engine set to tier %s (x%s speed)",
+				"Antrieb auf Stufe %s gesetzt (x%s Tempo)",
+				"Hajtómű beállítva: %s. szint (x%s sebesség)");
+		add(rows, "command.intersolarsystem.ship.engine_line",
+				"Engine: tier %s (x%s speed)",
+				"Antrieb: Stufe %s (x%s Tempo)",
+				"Hajtómű: %s. szint (x%s sebesség)");
+		add(rows, "command.intersolarsystem.ship.journey",
+				"Journey: loop around %s",
+				"Reise: Rundflug um %s",
+				"Út: %s megkerülése");
+		add(rows, "message.intersolarsystem.travel.meteor_warning",
+				"PROXIMITY ALERT: meteor shower ahead! Steer clear at the navigation console within 30 seconds",
+				"ANNÄHERUNGSALARM: Meteoritenschauer voraus! Innerhalb von 30 Sekunden an der Navigationskonsole ausweichen",
+				"KÖZELSÉGI RIASZTÁS: meteorraj előttünk! 30 másodpercen belül térj ki a navigációs konzolnál");
+		add(rows, "message.intersolarsystem.travel.evading",
+				"%s fires the thrusters: evasive course",
+				"%s zündet die Triebwerke: Ausweichkurs",
+				"%s begyújtja a manőverhajtóműveket: kitérő pálya");
+		add(rows, "message.intersolarsystem.travel.meteor_evaded",
+				"The meteor shower passes harmlessly behind the ship",
+				"Der Meteoritenschauer zieht harmlos hinter dem Schiff vorbei",
+				"A meteorraj ártalmatlanul elhalad a hajó mögött");
+		add(rows, "message.intersolarsystem.travel.meteor_hit",
+				"Impacts on the hull! The hull and the sensors are damaged",
+				"Einschläge am Rumpf! Rumpf und Sensoren sind beschädigt",
+				"Becsapódások a hajótesten! A burkolat és az érzékelők megsérültek");
+		add(rows, "message.intersolarsystem.travel.solar_flare",
+				"Solar flare! Radiation surges through the electronics and life support",
+				"Sonneneruption! Strahlung jagt durch Elektronik und Lebenserhaltung",
+				"Napkitörés! Sugárzás söpör végig az elektronikán és az életfenntartáson");
+		add(rows, "message.intersolarsystem.travel.wreck",
+				"A drifting wreck within reach: salvage tumbles in through the airlock",
+				"Ein treibendes Wrack in Reichweite: Bergegut poltert durch die Luftschleuse",
+				"Sodródó roncs a közelben: kimentett alkatrészek bukdácsolnak be a zsilipen");
+		add(rows, "message.intersolarsystem.travel.signal",
+				"Signal received: \"%s\"",
+				"Signal empfangen: „%s“",
+				"Jel érkezett: „%s”");
+		add(rows, "message.intersolarsystem.travel.signal.0",
+				"...Ark-3 to any station. Proxima burn complete. Crew in cold sleep. We will call when we wake...",
+				"...Arche-3 an alle Stationen. Proxima-Zündung beendet. Crew im Kälteschlaf. Wir melden uns, wenn wir aufwachen...",
+				"...Bárka-3 minden állomásnak. Proxima-gyorsítás kész. A legénység hibernálva. Jelentkezünk, ha felébredtünk...");
+		add(rows, "message.intersolarsystem.travel.signal.1",
+				"...the seed vaults are sealed. If anyone hears this, the codes are in the Svalbard log...",
+				"...die Saatgutbunker sind versiegelt. Wer das hört: die Codes stehen im Svalbard-Logbuch...",
+				"...a magbankok lezárva. Ha valaki hallja: a kódok a svalbardi naplóban vannak...");
+		add(rows, "message.intersolarsystem.travel.signal.2",
+				"...it is not the dust. Repeat, it is not the dust. Do not open the...",
+				"...es ist nicht der Staub. Wiederhole, es ist nicht der Staub. Öffnet nicht die...",
+				"...nem a por az oka. Ismétlem, nem a por. Ne nyissátok ki a...");
+		add(rows, "message.intersolarsystem.travel.signal.3",
+				"...Lunar Base Tranquility, day 412. Hydroponics failing. Three of us left...",
+				"...Mondbasis Tranquility, Tag 412. Hydrokultur fällt aus. Wir sind noch drei...",
+				"...Tranquility holdbázis, 412. nap. A hidrokultúra leáll. Hárman maradtunk...");
+		add(rows, "message.intersolarsystem.travel.signal.4",
+				"...a carrier tone from beyond Neptune, repeating every 4.2 hours. It is not ours...",
+				"...ein Trägerton von jenseits des Neptun, alle 4,2 Stunden. Er ist nicht von uns...",
+				"...vivőhang a Neptunuszon túlról, 4,2 óránként ismétlődik. Nem a miénk...");
+		add(rows, "message.intersolarsystem.travel.signal.5",
+				"...to whoever kept the lights on down there: thank you. Ark-1 is leaving orbit...",
+				"...an alle, die dort unten das Licht anließen: danke. Arche-1 verlässt den Orbit...",
+				"...annak, aki odalent égve hagyta a lámpákat: köszönjük. A Bárka-1 elhagyja a pályát...");
+		add(rows, "message.intersolarsystem.travel.signal.6",
+				"...Proxima b, twilight belt. Water confirmed. Air... we are not sure about the air...",
+				"...Proxima b, Dämmerungsgürtel. Wasser bestätigt. Luft... bei der Luft sind wir unsicher...",
+				"...Proxima b, szürkületi sáv. Víz megerősítve. A levegő... a levegőben nem vagyunk biztosak...");
+		add(rows, "message.intersolarsystem.travel.signal.7",
+				"...this is an automated beacon. The station is empty. Take what you need...",
+				"...dies ist ein automatisches Leuchtfeuer. Die Station ist leer. Nehmt, was ihr braucht...",
+				"...ez egy automata jeladó. Az állomás üres. Vigyétek, amire szükségetek van...");
 		check(rows);
 		return List.copyOf(rows);
 	}

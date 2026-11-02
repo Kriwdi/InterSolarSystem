@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": "intersolarsystem:scrap_metal",
+    "G": "minecraft:glass_pane",
+    "C": "intersolarsystem:salvaged_circuit",
+    "W": "intersolarsystem:salvaged_wiring",
+    "K": "minecraft:compass"
+  },
+  "pattern": [
+    "GKG",
+    "CWC",
+    "SSS"
+  ],
+  "result": {
+    "id": "intersolarsystem:navigation_console"
+  }
+}

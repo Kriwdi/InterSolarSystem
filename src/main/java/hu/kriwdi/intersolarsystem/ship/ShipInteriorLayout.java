@@ -13,7 +13,7 @@ public final class ShipInteriorLayout {
 	public static final int SIZE_Y = 6;
 	public static final int SIZE_Z = 7;
 
-	public enum Piece { HULL_PANEL, LIGHT, HATCH, REPAIR_STATION, DIAGNOSTIC_CONSOLE, AIR }
+	public enum Piece { HULL_PANEL, LIGHT, HATCH, REPAIR_STATION, DIAGNOSTIC_CONSOLE, NAVIGATION_CONSOLE, AIR }
 
 	public record Cell(int dx, int dy, int dz) {
 	}
@@ -25,6 +25,7 @@ public final class ShipInteriorLayout {
 	private static final Cell ENTRY = new Cell(4, 1, 3);
 	private static final Cell STATION = new Cell(7, 1, 5);
 	private static final Cell CONSOLE = new Cell(1, 1, 5);
+	private static final Cell NAVIGATION = new Cell(4, 1, 5);
 	private static final Set<Cell> LIGHTS = Set.of(
 			new Cell(2, 4, 2), new Cell(6, 4, 2), new Cell(2, 4, 4), new Cell(6, 4, 4));
 
@@ -57,6 +58,9 @@ public final class ShipInteriorLayout {
 		if (c.equals(CONSOLE)) {
 			return Piece.DIAGNOSTIC_CONSOLE;
 		}
+		if (c.equals(NAVIGATION)) {
+			return Piece.NAVIGATION_CONSOLE;
+		}
 		boolean shell = c.dx() == 0 || c.dx() == SIZE_X - 1 || c.dy() == 0 || c.dy() == SIZE_Y - 1
 				|| c.dz() == 0 || c.dz() == SIZE_Z - 1;
 		if (shell) {
@@ -80,6 +84,10 @@ public final class ShipInteriorLayout {
 
 	public Cell station() {
 		return STATION;
+	}
+
+	public Cell navigation() {
+		return NAVIGATION;
 	}
 
 	public Cell console() {

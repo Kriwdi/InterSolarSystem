@@ -63,9 +63,9 @@ public final class ShipFlightController {
 		}
 		if (phase == ShipFlightPhase.FLIGHT) {
 			rollIncidents(server, state, now);
+			ShipTravelEvents.tick(server, state, now);
 		}
-		Optional<ShipFlightPhase> due = ShipFlightTimeline.dueTransition(state.flightKind(), phase,
-				state.phaseStartedTick(), now);
+		Optional<ShipFlightPhase> due = ShipFlightTimeline.dueTransition(state, now);
 		if (due.isPresent()) {
 			transition(server, state, due.get(), now);
 		}
@@ -89,7 +89,7 @@ public final class ShipFlightController {
 
 	/** Runs the flight's due rolls. The saved seed and roll counter make the outcome independent of reloads. */
 	private static void rollIncidents(MinecraftServer server, ShipState state, long now) {
-		int due = ShipIncidentRules.rollsDue(now - state.phaseStartedTick());
+		int due = ShipIncidentRules.rollsDue(now - state.phaseStartedTick(), state.phaseDuration(ShipFlightPhase.FLIGHT));
 		int done = state.hazards().rollsDone();
 		if (due <= done) {
 			return;

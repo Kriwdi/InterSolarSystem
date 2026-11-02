@@ -12,6 +12,7 @@ import hu.kriwdi.intersolarsystem.ship.ShipStatusPayload;
 import hu.kriwdi.intersolarsystem.client.repair.PressureScreen;
 import hu.kriwdi.intersolarsystem.client.repair.ValveScreen;
 import hu.kriwdi.intersolarsystem.client.repair.WiringScreen;
+import hu.kriwdi.intersolarsystem.ship.NavigationPayloads;
 import hu.kriwdi.intersolarsystem.ship.RepairBoardPayloads;
 
 public class InterSolarSystemClient implements ClientModInitializer {
@@ -33,6 +34,11 @@ public class InterSolarSystemClient implements ClientModInitializer {
 				case VALVE -> new ValveScreen(payload.seed(), payload.size());
 				case PRESSURE -> new PressureScreen(payload.seed(), payload.size());
 			}));
+		});
+		ClientPlayNetworking.registerGlobalReceiver(NavigationPayloads.Open.TYPE, (payload, context) -> {
+			Minecraft minecraft = context.client();
+			minecraft.execute(() -> minecraft.setScreenAndShow(
+					new NavigationScreen(payload.engineTier(), payload.gameTime(), payload.canLaunch())));
 		});
 		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> ClientShipStatus.clear());
 		HudElementRegistry.addLast(ModIds.id("ship_status"), new ShipHudElement());

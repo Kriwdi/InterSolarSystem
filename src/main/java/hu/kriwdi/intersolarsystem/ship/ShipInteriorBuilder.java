@@ -37,6 +37,7 @@ public final class ShipInteriorBuilder {
 		ShipInteriorLayout layout = ShipInteriorLayout.capsule();
 		fillIfAir(interior, layout.station(), ModBlocks.REPAIR_STATION.defaultBlockState());
 		fillIfAir(interior, layout.console(), ModBlocks.DIAGNOSTIC_CONSOLE.defaultBlockState());
+		fillIfAir(interior, layout.navigation(), ModBlocks.NAVIGATION_CONSOLE.defaultBlockState());
 		// Rooms built before blocks could face a direction: turn the hatch to face into the room.
 		ShipInteriorLayout.Cell cell = layout.hatch();
 		BlockPos pos = ShipDimensions.ANCHOR.offset(cell.dx(), cell.dy(), cell.dz());
@@ -62,6 +63,7 @@ public final class ShipInteriorBuilder {
 			case HATCH -> ModBlocks.SHIP_HATCH.defaultBlockState().setValue(ShipFacingBlock.FACING, Direction.SOUTH);
 			case REPAIR_STATION -> ModBlocks.REPAIR_STATION.defaultBlockState();
 			case DIAGNOSTIC_CONSOLE -> ModBlocks.DIAGNOSTIC_CONSOLE.defaultBlockState();
+			case NAVIGATION_CONSOLE -> ModBlocks.NAVIGATION_CONSOLE.defaultBlockState();
 			case AIR -> Blocks.AIR.defaultBlockState();
 		};
 	}

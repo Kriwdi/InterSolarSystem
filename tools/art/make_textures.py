@@ -386,6 +386,97 @@ def console():
     save(h, "block/diagnostic_console_housing")
 
 
+def navigation_console():
+    import math
+    # Animated star chart: grid, the Sun, two orbits with planets moving along them, a blinking course marker.
+    frames = 16
+    sheet = Image.new("RGBA", (16, 16 * frames))
+    for f in range(frames):
+        fr = Image.new("RGBA", (16, 16), hexc("060b14"))
+        px = fr.load()
+        for y in range(16):
+            for x in range(16):
+                if x % 4 == 0 or y % 4 == 0:
+                    px[x, y] = hexc("0d1726")
+        for (x, y) in [(1, 2), (13, 1), (3, 13), (14, 11), (10, 3), (2, 8)]:
+            px[x, y] = hexc("8fa6c2") if (x + f) % 5 else hexc("e8f1ff")
+        cx, cy = 7.5, 7.5
+        for r, col in ((3.2, "1f4f7a"), (6.0, "1a3d5e")):
+            for a in range(0, 360, 6):
+                x = int(round(cx + r * math.cos(math.radians(a))))
+                y = int(round(cy + r * math.sin(math.radians(a)) * 0.8))
+                if 0 <= x < 16 and 0 <= y < 16:
+                    px[x, y] = hexc(col)
+        for (x, y) in [(7, 7), (8, 7), (7, 8), (8, 8)]:
+            px[x, y] = hexc("ffd25a")
+        px[7, 7] = hexc("fff2b0")
+        a1 = math.radians(f * 360 / frames)
+        a2 = math.radians(-f * 360 / frames / 2 + 90)
+        x1 = int(round(cx + 3.2 * math.cos(a1)))
+        y1 = int(round(cy + 3.2 * math.sin(a1) * 0.8))
+        x2 = int(round(cx + 6.0 * math.cos(a2)))
+        y2 = int(round(cy + 6.0 * math.sin(a2) * 0.8))
+        px[x1, y1] = hexc("4fa3ff")
+        px[x2, y2] = hexc("e0703a")
+        if f % 4 < 2:
+            px[x2, max(0, y2 - 1)] = hexc("5dfa98")
+        sheet.paste(fr, (0, f * 16))
+    save(sheet, "block/navigation_console_chart", frametime=3)
+
+    # Frame of the chart table: brushed steel with a brass trim and engraved degree marks.
+    fr = metal_base(71, light=3)
+    px = fr.load()
+    brass = hexc("b8913c")
+    for x in range(16):
+        px[x, 0] = shade(brass, 1.1)
+        px[x, 1] = brass
+        px[x, 15] = shade(brass, 0.7)
+        if x % 3 == 0:
+            px[x, 3] = STEEL[1]
+    bevel(fr, 0, 2, 15, 14)
+    grime(fr, 72)
+    save(fr, "block/navigation_console_frame")
+
+    # Column: dark steel with bundled cables running down and a status light.
+    col = metal_base(73, light=1)
+    px = col.load()
+    for y in range(16):
+        for x, c in ((5, "8e2219"), (6, "b33224"), (9, "1e4f9a"), (10, "2f6fd0")):
+            px[x, y] = shade(hexc(c), 0.85 + 0.15 * ((y // 2) % 2))
+    for y in (3, 9, 14):
+        for x in range(4, 12):
+            px[x, y] = STEEL[4]
+    px[7, 6] = hexc("5dfa98")
+    px[8, 6] = hexc("2a8a52")
+    bevel(col, 0, 0, 15, 15)
+    grime(col, 74, 0.2)
+    save(col, "block/navigation_console_column")
+
+    # Base plate: hazard edge around a riveted steel plate.
+    base = metal_base(75, light=2)
+    px = base.load()
+    for i in range(16):
+        for (x, y) in ((i, 0), (i, 15), (0, i), (15, i)):
+            px[x, y] = HAZARD_Y if (i // 2) % 2 == 0 else HAZARD_K
+    for (x, y) in [(3, 3), (11, 3), (3, 11), (11, 11)]:
+        rivet(base, x, y)
+    rust_patch(base, 12, 12, 1.6, 76, 0.6)
+    grime(base, 77)
+    save(base, "block/navigation_console_base")
+
+    # Hologram globe: blue ocean, green land, scan lines.
+    holo = Image.new("RGBA", (16, 16), hexc("2f78d0"))
+    px = holo.load()
+    rnd = random.Random(78)
+    for y in range(16):
+        for x in range(16):
+            if rnd.random() < 0.3 or (4 < x < 9 and 3 < y < 10):
+                px[x, y] = hexc("3fae6a")
+            if y % 3 == 0:
+                px[x, y] = shade(px[x, y], 1.25)
+    save(holo, "block/navigation_console_holo")
+
+
 # ---------------------------------------------------------------- items
 def items():
     o = OUTLINE
@@ -525,5 +616,6 @@ if __name__ == "__main__":
     hatch()
     repair_station()
     console()
+    navigation_console()
     items()
     print("textures written")

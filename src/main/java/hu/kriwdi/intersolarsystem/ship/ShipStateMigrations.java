@@ -27,11 +27,11 @@ public final class ShipStateMigrations {
 	/**
 	 * v1 -> v2 added optional fields (landing site, interior flag) and v2 -> v3 added optional flight fields
 	 * (phase, destination) and v3 -> v4 the optional hazards object and v4 -> v5 the optional flight kind and
-	 * diagnostics, so no existing data has to change.
+	 * diagnostics and v5 -> v6 the optional travel object, so no existing data has to change.
 	 */
 	public static <T> List<Migration<T>> defaultSteps() {
 		return List.of(new Migration<>(1, data -> data), new Migration<>(2, data -> data),
-				new Migration<>(3, data -> data), new Migration<>(4, data -> data));
+				new Migration<>(3, data -> data), new Migration<>(4, data -> data), new Migration<>(5, data -> data));
 	}
 
 	public static <T> Dynamic<T> migrate(Dynamic<T> data) {
