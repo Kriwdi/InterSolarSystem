@@ -10,7 +10,7 @@ Az eredeti ütemterv a 0–12. fázisra, az aktuális állapottal (2026-10-29). 
 | 3. Tesztfelszállás, hibák, minigame-ek | tesztfelszállás robbanással, a javítás minigame-ekkel | 4–6 hét | **kész** (3a kimentés és gyártás, 3b rejtett hibák, diagnosztika, tesztfelszállás, sikertelen felszállás, 3c–3d három javító minigame és a multiszerszám, formás modellek). Hátra: kézi próba |
 | 4. Időrendszer és utazás | időkonverzió, útszámító, eseményrendszer, offline szimuláció | 3–5 hét | **kész** (4a útszámító és v6 mentés, 4b navigációs konzol csillagtérképpel és Hold-megkerüléssel, 4c utazási események). Spec: `specs/2026-11-02-phase4-design.md` |
 | 5. Orbit dimenzió és ISS | közös űr-dimenzió, állomások, roncsmezők | 5–8 hét | **kész** (5a orbit, mikrogravitáció, vákuum, dokkolás; 5b űrruha oxigénnel; 5c az ISS). Spec: `specs/2026-11-02-phase5-design.md`. Hátra: saját égbolt a Földdel, roncsmezők |
-| 6. Hold | első más égitest | 4–6 hét | nincs elkezdve. **Itt dől el, hogy a mag-hurok (túlélés, romok fosztogatása, hajóépítés, kockázatos út, új bolygó) szórakoztató-e. Ha nem, nem építünk tovább rá, hanem először ezt javítjuk.** |
+| 6. Hold | első más égitest | 4–6 hét | **kész** (6a égbolt-renderelő a Földdel, 6b Hold-dimenzió kráterekkel és tengerekkel, 6c utazás és leszállás, 6d Apollo-helyszínek és a Tranquility bázis). Spec: `specs/2026-11-02-phase6-design.md`. **Itt dől el, hogy a mag-hurok szórakoztató-e: kézi próba kell.** |
 | 7. A halott Föld világgen | saját chunk generator, biome-ok (legalább 10), struktúrák, kezdő élmény | 8–14 hét | nincs elkezdve |
 | 8. Mars és a külső rendszer kapuja | Mars, meghibásodott rover mint kulcs | 6–10 hét | nincs elkezdve |
 | 9. Aszteroidaöv, üstökösök, megújuló források | generált célpontok, drónok, bányaállomások | 4–7 hét | nincs elkezdve |
@@ -27,6 +27,6 @@ Az eredeti ütemterv a 0–12. fázisra, az aktuális állapottal (2026-10-29). 
 
 1. **Kézi próba** a 3. fázisra (`runClient`): kimentés a ládákból, receptek, diagnosztika, tesztfelszállás, sikertelen felszállás, vezetékezés.
 2. **A 2. fázis maradéka:** több hajótest-osztály, bővíthető belső tér.
-3. **6. fázis: a Hold** – itt dől el, hogy a mag-hurok szórakoztató-e (lásd a tervet).
+3. **Kézi próba a mag-hurokra** (6. fázis döntési pontja), utána a 7. fázis: a halott Föld világgenerálása.
 
 A 2026-11-02-i munka összefoglalója: `docs/status/2026-11-02-helyzetjelentes.md`.

@@ -121,6 +121,19 @@ Choose **Earth Orbit (ISS)** on the navigation console: the ship climbs to orbit
 | Space Suit Trousers | 6 wool, 1 scrap metal |
 | Space Boots | 2 wool, 2 scrap metal, 2 leather |
 
+## The Moon
+
+Choose **Moon** on the navigation console (from Earth or from orbit): the ship lands in the Sea of Tranquility, between Apollo 11 and the ruins of Tranquility Base. From the Moon you can fly to Earth orbit or straight back to Earth. A leg takes as long as the distance between the two places (surface 0, orbit 0.25, Moon 3 real days), with the Moon's launch window.
+
+- **World:** 5500 blocks across. Rolling grey regolith highlands and dark maria (mare regolith over basalt), impact craters with raised rims (young ones with bright ejecta and rays), helium-3 rich regolith near the surface, ilmenite (titanium ore) in the mare basalt.
+- **Sky:** black, the stars always out, and the dead Earth hanging at a fixed point (the Moon is tidally locked), going through its phases. A lunar day lasts 2.95 Minecraft days, with long, dark nights.
+- **One-sixth gravity, vacuum:** the space suit is needed.
+- **Relics** at the real Apollo landing sites (11, 12, 14, 15, 16, 17, at their selenographic coordinates): descent stages with legs, ladder and engine bell, faded flags, experiment packages, lunar rovers on 15–17. **Tranquility Base:** half-buried habitat ruins east of Apollo 11, with supplies, a solar field, and data terminals telling the base's last days.
+
+## The Earth in the sky
+
+A mixin into vanilla's sky renderer draws the dead Earth (dust storms drifting over brown continents and dark oceans, eight lighting phases) with vanilla's own celestial pipeline: in orbit it fills the sky below, on the Moon it hangs in the sky and vanilla's moon is hidden.
+
 ## Ship HUD
 
 Inside the ship a panel in the top-left corner shows the flight phase and countdown, the condition of the eight subsystems (green at 70% and above, amber 20-69%, red below 20%, with the percentage) and the active incidents with their time left (they blink in the last 15 seconds). The server sends the status once per second, immediately when something changes, and as soon as a player enters the ship; the client only draws it. The old action bar countdown is gone.
@@ -131,4 +144,5 @@ Inside the ship a panel in the top-left corner shows the flight phase and countd
 - **Translations** live in one table, `ModLangTable` (all three languages per key). After editing it run `python3 tools/sync_lang.py` (or `./gradlew runDatagen`); `LangTableTest` fails if the committed lang files are out of date.
 - **Recipes** are plain data files in `src/main/resources/data/intersolarsystem/recipe`.
 - **CI** (`.github/workflows/build.yml`) builds, runs the unit tests and a dedicated-server smoke test that loads all recipes, loot and models and fails on any error from the mod.
+- **Client screenshots** (`.github/workflows/client-test.yml`, `src/gametest`): on every push a real client starts in a virtual display, builds the ship interior, the ISS and the Moon sites, opens every screen, and takes screenshots; they are published to the `ci-screens` branch.
 - **API probe** (`.github/workflows/api-probe.yml`, run manually): prints the real 26.3 signatures of the classes listed in `tools/api-probe.txt` to the `ci-probe` branch, so code is written against the actual API.
