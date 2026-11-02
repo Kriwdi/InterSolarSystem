@@ -1,11 +1,1 @@
-# Classes.
-net.minecraft.world.item.ToolMaterial
-net.minecraft.world.item.Item$Properties
-net.minecraft.server.level.ServerLevel
-net.minecraft.world.level.gamerules.GameRules
-net.minecraft.world.level.GameRules
-net.minecraft.world.level.levelgen.WorldDimensions
-net.minecraft.world.entity.EntityType
-net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents
-net.minecraft.world.level.biome.MobSpawnSettings
-net.minecraft.world.level.NaturalSpawner
+# none
