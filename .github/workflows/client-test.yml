@@ -28,14 +28,19 @@ jobs:
         shell: bash
         run: |
           sudo apt-get update -q
-          sudo apt-get install -y -q xvfb libgl1-mesa-dri mesa-utils > /dev/null
+          sudo apt-get install -y -q xvfb libgl1 libglx-mesa0 libgl1-mesa-dri libegl1 libegl-mesa0 \
+            mesa-vulkan-drivers libvulkan1 vulkan-tools mesa-utils > /dev/null
+          # Sanity check of the software OpenGL stack.
+          xvfb-run -a -s "-screen 0 1280x720x24 +extension GLX +render -noreset" glxinfo -B || true
       - name: Run client game test
         shell: bash
         env:
           LIBGL_ALWAYS_SOFTWARE: "1"
+          MESA_GL_VERSION_OVERRIDE: "4.6"
+          MESA_GLSL_VERSION_OVERRIDE: "460"
         run: |
           chmod +x gradlew
-          timeout 1500 xvfb-run -a -s "-screen 0 1280x720x24" ./gradlew runClientGameTest --stacktrace 2>&1 | tee client.log || true
+          timeout 1500 xvfb-run -a -s "-screen 0 1280x720x24 +extension GLX +render -noreset" ./gradlew runClientGameTest --stacktrace 2>&1 | tee client.log || true
       - name: Publish screenshots
         if: always()
         shell: bash
