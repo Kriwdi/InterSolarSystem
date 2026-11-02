@@ -63,6 +63,8 @@ public record CraterFeature(int minRadius, int maxRadius) implements Feature {
 		int reach = Math.min(MAX_REACH, rimReach + (rays ? 3 : 0));
 		int centreTop = origin.getY() - 1;
 		BlockState fresh = ModBlocks.FRESH_REGOLITH.defaultBlockState();
+		// Old craters are weathered back to ordinary regolith; only young ones keep bright ejecta.
+		BlockState rimBlock = young ? fresh : ModBlocks.LUNAR_REGOLITH.defaultBlockState();
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 		double rayPhase = random.nextDouble() * Math.PI;
 		for (int dx = -reach; dx <= reach; dx++) {
@@ -83,10 +85,12 @@ public record CraterFeature(int minRadius, int maxRadius) implements Feature {
 					int height = (int) Math.round(rim(radius, d));
 					for (int y = top + 1; y <= top + height; y++) {
 						pos.set(x, y, z);
+						level.setBlock(pos, rimBlock, 2);
+					}
+					if (young) {
+						pos.set(x, top, z);
 						level.setBlock(pos, fresh, 2);
 					}
-					pos.set(x, top, z);
-					level.setBlock(pos, fresh, 2);
 				} else if (rays) {
 					// Rays of bright ejecta: thin spokes reaching past the rim.
 					double angle = Math.atan2(dz, dx);

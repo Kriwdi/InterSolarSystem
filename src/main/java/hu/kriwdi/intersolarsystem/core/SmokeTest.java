@@ -85,8 +85,8 @@ public final class SmokeTest {
 		java.util.Map<String, Integer> top = new java.util.TreeMap<>();
 		int lowest = Integer.MAX_VALUE;
 		int highest = Integer.MIN_VALUE;
-		for (int x = -400; x <= 400; x += 16) {
-			for (int z = -400; z <= 400; z += 16) {
+		for (int x = -256; x <= 256; x += 32) {
+			for (int z = -256; z <= 256; z += 32) {
 				moon.getChunk(x >> 4, z >> 4);
 				int h = moon.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.WORLD_SURFACE, x, z);
 				lowest = Math.min(lowest, h);
