@@ -1,2 +1,2 @@
 # Classes.
-net.minecraft.client.renderer.LevelRenderer
+net.minecraft.core.registries.BuiltInRegistries

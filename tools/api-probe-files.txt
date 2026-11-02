@@ -1,6 +1,9 @@
 # Files.
-data/minecraft/worldgen/noise_settings/end.json
-data/minecraft/worldgen/configured_feature/ice_spike.json
-data/minecraft/worldgen/placed_feature/ice_spike.json
-data/minecraft/worldgen/biome/snowy_plains.json
-data/minecraft/worldgen/noise_settings/floating_islands.json
+data/minecraft/worldgen/material_rule/end.json
+data/minecraft/worldgen/density_function/end/sloped_cheese.json
+data/minecraft/worldgen/density_function/end/base_3d_noise.json
+data/minecraft/worldgen/feature/ice_spike.json
+assets/minecraft/atlases/celestials.json
+data/minecraft/timeline/day.json
+data/minecraft/tags/timeline/in_overworld.json
+data/minecraft/worldgen/noise/surface.json

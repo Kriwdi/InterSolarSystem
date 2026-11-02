@@ -1,5 +1,11 @@
 # Regex.
-world/attribute/
-levelgen/feature/Feature.class
-client/renderer/.*Pipeline
-fabric/api/client/rendering/v1/.*
+data/minecraft/timeline/
+atlases/
+worldgen/material_rule/
+worldgen/density_function/end/
+worldgen/feature/ice_spike
+worldgen/feature/disk_
+levelgen/feature/IceSpike
+levelgen/feature/FeatureTypes
+levelgen/feature/.*Disk
+worldgen/noise/surface
