@@ -1,4 +1,2 @@
 # Regex.
-carver.*json
-worldgen/feature/patch.*json
-worldgen/feature/.*block.*json
+worldgen/material_rule/.*json
