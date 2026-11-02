@@ -3,7 +3,7 @@
   "generator": {
     "type": "minecraft:flat",
     "settings": {
-      "biome": "minecraft:the_void",
+      "biome": "intersolarsystem:orbital_void",
       "features": false,
       "lakes": false,
       "layers": [],

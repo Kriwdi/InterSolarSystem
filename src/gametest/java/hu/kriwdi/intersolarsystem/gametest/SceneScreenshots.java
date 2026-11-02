@@ -89,15 +89,15 @@ public class SceneScreenshots implements FabricClientGameTest {
 			// The Moon: Apollo 11, Tranquility Base, the landscape and the Earth in the sky (lunar noon, then night).
 			game.getServer().runOnServer(server -> MoonSites.ensureBuilt(server.getLevel(ShipDimensions.MOON)));
 			game.getServer().runCommand("time set 17700");
+			game.getServer().runCommand("effect clear @a minecraft:night_vision"); // real lunar lighting
 			MoonSites.Apollo a11 = MoonSites.APOLLO.get(0);
-			int y = game.getServer().computeOnServer(server -> server.getLevel(ShipDimensions.MOON)
-					.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING, a11.x(), a11.z()));
+			int y = surfaceY(game, a11.x(), a11.z());
 			game.getServer().runCommand("execute in intersolarsystem:moon run tp @a " + (a11.x() + 7) + " " + (y + 2)
 					+ " " + (a11.z() + 6) + " 135 20");
 			context.waitTicks(160);
 			context.takeScreenshot("12_moon_apollo11");
 			game.getServer().runCommand("execute in intersolarsystem:moon run tp @a " + (MoonSites.BASE[0] - 16) + " "
-					+ (y + 6) + " " + (MoonSites.BASE[1] - 14) + " -45 25");
+					+ (surfaceY(game, MoonSites.BASE[0] - 16, MoonSites.BASE[1] - 14) + 6) + " " + (MoonSites.BASE[1] - 14) + " -45 25");
 			context.waitTicks(80);
 			context.takeScreenshot("13_moon_tranquility_base");
 			game.getServer().runCommand("execute in intersolarsystem:moon run tp @a " + a11.x() + " " + (y + 40) + " "
@@ -114,5 +114,14 @@ public class SceneScreenshots implements FabricClientGameTest {
 			context.waitTicks(40);
 			context.takeScreenshot("16_moon_night_sky");
 		}
+	}
+
+	/** Surface height of a Moon column. Level#getHeight does not load chunks (it returns the world bottom), so load first. */
+	private static int surfaceY(TestSingleplayerContext game, int x, int z) {
+		return game.getServer().computeOnServer(server -> {
+			var moon = server.getLevel(ShipDimensions.MOON);
+			moon.getChunk(x >> 4, z >> 4);
+			return moon.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING, x, z);
+		});
 	}
 }
