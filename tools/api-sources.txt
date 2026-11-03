@@ -1,1 +1,3 @@
-# none
+# Decompiled sources to read.
+net.minecraft.client.Camera
+net.minecraft.client.renderer.GameRenderer

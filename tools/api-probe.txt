@@ -1,1 +1,4 @@
-# none
+# Classes.
+net.fabricmc.fabric.api.client.gametest.v1.TestInput
+net.minecraft.client.Camera
+net.minecraft.client.renderer.GameRenderer

@@ -1,11 +1,1 @@
-data/minecraft/worldgen/biome/basalt_deltas.json
-data/minecraft/worldgen/biome/badlands.json
-data/minecraft/worldgen/material_rule/overworld/biome_surface/default.json
-data/minecraft/worldgen/material_rule/overworld/under_biome_surface/default.json
-data/minecraft/worldgen/structure/igloo.json
-data/minecraft/worldgen/structure/shipwreck.json
-data/minecraft/worldgen/structure_set/shipwrecks.json
-data/minecraft/worldgen/feature/fossil_diamonds.json
-data/minecraft/structure/village/plains/houses/plains_small_house_1.nbt
-data/minecraft/structure/village/plains/streets/corner_01.nbt
-data/minecraft/structure/igloo/top.nbt
+# none

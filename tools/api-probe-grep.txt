@@ -1,4 +1,2 @@
 # Regex.
-structure/igloo.*
-structure/shipwreck/.*nbt
-worldgen/structure/.*json
+client/gametest/v1/.*Input.*class
