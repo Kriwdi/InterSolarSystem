@@ -182,6 +182,13 @@ public final class SmokeTest {
 		if (!ores.keySet().stream().anyMatch(o -> o.startsWith("intersolarsystem:"))) {
 			LOGGER.error("[SMOKETEST-FAIL] no space ore around spawn");
 		}
+		var site = hu.kriwdi.intersolarsystem.ship.ShipStateAccess.get(server).landingSite();
+		if (site.isEmpty() || earth.getBlockState(new BlockPos(site.get().x(), site.get().y(), site.get().z()))
+				.getBlock() != ModBlocks.SHIP_HATCH) {
+			LOGGER.error("[SMOKETEST-FAIL] the start site (ship hatch near spawn) was not built: {}", site);
+		} else {
+			LOGGER.info("[SMOKETEST] start site: ship hatch at {} {} {}", site.get().x(), site.get().y(), site.get().z());
+		}
 		java.util.Map<String, String> structures = new java.util.TreeMap<>();
 		server.registryAccess().lookupOrThrow(net.minecraft.core.registries.Registries.STRUCTURE).listElements()
 				.filter(h -> h.key().identifier().getNamespace().equals(ModIds.MOD_ID))
