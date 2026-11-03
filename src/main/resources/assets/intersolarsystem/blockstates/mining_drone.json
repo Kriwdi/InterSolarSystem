@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/mining_drone"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/mining_drone",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/mining_drone",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/mining_drone",
+      "y": 270
+    }
+  }
+}

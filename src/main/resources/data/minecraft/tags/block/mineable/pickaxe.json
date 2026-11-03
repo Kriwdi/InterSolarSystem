@@ -1,10 +1,32 @@
 {
+  "replace": false,
   "values": [
     "intersolarsystem:lunar_rock",
     "intersolarsystem:mare_basalt",
     "intersolarsystem:ilmenite_ore",
     "intersolarsystem:station_hull",
     "intersolarsystem:station_foil",
-    "intersolarsystem:truss"
+    "intersolarsystem:truss",
+    "intersolarsystem:cinder_rock",
+    "intersolarsystem:salt_block",
+    "intersolarsystem:trinitite",
+    "intersolarsystem:compacted_junk",
+    "intersolarsystem:oil_shale",
+    "intersolarsystem:petrified_log",
+    "intersolarsystem:petrified_wood",
+    "intersolarsystem:scrap_pile",
+    "intersolarsystem:rubble",
+    "intersolarsystem:toxic_barrel",
+    "intersolarsystem:mining_drone",
+    "intersolarsystem:bauxite_ore",
+    "intersolarsystem:titanium_ore",
+    "intersolarsystem:uraninite_ore",
+    "intersolarsystem:spodumene_ore",
+    "intersolarsystem:monazite_ore",
+    "intersolarsystem:deepslate_bauxite_ore",
+    "intersolarsystem:deepslate_titanium_ore",
+    "intersolarsystem:deepslate_uraninite_ore",
+    "intersolarsystem:deepslate_spodumene_ore",
+    "intersolarsystem:deepslate_monazite_ore"
   ]
 }

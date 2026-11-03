@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "intersolarsystem:titanium_ingot",
+    "intersolarsystem:titanium_ingot"
+  ],
+  "result": {
+    "id": "intersolarsystem:titanium_plate",
+    "count": 1
+  }
+}

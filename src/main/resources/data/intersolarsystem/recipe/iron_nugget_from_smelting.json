@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": "intersolarsystem:scrap_metal",
+  "result": {
+    "id": "minecraft:iron_nugget"
+  }
+}

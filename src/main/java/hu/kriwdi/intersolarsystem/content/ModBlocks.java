@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
@@ -100,7 +101,97 @@ public final class ModBlocks {
 			BlockBehaviour.Properties.of().strength(3.0F, 6.0F).sound(SoundType.METAL).lightLevel(state -> 5)
 					.noOcclusion());
 
+	// ---- The dead Earth (phase 7): ground of the twelve biomes.
+	public static final Block ASH = register("ash", Block::new,
+			BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.SAND));
+
+	public static final Block CINDER_ROCK = register("cinder_rock", Block::new,
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.TUFF).requiresCorrectToolForDrops());
+
+	public static final Block DRIED_SILT = register("dried_silt", Block::new,
+			BlockBehaviour.Properties.of().strength(0.6F).sound(SoundType.MUD_BRICKS));
+
+	public static final Block SALT_CRUST = register("salt_crust", Block::new,
+			BlockBehaviour.Properties.of().strength(0.6F).sound(SoundType.CALCITE));
+
+	public static final Block SALT_BLOCK = register("salt_block", Block::new,
+			BlockBehaviour.Properties.of().strength(1.2F).sound(SoundType.CALCITE).requiresCorrectToolForDrops());
+
+	public static final Block LITHIUM_BRINE_CRUST = register("lithium_brine_crust", Block::new,
+			BlockBehaviour.Properties.of().strength(0.8F).sound(SoundType.CALCITE));
+
+	public static final Block IRRADIATED_SOIL = register("irradiated_soil", Block::new,
+			BlockBehaviour.Properties.of().strength(0.6F).sound(SoundType.GRAVEL).lightLevel(state -> 1));
+
+	public static final Block TRINITITE = register("trinitite", Block::new,
+			BlockBehaviour.Properties.of().strength(1.2F, 4.0F).sound(SoundType.GLASS).lightLevel(state -> 6)
+					.requiresCorrectToolForDrops());
+
+	public static final Block ACIDIC_MUD = register("acidic_mud", Block::new,
+			BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.MUD));
+
+	public static final Block COMPACTED_JUNK = register("compacted_junk", Block::new,
+			BlockBehaviour.Properties.of().strength(1.8F, 5.0F).sound(SoundType.METAL));
+
+	public static final Block TAR_SAND = register("tar_sand", Block::new,
+			BlockBehaviour.Properties.of().strength(0.6F).sound(SoundType.SOUL_SOIL).speedFactor(0.6F));
+
+	public static final Block OIL_SHALE = register("oil_shale", Block::new,
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.DEEPSLATE).requiresCorrectToolForDrops());
+
+	public static final Block SILICA_SAND = register("silica_sand", Block::new,
+			BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.SAND));
+
+	public static final Block PETRIFIED_LOG = register("petrified_log", RotatedPillarBlock::new,
+			BlockBehaviour.Properties.of().strength(2.0F, 6.0F).sound(SoundType.STONE).requiresCorrectToolForDrops());
+
+	public static final Block PETRIFIED_WOOD = register("petrified_wood", Block::new,
+			BlockBehaviour.Properties.of().strength(2.0F, 6.0F).sound(SoundType.STONE).requiresCorrectToolForDrops());
+
+	public static final Block DEAD_LOG = register("dead_log", RotatedPillarBlock::new,
+			BlockBehaviour.Properties.of().strength(1.6F).sound(SoundType.WOOD));
+
+	// ---- Ores for the space programme (no vanilla ores generate on the dead Earth).
+	public static final Block BAUXITE_ORE = ore("bauxite_ore", 2.5F, SoundType.STONE, 0);
+	public static final Block DEEPSLATE_BAUXITE_ORE = ore("deepslate_bauxite_ore", 4.0F, SoundType.DEEPSLATE, 0);
+	public static final Block TITANIUM_ORE = ore("titanium_ore", 3.0F, SoundType.STONE, 0);
+	public static final Block DEEPSLATE_TITANIUM_ORE = ore("deepslate_titanium_ore", 4.5F, SoundType.DEEPSLATE, 0);
+	public static final Block URANINITE_ORE = ore("uraninite_ore", 3.0F, SoundType.STONE, 3);
+	public static final Block DEEPSLATE_URANINITE_ORE = ore("deepslate_uraninite_ore", 4.5F, SoundType.DEEPSLATE, 3);
+	public static final Block SPODUMENE_ORE = ore("spodumene_ore", 2.5F, SoundType.STONE, 0);
+	public static final Block DEEPSLATE_SPODUMENE_ORE = ore("deepslate_spodumene_ore", 4.0F, SoundType.DEEPSLATE, 0);
+	public static final Block MONAZITE_ORE = ore("monazite_ore", 3.0F, SoundType.STONE, 0);
+	public static final Block DEEPSLATE_MONAZITE_ORE = ore("deepslate_monazite_ore", 4.5F, SoundType.DEEPSLATE, 0);
+
+	// ---- Shaped debris and props of the dead Earth (models built from boxes; outlines follow the models).
+	public static final Block SCRAP_PILE = register("scrap_pile",
+			p -> new ShapedBlock(p, new double[] {0, 0, 0, 16, 4, 16}, new double[] {2, 4, 3, 13, 8, 12},
+					new double[] {5, 8, 5, 10, 11, 10}),
+			BlockBehaviour.Properties.of().strength(1.2F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block RUBBLE = register("rubble",
+			p -> new ShapedBlock(p, new double[] {0, 0, 0, 16, 3, 16}, new double[] {3, 3, 2, 12, 6, 11}),
+			BlockBehaviour.Properties.of().strength(1.0F).sound(SoundType.STONE).noOcclusion());
+
+	public static final Block TOXIC_BARREL = register("toxic_barrel",
+			p -> new ShapedBlock(p, new double[] {2, 0, 2, 14, 15, 14}),
+			BlockBehaviour.Properties.of().strength(1.5F).sound(SoundType.METAL).noOcclusion().lightLevel(state -> 4));
+
+	public static final Block MINING_DRONE = register("mining_drone",
+			p -> new ShipFacingBlock(p, new double[] {1, 0, 3, 15, 9, 15}, new double[] {5, 2, 0, 11, 7, 3}),
+			BlockBehaviour.Properties.of().strength(2.5F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block TAR_PUDDLE = register("tar_puddle",
+			p -> new ShapedBlock(p, new double[] {0, 0, 0, 16, 1, 16}),
+			BlockBehaviour.Properties.of().strength(0.3F).sound(SoundType.HONEY_BLOCK).noOcclusion().speedFactor(0.4F)
+					.jumpFactor(0.5F));
+
 	private ModBlocks() {
+	}
+
+	private static Block ore(String name, float hardness, SoundType sound, int light) {
+		return register(name, Block::new, BlockBehaviour.Properties.of().strength(hardness, 3.0F).sound(sound)
+				.requiresCorrectToolForDrops().lightLevel(state -> light));
 	}
 
 	private static Block register(String name, Function<BlockBehaviour.Properties, Block> factory,

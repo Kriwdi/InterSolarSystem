@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": "intersolarsystem:titanium_plate",
+    "M": "intersolarsystem:rare_earth_magnet",
+    "B": "intersolarsystem:battery_cell",
+    "C": "intersolarsystem:salvaged_circuit",
+    "S": "intersolarsystem:solar_cell"
+  },
+  "pattern": [
+    "PMP",
+    "BCB",
+    "PSP"
+  ],
+  "result": {
+    "id": "intersolarsystem:ion_drive_kit",
+    "count": 1
+  }
+}

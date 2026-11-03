@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "intersolarsystem:block/dead_log"
+    },
+    "axis=z": {
+      "model": "intersolarsystem:block/dead_log_horizontal",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "intersolarsystem:block/dead_log_horizontal",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

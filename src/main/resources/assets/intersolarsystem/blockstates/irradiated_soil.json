@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/irradiated_soil"
+      },
+      {
+        "model": "intersolarsystem:block/irradiated_soil",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/irradiated_soil",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/irradiated_soil",
+        "y": 270
+      }
+    ]
+  }
+}

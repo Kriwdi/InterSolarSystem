@@ -1,0 +1,46 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "condition": "minecraft:tool/can_silk_touch",
+              "name": "intersolarsystem:spodumene_ore"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "intersolarsystem:lithium_dust",
+              "modifier": [
+                {
+                  "type": "minecraft:set_count",
+                  "count": {
+                    "type": "minecraft:uniform",
+                    "min": 2.0,
+                    "max": 4.0
+                  }
+                },
+                {
+                  "type": "minecraft:apply_bonus",
+                  "enchantment": "minecraft:fortune",
+                  "formula": "minecraft:uniform_bonus_count",
+                  "parameters": {
+                    "bonusMultiplier": 1
+                  }
+                },
+                {
+                  "type": "minecraft:explosion_decay"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "intersolarsystem:blocks/spodumene_ore"
+}

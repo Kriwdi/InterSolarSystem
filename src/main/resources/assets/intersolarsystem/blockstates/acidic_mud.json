@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/acidic_mud"
+      },
+      {
+        "model": "intersolarsystem:block/acidic_mud",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/acidic_mud",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/acidic_mud",
+        "y": 270
+      }
+    ]
+  }
+}

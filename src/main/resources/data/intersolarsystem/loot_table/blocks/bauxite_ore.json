@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "condition": "minecraft:tool/can_silk_touch",
+              "name": "intersolarsystem:bauxite_ore"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "intersolarsystem:raw_bauxite",
+              "modifier": [
+                {
+                  "type": "minecraft:apply_bonus",
+                  "enchantment": "minecraft:fortune",
+                  "formula": "minecraft:ore_drops"
+                },
+                {
+                  "type": "minecraft:explosion_decay"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "intersolarsystem:blocks/bauxite_ore"
+}

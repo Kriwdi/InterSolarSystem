@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/silica_sand"
+      },
+      {
+        "model": "intersolarsystem:block/silica_sand",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/silica_sand",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/silica_sand",
+        "y": 270
+      }
+    ]
+  }
+}

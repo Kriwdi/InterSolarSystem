@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/ash"
+      },
+      {
+        "model": "intersolarsystem:block/ash",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/ash",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/ash",
+        "y": 270
+      }
+    ]
+  }
+}

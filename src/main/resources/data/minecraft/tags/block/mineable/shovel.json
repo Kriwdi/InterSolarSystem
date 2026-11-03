@@ -1,8 +1,18 @@
 {
+  "replace": false,
   "values": [
     "intersolarsystem:lunar_regolith",
     "intersolarsystem:mare_regolith",
     "intersolarsystem:fresh_regolith",
-    "intersolarsystem:helium3_regolith"
+    "intersolarsystem:helium3_regolith",
+    "intersolarsystem:ash",
+    "intersolarsystem:dried_silt",
+    "intersolarsystem:salt_crust",
+    "intersolarsystem:lithium_brine_crust",
+    "intersolarsystem:irradiated_soil",
+    "intersolarsystem:acidic_mud",
+    "intersolarsystem:tar_sand",
+    "intersolarsystem:silica_sand",
+    "intersolarsystem:tar_puddle"
   ]
 }

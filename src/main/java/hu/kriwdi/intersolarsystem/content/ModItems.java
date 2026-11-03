@@ -6,7 +6,10 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 
 import hu.kriwdi.intersolarsystem.core.ModIds;
@@ -38,7 +41,57 @@ public final class ModItems {
 	public static final Item SPACE_BOOTS = register("space_boots", Item::new,
 			new Item.Properties().humanoidArmor(ModArmor.SPACE_SUIT, ArmorType.BOOTS));
 
+	// ---- Space-programme materials from the dead Earth's ores (phase 7).
+	public static final Item RAW_BAUXITE = simple("raw_bauxite");
+	public static final Item ALUMINIUM_INGOT = simple("aluminium_ingot");
+	public static final Item RAW_TITANIUM = simple("raw_titanium");
+	public static final Item TITANIUM_INGOT = simple("titanium_ingot");
+	public static final Item RAW_URANIUM = simple("raw_uranium");
+	public static final Item URANIUM_INGOT = simple("uranium_ingot");
+	public static final Item LITHIUM_DUST = simple("lithium_dust");
+	public static final Item RARE_EARTH_DUST = simple("rare_earth_dust");
+	public static final Item SILICON = simple("silicon");
+	public static final Item BITUMEN = simple("bitumen");
+
+	// ---- Components made from them.
+	public static final Item TITANIUM_PLATE = simple("titanium_plate");
+	public static final Item SOLAR_CELL = simple("solar_cell");
+	public static final Item BATTERY_CELL = simple("battery_cell");
+	public static final Item RARE_EARTH_MAGNET = simple("rare_earth_magnet");
+	public static final Item URANIUM_FUEL_ROD = register("uranium_fuel_rod", Item::new,
+			new Item.Properties().stacksTo(16).rarity(Rarity.UNCOMMON));
+
+	/** Engine upgrades, installed on the navigation console: the ion drive (tier 2) and the fusion drive (tier 3). */
+	public static final Item ION_DRIVE_KIT = register("ion_drive_kit", Item::new,
+			new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
+
+	public static final Item FUSION_DRIVE_KIT = register("fusion_drive_kit", Item::new,
+			new Item.Properties().stacksTo(1).rarity(Rarity.RARE));
+
+	// ---- Titanium tools: a little better than iron, much tougher.
+	public static final TagKey<Item> TITANIUM_TOOL_MATERIALS = TagKey.create(Registries.ITEM,
+			ModIds.id("titanium_tool_materials"));
+
+	public static final ToolMaterial TITANIUM = new ToolMaterial(
+			TagKey.create(Registries.BLOCK, ModIds.id("incorrect_for_titanium_tool")), 900, 7.0F, 2.5F, 12,
+			TITANIUM_TOOL_MATERIALS);
+
+	public static final Item TITANIUM_PICKAXE = register("titanium_pickaxe", Item::new,
+			new Item.Properties().pickaxe(TITANIUM, 1.0F, -2.8F));
+	public static final Item TITANIUM_AXE = register("titanium_axe", Item::new,
+			new Item.Properties().axe(TITANIUM, 6.0F, -3.1F));
+	public static final Item TITANIUM_SHOVEL = register("titanium_shovel", Item::new,
+			new Item.Properties().shovel(TITANIUM, 1.5F, -3.0F));
+	public static final Item TITANIUM_HOE = register("titanium_hoe", Item::new,
+			new Item.Properties().hoe(TITANIUM, -2.5F, -0.5F));
+	public static final Item TITANIUM_SWORD = register("titanium_sword", Item::new,
+			new Item.Properties().sword(TITANIUM, 3.0F, -2.4F));
+
 	private ModItems() {
+	}
+
+	private static Item simple(String name) {
+		return register(name, Item::new, new Item.Properties());
 	}
 
 	private static Item register(String name, Function<Item.Properties, Item> factory, Item.Properties properties) {

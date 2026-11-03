@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/tar_puddle"
+      },
+      {
+        "model": "intersolarsystem:block/tar_puddle",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/tar_puddle",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/tar_puddle",
+        "y": 270
+      }
+    ]
+  }
+}

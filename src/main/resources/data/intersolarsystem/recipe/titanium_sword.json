@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "X": "#intersolarsystem:titanium_tool_materials",
+    "#": "minecraft:stick"
+  },
+  "pattern": [
+    "X",
+    "X",
+    "#"
+  ],
+  "result": {
+    "id": "intersolarsystem:titanium_sword",
+    "count": 1
+  }
+}

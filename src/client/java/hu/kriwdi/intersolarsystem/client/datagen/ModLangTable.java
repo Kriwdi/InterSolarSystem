@@ -746,6 +746,298 @@ public final class ModLangTable {
 				"InterSolarSystem",
 				"InterSolarSystem",
 				"InterSolarSystem");
+		add(rows, "block.intersolarsystem.ash",
+				"Ash",
+				"Asche",
+				"Hamu");
+		add(rows, "block.intersolarsystem.cinder_rock",
+				"Cinder Rock",
+				"Schlackengestein",
+				"Salakkő");
+		add(rows, "block.intersolarsystem.dried_silt",
+				"Dried Silt",
+				"Getrockneter Schlick",
+				"Kiszáradt iszap");
+		add(rows, "block.intersolarsystem.salt_crust",
+				"Salt Crust",
+				"Salzkruste",
+				"Sókéreg");
+		add(rows, "block.intersolarsystem.salt_block",
+				"Salt Block",
+				"Salzblock",
+				"Sótömb");
+		add(rows, "block.intersolarsystem.lithium_brine_crust",
+				"Lithium Brine Crust",
+				"Lithiumsole-Kruste",
+				"Lítiumos sókéreg");
+		add(rows, "block.intersolarsystem.irradiated_soil",
+				"Irradiated Soil",
+				"Verstrahlte Erde",
+				"Sugárfertőzött talaj");
+		add(rows, "block.intersolarsystem.trinitite",
+				"Trinitite",
+				"Trinitit",
+				"Trinitit");
+		add(rows, "block.intersolarsystem.acidic_mud",
+				"Acidic Mud",
+				"Saurer Schlamm",
+				"Savas iszap");
+		add(rows, "block.intersolarsystem.compacted_junk",
+				"Compacted Junk",
+				"Gepresster Schrott",
+				"Préselt hulladék");
+		add(rows, "block.intersolarsystem.tar_sand",
+				"Tar Sand",
+				"Teersand",
+				"Kátrányos homok");
+		add(rows, "block.intersolarsystem.oil_shale",
+				"Oil Shale",
+				"Ölschiefer",
+				"Olajpala");
+		add(rows, "block.intersolarsystem.silica_sand",
+				"Silica Sand",
+				"Quarzsand",
+				"Kvarchomok");
+		add(rows, "block.intersolarsystem.petrified_log",
+				"Petrified Log",
+				"Versteinerter Stamm",
+				"Megkövült rönk");
+		add(rows, "block.intersolarsystem.petrified_wood",
+				"Petrified Wood",
+				"Versteinertes Holz",
+				"Megkövült fa");
+		add(rows, "block.intersolarsystem.dead_log",
+				"Dead Log",
+				"Toter Stamm",
+				"Elhalt rönk");
+		add(rows, "block.intersolarsystem.bauxite_ore",
+				"Bauxite Ore",
+				"Bauxiterz",
+				"Bauxitérc");
+		add(rows, "block.intersolarsystem.deepslate_bauxite_ore",
+				"Deepslate Bauxite Ore",
+				"Tiefenschiefer-Bauxiterz",
+				"Mélypala bauxitérc");
+		add(rows, "block.intersolarsystem.titanium_ore",
+				"Titanium Ore",
+				"Titanerz",
+				"Titánérc");
+		add(rows, "block.intersolarsystem.deepslate_titanium_ore",
+				"Deepslate Titanium Ore",
+				"Tiefenschiefer-Titanerz",
+				"Mélypala titánérc");
+		add(rows, "block.intersolarsystem.uraninite_ore",
+				"Uraninite Ore",
+				"Uraniniterz",
+				"Uraninitérc");
+		add(rows, "block.intersolarsystem.deepslate_uraninite_ore",
+				"Deepslate Uraninite Ore",
+				"Tiefenschiefer-Uraniniterz",
+				"Mélypala uraninitérc");
+		add(rows, "block.intersolarsystem.spodumene_ore",
+				"Spodumene Ore",
+				"Spodumenerz",
+				"Spodumenérc");
+		add(rows, "block.intersolarsystem.deepslate_spodumene_ore",
+				"Deepslate Spodumene Ore",
+				"Tiefenschiefer-Spodumenerz",
+				"Mélypala spodumenérc");
+		add(rows, "block.intersolarsystem.monazite_ore",
+				"Monazite Ore",
+				"Monaziterz",
+				"Monazitérc");
+		add(rows, "block.intersolarsystem.deepslate_monazite_ore",
+				"Deepslate Monazite Ore",
+				"Tiefenschiefer-Monaziterz",
+				"Mélypala monazitérc");
+		add(rows, "block.intersolarsystem.scrap_pile",
+				"Scrap Pile",
+				"Schrotthaufen",
+				"Fémhulladék-kupac");
+		add(rows, "block.intersolarsystem.rubble",
+				"Rubble",
+				"Trümmer",
+				"Törmelék");
+		add(rows, "block.intersolarsystem.toxic_barrel",
+				"Toxic Waste Barrel",
+				"Giftmüllfass",
+				"Mérgezőhulladék-hordó");
+		add(rows, "block.intersolarsystem.mining_drone",
+				"Broken Mining Drone",
+				"Defekte Bergbaudrohne",
+				"Elromlott bányászdrón");
+		add(rows, "block.intersolarsystem.tar_puddle",
+				"Tar Puddle",
+				"Teerpfütze",
+				"Kátránytócsa");
+		add(rows, "item.intersolarsystem.raw_bauxite",
+				"Raw Bauxite",
+				"Rohbauxit",
+				"Nyers bauxit");
+		add(rows, "item.intersolarsystem.aluminium_ingot",
+				"Aluminium Ingot",
+				"Aluminiumbarren",
+				"Alumíniumrúd");
+		add(rows, "item.intersolarsystem.raw_titanium",
+				"Raw Titanium",
+				"Rohtitan",
+				"Nyers titán");
+		add(rows, "item.intersolarsystem.titanium_ingot",
+				"Titanium Ingot",
+				"Titanbarren",
+				"Titánrúd");
+		add(rows, "item.intersolarsystem.raw_uranium",
+				"Raw Uranium",
+				"Roh-Uran",
+				"Nyers urán");
+		add(rows, "item.intersolarsystem.uranium_ingot",
+				"Enriched Uranium",
+				"Angereichertes Uran",
+				"Dúsított urán");
+		add(rows, "item.intersolarsystem.lithium_dust",
+				"Lithium Dust",
+				"Lithiumstaub",
+				"Lítiumpor");
+		add(rows, "item.intersolarsystem.rare_earth_dust",
+				"Rare Earth Dust",
+				"Seltenerdstaub",
+				"Ritkaföldfém-por");
+		add(rows, "item.intersolarsystem.silicon",
+				"Silicon Wafer",
+				"Siliziumscheibe",
+				"Szilíciumlapka");
+		add(rows, "item.intersolarsystem.bitumen",
+				"Bitumen",
+				"Bitumen",
+				"Bitumen");
+		add(rows, "item.intersolarsystem.titanium_plate",
+				"Titanium Plate",
+				"Titanplatte",
+				"Titánlemez");
+		add(rows, "item.intersolarsystem.solar_cell",
+				"Solar Cell",
+				"Solarzelle",
+				"Napelemcella");
+		add(rows, "item.intersolarsystem.battery_cell",
+				"Battery Cell",
+				"Akkuzelle",
+				"Akkumulátorcella");
+		add(rows, "item.intersolarsystem.rare_earth_magnet",
+				"Rare Earth Magnet",
+				"Seltenerdmagnet",
+				"Ritkaföldfém-mágnes");
+		add(rows, "item.intersolarsystem.uranium_fuel_rod",
+				"Uranium Fuel Rod",
+				"Uran-Brennstab",
+				"Urán fűtőelem");
+		add(rows, "item.intersolarsystem.ion_drive_kit",
+				"Ion Drive Kit",
+				"Ionenantrieb-Bausatz",
+				"Ionhajtómű-készlet");
+		add(rows, "item.intersolarsystem.fusion_drive_kit",
+				"Fusion Drive Kit",
+				"Fusionsantrieb-Bausatz",
+				"Fúziós hajtómű-készlet");
+		add(rows, "item.intersolarsystem.titanium_pickaxe",
+				"Titanium Pickaxe",
+				"Titanspitzhacke",
+				"Titán csákány");
+		add(rows, "item.intersolarsystem.titanium_axe",
+				"Titanium Axe",
+				"Titanaxt",
+				"Titán fejsze");
+		add(rows, "item.intersolarsystem.titanium_shovel",
+				"Titanium Shovel",
+				"Titanschaufel",
+				"Titán ásó");
+		add(rows, "item.intersolarsystem.titanium_hoe",
+				"Titanium Hoe",
+				"Titanhacke",
+				"Titán kapa");
+		add(rows, "item.intersolarsystem.titanium_sword",
+				"Titanium Sword",
+				"Titanschwert",
+				"Titán kard");
+		add(rows, "message.intersolarsystem.engine.installed",
+				"Engine upgraded to tier %s (x%s speed).",
+				"Antrieb auf Stufe %s aufgerüstet (x%s Geschwindigkeit).",
+				"A hajtómű %s. szintre fejlesztve (x%s sebesség).");
+		add(rows, "message.intersolarsystem.engine.already",
+				"The engine is already tier %s.",
+				"Der Antrieb ist bereits Stufe %s.",
+				"A hajtómű már %s. szintű.");
+		add(rows, "message.intersolarsystem.engine.needs_previous",
+				"Install the tier %s engine first.",
+				"Zuerst den Antrieb der Stufe %s einbauen.",
+				"Előbb a %s. szintű hajtóművet kell beszerelni.");
+		add(rows, "message.intersolarsystem.engine.not_landed",
+				"The engine can only be swapped while the ship is landed.",
+				"Der Antrieb kann nur nach der Landung getauscht werden.",
+				"A hajtóművet csak leszállt hajón lehet cserélni.");
+		add(rows, "message.intersolarsystem.hazard.acid",
+				"The acid burns through your clothes!",
+				"Die Säure frisst sich durch die Kleidung!",
+				"A sav átmarja a ruhádat!");
+		add(rows, "message.intersolarsystem.hazard.radiation",
+				"Radiation! Your Geiger counter is screaming.",
+				"Strahlung! Der Geigerzähler kreischt.",
+				"Sugárzás! A Geiger-számláló vijjog.");
+		add(rows, "biome.intersolarsystem.ash_desert",
+				"Ash Desert",
+				"Aschewüste",
+				"Hamusivatag");
+		add(rows, "biome.intersolarsystem.dried_seabed",
+				"Dried Seabed",
+				"Ausgetrockneter Meeresgrund",
+				"Kiszáradt tengerfenék");
+		add(rows, "biome.intersolarsystem.petrified_forest",
+				"Petrified Forest",
+				"Versteinerter Wald",
+				"Megkövült erdő");
+		add(rows, "biome.intersolarsystem.irradiated_crater",
+				"Irradiated Crater",
+				"Verstrahlter Krater",
+				"Sugárzó kráter");
+		add(rows, "biome.intersolarsystem.frozen_megalopolis",
+				"Frozen Megalopolis",
+				"Gefrorene Megastadt",
+				"Befagyott megapolisz");
+		add(rows, "biome.intersolarsystem.acid_swamp",
+				"Acid Swamp",
+				"Säuresumpf",
+				"Savas mocsár");
+		add(rows, "biome.intersolarsystem.junk_mountains",
+				"Junk Mountains",
+				"Schrottberge",
+				"Szeméthegyek");
+		add(rows, "biome.intersolarsystem.salt_flats",
+				"Salt Flats",
+				"Salzwüste",
+				"Sósivatag");
+		add(rows, "biome.intersolarsystem.deep_canyons",
+				"Deep Canyons",
+				"Tiefe Schluchten",
+				"Mély kanyonok");
+		add(rows, "biome.intersolarsystem.oasis",
+				"Oasis",
+				"Oase",
+				"Oázis");
+		add(rows, "biome.intersolarsystem.abandoned_farmland",
+				"Abandoned Farmland",
+				"Verlassenes Ackerland",
+				"Elhagyott farmvidék");
+		add(rows, "biome.intersolarsystem.oil_field",
+				"Oil Field",
+				"Ölfeld",
+				"Olajmező");
+		add(rows, "biome.intersolarsystem.lunar_surface",
+				"Lunar Surface",
+				"Mondoberfläche",
+				"Holdfelszín");
+		add(rows, "biome.intersolarsystem.orbital_void",
+				"Earth Orbit",
+				"Erdumlaufbahn",
+				"Föld körüli pálya");
 		check(rows);
 		return List.copyOf(rows);
 	}

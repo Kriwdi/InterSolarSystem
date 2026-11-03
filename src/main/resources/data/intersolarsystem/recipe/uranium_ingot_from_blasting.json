@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "ingredient": "intersolarsystem:raw_uranium",
+  "result": {
+    "id": "intersolarsystem:uranium_ingot"
+  }
+}

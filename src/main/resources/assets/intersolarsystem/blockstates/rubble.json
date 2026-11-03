@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/rubble"
+      },
+      {
+        "model": "intersolarsystem:block/rubble",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/rubble",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/rubble",
+        "y": 270
+      }
+    ]
+  }
+}

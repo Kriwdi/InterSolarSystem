@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "intersolarsystem:titanium_ore",
+    "intersolarsystem:uraninite_ore",
+    "intersolarsystem:monazite_ore",
+    "intersolarsystem:deepslate_titanium_ore",
+    "intersolarsystem:deepslate_uraninite_ore",
+    "intersolarsystem:deepslate_monazite_ore"
+  ]
+}

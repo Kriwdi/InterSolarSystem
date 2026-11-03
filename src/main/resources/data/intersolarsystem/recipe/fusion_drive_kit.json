@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": "intersolarsystem:titanium_plate",
+    "H": "intersolarsystem:helium3_regolith",
+    "R": "intersolarsystem:uranium_fuel_rod",
+    "C": "intersolarsystem:salvaged_circuit",
+    "M": "intersolarsystem:rare_earth_magnet"
+  },
+  "pattern": [
+    "PHP",
+    "RCR",
+    "PMP"
+  ],
+  "result": {
+    "id": "intersolarsystem:fusion_drive_kit",
+    "count": 1
+  }
+}

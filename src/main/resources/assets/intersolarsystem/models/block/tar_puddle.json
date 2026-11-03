@@ -1,0 +1,46 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "intersolarsystem:block/tar_puddle",
+    "p": "intersolarsystem:block/tar_puddle"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        1,
+        16
+      ],
+      "faces": {
+        "north": {
+          "texture": "#p",
+          "cullface": "north"
+        },
+        "east": {
+          "texture": "#p",
+          "cullface": "east"
+        },
+        "south": {
+          "texture": "#p",
+          "cullface": "south"
+        },
+        "west": {
+          "texture": "#p",
+          "cullface": "west"
+        },
+        "up": {
+          "texture": "#p"
+        },
+        "down": {
+          "texture": "#p",
+          "cullface": "down"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "minecraft:copper_ingot",
+    "A": "intersolarsystem:aluminium_ingot",
+    "L": "intersolarsystem:lithium_dust"
+  },
+  "pattern": [
+    " C ",
+    "ALA",
+    "ALA"
+  ],
+  "result": {
+    "id": "intersolarsystem:battery_cell",
+    "count": 1
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": "intersolarsystem:rare_earth_dust",
+    "I": "minecraft:iron_ingot"
+  },
+  "pattern": [
+    "R R",
+    "RIR",
+    " R "
+  ],
+  "result": {
+    "id": "intersolarsystem:rare_earth_magnet",
+    "count": 2
+  }
+}

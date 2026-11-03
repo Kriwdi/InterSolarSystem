@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "intersolarsystem:bauxite_ore",
+    "intersolarsystem:spodumene_ore",
+    "intersolarsystem:deepslate_bauxite_ore",
+    "intersolarsystem:deepslate_spodumene_ore",
+    "intersolarsystem:oil_shale"
+  ]
+}
