@@ -208,6 +208,17 @@ public final class SmokeTest {
 				});
 		LOGGER.info("[SMOKETEST] Earth structures nearest to spawn: {}", structures);
 		LOGGER.info("[SMOKETEST] Earth border {}", earth.getWorldBorder().getSize());
+		StringBuilder blueprints = new StringBuilder();
+		for (hu.kriwdi.intersolarsystem.spaceport.Section section : hu.kriwdi.intersolarsystem.spaceport.Section.values()) {
+			if (section.mothership()) {
+				int n = hu.kriwdi.intersolarsystem.spaceport.Blueprint.of(section.id()).size();
+				blueprints.append(section.id()).append('=').append(n).append(' ');
+				if (n == 0) {
+					LOGGER.error("[SMOKETEST-FAIL] blueprint {} is empty", section.id());
+				}
+			}
+		}
+		LOGGER.info("[SMOKETEST] mothership blueprints: {}", blueprints);
 		long missing = structures.values().stream().filter("MISSING"::equals).count();
 		if (structures.size() < 20 || missing > 0) {
 			LOGGER.error("[SMOKETEST-FAIL] {} of {} structures not found anywhere on the Earth", missing, structures.size());
