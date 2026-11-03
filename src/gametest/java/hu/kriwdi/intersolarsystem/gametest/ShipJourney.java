@@ -73,6 +73,21 @@ public class ShipJourney implements FabricClientGameTest {
 			context.waitTicks(30);
 			context.takeScreenshot("45_toward_bridge");
 
+			// Sit down in the pilot's seat with the use key, look at the consoles, get up again with sneak.
+			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 14.5, 4.5, 65.4, 16.5);
+			context.waitTicks(5);
+			context.getInput().lookAt(new BlockPos(4, 65, 16));
+			context.waitTicks(5);
+			context.getInput().pressKey(options -> options.keyUse);
+			context.waitTicks(20);
+			boolean sitting = game.getServer().computeOnServer(server -> player(server).isPassenger());
+			LOGGER.info("[JOURNEY] sitting in the seat: {}", sitting);
+			context.takeScreenshot("45c_sitting_in_the_seat");
+			context.getInput().holdKeyFor(options -> options.keyShift, 10);
+			context.waitTicks(10);
+			LOGGER.info("[JOURNEY] after sneaking still sitting: {}",
+					game.getServer().computeOnServer(server -> player(server).isPassenger()));
+
 			// The navigation console, clicked with the mouse: select the Moon, then LAUNCH.
 			game.getServer().runCommand("iss ship engine 4");
 			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 16.5, 4.5, 66, 20.5);
@@ -144,6 +159,34 @@ public class ShipJourney implements FabricClientGameTest {
 					moonHatch.getX() - 4, moonHatch.getY() + 2, moonHatch.getZ() + 6);
 			context.waitTicks(120);
 			context.takeScreenshot("54_ship_on_the_moon");
+			tp(game, "intersolarsystem:moon", moonHatch.getX() - 22, moonHatch.getY() + 9, moonHatch.getZ() + 14,
+					moonHatch.getX() + 4, moonHatch.getY() + 2, moonHatch.getZ() - 2);
+			context.waitTicks(40);
+			context.takeScreenshot("54b_ship_on_the_moon_side");
+
+			// Back aboard and up to the ISS: the ship docks at the station's front port.
+			game.getServer().runOnServer(server -> ShipBoarding.use(server.getLevel(ShipDimensions.MOON), moonHatch,
+					player(server)));
+			context.waitTicks(20);
+			game.getServer().runOnServer(server -> ShipNavigation.launch(server, player(server), "earth_orbit"));
+			waitForPhase(context, game, ShipFlightPhase.FLIGHT);
+			waitForPhase(context, game, ShipFlightPhase.LANDED);
+			context.waitTicks(20);
+			BlockPos dock = game.getServer().computeOnServer(server -> ShipStateAccess.get(server).landingSite()
+					.map(s -> new BlockPos(s.x(), s.y(), s.z())).orElse(BlockPos.ZERO));
+			LOGGER.info("[JOURNEY] docked at {}", dock.toShortString());
+			game.getServer().runOnServer(server -> ShipBoarding.use(server.getLevel(ShipDimensions.INTERIOR),
+					ShipInteriorBuilder.at(ShipInteriorLayout.capsule().hatch()), player(server)));
+			context.waitTicks(20);
+			game.getServer().runCommand("gamemode spectator @a");
+			tp(game, "intersolarsystem:orbit", dock.getX() + 26, dock.getY() + 10, dock.getZ() - 22, dock.getX() - 2,
+					dock.getY() + 1, dock.getZ() - 2);
+			context.waitTicks(100);
+			context.takeScreenshot("55_docked_at_the_iss");
+			tp(game, "intersolarsystem:orbit", dock.getX() - 30, dock.getY() + 24, dock.getZ() - 40, dock.getX(),
+					dock.getY(), dock.getZ() + 20);
+			context.waitTicks(40);
+			context.takeScreenshot("56_iss_and_ship");
 		}
 	}
 

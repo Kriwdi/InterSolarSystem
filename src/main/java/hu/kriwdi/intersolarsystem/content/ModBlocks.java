@@ -62,6 +62,11 @@ public final class ModBlocks {
 			p -> new ShapedBlock(p, new double[] {0, 7, 0, 16, 9, 16}),
 			BlockBehaviour.Properties.of().strength(1.5F, 3.0F).sound(SoundType.GLASS).noOcclusion());
 
+	/** The station's heat radiator: a thin white ribbed panel (like a solar panel, without cells). */
+	public static final Block STATION_RADIATOR = register("station_radiator",
+			p -> new ShapedBlock(p, new double[] {0, 7, 0, 16, 9, 16}),
+			BlockBehaviour.Properties.of().strength(1.5F, 3.0F).sound(SoundType.METAL).noOcclusion());
+
 	// The Moon (phase 6).
 	public static final Block LUNAR_ROCK = register("lunar_rock", Block::new,
 			BlockBehaviour.Properties.of().strength(1.8F, 6.0F).sound(SoundType.STONE).requiresCorrectToolForDrops());

@@ -28,31 +28,44 @@ class IssLayoutTest {
 	}
 
 	@Test
-	void dockHatchStandsOnTheFloorWithRoomBeside() {
+	void dockingPortOpensIntoTheModules() {
 		Map<String, IssLayout.Piece> g = grid();
 		int[] h = IssLayout.DOCK_HATCH;
-		assertEquals(IssLayout.Piece.DOCK_FLOOR, g.get(h[0] + "," + (h[1] - 1) + "," + h[2]));
-		assertEquals(IssLayout.Piece.DOCK_FLOOR, g.get((h[0] + 1) + "," + (h[1] - 1) + "," + h[2]));
+		// The hatch stands in space just in front of the port; the doorway behind it is two blocks tall.
 		assertTrue(g.get(h[0] + "," + h[1] + "," + h[2]) == null);
+		assertEquals(IssLayout.Piece.AIR, g.get(h[0] + "," + h[1] + "," + (h[2] + 1)));
+		assertEquals(IssLayout.Piece.AIR, g.get(h[0] + "," + (h[1] + 1) + "," + (h[2] + 1)));
+		assertEquals(IssLayout.Piece.DOCK_FLOOR, g.get(h[0] + "," + (h[1] - 1) + "," + (h[2] + 1)));
+		// A walkway with a floor all the way to Zvezda's back cap.
+		for (int z = IssLayout.FRONT_CAP_Z + 1; z < IssLayout.BACK_CAP_Z; z++) {
+			assertEquals(IssLayout.Piece.AIR, g.get("0,-1," + z), "walkway at z " + z);
+			IssLayout.Piece floor = g.get("0,-2," + z);
+			assertTrue(floor != null, "floor at z " + z);
+		}
 	}
 
 	@Test
-	void doorwayLeadsFromThePlatformIntoTheModules() {
-		Map<String, IssLayout.Piece> g = grid();
-		assertEquals(IssLayout.Piece.AIR, g.get("0,-2," + IssLayout.FRONT_CAP_Z));
-		assertEquals(IssLayout.Piece.AIR, g.get("0,-1," + IssLayout.FRONT_CAP_Z));
-		assertEquals(IssLayout.Piece.DOCK_FLOOR, g.get("0,-3," + (IssLayout.FRONT_CAP_Z - 1)));
-		assertEquals(IssLayout.Piece.HULL, g.get("0,-3,0"));
+	void stationIsFullSize() {
+		int minX = 0, maxX = 0, minZ = 0, maxZ = 0;
+		for (IssLayout.Placement p : IssLayout.build()) {
+			minX = Math.min(minX, p.x());
+			maxX = Math.max(maxX, p.x());
+			minZ = Math.min(minZ, p.z());
+			maxZ = Math.max(maxZ, p.z());
+		}
+		assertTrue(maxX - minX >= 108, "truss span " + (maxX - minX));
+		assertTrue(maxZ - minZ >= 72, "length " + (maxZ - minZ));
 	}
 
 	@Test
-	void stationHasSuppliesLightsWindowsAndSolarWings() {
+	void stationHasSuppliesLightsWindowsSolarWingsAndRadiators() {
 		Map<IssLayout.Piece, Integer> counts = new HashMap<>();
 		IssLayout.build().forEach(p -> counts.merge(p.piece(), 1, Integer::sum));
-		assertEquals(6, counts.get(IssLayout.Piece.SUPPLY));
-		assertTrue(counts.get(IssLayout.Piece.LIGHT) >= 10);
-		assertTrue(counts.get(IssLayout.Piece.WINDOW) >= 10);
-		assertTrue(counts.get(IssLayout.Piece.SOLAR) > 300);
+		assertTrue(counts.get(IssLayout.Piece.SUPPLY) >= 8);
+		assertTrue(counts.get(IssLayout.Piece.LIGHT) >= 20);
+		assertTrue(counts.get(IssLayout.Piece.WINDOW) >= 30);
+		assertTrue(counts.get(IssLayout.Piece.SOLAR) > 2000);
+		assertTrue(counts.get(IssLayout.Piece.RADIATOR) > 300);
 		assertTrue(counts.get(IssLayout.Piece.FOIL_HULL) > 0);
 	}
 }

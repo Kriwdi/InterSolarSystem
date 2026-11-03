@@ -55,27 +55,33 @@ public class SceneScreenshots implements FabricClientGameTest {
 			// Earth orbit: the ISS, the Earth below, and the night sky.
 			game.getServer().runOnServer(server -> OrbitStation.build(server.getLevel(ShipDimensions.ORBIT)));
 			game.getServer().runCommand("time set noon");
-			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 14 128 -38 25 18");
+			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 72 152 -96 facing 0 122 -12");
 			context.waitTicks(120);
 			context.takeScreenshot("07_orbit_iss");
-			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 14 128 -38 25 80");
+			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 30 112 -70 -20 70");
 			context.waitTicks(20);
 			context.takeScreenshot("08_orbit_earth_below");
 			game.getServer().runCommand("time set midnight");
-			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 14 128 -38 25 -30");
+			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 72 152 -96 30 -30");
 			context.waitTicks(40);
 			context.takeScreenshot("09_orbit_night_sky");
-			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 0 118 -10 180 0");
+			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 0 119 -27 0 5");
 			game.getServer().runCommand("time set noon");
 			context.waitTicks(40);
 			context.takeScreenshot("10_iss_inside");
+			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a -6 116 -9 30 80");
+			context.waitTicks(20);
+			context.takeScreenshot("10b_iss_cupola");
+			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a -40 135 -60 facing -40 126 -16");
+			context.waitTicks(30);
+			context.takeScreenshot("10c_iss_solar_wings");
 
 			// The space suit, seen from the front.
 			game.getServer().runCommand("item replace entity @a armor.head with intersolarsystem:space_helmet");
 			game.getServer().runCommand("item replace entity @a armor.chest with intersolarsystem:space_suit");
 			game.getServer().runCommand("item replace entity @a armor.legs with intersolarsystem:space_pants");
 			game.getServer().runCommand("item replace entity @a armor.feet with intersolarsystem:space_boots");
-			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 0 118 -20 0 10");
+			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 0 119 -17 0 10");
 			context.runOnClient(client -> client.options.setCameraType(CameraType.THIRD_PERSON_FRONT));
 			context.waitTicks(30);
 			context.takeScreenshot("11_space_suit");

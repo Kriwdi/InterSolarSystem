@@ -1122,6 +1122,10 @@ public final class ModLangTable {
 				"Seat",
 				"Sitz",
 				"Ülés");
+		add(rows, "block.intersolarsystem.station_radiator",
+				"Station Radiator",
+				"Stationsradiator",
+				"Állomás-hőleadó panel");
 		check(rows);
 		return List.copyOf(rows);
 	}

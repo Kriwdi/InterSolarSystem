@@ -267,3 +267,31 @@ if __name__ == "__main__":
     seat_textures()
     seat_model()
     print("seat written")
+
+
+def radiator():
+    img = Image.new("RGBA", (16, 16))
+    px = img.load()
+    rnd = random.Random(641)
+    for y in range(16):
+        for x in range(16):
+            rib = x % 4
+            c = hexc("e8e9e4") if rib in (1, 2) else hexc("b9bcb8") if rib == 0 else hexc("d3d5d0")
+            px[x, y] = shade(c, 1 + rnd.uniform(-0.03, 0.02))
+    for x in range(16):
+        px[x, 0] = hexc("8d918e")
+        px[x, 15] = hexc("8d918e")
+    # Micrometeoroid pits and a scorched patch.
+    for _ in range(6):
+        px[rnd.randrange(16), rnd.randrange(1, 15)] = hexc("7b7f7c")
+    save(img, "block/station_radiator")
+    data = json.loads((ASSETS / "models/block/solar_panel.json").read_text())
+    data["textures"] = {"particle": NS + "block/station_radiator", "cells": NS + "block/station_radiator",
+                        "back": NS + "block/station_radiator", "frame": NS + "block/truss"}
+    write(ASSETS / "models/block/station_radiator.json", data)
+    write(ASSETS / "blockstates/station_radiator.json", {"variants": {"": {"model": NS + "block/station_radiator"}}})
+    item_from_block("station_radiator", "block/station_radiator")
+
+
+if __name__ == "__main__":
+    radiator()

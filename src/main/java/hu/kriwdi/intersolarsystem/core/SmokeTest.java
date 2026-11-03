@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import hu.kriwdi.intersolarsystem.content.ModBlocks;
 import hu.kriwdi.intersolarsystem.content.ModLoot;
 import hu.kriwdi.intersolarsystem.ship.ShipDimensions;
+import hu.kriwdi.intersolarsystem.ship.ShipShell;
 import hu.kriwdi.intersolarsystem.space.IssLayout;
 import hu.kriwdi.intersolarsystem.space.MoonSites;
 import hu.kriwdi.intersolarsystem.space.OrbitStation;
@@ -65,10 +66,14 @@ public final class SmokeTest {
 				supplies++;
 			}
 		}
-		if (supplies != 6) {
-			LOGGER.error("[SMOKETEST-FAIL] {} of 6 ISS supply containers have their loot table", supplies);
+		long expected = IssLayout.build().stream().filter(p -> p.piece() == IssLayout.Piece.SUPPLY).count();
+		if (supplies != expected) {
+			LOGGER.error("[SMOKETEST-FAIL] {} of {} ISS supply containers have their loot table", supplies, expected);
 		} else {
-			LOGGER.info("[SMOKETEST] ISS built, docking port and 6 supply containers ready");
+			LOGGER.info("[SMOKETEST] ISS built, docking port and {} supply containers ready", supplies);
+		}
+		if (!ShipShell.isHull(orbit.getBlockState(hatch.above()))) {
+			LOGGER.error("[SMOKETEST-FAIL] the docked ship has no hull at the ISS");
 		}
 	}
 
