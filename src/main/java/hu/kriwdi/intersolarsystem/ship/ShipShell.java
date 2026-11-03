@@ -21,21 +21,23 @@ import hu.kriwdi.intersolarsystem.content.ModBlocks;
 import hu.kriwdi.intersolarsystem.content.ShipFacingBlock;
 
 /**
- * The research ship as it stands where it landed (or hangs at the ISS docking port): a rounded fuselage of
- * indestructible plating with a glass cockpit canopy on the nose, an orange livery band and portholes along the sides,
- * swept wings with navigation lights, two engine nacelles and a tail fin at the stern, and four landing legs with
- * footpads. It is built when the ship arrives and removed when it takes off; only the hull's own blocks are removed.
+ * The research ship as it stands where it landed (or hangs at the ISS docking port): upright like a rocket, a white
+ * cylinder of indestructible plating with livery bands, portholes, a band of tinted cockpit windows under the nose cone
+ * and a beacon on its tip, a ring of engine nozzles at the base, and three swept fins with landing legs and navigation
+ * lights. It is built when the ship arrives and removed when it takes off; only the hull's own blocks are removed.
  *
- * <p>Local coordinates: {@code d} goes into the ship from the hatch wall (the fuselage is 0..8, the wings and the
- * nacelles reach out to either side), {@code a} runs along the ship (stern -12 to nose +14, the hatch at 0), {@code y} is
- * up from the hatch (the fuselage floor is at -1). The hatch is two blocks tall (y 0 and 1).
+ * <p>Local coordinates: {@code d} goes into the ship from the hatch wall (the body is 0..6 around its axis at 3),
+ * {@code a} runs sideways (the hatch at 0), {@code y} is up from the hatch (the body starts at -1). The hatch is two
+ * blocks tall (y 0 and 1). The interior is a separate room and stays level.
  */
 public final class ShipShell {
-	public static final int WIDTH = 9;
-	public static final int STERN = -12;
-	public static final int NOSE = 14;
+	/** The body is 7 across (d 0..6), its axis at d = 3, a = 0. */
+	public static final int WIDTH = 7;
+	static final int AXIS_D = 3;
 	public static final int BOTTOM = -1;
-	public static final int TOP = 5;
+	/** Top of the cylindrical body; the nose cone rises above it to {@link #NOSE_TIP}. */
+	public static final int TOP = 17;
+	static final int NOSE_TIP = 24;
 	/** Longest landing leg (blocks below the fuselage). */
 	private static final int LEG_DEPTH = 12;
 
@@ -68,50 +70,33 @@ public final class ShipShell {
 		ServerLifecycleEvents.SERVER_STARTED.register(ShipShell::ensureBuilt);
 	}
 
-	// ---- Shape of the fuselage.
+	// ---- Shape: a rocket standing on three fins.
 
-	/** Side inset of the cross-section at a point along the ship (the nose and the stern are narrower). */
-	static int inset(int a) {
-		if (a <= -10) {
-			return 1;
+	/** Radius of the body at a height (the nose cone narrows above {@link #TOP}). */
+	static double radius(int y) {
+		if (y < BOTTOM || y > NOSE_TIP) {
+			return -1;
 		}
-		return switch (a) {
-			case 10, 11 -> 1;
-			case 12 -> 2;
-			case 13, 14 -> 3;
-			default -> 0;
-		};
-	}
-
-	static int top(int a) {
-		if (a <= -10) {
-			return 4;
+		if (y <= TOP) {
+			return 3.3;
 		}
-		return switch (a) {
-			case 11, 12 -> 4;
-			case 13 -> 3;
-			case 14 -> 2;
-			default -> TOP;
-		};
-	}
-
-	static int bottom(int a) {
-		return a >= 13 ? 0 : BOTTOM;
+		return 3.3 * (1.0 - (double) (y - TOP) / (NOSE_TIP - TOP + 1));
 	}
 
 	static boolean inShape(int d, int a, int y) {
-		if (a < STERN || a > NOSE) {
+		double r = radius(y);
+		if (r < 0) {
 			return false;
 		}
-		int k = inset(a);
-		return d >= k && d <= WIDTH - 1 - k && y >= bottom(a) && y <= top(a);
+		double dd = d - AXIS_D;
+		return dd * dd + a * a <= r * r + 0.01 || y >= NOSE_TIP - 1 && d == AXIS_D && a == 0;
 	}
 
 	static List<Part> layout() {
 		List<Part> parts = new ArrayList<>();
-		for (int a = STERN; a <= NOSE; a++) {
+		for (int y = BOTTOM; y <= NOSE_TIP; y++) {
 			for (int d = 0; d < WIDTH; d++) {
-				for (int y = BOTTOM; y <= TOP; y++) {
+				for (int a = -AXIS_D; a <= AXIS_D; a++) {
 					if (!inShape(d, a, y) || d == 0 && a == 0 && y == 0) {
 						continue;
 					}
@@ -121,102 +106,65 @@ public final class ShipShell {
 				}
 			}
 		}
-		wings(parts);
-		nacelles(parts);
-		tailFin(parts);
-		// Landing legs under the four corners; their length is found when building.
-		for (int d : new int[] {1, WIDTH - 2}) {
-			for (int a : new int[] {-8, 7}) {
-				parts.add(new Part(d, a, BOTTOM - 1, Kind.LEG));
-			}
-		}
+		parts.add(new Part(AXIS_D, 0, NOSE_TIP + 1, Kind.LIGHT_RED)); // beacon on the nose
+		fins(parts);
 		return List.copyOf(parts);
 	}
 
 	private static Part surfacePart(int d, int a, int y) {
-		int k = inset(a);
-		boolean nearSide = d == k;
-		boolean farSide = d == WIDTH - 1 - k;
-		boolean side = nearSide || farSide;
-		boolean roof = y == top(a);
-		boolean floor = y == bottom(a);
 		if (d == 0 && a == 0 && y == 1) {
 			return new Part(d, a, y, Kind.HATCH_TOP);
 		}
-		// Cockpit canopy: the upper nose is glass.
-		if (a >= 10 && a <= 12 && y >= 2 && !floor) {
+		double dd = d - AXIS_D;
+		boolean side = inShape(d, a, y + 1) && inShape(d, a, y - 1);
+		boolean cardinal = dd == 0 || a == 0;
+		boolean nearHatch = Math.abs(a) <= 1 && d <= 1;
+		// Cockpit: a band of tinted windows near the top, between frame pillars.
+		if (side && (y == TOP - 3 || y == TOP - 2) && !cardinal) {
 			return new Part(d, a, y, Kind.CANOPY);
 		}
-		// Rounded edges along the fuselage: stairs with their high side towards the middle.
-		if (side && (roof || floor)) {
-			return new Part(d, a, y, Kind.STAIRS, nearSide ? Local.IN : Local.OUT, floor);
-		}
-		// The roof slopes down where the next section forward or back is lower.
-		if (roof && !inShape(d, a + 1, y)) {
-			return new Part(d, a, y, Kind.STAIRS, Local.BACK, false);
-		}
-		if (roof && !inShape(d, a - 1, y)) {
-			return new Part(d, a, y, Kind.STAIRS, Local.FWD, false);
-		}
-		if (a == STERN && y >= 0 && y <= 2 && (d == 2 || d == 4 || d == 6) && (y != 1 || d == 4)) {
-			return new Part(d, a, y, Kind.THRUSTER);
-		}
-		if (side && y == 2 && (a == -7 || a == -4 || a == 3 || a == 6)) {
+		if (side && (y == 4 || y == 9) && cardinal && !nearHatch) {
 			return new Part(d, a, y, Kind.PORTHOLE);
 		}
-		if (side && y == 1 && a >= -11 && a <= 9) {
+		if (side && (y == 2 || y == TOP - 5)) {
 			return new Part(d, a, y, Kind.STRIPE);
+		}
+		// The engine skirt: nozzles all round the base, except beside the hatch.
+		if (side && y == 0 && !nearHatch && !cardinal) {
+			return new Part(d, a, y, Kind.THRUSTER);
+		}
+		// The nose cone's steps are smoothed with stairs facing the axis.
+		if (y > TOP && !inShape(d, a, y + 1) && !(d == AXIS_D && a == 0)) {
+			Local towards = Math.abs(dd) >= Math.abs(a) ? (dd < 0 ? Local.IN : Local.OUT) : (a < 0 ? Local.FWD : Local.BACK);
+			return new Part(d, a, y, Kind.STAIRS, towards, false);
 		}
 		return new Part(d, a, y, Kind.PLATING);
 	}
 
-	/** Swept wings at mid height on both sides, with the navigation lights at the tips (red: port, green: starboard). */
-	private static void wings(List<Part> parts) {
-		int[][] spans = {{-10, 3}, {-9, 4}, {-8, 5}, {-7, 6}, {-6, 6}, {-5, 5}, {-4, 3}, {-3, 2}};
-		for (int[] s : spans) {
-			int a = s[0];
-			for (int i = 1; i <= s[1]; i++) {
-				boolean tip = i == s[1] && a == -7;
-				parts.add(new Part(-i, a, 3, tip ? Kind.LIGHT_RED : Kind.SLAB_BOTTOM));
-				parts.add(new Part(WIDTH - 1 + i, a, 3, tip ? Kind.LIGHT_GREEN : Kind.SLAB_BOTTOM));
-			}
-		}
-	}
-
-	/** Two engine nacelles beside the stern (2 x 2), on pylons, thrusters at the back and rounded intakes in front. */
-	private static void nacelles(List<Part> parts) {
-		for (int[] side : new int[][] {{-3, -2, -1}, {WIDTH + 1, WIDTH + 2, WIDTH}}) {
-			for (int a = STERN; a <= -4; a++) {
-				for (int d : new int[] {side[0], side[1]}) {
-					for (int y = 0; y <= 1; y++) {
-						Kind kind = a == STERN ? Kind.THRUSTER : Kind.PLATING;
-						if (a == -4) {
-							parts.add(new Part(d, a, y, Kind.STAIRS, Local.BACK, y == 0));
-							continue;
-						}
-						parts.add(new Part(d, a, y, a == -7 && y == 1 ? Kind.STRIPE : kind));
+	/**
+	 * Three swept fins (back, port, starboard; the hatch side stays free), each with a landing leg and a light at the
+	 * tip.
+	 */
+	private static void fins(List<Part> parts) {
+		int[][] dirs = {{1, 0}, {0, -1}, {0, 1}};
+		Kind[] lights = {Kind.LIGHT_RED, Kind.LIGHT_RED, Kind.LIGHT_GREEN};
+		for (int f = 0; f < dirs.length; f++) {
+			int sd = dirs[f][0];
+			int sa = dirs[f][1];
+			for (int k = 1; k <= 3; k++) {
+				int d = AXIS_D + sd * (AXIS_D + k);
+				int a = sa * (AXIS_D + k);
+				int top = 7 - 2 * k;
+				for (int y = BOTTOM; y <= top; y++) {
+					Local back = sd != 0 ? (sd > 0 ? Local.OUT : Local.IN) : (sa > 0 ? Local.BACK : Local.FWD);
+					if (y == top) {
+						parts.add(new Part(d, a, y, k == 3 ? lights[f] : Kind.STAIRS, back, false));
+					} else {
+						parts.add(new Part(d, a, y, Kind.PLATING));
 					}
 				}
-				if (a >= -10 && a <= -6) {
-					parts.add(new Part(side[2], a, 1, Kind.SLAB_BOTTOM)); // pylon
-				}
-			}
-		}
-	}
-
-	/** A swept fin on the stern roof with a red light on top. */
-	private static void tailFin(List<Part> parts) {
-		int d = WIDTH / 2;
-		for (int y = 5; y <= 8; y++) {
-			int front = -8 - (y - 5);
-			for (int a = STERN; a <= front; a++) {
-				boolean leading = a == front;
-				if (y == 8 && a == STERN) {
-					parts.add(new Part(d, a, y, Kind.LIGHT_RED));
-				} else if (leading) {
-					parts.add(new Part(d, a, y, Kind.STAIRS, Local.BACK, false));
-				} else {
-					parts.add(new Part(d, a, y, Kind.PLATING));
+				if (k == 3) {
+					parts.add(new Part(d, a, BOTTOM - 1, Kind.LEG));
 				}
 			}
 		}
@@ -248,7 +196,7 @@ public final class ShipShell {
 			case PORTHOLE -> ModBlocks.SHIP_PORTHOLE.defaultBlockState();
 			case THRUSTER -> ModBlocks.SHIP_THRUSTER.defaultBlockState();
 			case STRIPE -> ModBlocks.SHIP_STRIPE.defaultBlockState();
-			case CANOPY -> ModBlocks.SHIP_VIEWPORT.defaultBlockState();
+			case CANOPY -> ModBlocks.SHIP_WINDOW.defaultBlockState();
 			case LIGHT_RED -> ModBlocks.SHIP_LIGHT_RED.defaultBlockState();
 			case LIGHT_GREEN -> ModBlocks.SHIP_LIGHT_GREEN.defaultBlockState();
 			case HATCH_TOP -> ModBlocks.SHIP_HATCH_TOP.defaultBlockState().setValue(ShipFacingBlock.FACING, out);
@@ -267,7 +215,7 @@ public final class ShipShell {
 				|| state.is(ModBlocks.SHIP_PLATING_STAIRS) || state.is(ModBlocks.SHIP_PLATING_SLAB)
 				|| state.is(ModBlocks.SHIP_STRIPE) || state.is(ModBlocks.SHIP_LIGHT_RED)
 				|| state.is(ModBlocks.SHIP_LIGHT_GREEN) || state.is(ModBlocks.SHIP_HATCH_TOP)
-				|| state.is(ModBlocks.SHIP_VIEWPORT);
+				|| state.is(ModBlocks.SHIP_VIEWPORT) || state.is(ModBlocks.SHIP_WINDOW);
 	}
 
 	/** Builds the hull on the ground around a hatch that faces {@code out}. */
@@ -296,7 +244,7 @@ public final class ShipShell {
 			if (mode == Mode.DOCKED && !current.isAir() && !isHull(current)) {
 				continue;
 			}
-			boolean fuselage = inShape(part.d(), part.a(), part.y());
+			boolean fuselage = inShape(part.d(), part.a(), part.y()) || part.kind() == Kind.LEG;
 			boolean free = current.canBeReplaced() || isHull(current);
 			if (!free && (part.kind() == Kind.FILL || !fuselage)) {
 				// Terrain inside the hull stays, and it cuts into wings and nacelles; the fuselage skin always goes on.
@@ -334,9 +282,9 @@ public final class ShipShell {
 	 * footpads, and also the blocks of older hull shapes.
 	 */
 	public static void remove(ServerLevel level, BlockPos hatch, Direction out) {
-		for (int a = STERN; a <= NOSE; a++) {
-			for (int d = -8; d <= WIDTH + 7; d++) {
-				for (int y = BOTTOM - LEG_DEPTH - 1; y <= 9; y++) {
+		for (int a = -14; a <= 14; a++) {
+			for (int d = -8; d <= 16; d++) {
+				for (int y = BOTTOM - LEG_DEPTH - 1; y <= NOSE_TIP + 2; y++) {
 					BlockPos pos = at(hatch, out, d, a, y);
 					if (isHull(level.getBlockState(pos))) {
 						level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);

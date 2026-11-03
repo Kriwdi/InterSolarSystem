@@ -314,3 +314,32 @@ def station_glass():
 
 if __name__ == "__main__":
     station_glass()
+
+
+def tinted_window():
+    img = Image.new("RGBA", (16, 16))
+    px = img.load()
+    for y in range(16):
+        for x in range(16):
+            t = (x + (15 - y)) / 30.0
+            base = mix(hexc("0d1a2e"), hexc("2c4a72"), t)
+            # Reflection streaks of the sky across the glass.
+            if 3 <= (x + y) % 11 <= 4 and 2 < x < 14 and 2 < y < 14:
+                base = mix(base, hexc("b9cbe0"), 0.55)
+            px[x, y] = base
+    for i in range(16):
+        for (x, y) in ((i, 0), (i, 15), (0, i), (15, i)):
+            px[x, y] = hexc("8d959c")
+        for (x, y) in ((i, 1), (1, i)):
+            px[x, y] = hexc("c9ccc8")
+        for (x, y) in ((i, 14), (14, i)):
+            px[x, y] = hexc("4a5056")
+    save(img, "block/ship_window")
+    write(ASSETS / "models/block/ship_window.json",
+          {"parent": "minecraft:block/cube_all", "textures": {"all": NS + "block/ship_window"}})
+    write(ASSETS / "blockstates/ship_window.json", {"variants": {"": {"model": NS + "block/ship_window"}}})
+    item_from_block("ship_window", "block/ship_window")
+
+
+if __name__ == "__main__":
+    tinted_window()

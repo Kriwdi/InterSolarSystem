@@ -1154,6 +1154,10 @@ public final class ModLangTable {
 				"Food bumps the visor",
 				"Essen stößt an das Visier",
 				"Az étel a sisakrostélynak ütközik");
+		add(rows, "block.intersolarsystem.ship_window",
+				"Tinted Cockpit Window",
+				"Getöntes Cockpitfenster",
+				"Sötétített pilótafülke-ablak");
 		check(rows);
 		return List.copyOf(rows);
 	}

@@ -47,12 +47,12 @@ public class ShipJourney implements FabricClientGameTest {
 			LOGGER.info("[JOURNEY] ship hatch at {}", hatch.toShortString());
 
 			// The ship from outside (the hatch faces west, the hull runs north-south east of it).
-			tp(game, "minecraft:overworld", hatch.getX() - 16, hatch.getY() + 5, hatch.getZ() - 16, hatch.getX() + 4,
-					hatch.getY() + 2, hatch.getZ());
+			tp(game, "minecraft:overworld", hatch.getX() - 22, hatch.getY() + 7, hatch.getZ() - 20, hatch.getX() + 3,
+					hatch.getY() + 10, hatch.getZ());
 			context.waitTicks(140);
 			context.takeScreenshot("40_ship_outside");
-			tp(game, "minecraft:overworld", hatch.getX() + 20, hatch.getY() + 7, hatch.getZ() + 18, hatch.getX() + 4,
-					hatch.getY() + 2, hatch.getZ());
+			tp(game, "minecraft:overworld", hatch.getX() + 24, hatch.getY() + 4, hatch.getZ() + 20, hatch.getX() + 3,
+					hatch.getY() + 10, hatch.getZ());
 			context.waitTicks(60);
 			context.takeScreenshot("41_ship_outside_stern");
 
@@ -155,12 +155,12 @@ public class ShipJourney implements FabricClientGameTest {
 			context.waitTicks(40);
 			BlockPos moonHatch = game.getServer().computeOnServer(server -> ShipStateAccess.get(server).landingSite()
 					.map(s -> new BlockPos(s.x(), s.y(), s.z())).orElse(BlockPos.ZERO));
-			tp(game, "intersolarsystem:moon", moonHatch.getX() + 6, moonHatch.getY() + 5, moonHatch.getZ() - 18,
-					moonHatch.getX() - 4, moonHatch.getY() + 2, moonHatch.getZ() + 6);
+			tp(game, "intersolarsystem:moon", moonHatch.getX() + 14, moonHatch.getY() + 6, moonHatch.getZ() - 22,
+					moonHatch.getX(), moonHatch.getY() + 10, moonHatch.getZ() + 3);
 			context.waitTicks(120);
 			context.takeScreenshot("54_ship_on_the_moon");
 			tp(game, "intersolarsystem:moon", moonHatch.getX() - 22, moonHatch.getY() + 9, moonHatch.getZ() + 14,
-					moonHatch.getX() + 4, moonHatch.getY() + 2, moonHatch.getZ() - 2);
+					moonHatch.getX(), moonHatch.getY() + 10, moonHatch.getZ() + 3);
 			context.waitTicks(40);
 			context.takeScreenshot("54b_ship_on_the_moon_side");
 
@@ -179,8 +179,8 @@ public class ShipJourney implements FabricClientGameTest {
 					ShipInteriorBuilder.at(ShipInteriorLayout.capsule().hatch()), player(server)));
 			context.waitTicks(20);
 			game.getServer().runCommand("gamemode spectator @a");
-			tp(game, "intersolarsystem:orbit", dock.getX() + 26, dock.getY() + 10, dock.getZ() - 22, dock.getX() - 2,
-					dock.getY() + 1, dock.getZ() - 2);
+			tp(game, "intersolarsystem:orbit", dock.getX() + 26, dock.getY() + 10, dock.getZ() - 22, dock.getX(),
+					dock.getY() + 10, dock.getZ() - 3);
 			context.waitTicks(100);
 			context.takeScreenshot("55_docked_at_the_iss");
 			tp(game, "intersolarsystem:orbit", dock.getX() - 30, dock.getY() + 24, dock.getZ() - 40, dock.getX(),

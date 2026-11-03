@@ -223,6 +223,9 @@ public final class ModBlocks {
 
 	public static final Block SHIP_PLATING_SLAB = register("ship_plating_slab", SlabBlock::new, hull(SoundType.METAL));
 
+	/** Tinted cockpit glass seen from outside: dark blue with a silver sheen, in a steel frame. */
+	public static final Block SHIP_WINDOW = register("ship_window", Block::new, hull(SoundType.GLASS));
+
 	public static final Block SHIP_STRIPE = register("ship_stripe", Block::new, hull(SoundType.METAL));
 
 	public static final Block SHIP_LIGHT_RED = register("ship_light_red", Block::new,
