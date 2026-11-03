@@ -1,1 +1,1 @@
-data/minecraft/worldgen/biome/plains.json
+assets/minecraft/lang/en_us.json

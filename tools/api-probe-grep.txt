@@ -1,0 +1,1 @@
+Chair|Seat|Sittable|Stool|Bench
