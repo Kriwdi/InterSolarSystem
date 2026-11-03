@@ -268,30 +268,59 @@ Ugyanaz a minta, mint a vas szerszámoknál, titánrúddal: csákány, fejsze, �
 - Az incidens típusai: rövidzárlat, túlmelegedés, szivárgás, nyomásvesztés, tűz.
 - **60 másodperc** van a javításra, különben az alrendszer 25%-ot veszít.
 
-**Javítás:**
+**Hol jelenik meg a hiba?** Minden incidens a hajó egy konkrét pontján látszik, az alrendszer helyén:
 
-1. Vedd a **javítókészletet** a főkezedbe.
-2. Kattints jobb gombbal a **javítóállomásra** (a hajóban).
-3. A javítás sorrendje: a legsürgősebb incidens, aztán egy ismert rejtett hiba, aztán a legrosszabb alrendszer. Incidens nélkül a készlet 25%-ot javít a legrosszabb alrendszeren.
+| Incidens | Mit látsz | Mivel javítod a helyszínen | Minijáték |
+|---|---|---|---|
+| Rövidzárlat | **szikrázó panel** a falon (szikrák, sercegés) | **forrasztópáka** | vezetékezés |
+| Túlmelegedés | **gőzölgő szellőző** a falon (gőz, sziszegés) | **multiszerszám** | szelep |
+| Szivárgás, nyomásvesztés | **szivárgó cső** a mennyezeti hűtőcsövön | **tömítőhab** | nyomás |
+| Tűz | **elektromos tűz** a padlón (láng, füst) | **poroltó** (vagy egy vödör víz) | nincs, azonnal elalszik |
 
-**Javító minijátékok** (incidensnél):
+- Kattints jobb gombbal a hibára a megfelelő szerszámmal. A **javítókészlet** mindenhol működik (helyette).
+- Ha rossz eszköz van a kezedben, a chat megmondja, mi kell.
+- A **javítóállomás** is megmaradt: oda vive a készletet a legsürgősebb hibát javítja, ugyanúgy, mint eddig.
+- Ha a hibát megjavítottad (bárhogyan), a fal vagy a cső visszaáll.
 
-| Incidens | Minijáték | Mit kell tenni |
+**Szerszámok receptjei:**
+
+| Szerszám | Hozzávalók | Tartósság |
 |---|---|---|
-| Rövidzárlat | **Vezetékezés** | Kösd össze a bal oldali színes csatlakozókat a jobb oldali azonos színűekkel. |
-| Túlmelegedés | **Szelep** | Zárd el a szelepet (gomb vagy szóköz), amikor a mutató a zöld sávban van, körönként egyszer. |
-| Szivárgás, nyomásvesztés | **Nyomás** | Pumpáld át az egységeket a szelepekkel úgy, hogy minden tartály a sárga vonalon álljon, a lépésszámon belül. |
-| Tűz | – | A készlet eloltja. |
+| Forrasztópáka | 1 rézrúd, 1 vasrúd, 1 vezeték (átlósan) | 32 javítás |
+| Tömítőhab (2 db) | 1 bitumen + 1 üvegpalack | elfogy |
+| Poroltó | 1 vasrög, 5 alumíniumrúd, 1 vödör | 12 oltás |
+| Légszűrő-patron | 2 gyapjú + 1 faszén | – |
 
-- A rossz megoldás 5%-ot von le, és az incidens megmarad.
-- A játék nem áll meg közben, és a készletnek a kezedben kell maradnia.
-- Minél sérültebb az alrendszer, annál nagyobb a tábla.
+A kezdőhordóban is van forrasztópáka, tömítőhab, poroltó, légszűrő, cső és kábel.
 
 **Multiszerszám:**
 
 - A második kézben tartva a 40% feletti könnyű hibákat minijáték nélkül javítod.
 - A súlyosabb hibáknál kisebb táblát kapsz.
 - 48 használatig bírja.
+
+---
+
+### A hajó rendszerei: reaktor, hűtés, életfenntartás, csövek, kábelek
+
+A **gépteremben** (a hajó farában):
+
+| Gép | Hol | Mennyi | Mivel töltöd |
+|---|---|---|---|
+| **Hajóreaktor** | középen, a rács mögött | 8 egység, repülésenként 1 | urán fűtőelem: +4 |
+| **Hűtőfolyadék-tartály** | bal hátsó sarok | 4 egység, repülésenként 1 | tiszta vizes kanna vagy jégtömb (jég, tömör jég, kék jég, hótömb): +2 |
+| **Életfenntartó egység** | jobb hátsó sarok | 4 egység, repülésenként 1 | légszűrő-patron: +4 |
+
+Jobb klikk üres kézzel: kiírja, mennyi van benne, és mivel töltheted. A tesztrepülés nem fogyaszt.
+
+**Csövek és kábelek.** A hűtőcsövek (rézszínűek) maguktól összeillenek egymással és a gépekkel. Kábelek (fekete-sárgák) ugyanígy.
+
+- A **hűtőcsőnek** össze kell kötnie a reaktort **mindkét hajtóműcsatlakozóval** (a hátsó fal két fúvókája) és a **hűtőtartállyal**.
+- A **tápkábelnek** a reaktortól el kell érnie a **hídig** (a mennyezeten fut végig, a válaszfalakon át).
+- Csövet és kábelt ki lehet bontani és újra lerakni (hajón kívül is, bárhol). Ha megszakad a vezeték, a hajó nem indul, és az ellenőrzőlista megmondja, mi hiányzik.
+- Recept: 3 fémhulladék → 6 cső; 3 mentett vezeték → 6 kábel.
+
+**Az ellenőrzőlista** ezeket is nézi: üzemanyag, hűtőfolyadék, légszűrő, ép csővezeték és kábel.
 
 ---
 
