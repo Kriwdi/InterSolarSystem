@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:block_blob",
+  "state": "intersolarsystem:cinder_rock",
+  "can_place_on": {
+    "type": "minecraft:matching_blocks",
+    "blocks": [
+      "intersolarsystem:ash",
+      "intersolarsystem:silica_sand",
+      "intersolarsystem:cinder_rock"
+    ]
+  }
+}

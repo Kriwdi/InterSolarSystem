@@ -41,6 +41,7 @@ public final class SmokeTest {
 			}
 			checkStation(server);
 			checkMoon(server);
+			checkEarth(server);
 			LOGGER.info("[SMOKETEST] server started, stopping");
 			server.halt(false);
 		});
@@ -116,5 +117,73 @@ public final class SmokeTest {
 			LOGGER.error("[SMOKETEST-FAIL] the Moon has no regolith highlands and maria");
 		}
 		LOGGER.info("[SMOKETEST] Moon border {}", moon.getWorldBorder().getSize());
+	}
+
+	/** The dead Earth: only the Overworld exists, every biome is ours and generates, and no vanilla ore is left. */
+	private static void checkEarth(MinecraftServer server) {
+		if (server.getLevel(net.minecraft.world.level.Level.NETHER) != null
+				|| server.getLevel(net.minecraft.world.level.Level.END) != null) {
+			LOGGER.error("[SMOKETEST-FAIL] the Nether or the End still exists");
+		}
+		ServerLevel earth = server.overworld();
+		BlockPos spawn = earth.getRespawnData().pos();
+		java.util.Map<String, String> found = new java.util.TreeMap<>();
+		for (var key : hu.kriwdi.intersolarsystem.worldgen.DeadEarth.ALL) {
+			var hit = earth.findClosestBiome3d(h -> h.is(key), spawn, 6400, 32, 64);
+			found.put(key.identifier().getPath(), hit == null ? "MISSING" : hit.getFirst().toShortString());
+		}
+		LOGGER.info("[SMOKETEST] Earth biomes nearest to spawn {}: {}", spawn.toShortString(), found);
+		if (found.values().stream().filter("MISSING"::equals).count() > 2) {
+			LOGGER.error("[SMOKETEST-FAIL] more than two dead Earth biomes are missing within 6400 blocks");
+		}
+		java.util.Map<String, Integer> biomes = new java.util.TreeMap<>();
+		java.util.Map<String, Integer> top = new java.util.TreeMap<>();
+		for (int x = -128; x <= 128; x += 64) {
+			for (int z = -128; z <= 128; z += 64) {
+				int bx = spawn.getX() + x;
+				int bz = spawn.getZ() + z;
+				earth.getChunk(bx >> 4, bz >> 4);
+				int h = earth.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.WORLD_SURFACE, bx, bz);
+				BlockPos pos = new BlockPos(bx, h - 1, bz);
+				biomes.merge(earth.getBiome(pos).unwrapKey().map(k -> k.identifier().toString()).orElse("?"), 1,
+						Integer::sum);
+				top.merge(net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(earth.getBlockState(pos).getBlock())
+						.toString(), 1, Integer::sum);
+			}
+		}
+		LOGGER.info("[SMOKETEST] Earth around spawn: biomes {}, top blocks {}", biomes, top);
+		if (biomes.keySet().stream().anyMatch(b -> b.startsWith("minecraft:"))) {
+			LOGGER.error("[SMOKETEST-FAIL] a vanilla biome generated on the dead Earth");
+		}
+		java.util.Map<String, Integer> ores = new java.util.TreeMap<>();
+		BlockPos.MutableBlockPos p = new BlockPos.MutableBlockPos();
+		for (int cx = -1; cx <= 1; cx++) {
+			for (int cz = -1; cz <= 1; cz++) {
+				int ox = (spawn.getX() & ~15) + cx * 16;
+				int oz = (spawn.getZ() & ~15) + cz * 16;
+				earth.getChunk(ox >> 4, oz >> 4);
+				for (int x = ox; x < ox + 16; x++) {
+					for (int z = oz; z < oz + 16; z++) {
+						for (int y = earth.getMinY(); y < 120; y++) {
+							String id = net.minecraft.core.registries.BuiltInRegistries.BLOCK
+									.getKey(earth.getBlockState(p.set(x, y, z)).getBlock()).toString();
+							if (id.endsWith("_ore")) {
+								ores.merge(id, 1, Integer::sum);
+							}
+						}
+					}
+				}
+			}
+		}
+		LOGGER.info("[SMOKETEST] ores in the 3x3 chunks at spawn: {}", ores);
+		if (ores.keySet().stream().anyMatch(o -> o.startsWith("minecraft:"))) {
+			LOGGER.error("[SMOKETEST-FAIL] vanilla ore generated on the dead Earth");
+		}
+		if (!ores.keySet().stream().anyMatch(o -> o.startsWith("intersolarsystem:"))) {
+			LOGGER.error("[SMOKETEST-FAIL] no space ore around spawn");
+		}
+		if (earth.getGameRules().get(net.minecraft.world.level.gamerules.GameRules.SPAWN_PHANTOMS)) {
+			LOGGER.error("[SMOKETEST-FAIL] phantoms still spawn");
+		}
 	}
 }

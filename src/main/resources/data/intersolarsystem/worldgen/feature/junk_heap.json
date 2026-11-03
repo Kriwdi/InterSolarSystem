@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:block_blob",
+  "state": "intersolarsystem:compacted_junk",
+  "can_place_on": {
+    "type": "minecraft:matching_blocks",
+    "blocks": [
+      "intersolarsystem:compacted_junk",
+      "minecraft:gravel",
+      "minecraft:coarse_dirt"
+    ]
+  }
+}

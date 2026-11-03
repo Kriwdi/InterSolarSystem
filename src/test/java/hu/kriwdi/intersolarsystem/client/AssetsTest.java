@@ -33,7 +33,8 @@ class AssetsTest {
 			.resolve("src/main/resources/assets/intersolarsystem");
 	private static final String NS = "intersolarsystem:";
 	private static final Set<String> VANILLA_PARENTS = Set.of("minecraft:block/block", "minecraft:block/cube_all",
-			"minecraft:block/cube", "minecraft:item/generated", "minecraft:item/handheld");
+			"minecraft:block/cube", "minecraft:block/cube_column", "minecraft:block/cube_column_horizontal",
+			"minecraft:item/generated", "minecraft:item/handheld");
 	private static final Set<String> ELEMENT_KEYS = Set.of("from", "to", "faces", "rotation", "shade", "__comment");
 	private static final Set<String> FACE_KEYS = Set.of("texture", "uv", "cullface", "rotation", "tintindex");
 	private static final Set<String> DIRECTIONS = Set.of("north", "south", "east", "west", "up", "down");

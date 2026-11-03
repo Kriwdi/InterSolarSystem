@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:block_blob",
+  "state": "minecraft:bone_block",
+  "can_place_on": {
+    "type": "minecraft:matching_blocks",
+    "blocks": [
+      "intersolarsystem:dried_silt",
+      "minecraft:sand",
+      "minecraft:gravel",
+      "intersolarsystem:salt_crust"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "intersolarsystem:ash_desert",
+    "intersolarsystem:dried_seabed",
+    "intersolarsystem:petrified_forest",
+    "intersolarsystem:irradiated_crater",
+    "intersolarsystem:frozen_megalopolis",
+    "intersolarsystem:acid_swamp",
+    "intersolarsystem:junk_mountains",
+    "intersolarsystem:salt_flats",
+    "intersolarsystem:deep_canyons",
+    "intersolarsystem:oasis",
+    "intersolarsystem:abandoned_farmland",
+    "intersolarsystem:oil_field"
+  ]
+}

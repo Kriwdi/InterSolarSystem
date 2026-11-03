@@ -1,0 +1,84 @@
+{
+  "attributes": {
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "ambient": [],
+          "axolotls": [],
+          "creature": [],
+          "misc": [],
+          "monster": [],
+          "underground_water_creature": [],
+          "water_ambient": [],
+          "water_creature": []
+        }
+      },
+      "modifier": "overlay"
+    },
+    "minecraft:visual/sky_color": "#93a07a",
+    "minecraft:visual/fog_color": "#8a9a62",
+    "minecraft:visual/water_fog_color": "#4c7a1e",
+    "minecraft:visual/ambient_particles": {
+      "argument": [
+        {
+          "particle": {
+            "type": "minecraft:spore_blossom_air"
+          },
+          "probability": 0.004
+        }
+      ],
+      "modifier": "append"
+    }
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:cave_extra_underground",
+    "minecraft:canyon"
+  ],
+  "downfall": 0.9,
+  "effects": {
+    "water_color": "#8fd13a",
+    "grass_color": "#6b7a35",
+    "foliage_color": "#5f6d2c"
+  },
+  "features": [
+    [],
+    [
+      "intersolarsystem:acid_pool",
+      "minecraft:lake_lava_underground"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:ore_gravel",
+      "minecraft:ore_granite_upper",
+      "minecraft:ore_granite_lower",
+      "minecraft:ore_diorite_upper",
+      "minecraft:ore_diorite_lower",
+      "minecraft:ore_andesite_upper",
+      "minecraft:ore_andesite_lower",
+      "minecraft:ore_tuff",
+      "intersolarsystem:ore_bauxite",
+      "intersolarsystem:ore_titanium",
+      "intersolarsystem:ore_uraninite",
+      "intersolarsystem:ore_spodumene",
+      "intersolarsystem:ore_monazite",
+      "intersolarsystem:ore_oil_shale"
+    ],
+    [],
+    [
+      "minecraft:spring_lava"
+    ],
+    [
+      "intersolarsystem:dead_trees",
+      "intersolarsystem:toxic_barrel_common",
+      "intersolarsystem:rubble_sparse"
+    ],
+    []
+  ],
+  "has_precipitation": true,
+  "temperature": 0.9
+}

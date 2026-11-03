@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:block_blob",
+  "state": "intersolarsystem:salt_block",
+  "can_place_on": {
+    "type": "minecraft:matching_blocks",
+    "blocks": [
+      "intersolarsystem:salt_crust",
+      "intersolarsystem:lithium_brine_crust"
+    ]
+  }
+}

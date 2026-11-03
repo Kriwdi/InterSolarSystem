@@ -1,0 +1,8 @@
+{
+  "feature": "intersolarsystem:canyon_strata",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

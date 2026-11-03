@@ -29,6 +29,7 @@ public class InterSolarSystem implements ModInitializer {
 		ShipCommands.register();
 		ShipFlightController.register();
 		SpaceEnvironment.register();
+		hu.kriwdi.intersolarsystem.worldgen.EarthEnvironment.register();
 		SmokeTest.register();
 		LOGGER.info("InterSolarSystem initialized");
 	}

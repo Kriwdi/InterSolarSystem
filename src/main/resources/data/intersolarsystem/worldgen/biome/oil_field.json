@@ -1,0 +1,83 @@
+{
+  "attributes": {
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "ambient": [],
+          "axolotls": [],
+          "creature": [],
+          "misc": [],
+          "monster": [],
+          "underground_water_creature": [],
+          "water_ambient": [],
+          "water_creature": []
+        }
+      },
+      "modifier": "overlay"
+    },
+    "minecraft:visual/sky_color": "#9a8f86",
+    "minecraft:visual/fog_color": "#857a70",
+    "minecraft:visual/water_fog_color": "#0d0b09",
+    "minecraft:visual/ambient_particles": {
+      "argument": [
+        {
+          "particle": {
+            "type": "minecraft:ash"
+          },
+          "probability": 0.006
+        }
+      ],
+      "modifier": "append"
+    }
+  },
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:cave_extra_underground",
+    "minecraft:canyon"
+  ],
+  "downfall": 0.0,
+  "effects": {
+    "water_color": "#2a2620"
+  },
+  "features": [
+    [],
+    [
+      "minecraft:lake_lava_underground"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:ore_gravel",
+      "minecraft:ore_granite_upper",
+      "minecraft:ore_granite_lower",
+      "minecraft:ore_diorite_upper",
+      "minecraft:ore_diorite_lower",
+      "minecraft:ore_andesite_upper",
+      "minecraft:ore_andesite_lower",
+      "minecraft:ore_tuff",
+      "intersolarsystem:ore_bauxite",
+      "intersolarsystem:ore_titanium",
+      "intersolarsystem:ore_uraninite",
+      "intersolarsystem:ore_spodumene",
+      "intersolarsystem:ore_monazite",
+      "intersolarsystem:ore_oil_shale",
+      "intersolarsystem:ore_oil_shale_field"
+    ],
+    [],
+    [
+      "minecraft:spring_lava"
+    ],
+    [
+      "intersolarsystem:oil_shale_disk",
+      "intersolarsystem:tar_puddle",
+      "intersolarsystem:toxic_barrel_rare",
+      "intersolarsystem:scrap_pile_sparse"
+    ],
+    []
+  ],
+  "has_precipitation": false,
+  "temperature": 1.5
+}

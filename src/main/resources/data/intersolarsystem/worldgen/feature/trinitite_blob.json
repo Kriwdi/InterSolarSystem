@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:block_blob",
+  "state": "intersolarsystem:trinitite",
+  "can_place_on": {
+    "type": "minecraft:matching_blocks",
+    "blocks": [
+      "intersolarsystem:irradiated_soil",
+      "minecraft:gravel",
+      "intersolarsystem:trinitite"
+    ]
+  }
+}
