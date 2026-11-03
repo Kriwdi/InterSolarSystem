@@ -107,7 +107,7 @@ public final class Machines {
 					}
 					for (BlockPos d : grid.diesel) {
 						MachineStore.Machine m = store.peek(level.dimension(), d);
-						if (m != null && m.fuel > 0 && grid.supply() > 0 && level.random.nextInt(3) == 0) {
+						if (m != null && m.fuel > 0 && grid.supply() > 0 && level.getRandom().nextInt(3) == 0) {
 							level.sendParticles(ParticleTypes.LARGE_SMOKE, d.getX() + 0.75, d.getY() + 1.7, d.getZ() + 0.6, 1,
 									0.02, 0.05, 0.02, 0.01);
 							level.playSound(null, d, SoundEvents.MINECART_RIDING, SoundSource.BLOCKS, 0.15F, 0.6F);
@@ -144,9 +144,9 @@ public final class Machines {
 		}
 		Modules mods = modules(level, pos);
 		m.progress += (int) (INTERVAL * power * (mods.shredder() ? 2 : 1));
-		if (level.random.nextInt(2) == 0) {
+		if (level.getRandom().nextInt(2) == 0) {
 			level.sendParticles(ParticleTypes.CRIT, pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5, 3, 0.25, 0.1, 0.25, 0.05);
-			level.playSound(null, pos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 0.35F, 0.7F + level.random.nextFloat() * 0.3F);
+			level.playSound(null, pos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 0.35F, 0.7F + level.getRandom().nextFloat() * 0.3F);
 		}
 		if (m.progress < WORK) {
 			return;
@@ -162,7 +162,7 @@ public final class Machines {
 			emit(level, pos, one);
 			return;
 		}
-		float yield = 0.55F + level.random.nextFloat() * 0.2F + (mods.smelter() ? 0.15F : 0) + (mods.sorter() ? 0.1F : 0);
+		float yield = 0.55F + level.getRandom().nextFloat() * 0.2F + (mods.smelter() ? 0.15F : 0) + (mods.sorter() ? 0.1F : 0);
 		yield = Math.min(1.0F, yield);
 		for (SalvageTable.Output out : outputs) {
 			if (out.rare() && !mods.sorter()) {
@@ -173,8 +173,8 @@ public final class Machines {
 				continue;
 			}
 			float amount = out.count() * yield;
-			int count = (int) amount + (level.random.nextFloat() < amount - (int) amount ? 1 : 0);
-			if (out.rare() && level.random.nextFloat() > 0.35F) {
+			int count = (int) amount + (level.getRandom().nextFloat() < amount - (int) amount ? 1 : 0);
+			if (out.rare() && level.getRandom().nextFloat() > 0.35F) {
 				count = 0;
 			}
 			if (mods.smelter() && item == ModItems.SCRAP_METAL) {
@@ -248,7 +248,9 @@ public final class Machines {
 		if (held.isEmpty()) {
 			if (player.isShiftKeyDown()) {
 				for (ItemStack stack : m.queue) {
-					player.getInventory().placeItemBackInInventory(stack);
+					if (!player.getInventory().add(stack)) {
+						level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY(), player.getZ(), stack));
+					}
 				}
 				m.queue.clear();
 				m.progress = 0;
