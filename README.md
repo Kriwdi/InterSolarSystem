@@ -134,6 +134,16 @@ Choose **Moon** on the navigation console (from Earth or from orbit): the ship l
 
 A mixin into vanilla's sky renderer draws the dead Earth (dust storms drifting over brown continents and dark oceans, eight lighting phases) with vanilla's own celestial pipeline: in orbit it fills the sky below, on the Moon it hangs in the sky and vanilla's moon is hidden.
 
+## The dead Earth
+
+A new world is the dead Earth: only the Overworld exists (no Nether, no End), the seas have dried out, and all vanilla biomes are replaced by twelve of the mod's own: ash desert, dried seabed, petrified forest, irradiated crater, frozen megalopolis, acid swamp, junk mountains, salt flats, deep canyons, oasis (the last living place), abandoned farmland and oil field. No vanilla animals, monsters, patrols, traders or phantoms spawn, and no vanilla ore generates: the caves and deepslate stay, the ores are the space programme's (bauxite, titanium, uraninite, spodumene, monazite, oil shale; silica sand and lithium salts on the surface). Iron and copper come only from salvage (smelt scrap metal and salvaged wiring). The acid swamp's water burns and the irradiated crater makes you sick unless you wear the full space suit.
+
+Materials make components (titanium plate, solar cell, battery cell, rare earth magnet, uranium fuel rod), titanium tools, and the engine upgrades: right-click the navigation console with an **Ion Drive Kit** (tier 2) or a **Fusion Drive Kit** (tier 3, needs helium-3 regolith from the Moon) while the ship is landed.
+
+Structures: small and large bunkers, a space centre, research lab and station, seed bank, terraformer, solar farm, dam, radio tower, hospital, barracks, airport, oil pumpjacks, farmhouses, crashed cargo capsules, satellites and rocket stages, mining drone sites, three failed colonies, dry shipwrecks, whale skeletons, a dead city and a metro network (jigsaw). A new world starts next to the ship, half buried where it came down, with a supply barrel; its hatch is already the ship's landing site.
+
+Existing worlds keep their old terrain; only new worlds get the dead Earth.
+
 ## Ship HUD
 
 Inside the ship a panel in the top-left corner shows the flight phase and countdown, the condition of the eight subsystems (green at 70% and above, amber 20-69%, red below 20%, with the percentage) and the active incidents with their time left (they blink in the last 15 seconds). The server sends the status once per second, immediately when something changes, and as soon as a player enters the ship; the client only draws it. The old action bar countdown is gone.
