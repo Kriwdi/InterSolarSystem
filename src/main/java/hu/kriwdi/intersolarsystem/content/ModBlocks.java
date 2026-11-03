@@ -203,8 +203,7 @@ public final class ModBlocks {
 	/** See-through viewport of the ship's interior: the window frame with clear glass. */
 	public static final Block SHIP_VIEWPORT = register("ship_viewport", Block::new,
 			BlockBehaviour.Properties.of().strength(-1.0F, 3600000.0F).sound(SoundType.GLASS).noLootTable()
-					.noOcclusion().pushReaction(PushReaction.IMMOVEABLE).isViewBlocking((s, l, p) -> false)
-					.isSuffocating((s, l, p) -> false).isRedstoneConductor((s, l, p) -> false));
+					.noOcclusion().pushReaction(PushReaction.IMMOVEABLE));
 
 	private ModBlocks() {
 	}
