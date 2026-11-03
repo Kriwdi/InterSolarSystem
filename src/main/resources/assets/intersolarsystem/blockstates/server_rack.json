@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/server_rack"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/server_rack",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/server_rack",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/server_rack",
+      "y": 270
+    }
+  }
+}

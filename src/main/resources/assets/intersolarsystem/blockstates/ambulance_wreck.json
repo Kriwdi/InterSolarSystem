@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/ambulance_wreck"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/ambulance_wreck",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/ambulance_wreck",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/ambulance_wreck",
+      "y": 270
+    }
+  }
+}

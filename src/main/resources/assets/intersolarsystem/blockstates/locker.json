@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/locker"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/locker",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/locker",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/locker",
+      "y": 270
+    }
+  }
+}

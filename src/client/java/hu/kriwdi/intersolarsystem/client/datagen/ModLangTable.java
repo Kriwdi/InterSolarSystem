@@ -1466,6 +1466,202 @@ public final class ModLangTable {
 				"Horse Skeleton",
 				"Pferdeskelett",
 				"Lócsontváz");
+		add(rows, "block.intersolarsystem.cracked_concrete",
+				"Cracked Concrete",
+				"Rissiger Beton",
+				"Repedt beton");
+		add(rows, "block.intersolarsystem.sooty_concrete",
+				"Sooty Concrete",
+				"Verrußter Beton",
+				"Kormos beton");
+		add(rows, "block.intersolarsystem.rebar_concrete",
+				"Broken Concrete",
+				"Gebrochener Stahlbeton",
+				"Törött vasbeton");
+		add(rows, "block.intersolarsystem.asphalt",
+				"Asphalt",
+				"Asphalt",
+				"Aszfalt");
+		add(rows, "block.intersolarsystem.cracked_asphalt",
+				"Cracked Asphalt",
+				"Rissiger Asphalt",
+				"Repedt aszfalt");
+		add(rows, "block.intersolarsystem.road_marking",
+				"Road Marking",
+				"Fahrbahnmarkierung",
+				"Útburkolati jel");
+		add(rows, "block.intersolarsystem.runway_marking",
+				"Runway Marking",
+				"Pistenmarkierung",
+				"Kifutópálya-jelölés");
+		add(rows, "block.intersolarsystem.hazard_concrete",
+				"Hazard Stripe Concrete",
+				"Warnstreifen-Beton",
+				"Figyelmeztető csíkos beton");
+		add(rows, "block.intersolarsystem.floor_tiles",
+				"Floor Tiles",
+				"Bodenfliesen",
+				"Padlócsempe");
+		add(rows, "block.intersolarsystem.wall_tiles",
+				"Hospital Wall Tiles",
+				"Krankenhaus-Wandfliesen",
+				"Kórházi falicsempe");
+		add(rows, "block.intersolarsystem.office_carpet",
+				"Office Carpet",
+				"Büroteppich",
+				"Irodai padlószőnyeg");
+		add(rows, "block.intersolarsystem.curtain_wall",
+				"Curtain Wall",
+				"Glasfassade",
+				"Üvegfal");
+		add(rows, "block.intersolarsystem.broken_curtain_wall",
+				"Shattered Curtain Wall",
+				"Zersplitterte Glasfassade",
+				"Betört üvegfal");
+		add(rows, "block.intersolarsystem.metal_grating",
+				"Metal Grating",
+				"Gitterrost",
+				"Fémrács");
+		add(rows, "block.intersolarsystem.ceiling_light",
+				"Emergency Ceiling Light",
+				"Notbeleuchtung",
+				"Vészvilágítás");
+		add(rows, "block.intersolarsystem.terminal_floor",
+				"Terminal Floor",
+				"Terminalboden",
+				"Terminálpadló");
+		add(rows, "block.intersolarsystem.shipping_crate",
+				"Shipping Crate",
+				"Frachtkiste",
+				"Szállítóláda");
+		add(rows, "block.intersolarsystem.office_desk",
+				"Office Desk",
+				"Schreibtisch",
+				"Irodai íróasztal");
+		add(rows, "block.intersolarsystem.office_chair",
+				"Office Chair",
+				"Bürostuhl",
+				"Irodai szék");
+		add(rows, "block.intersolarsystem.filing_cabinet",
+				"Filing Cabinet",
+				"Aktenschrank",
+				"Iratszekrény");
+		add(rows, "block.intersolarsystem.server_rack",
+				"Server Rack",
+				"Serverschrank",
+				"Szerverszekrény");
+		add(rows, "block.intersolarsystem.locker",
+				"Locker",
+				"Spind",
+				"Öltözőszekrény");
+		add(rows, "block.intersolarsystem.hospital_bed",
+				"Hospital Bed",
+				"Krankenhausbett",
+				"Kórházi ágy");
+		add(rows, "block.intersolarsystem.iv_stand",
+				"IV Stand",
+				"Infusionsständer",
+				"Infúziós állvány");
+		add(rows, "block.intersolarsystem.medical_cabinet",
+				"Medical Cabinet",
+				"Medizinschrank",
+				"Gyógyszerszekrény");
+		add(rows, "block.intersolarsystem.wheelchair",
+				"Wheelchair",
+				"Rollstuhl",
+				"Kerekesszék");
+		add(rows, "block.intersolarsystem.vending_machine",
+				"Vending Machine",
+				"Verkaufsautomat",
+				"Italautomata");
+		add(rows, "block.intersolarsystem.airport_seats",
+				"Airport Seats",
+				"Wartebank",
+				"Váróterem-ülések");
+		add(rows, "block.intersolarsystem.departure_board",
+				"Departure Board",
+				"Abflugtafel",
+				"Indulási tábla");
+		add(rows, "block.intersolarsystem.sandbags",
+				"Sandbags",
+				"Sandsäcke",
+				"Homokzsákok");
+		add(rows, "block.intersolarsystem.barbed_wire",
+				"Barbed Wire",
+				"Stacheldraht",
+				"Szögesdrót");
+		add(rows, "block.intersolarsystem.quarantine_barrier",
+				"Quarantine Barrier",
+				"Quarantäne-Absperrung",
+				"Karantén-sorompó");
+		add(rows, "block.intersolarsystem.warning_sign",
+				"Biohazard Sign",
+				"Biogefährdungsschild",
+				"Biológiai veszély tábla");
+		add(rows, "block.intersolarsystem.poster_exodus",
+				"Exodus Poster",
+				"Exodus-Plakat",
+				"Exodus plakát");
+		add(rows, "block.intersolarsystem.poster_quarantine",
+				"Quarantine Notice",
+				"Quarantäne-Aushang",
+				"Karantén-hirdetmény");
+		add(rows, "block.intersolarsystem.traffic_light",
+				"Traffic Light",
+				"Ampel",
+				"Közlekedési lámpa");
+		add(rows, "block.intersolarsystem.street_lamp",
+				"Street Lamp",
+				"Straßenlaterne",
+				"Utcai lámpa");
+		add(rows, "block.intersolarsystem.fire_hydrant",
+				"Fire Hydrant",
+				"Hydrant",
+				"Tűzcsap");
+		add(rows, "block.intersolarsystem.park_bench",
+				"Park Bench",
+				"Parkbank",
+				"Pad");
+		add(rows, "block.intersolarsystem.car_wreck_red",
+				"Car Wreck",
+				"Autowrack",
+				"Autóroncs");
+		add(rows, "block.intersolarsystem.car_wreck_blue",
+				"Car Wreck (Blue)",
+				"Autowrack (blau)",
+				"Autóroncs (kék)");
+		add(rows, "block.intersolarsystem.car_wreck_white",
+				"Car Wreck (White)",
+				"Autowrack (weiß)",
+				"Autóroncs (fehér)");
+		add(rows, "block.intersolarsystem.taxi_wreck",
+				"Taxi Wreck",
+				"Taxiwrack",
+				"Taxironcs");
+		add(rows, "block.intersolarsystem.police_car_wreck",
+				"Police Car Wreck",
+				"Polizeiwagenwrack",
+				"Rendőrautó-roncs");
+		add(rows, "block.intersolarsystem.ambulance_wreck",
+				"Ambulance Wreck",
+				"Krankenwagenwrack",
+				"Mentőautó-roncs");
+		add(rows, "block.intersolarsystem.jet_engine",
+				"Jet Engine",
+				"Strahltriebwerk",
+				"Sugárhajtómű");
+		add(rows, "block.intersolarsystem.runway_light",
+				"Runway Light",
+				"Pistenfeuer",
+				"Kifutófény");
+		add(rows, "block.intersolarsystem.runway_bollard",
+				"Bollard",
+				"Poller",
+				"Terelőoszlop");
+		add(rows, "block.intersolarsystem.dino_skull",
+				"Tyrannosaurus Skull",
+				"Tyrannosaurus-Schädel",
+				"Tyrannosaurus-koponya");
 		check(rows);
 		return List.copyOf(rows);
 	}

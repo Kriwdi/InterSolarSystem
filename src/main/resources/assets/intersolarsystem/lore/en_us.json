@@ -2,12 +2,12 @@
  "notes": {
   "bunker7": {
    "title": "Bunker 7 - last entry",
-   "subtitle": "Dr. Ilona Varga, bunker physician",
+   "subtitle": "Dr. Elena Ward, bunker physician",
    "pages": [
     "To whoever wakes up next to the wreck:\n\nYou were in the last cryo bay of Bunker 7. The filters gave out on day 2,914. I was the last one awake, so I carried you out myself.",
     "The ship outside is an Aurora research tender, a spare from the Seed Sower programme. She crashed here years ago with nobody aboard. The autopilot still answers. The hatch still opens.",
     "There is nothing left here. The soil is grey, the seas are dry, the cities are tombs. But the tender can fly. The Moon base had helium-3. The oasis in the south had living soil.",
-    "Salvage. Repair her. Learn her. The manuals are in the barrel.\n\nAnd if you ever reach the stars, take a handful of living soil with you. That is all of us now.\n\n- I."
+    "Salvage. Repair her. Learn her. The manuals are in the barrel.\n\nAnd if you ever reach the stars, take a handful of living soil with you. That is all of us now.\n\n- E."
    ]
   },
   "halcyon_memo": {
@@ -29,7 +29,7 @@
    ]
   },
   "farmer_diary": {
-   "title": "Kovacs farm diary",
+   "title": "Miller farm diary",
    "subtitle": "Spring, the year the rain stopped",
    "pages": [
     "March. Third dry month. The well is down to a bucket an hour. The wheat came up thin.",
@@ -39,7 +39,7 @@
   },
   "nurse_ashlung": {
    "title": "Ward 3 shift notes",
-   "subtitle": "Nurse T. Halasz",
+   "subtitle": "Nurse T. Hayes",
    "pages": [
     "New admissions: 41. All the same: dry cough, grey sputum, fever in the evenings. The doctors call it Ashlung. Spores from the dead soil, they think.",
     "It spreads by breath. We wear two masks now. Masks are rationed.",
@@ -51,12 +51,12 @@
    "subtitle": "To Grandma",
    "pages": [
     "Dear Grandma,\n\nWe are in the big hall now with lots of people. Daddy says the ship will take us to the Moon and then somewhere with blue sky.",
-    "They give us numbers. Ours is 88412. Daddy says it is a lucky number.\n\nI drew you the rocket. Love, Panna"
+    "They give us numbers. Ours is 88412. Daddy says it is a lucky number.\n\nI drew you the rocket. Love, Lily"
    ]
   },
   "soldier_short_war": {
    "title": "Field notebook",
-   "subtitle": "Sgt. D. Molnar, 4th Engineers",
+   "subtitle": "Sgt. D. Mercer, 4th Engineers",
    "pages": [
     "06:10. Orders: hold the reservoir road at all costs. Three nations want the same water.",
     "11:42. A flash in the north. Then another. The radio says the dams at Kerch and Volta are gone.",
@@ -76,7 +76,7 @@
    "subtitle": "Aurora Consortium, citizen notice",
    "pages": [
     "Applicant 88412: NOT SELECTED.\n\nThank you for your patience. The Consortium is working to secure further seats in later departures.",
-    "On the back, in pencil: 'There are no later departures. Tell Panna it is a lucky number anyway.'"
+    "On the back, in pencil: 'There are no later departures. Tell Lily it is a lucky number anyway.'"
    ]
   },
   "launch_director": {
@@ -146,11 +146,29 @@
    ]
   },
   "wreck_captain": {
-   "title": "Ship's log, MV Aranyhal",
+   "title": "Ship's log, MV Albatross",
    "subtitle": "Captain's last entry",
    "pages": [
     "The sea went down three metres in a year. Then it went grey and thick. We ran aground on what used to be the shipping lane.",
     "The crew walked to the coast. I stayed. A captain stays with the ship, even when the sea leaves her."
+   ]
+  },
+  "gate_agent": {
+   "title": "Note behind the gate desk",
+   "subtitle": "Gate B7, Aurora International",
+   "pages": [
+    "They told us to check every passenger for the cough. Anyone with grey on the handkerchief goes to the field hospital downstairs, not to the plane.",
+    "A man begged me to let his daughter board alone. She was not coughing. He was. I let her through. I do not know if that was right.",
+    "The last flight to the spaceport left at 06:40. EVAC 099 came back burning at 07:15 and went off the end of runway 27."
+   ]
+  },
+  "triage_doctor": {
+   "title": "Triage log",
+   "subtitle": "Dr. M. Osei, St. Raphael General",
+   "pages": [
+    "Day 6 of the camp. The tents on the car park are full. We sort by colour now: red goes inside, black goes to the trench.",
+    "The soldiers at the gate are kind. They bring us water. They are also under orders to shoot anyone who climbs the wire.",
+    "I have the cough now. I will keep writing the colours until I cannot hold the pen."
    ]
   }
  },
@@ -392,6 +410,20 @@
    "subtitle": "inventory",
    "pages": [
     "> inventory\nVARIETIES ........ 1247\nVIABLE (EST.) ..... 7%\nTEMPERATURE ...... -18 C\n\nSeeds need living soil to wake. Soil source: southern oasis (Reversal field)."
+   ]
+  },
+  "terminal_12": {
+   "title": "AURORA INTERNATIONAL",
+   "subtitle": "flight operations",
+   "pages": [
+    "> flights\nEVAC 097 -> KARMAN ..... DEPARTED\nEVAC 098 -> KARMAN ..... DEPARTED\nEVAC 099 -> KARMAN ..... RETURNED / CRASHED RWY 27\nEVAC 100-131 ........... CANCELLED\n\n> note\nScreening at check-in. Ashlung positive: field hospital, ground floor."
+   ]
+  },
+  "terminal_13": {
+   "title": "ST. RAPHAEL GENERAL",
+   "subtitle": "triage",
+   "pages": [
+    "> triage\nGREEN ........ 0\nYELLOW ....... 0\nRED .......... 312\nBLACK ........ 1904\n\n> order\nCamp gate closed by the military district. Patients may not leave. Staff may not leave."
    ]
   }
  },

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/office_desk"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/office_desk",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/office_desk",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/office_desk",
+      "y": 270
+    }
+  }
+}

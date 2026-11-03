@@ -103,8 +103,19 @@
           ]
         },
         {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:note",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"triage_doctor\"}"
+            }
+          ]
+        },
+        {
           "type": "minecraft:empty",
-          "weight": 1
+          "weight": 2
         }
       ]
     }

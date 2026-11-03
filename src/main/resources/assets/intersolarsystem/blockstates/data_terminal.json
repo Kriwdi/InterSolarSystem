@@ -179,6 +179,36 @@
     "facing=west,log=11": {
       "model": "intersolarsystem:block/data_terminal",
       "y": 270
+    },
+    "facing=north,log=12": {
+      "model": "intersolarsystem:block/data_terminal"
+    },
+    "facing=north,log=13": {
+      "model": "intersolarsystem:block/data_terminal"
+    },
+    "facing=east,log=12": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 90
+    },
+    "facing=east,log=13": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 90
+    },
+    "facing=south,log=12": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 180
+    },
+    "facing=south,log=13": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 180
+    },
+    "facing=west,log=12": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 270
+    },
+    "facing=west,log=13": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 270
     }
   }
 }

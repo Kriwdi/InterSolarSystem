@@ -2,12 +2,12 @@
  "notes": {
   "bunker7": {
    "title": "7-es bunker - utolsó bejegyzés",
-   "subtitle": "Dr. Varga Ilona, a bunker orvosa",
+   "subtitle": "Dr. Elena Ward, a bunker orvosa",
    "pages": [
     "Annak, aki a roncs mellett ébred:\n\nA 7-es bunker utolsó hibernációs fülkéjében voltál. A szűrők a 2914. napon adták fel. Én voltam az utolsó ébren, így magam hoztalak ki.",
     "A kinti hajó az Aurora egyik kutatóhajója, a Magvető-program tartaléka. Évekkel ezelőtt zuhant le itt, üresen. A robotpilóta még válaszol. Az ajtó még nyílik.",
     "Itt már nincs semmi. A talaj szürke, a tengerek kiszáradtak, a városok sírok. De a hajó még repül. A holdbázison volt hélium-3. Délen, az oázisban élő talaj volt.",
-    "Gyűjts. Javítsd meg. Tanuld meg. A kézikönyvek a hordóban vannak.\n\nÉs ha egyszer eljutsz a csillagokig, vigyél magaddal egy marék élő talajt. Most már ez vagyunk mi mindannyian.\n\n- I."
+    "Gyűjts. Javítsd meg. Tanuld meg. A kézikönyvek a hordóban vannak.\n\nÉs ha egyszer eljutsz a csillagokig, vigyél magaddal egy marék élő talajt. Most már ez vagyunk mi mindannyian.\n\n- E."
    ]
   },
   "halcyon_memo": {
@@ -29,7 +29,7 @@
    ]
   },
   "farmer_diary": {
-   "title": "A Kovács-tanya naplója",
+   "title": "A Miller-tanya naplója",
    "subtitle": "Tavasz, az az év, amikor elállt az eső",
    "pages": [
     "Március. A harmadik száraz hónap. A kútból már csak óránként egy vödör jön. A búza gyéren kelt ki.",
@@ -39,7 +39,7 @@
   },
   "nurse_ashlung": {
    "title": "3-as kórterem, műszaknapló",
-   "subtitle": "Halász T. ápolónő",
+   "subtitle": "T. Hayes ápolónő",
    "pages": [
     "Új felvételek: 41. Mind ugyanaz: száraz köhögés, szürke köpet, esti láz. Az orvosok Hamutüdőnek hívják. Spórák a halott talajból, azt mondják.",
     "Lélegzettel terjed. Most már két maszkot hordunk. A maszk fejadagos.",
@@ -48,15 +48,15 @@
   },
   "child_letter": {
    "title": "Zsírkrétás levél",
-   "subtitle": "Mamának",
+   "subtitle": "Nagyinak",
    "pages": [
-    "Drága Mama!\n\nMost egy nagy csarnokban vagyunk sok emberrel. Apa azt mondja, a hajó elvisz minket a Holdra, aztán valahova, ahol kék az ég.",
-    "Számot kaptunk. A miénk 88412. Apa szerint szerencseszám.\n\nLerajzoltam neked a rakétát. Puszi, Panna"
+    "Drága Nagyi!\n\nMost egy nagy csarnokban vagyunk sok emberrel. Apa azt mondja, a hajó elvisz minket a Holdra, aztán valahova, ahol kék az ég.",
+    "Számot kaptunk. A miénk 88412. Apa szerint szerencseszám.\n\nLerajzoltam neked a rakétát. Puszi, Lily"
    ]
   },
   "soldier_short_war": {
    "title": "Terepi jegyzetfüzet",
-   "subtitle": "Molnár D. őrmester, 4. műszaki zászlóalj",
+   "subtitle": "D. Mercer őrmester, 4. műszaki zászlóalj",
    "pages": [
     "06:10. Parancs: tartsuk a víztározóhoz vezető utat minden áron. Három ország akarja ugyanazt a vizet.",
     "11:42. Villanás északon. Aztán még egy. A rádió szerint a kercsi és a voltai gát megsemmisült.",
@@ -76,7 +76,7 @@
    "subtitle": "Aurora Konzorcium, lakossági értesítő",
    "pages": [
     "88412-es pályázó: NEM NYERT.\n\nKöszönjük türelmét. A Konzorcium további helyeken dolgozik a későbbi indulásokra.",
-    "A hátoldalán, ceruzával: 'Nincsenek későbbi indulások. Mondd Pannának, hogy azért szerencseszám.'"
+    "A hátoldalán, ceruzával: 'Nincsenek későbbi indulások. Mondd meg Lilynek, hogy azért szerencseszám.'"
    ]
   },
   "launch_director": {
@@ -146,11 +146,29 @@
    ]
   },
   "wreck_captain": {
-   "title": "Az Aranyhal hajónaplója",
+   "title": "Az MV Albatross hajónaplója",
    "subtitle": "A kapitány utolsó bejegyzése",
    "pages": [
     "A tenger egy év alatt három métert apadt. Aztán szürke és sűrű lett. Megfeneklettünk ott, ahol valaha a hajózóút volt.",
     "A legénység gyalog indult a part felé. Én maradtam. A kapitány a hajóval marad, akkor is, ha a tenger hagyja ott."
+   ]
+  },
+  "gate_agent": {
+   "title": "Cetli a beszállítópult mögött",
+   "subtitle": "B7-es kapu, Aurora International",
+   "pages": [
+    "Azt mondták, minden utast ellenőrizzünk, köhög-e. Akinek szürke a zsebkendője, az a lenti tábori kórházba megy, nem a gépre.",
+    "Egy férfi könyörgött, hogy engedjem fel egyedül a lányát. A lány nem köhögött. Ő igen. Átengedtem. Nem tudom, jól tettem-e.",
+    "Az utolsó járat 06:40-kor indult az űrkikötőbe. Az EVAC 099 07:15-kor égve jött vissza, és kifutott a 27-es pálya végén."
+   ]
+  },
+  "triage_doctor": {
+   "title": "Osztályozási napló",
+   "subtitle": "Dr. M. Osei, St. Raphael kórház",
+   "pages": [
+    "A tábor 6. napja. A parkolón a sátrak tele vannak. Már színek szerint osztályozunk: a piros bemegy, a fekete az árokba.",
+    "A kapunál álló katonák kedvesek. Vizet hoznak nekünk. Parancsuk is van: lőjenek mindenkire, aki átmászik a drótkerítésen.",
+    "Most már én is köhögök. Addig írom a színeket, amíg tartani tudom a tollat."
    ]
   }
  },
@@ -392,6 +410,20 @@
    "subtitle": "leltár",
    "pages": [
     "> leltar\nFAJTÁK ........... 1247\nCSÍRAKÉPES (BECS.) 7%\nHŐMÉRSÉKLET ...... -18 C\n\nA mag élő talajban ébred. Talajforrás: déli oázis (Visszafordító-tereppróba)."
+   ]
+  },
+  "terminal_12": {
+   "title": "AURORA INTERNATIONAL",
+   "subtitle": "repülésirányítás",
+   "pages": [
+    "> jaratok\nEVAC 097 -> KÁRMÁN ..... ELINDULT\nEVAC 098 -> KÁRMÁN ..... ELINDULT\nEVAC 099 -> KÁRMÁN ..... VISSZAFORDULT / LEZUHANT 27\nEVAC 100-131 ........... TÖRÖLVE\n\n> megjegyzes\nSzűrés a check-innél. Hamutüdő-pozitív: tábori kórház, földszint."
+   ]
+  },
+  "terminal_13": {
+   "title": "ST. RAPHAEL KÓRHÁZ",
+   "subtitle": "osztályozás",
+   "pages": [
+    "> osztalyozas\nZÖLD ......... 0\nSÁRGA ........ 0\nPIROS ........ 312\nFEKETE ....... 1904\n\n> parancs\nA tábor kapuját a katonai körzet lezárta. Beteg nem távozhat. Személyzet nem távozhat."
    ]
   }
  },

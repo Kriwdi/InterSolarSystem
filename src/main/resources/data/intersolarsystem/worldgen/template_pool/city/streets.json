@@ -9,12 +9,45 @@
         },
         "projection": "rigid"
       },
+      "weight": 5
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "intersolarsystem:city/street_jam",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
       "weight": 3
     },
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "intersolarsystem:city/street_cars",
+        "location": "intersolarsystem:city/street_checkpoint",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "intersolarsystem:city/street_collapsed",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "intersolarsystem:city/crossing",
         "processors": {
           "processors": []
         },

@@ -29,13 +29,8 @@ def bid(name):
     return name if ":" in name else "minecraft:" + name
 
 
-MOD_BLOCKS = {"station_hull", "station_foil", "station_window", "station_light", "truss", "solar_panel",
-              "antenna_dish", "data_terminal", "rusted_panel", "scrap_pile", "rubble", "toxic_barrel",
-              "mining_drone", "lander_engine", "compacted_junk", "dead_log", "petrified_log", "trinitite",
-              "irradiated_soil", "tar_sand", "oil_shale", "ash", "salt_block", "repair_station", "tar_puddle",
-              "living_soil", "oasis_grass", "dead_fence", "dead_planks", "station_glass",
-              "skeleton_lying", "skeleton_sitting", "skeleton_curled", "skeleton_suited", "dog_skeleton",
-              "cow_skeleton", "horse_skeleton"}
+# Every block with a blockstate file in the mod's assets is a mod block.
+MOD_BLOCKS = {p.stem for p in (ROOT / "src/main/resources/assets/intersolarsystem/blockstates").glob("*.json")}
 
 SKELETONS = tuple(NS + n for n in ("skeleton_lying", "skeleton_sitting", "skeleton_curled", "skeleton_suited",
                                      "dog_skeleton", "cow_skeleton", "horse_skeleton", "data_terminal"))
@@ -470,31 +465,6 @@ def radio_tower():
     return b
 
 
-def hospital():
-    b = Build("hospital", 1011)
-    for floor in range(3):
-        y0 = floor * 5
-        b.room(0, y0, 0, 20, y0 + 5, 12, WHITE, S("smooth_stone"))
-        b.windows(0, y0 + 3, 0, 20, 12, 2, GLASS)
-    b.fill(9, 1, 0, 11, 3, 0, AIR)
-    b.fill(1, 5, 1, 2, 10, 2, AIR)
-    for y in range(1, 15):
-        b.set(1, y, 1, S("ladder", facing="south"))
-    # Red cross on the facade.
-    for (x, y) in ((10, 11), (10, 12), (10, 13), (9, 12), (11, 12)):
-        b.set(x, y, 0, S("red_concrete"))
-    for floor in range(3):
-        y = floor * 5 + 1
-        for x in range(3, 19, 3):
-            b.set(x, y, 10, S("white_bed", facing="north", part="foot"))
-            b.set(x, y, 9, S("white_bed", facing="north", part="head"))
-        b.chest(19, y, 1, "medical", "west")
-        b.set(4 + floor * 5, y, 6, S("skeleton_lying", facing="east" if floor % 2 else "west"))
-    b.set(19, 1, 6, S("data_terminal", facing="west", log=7))
-    b.chest(19, 1, 11, "medical", "west", "barrel")
-    b.decay(0.05, cracked={"minecraft:white_concrete": "calcite"})
-    return b
-
 
 def barracks():
     b = Build("barracks", 1012)
@@ -523,38 +493,6 @@ def barracks():
     b.decay(0.04, cracked=CONCRETE)
     return b
 
-
-def airport():
-    b = Build("airport", 1013)
-    b.fill(0, 0, 0, 47, 0, 10, S("black_concrete"))
-    for x in range(2, 46, 4):
-        b.fill(x, 0, 5, x + 1, 0, 5, S("white_concrete"))
-    for x in range(0, 48):
-        if b.rnd.random() < 0.15:
-            b.set(x, 0, b.rnd.randrange(11), S("cracked_deepslate_tiles"))
-    # Control tower.
-    b.fill(20, 1, 14, 23, 14, 17, LGREY)
-    b.fill(21, 1, 15, 22, 13, 16, AIR)
-    for y in range(1, 15):
-        b.set(21, y, 15, S("ladder", facing="south"))
-    b.room(18, 14, 12, 25, 18, 19, LGREY)
-    b.windows(18, 16, 12, 25, 19, 1, S("tinted_glass"))
-    b.set(24, 15, 18, S("data_terminal", facing="west", log=1))
-    b.chest(19, 15, 13, "civic", "east")
-    # A crashed airliner: fuselage on its belly, one wing broken off.
-    for x in range(28, 46):
-        for dy in range(0, 4):
-            for dz in range(0, 4):
-                if (dy in (0, 3) or dz in (0, 3)) and b.rnd.random() > 0.1:
-                    b.set(x, 1 + dy, 13 + dz, S("white_concrete") if dy < 2 else S("light_gray_concrete"))
-    b.fill(29, 2, 14, 45, 3, 15, AIR)
-    for z in range(17, 27):
-        b.set(36 + (z - 17) // 3, 1, z, S("light_gray_concrete"))
-    b.set(46, 2, 14, S("lander_engine"))
-    b.chest(40, 2, 14, "civic", "north")
-    b.chest(31, 2, 15, "cargo", "south")
-    b.decay(0.02, keep=("minecraft:black_concrete", "minecraft:ladder"))
-    return b
 
 
 def oil_pumpjack():
@@ -617,67 +555,6 @@ def farmhouse():
 
 
 # ---------------------------------------------------------------- the city
-def city_pieces():
-    """Jigsaw pieces of a dead city: a plaza (start), streets that branch, and buildings on the street sides."""
-    pieces = {}
-    street = S("gray_concrete_powder")
-    kerb = S("smooth_stone")
-    # Plaza 15x15 with a toppled statue; four street connectors.
-    b = Build("city/plaza", 2001)
-    b.fill(0, 0, 0, 14, 0, 14, kerb)
-    b.fill(5, 1, 5, 9, 1, 9, S("stone_bricks"))
-    b.fill(6, 2, 6, 8, 2, 8, S("chiseled_stone_bricks"))
-    b.fill(9, 1, 7, 13, 1, 7, S("polished_andesite"))
-    for (x, z, o) in ((7, 0, "north_up"), (7, 14, "south_up"), (0, 7, "west_up"), (14, 7, "east_up")):
-        st, tag = jigsaw("street", "street", "city/streets", o, "minecraft:smooth_stone")
-        b.set(x, 0, z, st, tag)
-    pieces["city/plaza"] = b
-    # Street 5 wide, 16 long: connectors at both ends and building plots on both sides.
-    for variant in ("straight", "cars"):
-        b = Build("city/street_" + variant, 2002 if variant == "straight" else 2003)
-        b.fill(0, 0, 0, 4, 0, 15, street)
-        b.fill(0, 0, 0, 0, 0, 15, kerb)
-        b.fill(4, 0, 0, 4, 0, 15, kerb)
-        for z in (3, 11):
-            b.set(1, 1, z, S("iron_bars"))
-            b.set(1, 2, z, S("iron_bars"))
-            b.set(1, 3, z, S("redstone_lamp", lit="false"))
-        if variant == "cars":
-            for (z0, col) in ((2, "red_terracotta"), (9, "blue_terracotta")):
-                b.fill(2, 1, z0, 3, 1, z0 + 3, S(col))
-                b.fill(2, 2, z0 + 1, 3, 2, z0 + 2, S("tinted_glass"))
-        st, tag = jigsaw("street", "street", "city/streets", "north_up", "minecraft:gray_concrete_powder")
-        b.set(2, 0, 0, st, tag)
-        st, tag = jigsaw("street", "street", "city/streets", "south_up", "minecraft:gray_concrete_powder")
-        b.set(2, 0, 15, st, tag)
-        st, tag = jigsaw("lot", "lot", "city/buildings", "west_up", "minecraft:smooth_stone")
-        b.set(0, 0, 8, st, tag)
-        st, tag = jigsaw("lot", "lot", "city/buildings", "east_up", "minecraft:smooth_stone")
-        b.set(4, 0, 8, st, tag)
-        pieces["city/street_" + variant] = b
-    # Buildings: a skyscraper ruin, an apartment block, a shop. Their connector is on the street-facing wall.
-    for name, w, d, floors, wall, seed in (("tower", 11, 11, 7, LGREY, 2101), ("apartments", 13, 9, 4,
-                                                                                S("bricks"), 2102),
-                                           ("shop", 9, 9, 1, S("stone_bricks"), 2103)):
-        b = Build("city/" + name, seed)
-        for f in range(floors):
-            y0 = f * 4
-            b.room(0, y0, 0, w - 1, y0 + 4, d - 1, wall, S("polished_andesite"))
-            b.windows(0, y0 + 2, 0, w - 1, d - 1, 2, GLASS)
-            if f:
-                b.fill(1, y0, 1, 1, y0, 1, AIR)
-        for y in range(1, floors * 4):
-            b.set(1, y, 1, S("ladder", facing="south"))
-        b.fill(w // 2, 1, d - 1, w // 2, 2, d - 1, AIR)
-        b.chest(w - 2, 1, 1, "civic", "west")
-        if floors > 2:
-            b.chest(w - 2, (floors - 1) * 4 + 1, 1, "civic", "west", "barrel")
-        b.decay(0.05 + 0.01 * floors, keep=("minecraft:ladder",), cracked=CONCRETE)
-        st, tag = jigsaw("lot", "lot", "city/buildings", "south_up", "minecraft:smooth_stone")
-        b.set(w // 2, 0, d - 1, st, tag)
-        pieces["city/" + name] = b
-    return pieces
-
 
 def metro_pieces():
     """Underground metro: a station (start) with stairs up to the surface, tunnels, a collapsed tunnel end."""
@@ -1058,7 +935,7 @@ def loot_tables():
                    ("manual", "space_suit"), ("manual", "repairs")],
         "bunker_food": [("note", "farmer_diary"), ("note", "child_letter")],
         "military": [("note", "soldier_short_war"), ("data_tape", "short_war_broadcast"), ("manual", "repairs")],
-        "medical": [("note", "nurse_ashlung")],
+        "medical": [("note", "nurse_ashlung"), ("note", "triage_doctor")],
         "lab": [("note", "verdant_breach"), ("data_tape", "verdant_alarm"), ("note", "halcyon_memo")],
         "research_station": [("note", "halcyon_memo"), ("data_tape", "seed_sower_briefing"),
                              ("manual", "ship_systems"), ("manual", "diagnostics")],
@@ -1067,11 +944,11 @@ def loot_tables():
                          ("data_tape", "seed_sower_briefing"), ("manual", "drive_kits"), ("manual", "meteor_piloting"),
                          ("manual", "nav_console"), ("manual", "launch_checklist")],
         "space_debris": [("data_tape", "seed_sower_briefing")],
-        "cargo": [("note", "exodus_lottery"), ("note", "child_letter")],
+        "cargo": [("note", "exodus_lottery"), ("note", "child_letter"), ("note", "gate_agent")],
         "industrial": [("note", "drone_tech"), ("note", "dam_engineer")],
         "radio": [("note", "radio_operator"), ("data_tape", "mars_last")],
         "civic": [("note", "child_letter"), ("note", "exodus_lottery"), ("note", "farmer_diary"),
-                  ("data_tape", "aurora_exodus")],
+                  ("data_tape", "aurora_exodus"), ("note", "gate_agent")],
         "farm": [("note", "farmer_diary"), ("manual", "ship_farm")],
         "colony": [("note", "colony_overgrown"), ("note", "colony_burnt"), ("note", "colony_frozen")],
         "oasis_refuge": [("note", "oasis_keeper"), ("data_tape", "oasis_message"), ("manual", "ship_farm")],
@@ -1146,11 +1023,12 @@ SINGLES = [
     ("dam", dam, ["deep_canyons"], 36, 12, 70009, -2, "beard_box"),
     ("radio_tower", radio_tower, ["junk_mountains", "petrified_forest", "frozen_megalopolis", "abandoned_farmland"],
      30, 10, 70010, 0, "beard_thin"),
-    ("hospital", hospital, ["frozen_megalopolis", "ash_desert", "abandoned_farmland", "acid_swamp"], 40, 14, 70011,
-     0, "beard_thin"),
+    ("hospital", lambda: __import__("big_structures").hospital_complex(),
+     ["frozen_megalopolis", "ash_desert", "abandoned_farmland", "acid_swamp"], 56, 20, 70011, -7, "beard_box"),
     ("barracks", barracks, ["ash_desert", "deep_canyons", "petrified_forest", "junk_mountains"], 36, 12, 70012, 0,
      "beard_thin"),
-    ("airport", airport, ["salt_flats", "dried_seabed", "ash_desert"], 56, 20, 70013, 0, "beard_box"),
+    ("airport", lambda: __import__("big_structures").airport_complex(),
+     ["salt_flats", "dried_seabed", "ash_desert", "abandoned_farmland"], 72, 28, 70013, -1, "beard_box"),
     ("oil_pumpjack", oil_pumpjack, ["oil_field"], 12, 4, 70014, 0, "beard_thin"),
     ("farmhouse", farmhouse, ["abandoned_farmland"], 16, 5, 70015, 0, "beard_thin"),
     ("cargo_capsule", cargo_capsule, ALL, 20, 6, 70016, -1, "beard_thin"),
@@ -1173,13 +1051,13 @@ def main():
         sizes[name] = b.save(name)
         single_pool(name, name)
         structure(name, name, biomes, spacing, sep, salt, depth, adaptation=adaptation)
-    for rel, b in city_pieces().items():
+    import city_structures
+    for rel, b in city_structures.city_pieces().items():
         sizes[rel] = b.save(rel)
-    pool("city/start", [("city/plaza", 1)])
-    pool("city/streets", [("city/street_straight", 3), ("city/street_cars", 2)])
-    pool("city/buildings", [("city/tower", 2), ("city/apartments", 3), ("city/shop", 3)])
-    structure("dead_city", "city/start", ["frozen_megalopolis", "ash_desert"], 34, 12, 70030, 0, size=6,
-              adaptation="beard_thin", distance=96)
+    for name, entries in city_structures.POOLS.items():
+        pool(name, entries)
+    structure("dead_city", "city/start", ["frozen_megalopolis", "ash_desert"], 40, 14, 70030, 0, size=7,
+              adaptation="beard_thin", distance=128)
     for rel, b in metro_pieces().items():
         sizes[rel] = b.save(rel)
     pool("metro/start", [("metro/station", 1)])

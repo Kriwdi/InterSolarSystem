@@ -191,6 +191,17 @@ public class SceneScreenshots implements FabricClientGameTest {
 						+ " " + at.getZ() + " -45 32");
 				context.waitTicks(160);
 				context.takeScreenshot("30_structure_" + name);
+				if (name.equals("dead_city") || name.equals("airport") || name.equals("hospital")) {
+					// The big ones also from high above, looking both ways.
+					game.getServer().runCommand("execute in minecraft:overworld run tp @a " + (at.getX() - 30) + " "
+							+ (at.getY() + 70) + " " + (at.getZ() - 30) + " -45 40");
+					context.waitTicks(200);
+					context.takeScreenshot("31_aerial_" + name + "_a");
+					game.getServer().runCommand("execute in minecraft:overworld run tp @a " + (at.getX() + 90) + " "
+							+ (at.getY() + 70) + " " + (at.getZ() + 90) + " 135 40");
+					context.waitTicks(200);
+					context.takeScreenshot("31_aerial_" + name + "_b");
+				}
 			}
 		}
 	}

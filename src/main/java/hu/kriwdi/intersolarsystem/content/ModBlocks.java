@@ -347,7 +347,14 @@ public final class ModBlocks {
 		return block;
 	}
 
+	/** Registration for the generated block sets (see {@link UrbanBlocks}). */
+	static Block registerExternal(String name, Function<BlockBehaviour.Properties, Block> factory,
+			BlockBehaviour.Properties properties) {
+		return register(name, factory, properties);
+	}
+
 	/** Loads the class, which registers everything above. The items are listed in {@link ModCreativeTab}. */
 	public static void initialize() {
+		UrbanBlocks.initialize();
 	}
 }

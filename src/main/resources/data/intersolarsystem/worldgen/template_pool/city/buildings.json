@@ -3,13 +3,35 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "intersolarsystem:city/tower",
+        "location": "intersolarsystem:city/skyscraper",
         "processors": {
           "processors": []
         },
         "projection": "rigid"
       },
       "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "intersolarsystem:city/skyscraper_tall",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "intersolarsystem:city/office",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 3
     },
     {
       "element": {
@@ -25,13 +47,57 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "intersolarsystem:city/shop",
+        "location": "intersolarsystem:city/police",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "intersolarsystem:city/museum",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "intersolarsystem:city/shops",
         "processors": {
           "processors": []
         },
         "projection": "rigid"
       },
       "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "intersolarsystem:city/park",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "intersolarsystem:city/collapsed",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 2
     }
   ],
   "fallback": "minecraft:empty"

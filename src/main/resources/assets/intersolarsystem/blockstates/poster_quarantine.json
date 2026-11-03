@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/poster_quarantine"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/poster_quarantine",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/poster_quarantine",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/poster_quarantine",
+      "y": 270
+    }
+  }
+}

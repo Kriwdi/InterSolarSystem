@@ -18,7 +18,7 @@ import net.minecraft.world.phys.BlockHitResult;
  */
 public class DataTerminalBlock extends ShipFacingBlock {
 	/** Logs 0..3 are the Moon base's (told in chat); 4 and up are Earth logs, shown on the terminal's screen. */
-	public static final int LOGS = 12;
+	public static final int LOGS = 14;
 	public static final int MOON_LOGS = 4;
 	public static final IntegerProperty LOG = IntegerProperty.create("log", 0, LOGS - 1);
 

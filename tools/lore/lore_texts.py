@@ -6,16 +6,16 @@ make_lore.py writes them to assets/intersolarsystem/lore/<language>.json; German
 
 NOTES = {
     "bunker7": {
-        "en": {"title": "Bunker 7 - last entry", "subtitle": "Dr. Ilona Varga, bunker physician", "pages": [
+        "en": {"title": "Bunker 7 - last entry", "subtitle": "Dr. Elena Ward, bunker physician", "pages": [
             "To whoever wakes up next to the wreck:\n\nYou were in the last cryo bay of Bunker 7. The filters gave out on day 2,914. I was the last one awake, so I carried you out myself.",
             "The ship outside is an Aurora research tender, a spare from the Seed Sower programme. She crashed here years ago with nobody aboard. The autopilot still answers. The hatch still opens.",
             "There is nothing left here. The soil is grey, the seas are dry, the cities are tombs. But the tender can fly. The Moon base had helium-3. The oasis in the south had living soil.",
-            "Salvage. Repair her. Learn her. The manuals are in the barrel.\n\nAnd if you ever reach the stars, take a handful of living soil with you. That is all of us now.\n\n- I."]},
-        "hu": {"title": "7-es bunker - utolsó bejegyzés", "subtitle": "Dr. Varga Ilona, a bunker orvosa", "pages": [
+            "Salvage. Repair her. Learn her. The manuals are in the barrel.\n\nAnd if you ever reach the stars, take a handful of living soil with you. That is all of us now.\n\n- E."]},
+        "hu": {"title": "7-es bunker - utolsó bejegyzés", "subtitle": "Dr. Elena Ward, a bunker orvosa", "pages": [
             "Annak, aki a roncs mellett ébred:\n\nA 7-es bunker utolsó hibernációs fülkéjében voltál. A szűrők a 2914. napon adták fel. Én voltam az utolsó ébren, így magam hoztalak ki.",
             "A kinti hajó az Aurora egyik kutatóhajója, a Magvető-program tartaléka. Évekkel ezelőtt zuhant le itt, üresen. A robotpilóta még válaszol. Az ajtó még nyílik.",
             "Itt már nincs semmi. A talaj szürke, a tengerek kiszáradtak, a városok sírok. De a hajó még repül. A holdbázison volt hélium-3. Délen, az oázisban élő talaj volt.",
-            "Gyűjts. Javítsd meg. Tanuld meg. A kézikönyvek a hordóban vannak.\n\nÉs ha egyszer eljutsz a csillagokig, vigyél magaddal egy marék élő talajt. Most már ez vagyunk mi mindannyian.\n\n- I."]}},
+            "Gyűjts. Javítsd meg. Tanuld meg. A kézikönyvek a hordóban vannak.\n\nÉs ha egyszer eljutsz a csillagokig, vigyél magaddal egy marék élő talajt. Most már ez vagyunk mi mindannyian.\n\n- E."]}},
     "halcyon_memo": {
         "en": {"title": "INTERNAL - Halcyon phase III", "subtitle": "Aurora Consortium, climate division, 2058", "pages": [
             "Phase III dispersal approved. 4.1 million tonnes of reflective aerosol over 36 months. Projected cooling: 1.2 degrees.",
@@ -35,36 +35,36 @@ NOTES = {
             "Terepi minták 40 km-rel lejjebb: a VRD-7 új viselkedést mutat. Lebontja a humuszt. A talaj szürke és laza lesz, mint a hamu. Semmi nem csírázik ki benne.",
             "Szürke Virágzásnak neveztük el. Megállítani nem tudjuk. Csak dokumentálni.\n\nJavaslat: tájékoztatni a lakosságot. Döntés: titkos."]}},
     "farmer_diary": {
-        "en": {"title": "Kovacs farm diary", "subtitle": "Spring, the year the rain stopped", "pages": [
+        "en": {"title": "Miller farm diary", "subtitle": "Spring, the year the rain stopped", "pages": [
             "March. Third dry month. The well is down to a bucket an hour. The wheat came up thin.",
             "May. Grey patches in the south field, like someone spilled cement dust. The cows will not graze there. The dog digs and whines.",
             "July. The whole farm is grey. You can push a stick a metre into the ground. Seeds rot before they sprout.\n\nWe are leaving for the city. They say there is food in the city."]},
-        "hu": {"title": "A Kovács-tanya naplója", "subtitle": "Tavasz, az az év, amikor elállt az eső", "pages": [
+        "hu": {"title": "A Miller-tanya naplója", "subtitle": "Tavasz, az az év, amikor elállt az eső", "pages": [
             "Március. A harmadik száraz hónap. A kútból már csak óránként egy vödör jön. A búza gyéren kelt ki.",
             "Május. Szürke foltok a déli táblán, mintha valaki cementport szórt volna szét. A tehenek nem legelnek ott. A kutya ás és nyüszít.",
             "Július. Az egész tanya szürke. Egy botot egy méterre bele lehet nyomni a földbe. A mag elrothad, mielőtt kicsírázna.\n\nBemegyünk a városba. Azt mondják, a városban van élelem."]}},
     "nurse_ashlung": {
-        "en": {"title": "Ward 3 shift notes", "subtitle": "Nurse T. Halasz", "pages": [
+        "en": {"title": "Ward 3 shift notes", "subtitle": "Nurse T. Hayes", "pages": [
             "New admissions: 41. All the same: dry cough, grey sputum, fever in the evenings. The doctors call it Ashlung. Spores from the dead soil, they think.",
             "It spreads by breath. We wear two masks now. Masks are rationed.",
             "Day 19 of the quarantine. The army closed the doors from outside. We still have water. I am writing this so someone knows we stayed."]},
-        "hu": {"title": "3-as kórterem, műszaknapló", "subtitle": "Halász T. ápolónő", "pages": [
+        "hu": {"title": "3-as kórterem, műszaknapló", "subtitle": "T. Hayes ápolónő", "pages": [
             "Új felvételek: 41. Mind ugyanaz: száraz köhögés, szürke köpet, esti láz. Az orvosok Hamutüdőnek hívják. Spórák a halott talajból, azt mondják.",
             "Lélegzettel terjed. Most már két maszkot hordunk. A maszk fejadagos.",
             "A karantén 19. napja. A hadsereg kívülről lezárta az ajtókat. Víz még van. Azért írom le, hogy valaki tudja: mi itt maradtunk."]}},
     "child_letter": {
         "en": {"title": "A letter in crayon", "subtitle": "To Grandma", "pages": [
             "Dear Grandma,\n\nWe are in the big hall now with lots of people. Daddy says the ship will take us to the Moon and then somewhere with blue sky.",
-            "They give us numbers. Ours is 88412. Daddy says it is a lucky number.\n\nI drew you the rocket. Love, Panna"]},
-        "hu": {"title": "Zsírkrétás levél", "subtitle": "Mamának", "pages": [
-            "Drága Mama!\n\nMost egy nagy csarnokban vagyunk sok emberrel. Apa azt mondja, a hajó elvisz minket a Holdra, aztán valahova, ahol kék az ég.",
-            "Számot kaptunk. A miénk 88412. Apa szerint szerencseszám.\n\nLerajzoltam neked a rakétát. Puszi, Panna"]}},
+            "They give us numbers. Ours is 88412. Daddy says it is a lucky number.\n\nI drew you the rocket. Love, Lily"]},
+        "hu": {"title": "Zsírkrétás levél", "subtitle": "Nagyinak", "pages": [
+            "Drága Nagyi!\n\nMost egy nagy csarnokban vagyunk sok emberrel. Apa azt mondja, a hajó elvisz minket a Holdra, aztán valahova, ahol kék az ég.",
+            "Számot kaptunk. A miénk 88412. Apa szerint szerencseszám.\n\nLerajzoltam neked a rakétát. Puszi, Lily"]}},
     "soldier_short_war": {
-        "en": {"title": "Field notebook", "subtitle": "Sgt. D. Molnar, 4th Engineers", "pages": [
+        "en": {"title": "Field notebook", "subtitle": "Sgt. D. Mercer, 4th Engineers", "pages": [
             "06:10. Orders: hold the reservoir road at all costs. Three nations want the same water.",
             "11:42. A flash in the north. Then another. The radio says the dams at Kerch and Volta are gone.",
             "19:00. They are calling it the Short War because it lasted one day. It will not feel short to anyone downwind."]},
-        "hu": {"title": "Terepi jegyzetfüzet", "subtitle": "Molnár D. őrmester, 4. műszaki zászlóalj", "pages": [
+        "hu": {"title": "Terepi jegyzetfüzet", "subtitle": "D. Mercer őrmester, 4. műszaki zászlóalj", "pages": [
             "06:10. Parancs: tartsuk a víztározóhoz vezető utat minden áron. Három ország akarja ugyanazt a vizet.",
             "11:42. Villanás északon. Aztán még egy. A rádió szerint a kercsi és a voltai gát megsemmisült.",
             "19:00. Rövid Háborúnak hívják, mert egy napig tartott. Annak, aki a szél irányában él, nem lesz rövid."]}},
@@ -78,10 +78,10 @@ NOTES = {
     "exodus_lottery": {
         "en": {"title": "EXODUS boarding draw - result", "subtitle": "Aurora Consortium, citizen notice", "pages": [
             "Applicant 88412: NOT SELECTED.\n\nThank you for your patience. The Consortium is working to secure further seats in later departures.",
-            "On the back, in pencil: 'There are no later departures. Tell Panna it is a lucky number anyway.'"]},
+            "On the back, in pencil: 'There are no later departures. Tell Lily it is a lucky number anyway.'"]},
         "hu": {"title": "EXODUS beszállási sorsolás - eredmény", "subtitle": "Aurora Konzorcium, lakossági értesítő", "pages": [
             "88412-es pályázó: NEM NYERT.\n\nKöszönjük türelmét. A Konzorcium további helyeken dolgozik a későbbi indulásokra.",
-            "A hátoldalán, ceruzával: 'Nincsenek későbbi indulások. Mondd Pannának, hogy azért szerencseszám.'"]}},
+            "A hátoldalán, ceruzával: 'Nincsenek későbbi indulások. Mondd meg Lilynek, hogy azért szerencseszám.'"]}},
     "launch_director": {
         "en": {"title": "Launch director's desk note", "subtitle": "Karman Spaceport, pad 3", "pages": [
             "Ark-4 is the last. After her the pad has no fuel, no crew, no orders. 2,300 aboard. 41,000 at the fence.",
@@ -143,12 +143,30 @@ NOTES = {
             "A gépet önjáró módban hagyták, amikor a brigádokat visszarendelték. Addig ás, amíg a cellái ki nem merülnek.",
             "Bontási tipp: az áramköri lapok épek. Szedd ki a cellákat, kösd át a buszt, és újra menni fog."]}},
     "wreck_captain": {
-        "en": {"title": "Ship's log, MV Aranyhal", "subtitle": "Captain's last entry", "pages": [
+        "en": {"title": "Ship's log, MV Albatross", "subtitle": "Captain's last entry", "pages": [
             "The sea went down three metres in a year. Then it went grey and thick. We ran aground on what used to be the shipping lane.",
             "The crew walked to the coast. I stayed. A captain stays with the ship, even when the sea leaves her."]},
-        "hu": {"title": "Az Aranyhal hajónaplója", "subtitle": "A kapitány utolsó bejegyzése", "pages": [
+        "hu": {"title": "Az MV Albatross hajónaplója", "subtitle": "A kapitány utolsó bejegyzése", "pages": [
             "A tenger egy év alatt három métert apadt. Aztán szürke és sűrű lett. Megfeneklettünk ott, ahol valaha a hajózóút volt.",
             "A legénység gyalog indult a part felé. Én maradtam. A kapitány a hajóval marad, akkor is, ha a tenger hagyja ott."]}},
+    "gate_agent": {
+        "en": {"title": "Note behind the gate desk", "subtitle": "Gate B7, Aurora International", "pages": [
+            "They told us to check every passenger for the cough. Anyone with grey on the handkerchief goes to the field hospital downstairs, not to the plane.",
+            "A man begged me to let his daughter board alone. She was not coughing. He was. I let her through. I do not know if that was right.",
+            "The last flight to the spaceport left at 06:40. EVAC 099 came back burning at 07:15 and went off the end of runway 27."]},
+        "hu": {"title": "Cetli a beszállítópult mögött", "subtitle": "B7-es kapu, Aurora International", "pages": [
+            "Azt mondták, minden utast ellenőrizzünk, köhög-e. Akinek szürke a zsebkendője, az a lenti tábori kórházba megy, nem a gépre.",
+            "Egy férfi könyörgött, hogy engedjem fel egyedül a lányát. A lány nem köhögött. Ő igen. Átengedtem. Nem tudom, jól tettem-e.",
+            "Az utolsó járat 06:40-kor indult az űrkikötőbe. Az EVAC 099 07:15-kor égve jött vissza, és kifutott a 27-es pálya végén."]}},
+    "triage_doctor": {
+        "en": {"title": "Triage log", "subtitle": "Dr. M. Osei, St. Raphael General", "pages": [
+            "Day 6 of the camp. The tents on the car park are full. We sort by colour now: red goes inside, black goes to the trench.",
+            "The soldiers at the gate are kind. They bring us water. They are also under orders to shoot anyone who climbs the wire.",
+            "I have the cough now. I will keep writing the colours until I cannot hold the pen."]},
+        "hu": {"title": "Osztályozási napló", "subtitle": "Dr. M. Osei, St. Raphael kórház", "pages": [
+            "A tábor 6. napja. A parkolón a sátrak tele vannak. Már színek szerint osztályozunk: a piros bemegy, a fekete az árokba.",
+            "A kapunál álló katonák kedvesek. Vizet hoznak nekünk. Parancsuk is van: lőjenek mindenkire, aki átmászik a drótkerítésen.",
+            "Most már én is köhögök. Addig írom a színeket, amíg tartani tudom a tollat."]}},
 }
 
 TAPES = {
@@ -257,6 +275,16 @@ TERMINALS = {
             "> inventory\nVARIETIES ........ 1247\nVIABLE (EST.) ..... 7%\nTEMPERATURE ...... -18 C\n\nSeeds need living soil to wake. Soil source: southern oasis (Reversal field)."]},
         "hu": {"title": "MAGBANK", "subtitle": "leltár", "pages": [
             "> leltar\nFAJTÁK ........... 1247\nCSÍRAKÉPES (BECS.) 7%\nHŐMÉRSÉKLET ...... -18 C\n\nA mag élő talajban ébred. Talajforrás: déli oázis (Visszafordító-tereppróba)."]}},
+    "terminal_12": {
+        "en": {"title": "AURORA INTERNATIONAL", "subtitle": "flight operations", "pages": [
+            "> flights\nEVAC 097 -> KARMAN ..... DEPARTED\nEVAC 098 -> KARMAN ..... DEPARTED\nEVAC 099 -> KARMAN ..... RETURNED / CRASHED RWY 27\nEVAC 100-131 ........... CANCELLED\n\n> note\nScreening at check-in. Ashlung positive: field hospital, ground floor."]},
+        "hu": {"title": "AURORA INTERNATIONAL", "subtitle": "repülésirányítás", "pages": [
+            "> jaratok\nEVAC 097 -> KÁRMÁN ..... ELINDULT\nEVAC 098 -> KÁRMÁN ..... ELINDULT\nEVAC 099 -> KÁRMÁN ..... VISSZAFORDULT / LEZUHANT 27\nEVAC 100-131 ........... TÖRÖLVE\n\n> megjegyzes\nSzűrés a check-innél. Hamutüdő-pozitív: tábori kórház, földszint."]}},
+    "terminal_13": {
+        "en": {"title": "ST. RAPHAEL GENERAL", "subtitle": "triage", "pages": [
+            "> triage\nGREEN ........ 0\nYELLOW ....... 0\nRED .......... 312\nBLACK ........ 1904\n\n> order\nCamp gate closed by the military district. Patients may not leave. Staff may not leave."]},
+        "hu": {"title": "ST. RAPHAEL KÓRHÁZ", "subtitle": "osztályozás", "pages": [
+            "> osztalyozas\nZÖLD ......... 0\nSÁRGA ........ 0\nPIROS ........ 312\nFEKETE ....... 1904\n\n> parancs\nA tábor kapuját a katonai körzet lezárta. Beteg nem távozhat. Személyzet nem távozhat."]}},
 }
 
 MANUALS = {

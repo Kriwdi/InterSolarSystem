@@ -45,7 +45,7 @@ Az új világ kezdőpontja mellett, kelet felé áll a **hajód**: félig beteme
 
 **Az első lépések sorrendje:**
 
-1. **Nyisd ki a hordót** a hajó mellett. Benne: **Dr. Varga Ilona búcsúlevele** (olvasd el!), a hajó **kézikönyvei**, 2 javítókészlet, multiszerszám, kőcsákány, fáklyák, kenyér, egy vödör víz, fémhulladék, vetőmag, 2 tölgycsemete, gyapjú.
+1. **Nyisd ki a hordót** a hajó mellett. Benne: **Dr. Elena Ward búcsúlevele** (olvasd el!), a hajó **kézikönyvei**, 2 javítókészlet, multiszerszám, kőcsákány, fáklyák, kenyér, egy vödör víz, fémhulladék, vetőmag, 2 tölgycsemete, gyapjú.
 2. **Szállj be** a hajóba (jobb klikk az ajtóra). Nézz körül: a hídon van a navigációs konzol, oldalt a diagnosztikai konzolok, a középső részben az ágyak, a raktár és a javítóállomás, hátul a gépterem.
 3. A bal felső sarokban a **hajó állapotjelzője** (HUD) látszik: a fázis (leszállt, visszaszámlálás, repülés) és a nyolc alrendszer állapota százalékban.
 4. Menj ki, és **kezdd a fosztogatást**: a környéken romok, lezuhant kapszulák, műholdak, bunkerek vannak (lásd [6. fejezet](#6-romok-és-zsákmány)). A fémhulladékból vas, a mentett vezetékből réz olvasztható.

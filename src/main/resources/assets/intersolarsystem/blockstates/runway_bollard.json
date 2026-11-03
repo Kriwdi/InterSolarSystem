@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/runway_bollard"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/runway_bollard",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/runway_bollard",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/runway_bollard",
+      "y": 270
+    }
+  }
+}

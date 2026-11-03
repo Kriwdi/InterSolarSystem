@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/barbed_wire"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/barbed_wire",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/barbed_wire",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/barbed_wire",
+      "y": 270
+    }
+  }
+}

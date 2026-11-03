@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/warning_sign"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/warning_sign",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/warning_sign",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/warning_sign",
+      "y": 270
+    }
+  }
+}

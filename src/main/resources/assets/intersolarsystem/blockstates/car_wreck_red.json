@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/car_wreck_red"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/car_wreck_red",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/car_wreck_red",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/car_wreck_red",
+      "y": 270
+    }
+  }
+}

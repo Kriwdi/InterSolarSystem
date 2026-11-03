@@ -1,0 +1,147 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "metal_dark": "intersolarsystem:block/prop_metal_dark",
+    "plastic_black": "intersolarsystem:block/prop_plastic_black",
+    "yellow": "intersolarsystem:block/prop_yellow",
+    "particle": "intersolarsystem:block/prop_metal_dark"
+  },
+  "elements": [
+    {
+      "from": [
+        6,
+        0,
+        6
+      ],
+      "to": [
+        10,
+        12,
+        10
+      ],
+      "faces": {
+        "north": {
+          "texture": "#yellow",
+          "uv": [
+            0,
+            4,
+            4,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#yellow",
+          "uv": [
+            0,
+            4,
+            4,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#yellow",
+          "uv": [
+            0,
+            4,
+            4,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#yellow",
+          "uv": [
+            0,
+            4,
+            4,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#metal_dark",
+          "uv": [
+            0,
+            0,
+            4,
+            4
+          ]
+        },
+        "down": {
+          "texture": "#yellow",
+          "uv": [
+            0,
+            0,
+            4,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        5.8,
+        4,
+        5.8
+      ],
+      "to": [
+        10.2,
+        6,
+        10.2
+      ],
+      "faces": {
+        "north": {
+          "texture": "#plastic_black",
+          "uv": [
+            0,
+            14,
+            4.3999999999999995,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#plastic_black",
+          "uv": [
+            0,
+            14,
+            4.3999999999999995,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#plastic_black",
+          "uv": [
+            0,
+            14,
+            4.3999999999999995,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#plastic_black",
+          "uv": [
+            0,
+            14,
+            4.3999999999999995,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#plastic_black",
+          "uv": [
+            0,
+            0,
+            4.3999999999999995,
+            4.3999999999999995
+          ]
+        },
+        "down": {
+          "texture": "#plastic_black",
+          "uv": [
+            0,
+            0,
+            4.3999999999999995,
+            4.3999999999999995
+          ]
+        }
+      }
+    }
+  ]
+}

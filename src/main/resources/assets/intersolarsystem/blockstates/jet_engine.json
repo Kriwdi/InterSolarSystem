@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/jet_engine"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/jet_engine",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/jet_engine",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/jet_engine",
+      "y": 270
+    }
+  }
+}

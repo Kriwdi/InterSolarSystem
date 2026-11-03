@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/poster_exodus"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/poster_exodus",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/poster_exodus",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/poster_exodus",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/departure_board"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/departure_board",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/departure_board",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/departure_board",
+      "y": 270
+    }
+  }
+}
