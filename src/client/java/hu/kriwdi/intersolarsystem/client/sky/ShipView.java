@@ -19,8 +19,15 @@ import hu.kriwdi.intersolarsystem.ship.ShipViewPayload;
 public final class ShipView {
 	/** One frame's scene. Colours are 0xRRGGBB; a ceiling of -1 means open sky. */
 	public record Scene(int ceiling, int ground, float groundDepth, float stars, float starAngle, Body earth,
-			Body moon, float shake) {
+			Body moon, float shake, String groundTexture) {
+		Scene(int ceiling, int ground, float groundDepth, float stars, float starAngle, Body earth, Body moon,
+				float shake) {
+			this(ceiling, ground, groundDepth, stars, starAngle, earth, moon, shake, "");
+		}
 	}
+
+	/** Height of the eye above the painted ground when the ship stands on it. */
+	public static final float LANDED_DEPTH = 6.0F;
 
 	/**
 	 * A body on the sky. With pitch 0 the roll alone places it in the north-south plane: 0 is straight up, negative
@@ -84,10 +91,16 @@ public final class ShipView {
 	}
 
 	private static Scene place(String id) {
+		return place(id, last.groundFrom());
+	}
+
+	/** The scene at a place, with the painted ground of the biome the ship stands on. */
+	private static Scene place(String id, String ground) {
 		return switch (id) {
-			case "moon" -> new Scene(-1, MOON_GROUND, 2.0F, 1.0F, 0.0F, EARTH_FROM_MOON, null, 0.0F);
+			case "moon" -> new Scene(-1, MOON_GROUND, LANDED_DEPTH, 1.0F, 0.0F, EARTH_FROM_MOON, null, 0.0F, "moon");
 			case "earth_orbit" -> new Scene(-1, -1, 0.0F, 1.0F, 0.0F, EARTH_BELOW, null, 0.0F);
-			case "earth" -> new Scene(EARTH_SKY, EARTH_GROUND, 2.0F, 0.0F, 0.0F, null, null, 0.0F);
+			case "earth" -> new Scene(EARTH_SKY, EARTH_GROUND, LANDED_DEPTH, 0.0F, 0.0F, null, null, 0.0F,
+					ground.isEmpty() ? "ash_desert" : ground);
 			default -> new Scene(-1, -1, 0.0F, 1.0F, 0.0F, null, null, 0.0F);
 		};
 	}
@@ -107,11 +120,12 @@ public final class ShipView {
 			}
 			case LANDING -> {
 				float p = progress(partialTick);
-				Scene end = place(last.to().isEmpty() ? last.from() : destination(last.to()));
-				float depth = end.ground() == -1 ? 0.0F : 2.0F + 1500.0F * (1.0F - p) * (1.0F - p);
+				boolean arriving = !last.to().isEmpty();
+				Scene end = arriving ? place(destination(last.to()), last.groundTo()) : place(last.from());
+				float depth = end.ground() == -1 ? 0.0F : LANDED_DEPTH + 1500.0F * (1.0F - p) * (1.0F - p);
 				int ceiling = end.ceiling() == -1 || p < 0.6F ? -1 : end.ceiling();
 				return new Scene(ceiling, end.ground(), depth, ceiling == -1 ? 1.0F : 0.0F, time * 0.05F, end.earth(),
-						end.moon(), 0.25F * (1.0F - p) + 0.12F);
+						end.moon(), 0.25F * (1.0F - p) + 0.12F, end.groundTexture());
 			}
 			default -> {
 				return place(last.from());
@@ -138,8 +152,8 @@ public final class ShipView {
 			Scene base = place(from);
 			float q = p / 0.25F;
 			int ceiling = base.ceiling() == -1 ? -1 : lerpColour(base.ceiling(), 0x000000, Math.min(1.0F, q * 1.6F));
-			return new Scene(q > 0.6F ? -1 : ceiling, base.ground(), 2.0F + 3000.0F * q * q, Math.min(1.0F, q * 1.5F),
-					starAngle, base.earth(), null, shake);
+			return new Scene(q > 0.6F ? -1 : ceiling, base.ground(), LANDED_DEPTH + 3000.0F * q * q,
+					Math.min(1.0F, q * 1.5F), starAngle, base.earth(), null, shake, base.groundTexture());
 		}
 		if ("earth_orbit".equals(to) || "earth".equals(to) && "earth_orbit".equals(from)) {
 			return new Scene(-1, -1, 0.0F, 1.0F, starAngle, EARTH_BELOW, null, shake);
@@ -163,7 +177,8 @@ public final class ShipView {
 	}
 
 	private static Scene with(Scene s, float shake, float starAngle) {
-		return new Scene(s.ceiling(), s.ground(), s.groundDepth(), s.stars(), starAngle, s.earth(), s.moon(), shake);
+		return new Scene(s.ceiling(), s.ground(), s.groundDepth(), s.stars(), starAngle, s.earth(), s.moon(), shake,
+				s.groundTexture());
 	}
 
 	private static int lerpColour(int a, int b, float t) {

@@ -151,16 +151,74 @@ public abstract class SkyRendererMixin {
 			drawCelestialBody(() -> "Moon (ship view)", renderPass, transforms, quadIndices.getBuffer(6), moonBuffer, 0);
 			poseStack.popPose();
 		}
-		// Ground and sky are flat discs around the ship: the ground drops away as the ship climbs.
+		// The ground under the ship: a plain disc to the horizon with the painted surface of the biome on top (tiles
+		// of a seamless aerial view); it drops away as the ship climbs.
 		if (scene.ground() != -1 && scene.groundDepth() <= 450.0F) {
-			// Turned over so its front face looks up (the sky pipeline culls back faces).
+			// Turned over so the front faces look up (the sky pipelines cull back faces).
 			poseStack.pushPose();
 			poseStack.rotateDegrees(Axis.XP, 180.0F);
-			intersolarsystem$drawDisc(renderPass, poseStack, scene.groundDepth(), 500.0F, scene.ground());
+			intersolarsystem$drawDisc(renderPass, poseStack, scene.groundDepth() + 0.5F, 500.0F, scene.ground());
+			if (!scene.groundTexture().isEmpty()) {
+				intersolarsystem$drawGround(renderPass, poseStack, scene.groundDepth(), scene.groundTexture());
+			}
 			poseStack.popPose();
 		}
 		if (scene.ceiling() != -1) {
 			intersolarsystem$drawDisc(renderPass, poseStack, 20.0F, 500.0F, scene.ceiling());
+		}
+	}
+
+	/** Tiles per side of the painted ground, and the size of one tile (in sky units, about blocks). */
+	@Unique
+	private static final int GROUND_TILES = 9;
+
+	@Unique
+	private static final float GROUND_TILE = 36.0F;
+
+	@Unique
+	private final java.util.Map<String, GpuBuffer> intersolarsystem$grounds = new java.util.HashMap<>();
+
+	@Unique
+	private void intersolarsystem$drawGround(final RenderPass renderPass, final PoseStack poseStack, final float depth,
+			final String name) {
+		GpuBuffer tiles = intersolarsystem$grounds.computeIfAbsent(name,
+				n -> intersolarsystem$buildGround(celestialsAtlas, n));
+		int indices = 6 * GROUND_TILES * GROUND_TILES;
+		Matrix4f matrix = applyCelestialBodyTransform(poseStack, depth, GROUND_TILE / 2.0F);
+		GpuBufferSlice transforms = RenderSystem.getDynamicUniforms().writeTransform(matrix,
+				new Vector4f(1.0F, 1.0F, 1.0F, 1.0F));
+		renderPass.pushDebugGroup(() -> "InterSolarSystem ground");
+		renderPass.setPipeline(RenderSystem.getCompiledPipeline(RenderPipelines.CELESTIAL));
+		RenderSystem.bindDefaultUniforms(renderPass);
+		renderPass.setUniform("DynamicTransforms", transforms);
+		renderPass.setUniform("Sampler0", celestialsAtlas.getTextureView(), celestialsAtlas.getSampler());
+		renderPass.setVertexBuffer(0, tiles.slice());
+		renderPass.setIndexBuffer(quadIndices.getBuffer(indices), quadIndices.type());
+		renderPass.drawIndexed(indices, 1, 0, 0, 0);
+		renderPass.popDebugGroup();
+	}
+
+	/** A square of tiles (two units each) of one ground sprite, centred under the viewer. */
+	@Unique
+	private static GpuBuffer intersolarsystem$buildGround(final TextureAtlas atlas, final String name) {
+		VertexFormat format = DefaultVertexFormat.POSITION_TEX;
+		int quads = GROUND_TILES * GROUND_TILES;
+		try (ByteBufferBuilder bytes = ByteBufferBuilder.exactlySized(quads * 4 * format.getVertexSize())) {
+			BufferBuilder builder = new BufferBuilder(bytes, PrimitiveTopology.QUADS, format);
+			TextureAtlasSprite sprite = atlas.getSprite(ModIds.id("ground/" + name));
+			for (int i = 0; i < GROUND_TILES; i++) {
+				for (int j = 0; j < GROUND_TILES; j++) {
+					float x0 = -GROUND_TILES + 2.0F * i;
+					float z0 = -GROUND_TILES + 2.0F * j;
+					builder.addVertex(x0, 0.0F, z0).setUv(sprite.getU1(), sprite.getV1());
+					builder.addVertex(x0 + 2.0F, 0.0F, z0).setUv(sprite.getU0(), sprite.getV1());
+					builder.addVertex(x0 + 2.0F, 0.0F, z0 + 2.0F).setUv(sprite.getU0(), sprite.getV0());
+					builder.addVertex(x0, 0.0F, z0 + 2.0F).setUv(sprite.getU1(), sprite.getV0());
+				}
+			}
+			try (MeshData mesh = builder.buildOrThrow()) {
+				return RenderSystem.getDevice().createBuffer(() -> "Ground " + name, 32, mesh.vertexBuffer());
+			}
 		}
 	}
 
@@ -202,6 +260,8 @@ public abstract class SkyRendererMixin {
 			intersolarsystem$earthPhases.close();
 			intersolarsystem$disc.close();
 		}
+		intersolarsystem$grounds.values().forEach(GpuBuffer::close);
+		intersolarsystem$grounds.clear();
 	}
 
 	/** Eight quads, one per lighting phase, in the same layout as vanilla's moon phases. */
