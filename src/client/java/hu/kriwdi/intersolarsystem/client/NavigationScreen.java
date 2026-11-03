@@ -24,7 +24,7 @@ import hu.kriwdi.intersolarsystem.travel.TravelMath;
  */
 public class NavigationScreen extends Screen {
 	private static final int WIDTH = 320;
-	private static final int HEIGHT = 270;
+	private static final int HEIGHT = 300;
 	private static final int ROW = 12;
 	private static final Map<String, Integer> COLOURS = Map.ofEntries(
 			Map.entry("earth", 0xFF3D7BD9), Map.entry("earth_orbit", 0xFF9FC4FF), Map.entry("moon", 0xFFC9C9C9), Map.entry("venus", 0xFFE3C27A),
@@ -69,7 +69,7 @@ public class NavigationScreen extends Screen {
 	}
 
 	private int top() {
-		return (height - HEIGHT) / 2;
+		return Math.max(0, (height - HEIGHT) / 2);
 	}
 
 	private long now() {
@@ -112,7 +112,7 @@ public class NavigationScreen extends Screen {
 				engineTier, TravelMath.multiplier(engineTier)));
 		drawMap(g, l + 10, mapY(), WIDTH - 20, 36, partialTick);
 		drawList(g, l + 10, listY(), mouseX, mouseY);
-		drawDetails(g, l + 10, launchY() - 30);
+		drawDetails(g, l + 10, listY() + bodies.size() * ROW + 10);
 		boolean launchable = launchable(bodies.get(selected));
 		ShipPanel.button(g, font, launchX(), launchY(), 94, 18,
 				Component.translatable("screen.intersolarsystem.nav.launch"),
@@ -188,7 +188,7 @@ public class NavigationScreen extends Screen {
 				case FLYBY -> ShipPanel.reachableColour(ShipNavigation.reachable(b, here));
 				case LOCKED -> 0xFF6B737A;
 			};
-			g.text(font, status, x + 96, ry + 3, statusColour);
+			g.text(font, status, x + 118, ry + 3, statusColour);
 			if (!b.id().equals(here) && b.status() != CelestialBody.Status.LOCKED) {
 				String time = TravelMath.formatDuration(legTicks(b));
 				g.text(font, time, x + w - 4 - font.width(time), ry + 3, ShipPanel.TEXT);

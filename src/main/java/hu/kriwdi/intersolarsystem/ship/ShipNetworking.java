@@ -12,6 +12,7 @@ public final class ShipNetworking {
 	/** Registers the packets. Must run on both sides before any receiver is registered. */
 	public static void register() {
 		PayloadTypeRegistry.clientboundPlay().register(ShipStatusPayload.TYPE, ShipStatusPayload.CODEC);
+		PayloadTypeRegistry.clientboundPlay().register(ShipViewPayload.TYPE, ShipViewPayload.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(RepairBoardPayloads.Open.TYPE, RepairBoardPayloads.Open.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(RepairBoardPayloads.Result.TYPE, RepairBoardPayloads.Result.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(NavigationPayloads.Open.TYPE, NavigationPayloads.Open.CODEC);

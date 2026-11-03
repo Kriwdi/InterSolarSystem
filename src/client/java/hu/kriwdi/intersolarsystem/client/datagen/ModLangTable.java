@@ -1038,6 +1038,22 @@ public final class ModLangTable {
 				"Earth Orbit",
 				"Erdumlaufbahn",
 				"Föld körüli pálya");
+		add(rows, "block.intersolarsystem.ship_plating",
+				"Ship Plating",
+				"Schiffspanzerung",
+				"Hajóburkolat");
+		add(rows, "block.intersolarsystem.ship_porthole",
+				"Ship Porthole",
+				"Bullauge",
+				"Hajóablak");
+		add(rows, "block.intersolarsystem.ship_thruster",
+				"Ship Thruster",
+				"Schiffstriebwerk",
+				"Hajtóműfúvóka");
+		add(rows, "block.intersolarsystem.ship_viewport",
+				"Viewport",
+				"Sichtfenster",
+				"Kilátóablak");
 		check(rows);
 		return List.copyOf(rows);
 	}

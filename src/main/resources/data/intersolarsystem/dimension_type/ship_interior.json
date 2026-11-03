@@ -30,6 +30,6 @@
   "min_y": 0,
   "monster_spawn_block_light_limit": 0,
   "monster_spawn_light_level": 0,
-  "skybox": "end",
-  "timelines": "#minecraft:in_end"
+  "skybox": "overworld",
+  "timelines": "#intersolarsystem:in_ship"
 }

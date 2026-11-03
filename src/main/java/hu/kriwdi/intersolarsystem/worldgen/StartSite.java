@@ -57,14 +57,11 @@ public final class StartSite {
 
 	/** Builds the wreck around a centre column and returns the hatch position. The hatch faces west (the spawn). */
 	static BlockPos build(ServerLevel level, BlockPos near) {
-		BlockPos ground = MoonSites.surface(level, near.getX(), near.getZ());
-		int y = ground.getY();
-		BlockState hull = ModBlocks.RUSTED_PANEL.defaultBlockState();
 		// Impact scar: a shallow ash and cinder bowl.
-		for (int dx = -7; dx <= 7; dx++) {
-			for (int dz = -6; dz <= 6; dz++) {
-				double d = Math.sqrt(dx * dx * 0.7 + dz * dz);
-				if (d > 6.5) {
+		for (int dx = -8; dx <= 8; dx++) {
+			for (int dz = -15; dz <= 15; dz++) {
+				double d = Math.sqrt(dx * dx + dz * dz * 0.25);
+				if (d > 8) {
 					continue;
 				}
 				BlockPos top = MoonSites.surface(level, near.getX() + dx, near.getZ() + dz).below();
@@ -72,29 +69,15 @@ public final class StartSite {
 						: ModBlocks.ASH.defaultBlockState());
 			}
 		}
-		// The hull: a rounded rusted shell 7 long, half buried, tilted down to the east.
-		for (int dx = -3; dx <= 3; dx++) {
-			int sink = dx > 1 ? 1 : 0;
-			for (int dy = 0; dy <= 3; dy++) {
-				for (int dz = -2; dz <= 2; dz++) {
-					boolean corner = (dy == 3 || dy == 0) && Math.abs(dz) == 2;
-					if (corner) {
-						continue;
-					}
-					set(level, new BlockPos(near.getX() + dx, y + dy - sink - 1, near.getZ() + dz), hull);
-				}
-			}
-		}
-		set(level, new BlockPos(near.getX() + 4, y, near.getZ()), ModBlocks.LANDER_ENGINE.defaultBlockState());
-		set(level, new BlockPos(near.getX() + 1, y + 3, near.getZ()), ModBlocks.ANTENNA_DISH.defaultBlockState());
-		BlockPos hatch = new BlockPos(near.getX() - 4, y, near.getZ());
+		// The ship itself, landed hard: its hull around the hatch, which faces west, towards the spawn.
+		BlockPos hatch = MoonSites.surface(level, near.getX() - 4, near.getZ());
 		set(level, hatch, ModBlocks.SHIP_HATCH.defaultBlockState().setValue(ShipFacingBlock.FACING, Direction.WEST));
-		set(level, hatch.above(), Blocks.AIR.defaultBlockState());
+		hu.kriwdi.intersolarsystem.ship.ShipShell.build(level, hatch, Direction.WEST);
 		// Debris and the supply barrel.
-		set(level, MoonSites.surface(level, near.getX() - 5, near.getZ() + 3), ModBlocks.SCRAP_PILE.defaultBlockState());
-		set(level, MoonSites.surface(level, near.getX() + 2, near.getZ() - 4), ModBlocks.SCRAP_PILE.defaultBlockState());
-		set(level, MoonSites.surface(level, near.getX() + 6, near.getZ() + 2), ModBlocks.RUBBLE.defaultBlockState());
-		BlockPos barrel = MoonSites.surface(level, near.getX() - 5, near.getZ() - 2);
+		set(level, MoonSites.surface(level, near.getX() - 6, near.getZ() + 3), ModBlocks.SCRAP_PILE.defaultBlockState());
+		set(level, MoonSites.surface(level, near.getX() - 7, near.getZ() - 5), ModBlocks.SCRAP_PILE.defaultBlockState());
+		set(level, MoonSites.surface(level, near.getX() + 7, near.getZ() + 14), ModBlocks.RUBBLE.defaultBlockState());
+		BlockPos barrel = MoonSites.surface(level, near.getX() - 6, near.getZ() - 2);
 		set(level, barrel, Blocks.BARREL.defaultBlockState());
 		if (level.getBlockEntity(barrel) instanceof RandomizableContainerBlockEntity container) {
 			container.setLootTable(START_LOOT);

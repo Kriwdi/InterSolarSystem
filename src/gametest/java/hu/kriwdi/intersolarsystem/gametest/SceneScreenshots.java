@@ -17,7 +17,6 @@ import hu.kriwdi.intersolarsystem.client.repair.PressureScreen;
 import hu.kriwdi.intersolarsystem.client.repair.ValveScreen;
 import hu.kriwdi.intersolarsystem.client.repair.WiringScreen;
 import hu.kriwdi.intersolarsystem.ship.ShipDimensions;
-import hu.kriwdi.intersolarsystem.ship.ShipInteriorBuilder;
 import hu.kriwdi.intersolarsystem.space.MoonSites;
 import hu.kriwdi.intersolarsystem.space.OrbitStation;
 
@@ -33,19 +32,6 @@ public class SceneScreenshots implements FabricClientGameTest {
 			game.getServer().runCommand("gamemode creative @a");
 			game.getServer().runCommand("gamerule doDaylightCycle false");
 			game.getServer().runCommand("effect give @a minecraft:night_vision infinite 0 true");
-
-			// Ship interior with the consoles, hatch and HUD.
-			game.getServer().runOnServer(server -> {
-				ServerLevel interior = server.getLevel(ShipDimensions.INTERIOR);
-				ShipInteriorBuilder.build(interior, true);
-				ShipInteriorBuilder.ensureStation(interior);
-			});
-			game.getServer().runCommand("execute in intersolarsystem:ship_interior run tp @a 4.5 65 1.6 0 22");
-			context.waitTicks(80);
-			context.takeScreenshot("01_ship_interior");
-			game.getServer().runCommand("execute in intersolarsystem:ship_interior run tp @a 4.5 65 4.2 180 18");
-			context.waitTicks(40);
-			context.takeScreenshot("02_ship_hatch");
 
 			// The ship's screens.
 			context.setScreen(() -> new NavigationScreen(1, 30_000L, true, "earth"));

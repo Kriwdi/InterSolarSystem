@@ -4,6 +4,7 @@
   "package": "hu.kriwdi.intersolarsystem.client.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "GameRendererMixin",
     "SkyRendererMixin"
   ],
   "injectors": {

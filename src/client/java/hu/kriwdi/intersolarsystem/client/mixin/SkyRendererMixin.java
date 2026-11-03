@@ -35,6 +35,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import hu.kriwdi.intersolarsystem.client.sky.EarthInSky;
+import hu.kriwdi.intersolarsystem.client.sky.ShipView;
 import hu.kriwdi.intersolarsystem.core.ModIds;
 
 /**
@@ -52,6 +53,10 @@ public abstract class SkyRendererMixin {
 	@Shadow
 	@Final
 	private RenderSystem.AutoStorageIndexBuffer quadIndices;
+
+	@Shadow
+	@Final
+	private GpuBuffer moonBuffer;
 
 	@Unique
 	private GpuBuffer intersolarsystem$earthPhases;
@@ -71,10 +76,26 @@ public abstract class SkyRendererMixin {
 		throw new AssertionError();
 	}
 
+	@Shadow
+	private void renderStars(final RenderPass renderPass, final float starBrightness, final PoseStack poseStack) {
+		throw new AssertionError();
+	}
+
+	@Unique
+	private static float intersolarsystem$partialTicks;
+
+	/** Remembers the frame's partial tick for the ship view (the sky render itself does not get it). */
+	@Inject(method = "extractRenderState", at = @At("HEAD"))
+	private void intersolarsystem$rememberPartialTick(final net.minecraft.client.multiplayer.ClientLevel level,
+			final float partialTicks, final net.minecraft.client.Camera camera,
+			final net.minecraft.client.renderer.state.level.SkyRenderState state, final CallbackInfo ci) {
+		intersolarsystem$partialTicks = partialTicks;
+	}
+
 	@Inject(method = "renderMoon", at = @At("HEAD"), cancellable = true)
 	private void intersolarsystem$noMoonOnTheMoon(final RenderPass renderPass, final MoonPhase moonPhase,
 			final float rainBrightness, final PoseStack poseStack, final CallbackInfo ci) {
-		if (EarthInSky.current() == EarthInSky.View.FROM_MOON) {
+		if (EarthInSky.current() == EarthInSky.View.FROM_MOON || ShipView.active()) {
 			ci.cancel();
 		}
 	}
@@ -83,32 +104,86 @@ public abstract class SkyRendererMixin {
 	private void intersolarsystem$renderEarth(final RenderPass renderPass, final PoseStack poseStack,
 			final float sunAngle, final float moonAngle, final float starAngle, final MoonPhase moonPhase,
 			final float rainBrightness, final float starBrightness, final CallbackInfo ci) {
-		EarthInSky.View view = EarthInSky.current();
-		if (view == EarthInSky.View.NONE) {
-			return;
-		}
 		if (intersolarsystem$earthPhases == null) {
 			intersolarsystem$earthPhases = intersolarsystem$buildEarthPhases(celestialsAtlas);
 			intersolarsystem$disc = intersolarsystem$buildDisc();
 		}
-		poseStack.pushPose();
-		poseStack.rotateDegrees(Axis.YP, -90.0F);
-		poseStack.rotateDegrees(Axis.XP, view.pitch());
-		poseStack.rotateDegrees(Axis.ZP, view.roll());
-		float scale = view.scale();
-		// Occluder: a black disc slightly smaller than the sprite (the atmosphere rim stays visible).
-		Matrix4f discMatrix = applyCelestialBodyTransform(poseStack, EarthInSky.DISTANCE + 0.5F, scale * 0.94F);
-		GpuBufferSlice discTransforms = RenderSystem.getDynamicUniforms().writeTransform(discMatrix,
-				new Vector4f(0.0F, 0.0F, 0.0F, 1.0F));
-		renderPass.pushDebugGroup(() -> "Earth occluder");
+		if (ShipView.active()) {
+			intersolarsystem$renderShipView(renderPass, poseStack, sunAngle);
+			return;
+		}
+		EarthInSky.View view = EarthInSky.current();
+		if (view == EarthInSky.View.NONE) {
+			return;
+		}
+		intersolarsystem$drawEarth(renderPass, poseStack, view.pitch(), view.roll(), view.scale(),
+				EarthInSky.phase(view, sunAngle));
+	}
+
+	/** The view out of the ship's viewports (the interior dimension's sky), see {@link ShipView}. */
+	@Unique
+	private void intersolarsystem$renderShipView(final RenderPass renderPass, final PoseStack poseStack,
+			final float sunAngle) {
+		float partial = intersolarsystem$partialTicks;
+		ShipView.Scene scene = ShipView.scene(partial);
+		if (scene.stars() > 0.0F) {
+			poseStack.pushPose();
+			poseStack.rotateDegrees(Axis.YP, -90.0F);
+			poseStack.rotateDegrees(Axis.XP, scene.starAngle());
+			renderStars(renderPass, scene.stars(), poseStack);
+			poseStack.popPose();
+		}
+		if (scene.earth() != null) {
+			ShipView.Body e = scene.earth();
+			intersolarsystem$drawEarth(renderPass, poseStack, e.pitch(), e.roll(), e.scale(),
+					EarthInSky.phase(EarthInSky.View.FROM_ORBIT, sunAngle));
+		}
+		if (scene.moon() != null) {
+			ShipView.Body m = scene.moon();
+			poseStack.pushPose();
+			poseStack.rotateDegrees(Axis.YP, -90.0F);
+			poseStack.rotateDegrees(Axis.XP, m.pitch());
+			poseStack.rotateDegrees(Axis.ZP, m.roll());
+			intersolarsystem$drawDisc(renderPass, poseStack, EarthInSky.DISTANCE + 0.5F, m.scale() * 0.9F, 0x000000);
+			Matrix4f matrix = applyCelestialBodyTransform(poseStack, EarthInSky.DISTANCE, m.scale());
+			GpuBufferSlice transforms = RenderSystem.getDynamicUniforms().writeTransform(matrix,
+					new Vector4f(1.0F, 1.0F, 1.0F, 1.0F));
+			drawCelestialBody(() -> "Moon (ship view)", renderPass, transforms, quadIndices.getBuffer(6), moonBuffer, 0);
+			poseStack.popPose();
+		}
+		// Ground and sky are flat discs around the ship: the ground drops away as the ship climbs.
+		if (scene.ground() != -1 && scene.groundDepth() <= 450.0F) {
+			intersolarsystem$drawDisc(renderPass, poseStack, -scene.groundDepth(), 500.0F, scene.ground());
+		}
+		if (scene.ceiling() != -1) {
+			intersolarsystem$drawDisc(renderPass, poseStack, 20.0F, 500.0F, scene.ceiling());
+		}
+	}
+
+	@Unique
+	private void intersolarsystem$drawDisc(final RenderPass renderPass, final PoseStack poseStack, final float height,
+			final float scale, final int rgb) {
+		Matrix4f matrix = applyCelestialBodyTransform(poseStack, height, scale);
+		GpuBufferSlice transforms = RenderSystem.getDynamicUniforms().writeTransform(matrix,
+				new Vector4f(((rgb >> 16) & 0xFF) / 255.0F, ((rgb >> 8) & 0xFF) / 255.0F, (rgb & 0xFF) / 255.0F, 1.0F));
+		renderPass.pushDebugGroup(() -> "InterSolarSystem disc");
 		renderPass.setPipeline(RenderSystem.getCompiledPipeline(RenderPipelines.SKY));
 		RenderSystem.bindDefaultUniforms(renderPass);
-		renderPass.setUniform("DynamicTransforms", discTransforms);
+		renderPass.setUniform("DynamicTransforms", transforms);
 		renderPass.setVertexBuffer(0, intersolarsystem$disc.slice());
 		renderPass.draw(EarthInSky.DISC_VERTICES, 1, 0, 0);
 		renderPass.popDebugGroup();
+	}
 
-		int phase = EarthInSky.phase(view, sunAngle);
+	@Unique
+	private void intersolarsystem$drawEarth(final RenderPass renderPass, final PoseStack poseStack, final float pitch,
+			final float roll, final float scale, final int phase) {
+		poseStack.pushPose();
+		poseStack.rotateDegrees(Axis.YP, -90.0F);
+		poseStack.rotateDegrees(Axis.XP, pitch);
+		poseStack.rotateDegrees(Axis.ZP, roll);
+		// Occluder: a black disc slightly smaller than the sprite (the atmosphere rim stays visible).
+		intersolarsystem$drawDisc(renderPass, poseStack, EarthInSky.DISTANCE + 0.5F, scale * 0.94F, 0x000000);
 		Matrix4f matrix = applyCelestialBodyTransform(poseStack, EarthInSky.DISTANCE, scale);
 		GpuBufferSlice transforms = RenderSystem.getDynamicUniforms().writeTransform(matrix,
 				new Vector4f(1.0F, 1.0F, 1.0F, 1.0F));

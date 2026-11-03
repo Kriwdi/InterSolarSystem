@@ -103,6 +103,7 @@ public final class ShipLanding {
 				BlockPos hatch = findHatchCell(moon, target.x(), target.z(), SEARCH_RADIUS)
 						.orElseGet(() -> new BlockPos(target.x(), surfaceHeight(moon, target.x(), target.z()), target.z()));
 				moon.setBlock(hatch, ModBlocks.SHIP_HATCH.defaultBlockState(), Block.UPDATE_ALL);
+				ShipShell.build(moon, hatch, Direction.NORTH);
 				state.setLandingSite(new ShipState.LandingSite(moon.dimension().identifier().toString(),
 						hatch.getX(), hatch.getY(), hatch.getZ()));
 				return new Landing(hatch, false, false, true);
@@ -123,6 +124,7 @@ public final class ShipLanding {
 				surfaceHeight(overworld, spawnPos.getX(), spawnPos.getZ()),
 				spawnPos.getZ()));
 		overworld.setBlock(hatch, ModBlocks.SHIP_HATCH.defaultBlockState(), Block.UPDATE_ALL);
+		ShipShell.build(overworld, hatch, Direction.NORTH);
 		state.setLandingSite(new ShipState.LandingSite(overworld.dimension().identifier().toString(),
 				hatch.getX(), hatch.getY(), hatch.getZ()));
 		return new Landing(hatch, usedSpawn);

@@ -186,6 +186,26 @@ public final class ModBlocks {
 			BlockBehaviour.Properties.of().strength(0.3F).sound(SoundType.HONEY_BLOCK).noOcclusion().speedFactor(0.4F)
 					.jumpFactor(0.5F));
 
+	// ---- The ship seen from outside (built around the hatch where it lands) and its viewports. Indestructible: the
+	// hull leaves with the ship at takeoff.
+	public static final Block SHIP_PLATING = register("ship_plating", Block::new,
+			BlockBehaviour.Properties.of().strength(-1.0F, 3600000.0F).sound(SoundType.METAL).noLootTable()
+					.pushReaction(PushReaction.BLOCK));
+
+	public static final Block SHIP_PORTHOLE = register("ship_porthole", Block::new,
+			BlockBehaviour.Properties.of().strength(-1.0F, 3600000.0F).sound(SoundType.GLASS).noLootTable()
+					.pushReaction(PushReaction.BLOCK).lightLevel(state -> 6));
+
+	public static final Block SHIP_THRUSTER = register("ship_thruster", Block::new,
+			BlockBehaviour.Properties.of().strength(-1.0F, 3600000.0F).sound(SoundType.METAL).noLootTable()
+					.pushReaction(PushReaction.BLOCK));
+
+	/** See-through viewport of the ship's interior: the window frame with clear glass. */
+	public static final Block SHIP_VIEWPORT = register("ship_viewport", Block::new,
+			BlockBehaviour.Properties.of().strength(-1.0F, 3600000.0F).sound(SoundType.GLASS).noLootTable()
+					.noOcclusion().pushReaction(PushReaction.BLOCK).isViewBlocking((s, l, p) -> false)
+					.isSuffocating((s, l, p) -> false).isRedstoneConductor((s, l, p) -> false));
+
 	private ModBlocks() {
 	}
 

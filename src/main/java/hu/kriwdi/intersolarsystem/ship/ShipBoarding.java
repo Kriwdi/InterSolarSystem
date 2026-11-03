@@ -69,9 +69,14 @@ public final class ShipBoarding {
 		ShipInteriorLayout layout = ShipInteriorLayout.capsule();
 		Cell hatchCell = layout.hatch();
 		BlockPos interiorHatch = ShipDimensions.ANCHOR.offset(hatchCell.dx(), hatchCell.dy(), hatchCell.dz());
-		if (interior.getBlockState(interiorHatch).getBlock() != ModBlocks.SHIP_HATCH) {
-			// First build clears the inside; a repair (hatch lost) keeps whatever players put inside.
-			ShipInteriorBuilder.build(interior, !state.interiorBuilt());
+		interior.getChunk(interiorHatch.getX() >> 4, interiorHatch.getZ() >> 4);
+		if (!ShipInteriorBuilder.isCurrent(interior)) {
+			// First build, or an old one-room capsule: the standard ship replaces it (the inside is cleared).
+			ShipInteriorBuilder.build(interior, true);
+			state.setInteriorBuilt(true);
+		} else if (interior.getBlockState(interiorHatch).getBlock() != ModBlocks.SHIP_HATCH) {
+			// A repair (hatch lost) keeps whatever players put inside.
+			ShipInteriorBuilder.build(interior, false);
 			state.setInteriorBuilt(true);
 		}
 		ShipInteriorBuilder.ensureStation(interior);

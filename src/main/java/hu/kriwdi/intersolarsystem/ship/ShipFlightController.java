@@ -194,6 +194,8 @@ public final class ShipFlightController {
 			ServerLevel level = ShipBoarding.levelOf(server, site);
 			BlockPos pos = new BlockPos(site.x(), site.y(), site.z());
 			if (level != null && level.getBlockState(pos).getBlock() == ModBlocks.SHIP_HATCH) {
+				ShipShell.remove(level, pos, level.getBlockState(pos).getValue(
+						hu.kriwdi.intersolarsystem.content.ShipFacingBlock.FACING));
 				level.removeBlock(pos, false);
 			}
 		});

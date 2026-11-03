@@ -6,6 +6,7 @@
 	"environment": "client",
 	"entrypoints": {
 		"fabric-client-gametest": [
+			"hu.kriwdi.intersolarsystem.gametest.ShipJourney",
 			"hu.kriwdi.intersolarsystem.gametest.SceneScreenshots"
 		]
 	},

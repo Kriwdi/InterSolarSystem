@@ -28,6 +28,10 @@ public final class ShipStatusSync {
 			STATE.reset();
 			return;
 		}
+		if (nowTick % 10 == 0) {
+			ShipViewPayload view = ShipViewPayload.of(state, nowTick);
+			interior.players().forEach(p -> ServerPlayNetworking.send(p, view));
+		}
 		ShipStatusSnapshot snapshot = ShipStatusSnapshot.from(state, nowTick);
 		ShipStatusSnapshot.StructuralKey key = snapshot.structuralKey();
 		boolean changed = !key.equals(STATE.lastSentKey());

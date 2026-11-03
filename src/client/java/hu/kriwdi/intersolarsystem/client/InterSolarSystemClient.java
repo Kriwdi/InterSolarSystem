@@ -41,7 +41,15 @@ public class InterSolarSystemClient implements ClientModInitializer {
 					new NavigationScreen(payload.engineTier(), payload.gameTime(), payload.canLaunch(),
 							payload.here())));
 		});
-		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> ClientShipStatus.clear());
+		ClientPlayNetworking.registerGlobalReceiver(hu.kriwdi.intersolarsystem.ship.ShipViewPayload.TYPE,
+				(payload, context) -> context.client().execute(() -> hu.kriwdi.intersolarsystem.client.sky.ShipView
+						.accept(payload)));
+		net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK
+				.register(hu.kriwdi.intersolarsystem.client.sky.ShipView::tick);
+		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
+			ClientShipStatus.clear();
+			hu.kriwdi.intersolarsystem.client.sky.ShipView.clear();
+		});
 		HudElementRegistry.addLast(ModIds.id("ship_status"), new ShipHudElement());
 		HudElementRegistry.addLast(ModIds.id("oxygen"), new OxygenHudElement());
 	}
