@@ -17,7 +17,7 @@ import hu.kriwdi.intersolarsystem.space.VacuumStatusPayload;
 /**
  * The helmet's visor display and what the vacuum does to your sight.
  *
- * <p>With the helmet on: the dark rim of the visor, an oxygen arc on the left, the suit's seal and pressure arc on the
+ * <p>With the helmet on: an oxygen arc on the left, the suit's seal and pressure arc on the
  * right, warnings at the bottom (leak, low oxygen, hypoxia). Without air: hypoxia darkens and blurs the edges of the
  * view in time with the heartbeat; decompression frosts it over and makes it flicker.
  */
@@ -60,7 +60,6 @@ public class HelmetHudElement implements HudElement {
 			}
 			return;
 		}
-		visorRim(g, w, h);
 		double oxygen = s != null ? s.oxygen() : ModArmor.oxygen(player);
 		boolean leak = s != null && s.leak();
 		boolean sealed = ModArmor.fullSuit(player);
@@ -107,20 +106,6 @@ public class HelmetHudElement implements HudElement {
 			boolean lit = t <= fill + 1e-6;
 			g.fill(x - 2, y - 1, x + 2, y + 2, 0x90000000);
 			g.fill(x - 1, y - 1, x + 1, y + 1, lit ? colour : 0x50FFFFFF);
-		}
-	}
-
-	/** The rim of the visor: soft dark corners. */
-	private static void visorRim(GuiGraphicsExtractor g, int w, int h) {
-		int r = Math.min(w, h) / 4;
-		for (int i = 0; i < r; i += 2) {
-			int inset = (int) Math.round(r - Math.sqrt(Math.max(0, r * r - (r - i) * (r - i))));
-			int alpha = 0x50 - i * 0x50 / r;
-			int c = (alpha << 24);
-			g.fill(0, i, inset, i + 2, c);
-			g.fill(w - inset, i, w, i + 2, c);
-			g.fill(0, h - i - 2, inset, h - i, c);
-			g.fill(w - inset, h - i - 2, w, h - i, c);
 		}
 	}
 

@@ -139,6 +139,7 @@ public class SceneScreenshots implements FabricClientGameTest {
 			game.getServer().runCommand("effect clear @a");
 			game.getServer().runCommand("gamemode creative @a");
 			game.getServer().runCommand("item replace entity @a armor.head with intersolarsystem:space_helmet");
+			game.getServer().runCommand("item replace entity @a armor.chest with intersolarsystem:space_suit");
 
 			// The Moon: Apollo 11, Tranquility Base, the landscape and the Earth in the sky (lunar noon, then night).
 			game.getServer().runOnServer(server -> MoonSites.ensureBuilt(server.getLevel(ShipDimensions.MOON)));
@@ -174,6 +175,7 @@ public class SceneScreenshots implements FabricClientGameTest {
 			// Spectators fly: the camera stays where it is put instead of falling to the ground.
 			game.getServer().runCommand("gamemode spectator @a");
 			context.runOnClient(client -> client.options.renderDistance().set(10));
+			game.getServer().runCommand("item replace entity @a armor.head with minecraft:air");
 			for (var biome : hu.kriwdi.intersolarsystem.worldgen.DeadEarth.ALL) {
 				BlockPos at = game.getServer().computeOnServer(server -> {
 					ServerLevel earth = server.overworld();
