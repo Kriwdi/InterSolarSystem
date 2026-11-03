@@ -86,14 +86,14 @@ public class ShipJourney implements FabricClientGameTest {
 							? b.getBlockPos() + " " + client.level.getBlockState(b.getBlockPos()) : ""));
 			LOGGER.info("[JOURNEY] aiming at {}", aim);
 			context.getInput().pressKey(options -> options.keyUse);
-			context.waitTicks(20);
-			String screen = context.computeOnClient(client -> String.valueOf(client.screen));
-			LOGGER.info("[JOURNEY] after the use key the screen is {}", screen);
-			if (!screen.contains("NavigationScreen")) {
+			try {
+				context.waitForScreen(NavigationScreen.class);
+				LOGGER.info("[JOURNEY] the use key opened the navigation console");
+			} catch (AssertionError e) {
 				LOGGER.error("[JOURNEY] the use key did not open the console; opening it directly");
 				game.getServer().runOnServer(server -> ShipNavigation.open(server, player(server)));
+				context.waitForScreen(NavigationScreen.class);
 			}
-			context.waitForScreen(NavigationScreen.class);
 			context.waitTicks(10);
 			context.takeScreenshot("46_nav_open");
 			click(context, 60, 82 + 2 + 2 * 12 + 6);
