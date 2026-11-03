@@ -29,7 +29,7 @@ public final class ShipStatusSync {
 			return;
 		}
 		if (nowTick % 10 == 0) {
-			ShipViewPayload view = ShipViewPayload.of(state, nowTick);
+			ShipViewPayload view = ShipViewPayload.of(server, state, nowTick);
 			interior.players().forEach(p -> ServerPlayNetworking.send(p, view));
 		}
 		ShipStatusSnapshot snapshot = ShipStatusSnapshot.from(state, nowTick);

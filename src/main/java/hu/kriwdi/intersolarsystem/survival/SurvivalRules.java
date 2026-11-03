@@ -94,7 +94,7 @@ public final class SurvivalRules {
 			}
 			if (!level.isClientSide()) {
 				level.setBlock(pos, Blocks.FARMLAND.defaultBlockState(), Block.UPDATE_ALL);
-				level.playSound(null, pos, SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+				level.playSound(null, pos, SoundEvents.HOE_TILL.value(), SoundSource.BLOCKS, 1.0F, 1.0F);
 				stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
 			}
 			return InteractionResult.SUCCESS;
@@ -121,7 +121,8 @@ public final class SurvivalRules {
 			stack.shrink(1);
 			ItemStack full = new ItemStack(ModItems.CLEAN_WATER_CANISTER);
 			if (!player.getInventory().add(full)) {
-				player.drop(full, false);
+				level.addFreshEntity(new net.minecraft.world.entity.item.ItemEntity(level, player.getX(), player.getY(),
+						player.getZ(), full));
 			}
 			tell(player, Component.translatable("message.intersolarsystem.water_filled"));
 			level.playSound(null, player.blockPosition(), SoundEvents.BUCKET_FILL, SoundSource.PLAYERS, 1.0F, 1.0F);
