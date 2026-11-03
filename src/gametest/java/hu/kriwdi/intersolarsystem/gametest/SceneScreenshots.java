@@ -34,9 +34,13 @@ public class SceneScreenshots implements FabricClientGameTest {
 			game.getServer().runCommand("effect give @a minecraft:night_vision infinite 0 true");
 
 			// The ship's screens.
-			context.setScreen(() -> new NavigationScreen(1, 30_000L, true, "earth"));
+			context.setScreen(() -> new NavigationScreen(1, 30_000L, "", "earth"));
 			context.waitTicks(20);
 			context.takeScreenshot("03_navigation");
+			context.setScreen(() -> new NavigationScreen(1, 30_000L, "command.intersolarsystem.ship.fly_too_damaged",
+					"earth"));
+			context.waitTicks(10);
+			context.takeScreenshot("03b_navigation_blocked");
 			context.setScreen(() -> new WiringScreen(42L, 5));
 			context.waitTicks(5);
 			context.takeScreenshot("04_wiring");
