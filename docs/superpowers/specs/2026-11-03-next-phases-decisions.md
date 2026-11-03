@@ -42,3 +42,14 @@
 ## Sorrend
 1. Javítások (sebzés, HUD, ruha, szalag, illeszkedés) 2. Energia + bontás 3. Kármán-űrkikötő + anyahajó
 4. Űrlátvány 5. Struktúra- és biome-átdolgozás 6. Pálya (súlytalanság + kötél + hátirakéta), roncsok, Hold-missziók.
+
+## Bővíthetőség (2026-11-04)
+A felhasználó kérése: később több bolygó, hold és objektum jön, a progresszió szintjén fontosak. Ezért:
+- **Anyagok és bontás:** egyetlen tábla (`tools/salvage/make_salvage.py`) írja le, mi miből áll; új égitest anyagai
+  és gépei új sorokat kapnak, a ritka kimenetek modulhoz (később magasabb szintű modulhoz) köthetők.
+- **Energia:** a `PowerGrid.Role` listába kerül minden új áramforrás/tároló/fogyasztó (reaktor, RTG, fúziós,
+  űrkikötő-gépek, más bolygók forrásai); a hálózat ugyanaz marad.
+- **Struktúrák:** minden felszíni rom a `flat_site` burkon át kerül a világba (alap, illeszkedés, garancia), más
+  égitestek romjai is ezt használják majd.
+- **Progresszió:** a gyártás/anyahajó receptjei égitestenkénti anyagokra épülnek (Föld → Hold → Mars …), a
+  tervrajzok és modulok szintekre bonthatók.

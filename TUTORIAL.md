@@ -235,6 +235,36 @@ Majdnem minden ládatípusban van esély egy, a helyhez illő feljegyzésre, sza
 
 ---
 
+### Energia, szétszerelés és bontás
+
+**Áramhálózat.** A gépek kábellel (a hajós fekete-sárga kábel, 3 mentett vezeték = 6 kábel) kapcsolódnak az áramforrásokhoz; egymás mellett állva kábel nélkül is.
+
+| Áramforrás | Teljesítmény | Mire figyelj |
+|---|---|---|
+| **Napelem** | 2 kW | csak nappal, szabad ég alatt |
+| **Dízelaggregátor** | 8 kW | üzemanyag kell (jobb klikk vele): szén/faszén, bitumen, szénblokk, fa; csak akkor éget, ha kell az áram |
+| **Akkumulátortelep** | tárol | a felesleges napenergiát eltárolja, és hiánykor visszaadja |
+
+Jobb klikk üres kézzel bármelyikre: állapot (üzemanyag, töltöttség).
+
+**Szétszerelés a helyszínen.** A roncsokat, gépeket és berendezéseket (autók, sugárhajtómű, szerverszekrény, italautomata, aggregátor, terminál, bányászdrón, közlekedési lámpa, hibernációs fülke stb.) **lépésenként** szedheted szét:
+- **multiszerszám**: csavarok, burkolatok, áramköri lapok;
+- **vágópisztoly**: fémvágás (recept: mentett vezeték + fémhulladék + akkumulátorcella).
+
+Minden kattintás egy lépés, és mindegyik ad alkatrészeket. Ha rossz a szerszám, a kijelző megmondja, mi kell. Az utolsó lépés után a tárgy eltűnik.
+
+**Bontógép.** Ami alkatrész vagy talált tárgy, azt nyersanyagra bontja: a fémhulladékból vasrög lesz, a vezetékből réz, az áramkörből szilícium, arany és réz, az üvegszilánkból üveg, a műanyagból és gumiból bitumen, és így tovább (kb. 100 féle tárgyat ismer).
+- **Betöltés:** jobb klikk a tárggyal (egyszerre az egész köteg), legfeljebb 4 köteg fér bele.
+- **Üres kézzel:** állapot (áram, sor, kihozatal, modulok). Guggolva üres kézzel visszakapod a sort.
+- **Áram:** 4 kW kell, plusz 2 kW modulonként.
+- **Kimenet:** a kész anyag a mellette álló ládába vagy hordóba megy, ha nincs ilyen, a tetején kiesik.
+- **Kihozatal:** alapból 55–75%.
+- **Modulok** (a bontógép mellé, bármelyik oldalára téve):
+  - **daráló**: kétszer gyorsabb;
+  - **olvasztó**: +15% kihozatal, a fémhulladék rögtön vasként jön ki;
+  - **szétválogató**: +10% kihozatal, és kijönnek a ritka anyagok is (ritkaföldfém, arany, izzópor stb.).
+- Mindhárom modullal közel 100% a kihozatal.
+
 ## 7. Receptek
 
 A receptek a receptkönyvben is megjelennek. Az alábbi táblázatok a pontos hozzávalókat mutatják.
