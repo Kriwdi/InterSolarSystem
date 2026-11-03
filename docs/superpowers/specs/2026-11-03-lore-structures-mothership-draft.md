@@ -1,6 +1,6 @@
 # Lore, földi struktúrák, űrbázis és anyahajó – tervezet (egyeztetésre)
 
-Állapot: **tervezet**. A felhasználó döntései (2026-11-03): a Föld pusztulása a "láncreakció" és a "járvány" ötvözete,
+Állapot: **elfogadott alap** (2026-11-03). A felhasználó döntései (2026-11-03): a Föld pusztulása a "láncreakció" és a "járvány" ötvözete,
 legyen kreatív; a történet minden formában megjelenik (naplók, terminálok, hangfelvételek, környezeti mesélés); több
 fajta csontváz; a struktúrák legyenek nagyok, összefüggők, logikusak, sok új blokkal; az anyahajó egy elhagyott földi
 űrbázison épül, amit előbb restaurálni kell; minden technológiához jár használati útmutató (a saját bázison alapból,
@@ -81,8 +81,11 @@ alapanyag-listája van (titánlemez, alumínium, hajótest-keret, áramkör, rea
 **Kézikönyvek.** Minden technológiai elemhez (konzolok, gyártógép, reaktor, életfenntartás, hajtómű-készletek stb.)
 tartozik egy kézikönyv: a saját, restaurált bázisod nyomtatójából ingyen, máshol ládákban, loot-dobozokban találod.
 
-## Nyitott kérdések (a felhasználóhoz)
+## Döntések (2026-11-03)
 
-- Mennyi legyen a Kármán-űrkikötő mérete és száma? (Ajánlás: kb. 250 × 250 blokk, világonként 3.)
-- Az anyahajó belseje saját dimenzió legyen (mint most a kutatóhajóé), és mekkora?
-- A kézikönyvek könyvszerű, lapozható képernyők legyenek vagy vanilla írott könyvek?
+- A lore-alap mehet (fenti 1. fejezet).
+- **Kármán-űrkikötő:** gigantikus (400+ blokk), világonként **3**, a kezdőhelytől távol (nagy expedíció eljutni).
+- **Anyahaja:** a kettő együtt: a csarnokban blokkonként felépülő, bejárható óriás test, és felszállás után saját,
+  bővíthető dimenzió több fedélzettel (farm, labor, gyártó, hangár szobaként).
+- **Kézikönyvek és feljegyzések:** saját, lapozható könyvképernyő ábrákkal, ikonokkal, receptekkel; a feljegyzések
+  kézírásos cetli stílusban.
