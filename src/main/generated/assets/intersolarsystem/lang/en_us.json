@@ -152,12 +152,14 @@
   "lore.intersolarsystem.terminal.2": "Day 390. Ark-3 left orbit today. There was no seat for us. They said the next ship would come back for the base.",
   "lore.intersolarsystem.terminal.3": "Day 412. Hydroponics failing. Three of us left. If you are reading this, the codes for the seed vault are in the Svalbard log. Take the helium. Go.",
   "lore.intersolarsystem.terminal.header": "[Tranquility Base - log %s]",
+  "message.intersolarsystem.barren_soil": "The dead soil is barren: plants only grow in a ship's farm",
   "message.intersolarsystem.engine.already": "The engine is already tier %s.",
   "message.intersolarsystem.engine.installed": "Engine upgraded to tier %s (x%s speed).",
   "message.intersolarsystem.engine.needs_previous": "Install the tier %s engine first.",
   "message.intersolarsystem.engine.not_landed": "The engine can only be swapped while the ship is landed.",
   "message.intersolarsystem.hazard.acid": "The acid burns through your clothes!",
   "message.intersolarsystem.hazard.radiation": "Radiation! Your Geiger counter is screaming.",
+  "message.intersolarsystem.helmet_blocks_food": "You can't eat or drink with the helmet on",
   "message.intersolarsystem.moon.landed": "Touchdown on the Moon, Sea of Tranquility. Apollo 11 is just to the west. Suit up: there is no air out there",
   "message.intersolarsystem.nav.blocked.flying": "The ship is already under way: wait until it has landed",
   "message.intersolarsystem.nav.blocked.no_site": "The ship has no landing site: leave and board again through its hatch",
@@ -268,5 +270,9 @@
   "ship.intersolarsystem.subsystem.landing_launch": "Landing & Launch",
   "ship.intersolarsystem.subsystem.life_support": "Life Support",
   "ship.intersolarsystem.subsystem.navigation_comms": "Navigation & Comms",
-  "ship.intersolarsystem.subsystem.stabilizer": "Stabilizer"
+  "ship.intersolarsystem.subsystem.stabilizer": "Stabilizer",
+  "subtitles.intersolarsystem.helmet_blocked": "Food bumps the visor",
+  "subtitles.intersolarsystem.oxygen_alarm": "Low oxygen alarm",
+  "subtitles.intersolarsystem.suffocate": "Gasping for air",
+  "subtitles.intersolarsystem.suit_breath": "Breathing in the suit"
 }

@@ -23,6 +23,8 @@ public class InterSolarSystem implements ModInitializer {
 		ModItems.initialize();
 		ModBlocks.initialize();
 		hu.kriwdi.intersolarsystem.content.ModEntities.initialize();
+		hu.kriwdi.intersolarsystem.content.ModSounds.initialize();
+		hu.kriwdi.intersolarsystem.survival.SurvivalRules.register();
 		hu.kriwdi.intersolarsystem.content.ModCreativeTab.initialize();
 		ModLoot.initialize();
 		hu.kriwdi.intersolarsystem.worldgen.ModWorldgen.initialize();

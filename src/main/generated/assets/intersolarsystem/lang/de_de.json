@@ -152,12 +152,14 @@
   "lore.intersolarsystem.terminal.2": "Tag 390. Arche-3 hat heute den Orbit verlassen. Für uns war kein Platz. Sie sagten, das nächste Schiff holt die Basis ab.",
   "lore.intersolarsystem.terminal.3": "Tag 412. Hydrokultur fällt aus. Wir sind noch drei. Wer das liest: die Codes für den Saatgutbunker stehen im Svalbard-Logbuch. Nimm das Helium. Flieg.",
   "lore.intersolarsystem.terminal.header": "[Tranquility-Basis - Protokoll %s]",
+  "message.intersolarsystem.barren_soil": "Der tote Boden ist unfruchtbar: Pflanzen wachsen nur in der Schiffsfarm",
   "message.intersolarsystem.engine.already": "Der Antrieb ist bereits Stufe %s.",
   "message.intersolarsystem.engine.installed": "Antrieb auf Stufe %s aufgerüstet (x%s Geschwindigkeit).",
   "message.intersolarsystem.engine.needs_previous": "Zuerst den Antrieb der Stufe %s einbauen.",
   "message.intersolarsystem.engine.not_landed": "Der Antrieb kann nur nach der Landung getauscht werden.",
   "message.intersolarsystem.hazard.acid": "Die Säure frisst sich durch die Kleidung!",
   "message.intersolarsystem.hazard.radiation": "Strahlung! Der Geigerzähler kreischt.",
+  "message.intersolarsystem.helmet_blocks_food": "Mit aufgesetztem Helm kannst du nicht essen oder trinken",
   "message.intersolarsystem.moon.landed": "Aufsetzen auf dem Mond, Meer der Ruhe. Apollo 11 liegt westlich. Raumanzug anlegen: draußen gibt es keine Luft",
   "message.intersolarsystem.nav.blocked.flying": "Das Schiff ist schon unterwegs: warte, bis es gelandet ist",
   "message.intersolarsystem.nav.blocked.no_site": "Das Schiff hat keinen Landeplatz: steig aus und durch die Luke wieder ein",
@@ -268,5 +270,9 @@
   "ship.intersolarsystem.subsystem.landing_launch": "Landung & Start",
   "ship.intersolarsystem.subsystem.life_support": "Lebenserhaltung",
   "ship.intersolarsystem.subsystem.navigation_comms": "Navigation & Kommunikation",
-  "ship.intersolarsystem.subsystem.stabilizer": "Stabilisator"
+  "ship.intersolarsystem.subsystem.stabilizer": "Stabilisator",
+  "subtitles.intersolarsystem.helmet_blocked": "Essen stößt an das Visier",
+  "subtitles.intersolarsystem.oxygen_alarm": "Sauerstoffalarm",
+  "subtitles.intersolarsystem.suffocate": "Nach Luft schnappen",
+  "subtitles.intersolarsystem.suit_breath": "Atmen im Anzug"
 }

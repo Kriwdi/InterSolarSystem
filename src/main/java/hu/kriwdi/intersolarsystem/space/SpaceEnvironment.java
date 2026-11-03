@@ -13,7 +13,10 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
+
+import hu.kriwdi.intersolarsystem.content.ModSounds;
 
 import hu.kriwdi.intersolarsystem.content.ModArmor;
 import hu.kriwdi.intersolarsystem.content.ModItems;
@@ -84,6 +87,15 @@ public final class SpaceEnvironment {
 		boolean sealed = ModArmor.fullSuit(player) && ModArmor.oxygen(player) > 0.0;
 		if (sealed) {
 			player.setAirSupply(player.getMaxAirSupply());
+			// The suit's own sounds: slow breathing, and a beeping alarm when the tank runs low.
+			if (now % 70 == 0) {
+				player.level().playSound(null, player.blockPosition(), ModSounds.SUIT_BREATH, SoundSource.PLAYERS, 0.35F,
+						0.95F + player.getRandom().nextFloat() * 0.1F);
+			}
+			if (ModArmor.oxygen(player) < 0.2 && now % 40 == 20) {
+				player.level().playSound(null, player.blockPosition(), ModSounds.OXYGEN_ALARM, SoundSource.PLAYERS, 0.6F,
+						1.0F);
+			}
 			if (now % 20 == 0) {
 				suit.setDamageValue(Math.min(suit.getMaxDamage() - 1, suit.getDamageValue() + 1));
 				if (suit.getDamageValue() >= suit.getMaxDamage() - 1) {
@@ -92,6 +104,10 @@ public final class SpaceEnvironment {
 				}
 			}
 			return;
+		}
+		if (now % 25 == 0) {
+			player.level().playSound(null, player.blockPosition(), ModSounds.SUFFOCATE, SoundSource.PLAYERS, 0.8F,
+					0.9F + player.getRandom().nextFloat() * 0.2F);
 		}
 		int air = player.getAirSupply() - AIR_LOSS;
 		if (air <= -20) {

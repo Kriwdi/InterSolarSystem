@@ -1130,6 +1130,30 @@ public final class ModLangTable {
 				"Station Glass",
 				"Stationsglas",
 				"Állomásüveg");
+		add(rows, "message.intersolarsystem.barren_soil",
+				"The dead soil is barren: plants only grow in a ship's farm",
+				"Der tote Boden ist unfruchtbar: Pflanzen wachsen nur in der Schiffsfarm",
+				"A halott talaj terméketlen: növény csak a hajó farmján nő");
+		add(rows, "message.intersolarsystem.helmet_blocks_food",
+				"You can't eat or drink with the helmet on",
+				"Mit aufgesetztem Helm kannst du nicht essen oder trinken",
+				"Sisakban nem tudsz enni vagy inni");
+		add(rows, "subtitles.intersolarsystem.suit_breath",
+				"Breathing in the suit",
+				"Atmen im Anzug",
+				"Légzés a szkafanderben");
+		add(rows, "subtitles.intersolarsystem.oxygen_alarm",
+				"Low oxygen alarm",
+				"Sauerstoffalarm",
+				"Oxigénriasztás");
+		add(rows, "subtitles.intersolarsystem.suffocate",
+				"Gasping for air",
+				"Nach Luft schnappen",
+				"Fulladozás");
+		add(rows, "subtitles.intersolarsystem.helmet_blocked",
+				"Food bumps the visor",
+				"Essen stößt an das Visier",
+				"Az étel a sisakrostélynak ütközik");
 		check(rows);
 		return List.copyOf(rows);
 	}

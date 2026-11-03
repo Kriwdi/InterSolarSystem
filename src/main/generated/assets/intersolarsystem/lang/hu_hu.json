@@ -152,12 +152,14 @@
   "lore.intersolarsystem.terminal.2": "390. nap. A Bárka-3 ma elhagyta a pályát. Nekünk nem jutott hely. Azt mondták, a következő hajó visszajön a bázisért.",
   "lore.intersolarsystem.terminal.3": "412. nap. Leáll a hidrokultúra. Hárman maradtunk. Ha ezt olvasod: a magbank kódjai a svalbardi naplóban vannak. Vidd a héliumot. Indulj.",
   "lore.intersolarsystem.terminal.header": "[Tranquility bázis - %s. napló]",
+  "message.intersolarsystem.barren_soil": "A halott talaj terméketlen: növény csak a hajó farmján nő",
   "message.intersolarsystem.engine.already": "A hajtómű már %s. szintű.",
   "message.intersolarsystem.engine.installed": "A hajtómű %s. szintre fejlesztve (x%s sebesség).",
   "message.intersolarsystem.engine.needs_previous": "Előbb a %s. szintű hajtóművet kell beszerelni.",
   "message.intersolarsystem.engine.not_landed": "A hajtóművet csak leszállt hajón lehet cserélni.",
   "message.intersolarsystem.hazard.acid": "A sav átmarja a ruhádat!",
   "message.intersolarsystem.hazard.radiation": "Sugárzás! A Geiger-számláló vijjog.",
+  "message.intersolarsystem.helmet_blocks_food": "Sisakban nem tudsz enni vagy inni",
   "message.intersolarsystem.moon.landed": "Leszállás a Holdon, a Nyugalom tengerén. Az Apollo 11 nyugatra van. Vedd fel a ruhát: odakint nincs levegő",
   "message.intersolarsystem.nav.blocked.flying": "A hajó már úton van: várd meg, amíg leszáll",
   "message.intersolarsystem.nav.blocked.no_site": "A hajónak nincs leszállóhelye: szállj ki, és szállj be újra az ajtaján",
@@ -268,5 +270,9 @@
   "ship.intersolarsystem.subsystem.landing_launch": "Leszálló- és kilövőegység",
   "ship.intersolarsystem.subsystem.life_support": "Életfenntartás",
   "ship.intersolarsystem.subsystem.navigation_comms": "Navigáció és kommunikáció",
-  "ship.intersolarsystem.subsystem.stabilizer": "Stabilizáló egység"
+  "ship.intersolarsystem.subsystem.stabilizer": "Stabilizáló egység",
+  "subtitles.intersolarsystem.helmet_blocked": "Az étel a sisakrostélynak ütközik",
+  "subtitles.intersolarsystem.oxygen_alarm": "Oxigénriasztás",
+  "subtitles.intersolarsystem.suffocate": "Fulladozás",
+  "subtitles.intersolarsystem.suit_breath": "Légzés a szkafanderben"
 }

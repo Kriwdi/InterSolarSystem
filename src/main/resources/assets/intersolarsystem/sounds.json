@@ -1,0 +1,28 @@
+{
+  "suit_breath": {
+    "subtitle": "subtitles.intersolarsystem.suit_breath",
+    "sounds": [
+      "intersolarsystem:suit_breath1",
+      "intersolarsystem:suit_breath2"
+    ]
+  },
+  "oxygen_alarm": {
+    "subtitle": "subtitles.intersolarsystem.oxygen_alarm",
+    "sounds": [
+      "intersolarsystem:oxygen_alarm"
+    ]
+  },
+  "suffocate": {
+    "subtitle": "subtitles.intersolarsystem.suffocate",
+    "sounds": [
+      "intersolarsystem:suffocate1",
+      "intersolarsystem:suffocate2"
+    ]
+  },
+  "helmet_blocked": {
+    "subtitle": "subtitles.intersolarsystem.helmet_blocked",
+    "sounds": [
+      "intersolarsystem:helmet_blocked"
+    ]
+  }
+}

@@ -49,7 +49,7 @@ Az új világ kezdőpontja mellett, kelet felé áll a **hajód**: félig beteme
 2. **Szállj be** a hajóba (jobb klikk az ajtóra). Nézz körül: a hídon van a navigációs konzol, oldalt a diagnosztikai konzolok, a középső részben az ágyak, a raktár és a javítóállomás, hátul a gépterem.
 3. A bal felső sarokban a **hajó állapotjelzője** (HUD) látszik: a fázis (leszállt, visszaszámlálás, repülés) és a nyolc alrendszer állapota százalékban.
 4. Menj ki, és **kezdd a fosztogatást**: a környéken romok, lezuhant kapszulák, műholdak, bunkerek vannak (lásd [6. fejezet](#6-romok-és-zsákmány)). A fémhulladékból vas, a mentett vezetékből réz olvasztható.
-5. **Gyűjts fát**: a halott fákból (elhalt rönk) saját deszka készül, a rönkből faszén égethető. Élő fák csak az oázisban vannak, de a csemetékből saját fát nevelhetsz.
+5. **Gyűjts fát**: a halott fákból (elhalt rönk) saját deszka készül, a rönkből faszén égethető. Élő fák csak az oázisban vannak. **A Föld talaja terméketlen:** kapálni, vetni és csemetét ültetni csak a hajó belsejében lehet.
 6. Készíts **kőcsákányt** (a kő megvan a föld alatt), és bányássz bauxitot és spodumént. Vascsákánnyal már titán, uraninit és monazit is bányászható.
 
 > A világban nincs állat és nincs szörny. Élelmet a romokból, az oázisból és a saját farmodról szerezhetsz.
@@ -366,6 +366,8 @@ Az idő a **játékidővel** telik: ha a szerver megáll, az út is. Az indítá
 - **A hajóban újratöltődik**, ha az életfenntartás legalább 20%-on van.
 - A gyorsgombsor fölött **O₂-jelző** mutatja a szintet. Pályán tömítetlen ruhában a HUD vákuumfigyelmeztetést villog.
 - A teljes ruha a Földön **a sav és a sugárzás ellen is véd**.
+- **Sisakban nem lehet enni és inni.** Előbb vedd le (a hajóban vagy ahol van levegő).
+- **Hangok:** a ruhában hallod a saját légzésedet; ha 20% alá fogy az oxigén, a ruha sípolva riaszt; levegő nélkül fulladozol.
 
 ---
 
