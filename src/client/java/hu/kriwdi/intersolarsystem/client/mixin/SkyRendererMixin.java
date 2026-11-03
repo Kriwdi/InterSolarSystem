@@ -153,7 +153,11 @@ public abstract class SkyRendererMixin {
 		}
 		// Ground and sky are flat discs around the ship: the ground drops away as the ship climbs.
 		if (scene.ground() != -1 && scene.groundDepth() <= 450.0F) {
-			intersolarsystem$drawDisc(renderPass, poseStack, -scene.groundDepth(), 500.0F, scene.ground());
+			// Turned over so its front face looks up (the sky pipeline culls back faces).
+			poseStack.pushPose();
+			poseStack.rotateDegrees(Axis.XP, 180.0F);
+			intersolarsystem$drawDisc(renderPass, poseStack, scene.groundDepth(), 500.0F, scene.ground());
+			poseStack.popPose();
 		}
 		if (scene.ceiling() != -1) {
 			intersolarsystem$drawDisc(renderPass, poseStack, 20.0F, 500.0F, scene.ceiling());

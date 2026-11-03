@@ -80,10 +80,8 @@ def viewport():
     """Clear glass: only a few glints, so a wall of viewports reads as one big pane (cut-out, no frame lines)."""
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
     px = img.load()
-    for i in range(4):
-        px[3 + i, 8 - i] = (225, 238, 255, 255)
-    px[9, 4] = (225, 238, 255, 255)
-    px[12, 11] = (190, 210, 230, 255)
+    for i in range(2):
+        px[4 + i, 7 - i] = (225, 238, 255, 255)
     save(img, "block/ship_viewport")
 
 
