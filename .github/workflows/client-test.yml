@@ -52,4 +52,4 @@ jobs:
           find . -name "hs_err*.log" -exec cp {} out/ \; 2>/dev/null || true
           echo "Commit: ${GITHUB_SHA}" > out/INFO.txt
           cd out && git init -q -b ci-screens && git config user.email ci@example.com && git config user.name ci
-          git add -A && git commit -qm "screens ${GITHUB_SHA}" && git push -f -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" ci-screens || true
+          git add -A && git commit -qm "screens ${GITHUB_SHA}" && git config http.postBuffer 524288000 && for i in 1 2 3; do git push -f -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" ci-screens && break; sleep 20; done || true
