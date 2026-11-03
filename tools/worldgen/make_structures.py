@@ -994,8 +994,9 @@ NO_MOBS = {c: {"bounding_box": "full", "spawns": []} for c in
             "water_creature")}
 
 
-# Structures that only generate on level ground: (sample radius, allowed height difference).
-FLAT = {"airport": (110, 12), "hospital": (48, 12), "dead_city": (64, 18)}
+# Structures that only generate on level ground: (sample radius, allowed height difference, ground level above the
+# lowest block, how far above the ground leftover terrain is removed).
+FLAT = {"airport": (110, 12, 0, 24), "hospital": (48, 12, 6, 24), "dead_city": (64, 18, 0, 24)}
 
 
 def structure(name, pool_name, biomes, spacing, separation, salt, depth=0, size=1, adaptation="beard_thin",
@@ -1008,11 +1009,11 @@ def structure(name, pool_name, biomes, spacing, separation, salt, depth=0, size=
         data["project_start_to_heightmap"] = "WORLD_SURFACE_WG"
     if name in FLAT:
         # Big ruins: the jigsaw layout is wrapped in a flat-site check (see FlatSiteStructure.java).
-        radius, variation = FLAT[name]
+        radius, variation, ground_offset, clear_height = FLAT[name]
         write(f"intersolarsystem/worldgen/structure/{name}_layout.json", data)
         data = {"type": NS + "flat_site", "biomes": data["biomes"], "spawn_overrides": NO_MOBS, "step": step,
                 "terrain_adaptation": adaptation, "layout": NS + name + "_layout", "check_radius": radius,
-                "max_variation": variation}
+                "max_variation": variation, "ground_offset": ground_offset, "clear_height": clear_height}
     write(f"intersolarsystem/worldgen/structure/{name}.json", data)
     write(f"intersolarsystem/worldgen/structure_set/{name}.json", {
         "placement": {"type": "minecraft:random_spread", "salt": salt, "separation": separation, "spacing": spacing},

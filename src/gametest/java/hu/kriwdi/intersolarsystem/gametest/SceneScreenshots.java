@@ -201,6 +201,10 @@ public class SceneScreenshots implements FabricClientGameTest {
 							+ (at.getY() + 70) + " " + (at.getZ() + 90) + " 135 40");
 					context.waitTicks(200);
 					context.takeScreenshot("31_aerial_" + name + "_b");
+					game.getServer().runCommand("execute in minecraft:overworld run tp @a " + (at.getX() + 14) + " "
+							+ (at.getY() + 150) + " " + (at.getZ() + 14) + " 0 90");
+					context.waitTicks(200);
+					context.takeScreenshot("31_aerial_" + name + "_top");
 				}
 			}
 		}

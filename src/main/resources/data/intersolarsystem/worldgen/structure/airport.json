@@ -39,5 +39,7 @@
   "terrain_adaptation": "beard_box",
   "layout": "intersolarsystem:airport_layout",
   "check_radius": 110,
-  "max_variation": 12
+  "max_variation": 12,
+  "ground_offset": 0,
+  "clear_height": 24
 }

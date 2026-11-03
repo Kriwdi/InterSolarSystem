@@ -6,13 +6,26 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.StructureManager;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.pieces.PiecesContainer;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 
+import hu.kriwdi.intersolarsystem.content.ModBlocks;
 import hu.kriwdi.intersolarsystem.core.ModIds;
 
 /**
@@ -26,7 +39,9 @@ public final class FlatSiteStructure extends Structure {
 			settingsCodec(i),
 			Structure.CODEC.fieldOf("layout").forGetter(s -> s.layout),
 			Codec.intRange(16, 256).fieldOf("check_radius").forGetter(s -> s.checkRadius),
-			Codec.intRange(1, 64).fieldOf("max_variation").forGetter(s -> s.maxVariation))
+			Codec.intRange(1, 64).fieldOf("max_variation").forGetter(s -> s.maxVariation),
+			Codec.intRange(0, 64).optionalFieldOf("ground_offset", 0).forGetter(s -> s.groundOffset),
+			Codec.intRange(0, 64).optionalFieldOf("clear_height", 24).forGetter(s -> s.clearHeight))
 			.apply(i, FlatSiteStructure::new));
 
 	public static final StructureType<FlatSiteStructure> TYPE = () -> CODEC;
@@ -37,12 +52,17 @@ public final class FlatSiteStructure extends Structure {
 	private final Holder<Structure> layout;
 	private final int checkRadius;
 	private final int maxVariation;
+	private final int groundOffset;
+	private final int clearHeight;
 
-	public FlatSiteStructure(StructureSettings settings, Holder<Structure> layout, int checkRadius, int maxVariation) {
+	public FlatSiteStructure(StructureSettings settings, Holder<Structure> layout, int checkRadius, int maxVariation,
+			int groundOffset, int clearHeight) {
 		super(settings);
 		this.layout = layout;
 		this.checkRadius = checkRadius;
 		this.maxVariation = maxVariation;
+		this.groundOffset = groundOffset;
+		this.clearHeight = clearHeight;
 	}
 
 	public static void register() {
@@ -74,6 +94,53 @@ public final class FlatSiteStructure extends Structure {
 			}
 		}
 		return layout.value().findValidGenerationPoint(context);
+	}
+
+	/**
+	 * After the ruin is placed in a chunk: whatever natural terrain is left above its ground level (a hill the
+	 * terrain adaptation could not shave off) is removed, so nothing is buried. Only natural blocks are touched
+	 * (stone, dirt, sand, gravel, ores, dead trees, plants, the dead Earth's soils), never the ruin itself.
+	 */
+	@Override
+	public void afterPlace(WorldGenLevel level, StructureManager structureManager, ChunkGenerator generator,
+			RandomSource random, BoundingBox chunkBox, ChunkPos chunkPos, PiecesContainer pieces) {
+		BoundingBox box = pieces.calculateBoundingBox();
+		int ground = box.minY() + groundOffset;
+		int top = Math.min(ground + clearHeight, level.getMaxY());
+		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+		BlockState air = Blocks.AIR.defaultBlockState();
+		for (int x = Math.max(box.minX(), chunkBox.minX()); x <= Math.min(box.maxX(), chunkBox.maxX()); x++) {
+			for (int z = Math.max(box.minZ(), chunkBox.minZ()); z <= Math.min(box.maxZ(), chunkBox.maxZ()); z++) {
+				for (int y = ground + 1; y <= top; y++) {
+					pos.set(x, y, z);
+					if (natural(level.getBlockState(pos))) {
+						level.setBlock(pos, air, 2);
+					}
+				}
+			}
+		}
+	}
+
+	private static boolean natural(BlockState state) {
+		if (state.isAir()) {
+			return false;
+		}
+		if (state.is(BlockTags.BASE_STONE_OVERWORLD) || state.is(BlockTags.DIRT) || state.is(BlockTags.SAND)
+				|| state.is(Blocks.GRAVEL) || state.is(Blocks.SNOW) || state.is(Blocks.SNOW_BLOCK) || state.is(Blocks.ICE)
+				|| state.is(Blocks.PACKED_ICE) || state.is(Blocks.CALCITE) || state.is(Blocks.TUFF)
+				|| state.is(Blocks.DEAD_BUSH) || state.is(Blocks.SHORT_GRASS)) {
+			return true;
+		}
+		Block block = state.getBlock();
+		if (block == ModBlocks.ASH || block == ModBlocks.CINDER_ROCK || block == ModBlocks.DRIED_SILT
+				|| block == ModBlocks.SALT_CRUST || block == ModBlocks.SALT_BLOCK || block == ModBlocks.LITHIUM_BRINE_CRUST
+				|| block == ModBlocks.IRRADIATED_SOIL || block == ModBlocks.TRINITITE || block == ModBlocks.ACIDIC_MUD
+				|| block == ModBlocks.COMPACTED_JUNK || block == ModBlocks.TAR_SAND || block == ModBlocks.OIL_SHALE
+				|| block == ModBlocks.SILICA_SAND || block == ModBlocks.PETRIFIED_LOG || block == ModBlocks.PETRIFIED_WOOD
+				|| block == ModBlocks.DEAD_LOG || block == ModBlocks.OASIS_GRASS) {
+			return true;
+		}
+		return BuiltInRegistries.BLOCK.getKey(block).getPath().endsWith("_ore");
 	}
 
 	@Override

@@ -39,5 +39,7 @@
   "terrain_adaptation": "beard_thin",
   "layout": "intersolarsystem:dead_city_layout",
   "check_radius": 64,
-  "max_variation": 18
+  "max_variation": 18,
+  "ground_offset": 0,
+  "clear_height": 24
 }
