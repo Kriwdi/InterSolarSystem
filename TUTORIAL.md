@@ -60,14 +60,13 @@ Az új világ kezdőpontja mellett, kelet felé áll a **hajód**: félig beteme
 
 ### Kívülről
 
-Ahol a hajó leszáll, ott áll a **kutatóhajó** teste:
+Ahol a hajó leszáll, ott **állva** áll a **kutatóhajó**, mint egy rakéta (a belseje ettől még egy kényelmes, vízszintes szint):
 
-- lekerekített, fehér törzs kék-narancs csíkkal és kerek ablakokkal;
-- elöl üvegkupolás pilótafülke;
-- oldalt nyilazott szárnyak, a végükön helyzetjelző fények (bal oldalt piros, jobb oldalt zöld);
-- hátul két hajtóműgondola és egy függőleges vezérsík piros fénnyel a tetején;
-- alul négy leszállóláb talpakkal;
-- az oldalán a **2 blokk magas ajtó**.
+- fehér törzs kék-narancs csíkokkal és kerek ablakokkal;
+- fent sötétített üvegű pilótafülke-gyűrű, a csúcson piros jelzőfény;
+- alul a hajtóműgyűrű fúvókái;
+- három nyilazott borda leszállólábakkal és helyzetjelző fényekkel (piros és zöld);
+- az oldalán, a talajszinten a **2 blokk magas ajtó**.
 
 **A hajótest törhetetlen.** Kreatív módban guggolva le lehet bontani, ha takarítani kell. Felszálláskor a hajótest eltűnik, és a célnál újra felépül: a Földön, a Holdon és az ISS-nél is. Az ISS-nél a hajó az állomás elülső dokkolóportjához kapcsolódik, az ajtaja egyenesen a dokkolóadapterbe nyílik.
 
@@ -91,9 +90,9 @@ Az űrhajós ülésbe **jobb klikkel ülsz le**, és **guggolással (Shift) áll
 
 Az ablakokon a valódi helyzet látszik:
 
-- **a Földön:** poros, bézs ég és barna talaj;
+- **a Földön:** poros, bézs ég, alatta annak a biome-nak a festett, részletes felszíne, ahol a hajó áll (dűnék, repedt sósíkság, városromok felülről, mezők, olajkutak stb.);
 - **pályán:** elöl, lent kitölti a látványt a Föld;
-- **a Holdon:** szürke talaj, fekete ég csillagokkal, fölötted a Föld;
+- **a Holdon:** kráteres holdfelszín, fekete ég csillagokkal, fölötted a Föld;
 - **utazás közben:** a talaj elmarad, a bolygó mögötted zsugorodik, a cél elöl nő, a csillagok úsznak.
 
 Felszálláskor és leszálláskor a kabin remeg, a hajtómű zúg, a visszaszámlálás sípol.
