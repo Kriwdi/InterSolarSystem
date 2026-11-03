@@ -31,7 +31,8 @@ public final class FlatSiteStructure extends Structure {
 
 	public static final StructureType<FlatSiteStructure> TYPE = () -> CODEC;
 
-	private static final int STEP = 24;
+	/** Samples per side of the grid (terrain height lookups are expensive: 5 x 5 at most per candidate). */
+	private static final int GRID = 5;
 
 	private final Holder<Structure> layout;
 	private final int checkRadius;
@@ -52,10 +53,17 @@ public final class FlatSiteStructure extends Structure {
 	protected Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
 		int cx = context.chunkPos().getMinBlockX() + 8;
 		int cz = context.chunkPos().getMinBlockZ() + 8;
+		if (!context.couldValidBiomeExistOnTopOfChunkCenter()) {
+			return Optional.empty();
+		}
 		int min = Integer.MAX_VALUE;
 		int max = Integer.MIN_VALUE;
-		for (int dx = -checkRadius; dx <= checkRadius; dx += STEP) {
-			for (int dz = -checkRadius; dz <= checkRadius; dz += STEP) {
+		int step = 2 * checkRadius / (GRID - 1);
+		for (int i = 0; i < GRID; i++) {
+			for (int j = 0; j < GRID; j++) {
+				// Centre and corners first: most hilly sites fail within the first few samples.
+				int dx = -checkRadius + ((i + 2) % GRID) * step;
+				int dz = -checkRadius + ((j + 2) % GRID) * step;
 				int y = context.chunkGenerator().getFirstOccupiedHeight(cx + dx, cz + dz, Heightmap.Types.WORLD_SURFACE_WG,
 						context.heightAccessor(), context.randomState());
 				min = Math.min(min, y);
