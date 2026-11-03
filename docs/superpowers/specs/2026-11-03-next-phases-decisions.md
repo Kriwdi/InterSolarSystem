@@ -53,3 +53,20 @@ A felhasználó kérése: később több bolygó, hold és objektum jön, a prog
   égitestek romjai is ezt használják majd.
 - **Progresszió:** a gyártás/anyahajó receptjei égitestenkénti anyagokra épülnek (Föld → Hold → Mars …), a
   tervrajzok és modulok szintekre bonthatók.
+
+## Munkaterv a 3. szakaszhoz (Kármán + anyahajó), felügyelet nélkül (2026-11-04 éjjel)
+1. **Űrkikötő-struktúra** (`tools/worldgen/karman.py`): egyetlen ~420×320-as sablon a `flat_site` burokban
+   (gyűrűn, 3 db, ~6 km-re, `guaranteed`): összeszerelő csarnok (Bárka-5 gerinc, daru, darukonzol), 2 kilövőállás
+   (lánghárító árok, szervizto­rony), indítóközpont (terminálok, kézikönyv-nyomtató), erőmű (reaktorcsarnok, 2
+   hűtőtorony, turbinacsarnok, napelemmező), gyártócsarnok (gyártógép), üzemanyagtelep (gömbtartályok, szivattyúház),
+   lakóblokkok, vasúti rakodó, kerítés kapukkal. Minden létesítményben egy **vezérlőszekrény**.
+2. **Restaurálás**: a vezérlőszekrény (FACILITY tulajdonság) feladatlistát ad: anyagleadás + törmelék eltakarítása
+   (a bejáratoknál lévő törmelék/ betonacél kibányászása – a szekrény ellenőrzi a megadott pontokat) + kalibrálás
+   (gyors minijáték a hajós javítótábla mintájára) + az előző létesítmény működik (erőmű → irányítás → gyártás →
+   üzemanyag → daru). Erőmű: fűtőelemet fogyaszt, és időnként meghibásodik (javítókészlet a szekrénynél).
+3. **Gyártógép**: áram kell (űrkikötő-erőmű vagy saját hálózat); szekciókészletek és kishajó-tervrajz gyártása
+   anyagleadással (guggolva: következő recept). Vegyes progresszió: hajtómű- és reaktorszekció holdi anyagot kér.
+4. **Daru**: a darukonzolba adott készletből a daru blokkról blokkra rakja le a szekciót a csarnokban
+   (tervrajz: `resources/blueprints/*.txt`, Python generálja), látványosan, percek alatt.
+5. **Anyahajó**: ha minden szekció kész és tankolt, a hídon indítható; saját dimenzió (fedélzetek a szekciókból),
+   a kishajó a hangárban dokkol; utazás égitestek között eseményekkel (a hajós rendszerek mintájára).
