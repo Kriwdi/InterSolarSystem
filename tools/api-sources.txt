@@ -1,0 +1,2 @@
+net.minecraft.world.level.levelgen.structure.structures.JigsawStructure
+net.minecraft.world.level.levelgen.Beardifier
