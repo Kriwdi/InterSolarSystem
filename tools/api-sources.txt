@@ -1,0 +1,5 @@
+net.minecraft.client.gui.screens.Screen
+net.minecraft.client.gui.components.AbstractWidget
+net.minecraft.client.gui.components.events.ContainerEventHandler
+net.minecraft.client.gui.components.events.AbstractContainerEventHandler
+net.minecraft.client.MouseHandler
