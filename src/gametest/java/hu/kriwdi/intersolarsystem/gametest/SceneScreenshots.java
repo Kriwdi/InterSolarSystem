@@ -83,6 +83,36 @@ public class SceneScreenshots implements FabricClientGameTest {
 			game.getServer().runCommand("execute in minecraft:overworld run tp @a 15 221 -5 0 30");
 			context.waitTicks(40);
 			context.takeScreenshot("06f_skeletons");
+			// The salvage chain: diesel generator -> cable -> recycler (with a shredder) -> chest; four scrap metal in,
+			// iron nuggets out.
+			game.getServer().runCommand("setblock 2 220 -6 intersolarsystem:diesel_generator[facing=north]");
+			game.getServer().runCommand("setblock 3 220 -6 intersolarsystem:cable");
+			game.getServer().runCommand("setblock 4 220 -6 intersolarsystem:recycler[facing=north]");
+			game.getServer().runCommand("setblock 4 220 -5 intersolarsystem:shredder_module[facing=north]");
+			game.getServer().runCommand("setblock 5 220 -6 minecraft:chest[facing=north]");
+			game.getServer().runOnServer(server -> {
+				net.minecraft.server.level.ServerLevel earth = server.overworld();
+				net.minecraft.server.level.ServerPlayer player = server.getPlayerList().getPlayers().get(0);
+				hu.kriwdi.intersolarsystem.salvage.Machines.interact(earth, new BlockPos(2, 220, -6), player,
+						new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.COAL, 4));
+				hu.kriwdi.intersolarsystem.salvage.Machines.interact(earth, new BlockPos(4, 220, -6), player,
+						new net.minecraft.world.item.ItemStack(hu.kriwdi.intersolarsystem.content.ModItems.SCRAP_METAL, 4));
+			});
+			game.getServer().runCommand("execute in minecraft:overworld run tp @a 4 221 -10 0 25");
+			context.waitTicks(420);
+			context.takeScreenshot("06g_recycler");
+			game.getServer().runOnServer(server -> {
+				var be = server.overworld().getBlockEntity(new BlockPos(5, 220, -6));
+				int nuggets = 0;
+				if (be instanceof net.minecraft.world.Container c) {
+					for (int i = 0; i < c.getContainerSize(); i++) {
+						if (c.getItem(i).is(net.minecraft.world.item.Items.IRON_NUGGET)) {
+							nuggets += c.getItem(i).getCount();
+						}
+					}
+				}
+				org.slf4j.LoggerFactory.getLogger("salvage-test").info("[SALVAGE] chest holds {} iron nuggets", nuggets);
+			});
 
 			// Earth orbit: the ISS, the Earth below, and the night sky.
 			game.getServer().runOnServer(server -> OrbitStation.build(server.getLevel(ShipDimensions.ORBIT)));
