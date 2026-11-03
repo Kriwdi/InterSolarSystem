@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/cryo_pod"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/cryo_pod",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/cryo_pod",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/cryo_pod",
+      "y": 270
+    }
+  }
+}

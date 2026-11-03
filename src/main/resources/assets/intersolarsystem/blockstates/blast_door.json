@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/blast_door"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/blast_door",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/blast_door",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/blast_door",
+      "y": 270
+    }
+  }
+}

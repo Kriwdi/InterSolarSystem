@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/fume_hood"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/fume_hood",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/fume_hood",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/fume_hood",
+      "y": 270
+    }
+  }
+}

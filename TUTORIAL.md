@@ -201,7 +201,11 @@ A struktúrák ládáiban és hordóiban kimentett technológia, élelem és ala
 | **Kolóniák** (benőtt, leégett, befagyott) | oázis/savas mocsár, hamusivatag/kráter, megapolisz | élelem, titán, gyapjú, bőr, űrsisak |
 | **Hajóroncs**, **bálnacsontváz** | kiszáradt tengerfenék | rakomány, iránytű, térkép, arany |
 | **Holt megaváros** (kereszteződések közlekedési lámpákkal, sugárutak autóroncsokkal, katonai ellenőrzőpontok, leomlott épületek; 90–110 m-es üvegfelhőkarcolók szerverszinttel, irodaházak, panelházak, rendőrség cellákkal, természettudományi múzeum T-rex csontvázzal, üzletsor, park) | befagyott megapolisz, hamusivatag | városi, katonai és labor-zsákmány minden épületben |
+| **Bunkerhálózat** (föld alatt: parancsnoki központ őrházzal és aknával a felszínre, sínes alagutak kábeltálcákkal, hálótermek emeletes ágyakkal, étkező, hibernációs terem, gyengélkedő, fegyverraktár, hidropónia, víztisztító, archívum, beomlott alagútvégek) | bármely szárazföldi biome, világonként legalább 3 | bunker-, katonai, orvosi, élelmiszer- és labor-zsákmány |
+| **Verdant-laboratórium** (ahol a Szürke Virágzás kiszabadult: négy üvegházcsarnok, a 4-es betörve, háromszintes laborépület, elszigetelő blokk zsilippel, öntözőcsatorna, alatta mintatároló trezor) | savas mocsár, megkövült erdő, farmvidék, világonként legalább 2 | labor- és kutatóállomás-zsákmány, magok |
 | **Metróhálózat** (állomás lépcsővel, alagutak) | megapolisz, hamusivatag, farmvidék, szeméthegyek | városi zsákmány, élelem |
+
+**A Föld 20 000 blokk széles** (világhatár ±10 000). A ritka nagy romokból (repülőtér, kórház, megaváros, űrközpont, magbank, gát, kolóniák, oázis-menedék, bunkerhálózat, Verdant-labor) minden világban garantáltan van legalább egy-kettő, a középponttól pár kilométerre, a legsíkabb közeli helyen.
 
 ### Történet: feljegyzések, adatszalagok, terminálok, kézikönyvek
 

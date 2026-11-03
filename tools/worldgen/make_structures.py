@@ -996,7 +996,8 @@ NO_MOBS = {c: {"bounding_box": "full", "spawns": []} for c in
 
 # Structures that only generate on level ground: (sample radius, allowed height difference, ground level above the
 # lowest block, how far above the ground leftover terrain is removed).
-FLAT = {"airport": (110, 12, 0, 24), "hospital": (48, 12, 6, 24), "dead_city": (64, 18, 0, 24)}
+FLAT = {"airport": (110, 12, 0, 24), "hospital": (48, 12, 6, 24), "dead_city": (64, 18, 0, 24),
+        "verdant_lab": (56, 12, 9, 24)}
 
 # The Earth is 20 000 blocks across (1250 chunks). Rare and important ruins are placed on concentric rings so every
 # world has them: (count, ring distance in chunks (the first ring lies at about 4x this), sites in the first ring).
@@ -1004,7 +1005,8 @@ FLAT = {"airport": (110, 12, 0, 24), "hospital": (48, 12, 6, 24), "dead_city": (
 # different: the sites of different kinds then lie at least ~250 blocks apart along that direction.
 RINGS = {"oasis_refuge": (8, 16, 4), "colony_frozen": (3, 20, 3), "colony_overgrown": (3, 28, 3),
          "colony_burnt": (3, 34, 3), "seed_bank": (3, 40, 3), "dam": (3, 46, 3), "hospital": (5, 52, 5),
-         "dead_city": (6, 58, 6), "airport": (4, 66, 4), "space_center": (3, 74, 3)}
+         "dead_city": (6, 58, 6), "airport": (4, 66, 4), "space_center": (3, 74, 3), "bunker_network": (3, 24, 3),
+         "verdant_lab": (2, 37, 2)}
 
 
 def structure(name, pool_name, biomes, spacing, separation, salt, depth=0, size=1, adaptation="beard_thin",
@@ -1105,6 +1107,18 @@ def main():
     pool("metro/ends", [("metro/collapsed_end", 1)])
     structure("metro", "metro/start", ["frozen_megalopolis", "ash_desert", "abandoned_farmland", "junk_mountains"],
               30, 10, 70031, -14, size=7, adaptation="none", step="underground_structures", distance=112)
+    import complex_structures as cx
+    for rel, b in cx.bunker_network_pieces().items():
+        sizes[rel] = b.save(rel)
+    for name, entries in cx.BUNKER_POOLS.items():
+        pool(name, entries, fallback=NS + "bunker_net/ends" if name != "bunker_net/ends" else "minecraft:empty")
+    structure("bunker_network", "bunker_net/start", LAND, 64, 24, 70040, -30, size=6, adaptation="none",
+              step="underground_structures", distance=96)
+    b = cx.verdant_lab()
+    sizes["verdant_lab"] = b.save("verdant_lab")
+    single_pool("verdant_lab", "verdant_lab")
+    structure("verdant_lab", "verdant_lab", ["acid_swamp", "petrified_forest", "abandoned_farmland"], 64, 24, 70041,
+              -10, adaptation="beard_box")
     loot_tables()
     for k, v in sizes.items():
         print(f"{k:28s} {v}")

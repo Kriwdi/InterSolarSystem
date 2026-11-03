@@ -302,6 +302,23 @@ def prop_textures():
             for (x, y) in ((7, 7), (8, 7), (7, 8), (8, 8), (6, 7), (9, 8)):
                 px[x, y] = hexc("b0302a")
         save(img, "block/prop_" + name)
+    # Frosted cryo glass and the specimen fluid with Grey Bloom clumps.
+    img, px, rnd = noise_img(60, "bcd6e2", "8fb2c4", 0.5)
+    for _ in range(14):
+        x, y = rnd.randrange(16), rnd.randrange(16)
+        px[x, y] = hexc("eef6fa")
+    for y in range(16):
+        px[0, y] = px[15, y] = hexc("6d8a99")
+    save(img, "block/prop_frost")
+    img, px, rnd = noise_img(61, "5e6e52", "3f4b38", 0.6)
+    for _ in range(10):
+        cx, cy = rnd.randrange(2, 14), rnd.randrange(2, 14)
+        for (dx, dy) in ((0, 0), (1, 0), (0, 1), (-1, 0)):
+            if 0 <= cx + dx < 16 and 0 <= cy + dy < 16:
+                px[cx + dx, cy + dy] = hexc("9a988c")
+    for y in range(0, 16, 5):
+        px[3, y] = px[11, (y + 2) % 16] = hexc("c9d1bc")  # bubbles
+    save(img, "block/prop_specimen")
     # Jet engine intake fan.
     fan = Image.new("RGBA", (16, 16))
     px = fan.load()
@@ -547,6 +564,62 @@ def m_runway_bollard():
     return [e((6, 0, 6), (10, 12, 10), "yellow", faces={"up": "metal_dark"}), e((5.8, 4, 5.8), (10.2, 6, 10.2), "plastic_black")]
 
 
+def m_cryo_pod():
+    return [e((2, 0, 2), (14, 2, 14), "metal_dark"), e((3, 2, 4), (13, 29, 14), "metal_white", faces={"north": "frost"}),
+            e((3.5, 4, 3.5), (12.5, 27, 4), "frost"), e((2.5, 29, 3), (13.5, 31, 14.5), "metal_grey"),
+            e((1, 3, 10), (2.5, 28, 11.5), "chrome"), e((13.5, 3, 10), (15, 28, 11.5), "chrome"),
+            e((5, 2.2, 2.5), (11, 3.8, 3.5), "metal_dark"), e((6, 2.6, 2.3), (7, 3.4, 2.5), "lamp_green"),
+            e((9, 2.6, 2.3), (10, 3.4, 2.5), "lamp_red")]
+
+
+def m_lab_bench():
+    return [e((0, 13, 1), (16, 15, 15), "metal_white"), e((1, 0, 2), (15, 13, 14), "metal_grey", faces={"north": "metal_white"}),
+            e((3, 15, 6), (6, 16, 9), "metal_dark"), e((4, 16, 7), (5, 22, 8), "metal_dark",
+            rot={"origin": [4.5, 16, 7.5], "axis": "x", "angle": -22.5}), e((3.5, 21, 5), (5.5, 23, 7), "metal_dark"),
+            e((9, 15, 4), (11, 19, 6), "glass_dark"), e((12, 15, 8), (14, 18, 10), "specimen"), e((8, 15, 10), (11, 16, 12), "chrome")]
+
+
+def m_fume_hood():
+    return [e((0, 0, 2), (16, 12, 16), "metal_grey"), e((0, 12, 6), (16, 13, 16), "metal_white"),
+            e((0, 13, 15), (16, 30, 16), "metal_white"), e((0, 13, 6), (1, 30, 16), "metal_white"), e((15, 13, 6), (16, 30, 16), "metal_white"),
+            e((0, 26, 4), (16, 32, 16), "metal_white"), e((1, 18, 5.5), (15, 26, 6), "glass_dark"),
+            e((5, 13, 9), (7, 17, 11), "specimen"), e((9, 13, 10), (12, 14, 12), "chrome"), e((6, 29, 9), (10, 32, 13), "chrome")]
+
+
+def m_specimen_tank():
+    return [e((3, 0, 3), (13, 2, 13), "metal_dark"), e((3.5, 2, 3.5), (12.5, 22, 12.5), "specimen"),
+            e((3, 22, 3), (13, 24, 13), "metal_dark"), e((7, 24, 7), (9, 28, 9), "chrome"),
+            e((2.5, 2, 2.5), (3.5, 22, 3.5), "chrome"), e((12.5, 2, 12.5), (13.5, 22, 13.5), "chrome"),
+            e((2.5, 2, 12.5), (3.5, 22, 13.5), "chrome"), e((12.5, 2, 2.5), (13.5, 22, 3.5), "chrome")]
+
+
+def m_bunk_bed():
+    els = []
+    for x in (0, 15):
+        for z in (0, 15):
+            els.append(e((x, 0, z), (x + 1, 28, z + 1), "metal_grey"))
+    for y in (3, 17):
+        els += [e((0, y, 0), (16, y + 1, 16), "metal_grey"), e((1, y + 1, 1), (15, y + 3, 15), "fabric_green"),
+                e((2, y + 3, 11), (14, y + 4.5, 14.5), "metal_white")]
+    els += [e((14.5, 4, 3), (15.5, 26, 4), "chrome"), e((14.5, 9, 3), (15.5, 10, 13), "chrome")]
+    return els
+
+
+def m_generator():
+    return [e((0, 0, 2), (16, 2, 14), "metal_dark"), e((1, 2, 3), (15, 12, 13), "yellow", faces={"north": "metal_dark"}),
+            e((3, 12, 5), (13, 13, 11), "metal_dark"), e((12, 12, 9), (14, 26, 11), "rust"), e((11.5, 24, 8.5), (14.5, 26, 11.5), "rust"),
+            e((2, 5, 2.5), (8, 10, 3), "screen"), e((10, 6, 2.5), (11, 7, 3), "lamp_red"), e((-1, 3, 6), (1, 8, 10), "rust")]
+
+
+def m_blast_door():
+    els = [e((-8, 0, 13), (24, 32, 16), "metal_dark")]
+    for (y0, y1, x0, x1) in ((2, 30, -6, 22), (4, 28, -7, 23), (6, 26, -8, 24)):
+        els.append(e((x0, y0, 12), (x1, y1, 13), "metal_grey"))
+    els += [e((6, 12, 11), (10, 20, 12), "chrome"), e((-4, 15.5, 11.5), (20, 16.5, 12), "chrome"),
+            e((7.5, 4, 11.5), (8.5, 28, 12), "chrome"), e((-8, 0, 12), (24, 2, 13), "hazard"), e((-8, 30, 12), (24, 32, 13), "hazard")]
+    return els
+
+
 PROP_TEX = {"wood": "prop_wood", "metal_grey": "prop_metal_grey", "metal_white": "prop_metal_white", "metal_dark": "prop_metal_dark",
             "plastic_black": "prop_plastic_black", "screen": "prop_screen", "chrome": "prop_chrome", "fabric_blue": "prop_fabric_blue",
             "fabric_green": "prop_fabric_green", "rubber": "prop_rubber", "glass_dark": "prop_glass_dark", "red": "prop_red",
@@ -554,7 +627,8 @@ PROP_TEX = {"wood": "prop_wood", "metal_grey": "prop_metal_grey", "metal_white":
             "lamp_red": "prop_lamp_red", "lamp_green": "prop_lamp_green", "lamp_amber": "prop_lamp_amber",
             "board": "prop_departure_board", "biohazard": "prop_biohazard", "barrier": "hazard_concrete", "fan": "prop_jet_fan",
             "bone": "skeleton_bone", "socket": "skeleton_socket", "poster_exodus": "prop_poster_exodus",
-            "poster_quarantine": "prop_poster_quarantine"}
+            "poster_quarantine": "prop_poster_quarantine", "frost": "prop_frost", "specimen": "prop_specimen",
+            "hazard": "hazard_concrete"}
 for _p in ("car_red", "car_blue", "car_white", "car_yellow", "car_police", "car_ambulance"):
     PROP_TEX[_p] = "prop_" + _p
 
@@ -624,6 +698,13 @@ BLOCKS = {
     "runway_light": (P(m_runway_light, (5, 0, 5, 11, 4, 11), light=4, collide=False), "Runway Light", "Pistenfeuer", "Kifutófény"),
     "runway_bollard": (P(m_runway_bollard, (6, 0, 6, 10, 12, 10)), "Bollard", "Poller", "Terelőoszlop"),
     "dino_skull": (P(m_dino_skull, FULL, "bone"), "Tyrannosaurus Skull", "Tyrannosaurus-Schädel", "Tyrannosaurus-koponya"),
+    "cryo_pod": (P(m_cryo_pod, (2, 0, 2, 14, 16, 14), light=3), "Cryo Pod", "Kryokapsel", "Hibernációs fülke"),
+    "lab_bench": (P(m_lab_bench, (0, 0, 1, 16, 15, 15)), "Lab Bench", "Labortisch", "Laborasztal"),
+    "fume_hood": (P(m_fume_hood, (0, 0, 2, 16, 16, 16)), "Fume Hood", "Abzug", "Vegyifülke"),
+    "specimen_tank": (P(m_specimen_tank, (3, 0, 3, 13, 16, 13), "glass", light=4), "Specimen Tank", "Probentank", "Mintatartály"),
+    "bunk_bed": (P(m_bunk_bed, FULL), "Bunk Bed", "Etagenbett", "Emeletes ágy"),
+    "diesel_generator": (P(m_generator, (0, 0, 2, 16, 13, 14)), "Diesel Generator", "Dieselgenerator", "Dízelaggregátor"),
+    "blast_door": (P(m_blast_door, (0, 0, 12, 16, 16, 16)), "Blast Door", "Druckschutztür", "Robbanásbiztos ajtó"),
 }
 PROP_TEX["prop_blue_dummy"] = "prop_fabric_blue"
 

@@ -1,0 +1,46 @@
+{
+  "type": "intersolarsystem:flat_site",
+  "biomes": "#intersolarsystem:has_structure/verdant_lab",
+  "spawn_overrides": {
+    "ambient": {
+      "bounding_box": "full",
+      "spawns": []
+    },
+    "axolotls": {
+      "bounding_box": "full",
+      "spawns": []
+    },
+    "creature": {
+      "bounding_box": "full",
+      "spawns": []
+    },
+    "misc": {
+      "bounding_box": "full",
+      "spawns": []
+    },
+    "monster": {
+      "bounding_box": "full",
+      "spawns": []
+    },
+    "underground_water_creature": {
+      "bounding_box": "full",
+      "spawns": []
+    },
+    "water_ambient": {
+      "bounding_box": "full",
+      "spawns": []
+    },
+    "water_creature": {
+      "bounding_box": "full",
+      "spawns": []
+    }
+  },
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_box",
+  "layout": "intersolarsystem:verdant_lab_layout",
+  "check_radius": 56,
+  "max_variation": 12,
+  "ground_offset": 9,
+  "clear_height": 24,
+  "guaranteed": true
+}

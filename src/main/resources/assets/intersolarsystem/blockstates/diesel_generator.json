@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/diesel_generator"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/diesel_generator",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/diesel_generator",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/diesel_generator",
+      "y": 270
+    }
+  }
+}

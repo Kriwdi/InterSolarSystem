@@ -1662,6 +1662,34 @@ public final class ModLangTable {
 				"Tyrannosaurus Skull",
 				"Tyrannosaurus-Schädel",
 				"Tyrannosaurus-koponya");
+		add(rows, "block.intersolarsystem.cryo_pod",
+				"Cryo Pod",
+				"Kryokapsel",
+				"Hibernációs fülke");
+		add(rows, "block.intersolarsystem.lab_bench",
+				"Lab Bench",
+				"Labortisch",
+				"Laborasztal");
+		add(rows, "block.intersolarsystem.fume_hood",
+				"Fume Hood",
+				"Abzug",
+				"Vegyifülke");
+		add(rows, "block.intersolarsystem.specimen_tank",
+				"Specimen Tank",
+				"Probentank",
+				"Mintatartály");
+		add(rows, "block.intersolarsystem.bunk_bed",
+				"Bunk Bed",
+				"Etagenbett",
+				"Emeletes ágy");
+		add(rows, "block.intersolarsystem.diesel_generator",
+				"Diesel Generator",
+				"Dieselgenerator",
+				"Dízelaggregátor");
+		add(rows, "block.intersolarsystem.blast_door",
+				"Blast Door",
+				"Druckschutztür",
+				"Robbanásbiztos ajtó");
 		check(rows);
 		return List.copyOf(rows);
 	}

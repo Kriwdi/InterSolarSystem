@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/specimen_tank"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/specimen_tank",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/specimen_tank",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/specimen_tank",
+      "y": 270
+    }
+  }
+}

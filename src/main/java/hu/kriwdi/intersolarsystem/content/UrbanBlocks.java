@@ -171,6 +171,34 @@ public final class UrbanBlocks {
 			p -> new ShipFacingBlock(p, new double[] {0, 0, 0, 16, 16, 16}),
 			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.BONE_BLOCK).noOcclusion());
 
+	public static final Block CRYO_POD = register("cryo_pod",
+			p -> new ShipFacingBlock(p, new double[] {2, 0, 2, 14, 16, 14}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).lightLevel(state -> 3).noOcclusion());
+
+	public static final Block LAB_BENCH = register("lab_bench",
+			p -> new ShipFacingBlock(p, new double[] {0, 0, 1, 16, 15, 15}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block FUME_HOOD = register("fume_hood",
+			p -> new ShipFacingBlock(p, new double[] {0, 0, 2, 16, 16, 16}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block SPECIMEN_TANK = register("specimen_tank",
+			p -> new ShipFacingBlock(p, new double[] {3, 0, 3, 13, 16, 13}),
+			BlockBehaviour.Properties.of().strength(0.8F, 6.0F).sound(SoundType.GLASS).lightLevel(state -> 4).noOcclusion());
+
+	public static final Block BUNK_BED = register("bunk_bed",
+			p -> new ShipFacingBlock(p, new double[] {0, 0, 0, 16, 16, 16}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block DIESEL_GENERATOR = register("diesel_generator",
+			p -> new ShipFacingBlock(p, new double[] {0, 0, 2, 16, 13, 14}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block BLAST_DOOR = register("blast_door",
+			p -> new ShipFacingBlock(p, new double[] {0, 0, 12, 16, 16, 16}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
 	private UrbanBlocks() {
 	}
 
