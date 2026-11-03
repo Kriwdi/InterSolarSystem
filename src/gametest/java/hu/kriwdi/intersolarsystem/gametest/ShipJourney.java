@@ -77,14 +77,17 @@ public class ShipJourney implements FabricClientGameTest {
 			game.getServer().runCommand("iss ship engine 4");
 			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 16.5, 4.5, 66, 20.5);
 			context.waitTicks(10);
-			game.getServer().runOnServer(server -> ShipNavigation.open(server, player(server)));
+			// Opened like a player does: looking at the console and pressing the use key (right click).
+			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 16.5, 4.5, 65.6, 18.5);
+			context.waitTicks(10);
+			context.getInput().pressKey(options -> options.keyUse);
 			context.waitForScreen(NavigationScreen.class);
 			context.waitTicks(10);
 			context.takeScreenshot("46_nav_open");
 			click(context, 60, 82 + 2 + 2 * 12 + 6);
 			context.waitTicks(5);
 			context.takeScreenshot("47_nav_moon_selected");
-			click(context, 320 - 104 + 47, 300 - 26 + 9);
+			click(context, 320 - 104 + 47, 274 - 26 + 9);
 			context.waitTicks(10);
 			String phase = game.getServer().computeOnServer(server -> ShipStateAccess.get(server).phase().name());
 			LOGGER.info("[JOURNEY] after clicking LAUNCH the ship is {}", phase);
@@ -145,7 +148,7 @@ public class ShipJourney implements FabricClientGameTest {
 			int h = client.getWindow().getGuiScaledHeight();
 			double scale = (double) client.getWindow().getWidth() / w;
 			int left = (w - 320) / 2;
-			int top = Math.max(0, (h - 300) / 2);
+			int top = Math.max(0, (h - 274) / 2);
 			return new double[] {(left + px) * scale, (top + py) * scale};
 		});
 		context.getInput().setCursorPos(at[0], at[1]);

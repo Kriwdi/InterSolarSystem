@@ -21,6 +21,13 @@ public final class ShipCommands {
 	public static void register() {
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) ->
 				dispatcher.register(Commands.literal("iss")
+						// The navigation console as a command (works the same, from inside the ship).
+						.then(Commands.literal("nav")
+								.then(Commands.argument("destination", StringArgumentType.word())
+										.suggests((ctx, builder) -> SharedSuggestionProvider.suggest(
+												hu.kriwdi.intersolarsystem.travel.SolarSystem.bodies().stream()
+														.map(hu.kriwdi.intersolarsystem.travel.CelestialBody::id), builder))
+										.executes(ShipCommands::nav)))
 						.then(Commands.literal("ship")
 								.then(Commands.literal("info").executes(ShipCommands::info))
 								.then(Commands.literal("fly")
@@ -41,6 +48,12 @@ public final class ShipCommands {
 												.then(Commands.argument("value",
 																IntegerArgumentType.integer(ShipState.MIN_CONDITION, ShipState.MAX_CONDITION))
 														.executes(ShipCommands::set)))))));
+	}
+
+	private static int nav(CommandContext<CommandSourceStack> ctx) throws com.mojang.brigadier.exceptions.CommandSyntaxException {
+		ServerPlayer player = ctx.getSource().getPlayerOrException();
+		return ShipNavigation.launch(ctx.getSource().getServer(), player,
+				StringArgumentType.getString(ctx, "destination")) ? 1 : 0;
 	}
 
 	private static int info(CommandContext<CommandSourceStack> ctx) {

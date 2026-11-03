@@ -4,10 +4,12 @@ import java.util.Optional;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
+import hu.kriwdi.intersolarsystem.InterSolarSystem;
 import hu.kriwdi.intersolarsystem.space.MoonSites;
 import hu.kriwdi.intersolarsystem.travel.CelestialBody;
 import hu.kriwdi.intersolarsystem.travel.SolarSystem;
@@ -19,9 +21,25 @@ public final class ShipNavigation {
 	}
 
 	private static boolean canLaunch(ShipState state) {
-		return !state.isReadOnly() && state.phase() == ShipFlightPhase.LANDED && state.landingSite().isPresent()
-				&& ShipFlightRules.canTakeOff(state.condition(ShipSubsystem.ENGINE),
-						state.condition(ShipSubsystem.LANDING_LAUNCH));
+		return blocker(state).isEmpty();
+	}
+
+	/** Why the ship cannot launch right now (a translation key), or "" when it can. */
+	static String blocker(ShipState state) {
+		if (state.isReadOnly()) {
+			return "message.intersolarsystem.nav.blocked.read_only";
+		}
+		if (state.phase() != ShipFlightPhase.LANDED) {
+			return "message.intersolarsystem.nav.blocked.flying";
+		}
+		if (state.landingSite().isEmpty()) {
+			return "message.intersolarsystem.nav.blocked.no_site";
+		}
+		if (!ShipFlightRules.canTakeOff(state.condition(ShipSubsystem.ENGINE),
+				state.condition(ShipSubsystem.LANDING_LAUNCH))) {
+			return "command.intersolarsystem.ship.fly_too_damaged";
+		}
+		return "";
 	}
 
 	/** The place id ("earth", "earth_orbit", "moon") of a dimension. */
@@ -56,23 +74,35 @@ public final class ShipNavigation {
 	public static void open(MinecraftServer server, ServerPlayer player) {
 		ShipState state = ShipStateAccess.get(server);
 		ServerPlayNetworking.send(player, new NavigationPayloads.Open(state.travel().engineTier(),
-				server.overworld().getGameTime(), canLaunch(state), here(state)));
+				server.overworld().getGameTime(), blocker(state), here(state)));
 	}
 
-	public static void launch(MinecraftServer server, ServerPlayer player, String bodyId) {
+	/**
+	 * Starts a journey towards {@code bodyId}. Every refusal is told to the player (and logged), so a click on LAUNCH
+	 * never silently does nothing. Returns whether the takeoff sequence started.
+	 */
+	public static boolean launch(MinecraftServer server, ServerPlayer player, String bodyId) {
 		ShipState state = ShipStateAccess.get(server);
+		String result = tryLaunch(server, player, state, bodyId);
+		InterSolarSystem.LOGGER.info("[nav] {} asked to launch towards {}: {}", player.getName().getString(), bodyId,
+				result.isEmpty() ? "takeoff started" : result);
+		if (!result.isEmpty()) {
+			player.sendSystemMessage(Component.translatable(result).withStyle(ChatFormatting.RED));
+		}
+		return result.isEmpty();
+	}
+
+	private static String tryLaunch(MinecraftServer server, ServerPlayer player, ShipState state, String bodyId) {
 		if (!player.level().dimension().equals(ShipDimensions.INTERIOR)) {
-			return;
+			return "message.intersolarsystem.nav.blocked.not_aboard";
 		}
 		Optional<CelestialBody> body = SolarSystem.byId(bodyId);
 		if (body.isEmpty() || !reachable(body.get(), here(state))) {
-			player.sendSystemMessage(Component.translatable("message.intersolarsystem.nav.unreachable"));
-			return;
+			return "message.intersolarsystem.nav.unreachable";
 		}
-		if (!canLaunch(state)) {
-			player.sendSystemMessage(Component.translatable(state.phase() == ShipFlightPhase.LANDED
-					? "command.intersolarsystem.ship.fly_too_damaged" : "command.intersolarsystem.ship.fly_not_landed"));
-			return;
+		String blocker = blocker(state);
+		if (!blocker.isEmpty()) {
+			return blocker;
 		}
 		long now = server.overworld().getGameTime();
 		long seed = server.overworld().getRandom().nextLong();
@@ -107,9 +137,11 @@ public final class ShipNavigation {
 						flightTicks);
 			}
 		}
-		if (started) {
-			ShipFlightController.broadcast(server, Component.translatable("message.intersolarsystem.nav.launch",
-					Component.translatable(body.get().translationKey()), ShipFlightTimeline.formatClock(flightTicks)));
+		if (!started) {
+			return "message.intersolarsystem.nav.blocked.flying";
 		}
+		ShipFlightController.broadcast(server, Component.translatable("message.intersolarsystem.nav.launch",
+				Component.translatable(body.get().translationKey()), ShipFlightTimeline.formatClock(flightTicks)));
+		return "";
 	}
 }

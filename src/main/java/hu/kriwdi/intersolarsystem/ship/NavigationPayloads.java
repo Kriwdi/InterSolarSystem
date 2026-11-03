@@ -15,34 +15,51 @@ public final class NavigationPayloads {
 	private NavigationPayloads() {
 	}
 
-	/** Server -> client: open the console with the ship's engine tier, the server's game time and whether it can launch. */
-	/** {@code here}: where the ship is ("earth", "earth_orbit", "moon"). */
-	public record Open(int engineTier, long gameTime, boolean canLaunch, String here) implements CustomPacketPayload {
+	/**
+	 * Server -> client: open the console with the ship's engine tier, the server's game time, why it cannot launch
+	 * ({@code blocker}: a translation key, "" when it can) and where the ship is ({@code here}: "earth", "earth_orbit",
+	 * "moon").
+	 */
+	public record Open(int engineTier, long gameTime, String blocker, String here) implements CustomPacketPayload {
 		public static final CustomPacketPayload.Type<Open> TYPE = new CustomPacketPayload.Type<>(ModIds.id("nav_open"));
 		public static final StreamCodec<ByteBuf, Open> CODEC = StreamCodec.of(
 				(buf, p) -> {
 					VarInt.write(buf, p.engineTier());
 					buf.writeLong(p.gameTime());
-					buf.writeBoolean(p.canLaunch());
-					byte[] here = p.here().getBytes(java.nio.charset.StandardCharsets.UTF_8);
-					VarInt.write(buf, here.length);
-					buf.writeBytes(here);
+					writeString(buf, p.blocker(), 128);
+					writeString(buf, p.here(), MAX_ID_LENGTH);
 				},
 				buf -> {
 					int engine = VarInt.read(buf);
 					long time = buf.readLong();
-					boolean launch = buf.readBoolean();
-					int length = Math.max(0, Math.min(MAX_ID_LENGTH, VarInt.read(buf)));
-					byte[] bytes = new byte[Math.min(length, buf.readableBytes())];
-					buf.readBytes(bytes);
+					String blocker = readString(buf, 128);
+					String here = readString(buf, MAX_ID_LENGTH);
 					buf.skipBytes(buf.readableBytes());
-					return new Open(engine, time, launch, new String(bytes, java.nio.charset.StandardCharsets.UTF_8));
+					return new Open(engine, time, blocker, here);
 				});
+
+		public boolean canLaunch() {
+			return blocker.isEmpty();
+		}
 
 		@Override
 		public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
 			return TYPE;
 		}
+	}
+
+	private static void writeString(ByteBuf buf, String value, int max) {
+		byte[] bytes = value.getBytes(java.nio.charset.StandardCharsets.UTF_8);
+		int length = Math.min(bytes.length, max);
+		VarInt.write(buf, length);
+		buf.writeBytes(bytes, 0, length);
+	}
+
+	private static String readString(ByteBuf buf, int max) {
+		int length = Math.max(0, Math.min(max, VarInt.read(buf)));
+		byte[] bytes = new byte[Math.min(length, buf.readableBytes())];
+		buf.readBytes(bytes);
+		return new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
 	}
 
 	/** Client -> server: launch towards this body. */

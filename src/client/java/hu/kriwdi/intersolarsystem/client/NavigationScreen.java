@@ -5,12 +5,18 @@ import java.util.Map;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 
+import net.fabricmc.loader.api.FabricLoader;
+
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 
 import hu.kriwdi.intersolarsystem.client.ui.ShipPanel;
+import hu.kriwdi.intersolarsystem.core.ModIds;
 import hu.kriwdi.intersolarsystem.ship.NavigationPayloads;
 import hu.kriwdi.intersolarsystem.ship.ShipNavigation;
 import hu.kriwdi.intersolarsystem.travel.CelestialBody;
@@ -21,10 +27,13 @@ import hu.kriwdi.intersolarsystem.travel.TravelMath;
  * The navigation console's star map: the Solar System as an orrery strip, a list of destinations with their travel
  * times for this ship's engine and the current launch window, and the launch button. Times are recomputed every frame
  * from the server's clock, so the window countdown runs live.
+ *
+ * <p>The rows and the launch button are real widgets (mouse clicks go through the vanilla event path); the keyboard
+ * works too: up/down select, Enter launches. A launch that is not possible says why instead of doing nothing.
  */
 public class NavigationScreen extends Screen {
 	private static final int WIDTH = 320;
-	private static final int HEIGHT = 300;
+	private static final int HEIGHT = 274;
 	private static final int ROW = 12;
 	private static final Map<String, Integer> COLOURS = Map.ofEntries(
 			Map.entry("earth", 0xFF3D7BD9), Map.entry("earth_orbit", 0xFF9FC4FF), Map.entry("moon", 0xFFC9C9C9), Map.entry("venus", 0xFFE3C27A),
@@ -40,23 +49,140 @@ public class NavigationScreen extends Screen {
 
 	private final int engineTier;
 	private final long serverTimeAtOpen;
+	private final String blocker;
 	private final boolean canLaunch;
 	private final String here;
 	private final List<CelestialBody> bodies = SolarSystem.bodies();
+	private final String version = FabricLoader.getInstance().getModContainer(ModIds.MOD_ID)
+			.map(c -> c.getMetadata().getVersion().getFriendlyString()).orElse("?");
 	private int ticks;
-	private int selected = 1;
+	private int selected;
 	private boolean launched;
+	/** Feedback under the details (why a launch is not possible), with its colour. */
+	private Component message;
+	private int messageColour = ShipPanel.WARN;
 
-	public NavigationScreen(int engineTier, long gameTime, boolean canLaunch, String here) {
+	public NavigationScreen(int engineTier, long gameTime, String blocker, String here) {
 		super(Component.translatable("screen.intersolarsystem.nav.title"));
 		this.engineTier = engineTier;
 		this.serverTimeAtOpen = gameTime;
-		this.canLaunch = canLaunch;
+		this.blocker = blocker;
+		this.canLaunch = blocker.isEmpty();
 		this.here = here;
+		// Start on the first destination the ship can actually fly to.
+		selected = 0;
+		for (int i = 0; i < bodies.size(); i++) {
+			if (ShipNavigation.reachable(bodies.get(i), here)) {
+				selected = i;
+				break;
+			}
+		}
+		if (!canLaunch) {
+			message = Component.translatable(blocker);
+			messageColour = ShipPanel.BAD;
+		}
 	}
 
 	private boolean launchable(CelestialBody b) {
 		return canLaunch && !launched && ShipNavigation.reachable(b, here);
+	}
+
+	/** A clickable area; the screen draws it, the widget only takes the mouse through the vanilla event path. */
+	private static final class Hit extends AbstractWidget {
+		private final Runnable action;
+
+		Hit(int x, int y, int w, int h, Component label, Runnable action) {
+			super(x, y, w, h, label);
+			this.action = action;
+		}
+
+		@Override
+		protected void extractWidgetRenderState(GuiGraphicsExtractor g, int mouseX, int mouseY, float partialTick) {
+		}
+
+		@Override
+		public void onClick(MouseButtonEvent event, boolean doubleClick) {
+			action.run();
+		}
+
+		@Override
+		protected void updateWidgetNarration(NarrationElementOutput output) {
+			defaultButtonNarrationText(output);
+		}
+	}
+
+	@Override
+	protected void init() {
+		int x = left() + 10;
+		for (int i = 0; i < bodies.size(); i++) {
+			int index = i;
+			addRenderableWidget(new Hit(x, listY() + 2 + i * ROW, WIDTH - 20, ROW,
+					Component.translatable(bodies.get(i).translationKey()), () -> select(index)));
+		}
+		addRenderableWidget(new Hit(launchX(), launchY(), 94, 18,
+				Component.translatable("screen.intersolarsystem.nav.launch"), this::launch));
+	}
+
+	private void select(int index) {
+		selected = index;
+		CelestialBody b = bodies.get(index);
+		if (!canLaunch) {
+			return;
+		}
+		if (ShipNavigation.reachable(b, here)) {
+			message = null;
+		} else {
+			message = Component.translatable(b.id().equals(here) ? "screen.intersolarsystem.nav.already_here"
+					: "message.intersolarsystem.nav.unreachable");
+			messageColour = ShipPanel.WARN;
+		}
+	}
+
+	private void launch() {
+		CelestialBody b = bodies.get(selected);
+		if (launched) {
+			return;
+		}
+		if (!launchable(b)) {
+			message = Component.translatable(!canLaunch ? blocker : b.id().equals(here)
+					? "screen.intersolarsystem.nav.already_here" : "message.intersolarsystem.nav.unreachable");
+			messageColour = !canLaunch ? ShipPanel.BAD : ShipPanel.WARN;
+			return;
+		}
+		launched = true;
+		ClientPlayNetworking.send(new NavigationPayloads.Launch(b.id()));
+		onClose();
+	}
+
+	private List<String> wrap(String text, int width) {
+		List<String> lines = new java.util.ArrayList<>();
+		StringBuilder line = new StringBuilder();
+		for (String word : text.split(" ")) {
+			String next = line.isEmpty() ? word : line + " " + word;
+			if (font.width(next) > width && !line.isEmpty()) {
+				lines.add(line.toString());
+				line = new StringBuilder(word);
+			} else {
+				line = new StringBuilder(next);
+			}
+		}
+		if (!line.isEmpty()) {
+			lines.add(line.toString());
+		}
+		return lines;
+	}
+
+	@Override
+	public boolean keyPressed(KeyEvent event) {
+		if (event.isUp() || event.isDown()) {
+			select(Math.floorMod(selected + (event.isUp() ? -1 : 1), bodies.size()));
+			return true;
+		}
+		if (event.isConfirmation()) {
+			launch();
+			return true;
+		}
+		return super.keyPressed(event);
 	}
 
 	/** Travel time of a leg from where the ship is now. */
@@ -113,6 +239,15 @@ public class NavigationScreen extends Screen {
 		drawMap(g, l + 10, mapY(), WIDTH - 20, 36, partialTick);
 		drawList(g, l + 10, listY(), mouseX, mouseY);
 		drawDetails(g, l + 10, listY() + bodies.size() * ROW + 10);
+		if (message != null) {
+			// Up to two lines left of the launch button.
+			List<String> lines = wrap(message.getString(), launchX() - l - 16);
+			for (int i = 0; i < Math.min(2, lines.size()); i++) {
+				g.text(font, lines.get(i), l + 10, launchY() + i * 10, messageColour);
+			}
+		}
+		String build = "v" + version;
+		g.text(font, build, l + WIDTH - 12 - font.width(build), mapY() + 27, 0xFF5C646B);
 		boolean launchable = launchable(bodies.get(selected));
 		ShipPanel.button(g, font, launchX(), launchY(), 94, 18,
 				Component.translatable("screen.intersolarsystem.nav.launch"),
@@ -244,26 +379,5 @@ public class NavigationScreen extends Screen {
 					: Component.translatable("screen.intersolarsystem.nav.locked");
 			g.text(font, line, x, y + 12, ShipPanel.HINT);
 		}
-	}
-
-	@Override
-	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-		if (event.button() == 0) {
-			int x = left() + 10;
-			for (int i = 0; i < bodies.size(); i++) {
-				if (ShipPanel.inside(event.x(), event.y(), x, listY() + 2 + i * ROW, WIDTH - 20, ROW)) {
-					selected = i;
-					return true;
-				}
-			}
-			CelestialBody b = bodies.get(selected);
-			if (ShipPanel.inside(event.x(), event.y(), launchX(), launchY(), 94, 18) && launchable(b)) {
-				launched = true;
-				ClientPlayNetworking.send(new NavigationPayloads.Launch(b.id()));
-				onClose();
-				return true;
-			}
-		}
-		return super.mouseClicked(event, doubleClick);
 	}
 }

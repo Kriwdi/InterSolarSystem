@@ -3,6 +3,11 @@ plugins {
 	id 'maven-publish'
 }
 
+// CI builds carry the run number (intersolarsystem-1.0.0+build.70.jar), so a downloaded jar shows which build it is.
+if (System.getenv("GITHUB_RUN_NUMBER")) {
+	version = "${project.version}+build.${System.getenv("GITHUB_RUN_NUMBER")}"
+}
+
 repositories {
 	// Add repositories to retrieve artifacts from in here.
 	// You should only use this when depending on other mods because

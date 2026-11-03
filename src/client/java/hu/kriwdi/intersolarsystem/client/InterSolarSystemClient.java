@@ -38,7 +38,7 @@ public class InterSolarSystemClient implements ClientModInitializer {
 		ClientPlayNetworking.registerGlobalReceiver(NavigationPayloads.Open.TYPE, (payload, context) -> {
 			Minecraft minecraft = context.client();
 			minecraft.execute(() -> minecraft.setScreenAndShow(
-					new NavigationScreen(payload.engineTier(), payload.gameTime(), payload.canLaunch(),
+					new NavigationScreen(payload.engineTier(), payload.gameTime(), payload.blocker(),
 							payload.here())));
 		});
 		ClientPlayNetworking.registerGlobalReceiver(hu.kriwdi.intersolarsystem.ship.ShipViewPayload.TYPE,

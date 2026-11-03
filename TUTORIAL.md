@@ -32,7 +32,7 @@ Ez az útmutató végigvezet a mod jelenlegi tartalmán: hogyan indulj, mit csin
 
 1. Telepítsd a **Fabric Loadert** (0.20.1 vagy újabb) a **Minecraft 26.3**-hoz.
 2. Töltsd le a **Fabric API**-t (0.165.0+26.3 vagy újabb), és tedd a `mods` mappába.
-3. A mod jar-ját a GitHubon a [`ci-builds` ág `jar` mappájából](https://github.com/Kriwdi/InterSolarSystem/tree/ci-builds/jar) töltheted le (`intersolarsystem-1.0.0.jar`), és ezt is a `mods` mappába tedd.
+3. A mod jar-ját a GitHubon a [`ci-builds` ág `jar` mappájából](https://github.com/Kriwdi/InterSolarSystem/tree/ci-builds/jar) töltheted le. A fájl nevében benne van a build száma (pl. `intersolarsystem-1.0.0+build.70.jar`). Ezt is a `mods` mappába tedd, és **a régi `intersolarsystem` jar-t töröld onnan**, hogy csak egy legyen.
 4. Indítsd el a játékot a Fabric profillal, és hozz létre egy **új világot**. A „halott Föld” csak új világban generálódik; a régi világok Föld-része marad, ami volt.
 
 A mod tárgyai kreatív módban az **InterSolarSystem** fülön vannak (sisak ikon). Ha nem fér ki az első oldalra, a fülsor végén lapozó nyilak jelennek meg.
@@ -308,7 +308,9 @@ Kattints jobb gombbal a **navigációs konzolra** (a hídon). Megnyílik a **csi
 - **alul:** a kiválasztott célpont részletei (indítási ablak, időtartam);
 - **INDÍTÁS** gomb: csak akkor zöld, ha a hajó le van szállva és indítható.
 
-**Indulás:** kattints a célpontra a listában, majd az **INDÍTÁS** gombra.
+**Indulás:** kattints a célpontra a listában, majd az **INDÍTÁS** gombra. Billentyűzettel is megy: **fel/le nyíl** a választás, **Enter** az indítás. Ha a hajó nem tud elindulni (sérült, már úton van stb.), a gomb mellett piros szöveg írja ki, miért.
+
+Ugyanez parancsként, a hajóból: `/iss nav moon` (célok: `earth`, `earth_orbit`, `moon`). A térkép jobb alsó sarkában a mod verziója látszik (pl. `v1.0.0+build.70`), így látod, melyik build van fent.
 
 **Mi történik utána:**
 
@@ -416,6 +418,7 @@ A hajtómű szintje osztja az utazási időt:
 
 | Parancs | Ki használhatja | Mire jó |
 |---|---|---|
+| `/iss nav <cél>` | mindenki (a hajóban) | indulás a célhoz, mint a navigációs konzolról (`earth`, `earth_orbit`, `moon`) |
 | `/iss ship info` | mindenki | a hajó osztálya, az alrendszerek állapota, aktív incidensek |
 | `/iss ship set <alrendszer> <érték>` | operátor | alrendszer állapotának beállítása (tesztelésre) |
 | `/iss ship fly <x> <z>` | operátor | repülés egy földi koordinátára (a hajóból) |

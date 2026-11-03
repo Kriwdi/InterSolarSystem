@@ -1070,6 +1070,26 @@ public final class ModLangTable {
 				"Dead Fence",
 				"Totholzzaun",
 				"Elhalt fa kerítés");
+		add(rows, "message.intersolarsystem.nav.blocked.read_only",
+				"The ship's save could not be read, so it stays grounded (see the log)",
+				"Der Schiffsspeicherstand konnte nicht gelesen werden, das Schiff bleibt am Boden (siehe Log)",
+				"A hajó mentése nem olvasható, ezért nem szállhat fel (lásd a naplót)");
+		add(rows, "message.intersolarsystem.nav.blocked.flying",
+				"The ship is already under way: wait until it has landed",
+				"Das Schiff ist schon unterwegs: warte, bis es gelandet ist",
+				"A hajó már úton van: várd meg, amíg leszáll");
+		add(rows, "message.intersolarsystem.nav.blocked.no_site",
+				"The ship has no landing site: leave and board again through its hatch",
+				"Das Schiff hat keinen Landeplatz: steig aus und durch die Luke wieder ein",
+				"A hajónak nincs leszállóhelye: szállj ki, és szállj be újra az ajtaján");
+		add(rows, "message.intersolarsystem.nav.blocked.not_aboard",
+				"You can only launch from inside the ship",
+				"Starten geht nur von Bord des Schiffes",
+				"Indítani csak a hajó belsejéből lehet");
+		add(rows, "screen.intersolarsystem.nav.already_here",
+				"The ship is already here: choose another destination",
+				"Das Schiff ist schon hier: wähle ein anderes Ziel",
+				"A hajó már itt van: válassz másik célt");
 		check(rows);
 		return List.copyOf(rows);
 	}
