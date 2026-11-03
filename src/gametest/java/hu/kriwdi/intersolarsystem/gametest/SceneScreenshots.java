@@ -122,17 +122,27 @@ public class SceneScreenshots implements FabricClientGameTest {
 			// The dead Earth: every biome and the main structures, at noon.
 			game.getServer().runCommand("time set 6000");
 			game.getServer().runCommand("effect give @a minecraft:night_vision infinite 0 true");
+			// Spectators fly: the camera stays where it is put instead of falling to the ground.
+			game.getServer().runCommand("gamemode spectator @a");
 			for (var biome : hu.kriwdi.intersolarsystem.worldgen.DeadEarth.ALL) {
 				BlockPos at = game.getServer().computeOnServer(server -> {
 					ServerLevel earth = server.overworld();
 					var hit = earth.findClosestBiome3d(h -> h.is(biome), BlockPos.ZERO, 4000, 32, 64);
-					return hit == null ? null : MoonSites.surface(earth, hit.getFirst().getX(), hit.getFirst().getZ());
+					if (hit == null) {
+						return null;
+					}
+					// Step 40 blocks further in, away from the biome's edge nearest to the origin.
+					BlockPos p = hit.getFirst();
+					double len = Math.max(1.0, Math.sqrt((double) p.getX() * p.getX() + (double) p.getZ() * p.getZ()));
+					int x = p.getX() + (int) Math.round(p.getX() / len * 40);
+					int z = p.getZ() + (int) Math.round(p.getZ() / len * 40);
+					return MoonSites.surface(earth, x, z);
 				});
 				if (at == null) {
 					continue;
 				}
-				game.getServer().runCommand("execute in minecraft:overworld run tp @a " + at.getX() + " " + (at.getY() + 14)
-						+ " " + at.getZ() + " -45 28");
+				game.getServer().runCommand("execute in minecraft:overworld run tp @a " + at.getX() + " " + (at.getY() + 16)
+						+ " " + at.getZ() + " -45 30");
 				context.waitTicks(90);
 				context.takeScreenshot("20_earth_" + biome.identifier().getPath());
 			}
@@ -143,13 +153,13 @@ public class SceneScreenshots implements FabricClientGameTest {
 					var structure = server.registryAccess().lookupOrThrow(Registries.STRUCTURE)
 							.getOrThrow(ResourceKey.create(Registries.STRUCTURE, ModIds.id(name)));
 					BlockPos found = earth.findNearestMapStructure(HolderSet.direct(structure), BlockPos.ZERO, 120, false);
-					return found == null ? null : MoonSites.surface(earth, found.getX() - 18, found.getZ() - 18);
+					return found == null ? null : MoonSites.surface(earth, found.getX() - 14, found.getZ() - 14);
 				});
 				if (at == null) {
 					continue;
 				}
-				game.getServer().runCommand("execute in minecraft:overworld run tp @a " + at.getX() + " " + (at.getY() + 12)
-						+ " " + at.getZ() + " -45 24");
+				game.getServer().runCommand("execute in minecraft:overworld run tp @a " + at.getX() + " " + (at.getY() + 18)
+						+ " " + at.getZ() + " -45 32");
 				context.waitTicks(90);
 				context.takeScreenshot("30_structure_" + name);
 			}
