@@ -30,6 +30,12 @@ public class InterSolarSystemClient implements ClientModInitializer {
 				}
 			});
 		});
+		ClientPlayNetworking.registerGlobalReceiver(hu.kriwdi.intersolarsystem.space.VacuumStatusPayload.TYPE,
+				(payload, context) -> context.client().execute(() -> {
+					if (context.client().level != null) {
+						HelmetHudElement.update(payload, context.client().level.getGameTime());
+					}
+				}));
 		ClientPlayNetworking.registerGlobalReceiver(RepairBoardPayloads.Open.TYPE, (payload, context) -> {
 			Minecraft minecraft = context.client();
 			minecraft.execute(() -> minecraft.setScreenAndShow(switch (payload.kind()) {
@@ -55,7 +61,7 @@ public class InterSolarSystemClient implements ClientModInitializer {
 			hu.kriwdi.intersolarsystem.client.sky.ClientManeuver.clear();
 		});
 		HudElementRegistry.addLast(ModIds.id("ship_status"), new ShipHudElement());
-		HudElementRegistry.addLast(ModIds.id("oxygen"), new OxygenHudElement());
+		HudElementRegistry.addLast(ModIds.id("helmet"), new HelmetHudElement());
 		HudElementRegistry.addLast(ModIds.id("radar"), new RadarHudElement());
 		HudElementRegistry.addLast(ModIds.id("tape"), new hu.kriwdi.intersolarsystem.client.lore.TapePlayer());
 		hu.kriwdi.intersolarsystem.client.lore.LoreClient.register();

@@ -37,5 +37,34 @@
       "intersolarsystem:tape_static1",
       "intersolarsystem:tape_static2"
     ]
+  },
+  "suit_leak": {
+    "subtitle": "subtitles.intersolarsystem.suit_leak",
+    "sounds": [
+      "intersolarsystem:suit_leak"
+    ]
+  },
+  "heartbeat": {
+    "subtitle": "subtitles.intersolarsystem.heartbeat",
+    "sounds": [
+      "intersolarsystem:heartbeat"
+    ]
+  },
+  "ear_ring": {
+    "subtitle": "subtitles.intersolarsystem.ear_ring",
+    "sounds": [
+      "intersolarsystem:ear_ring"
+    ]
+  },
+  "tape_voice": {
+    "subtitle": "subtitles.intersolarsystem.tape_voice",
+    "sounds": [
+      "intersolarsystem:tape_voice1",
+      "intersolarsystem:tape_voice2",
+      "intersolarsystem:tape_voice3",
+      "intersolarsystem:tape_voice4",
+      "intersolarsystem:tape_voice5",
+      "intersolarsystem:tape_voice6"
+    ]
   }
 }

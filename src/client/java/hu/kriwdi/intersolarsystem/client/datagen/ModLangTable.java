@@ -1435,9 +1435,9 @@ public final class ModLangTable {
 				"Rechtsklick zum Lesen",
 				"Jobb klikk: elolvasás");
 		add(rows, "lore.intersolarsystem.play_hint",
-				"Right click to play",
-				"Rechtsklick zum Abspielen",
-				"Jobb klikk: lejátszás");
+				"Play it in a data terminal or a radio set (right click the deck with the tape)",
+				"In einem Datenterminal oder Funkgerät abspielen (mit dem Band auf das Gerät rechtsklicken)",
+				"Adatterminálban vagy rádióban játszható le (jobb klikk a géppel, kézben a szalaggal)");
 		add(rows, "block.intersolarsystem.skeleton_lying",
 				"Skeleton (Lying)",
 				"Skelett (liegend)",
@@ -1690,6 +1690,86 @@ public final class ModLangTable {
 				"Blast Door",
 				"Druckschutztür",
 				"Robbanásbiztos ajtó");
+		add(rows, "death.attack.intersolarsystem.hypoxia",
+				"%1$s ran out of oxygen",
+				"%1$s ging der Sauerstoff aus",
+				"%1$s kifogyott az oxigénből");
+		add(rows, "death.attack.intersolarsystem.hypoxia.player",
+				"%1$s ran out of oxygen whilst fighting %2$s",
+				"%1$s ging im Kampf gegen %2$s der Sauerstoff aus",
+				"%1$s kifogyott az oxigénből %2$s ellen harcolva");
+		add(rows, "death.attack.intersolarsystem.decompression",
+				"%1$s was exposed to the vacuum",
+				"%1$s war dem Vakuum ausgesetzt",
+				"%1$s a vákuumnak volt kitéve");
+		add(rows, "death.attack.intersolarsystem.decompression.player",
+				"%1$s was exposed to the vacuum whilst fighting %2$s",
+				"%1$s war im Kampf gegen %2$s dem Vakuum ausgesetzt",
+				"%1$s a vákuumnak volt kitéve %2$s ellen harcolva");
+		add(rows, "message.intersolarsystem.suit_punctured",
+				"Suit punctured! Seal it with sealant foam",
+				"Anzug durchlöchert! Mit Dichtschaum abdichten",
+				"Kilyukadt a ruha! Tömítőhabbal foltozd be");
+		add(rows, "message.intersolarsystem.suit_sealed",
+				"Suit sealed",
+				"Anzug abgedichtet",
+				"A ruha befoltozva");
+		add(rows, "subtitles.intersolarsystem.suit_leak",
+				"Suit hisses",
+				"Anzug zischt",
+				"A ruha sziszeg");
+		add(rows, "subtitles.intersolarsystem.heartbeat",
+				"Heart pounds",
+				"Herz pocht",
+				"Szívverés");
+		add(rows, "subtitles.intersolarsystem.ear_ring",
+				"Ears ring",
+				"Ohren klingeln",
+				"Cseng a fül");
+		add(rows, "subtitles.intersolarsystem.tape_voice",
+				"Voice on the tape",
+				"Stimme auf dem Band",
+				"Hang a szalagon");
+		add(rows, "hud.intersolarsystem.helmet.oxygen",
+				"O2",
+				"O2",
+				"O2");
+		add(rows, "hud.intersolarsystem.helmet.suit",
+				"SUIT",
+				"ANZUG",
+				"RUHA");
+		add(rows, "hud.intersolarsystem.helmet.leak",
+				"LEAK",
+				"LECK",
+				"SZIVÁRGÁS");
+		add(rows, "hud.intersolarsystem.helmet.low",
+				"O2 LOW",
+				"O2 NIEDRIG",
+				"KEVÉS O2");
+		add(rows, "hud.intersolarsystem.helmet.hypoxia",
+				"HYPOXIA",
+				"HYPOXIE",
+				"HIPOXIA");
+		add(rows, "hud.intersolarsystem.helmet.decompression",
+				"NO SEAL - VACUUM",
+				"NICHT DICHT - VAKUUM",
+				"NEM ZÁR - VÁKUUM");
+		add(rows, "hud.intersolarsystem.helmet.pressure",
+				"PRESS",
+				"DRUCK",
+				"NYOMÁS");
+		add(rows, "block.intersolarsystem.radio_set",
+				"Radio Set",
+				"Funkgerät",
+				"Rádió");
+		add(rows, "message.intersolarsystem.tape_blank",
+				"The tape is blank",
+				"Das Band ist leer",
+				"A szalag üres");
+		add(rows, "message.intersolarsystem.radio_silence",
+				"Only static. Nobody is broadcasting.",
+				"Nur Rauschen. Niemand sendet.",
+				"Csak zúgás. Senki nem ad.");
 		check(rows);
 		return List.copyOf(rows);
 	}

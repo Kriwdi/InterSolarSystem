@@ -171,6 +171,10 @@ public final class UrbanBlocks {
 			p -> new ShipFacingBlock(p, new double[] {0, 0, 0, 16, 16, 16}),
 			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.BONE_BLOCK).noOcclusion());
 
+	public static final Block RADIO_SET = register("radio_set",
+			p -> new RadioSetBlock(p, new double[] {1, 0, 2, 15, 12, 13}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
 	public static final Block CRYO_POD = register("cryo_pod",
 			p -> new ShipFacingBlock(p, new double[] {2, 0, 2, 14, 16, 14}),
 			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).lightLevel(state -> 3).noOcclusion());

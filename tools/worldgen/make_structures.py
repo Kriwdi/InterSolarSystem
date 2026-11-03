@@ -243,6 +243,7 @@ def bunker_large():
     b.set(13, 1, 10, S("skeleton_sitting", facing="north"))  # by the terminal, waiting for the all-clear
     b.set(3, 6, 6, S("skeleton_lying", facing="east"))
     b.set(12, 1, 11, S("repair_station", facing="north"))
+    b.set(13, 1, 11, S("radio_set", facing="north"))
     b.fill(8, 1, 1, 8, 4, 11, S("iron_bars"))
     b.fill(8, 1, 5, 8, 3, 7, AIR)
     for x in (3, 13):
@@ -469,6 +470,7 @@ def radio_tower():
     b.set(15, 1, 3, S("data_terminal", facing="west", log=10))
     b.chest(15, 1, 1, "radio", "west")
     b.set(14, 1, 4, S("skeleton_sitting", facing="east"))  # the operator, still at the radio
+    b.set(15, 1, 5, S("radio_set", facing="west"))
     b.decay(0.02, keep=(NS + "truss",))
     return b
 

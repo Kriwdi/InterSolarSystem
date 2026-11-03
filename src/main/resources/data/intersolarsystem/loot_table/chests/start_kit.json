@@ -21,6 +21,30 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "intersolarsystem:radio_set"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:data_tape",
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"seed_sower_briefing\"}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
           "name": "intersolarsystem:repair_kit",
           "modifier": {
             "type": "minecraft:set_count",

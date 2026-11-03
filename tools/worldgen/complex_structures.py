@@ -52,6 +52,7 @@ def command_centre():
     for z in range(3, D - 3, 2):
         b.set(1, 1, z, S("server_rack", facing="east"))
     b.set(W - 3, 1, D - 3, S("diesel_generator", facing="west"))
+    b.set(12, 1, 1, S("radio_set", facing="south"))
     b.set(W - 3, 1, D - 5, S("diesel_generator", facing="west"))
     for z in range(D - 7, D - 1):
         b.set(W - 2, H - 1, z, S("cable", north="true", south="true", east="false", west="false", up="false", down="false"))

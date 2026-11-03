@@ -229,6 +229,7 @@ def prop_textures():
     flat("prop_lamp_red", "7a1f1a", 36, 0.2, "5a1612")
     flat("prop_lamp_green", "1f5a2a", 37, 0.2, "164520")
     flat("prop_lamp_amber", "b97a14", 38, 0.2, "8c5b0f")
+    flat("prop_olive", "5a6340", 39, 0.35, "454d30")
     # Screens: a dead monitor and a flickering departure board.
     img, px, rnd = noise_img(40, "0c1410", "060a08", 0.5)
     for y in range(2, 14, 3):
@@ -564,6 +565,19 @@ def m_runway_bollard():
     return [e((6, 0, 6), (10, 12, 10), "yellow", faces={"up": "metal_dark"}), e((5.8, 4, 5.8), (10.2, 6, 10.2), "plastic_black")]
 
 
+def m_radio_set():
+    """A field radio with a tape deck: olive case, speaker grille, two dials, the cassette window, a whip antenna."""
+    els = [e((1, 0, 3), (15, 10, 13), "olive", faces={"north": "metal_dark"}), e((1, 10, 5), (15, 11, 11), "metal_dark"),
+           e((2, 2, 2.6), (7, 8, 3), "screen"), e((9, 6, 2.5), (11, 8, 3), "chrome"), e((12, 6, 2.5), (14, 8, 3), "chrome"),
+           e((9, 2, 2.6), (14, 4.5, 3), "glass_dark"), e((10, 2.8, 2.4), (11, 3.8, 2.6), "rust"), e((12, 2.8, 2.4), (13, 3.8, 2.6), "rust"),
+           e((3, 11, 7), (13, 12, 9), "metal_grey"), e((13, 10, 11), (13.6, 30, 11.6), "chrome",
+           rot={"origin": [13.3, 10, 11.3], "axis": "z", "angle": -22.5}), e((0, 3, 6), (1, 7, 10), "metal_dark"),
+           e((15, 3, 6), (16, 7, 10), "metal_dark")]
+    for y in (3, 4.5, 6):
+        els.append(e((2.5, y, 2.5), (6.5, y + 0.6, 2.6), "metal_grey"))
+    return els
+
+
 def m_cryo_pod():
     return [e((2, 0, 2), (14, 2, 14), "metal_dark"), e((3, 2, 4), (13, 29, 14), "metal_white", faces={"north": "frost"}),
             e((3.5, 4, 3.5), (12.5, 27, 4), "frost"), e((2.5, 29, 3), (13.5, 31, 14.5), "metal_grey"),
@@ -628,7 +642,7 @@ PROP_TEX = {"wood": "prop_wood", "metal_grey": "prop_metal_grey", "metal_white":
             "board": "prop_departure_board", "biohazard": "prop_biohazard", "barrier": "hazard_concrete", "fan": "prop_jet_fan",
             "bone": "skeleton_bone", "socket": "skeleton_socket", "poster_exodus": "prop_poster_exodus",
             "poster_quarantine": "prop_poster_quarantine", "frost": "prop_frost", "specimen": "prop_specimen",
-            "hazard": "hazard_concrete"}
+            "hazard": "hazard_concrete", "olive": "prop_olive"}
 for _p in ("car_red", "car_blue", "car_white", "car_yellow", "car_police", "car_ambulance"):
     PROP_TEX[_p] = "prop_" + _p
 
@@ -698,6 +712,7 @@ BLOCKS = {
     "runway_light": (P(m_runway_light, (5, 0, 5, 11, 4, 11), light=4, collide=False), "Runway Light", "Pistenfeuer", "Kifutófény"),
     "runway_bollard": (P(m_runway_bollard, (6, 0, 6, 10, 12, 10)), "Bollard", "Poller", "Terelőoszlop"),
     "dino_skull": (P(m_dino_skull, FULL, "bone"), "Tyrannosaurus Skull", "Tyrannosaurus-Schädel", "Tyrannosaurus-koponya"),
+    "radio_set": (P(m_radio_set, (1, 0, 2, 15, 12, 13), cls="RadioSetBlock"), "Radio Set", "Funkgerät", "Rádió"),
     "cryo_pod": (P(m_cryo_pod, (2, 0, 2, 14, 16, 14), light=3), "Cryo Pod", "Kryokapsel", "Hibernációs fülke"),
     "lab_bench": (P(m_lab_bench, (0, 0, 1, 16, 15, 15)), "Lab Bench", "Labortisch", "Laborasztal"),
     "fume_hood": (P(m_fume_hood, (0, 0, 2, 16, 16, 16)), "Fume Hood", "Abzug", "Vegyifülke"),
@@ -752,7 +767,8 @@ def write_java():
             if o.get("collide") is False:
                 props += ".noCollision()"
             b = ", ".join(str(v) for v in box)
-            lines.append(f'\tpublic static final Block {const} = register("{name}",\n\t\t\tp -> new ShipFacingBlock(p, new double[] {{{b}}}),\n\t\t\t{props});')
+            cls = o.get("cls", "ShipFacingBlock")
+            lines.append(f'\tpublic static final Block {const} = register("{name}",\n\t\t\tp -> new {cls}(p, new double[] {{{b}}}),\n\t\t\t{props});')
     src = '''package hu.kriwdi.intersolarsystem.content;
 
 import net.minecraft.world.level.block.Block;

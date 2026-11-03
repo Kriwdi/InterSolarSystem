@@ -40,8 +40,6 @@ public final class SpaceEnvironment {
 	public static final int LIFE_SUPPORT_MINIMUM = 20;
 	/** Width of the Earth (the overworld border) in blocks. */
 	public static final double EARTH_SIZE = 20_000.0;
-	/** Net air lost per tick in vacuum after vanilla's own refill of 4 (15 s from full to empty). */
-	private static final int AIR_LOSS = 5;
 	private static final Identifier GRAVITY_ID = ModIds.id("microgravity");
 	private static final Identifier FALL_ID = ModIds.id("microgravity_fall");
 
@@ -50,6 +48,7 @@ public final class SpaceEnvironment {
 
 	public static void register() {
 		ServerTickEvents.END_SERVER_TICK.register(SpaceEnvironment::tick);
+		VacuumBreathing.register();
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
 			// The Moon is 5500 blocks across (scaled against the 20 000-block Earth).
 			ServerLevel moon = server.getLevel(ShipDimensions.MOON);
@@ -84,46 +83,14 @@ public final class SpaceEnvironment {
 				continue;
 			}
 			if (orbit || moon) {
-				breathe(player, now);
-			} else if (interior && ship.condition(ShipSubsystem.LIFE_SUPPORT) >= LIFE_SUPPORT_MINIMUM && now % 5 == 0) {
-				refill(player);
-			}
-		}
-	}
-
-	private static void breathe(ServerPlayer player, long now) {
-		ItemStack suit = player.getItemBySlot(EquipmentSlot.CHEST);
-		boolean sealed = ModArmor.fullSuit(player) && ModArmor.oxygen(player) > 0.0;
-		if (sealed) {
-			player.setAirSupply(player.getMaxAirSupply());
-			// The suit's own sounds: slow breathing, and a beeping alarm when the tank runs low.
-			if (now % 70 == 0) {
-				player.level().playSound(null, player.blockPosition(), ModSounds.SUIT_BREATH, SoundSource.PLAYERS, 0.35F,
-						0.95F + player.getRandom().nextFloat() * 0.1F);
-			}
-			if (ModArmor.oxygen(player) < 0.2 && now % 40 == 20) {
-				player.level().playSound(null, player.blockPosition(), ModSounds.OXYGEN_ALARM, SoundSource.PLAYERS, 0.6F,
-						1.0F);
-			}
-			if (now % 20 == 0) {
-				suit.setDamageValue(Math.min(suit.getMaxDamage() - 1, suit.getDamageValue() + 1));
-				if (suit.getDamageValue() >= suit.getMaxDamage() - 1) {
-					// The last point stands for an empty tank: the suit is never destroyed by breathing.
-					suit.setDamageValue(suit.getMaxDamage());
+				VacuumBreathing.breathe(player, now);
+			} else {
+				VacuumBreathing.breatheAir(player, now);
+				if (interior && ship.condition(ShipSubsystem.LIFE_SUPPORT) >= LIFE_SUPPORT_MINIMUM && now % 5 == 0) {
+					refill(player);
 				}
 			}
-			return;
 		}
-		if (now % 25 == 0) {
-			player.level().playSound(null, player.blockPosition(), ModSounds.SUFFOCATE, SoundSource.PLAYERS, 0.8F,
-					0.9F + player.getRandom().nextFloat() * 0.2F);
-		}
-		int air = player.getAirSupply() - AIR_LOSS;
-		if (air <= -20) {
-			air = 0;
-			player.hurtServer((ServerLevel) player.level(), player.damageSources().drown(), 2.0F);
-		}
-		player.setAirSupply(air);
 	}
 
 	private static void refill(ServerPlayer player) {

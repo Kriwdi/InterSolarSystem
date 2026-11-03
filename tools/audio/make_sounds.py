@@ -125,6 +125,61 @@ def radio_static(seed):
     return (hiss + carrier) * envelope(n, 0.1, 0.4)
 
 
+def hiss(seed):
+    """A suit puncture: sharp air escaping through a small hole, wavering."""
+    rnd = np.random.default_rng(seed)
+    n = seconds(0.8)
+    t = np.arange(n) / RATE
+    noise = bandpass(rnd.normal(size=n), 2500, 9000) * (0.7 + 0.3 * np.sin(2 * np.pi * 11 * t))
+    return noise * envelope(n, 0.05, 0.4)
+
+
+def heartbeat():
+    """Lub-dub: two low thumps."""
+    out = []
+    for f, amp, gap in ((52, 1.0, 0.12), (46, 0.7, 0.35)):
+        n = seconds(0.16)
+        t = np.arange(n) / RATE
+        out.append(np.sin(2 * np.pi * f * t) * np.exp(-t * 22) * amp)
+        out.append(np.zeros(seconds(gap)))
+    return np.concatenate(out)
+
+
+def ear_ring():
+    """Tinnitus after pressure loss: a high tone that beats and fades, over a muffled rush."""
+    rnd = np.random.default_rng(9)
+    n = seconds(1.6)
+    t = np.arange(n) / RATE
+    tone = np.sin(2 * np.pi * 3900 * t) * 0.5 + np.sin(2 * np.pi * 3907 * t) * 0.5
+    rush = lowpass(rnd.normal(size=n), 400) * 0.6
+    return (tone * 0.35 + rush) * envelope(n, 0.05, 0.7)
+
+
+def voice(seed, pitch):
+    """Garbled radio speech: syllables of a buzzing glottal source shaped by two vowel formants, a wandering pitch,
+    gaps between words, squeezed through a radio band and clipped. Not words, but unmistakably someone talking."""
+    rnd = np.random.default_rng(seed)
+    vowels = [(730, 1090), (270, 2290), (530, 1840), (570, 840), (300, 870), (660, 1700)]
+    parts = []
+    for _ in range(rnd.integers(5, 8)):
+        n = seconds(rnd.uniform(0.09, 0.2))
+        t = np.arange(n) / RATE
+        f0 = pitch * (1 + 0.15 * np.sin(2 * np.pi * rnd.uniform(1, 3) * t + rnd.uniform(0, 6)))
+        phase = np.cumsum(f0) / RATE
+        source = (phase % 1.0) * 2 - 1  # sawtooth: the vocal cords
+        f1, f2 = vowels[rnd.integers(len(vowels))]
+        v = bandpass(source, f1 * 0.8, f1 * 1.2) + 0.6 * bandpass(source, f2 * 0.85, f2 * 1.15)
+        cons = bandpass(rnd.normal(size=seconds(0.03)), 2500, 6000) * 0.4  # a consonant
+        parts.append(np.concatenate([cons, v * envelope(n, 0.2, 0.3)]))
+        if rnd.random() < 0.3:
+            parts.append(np.zeros(seconds(rnd.uniform(0.05, 0.12))))
+    x = np.concatenate(parts)
+    x = bandpass(x, 300, 3200)
+    x = np.tanh(x / (np.max(np.abs(x)) + 1e-9) * 2.5)  # radio overdrive
+    x += bandpass(rnd.normal(size=len(x)), 1000, 5000) * 0.12
+    return x
+
+
 SOUNDS = {
     "suit_breath": [("suit_breath1", lambda: breath(1)), ("suit_breath2", lambda: breath(2))],
     "oxygen_alarm": [("oxygen_alarm", alarm)],
@@ -132,6 +187,11 @@ SOUNDS = {
     "helmet_blocked": [("helmet_blocked", lambda: helmet_clunk(5))],
     "tape_start": [("tape_start", lambda: tape_click(6))],
     "tape_static": [("tape_static1", lambda: radio_static(7)), ("tape_static2", lambda: radio_static(8))],
+    "suit_leak": [("suit_leak", lambda: hiss(10))],
+    "heartbeat": [("heartbeat", heartbeat)],
+    "ear_ring": [("ear_ring", ear_ring)],
+    "tape_voice": [("tape_voice%d" % i, (lambda i=i: voice(20 + i, [110, 140, 175, 210, 125, 190][i - 1])))
+                   for i in range(1, 7)],
 }
 
 SUBTITLES = {
@@ -141,6 +201,10 @@ SUBTITLES = {
     "helmet_blocked": "subtitles.intersolarsystem.helmet_blocked",
     "tape_start": "subtitles.intersolarsystem.tape_start",
     "tape_static": "subtitles.intersolarsystem.tape_static",
+    "suit_leak": "subtitles.intersolarsystem.suit_leak",
+    "heartbeat": "subtitles.intersolarsystem.heartbeat",
+    "ear_ring": "subtitles.intersolarsystem.ear_ring",
+    "tape_voice": "subtitles.intersolarsystem.tape_voice",
 }
 
 

@@ -34,6 +34,20 @@ public class DataTerminalBlock extends ShipFacingBlock {
 		builder.add(LOG);
 	}
 
+	/** A data tape in hand: the terminal plays it. */
+	@Override
+	protected InteractionResult useItemOn(net.minecraft.world.item.ItemStack stack, BlockState state, Level level,
+			BlockPos pos, Player player, net.minecraft.world.InteractionHand hand, BlockHitResult hit) {
+		if (stack.getItem() != ModItems.DATA_TAPE) {
+			return stack.isEmpty() ? InteractionResult.TRY_WITH_EMPTY_HAND : InteractionResult.PASS;
+		}
+		if (level instanceof net.minecraft.server.level.ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer) {
+			hu.kriwdi.intersolarsystem.lore.TapeDecks.play(serverLevel, pos, serverPlayer, stack);
+			return InteractionResult.SUCCESS_SERVER;
+		}
+		return InteractionResult.SUCCESS;
+	}
+
 	@Override
 	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player,
 			BlockHitResult hit) {

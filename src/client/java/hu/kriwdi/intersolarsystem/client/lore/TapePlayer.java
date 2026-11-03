@@ -18,38 +18,79 @@ import hu.kriwdi.intersolarsystem.content.ModSounds;
 public final class TapePlayer implements HudElement {
 	private static LoreLibrary.Entry playing;
 	private static int ticks;
+	private static double sourceX;
+	private static double sourceY;
+	private static double sourceZ;
 
-	public static void play(LoreLibrary.Entry entry) {
+	/** Plays a tape in the deck at (x, y, z): every sound comes from the deck. */
+	public static void play(LoreLibrary.Entry entry, double deckX, double deckY, double deckZ) {
 		playing = entry;
 		ticks = 0;
-		sound(ModSounds.TAPE_START, 0.8F);
+		sourceX = deckX;
+		sourceY = deckY;
+		sourceZ = deckZ;
 	}
 
 	public static void stop() {
 		playing = null;
 	}
 
-	private static void sound(net.minecraft.sounds.SoundEvent event, float volume) {
+	private static void sound(net.minecraft.sounds.SoundEvent event, float volume, float pitch) {
 		Minecraft mc = Minecraft.getInstance();
-		if (mc.player != null && mc.level != null) {
-			mc.level.playLocalSound(mc.player.getX(), mc.player.getY(), mc.player.getZ(), event, SoundSource.PLAYERS,
-					volume, 1.0F, false);
+		if (mc.level != null) {
+			mc.level.playLocalSound(sourceX, sourceY, sourceZ, event, SoundSource.RECORDS, volume, pitch, false);
 		}
+	}
+
+	/** Each speaker keeps one voice: the pitch comes from the name. */
+	private static float pitchOf(String who) {
+		return 0.8F + (Math.abs(who.hashCode()) % 45) / 100.0F;
 	}
 
 	public static void tick() {
 		if (playing == null) {
 			return;
 		}
+		Minecraft mc = Minecraft.getInstance();
+		if (mc.player == null || mc.player.distanceToSqr(sourceX, sourceY, sourceZ) > 32 * 32) {
+			playing = null;
+			return;
+		}
 		ticks++;
+		if (ticks % 50 == 1) {
+			sound(ModSounds.TAPE_STATIC, 0.25F, 1.0F);
+		}
+		LoreLibrary.Line current = null;
 		for (LoreLibrary.Line line : playing.lines()) {
-			if (line.at() == ticks) {
-				sound(ModSounds.TAPE_STATIC, 0.35F);
+			if (line.at() <= ticks) {
+				current = line;
+			}
+		}
+		if (current != null) {
+			int since = ticks - current.at();
+			boolean effect = current.text().startsWith("[");
+			int speaking = Math.min(110, 20 + current.text().length() * 2);
+			if (since == 0) {
+				sound(ModSounds.TAPE_STATIC, 0.6F, 1.0F);
+			}
+			if (!effect && since < speaking && since % 22 == 2) {
+				sound(ModSounds.TAPE_VOICE, 0.9F, pitchOf(current.who()));
+			}
+			if (effect && since == 2) {
+				String t = current.text().toLowerCase(java.util.Locale.ROOT);
+				if (t.contains("alarm") || t.contains("siren") || t.contains("riaszt") || t.contains("sziréna")
+						|| t.contains("tones") || t.contains("hang]")) {
+					sound(ModSounds.OXYGEN_ALARM, 0.8F, 0.7F);
+				} else if (t.contains("bird") || t.contains("madár")) {
+					sound(net.minecraft.sounds.SoundEvents.PARROT_AMBIENT, 0.8F, 1.3F);
+				} else {
+					sound(ModSounds.TAPE_STATIC, 0.9F, 0.8F);
+				}
 			}
 		}
 		int end = playing.lines().isEmpty() ? 0 : playing.lines().get(playing.lines().size() - 1).at() + 120;
 		if (ticks > end) {
-			sound(ModSounds.TAPE_START, 0.5F);
+			sound(ModSounds.TAPE_START, 0.6F, 1.0F);
 			playing = null;
 		}
 	}

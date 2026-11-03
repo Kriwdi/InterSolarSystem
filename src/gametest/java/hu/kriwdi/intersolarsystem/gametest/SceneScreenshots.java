@@ -63,7 +63,9 @@ public class SceneScreenshots implements FabricClientGameTest {
 			context.waitTicks(10);
 			context.takeScreenshot("06d_lore_terminal");
 			context.setScreen(() -> null);
-			context.runOnClient(client -> hu.kriwdi.intersolarsystem.client.lore.LoreClient.open("tapes", "mars_last"));
+			context.runOnClient(client -> hu.kriwdi.intersolarsystem.client.lore.TapePlayer.play(
+					hu.kriwdi.intersolarsystem.client.lore.LoreLibrary.get("tapes", "mars_last"), client.player.getX(),
+					client.player.getY(), client.player.getZ()));
 			context.waitTicks(80);
 			context.takeScreenshot("06e_lore_tape");
 
@@ -118,6 +120,25 @@ public class SceneScreenshots implements FabricClientGameTest {
 			context.waitTicks(30);
 			context.takeScreenshot("11_space_suit");
 			context.runOnClient(client -> client.options.setCameraType(CameraType.FIRST_PERSON));
+			// The helmet display in survival, then a punctured suit, then an empty tank (hypoxia), then no helmet
+			// (decompression).
+			game.getServer().runCommand("gamemode survival @a");
+			game.getServer().runCommand("effect give @a minecraft:resistance infinite 4 true");
+			context.waitTicks(30);
+			context.takeScreenshot("11b_helmet_hud");
+			game.getServer().runCommand("item replace entity @a armor.chest with intersolarsystem:space_suit[custom_data={leak:1b}]");
+			context.waitTicks(30);
+			context.takeScreenshot("11c_suit_leak");
+			game.getServer().runCommand("item replace entity @a armor.chest with intersolarsystem:space_suit[damage=592]");
+			context.waitTicks(200);
+			context.takeScreenshot("11d_hypoxia");
+			game.getServer().runCommand("item replace entity @a armor.head with minecraft:air");
+			game.getServer().runCommand("item replace entity @a armor.chest with intersolarsystem:space_suit");
+			context.waitTicks(60);
+			context.takeScreenshot("11e_decompression");
+			game.getServer().runCommand("effect clear @a");
+			game.getServer().runCommand("gamemode creative @a");
+			game.getServer().runCommand("item replace entity @a armor.head with intersolarsystem:space_helmet");
 
 			// The Moon: Apollo 11, Tranquility Base, the landscape and the Earth in the sky (lunar noon, then night).
 			game.getServer().runOnServer(server -> MoonSites.ensureBuilt(server.getLevel(ShipDimensions.MOON)));

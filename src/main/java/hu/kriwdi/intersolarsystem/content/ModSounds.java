@@ -15,6 +15,10 @@ public final class ModSounds {
 	public static final SoundEvent HELMET_BLOCKED = register("helmet_blocked");
 	public static final SoundEvent TAPE_START = register("tape_start");
 	public static final SoundEvent TAPE_STATIC = register("tape_static");
+	public static final SoundEvent TAPE_VOICE = register("tape_voice");
+	public static final SoundEvent SUIT_LEAK = register("suit_leak");
+	public static final SoundEvent HEARTBEAT = register("heartbeat");
+	public static final SoundEvent EAR_RING = register("ear_ring");
 
 	private ModSounds() {
 	}

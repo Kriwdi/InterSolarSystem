@@ -23,7 +23,8 @@ public final class LoreClient {
 		UseItemCallback.EVENT.register((player, level, hand) -> {
 			ItemStack stack = player.getItemInHand(hand);
 			String kind = kindOf(stack);
-			if (kind == null) {
+			if (kind == null || kind.equals("tapes")) {
+				// Tapes play only in a deck (data terminal or radio set): see TapeDecks.
 				return InteractionResult.PASS;
 			}
 			if (level.isClientSide()) {
@@ -46,6 +47,13 @@ public final class LoreClient {
 			lines.add(Component.translatable(kind.equals("tapes") ? "lore.intersolarsystem.play_hint" : "lore.intersolarsystem.use_hint")
 					.withStyle(ChatFormatting.DARK_GRAY));
 		});
+		ClientPlayNetworking.registerGlobalReceiver(hu.kriwdi.intersolarsystem.lore.TapePlayPayload.TYPE,
+				(payload, context) -> context.client().execute(() -> {
+					LoreLibrary.Entry entry = LoreLibrary.get("tapes", payload.id());
+					if (entry != null) {
+						TapePlayer.play(entry, payload.x() + 0.5, payload.y() + 0.5, payload.z() + 0.5);
+					}
+				}));
 		ClientPlayNetworking.registerGlobalReceiver(LoreOpenPayload.TYPE,
 				(payload, context) -> context.client().execute(() -> open(payload.kind() + "s", payload.id())));
 	}
@@ -74,7 +82,6 @@ public final class LoreClient {
 			return;
 		}
 		switch (kind) {
-			case "tapes" -> TapePlayer.play(entry);
 			case "manuals" -> mc.setScreenAndShow(new LoreScreen(LoreScreen.Style.MANUAL, entry));
 			case "terminals" -> mc.setScreenAndShow(new LoreScreen(LoreScreen.Style.TERMINAL, entry));
 			default -> mc.setScreenAndShow(new LoreScreen(LoreScreen.Style.NOTE, entry));
