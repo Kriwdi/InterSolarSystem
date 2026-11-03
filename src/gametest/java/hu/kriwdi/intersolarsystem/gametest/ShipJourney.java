@@ -85,8 +85,8 @@ public class ShipJourney implements FabricClientGameTest {
 			context.takeScreenshot("45c_sitting_in_the_seat");
 			context.getInput().holdKeyFor(options -> options.keyShift, 10);
 			context.waitTicks(10);
-			LOGGER.info("[JOURNEY] after sneaking still sitting: {}",
-					game.getServer().computeOnServer(server -> player(server).isPassenger()));
+			boolean stillSitting = game.getServer().computeOnServer(server -> player(server).isPassenger());
+			LOGGER.info("[JOURNEY] after sneaking still sitting: {}", stillSitting);
 
 			// The navigation console, clicked with the mouse: select the Moon, then LAUNCH.
 			game.getServer().runCommand("iss ship engine 4");
