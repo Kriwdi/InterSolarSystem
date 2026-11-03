@@ -81,6 +81,15 @@ public final class FlightControls {
 			missing.add(Component.translatable("message.intersolarsystem.checklist.course"));
 		}
 		BlockState panel = interiorState(server, ShipInteriorLayout.capsule().flightPanel());
+		boolean assisted = hu.kriwdi.intersolarsystem.core.ModSettings.get(server).difficulty().assisted();
+		if (assisted && panel != null && panel.is(ModBlocks.FLIGHT_PANEL) && !FlightPanelBlock.allOn(panel)) {
+			// Easy: the ship runs its own power-up sequence.
+			for (var sw : FlightPanelBlock.SWITCHES) {
+				panel = panel.setValue(sw, true);
+			}
+			server.getLevel(ShipDimensions.INTERIOR).setBlock(ShipInteriorBuilder.at(ShipInteriorLayout.capsule()
+					.flightPanel()), panel, Block.UPDATE_ALL);
+		}
 		if (panel != null && panel.is(ModBlocks.FLIGHT_PANEL)) {
 			for (int i = 0; i < FlightPanelBlock.SWITCHES.length; i++) {
 				if (!panel.getValue(FlightPanelBlock.SWITCHES[i])) {

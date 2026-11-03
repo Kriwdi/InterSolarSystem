@@ -65,6 +65,11 @@ public final class ShipNetworks {
 
 	/** One flight's worth from each machine (normal flights; test hops are free). */
 	public static void consume(ServerLevel interior) {
+		// Easy: supplies last twice as long (every other flight is free).
+		if (hu.kriwdi.intersolarsystem.core.ModSettings.get(interior.getServer()).difficulty().assisted()
+				&& interior.getRandom().nextBoolean()) {
+			return;
+		}
 		ShipInteriorLayout layout = ShipInteriorLayout.capsule();
 		for (Cell cell : new Cell[] {layout.reactor(), layout.coolantTank(), layout.lifeSupport()}) {
 			BlockPos pos = ShipInteriorBuilder.at(cell);

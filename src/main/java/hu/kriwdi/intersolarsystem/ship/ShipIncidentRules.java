@@ -11,7 +11,8 @@ public final class ShipIncidentRules {
 	public static final int ROLLS_PER_FLIGHT = 5;
 	public static final int INCIDENT_DEADLINE_TICKS = 1200;
 	public static final int EXPIRY_DAMAGE = 25;
-	public static final int MAX_ACTIVE = 2;
+	/** Hard cap of incidents at once; the crew size and difficulty set the real limit (Difficulty.Crew). */
+	public static final int MAX_ACTIVE = 4;
 	public static final int SAFE_CONDITION = 70;
 	public static final double MAX_CHANCE = 0.25;
 

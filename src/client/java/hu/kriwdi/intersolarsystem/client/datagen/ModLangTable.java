@@ -1386,6 +1386,30 @@ public final class ModLangTable {
 				"put a new air filter into the life support unit",
 				"eine neue Luftfilterpatrone in die Lebenserhaltung setzen",
 				"tegyél új légszűrő-patront az életfenntartó egységbe");
+		add(rows, "difficulty.intersolarsystem.easy",
+				"easy",
+				"leicht",
+				"könnyű");
+		add(rows, "difficulty.intersolarsystem.normal",
+				"normal",
+				"normal",
+				"normál");
+		add(rows, "difficulty.intersolarsystem.realistic",
+				"realistic",
+				"realistisch",
+				"realisztikus");
+		add(rows, "command.intersolarsystem.difficulty.info",
+				"Difficulty: %s. Crew aboard: %s, so up to %s incidents at once",
+				"Schwierigkeit: %s. Besatzung an Bord: %s, also bis zu %s Störungen gleichzeitig",
+				"Nehézség: %s. Legénység a hajón: %s, így egyszerre legfeljebb %s incidens");
+		add(rows, "command.intersolarsystem.difficulty.set",
+				"Difficulty set to %s",
+				"Schwierigkeit auf %s gesetzt",
+				"Nehézség beállítva: %s");
+		add(rows, "command.intersolarsystem.difficulty.unknown",
+				"Unknown difficulty: %s (easy, normal, realistic)",
+				"Unbekannte Schwierigkeit: %s (easy, normal, realistic)",
+				"Ismeretlen nehézség: %s (easy, normal, realistic)");
 		check(rows);
 		return List.copyOf(rows);
 	}

@@ -34,11 +34,16 @@ public final class MeteorField {
 
 	/** The rocks of a shower lasting {@code duration} ticks: waves of one to three every second or so. */
 	public static List<Meteor> meteors(long seed, int duration) {
+		return meteors(seed, duration, false);
+	}
+
+	/** {@code dense}: realistic difficulty, an extra rock in every wave. */
+	public static List<Meteor> meteors(long seed, int duration, boolean dense) {
 		Random random = new Random(seed * 0x9E3779B97F4A7C15L + 77L);
 		List<Meteor> list = new ArrayList<>();
 		int t = LEAD_IN;
 		while (t < duration - 10) {
-			int wave = 1 + random.nextInt(3);
+			int wave = 1 + random.nextInt(3) + (dense ? 1 : 0);
 			for (int i = 0; i < wave; i++) {
 				float x = random.nextFloat() * 2.0F - 1.0F;
 				float y = random.nextFloat() * 2.0F - 1.0F;

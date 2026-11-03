@@ -29,7 +29,7 @@ public final class ClientManeuver {
 		}
 		if (last == null || payload.seed() != fieldSeed) {
 			fieldSeed = payload.seed();
-			field = MeteorField.meteors(payload.seed(), payload.duration());
+			field = MeteorField.meteors(payload.seed(), payload.duration(), payload.dense());
 			shownX = payload.x();
 			shownY = payload.y();
 			seenHits = payload.hits();

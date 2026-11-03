@@ -13,7 +13,8 @@ import hu.kriwdi.intersolarsystem.core.ModIds;
  * ({@code elapsed} of {@code duration} ticks), where the ship is in the field, how many rocks hit so far, and whether
  * someone is flying it. A duration of 0 ends the manoeuvre.
  */
-public record ManeuverPayload(long seed, int elapsed, int duration, float x, float y, int hits, boolean piloted)
+public record ManeuverPayload(long seed, int elapsed, int duration, float x, float y, int hits, boolean piloted,
+		boolean dense)
 		implements CustomPacketPayload {
 	public static final CustomPacketPayload.Type<ManeuverPayload> TYPE = new CustomPacketPayload.Type<>(
 			ModIds.id("maneuver"));
@@ -26,16 +27,17 @@ public record ManeuverPayload(long seed, int elapsed, int duration, float x, flo
 				buf.writeFloat(p.y());
 				VarInt.write(buf, Math.max(0, p.hits()));
 				buf.writeBoolean(p.piloted());
+				buf.writeBoolean(p.dense());
 			},
 			buf -> {
 				ManeuverPayload p = new ManeuverPayload(buf.readLong(), VarInt.read(buf), VarInt.read(buf),
-						buf.readFloat(), buf.readFloat(), VarInt.read(buf), buf.readBoolean());
+						buf.readFloat(), buf.readFloat(), VarInt.read(buf), buf.readBoolean(), buf.readBoolean());
 				buf.skipBytes(buf.readableBytes());
 				return p;
 			});
 
 	public static ManeuverPayload end() {
-		return new ManeuverPayload(0L, 0, 0, 0.0F, 0.0F, 0, false);
+		return new ManeuverPayload(0L, 0, 0, 0.0F, 0.0F, 0, false, false);
 	}
 
 	@Override

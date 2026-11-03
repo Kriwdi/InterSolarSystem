@@ -21,6 +21,14 @@ public final class ShipCommands {
 	public static void register() {
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) ->
 				dispatcher.register(Commands.literal("iss")
+						.then(Commands.literal("difficulty")
+								.executes(ShipCommands::difficulty)
+								.then(Commands.argument("level", StringArgumentType.word())
+										.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
+										.suggests((ctx, builder) -> SharedSuggestionProvider.suggest(
+												java.util.Arrays.stream(hu.kriwdi.intersolarsystem.core.Difficulty.values())
+														.map(hu.kriwdi.intersolarsystem.core.Difficulty::id), builder))
+										.executes(ShipCommands::setDifficulty)))
 						// The navigation console as a command (works the same, from inside the ship).
 						.then(Commands.literal("nav")
 								.then(Commands.argument("destination", StringArgumentType.word())
@@ -57,6 +65,27 @@ public final class ShipCommands {
 		ServerPlayer player = ctx.getSource().getPlayerOrException();
 		return ShipNavigation.launch(ctx.getSource().getServer(), player,
 				StringArgumentType.getString(ctx, "destination")) ? 1 : 0;
+	}
+
+	private static int difficulty(CommandContext<CommandSourceStack> ctx) {
+		var crew = hu.kriwdi.intersolarsystem.core.ModSettings.crew(ctx.getSource().getServer());
+		ctx.getSource().sendSuccess(() -> Component.translatable("command.intersolarsystem.difficulty.info",
+				Component.translatable("difficulty.intersolarsystem." + crew.difficulty().id()), crew.size(),
+				crew.maxParallel()), false);
+		return 1;
+	}
+
+	private static int setDifficulty(CommandContext<CommandSourceStack> ctx) {
+		String id = StringArgumentType.getString(ctx, "level");
+		var level = hu.kriwdi.intersolarsystem.core.Difficulty.fromId(id);
+		if (level.isEmpty()) {
+			ctx.getSource().sendFailure(Component.translatable("command.intersolarsystem.difficulty.unknown", id));
+			return 0;
+		}
+		hu.kriwdi.intersolarsystem.core.ModSettings.get(ctx.getSource().getServer()).setDifficulty(level.get());
+		ctx.getSource().sendSuccess(() -> Component.translatable("command.intersolarsystem.difficulty.set",
+				Component.translatable("difficulty.intersolarsystem." + id)), true);
+		return 1;
 	}
 
 	private static int meteors(CommandContext<CommandSourceStack> ctx) {

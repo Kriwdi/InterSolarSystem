@@ -324,6 +324,23 @@ Jobb klikk üres kézzel: kiírja, mennyi van benne, és mivel töltheted. A tes
 
 ---
 
+### Nehézség és legénység
+
+A nehézséget az operátor állítja: `/iss difficulty easy|normal|realistic` (paraméter nélkül kiírja a jelenlegit).
+
+| Szint | Mit jelent |
+|---|---|
+| **Könnyű** | a kapcsolók maguktól bekapcsolnak, a robotpilóta magától kitér, kevesebb incidens, a készletek kétszer annyi ideig tartanak |
+| **Normál** | az alap |
+| **Realisztikus** | több incidens, egyszerre több, sűrűbb meteorraj, nagyobb találati sebzés; a robotpilóta csak a konzolról kapcsolható |
+
+**A legénység mérete is számít** (akik a hajóban vannak):
+
+- **Egyedül** a hajó többet intéz magától: ha nincs pilóta, a robotpilóta kitér (realisztikus szinten nem), és egyszerre legfeljebb 2 incidens lehet.
+- **Többen** több minden romlik el, és egyszerre is: minden új ember +35% incidensesélyt hoz, és eggyel több párhuzamos hibát (legfeljebb 4). Érdemes felosztani a munkát: pilóta, gépész, javító.
+
+---
+
 ## 9. Rejtett hibák, diagnosztika, tesztrepülés
 
 **Rejtett hibák:**
@@ -489,6 +506,7 @@ A hajtómű szintje osztja az utazási időt:
 | `/iss ship fly <x> <z>` | operátor | repülés egy földi koordinátára (a hajóból) |
 | `/iss ship engine <1-4>` | operátor | hajtómű-szint beállítása (tesztelésre) |
 | `/iss ship meteors` | operátor | meteorraj indítása repülés közben (tesztelésre) |
+| `/iss difficulty [szint]` | mindenki megnézheti, operátor állíthatja | nehézség: `easy`, `normal`, `realistic` |
 
 Alrendszer nevek: `engine`, `fuel_energy`, `hull_armor`, `life_support`, `navigation_comms`, `stabilizer`, `landing_launch`, `cargo`.
 

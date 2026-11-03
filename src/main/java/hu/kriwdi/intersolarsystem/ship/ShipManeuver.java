@@ -38,6 +38,7 @@ public final class ShipManeuver {
 	private static float vx;
 	private static float vy;
 	private static int hits;
+	private static boolean dense;
 
 	private ShipManeuver() {
 	}
@@ -66,7 +67,10 @@ public final class ShipManeuver {
 		if (deadline != shower.deadlineTick()) {
 			deadline = shower.deadlineTick();
 			seed = state.hazards().seed() ^ deadline;
-			List<MeteorField.Meteor> rocks = new ArrayList<>(MeteorField.meteors(seed, TravelEventRules.RESPONSE_TICKS));
+			dense = hu.kriwdi.intersolarsystem.core.ModSettings.get(server).difficulty()
+					== hu.kriwdi.intersolarsystem.core.Difficulty.REALISTIC;
+			List<MeteorField.Meteor> rocks = new ArrayList<>(MeteorField.meteors(seed, TravelEventRules.RESPONSE_TICKS,
+					dense));
 			rocks.sort(Comparator.comparingInt(MeteorField.Meteor::arrive));
 			field = rocks;
 			next = 0;
@@ -81,7 +85,7 @@ public final class ShipManeuver {
 			Input in = pilot.getLastClientInput();
 			inX = (in.right() ? 1 : 0) - (in.left() ? 1 : 0);
 			inY = (in.forward() ? 1 : 0) - (in.backward() ? 1 : 0);
-		} else if (shower.evaded()) {
+		} else if (shower.evaded() || hu.kriwdi.intersolarsystem.core.ModSettings.crew(server).autopilotByDefault()) {
 			int[] dodge = autopilot(elapsed);
 			inX = dodge[0];
 			inY = dodge[1];
@@ -95,14 +99,17 @@ public final class ShipManeuver {
 			MeteorField.Meteor rock = field.get(next++);
 			if (rock.hits(x, y)) {
 				hits++;
-				state.setCondition(ShipSubsystem.HULL_ARMOR, state.condition(ShipSubsystem.HULL_ARMOR) - HULL_DAMAGE_PER_HIT);
+				double scale = hu.kriwdi.intersolarsystem.core.ModSettings.get(server).difficulty().damage();
+				state.setCondition(ShipSubsystem.HULL_ARMOR,
+						state.condition(ShipSubsystem.HULL_ARMOR) - (int) Math.round(HULL_DAMAGE_PER_HIT * scale));
 				state.setCondition(ShipSubsystem.NAVIGATION_COMMS,
 						state.condition(ShipSubsystem.NAVIGATION_COMMS) - NAV_DAMAGE_PER_HIT);
 				ShipFlightController.playInterior(server, SoundEvents.GENERIC_EXPLODE.value());
 			}
 		}
 		if (now % 2 == 0) {
-			send(server, new ManeuverPayload(seed, elapsed, TravelEventRules.RESPONSE_TICKS, x, y, hits, pilot != null));
+			send(server, new ManeuverPayload(seed, elapsed, TravelEventRules.RESPONSE_TICKS, x, y, hits, pilot != null,
+					dense));
 		}
 	}
 

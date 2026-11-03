@@ -107,7 +107,19 @@ public final class ShipFlightController {
 			for (ShipSubsystem s : ShipSubsystem.values()) {
 				conditions.put(s, state.condition(s));
 			}
+			hu.kriwdi.intersolarsystem.core.Difficulty.Crew crew = hu.kriwdi.intersolarsystem.core.ModSettings.crew(server);
+			if (active.size() >= crew.maxParallel()) {
+				continue;
+			}
 			Optional<ShipSubsystem> hit = ShipIncidentRules.roll(state.hazards().seed(), index, conditions, active);
+			// Difficulty and crew size: drop some failures, or roll a second time (deterministic per roll).
+			java.util.SplittableRandom extra = new java.util.SplittableRandom(state.hazards().seed() ^ (index * 7919L));
+			double rate = crew.incidentRate();
+			if (hit.isPresent() && rate < 1.0 && extra.nextDouble() > rate) {
+				hit = Optional.empty();
+			} else if (hit.isEmpty() && rate > 1.0 && extra.nextDouble() < rate - 1.0) {
+				hit = ShipIncidentRules.roll(state.hazards().seed(), index + 100_000, conditions, active);
+			}
 			if (hit.isPresent()) {
 				ShipIncident incident = new ShipIncident(hit.get(), ShipIncidentRules.typeFor(hit.get()),
 						now + ShipIncidentRules.INCIDENT_DEADLINE_TICKS);
