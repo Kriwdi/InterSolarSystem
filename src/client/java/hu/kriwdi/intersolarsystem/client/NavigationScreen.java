@@ -272,7 +272,7 @@ public class NavigationScreen extends Screen {
 			}
 		}
 		String build = "v" + version;
-		g.text(font, build, l + WIDTH - 12 - font.width(build), mapY() + mapHeight - 9, 0xFF5C646B);
+		g.text(font, build, l + WIDTH - 12 - font.width(build), mapY() + 2, 0xFF5C646B);
 		boolean launchable = launchable(bodies.get(selected));
 		ShipPanel.button(g, font, launchX(), launchY(), 94, 18,
 				Component.translatable("screen.intersolarsystem.nav.launch"),
