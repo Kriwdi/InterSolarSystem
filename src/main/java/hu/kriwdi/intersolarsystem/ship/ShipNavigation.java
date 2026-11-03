@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 
 import hu.kriwdi.intersolarsystem.InterSolarSystem;
@@ -139,6 +140,10 @@ public final class ShipNavigation {
 		}
 		if (!started) {
 			return "message.intersolarsystem.nav.blocked.flying";
+		}
+		ServerLevel interior = server.getLevel(ShipDimensions.INTERIOR);
+		if (interior != null) {
+			ShipNetworks.consume(interior);
 		}
 		ShipFlightController.broadcast(server, Component.translatable("message.intersolarsystem.nav.launch",
 				Component.translatable(body.get().translationKey()), ShipFlightTimeline.formatClock(flightTicks)));

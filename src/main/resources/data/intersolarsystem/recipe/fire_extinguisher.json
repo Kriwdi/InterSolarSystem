@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": "minecraft:iron_nugget",
+    "A": "intersolarsystem:aluminium_ingot",
+    "B": "minecraft:bucket"
+  },
+  "pattern": [
+    " N ",
+    "ABA",
+    "AAA"
+  ],
+  "result": {
+    "id": "intersolarsystem:fire_extinguisher",
+    "count": 1
+  }
+}

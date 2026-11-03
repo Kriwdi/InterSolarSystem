@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": "intersolarsystem:scrap_metal"
+  },
+  "pattern": [
+    "SSS"
+  ],
+  "result": {
+    "id": "intersolarsystem:pipe",
+    "count": 6
+  }
+}

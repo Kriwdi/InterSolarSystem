@@ -100,6 +100,17 @@ public final class ModItems {
 	public static final Item CLEAN_WATER_CANISTER = register("clean_water_canister", Item::new,
 			new Item.Properties().stacksTo(16));
 
+	/** Tools for fixing incidents on the spot: soldering iron (short circuits), sealant (leaks), extinguisher (fires). */
+	public static final Item SOLDERING_IRON = register("soldering_iron", Item::new, new Item.Properties().durability(32));
+
+	public static final Item SEALANT = register("sealant", Item::new, new Item.Properties().stacksTo(16));
+
+	public static final Item FIRE_EXTINGUISHER = register("fire_extinguisher", Item::new,
+			new Item.Properties().durability(12));
+
+	/** CO2 scrubber cartridge for the life support unit (four flights). */
+	public static final Item AIR_FILTER = register("air_filter", Item::new, new Item.Properties().stacksTo(16));
+
 	private static Item register(String name, Function<Item.Properties, Item> factory, Item.Properties properties) {
 		ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, ModIds.id(name));
 		return Registry.register(BuiltInRegistries.ITEM, key, factory.apply(properties.setId(key)));

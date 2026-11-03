@@ -250,6 +250,46 @@ public final class ModBlocks {
 	public static final Block THROTTLE = register("throttle", ThrottleBlock::new,
 			BlockBehaviour.Properties.of().strength(3.0F, 6.0F).sound(SoundType.METAL).noOcclusion());
 
+	// ---- Ship systems: conduits, machines and the places where incidents show.
+	public static final Block PIPE = register("pipe", p -> new ConduitBlock(p, 2.5, s -> s.getBlock() instanceof ShipMachineBlock
+			|| s.is(LANDER_ENGINE)), BlockBehaviour.Properties.of().strength(1.5F, 4.0F).sound(SoundType.COPPER).noOcclusion());
+
+	public static final Block CABLE = register("cable", p -> new ConduitBlock(p, 1.5, s -> s.getBlock() instanceof ShipMachineBlock
+			|| s.is(LANDER_ENGINE) || s.getBlock() instanceof ShipFacingBlock && !(s.getBlock() instanceof ShipHatchBlock)
+			&& !(s.getBlock() instanceof ShipHatchTopBlock)),
+			BlockBehaviour.Properties.of().strength(0.8F, 2.0F).sound(SoundType.WOOL).noOcclusion());
+
+	public static final Block REACTOR = register("reactor",
+			p -> new ShipMachineBlock(p, 8, s -> s.is(ModItems.URANIUM_FUEL_ROD), 4, "reactor",
+					net.minecraft.sounds.SoundEvents.IRON_DOOR_CLOSE, new double[] {1, 0, 1, 15, 16, 15}),
+			BlockBehaviour.Properties.of().strength(4.0F, 8.0F).sound(SoundType.METAL).lightLevel(s -> 3 + s.getValue(
+					ShipMachineBlock.LEVEL)).noOcclusion());
+
+	public static final Block COOLANT_TANK = register("coolant_tank",
+			p -> new ShipMachineBlock(p, 4, s -> s.is(ModItems.CLEAN_WATER_CANISTER) || s.is(net.minecraft.world.item.Items.ICE)
+					|| s.is(net.minecraft.world.item.Items.PACKED_ICE) || s.is(net.minecraft.world.item.Items.BLUE_ICE)
+					|| s.is(net.minecraft.world.item.Items.SNOW_BLOCK), 2, "coolant_tank",
+					net.minecraft.sounds.SoundEvents.BUCKET_EMPTY, new double[] {2, 0, 2, 14, 16, 14}),
+			BlockBehaviour.Properties.of().strength(4.0F, 8.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block LIFE_SUPPORT_UNIT = register("life_support_unit",
+			p -> new ShipMachineBlock(p, 4, s -> s.is(ModItems.AIR_FILTER), 4, "life_support_unit",
+					net.minecraft.sounds.SoundEvents.ARMOR_EQUIP_IRON.value(), new double[] {1, 0, 2, 15, 16, 14}),
+			BlockBehaviour.Properties.of().strength(4.0F, 8.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block SPARKING_PANEL = register("sparking_panel", p -> new FaultBlock(p, FaultBlock.Kind.SPARKS),
+			BlockBehaviour.Properties.of().strength(-1.0F, 3600000.0F).sound(SoundType.METAL).noLootTable().lightLevel(s -> 5));
+
+	public static final Block STEAM_VENT = register("steam_vent", p -> new FaultBlock(p, FaultBlock.Kind.STEAM),
+			BlockBehaviour.Properties.of().strength(-1.0F, 3600000.0F).sound(SoundType.METAL).noLootTable());
+
+	public static final Block LEAKING_PIPE = register("leaking_pipe", p -> new FaultBlock(p, FaultBlock.Kind.LEAK),
+			BlockBehaviour.Properties.of().strength(-1.0F, 3600000.0F).sound(SoundType.COPPER).noLootTable().noOcclusion());
+
+	public static final Block SHIP_FIRE = register("ship_fire", p -> new FaultBlock(p, FaultBlock.Kind.FIRE),
+			BlockBehaviour.Properties.of().strength(-1.0F, 3600000.0F).sound(SoundType.WOOL).noLootTable().noOcclusion()
+					.lightLevel(s -> 13));
+
 	/** Padded flight seat to sit in (the pilot's and the crew's seats on the bridge). */
 	public static final Block ASTRONAUT_SEAT = register("astronaut_seat", AstronautSeatBlock::new,
 			BlockBehaviour.Properties.of().strength(2.0F, 6.0F).sound(SoundType.METAL).noOcclusion());

@@ -25,8 +25,9 @@ public final class ShipRepairBoards {
 	/** Allowance for network delay between the server and the client's tick counter. */
 	private static final int CLOCK_SLACK_TICKS = 40;
 
+	/** {@code tool}: what must still be in hand when the answer comes (a repair kit or the fault's own tool). */
 	private record Pending(RepairMinigame kind, long seed, int size, ShipIncident incident, long openedTick,
-			long expiresTick) {
+			long expiresTick, net.minecraft.world.item.Item tool) {
 	}
 
 	private static final Map<UUID, Pending> PENDING = new HashMap<>();
@@ -36,12 +37,17 @@ public final class ShipRepairBoards {
 
 	public static void open(MinecraftServer server, ServerPlayer player, RepairMinigame kind, ShipIncident incident,
 			boolean multitool) {
+		open(server, player, kind, incident, multitool, ModItems.REPAIR_KIT);
+	}
+
+	public static void open(MinecraftServer server, ServerPlayer player, RepairMinigame kind, ShipIncident incident,
+			boolean multitool, net.minecraft.world.item.Item tool) {
 		ShipState state = ShipStateAccess.get(server);
 		long now = server.overworld().getGameTime();
 		int size = kind.size(state.condition(incident.subsystem()), multitool);
 		long seed = server.overworld().getRandom().nextLong();
 		PENDING.put(player.getUUID(), new Pending(kind, seed, size, incident, now,
-				Math.min(now + BOARD_TIMEOUT_TICKS, incident.deadlineTick())));
+				Math.min(now + BOARD_TIMEOUT_TICKS, incident.deadlineTick()), tool));
 		ServerPlayNetworking.send(player, new RepairBoardPayloads.Open(kind, seed, size));
 	}
 
@@ -58,7 +64,7 @@ public final class ShipRepairBoards {
 			return;
 		}
 		ItemStack kit = player.getMainHandItem();
-		if (kit.getItem() != ModItems.REPAIR_KIT) {
+		if (kit.getItem() != pending.tool()) {
 			player.sendSystemMessage(Component.translatable("message.intersolarsystem.ship.board_no_kit"));
 			return;
 		}
@@ -66,7 +72,11 @@ public final class ShipRepairBoards {
 		int maxTick = (int) Math.min(Integer.MAX_VALUE, now - pending.openedTick() + CLOCK_SLACK_TICKS);
 		if (pending.kind().isSolvedBy(pending.seed(), pending.size(), result.answer(), maxTick)) {
 			if (state.resolveIncident(pending.incident())) {
-				kit.consume(1, player);
+				if (kit.isDamageableItem()) {
+					kit.hurtAndBreak(1, player, net.minecraft.world.entity.EquipmentSlot.MAINHAND);
+				} else {
+					kit.consume(1, player);
+				}
 				ShipRepair.useMultitool(player);
 				player.sendSystemMessage(Component.translatable("message.intersolarsystem.ship.repair_incident",
 						Component.translatable(ShipCommands.incidentKey(pending.incident().type())),

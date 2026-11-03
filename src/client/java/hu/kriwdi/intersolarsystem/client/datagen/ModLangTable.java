@@ -1286,6 +1286,106 @@ public final class ModLangTable {
 				"No meteor shower: the ship is not in flight, or another event is under way",
 				"Kein Meteoritenschauer: das Schiff fliegt nicht, oder ein anderes Ereignis läuft",
 				"Nincs meteorraj: a hajó nem repül, vagy már zajlik egy esemény");
+		add(rows, "block.intersolarsystem.pipe",
+				"Coolant Pipe",
+				"Kühlmittelrohr",
+				"Hűtőcső");
+		add(rows, "block.intersolarsystem.cable",
+				"Power Cable",
+				"Stromkabel",
+				"Tápkábel");
+		add(rows, "block.intersolarsystem.reactor",
+				"Ship Reactor",
+				"Schiffsreaktor",
+				"Hajóreaktor");
+		add(rows, "block.intersolarsystem.coolant_tank",
+				"Coolant Tank",
+				"Kühlmitteltank",
+				"Hűtőfolyadék-tartály");
+		add(rows, "block.intersolarsystem.life_support_unit",
+				"Life Support Unit",
+				"Lebenserhaltungseinheit",
+				"Életfenntartó egység");
+		add(rows, "block.intersolarsystem.sparking_panel",
+				"Sparking Panel",
+				"Funkende Verkleidung",
+				"Szikrázó panel");
+		add(rows, "block.intersolarsystem.steam_vent",
+				"Steam Vent",
+				"Dampfauslass",
+				"Gőzölgő szellőző");
+		add(rows, "block.intersolarsystem.leaking_pipe",
+				"Leaking Pipe",
+				"Leckendes Rohr",
+				"Szivárgó cső");
+		add(rows, "block.intersolarsystem.ship_fire",
+				"Electrical Fire",
+				"Kabelbrand",
+				"Elektromos tűz");
+		add(rows, "item.intersolarsystem.soldering_iron",
+				"Soldering Iron",
+				"Lötkolben",
+				"Forrasztópáka");
+		add(rows, "item.intersolarsystem.sealant",
+				"Sealant Foam",
+				"Dichtschaum",
+				"Tömítőhab");
+		add(rows, "item.intersolarsystem.fire_extinguisher",
+				"Fire Extinguisher",
+				"Feuerlöscher",
+				"Poroltó");
+		add(rows, "item.intersolarsystem.air_filter",
+				"Air Filter Cartridge",
+				"Luftfilterpatrone",
+				"Légszűrő-patron");
+		add(rows, "message.intersolarsystem.fault.needs",
+				"%s here: fix it with a %s (or a %s)",
+				"%s hier: reparieren mit %s (oder %s)",
+				"%s itt: javítsd meg ezzel: %s (vagy: %s)");
+		add(rows, "message.intersolarsystem.machine.full",
+				"%s is full",
+				"%s ist voll",
+				"%s tele van");
+		add(rows, "message.intersolarsystem.machine.level",
+				"%s: %s / %s",
+				"%s: %s / %s",
+				"%s: %s / %s");
+		add(rows, "message.intersolarsystem.machine.hint.reactor",
+				"Each flight burns one unit; a uranium fuel rod adds four.",
+				"Jeder Flug verbraucht eine Einheit; ein Uran-Brennstab bringt vier.",
+				"Minden repülés egy egységet éget el; egy urán fűtőelem négyet ad.");
+		add(rows, "message.intersolarsystem.machine.hint.coolant_tank",
+				"Each flight uses one unit; a clean water canister or a block of ice adds two.",
+				"Jeder Flug verbraucht eine Einheit; ein Kanister sauberes Wasser oder ein Eisblock bringt zwei.",
+				"Minden repülés egy egységet használ; egy tiszta vizes kanna vagy egy jégtömb kettőt ad.");
+		add(rows, "message.intersolarsystem.machine.hint.life_support_unit",
+				"Each flight wears the filter by one; a new air filter cartridge restores four.",
+				"Jeder Flug nutzt den Filter um eins ab; eine neue Luftfilterpatrone stellt vier her.",
+				"Minden repülés egyet koptat a szűrőn; egy új légszűrő-patron négyet ad vissza.");
+		add(rows, "message.intersolarsystem.checklist.pipes_engine",
+				"lay the coolant pipe from the reactor to both engine ports",
+				"das Kühlmittelrohr vom Reaktor zu beiden Triebwerksanschlüssen verlegen",
+				"vezesd a hűtőcsövet a reaktortól mindkét hajtóműcsatlakozóig");
+		add(rows, "message.intersolarsystem.checklist.pipes_coolant",
+				"connect the coolant tank to the reactor's pipes",
+				"den Kühlmitteltank an die Rohre des Reaktors anschließen",
+				"kösd rá a hűtőfolyadék-tartályt a reaktor csöveire");
+		add(rows, "message.intersolarsystem.checklist.cable_bridge",
+				"lay the power cable from the reactor to the bridge",
+				"das Stromkabel vom Reaktor zur Brücke verlegen",
+				"vezesd a tápkábelt a reaktortól a hídig");
+		add(rows, "message.intersolarsystem.checklist.empty.reactor",
+				"refuel the reactor (uranium fuel rod)",
+				"den Reaktor nachladen (Uran-Brennstab)",
+				"töltsd fel a reaktort (urán fűtőelem)");
+		add(rows, "message.intersolarsystem.checklist.empty.coolant_tank",
+				"fill the coolant tank (clean water or ice)",
+				"den Kühlmitteltank füllen (sauberes Wasser oder Eis)",
+				"töltsd fel a hűtőfolyadék-tartályt (tiszta víz vagy jég)");
+		add(rows, "message.intersolarsystem.checklist.empty.life_support_unit",
+				"put a new air filter into the life support unit",
+				"eine neue Luftfilterpatrone in die Lebenserhaltung setzen",
+				"tegyél új légszűrő-patront az életfenntartó egységbe");
 		check(rows);
 		return List.copyOf(rows);
 	}

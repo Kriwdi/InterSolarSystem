@@ -21,15 +21,16 @@ public final class ShipInteriorLayout {
 	public static final int SIZE_Z = 21;
 
 	public enum Piece {
-		HULL_PANEL, FLOOR, VIEWPORT, LIGHT, HATCH, HATCH_TOP, REPAIR_STATION, DIAGNOSTIC_CONSOLE, NAVIGATION_CONSOLE, FLIGHT_PANEL, THROTTLE, SEAT,
+		HULL_PANEL, FLOOR, VIEWPORT, LIGHT, HATCH, HATCH_TOP, REPAIR_STATION, DIAGNOSTIC_CONSOLE, NAVIGATION_CONSOLE, FLIGHT_PANEL, THROTTLE, REACTOR, COOLANT_TANK, LIFE_SUPPORT_UNIT,
+		CABLE, SEAT,
 		BED_HEAD, BED_FOOT, BARREL, CHEST, ENGINE_PORT, REACTOR_CORE, REACTOR_CAGE, PIPE, AIR;
 
 		/** The ship itself: these cannot be broken from inside, even in creative. */
 		public boolean structural() {
 			return switch (this) {
 				case HULL_PANEL, FLOOR, VIEWPORT, LIGHT, HATCH, HATCH_TOP, REPAIR_STATION, DIAGNOSTIC_CONSOLE, NAVIGATION_CONSOLE,
-						FLIGHT_PANEL, THROTTLE,
-						ENGINE_PORT, REACTOR_CORE, REACTOR_CAGE, PIPE -> true;
+						FLIGHT_PANEL, THROTTLE, REACTOR, COOLANT_TANK, LIFE_SUPPORT_UNIT,
+						ENGINE_PORT, REACTOR_CORE, REACTOR_CAGE -> true;
 				default -> false;
 			};
 		}
@@ -50,6 +51,10 @@ public final class ShipInteriorLayout {
 	private static final Cell PILOT_SEAT = new Cell(4, 1, 16);
 	private static final Cell FLIGHT_PANEL = new Cell(3, 1, 17);
 	private static final Cell THROTTLE = new Cell(5, 1, 17);
+	private static final Cell REACTOR = new Cell(4, 1, 2);
+	private static final Cell COOLANT_TANK = new Cell(1, 1, 1);
+	private static final Cell LIFE_SUPPORT = new Cell(7, 1, 1);
+	public static final Cell[] ENGINE_PORTS = {new Cell(2, 2, 0), new Cell(6, 2, 0)};
 	/** A cell of the panoramic viewport: if it is not a viewport, the room is an old capsule and is rebuilt. */
 	private static final Cell MARKER = new Cell(4, 3, SIZE_Z - 1);
 
@@ -102,13 +107,17 @@ public final class ShipInteriorLayout {
 			boolean porthole = y == 3 && (z == 7 || z == 11 || z == 13 && x == SIZE_X - 1 || z == 2);
 			return bridgeWindow || porthole ? Piece.VIEWPORT : Piece.HULL_PANEL;
 		}
+		// Conduits along the ceiling corners, through the bulkheads: the coolant pipe on the left, the power cable on
+		// the right (from the reactor to the bridge).
+		if (y == SIZE_Y - 2 && x == 1 && z >= 1) {
+			return Piece.PIPE;
+		}
+		if (y == SIZE_Y - 2 && x == SIZE_X - 2 && z >= 2) {
+			return Piece.CABLE;
+		}
 		// Bulkheads with doorways (3 wide, 3 high) between engine room, living section and bridge.
 		if ((z == 5 || z == 14) && !(x >= 3 && x <= 5 && y <= 3)) {
 			return Piece.HULL_PANEL;
-		}
-		// Pipes along the ceiling corners.
-		if (y == SIZE_Y - 2 && (x == 1 || x == SIZE_X - 2) && z != 5 && z != 14) {
-			return Piece.PIPE;
 		}
 		return Piece.AIR;
 	}
@@ -137,8 +146,24 @@ public final class ShipInteriorLayout {
 		m.put(new Cell(7, 2, 6), Piece.BARREL);
 		m.put(new Cell(7, 1, 12), Piece.CHEST);
 		m.put(new Cell(7, 1, 13), Piece.CHEST);
-		// Reactor column in the engine room, caged.
-		m.put(new Cell(4, 1, 2), Piece.REACTOR_CORE);
+		// Reactor column in the engine room, caged; the coolant tank and the life support unit in the back corners.
+		m.put(REACTOR, Piece.REACTOR);
+		m.put(COOLANT_TANK, Piece.COOLANT_TANK);
+		m.put(LIFE_SUPPORT, Piece.LIFE_SUPPORT_UNIT);
+		// Coolant pipes from the reactor to both engine ports, the tank and the life support unit.
+		for (int x = 2; x <= 6; x++) {
+			m.put(new Cell(x, 1, 1), Piece.PIPE);
+		}
+		m.put(new Cell(2, 2, 1), Piece.PIPE);
+		m.put(new Cell(6, 2, 1), Piece.PIPE);
+		for (int y = 2; y <= 4; y++) {
+			m.put(new Cell(1, y, 1), Piece.PIPE);
+		}
+		// Power cable up from the reactor's core to the ceiling run.
+		m.put(new Cell(4, 4, 2), Piece.CABLE);
+		for (int x = 4; x <= 6; x++) {
+			m.put(new Cell(x, 5, 2), Piece.CABLE);
+		}
 		m.put(new Cell(4, 2, 2), Piece.LIGHT);
 		m.put(new Cell(4, 3, 2), Piece.REACTOR_CORE);
 		for (int y = 1; y <= 3; y++) {
@@ -182,6 +207,18 @@ public final class ShipInteriorLayout {
 
 	public Cell navigation() {
 		return NAVIGATION;
+	}
+
+	public Cell reactor() {
+		return REACTOR;
+	}
+
+	public Cell coolantTank() {
+		return COOLANT_TANK;
+	}
+
+	public Cell lifeSupport() {
+		return LIFE_SUPPORT;
 	}
 
 	public Cell pilotSeat() {

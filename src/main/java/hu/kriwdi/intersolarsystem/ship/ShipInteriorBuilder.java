@@ -33,6 +33,7 @@ public final class ShipInteriorBuilder {
 			// Beds are placed as two halves; the second half must not be re-placed through a neighbour update.
 			interior.setBlock(pos, stateFor(placement.piece()), Block.UPDATE_CLIENTS);
 		}
+		reconnectConduits(interior);
 		if (clearInterior) {
 			paintSpace(interior);
 		}
@@ -66,6 +67,21 @@ public final class ShipInteriorBuilder {
 			return;
 		}
 		ShipInteriorLayout layout = ShipInteriorLayout.capsule();
+		// Ships from before the reactor: lay the pipes and cables once (into empty cells or over the old truss pipes).
+		BlockPos reactor = at(layout.reactor());
+		interior.getChunk(reactor.getX() >> 4, reactor.getZ() >> 4);
+		if (!interior.getBlockState(reactor).is(ModBlocks.REACTOR)) {
+			for (ShipInteriorLayout.Placement p : layout.placements()) {
+				if (p.piece() == Piece.PIPE || p.piece() == Piece.CABLE) {
+					BlockPos pos = at(p.cell());
+					BlockState have = interior.getBlockState(pos);
+					if (have.isAir() || have.is(ModBlocks.TRUSS) || have.is(ModBlocks.RUSTED_PANEL)
+							|| have.is(ModBlocks.LANDER_ENGINE)) {
+						interior.setBlock(pos, stateFor(p.piece()), Block.UPDATE_ALL);
+					}
+				}
+			}
+		}
 		// Newer versions of the fixed parts (the two-block hatch, turned consoles, seats) replace older ones in place;
 		// containers and anything players built in the free cells stay.
 		for (ShipInteriorLayout.Placement p : layout.placements()) {
@@ -75,7 +91,8 @@ public final class ShipInteriorBuilder {
 			BlockPos pos = at(p.cell());
 			BlockState want = stateFor(p.piece());
 			BlockState have = interior.getBlockState(pos);
-			boolean controls = p.piece() == Piece.FLIGHT_PANEL || p.piece() == Piece.THROTTLE;
+			boolean controls = p.piece() == Piece.FLIGHT_PANEL || p.piece() == Piece.THROTTLE
+					|| p.piece() == Piece.REACTOR || p.piece() == Piece.COOLANT_TANK || p.piece() == Piece.LIFE_SUPPORT_UNIT;
 			if (controls && have.getBlock() == want.getBlock()) {
 				continue; // keep the switches and the lever where the crew left them
 			}
@@ -85,8 +102,26 @@ public final class ShipInteriorBuilder {
 			}
 		}
 		fillIfAir(interior, layout.station(), stateFor(Piece.REPAIR_STATION));
+		reconnectConduits(interior);
 		fillIfAir(interior, layout.console(), stateFor(Piece.DIAGNOSTIC_CONSOLE));
 		fillIfAir(interior, layout.navigation(), stateFor(Piece.NAVIGATION_CONSOLE));
+	}
+
+	/** Joins every pipe and cable of the ship to its neighbours (blocks placed in order do not see later neighbours). */
+	public static void reconnectConduits(ServerLevel interior) {
+		for (ShipInteriorLayout.Placement p : ShipInteriorLayout.capsule().placements()) {
+			if (p.piece() != Piece.PIPE && p.piece() != Piece.CABLE) {
+				continue;
+			}
+			BlockPos pos = at(p.cell());
+			BlockState have = interior.getBlockState(pos);
+			if (have.getBlock() instanceof hu.kriwdi.intersolarsystem.content.ConduitBlock conduit) {
+				BlockState joined = conduit.connected(interior, pos);
+				if (joined != have) {
+					interior.setBlock(pos, joined, Block.UPDATE_CLIENTS);
+				}
+			}
+		}
 	}
 
 	public static BlockPos at(ShipInteriorLayout.Cell cell) {
@@ -136,7 +171,12 @@ public final class ShipInteriorBuilder {
 			case CHEST -> Blocks.CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.WEST);
 			case ENGINE_PORT, REACTOR_CORE -> ModBlocks.LANDER_ENGINE.defaultBlockState();
 			case REACTOR_CAGE -> Blocks.IRON_BARS.defaultBlockState();
-			case PIPE -> ModBlocks.TRUSS.defaultBlockState();
+			case PIPE -> ModBlocks.PIPE.defaultBlockState();
+			case CABLE -> ModBlocks.CABLE.defaultBlockState();
+			case REACTOR -> ModBlocks.REACTOR.defaultBlockState().setValue(ShipFacingBlock.FACING, Direction.SOUTH);
+			case COOLANT_TANK -> ModBlocks.COOLANT_TANK.defaultBlockState().setValue(ShipFacingBlock.FACING, Direction.EAST);
+			case LIFE_SUPPORT_UNIT -> ModBlocks.LIFE_SUPPORT_UNIT.defaultBlockState()
+					.setValue(ShipFacingBlock.FACING, Direction.WEST);
 			case AIR -> Blocks.AIR.defaultBlockState();
 		};
 	}

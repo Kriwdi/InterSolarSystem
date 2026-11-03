@@ -89,6 +89,10 @@ public final class FlightControls {
 				}
 			}
 		}
+		ServerLevel interior = server.getLevel(ShipDimensions.INTERIOR);
+		if (interior != null) {
+			missing.addAll(ShipNetworks.problems(interior));
+		}
 		if (needPilot && ShipManeuver.pilot(server) != player) {
 			missing.add(Component.translatable("message.intersolarsystem.checklist.seat"));
 		}

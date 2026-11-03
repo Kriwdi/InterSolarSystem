@@ -59,6 +59,7 @@ public final class ShipFlightController {
 	private static void advance(MinecraftServer server, ShipState state, long now) {
 		tickIncidents(server, state, now);
 		ShipManeuver.tick(server, state, now);
+		ShipFaultSites.tick(server, state, now);
 		ShipFlightPhase phase = state.phase();
 		if (phase == ShipFlightPhase.LANDED) {
 			return;

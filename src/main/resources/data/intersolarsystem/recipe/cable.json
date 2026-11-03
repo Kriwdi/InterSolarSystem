@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "W": "intersolarsystem:salvaged_wiring"
+  },
+  "pattern": [
+    "WWW"
+  ],
+  "result": {
+    "id": "intersolarsystem:cable",
+    "count": 6
+  }
+}

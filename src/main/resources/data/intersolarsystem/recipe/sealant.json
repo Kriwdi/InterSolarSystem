@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "intersolarsystem:bitumen",
+    "G": "minecraft:glass_bottle"
+  },
+  "pattern": [
+    "B",
+    "G"
+  ],
+  "result": {
+    "id": "intersolarsystem:sealant",
+    "count": 2
+  }
+}
