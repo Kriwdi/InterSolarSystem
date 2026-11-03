@@ -1,1 +1,20 @@
-# none
+# Decompiled sources to read.
+net.minecraft.client.model.monster.silverfish.SilverfishModel
+net.minecraft.client.renderer.entity.SilverfishRenderer
+net.minecraft.client.model.QuadrupedModel
+net.minecraft.client.model.animal.pig.PigModel
+net.minecraft.client.renderer.entity.PigRenderer
+net.minecraft.client.renderer.entity.MobRenderer
+net.minecraft.client.renderer.entity.state.LivingEntityRenderState
+net.minecraft.world.entity.monster.Silverfish
+net.minecraft.world.entity.animal.pig.Pig
+net.minecraft.world.entity.npc.wanderingtrader.WanderingTrader
+net.minecraft.world.entity.npc.villager.AbstractVillager
+net.minecraft.client.renderer.entity.HumanoidMobRenderer
+net.minecraft.client.model.HumanoidModel
+net.minecraft.client.renderer.entity.WanderingTraderRenderer
+net.minecraft.client.model.geom.ModelLayers
+net.minecraft.world.entity.SpawnPlacements
+net.minecraft.client.renderer.entity.SpiderRenderer
+net.minecraft.client.model.monster.spider.SpiderModel
+net.minecraft.world.entity.monster.spider.Spider

@@ -1,1 +1,4 @@
-# none
+net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
+net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry
+net.minecraft.world.entity.EntityType$Builder
+net.minecraft.world.item.SpawnEggItem

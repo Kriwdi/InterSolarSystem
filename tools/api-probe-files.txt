@@ -1,1 +1,3 @@
-# none
+assets/minecraft/items/pig_spawn_egg.json
+assets/minecraft/models/item/pig_spawn_egg.json
+data/minecraft/loot_table/entities/pig.json
