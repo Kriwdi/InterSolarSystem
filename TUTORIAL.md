@@ -1,0 +1,471 @@
+# InterSolarSystem – Játékos útmutató
+
+Ez az útmutató végigvezet a mod jelenlegi tartalmán: hogyan indulj, mit csinálj a halott Földön, hogyan tartsd életben a hajót, és hogyan juss el a pályára, az ISS-re és a Holdra. A mod fejlesztés alatt áll; ami itt le van írva, az a legutóbbi buildben működik. Amit még nem lehet megcsinálni, azt a végén külön jelöltük.
+
+> **Röviden:** új világban a lezuhant hajód mellett kezdesz. Fosztogasd ki a romokat, bányássz űrérceket, javítsd a hajót, építs űrruhát, aztán a navigációs konzolról indulj a pályára vagy a Holdra. A hajtómű-fejlesztésekhez a Föld érceiből és a Hold hélium-3-jából kell alkatrészeket gyártani.
+
+---
+
+## Tartalom
+
+1. [Telepítés](#1-telepítés)
+2. [Az első percek](#2-az-első-percek)
+3. [A hajó](#3-a-hajó)
+4. [A halott Föld](#4-a-halott-föld)
+5. [Nyersanyagok és feldolgozás](#5-nyersanyagok-és-feldolgozás)
+6. [Romok és zsákmány](#6-romok-és-zsákmány)
+7. [Receptek](#7-receptek)
+8. [Kopás, meghibásodás, javítás](#8-kopás-meghibásodás-javítás)
+9. [Rejtett hibák, diagnosztika, tesztrepülés](#9-rejtett-hibák-diagnosztika-tesztrepülés)
+10. [Navigáció és utazás](#10-navigáció-és-utazás)
+11. [Űrruha és oxigén](#11-űrruha-és-oxigén)
+12. [Föld körüli pálya és az ISS](#12-föld-körüli-pálya-és-az-iss)
+13. [A Hold](#13-a-hold)
+14. [Hajtómű-fejlesztés](#14-hajtómű-fejlesztés)
+15. [Parancsok](#15-parancsok)
+16. [Tippek és gyakori kérdések](#16-tippek-és-gyakori-kérdések)
+17. [Ami még nincs kész](#17-ami-még-nincs-kész)
+
+---
+
+## 1. Telepítés
+
+1. Telepítsd a **Fabric Loadert** (0.20.1 vagy újabb) a **Minecraft 26.3**-hoz.
+2. Töltsd le a **Fabric API**-t (0.165.0+26.3 vagy újabb), és tedd a `mods` mappába.
+3. A mod jar-ját a GitHubon a [`ci-builds` ág `jar` mappájából](https://github.com/Kriwdi/InterSolarSystem/tree/ci-builds/jar) töltheted le (`intersolarsystem-1.0.0.jar`), és ezt is a `mods` mappába tedd.
+4. Indítsd el a játékot a Fabric profillal, és hozz létre egy **új világot**. A „halott Föld” csak új világban generálódik; a régi világok Föld-része marad, ami volt.
+
+A mod tárgyai kreatív módban az **InterSolarSystem** fülön vannak (sisak ikon). Ha nem fér ki az első oldalra, a fülsor végén lapozó nyilak jelennek meg.
+
+---
+
+## 2. Az első percek
+
+Az új világ kezdőpontja mellett, kelet felé áll a **hajód**: félig betemetve, égésnyommal, roncsokkal körülötte. A hajóteste törhetetlen, a nyugat felé néző ajtaja (a **hajóajtó**) visz be.
+
+**Az első lépések sorrendje:**
+
+1. **Nyisd ki a hordót** a hajó mellett. Benne: 2 javítókészlet, multiszerszám, kőcsákány, fáklyák, kenyér, egy vödör víz, fémhulladék, vetőmag, 2 tölgycsemete, gyapjú.
+2. **Szállj be** a hajóba (jobb klikk az ajtóra). Nézz körül: a hídon van a navigációs konzol, oldalt a diagnosztikai konzolok, a középső részben az ágyak, a raktár és a javítóállomás, hátul a gépterem.
+3. A bal felső sarokban a **hajó állapotjelzője** (HUD) látszik: a fázis (leszállt, visszaszámlálás, repülés) és a nyolc alrendszer állapota százalékban.
+4. Menj ki, és **kezdd a fosztogatást**: a környéken romok, lezuhant kapszulák, műholdak, bunkerek vannak (lásd [6. fejezet](#6-romok-és-zsákmány)). A fémhulladékból vas, a mentett vezetékből réz olvasztható.
+5. **Gyűjts fát**: a halott fákból (elhalt rönk) fenyődeszka készül, a rönkből faszén égethető. Élő fák csak az oázisban vannak, de a csemetékből saját fát nevelhetsz.
+6. Készíts **kőcsákányt** (a kő megvan a föld alatt), és bányássz bauxitot és spodumént. Vascsákánnyal már titán, uraninit és monazit is bányászható.
+
+> A világban nincs állat és nincs szörny. Élelmet a romokból, az oázisból és a saját farmodról szerezhetsz.
+
+---
+
+## 3. A hajó
+
+### Kívülről
+
+Ahol a hajó leszáll, ott egy valódi hajótest áll: fehér burkolat ablakokkal, elöl pilótafülke, hátul hajtóművek, alul négy leszállóláb. **A hajótest törhetetlen.** Kreatív módban guggolva le lehet bontani, ha takarítani kell. Felszálláskor a hajótest eltűnik, és a célnál újra felépül. Az ISS-hez dokkolva nincs külső hajótest, ott az ajtó a dokkolóporton van.
+
+**A beszállás nem indítja el a hajót.** Felszállni csak a navigációs konzolról lehet.
+
+### Belül (9 × 7 × 21 blokk)
+
+| Rész | Mi van ott |
+|---|---|
+| **Híd** (orr) | padlóig érő panorámaablak és tetőablak, navigációs konzol, két diagnosztikai konzol, két ülés |
+| **Lakórész** (közép) | két ágy, hordók és két láda (raktár), javítóállomás, kerek ablakok, bal oldalt a hajóajtó |
+| **Gépterem** (far) | reaktoroszlop rácsban, hajtóműnyílások a hátsó falban |
+
+A falak, az ablakok, a konzolok és az ajtó **belülről nem bonthatók** (kreatívban sem). A ládákba, hordókba nyugodtan pakolhatsz: ez a hajó raktára, és veled utazik. Ha valahogy mégis kikerülsz a hajó terén kívülre, a játék visszatesz.
+
+### Kilátás az ablakokon
+
+Az ablakokon a valódi helyzet látszik:
+
+- **a Földön:** poros, bézs ég és barna talaj;
+- **pályán:** elöl, lent kitölti a látványt a Föld;
+- **a Holdon:** szürke talaj, fekete ég csillagokkal, fölötted a Föld;
+- **utazás közben:** a talaj elmarad, a bolygó mögötted zsugorodik, a cél elöl nő, a csillagok úsznak.
+
+Felszálláskor és leszálláskor a kabin remeg, a hajtómű zúg, a visszaszámlálás sípol.
+
+### A HUD
+
+A bal felső sarokban, csak a hajóban:
+
+- **fázis:** leszállt / felszállás 0:04 múlva / érkezés 0:11 múlva / leszállás;
+- **nyolc alrendszer:** hajtómű, üzemanyag és energia, burkolat és páncél, életfenntartás, navigáció és kommunikáció, stabilizátor, leszálló- és indítóegység, raktér. Zöld: 70% vagy több, sárga: 20–69%, piros: 20% alatt;
+- **aktív incidensek** a hátralévő idővel (az utolsó 15 másodpercben villognak);
+- **piros figyelmeztető jel** azoknál az alrendszereknél, amelyeknek ismert rejtett hibája van.
+
+---
+
+## 4. A halott Föld
+
+A tengerek kiszáradtak, és nincs Nether és End (a portál nem visz sehová). Tizenkét biome van:
+
+| Biome | Hogy néz ki | Mit érdemes ott keresni | Veszély |
+|---|---|---|---|
+| **Hamusivatag** | hamu, salakkő, kvarchomok | csonkok, salakszikla, kvarchomok (szilícium) | – |
+| **Kiszáradt tengerfenék** | repedezett iszap, homok, sókéreg | halott korallok, csonthalmok, szárazra került hajóroncs, bálnacsontváz | – |
+| **Megkövült erdő** | durva föld, kavics | megkövült fák, bunkerek, laktanya | – |
+| **Sugárzó kráter** | sugárfertőzött talaj, izzó trinitit | robbanási kráterek, sok uraninit, mérgező hordók | **sugárzás** |
+| **Befagyott megapolisz** | hó, tömör jég | holt város felhőkarcolókkal, magbank, metró, befagyott kolónia | hideg (még nincs hatása) |
+| **Savas mocsár** | savas iszap, sár | savas tavak, elhalt fák, benőtt kolónia | **a víz mar** |
+| **Szeméthegyek** | préselt hulladék | hulladékhalmok, elromlott bányászdrónok | – |
+| **Sósivatag** | sókéreg, sótömb | lítiumos sókéreg, űrközpont, repülőtér, napelemfarm | – |
+| **Mély kanyonok** | vörös homok, színes rétegzett falak | óriás kanyonok, gát | magas falak |
+| **Oázis** (ritka) | fű, tiszta víz, fák | az utolsó élő hely: fa, virág, cukornád, tök | – |
+| **Elhagyott farmvidék** | barna fű, durva föld | szalmabálák, tanya silóval, kiszáradt földek | – |
+| **Olajmező** | kátrányos homok, olajpala | olajkutak tartállyal, kátránytócsák (lassítanak) | – |
+
+**Veszélyek:**
+
+- **Savas mocsár:** a vízben sebződsz és megmérgeződsz.
+- **Sugárzó kráter:** amíg a biome-ban vagy, lassan sebződsz és éhezel.
+- **A teljes űrruha (mind a négy darab) mindkettő ellen véd.**
+
+---
+
+## 5. Nyersanyagok és feldolgozás
+
+A vanilla ércek (vas, szén, gyémánt stb.) **nem generálódnak**. A barlangok és a mélypala megmaradtak, de bennük az űrprogram ércei vannak, mindegyik kő- és mélypala-változatban.
+
+| Érc | Hol | Csákány | Mit ad | Feldolgozás |
+|---|---|---|---|---|
+| **Bauxitérc** (vörösbarna) | 0–140 magasságban, gyakori | kő | nyers bauxit | kemencében → **alumíniumrúd** |
+| **Titánérc** (kékesszürke) | -40–70 között | vas | nyers titán | kemencében → **titánrúd** |
+| **Uraninitérc** (zöld, halványan világít) | mélyen, a sugárzó kráterben bőven | vas | nyers urán | kemencében → **dúsított urán** |
+| **Spodumenérc** (rózsaszín) | -16–96 között | kő | lítiumpor (2–4) | – |
+| **Monazitérc** (narancssárga) | mélyen, -64–20 között | vas | ritkaföldfém-por (1–3) | – |
+| **Olajpala** | föld alatt, az olajmezőn sok | kő | bitumen | (később üzemanyag) |
+| **Lítiumos sókéreg** | a sósivatag felszínén | kézzel/ásóval | lítiumpor | – |
+| **Kvarchomok** | a hamusivatagban | ásó | kvarchomok blokk | kemencében → **szilíciumlapka** |
+
+A Szerencse varázslat növeli a hozamot. A Selyemérintés magát az érctömböt adja.
+
+**Vas és réz csak kimentésből van:**
+
+- fémhulladék → **vasrög** (kemence), 9 rögből vasrúd;
+- mentett vezeték → **rézrúd** (kemence);
+- rozsdás panel → 2 fémhulladék (kézzel).
+
+**Egyéb hasznos átalakítások:**
+
+- elhalt rönk → 4 fenyődeszka;
+- elhalt rönk → faszén (kemence);
+- sókéreg → üveg (kemence).
+
+---
+
+## 6. Romok és zsákmány
+
+A struktúrák ládáiban és hordóiban kimentett technológia, élelem és alapanyag van. Mindegyik típusnak saját zsákmánytáblája van.
+
+| Struktúra | Hol | Jellemző zsákmány |
+|---|---|---|
+| **Kis bunker** (föld alatt, kis betonbódé a felszínen) | szinte mindenhol | fémhulladék, vezeték, áramkör, javítókészlet, gyapjú, élelem |
+| **Nagy bunker** (kétszintes) | hamusivatag, megkövült erdő, kanyon, farmvidék, szeméthegyek, megapolisz | katonai felszerelés, javítóállomás, élelem |
+| **Űrközpont** (kilövőállás, kidőlt rakéta, irányítóbunker) | sósivatag, hamusivatag | titánlemez, alumínium, űrruhadarabok, mágnes, akkumulátor, **ritkán ionhajtómű-készlet** |
+| **Kutatólabor** | megkövült erdő, megapolisz, savas mocsár, sósivatag | áramkör, szilícium, ritkaföldfém, lítium, akkumulátor, napelem |
+| **Kutatóállomás** (gólyalábas modulok) | sósivatag, megapolisz, sugárzó kráter, tengerfenék | titán, alumínium, űrsisak, javítókészlet |
+| **Magbank** (Svalbard-szerű) | befagyott megapolisz | vetőmagok, csemeték, krumpli, répa, bogyó, csontliszt |
+| **Terraformáló kísérlet** (üvegkupola) | sugárzó kráter, savas mocsár, sósivatag, hamusivatag | laborzsákmány |
+| **Napelemfarm** | sósivatag, hamusivatag, farmvidék | ipari zsákmány |
+| **Gát** | mély kanyonok | ipari zsákmány |
+| **Rádiótorony** | szeméthegyek, megkövült erdő, megapolisz, farmvidék | áramkör, vezeték, mágnes, vörös por |
+| **Kórház** (háromszintes) | megapolisz, hamusivatag, farmvidék, savas mocsár | orvosi zsákmány, aranyalma |
+| **Laktanya** (őrtoronnyal) | hamusivatag, kanyon, megkövült erdő, szeméthegyek | fegyver, páncél, TNT, titánlemez |
+| **Repülőtér** (kifutó, irányítótorony, lezuhant gép) | sósivatag, tengerfenék, hamusivatag | városi és rakomány-zsákmány |
+| **Olajkút** | olajmező | ipari zsákmány, bitumen |
+| **Tanya** (pajta, siló, kiszáradt földek) | farmvidék | vetőmag, bőr, gyapjú, eszközök |
+| **Lezuhant teherkapszula**, **műhold**, **rakétafokozat** | mindenhol | élelem, fémhulladék, alumínium, napelem |
+| **Bányászdrón-telep** (aknával) | szeméthegyek, kanyon, olajmező | ipari zsákmány; a drónokból áramkör, vezeték, akkumulátor |
+| **Kolóniák** (benőtt, leégett, befagyott) | oázis/savas mocsár, hamusivatag/kráter, megapolisz | élelem, titán, gyapjú, bőr, űrsisak |
+| **Hajóroncs**, **bálnacsontváz** | kiszáradt tengerfenék | rakomány, iránytű, térkép, arany |
+| **Holt város** (tér, utcák, felhőkarcolók, lakóházak, boltok) | befagyott megapolisz, hamusivatag | városi zsákmány minden épületben |
+| **Metróhálózat** (állomás lépcsővel, alagutak) | megapolisz, hamusivatag, farmvidék, szeméthegyek | városi zsákmány, élelem |
+
+**Elszórt törmelék:**
+
+- **fémhulladék-kupac:** 1–3 fémhulladék, néha vezeték;
+- **törmelék:** kavics, néha fémhulladék;
+- **elromlott bányászdrón:** áramkör, vezeték, fémhulladék, néha akkumulátorcella.
+
+---
+
+## 7. Receptek
+
+A receptek a receptkönyvben is megjelennek. Az alábbi táblázatok a pontos hozzávalókat mutatják.
+
+### A hajó felszerelése
+
+| Tárgy | Hozzávalók |
+|---|---|
+| Javítókészlet | 2 fémhulladék, 1 mentett vezeték, 1 vasrúd, 1 mentett áramkör |
+| Javítóállomás | 5 fémhulladék, 1 vasrúd, 2 vezeték, 1 áramkör |
+| Diagnosztikai konzol | 5 fémhulladék, 1 üveglap, 2 áramkör, 1 vörös por |
+| Navigációs konzol | 3 fémhulladék, 2 üveglap, 1 iránytű, 2 áramkör, 1 vezeték |
+| Multiszerszám | 2 vasrúd, 1 áramkör, 1 vezeték, 3 fémhulladék |
+| Rozsdás panel (2 db) | 4 fémhulladék |
+
+### Űrruha
+
+| Darab | Hozzávalók |
+|---|---|
+| Űrsisak | 2 fémhulladék, 1 áramkör, 2 gyapjú, 1 üveglap |
+| Űrruha (oxigéntartály) | 5 gyapjú, 2 vezeték, 1 vasrúd, 1 fémhulladék |
+| Űrnadrág | 6 gyapjú, 1 fémhulladék |
+| Űrcsizma | 2 gyapjú, 2 fémhulladék, 2 bőr |
+
+Állatok nincsenek, ezért gyapjút és bőrt a romokban találsz: bunker, város, tanya, kolónia, kórház. A kezdőhordóban is van gyapjú.
+
+### Alkatrészek
+
+| Alkatrész | Hozzávalók | Darab |
+|---|---|---|
+| Titánlemez | 2 titánrúd (formátlan) | 1 |
+| Napelemcella | 3 üveglap, 3 szilíciumlapka, 2 alumíniumrúd, 1 vezeték | 2 |
+| Akkumulátorcella | 1 rézrúd, 4 alumíniumrúd, 2 lítiumpor | 1 |
+| Ritkaföldfém-mágnes | 5 ritkaföldfém-por, 1 vasrúd | 2 |
+| Urán fűtőelem | 2 titánlemez, 1 dúsított urán | 1 |
+| **Ionhajtómű-készlet** | 4 titánlemez, 1 mágnes, 2 akkumulátorcella, 1 áramkör, 1 napelemcella | 1 |
+| **Fúziós hajtómű-készlet** | 4 titánlemez, 1 hélium-3 regolit (Hold), 2 urán fűtőelem, 1 áramkör, 1 mágnes | 1 |
+
+### Titán szerszámok
+
+Ugyanaz a minta, mint a vas szerszámoknál, titánrúddal: csákány, fejsze, ásó, kapa, kard. Valamivel jobbak a vasnál, és jóval tartósabbak (900 használat).
+
+---
+
+## 8. Kopás, meghibásodás, javítás
+
+**Kopás:**
+
+- Minden repülés koptatja az alrendszereket; a hajtómű repülésenként kb. 8%-ot veszít.
+- Ha a **hajtómű** vagy a **leszálló- és indítóegység** 20% alá esik, a hajó nem tud felszállni.
+
+**Incidensek repülés közben:**
+
+- Repülés közben 10 másodpercenként esély van egy incidensre a sérült alrendszereken. Minél rosszabb az állapot, annál nagyobb az esély; 70% felett nincs esély.
+- Az incidens típusai: rövidzárlat, túlmelegedés, szivárgás, nyomásvesztés, tűz.
+- **60 másodperc** van a javításra, különben az alrendszer 25%-ot veszít.
+
+**Javítás:**
+
+1. Vedd a **javítókészletet** a főkezedbe.
+2. Kattints jobb gombbal a **javítóállomásra** (a hajóban).
+3. A javítás sorrendje: a legsürgősebb incidens, aztán egy ismert rejtett hiba, aztán a legrosszabb alrendszer. Incidens nélkül a készlet 25%-ot javít a legrosszabb alrendszeren.
+
+**Javító minijátékok** (incidensnél):
+
+| Incidens | Minijáték | Mit kell tenni |
+|---|---|---|
+| Rövidzárlat | **Vezetékezés** | Kösd össze a bal oldali színes csatlakozókat a jobb oldali azonos színűekkel. |
+| Túlmelegedés | **Szelep** | Zárd el a szelepet (gomb vagy szóköz), amikor a mutató a zöld sávban van, körönként egyszer. |
+| Szivárgás, nyomásvesztés | **Nyomás** | Pumpáld át az egységeket a szelepekkel úgy, hogy minden tartály a sárga vonalon álljon, a lépésszámon belül. |
+| Tűz | – | A készlet eloltja. |
+
+- A rossz megoldás 5%-ot von le, és az incidens megmarad.
+- A játék nem áll meg közben, és a készletnek a kezedben kell maradnia.
+- Minél sérültebb az alrendszer, annál nagyobb a tábla.
+
+**Multiszerszám:**
+
+- A második kézben tartva a 40% feletti könnyű hibákat minijáték nélkül javítod.
+- A súlyosabb hibáknál kisebb táblát kapsz.
+- 48 használatig bírja.
+
+---
+
+## 9. Rejtett hibák, diagnosztika, tesztrepülés
+
+**Rejtett hibák:**
+
+- Egy kopott (70% alatti) alrendszer minden leszállásnál **rejtett hibát** kaphat.
+- Ez sehol sem látszik, de növeli a **felszállási kockázatot**.
+- Ha a felszállás sikertelen, robbanás van az indítóhelyen (blokkot nem tör, de élőlényeket sebez). A hajó a helyén marad, és súlyosan sérül.
+
+**Diagnosztikai konzol** (jobb klikk, a hajóban):
+
+- Átvizsgálja a hajót. Egy rejtett hibát 50% + a navigáció állapotának fele eséllyel talál meg.
+- Kiírja az ismert hibákat, és megbecsüli a kockázatot, de csak abból, amit megtalált.
+- Percenként egyszer használható.
+
+**Tesztrepülés:**
+
+- **Guggolva kattints kétszer a diagnosztikai konzolra 5 másodpercen belül.**
+- A hajó felszáll, és ugyanott leszáll (kb. 30 másodperc).
+- Minden rejtett hiba előjön incidensként, így otthon, biztonságban javíthatod őket.
+- A tesztrepülés felszállási kockázata feleakkora, és a kopás is fele.
+
+**Jó gyakorlat egy nagy út előtt:** diagnosztika → javítás → tesztrepülés → javítás → indulás.
+
+---
+
+## 10. Navigáció és utazás
+
+Kattints jobb gombbal a **navigációs konzolra** (a hídon). Megnyílik a **csillagtérkép**:
+
+- **felül:** a Naprendszer sávja (bal oldalt a Nap);
+- **lista:** minden célpont az állapotával és az utazási idővel a hajód hajtóművével;
+- **alul:** a kiválasztott célpont részletei (indítási ablak, időtartam);
+- **INDÍTÁS** gomb: csak akkor zöld, ha a hajó le van szállva és indítható.
+
+**Indulás:** kattints a célpontra a listában, majd az **INDÍTÁS** gombra.
+
+**Mi történik utána:**
+
+| Fázis | Mennyi ideig | Mit látsz |
+|---|---|---|
+| Visszaszámlálás | 10 mp | sípolás, az utolsó 3 mp-ben a kabin rázkódik |
+| Felszállás és repülés | a cél szerint | hajtóműzaj, a talaj elmarad, csillagok, a cél közeledik |
+| Leszállás | 5 mp | rázkódás, feljön a talaj |
+| Leszállt | – | üzenet a célról; a hajótest ott áll, ahol landoltál |
+
+Repülés közben **nem lehet kiszállni**. Közben dolgozhatsz a hajóban: javíthatsz, pakolhatsz, figyelheted az ablakot.
+
+**Utazási idők** az alap (1-es) hajtóművel, a Földről:
+
+| Cél | Idő | Megjegyzés |
+|---|---|---|
+| Föld körüli pálya (ISS) | kb. 0:30 | dokkolás az ISS-hez |
+| Hold | kb. 8–9 perc | leszállás a Nyugalom tengerén |
+| Többi bolygó | órák, napok | **még zárva**, ezek a világok később jönnek |
+
+Az idő a **játékidővel** telik: ha a szerver megáll, az út is. Az indítási ablakon kívül az út legfeljebb 50%-kal hosszabb, és a konzol mutatja, mikor lesz a következő jó ablak.
+
+**Utazási események** (két percnél hosszabb utaknál, percenként esély):
+
+| Esemény | Mi történik | Mit tehetsz |
+|---|---|---|
+| **Meteorzápor** | a burkolat és az érzékelők sérülhetnek | 30 mp-en belül kattints a navigációs konzolra, hogy kitérj (kevés üzemanyagba kerül) |
+| **Napkitörés** | sérül az elektronika és az életfenntartás | – |
+| **Rendszerhiba** | incidens a legrosszabb alrendszeren | javítsd meg |
+| **Sodródó roncs** | zsákmány érkezik a zsilipen át | szedd fel |
+| **Furcsa jelek** | töredékek arról, mi történt a többi expedícióval | – |
+
+---
+
+## 11. Űrruha és oxigén
+
+**Vákuum** van a pályán és a Holdon. A **teljes űrruha** (sisak, ruha, nadrág, csizma) nélkül kb. 15 másodperc alatt elfogy a levegőd, utána fulladsz.
+
+- Az **űrruha (mellrész) az oxigéntartály**: vákuumban másodpercenként egy pontot fogy, teli állapotban kb. 10 percig bírja.
+- **A hajóban újratöltődik**, ha az életfenntartás legalább 20%-on van.
+- A gyorsgombsor fölött **O₂-jelző** mutatja a szintet. Pályán tömítetlen ruhában a HUD vákuumfigyelmeztetést villog.
+- A teljes ruha a Földön **a sav és a sugárzás ellen is véd**.
+
+---
+
+## 12. Föld körüli pálya és az ISS
+
+Válaszd a navigációs konzolon a **Föld körüli pálya (ISS)** célt. A hajó felmegy pályára, és dokkol a régi **Nemzetközi Űrállomáshoz**. A hajóajtó a dokkolóporton lesz; kilépve az állomáson vagy.
+
+- **Mikrogravitáció:** a gravitáció 15%, nincs esési sebzés. A hajóban a stabilizátor ad mesterséges gravitációt; ha 20% alá esik, a hajóban is csökken.
+- **Az ISS:** dokkolómodul és platform, Destiny, Unity, az aranyfóliás orosz szegmens, ablakok a Föld peremére, rácsos főtartó napelemszárnyakkal. **Hat ellátmányláda** van rajta: zsákmány, élelem, űrruhadarabok, multiszerszámok.
+- **Az állomás minden blokkja kibányászható** kimentett anyagnak.
+- Pályáról a **Föld** cél visszavisz az utolsó földi leszállóhelyedre, a **Hold** cél pedig a Holdra.
+
+---
+
+## 13. A Hold
+
+Válaszd a **Hold** célt a Földről vagy pályáról. A hajó a **Nyugalom tengerén** száll le, az Apollo–11 és a Tranquility bázis romjai között.
+
+- **A világ:** 5500 blokk széles. Szürke regolitfelföldek, sötét tengerek (mare), kráterek kiemelkedő peremmel (a fiatalok fényes kidobott anyaggal).
+- **Nyersanyag:**
+  - **hélium-3 tartalmú regolit** a felszín közelében: ez kell a fúziós hajtóműhöz;
+  - **ilmenit** a mare bazaltban.
+- **Ég:** fekete, mindig csillagos, és a Föld egy helyben áll rajta, fázisokkal. Egy holdi nap 2,95 Minecraft-nap, hosszú, sötét éjszakákkal.
+- **Hatod gravitáció és vákuum:** kell az űrruha, és nagyokat lehet ugrani.
+- **Relikviák:**
+  - az Apollo–11, 12, 14, 15, 16 és 17 valódi leszállóhelyén leszállóegységek, kifakult zászlók, műszercsomagok, a 15–17-nél holdjárók;
+  - a **Tranquility bázis** romjai ellátmánnyal, napelemmezővel és adatterminálokkal, amelyek a bázis utolsó napjait mesélik.
+
+A Holdról a **Föld körüli pálya** vagy egyenesen a **Föld** felé indulhatsz vissza.
+
+---
+
+## 14. Hajtómű-fejlesztés
+
+A hajtómű szintje osztja az utazási időt:
+
+| Szint | Szorzó | Hogyan |
+|---|---|---|
+| 1 | ×1 | alap |
+| 2 | ×3 | **ionhajtómű-készlet** (Föld érceiből) |
+| 3 | ×10 | **fúziós hajtómű-készlet** (urán a Földről + hélium-3 a Holdról) |
+| 4 | ×30 | később (a külső bolygókhoz) |
+
+**Beszerelés:**
+
+- Fogd a készletet a kezedbe, és kattints jobb gombbal a **navigációs konzolra**, miközben a hajó **le van szállva**.
+- A szinteket sorban kell beszerelni: a fúziós előtt az ionhajtóművet.
+- A készlet elfogy, és a konzol fejlécében az új szint látszik.
+
+**Az ionhajtóműhöz vezető út röviden:**
+
+1. bauxit → alumínium;
+2. titán → titánrúd → titánlemez;
+3. spodumen → lítium;
+4. kvarchomok → szilícium;
+5. monazit → ritkaföldfém;
+6. ezekből akkumulátorcella, napelemcella és mágnes;
+7. végül az **ionhajtómű-készlet**.
+
+---
+
+## 15. Parancsok
+
+| Parancs | Ki használhatja | Mire jó |
+|---|---|---|
+| `/iss ship info` | mindenki | a hajó osztálya, az alrendszerek állapota, aktív incidensek |
+| `/iss ship set <alrendszer> <érték>` | operátor | alrendszer állapotának beállítása (tesztelésre) |
+| `/iss ship fly <x> <z>` | operátor | repülés egy földi koordinátára (a hajóból) |
+| `/iss ship engine <1-4>` | operátor | hajtómű-szint beállítása (tesztelésre) |
+
+Alrendszer nevek: `engine`, `fuel_energy`, `hull_armor`, `life_support`, `navigation_comms`, `stabilizer`, `landing_launch`, `cargo`.
+
+---
+
+## 16. Tippek és gyakori kérdések
+
+**Nem találom a mod tárgyait kreatívban.**
+Az InterSolarSystem fülön vannak (sisak ikon), szükség esetén lapozz a fülsoron.
+
+**Régi világban vagyok, és nincs halott Föld.**
+A világgenerálás csak új világban működik. A régi világban a hajó, a pálya és a Hold működik. A régi egyszobás kabin a következő beszálláskor lecserélődik az új hajóra (ami a régi kabinban volt, elvész).
+
+**Nem tudok felszállni.**
+Nézd meg a HUD-ot: a hajtómű vagy a leszálló- és indítóegység 20% alatt van? Javítsd meg. Repülés vagy visszaszámlálás közben új utat nem lehet indítani.
+
+**Felszállás közben felrobbant a hajó.**
+Rejtett hibád volt. Legközelebb diagnosztizálj és tesztrepülj (lásd [9. fejezet](#9-rejtett-hibák-diagnosztika-tesztrepülés)).
+
+**Fulladok a pályán vagy a Holdon.**
+Mind a négy űrruhadarab kell, és az oxigén a hajóban töltődik.
+
+**Honnan szerezzek vasat?**
+Fémhulladékból kemencében vasrög lesz. Fémhulladék van a romokban, a fémhulladék-kupacokban, és a rozsdás panelekből is.
+
+**Honnan szerezzek gyapjút, bőrt?**
+Bunkerekből, városból, tanyákból, kolóniákból, kórházakból.
+
+**Hol van élelem?**
+A romokban (bunkerek, kapszulák, metró, kolóniák), és az oázisban (tök, cukornád). A magbankban és a tanyákon vetőmagot találsz, abból farmolhatsz.
+
+**Éjszaka nem jön semmi?**
+Így van: a halott Földön most nincsenek élőlények. Saját lények később jönnek.
+
+**Kiszabadultam a hajóból, és a semmiben lebegek.**
+Ha a hajó terén kívülre kerülsz, a játék fél másodpercen belül visszatesz a beszállási pontra.
+
+---
+
+## 17. Ami még nincs kész
+
+- **Saját élőlények** (mutánsok, drónok): most a világ üres.
+- A **többi bolygó** (Mars, Vénusz, Merkúr, aszteroidaöv, külső bolygók): a listában látszanak, de zárva vannak.
+- **Több hajóosztály** és bővíthető belső tér: most egy alap hajó van.
+- **Bányászdrónok megjavítása**, olajfinomítás üzemanyaggá, víz- és levegőszűrés.
+- **A 4-es hajtómű-szint** beszerezhető alkatrésze.
+- A **Föld-romok szöveges naplói** (a Holdon már vannak adatterminálok).
+
+A fejlesztés állapota a [`docs/roadmap.md`](docs/roadmap.md)-ben követhető.

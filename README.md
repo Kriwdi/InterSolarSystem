@@ -1,5 +1,7 @@
 # InterSolarSystem
 
+**Player guide (Hungarian): [TUTORIAL.md](TUTORIAL.md)** — how to start, what to do, every recipe and system.
+
 Post-apocalyptic space survival mod for Minecraft 26.3 (Fabric). Salvage a dead Earth, keep a ship alive, and fly towards Proxima.
 
 ## Download (dev builds)
@@ -66,7 +68,7 @@ Every flight wears the subsystems out (about -8 on the engine per flight). Below
 
 ## Salvage and crafting
 
-The technology is salvaged, not invented. Chests in abandoned mineshafts, dungeons, shipwrecks (supply), desert and jungle temples, ruined portals, stronghold corridors, ancient cities, pillager outposts, igloos and village toolsmiths carry **Scrap Metal**, **Salvaged Wiring**, **Salvaged Circuits** and occasionally a ready Repair Kit. (These move into the dead Earth's own ruins in phase 7.)
+The technology is salvaged, not invented. On the dead Earth the ruins' chests and barrels (bunkers, labs, the space centre, cities, crashed capsules...) carry **Scrap Metal**, **Salvaged Wiring**, **Salvaged Circuits**, repair kits, food, wool and leather; scrap piles and broken mining drones drop salvage too. Scrap metal smelts into iron nuggets and salvaged wiring into copper (no vanilla ore generates).
 
 | Recipe | Ingredients |
 |---|---|
