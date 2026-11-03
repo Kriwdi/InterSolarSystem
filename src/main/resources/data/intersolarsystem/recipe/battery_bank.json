@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "intersolarsystem:battery_cell",
+    "W": "intersolarsystem:salvaged_wiring",
+    "S": "intersolarsystem:scrap_metal"
+  },
+  "pattern": [
+    "BBB",
+    "WSW",
+    "SSS"
+  ],
+  "result": {
+    "id": "intersolarsystem:battery_bank",
+    "count": 1
+  }
+}

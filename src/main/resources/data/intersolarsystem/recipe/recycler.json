@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": "intersolarsystem:scrap_metal",
+    "I": "minecraft:iron_ingot",
+    "C": "intersolarsystem:salvaged_circuit",
+    "H": "minecraft:hopper",
+    "W": "intersolarsystem:salvaged_wiring"
+  },
+  "pattern": [
+    "SIS",
+    "CHC",
+    "SWS"
+  ],
+  "result": {
+    "id": "intersolarsystem:recycler",
+    "count": 1
+  }
+}

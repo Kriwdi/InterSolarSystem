@@ -146,6 +146,28 @@ def recipes():
 
 
 # ---------------------------------------------------------------- tags
+def salvage_recipes():
+    shaped("recycler", ["SIS", "CHC", "SWS"], {"S": "scrap_metal", "I": "minecraft:iron_ingot", "C": "salvaged_circuit",
+                                                 "H": "minecraft:hopper", "W": "salvaged_wiring"}, "recycler")
+    shaped("shredder_module", ["III", "SGS", "III"], {"I": "minecraft:iron_ingot", "S": "scrap_metal",
+                                                       "G": "minecraft:grindstone"}, "shredder_module")
+    shaped("smelter_module", ["SCS", "SFS", "SWS"], {"S": "scrap_metal", "C": "minecraft:copper_ingot",
+                                                      "F": "minecraft:blast_furnace", "W": "salvaged_wiring"}, "smelter_module")
+    shaped("sorter_module", ["CEC", "WHW", "SCS"], {"C": "salvaged_circuit", "E": "rare_earth_magnet", "W": "salvaged_wiring",
+                                                     "H": "minecraft:hopper", "S": "scrap_metal"}, "sorter_module")
+    shaped("cutting_torch", ["  W", " S ", "B  "], {"W": "salvaged_wiring", "S": "scrap_metal", "B": "battery_cell"},
+           "cutting_torch")
+    shaped("battery_bank", ["BBB", "WSW", "SSS"], {"B": "battery_cell", "W": "salvaged_wiring", "S": "scrap_metal"},
+           "battery_bank")
+    shaped("diesel_generator", ["SSS", "WFW", "SCS"], {"S": "scrap_metal", "W": "salvaged_wiring", "F": "minecraft:furnace",
+                                                        "C": "salvaged_circuit"}, "diesel_generator")
+    shaped("solar_panel", ["GGG", "CCC", "AWA"], {"G": "minecraft:glass", "C": "solar_cell", "A": "aluminium_ingot",
+                                                   "W": "salvaged_wiring"}, "solar_panel")
+    shaped("radio_set", ["  W", "SCS", "SBS"], {"W": "minecraft:iron_bars", "S": "scrap_metal", "C": "salvaged_circuit",
+                                                 "B": "battery_cell"}, "radio_set")
+    cook("glass_from_shards", "glass_shards", "minecraft:glass", 0.1, kinds=("smelting",))
+
+
 def tags():
     write("intersolarsystem/tags/item/titanium_tool_materials.json", {"values": [NS + "titanium_ingot"]})
     write("intersolarsystem/tags/block/incorrect_for_titanium_tool.json", {"values": []})
@@ -187,4 +209,5 @@ if __name__ == "__main__":
     loot()
     recipes()
     tags()
+    salvage_recipes()
     print("content data written")

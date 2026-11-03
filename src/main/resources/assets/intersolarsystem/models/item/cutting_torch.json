@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "intersolarsystem:item/cutting_torch"
+  }
+}

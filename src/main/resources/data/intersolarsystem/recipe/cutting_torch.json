@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "W": "intersolarsystem:salvaged_wiring",
+    "S": "intersolarsystem:scrap_metal",
+    "B": "intersolarsystem:battery_cell"
+  },
+  "pattern": [
+    "  W",
+    " S ",
+    "B  "
+  ],
+  "result": {
+    "id": "intersolarsystem:cutting_torch",
+    "count": 1
+  }
+}

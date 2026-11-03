@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": "minecraft:glass",
+    "C": "intersolarsystem:solar_cell",
+    "A": "intersolarsystem:aluminium_ingot",
+    "W": "intersolarsystem:salvaged_wiring"
+  },
+  "pattern": [
+    "GGG",
+    "CCC",
+    "AWA"
+  ],
+  "result": {
+    "id": "intersolarsystem:solar_panel",
+    "count": 1
+  }
+}

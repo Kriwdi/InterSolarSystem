@@ -196,7 +196,27 @@ public final class UrbanBlocks {
 			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
 
 	public static final Block DIESEL_GENERATOR = register("diesel_generator",
-			p -> new ShipFacingBlock(p, new double[] {0, 0, 2, 16, 13, 14}),
+			p -> new SalvageMachineBlock(p, new double[] {0, 0, 2, 16, 13, 14}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block RECYCLER = register("recycler",
+			p -> new SalvageMachineBlock(p, new double[] {0, 0, 0, 16, 16, 16}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block SHREDDER_MODULE = register("shredder_module",
+			p -> new SalvageMachineBlock(p, new double[] {1, 0, 1, 15, 13, 15}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block SMELTER_MODULE = register("smelter_module",
+			p -> new SalvageMachineBlock(p, new double[] {1, 0, 1, 15, 13, 15}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block SORTER_MODULE = register("sorter_module",
+			p -> new SalvageMachineBlock(p, new double[] {0, 0, 1, 16, 15, 15}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block BATTERY_BANK = register("battery_bank",
+			p -> new SalvageMachineBlock(p, new double[] {1, 0, 2, 15, 16, 15}),
 			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
 
 	public static final Block BLAST_DOOR = register("blast_door",

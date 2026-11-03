@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/battery_bank"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/battery_bank",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/battery_bank",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/battery_bank",
+      "y": 270
+    }
+  }
+}

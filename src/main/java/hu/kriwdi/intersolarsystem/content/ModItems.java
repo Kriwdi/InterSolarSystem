@@ -55,6 +55,12 @@ public final class ModItems {
 
 	// ---- Components made from them.
 	public static final Item TITANIUM_PLATE = simple("titanium_plate");
+
+	// ---- Salvage: what things are taken apart into, and the torch that cuts them.
+	public static final Item PLASTIC_SCRAP = simple("plastic_scrap");
+	public static final Item RUBBER_SCRAP = simple("rubber_scrap");
+	public static final Item GLASS_SHARDS = simple("glass_shards");
+	public static final Item CUTTING_TORCH = register("cutting_torch", Item::new, new Item.Properties().durability(160));
 	public static final Item SOLAR_CELL = simple("solar_cell");
 	public static final Item BATTERY_CELL = simple("battery_cell");
 	public static final Item RARE_EARTH_MAGNET = simple("rare_earth_magnet");

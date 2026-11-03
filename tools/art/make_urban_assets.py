@@ -578,6 +578,51 @@ def m_radio_set():
     return els
 
 
+def m_recycler():
+    """The recycler: a heavy steel body with an intake hopper on top, a window onto the crusher, warning stripes,
+    a status lamp and an output chute at the front."""
+    return [e((0, 0, 0), (16, 2, 16), "metal_dark"), e((1, 2, 1), (15, 12, 15), "metal_grey", faces={"north": "metal_dark"}),
+            e((0.5, 2, 0.5), (15.5, 3, 15.5), "hazard"), e((3, 12, 3), (13, 13, 13), "metal_dark"),
+            e((2, 13, 2), (14, 16, 4), "metal_grey"), e((2, 13, 12), (14, 16, 14), "metal_grey"),
+            e((2, 13, 4), (4, 16, 12), "metal_grey"), e((12, 13, 4), (14, 16, 12), "metal_grey"),
+            e((4, 12.5, 4), (12, 13, 12), "rust"), e((3, 5, 0.5), (9, 10, 1), "glass_dark"),
+            e((4, 6, 0.6), (8, 7, 0.8), "rust"), e((11, 8, 0.5), (13, 10, 1), "lamp_amber"),
+            e((10, 3, -2), (14, 5, 1), "metal_dark"), e((15, 4, 5), (16.5, 9, 11), "metal_dark")]
+
+
+def m_shredder_module():
+    els = [e((1, 0, 1), (15, 10, 15), "yellow", faces={"up": "metal_dark"}), e((2, 10, 2), (14, 12, 14), "metal_dark")]
+    for x in (3, 7, 11):
+        els += [e((x, 10, 4), (x + 2, 13, 12), "chrome"), e((x + 0.5, 12.5, 3.5), (x + 1.5, 13.5, 12.5), "metal_grey")]
+    els += [e((0, 4, 6), (1, 8, 10), "metal_dark"), e((15, 4, 6), (16, 8, 10), "metal_dark")]
+    return els
+
+
+def m_smelter_module():
+    return [e((1, 0, 1), (15, 3, 15), "metal_dark"), e((2, 3, 2), (14, 12, 14), "rust", faces={"north": "metal_dark"}),
+            e((4, 4, 1.5), (12, 8, 2), "lamp_amber"), e((4, 12, 4), (12, 13, 12), "metal_dark"),
+            e((5, 12.5, 5), (11, 13.2, 11), "lamp_amber"), e((10, 13, 10), (13, 22, 13), "rust"),
+            e((0, 5, 6), (2, 7, 10), "metal_grey"), e((14, 5, 6), (16, 7, 10), "metal_grey")]
+
+
+def m_sorter_module():
+    els = [e((0, 0, 1), (16, 6, 15), "metal_grey"), e((0, 6, 3), (16, 7, 13), "rubber")]
+    for x in (2, 7, 12):
+        els += [e((x, 7, 2), (x + 2, 12, 4), "metal_dark"), e((x, 11, 4), (x + 2, 12, 12), "metal_dark"),
+                e((x + 0.5, 9, 5), (x + 1.5, 11, 11), "chrome")]
+    els += [e((6, 12, 6), (10, 15, 10), "metal_dark", faces={"north": "screen"}), e((1, 2, 0.5), (4, 4, 1), "lamp_green")]
+    return els
+
+
+def m_battery_bank():
+    els = [e((1, 0, 2), (15, 16, 15), "metal_grey", faces={"north": "metal_dark"})]
+    for y in (2, 7, 12):
+        for x in (2.5, 6.5, 10.5):
+            els += [e((x, y, 1.5), (x + 3, y + 3.5, 2), "yellow"), e((x + 1, y + 3.5, 1.6), (x + 2, y + 4, 2), "chrome")]
+    els += [e((6, 15.5, 1.5), (10, 16, 2), "lamp_green"), e((7, 16, 7), (9, 18, 9), "metal_dark")]
+    return els
+
+
 def m_cryo_pod():
     return [e((2, 0, 2), (14, 2, 14), "metal_dark"), e((3, 2, 4), (13, 29, 14), "metal_white", faces={"north": "frost"}),
             e((3.5, 4, 3.5), (12.5, 27, 4), "frost"), e((2.5, 29, 3), (13.5, 31, 14.5), "metal_grey"),
@@ -718,7 +763,12 @@ BLOCKS = {
     "fume_hood": (P(m_fume_hood, (0, 0, 2, 16, 16, 16)), "Fume Hood", "Abzug", "Vegyifülke"),
     "specimen_tank": (P(m_specimen_tank, (3, 0, 3, 13, 16, 13), "glass", light=4), "Specimen Tank", "Probentank", "Mintatartály"),
     "bunk_bed": (P(m_bunk_bed, FULL), "Bunk Bed", "Etagenbett", "Emeletes ágy"),
-    "diesel_generator": (P(m_generator, (0, 0, 2, 16, 13, 14)), "Diesel Generator", "Dieselgenerator", "Dízelaggregátor"),
+    "diesel_generator": (P(m_generator, (0, 0, 2, 16, 13, 14), cls="SalvageMachineBlock"), "Diesel Generator", "Dieselgenerator", "Dízelaggregátor"),
+    "recycler": (P(m_recycler, FULL, cls="SalvageMachineBlock"), "Recycler", "Recycler", "Bontógép"),
+    "shredder_module": (P(m_shredder_module, (1, 0, 1, 15, 13, 15), cls="SalvageMachineBlock"), "Shredder Module", "Schreddermodul", "Darálómodul"),
+    "smelter_module": (P(m_smelter_module, (1, 0, 1, 15, 13, 15), cls="SalvageMachineBlock"), "Smelter Module", "Schmelzmodul", "Olvasztómodul"),
+    "sorter_module": (P(m_sorter_module, (0, 0, 1, 16, 15, 15), cls="SalvageMachineBlock"), "Sorter Module", "Sortiermodul", "Szétválogató modul"),
+    "battery_bank": (P(m_battery_bank, (1, 0, 2, 15, 16, 15), cls="SalvageMachineBlock"), "Battery Bank", "Batteriebank", "Akkumulátortelep"),
     "blast_door": (P(m_blast_door, (0, 0, 12, 16, 16, 16)), "Blast Door", "Druckschutztür", "Robbanásbiztos ajtó"),
 }
 PROP_TEX["prop_blue_dummy"] = "prop_fabric_blue"

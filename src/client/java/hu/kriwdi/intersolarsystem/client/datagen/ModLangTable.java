@@ -1770,6 +1770,262 @@ public final class ModLangTable {
 				"Only static. Nobody is broadcasting.",
 				"Nur Rauschen. Niemand sendet.",
 				"Csak zúgás. Senki nem ad.");
+		add(rows, "block.intersolarsystem.recycler",
+				"Recycler",
+				"Recycler",
+				"Bontógép");
+		add(rows, "block.intersolarsystem.shredder_module",
+				"Shredder Module",
+				"Schreddermodul",
+				"Darálómodul");
+		add(rows, "block.intersolarsystem.smelter_module",
+				"Smelter Module",
+				"Schmelzmodul",
+				"Olvasztómodul");
+		add(rows, "block.intersolarsystem.sorter_module",
+				"Sorter Module",
+				"Sortiermodul",
+				"Szétválogató modul");
+		add(rows, "block.intersolarsystem.battery_bank",
+				"Battery Bank",
+				"Batteriebank",
+				"Akkumulátortelep");
+		add(rows, "item.intersolarsystem.plastic_scrap",
+				"Plastic Scrap",
+				"Plastikschrott",
+				"Műanyaghulladék");
+		add(rows, "item.intersolarsystem.rubber_scrap",
+				"Rubber Scrap",
+				"Gummireste",
+				"Gumihulladék");
+		add(rows, "item.intersolarsystem.glass_shards",
+				"Glass Shards",
+				"Glasscherben",
+				"Üvegszilánkok");
+		add(rows, "item.intersolarsystem.cutting_torch",
+				"Cutting Torch",
+				"Schneidbrenner",
+				"Vágópisztoly");
+		add(rows, "machine.intersolarsystem.recycler.status",
+				"Recycler: power %1$s/%2$s kW, %3$s items queued, yield %4$s-%5$s%%, modules [%6$s] (S shredder, M smelter, R sorter)",
+				"Recycler: Strom %1$s/%2$s kW, %3$s Teile in der Warteschlange, Ausbeute %4$s-%5$s%%, Module [%6$s] (S Schredder, M Schmelze, R Sortierer)",
+				"Bontógép: áram %1$s/%2$s kW, %3$s tárgy sorban, kihozatal %4$s-%5$s%%, modulok [%6$s] (S daráló, M olvasztó, R szétválogató)");
+		add(rows, "machine.intersolarsystem.recycler.no_power",
+				"No power: run a cable from a generator, solar panel or battery bank.",
+				"Kein Strom: Kabel von einem Generator, Solarpanel oder einer Batteriebank verlegen.",
+				"Nincs áram: vezess kábelt egy aggregátortól, napelemtől vagy akkumulátortelepről.");
+		add(rows, "machine.intersolarsystem.recycler.cannot",
+				"%s cannot be recycled",
+				"%s kann nicht recycelt werden",
+				"%s nem bontható");
+		add(rows, "machine.intersolarsystem.recycler.full",
+				"The recycler's hopper is full",
+				"Der Trichter des Recyclers ist voll",
+				"A bontógép tölcsére tele van");
+		add(rows, "machine.intersolarsystem.recycler.loaded",
+				"Loaded (%s/%s)",
+				"Eingelegt (%s/%s)",
+				"Betöltve (%s/%s)");
+		add(rows, "machine.intersolarsystem.generator.status",
+				"Fuel for %s min, %s kW when running",
+				"Treibstoff für %s min, %s kW im Betrieb",
+				"Üzemanyag %s percre, működés közben %s kW");
+		add(rows, "machine.intersolarsystem.generator.full",
+				"The tank is full",
+				"Der Tank ist voll",
+				"A tartály tele van");
+		add(rows, "machine.intersolarsystem.battery.status",
+				"Charge %s%%",
+				"Ladung %s%%",
+				"Töltöttség %s%%");
+		add(rows, "machine.intersolarsystem.module.shredder_module",
+				"Shredder: twice as fast for the recycler it touches",
+				"Schredder: doppelt so schnell für den angrenzenden Recycler",
+				"Daráló: kétszer gyorsabb a mellette álló bontógép");
+		add(rows, "machine.intersolarsystem.module.smelter_module",
+				"Smelter: +15%% yield, scrap metal comes out as iron",
+				"Schmelze: +15%% Ausbeute, Schrott kommt als Eisen heraus",
+				"Olvasztó: +15%% kihozatal, a fémhulladék vasként jön ki");
+		add(rows, "machine.intersolarsystem.module.sorter_module",
+				"Sorter: +10%% yield and rare materials",
+				"Sortierer: +10%% Ausbeute und seltene Stoffe",
+				"Szétválogató: +10%% kihozatal és ritka anyagok");
+		add(rows, "salvage.intersolarsystem.needs_tool",
+				"Step %s/%s: %s - needs %s",
+				"Schritt %s/%s: %s - braucht %s",
+				"%s/%s. lépés: %s - ehhez kell: %s");
+		add(rows, "salvage.intersolarsystem.progress",
+				"Step %s/%s done (%s). Next: %s with %s",
+				"Schritt %s/%s erledigt (%s). Weiter: %s mit %s",
+				"%s/%s. lépés kész (%s). Következik: %s, ehhez: %s");
+		add(rows, "salvage.intersolarsystem.done",
+				"Taken apart",
+				"Zerlegt",
+				"Szétszerelve");
+		add(rows, "salvage.intersolarsystem.step.wheels",
+				"Unbolt the wheels",
+				"Räder abschrauben",
+				"Kerekek lecsavarozása");
+		add(rows, "salvage.intersolarsystem.step.battery",
+				"Pull the battery",
+				"Batterie ausbauen",
+				"Akkumulátor kiszerelése");
+		add(rows, "salvage.intersolarsystem.step.body",
+				"Cut up the body",
+				"Karosserie zerschneiden",
+				"Karosszéria szétvágása");
+		add(rows, "salvage.intersolarsystem.step.engine",
+				"Strip the engine",
+				"Motor zerlegen",
+				"Motor szétszedése");
+		add(rows, "salvage.intersolarsystem.step.cowling",
+				"Unbolt the cowling",
+				"Verkleidung abschrauben",
+				"Burkolat lecsavarozása");
+		add(rows, "salvage.intersolarsystem.step.fan",
+				"Cut out the fan",
+				"Fan herausschneiden",
+				"Ventilátor kivágása");
+		add(rows, "salvage.intersolarsystem.step.core",
+				"Strip the core",
+				"Kerntriebwerk zerlegen",
+				"Mag szétszedése");
+		add(rows, "salvage.intersolarsystem.step.panels",
+				"Take off the panels",
+				"Abdeckungen abnehmen",
+				"Burkolatlemezek leszedése");
+		add(rows, "salvage.intersolarsystem.step.boards",
+				"Pull the boards",
+				"Platinen ziehen",
+				"Áramköri lapok kihúzása");
+		add(rows, "salvage.intersolarsystem.step.frame",
+				"Cut up the frame",
+				"Rahmen zerschneiden",
+				"Váz szétvágása");
+		add(rows, "salvage.intersolarsystem.step.front",
+				"Remove the front",
+				"Front abnehmen",
+				"Előlap leszedése");
+		add(rows, "salvage.intersolarsystem.step.electronics",
+				"Pull the electronics",
+				"Elektronik ausbauen",
+				"Elektronika kiszerelése");
+		add(rows, "salvage.intersolarsystem.step.cabinet",
+				"Cut up the cabinet",
+				"Gehäuse zerschneiden",
+				"Szekrény szétvágása");
+		add(rows, "salvage.intersolarsystem.step.panel",
+				"Remove the control panel",
+				"Bedienfeld ausbauen",
+				"Kezelőpanel kiszerelése");
+		add(rows, "salvage.intersolarsystem.step.wiring",
+				"Pull the wiring",
+				"Verkabelung ziehen",
+				"Vezetékek kihúzása");
+		add(rows, "salvage.intersolarsystem.step.display",
+				"Remove the display",
+				"Anzeige ausbauen",
+				"Kijelző kiszerelése");
+		add(rows, "salvage.intersolarsystem.step.control",
+				"Remove the control unit",
+				"Steuereinheit ausbauen",
+				"Vezérlőegység kiszerelése");
+		add(rows, "salvage.intersolarsystem.step.canopy",
+				"Lift off the canopy",
+				"Haube abnehmen",
+				"Fedél leemelése");
+		add(rows, "salvage.intersolarsystem.step.shell",
+				"Cut up the shell",
+				"Hülle zerschneiden",
+				"Héj szétvágása");
+		add(rows, "salvage.intersolarsystem.step.screen",
+				"Remove the screen",
+				"Bildschirm ausbauen",
+				"Képernyő kiszerelése");
+		add(rows, "salvage.intersolarsystem.step.board",
+				"Pull the main board",
+				"Hauptplatine ziehen",
+				"Alaplap kihúzása");
+		add(rows, "salvage.intersolarsystem.step.case",
+				"Open the case",
+				"Gehäuse öffnen",
+				"Ház szétszedése");
+		add(rows, "salvage.intersolarsystem.step.cells",
+				"Pull the cells",
+				"Zellen ausbauen",
+				"Cellák kiszerelése");
+		add(rows, "salvage.intersolarsystem.step.chassis",
+				"Cut up the chassis",
+				"Fahrgestell zerschneiden",
+				"Alváz szétvágása");
+		add(rows, "salvage.intersolarsystem.step.lines",
+				"Disconnect the lines",
+				"Leitungen trennen",
+				"Vezetékek leválasztása");
+		add(rows, "salvage.intersolarsystem.step.bell",
+				"Cut up the nozzle",
+				"Düse zerschneiden",
+				"Fúvóka szétvágása");
+		add(rows, "salvage.intersolarsystem.step.lamps",
+				"Take out the lamps",
+				"Lampen ausbauen",
+				"Lámpák kiszerelése");
+		add(rows, "salvage.intersolarsystem.step.pole",
+				"Cut down the pole",
+				"Mast absägen",
+				"Oszlop levágása");
+		add(rows, "salvage.intersolarsystem.step.lamp",
+				"Take out the lamp",
+				"Lampe ausbauen",
+				"Lámpa kiszerelése");
+		add(rows, "salvage.intersolarsystem.step.sash",
+				"Lift out the sash",
+				"Frontscheibe ausbauen",
+				"Tolóablak kiemelése");
+		add(rows, "salvage.intersolarsystem.step.doors",
+				"Take off the doors",
+				"Türen abnehmen",
+				"Ajtók leszedése");
+		add(rows, "salvage.intersolarsystem.step.mattress",
+				"Take off the mattress",
+				"Matratze abnehmen",
+				"Matrac leszedése");
+		add(rows, "salvage.intersolarsystem.step.bolts",
+				"Undo the bolts",
+				"Bolzen lösen",
+				"Csavarok kioldása");
+		add(rows, "salvage.intersolarsystem.step.leaf",
+				"Cut up the door leaf",
+				"Türblatt zerschneiden",
+				"Ajtólap szétvágása");
+		add(rows, "salvage.intersolarsystem.step.feed",
+				"Remove the feed horn",
+				"Speisehorn ausbauen",
+				"Tápfej kiszerelése");
+		add(rows, "salvage.intersolarsystem.step.dish",
+				"Cut up the dish",
+				"Schüssel zerschneiden",
+				"Tányér szétvágása");
+		add(rows, "salvage.intersolarsystem.step.cell",
+				"Lift out the cell",
+				"Zelle ausbauen",
+				"Cella kiemelése");
+		add(rows, "salvage.intersolarsystem.step.seats",
+				"Unbolt the seats",
+				"Sitze abschrauben",
+				"Ülések lecsavarozása");
+		add(rows, "salvage.intersolarsystem.step.beam",
+				"Cut the beam",
+				"Träger schneiden",
+				"Tartógerenda elvágása");
+		add(rows, "salvage.intersolarsystem.step.locker",
+				"Cut open the locker",
+				"Spind aufschneiden",
+				"Szekrény felvágása");
+		add(rows, "salvage.intersolarsystem.step.drawers",
+				"Empty the drawers",
+				"Schubladen leeren",
+				"Fiókok kiürítése");
 		check(rows);
 		return List.copyOf(rows);
 	}

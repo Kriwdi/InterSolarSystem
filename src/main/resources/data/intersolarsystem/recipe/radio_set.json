@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "W": "minecraft:iron_bars",
+    "S": "intersolarsystem:scrap_metal",
+    "C": "intersolarsystem:salvaged_circuit",
+    "B": "intersolarsystem:battery_cell"
+  },
+  "pattern": [
+    "  W",
+    "SCS",
+    "SBS"
+  ],
+  "result": {
+    "id": "intersolarsystem:radio_set",
+    "count": 1
+  }
+}

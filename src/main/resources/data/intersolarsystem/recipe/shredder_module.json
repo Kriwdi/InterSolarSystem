@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": "minecraft:iron_ingot",
+    "S": "intersolarsystem:scrap_metal",
+    "G": "minecraft:grindstone"
+  },
+  "pattern": [
+    "III",
+    "SGS",
+    "III"
+  ],
+  "result": {
+    "id": "intersolarsystem:shredder_module",
+    "count": 1
+  }
+}

@@ -255,7 +255,7 @@ public final class ModBlocks {
 			|| s.is(LANDER_ENGINE)), BlockBehaviour.Properties.of().strength(1.5F, 4.0F).sound(SoundType.COPPER).noOcclusion());
 
 	public static final Block CABLE = register("cable", p -> new ConduitBlock(p, 1.5, s -> s.getBlock() instanceof ShipMachineBlock
-			|| s.is(LANDER_ENGINE) || s.getBlock() instanceof ShipFacingBlock && !(s.getBlock() instanceof ShipHatchBlock)
+			|| hu.kriwdi.intersolarsystem.salvage.PowerGrid.connects(s) || s.is(LANDER_ENGINE) || s.getBlock() instanceof ShipFacingBlock && !(s.getBlock() instanceof ShipHatchBlock)
 			&& !(s.getBlock() instanceof ShipHatchTopBlock)),
 			BlockBehaviour.Properties.of().strength(0.8F, 2.0F).sound(SoundType.WOOL).noOcclusion());
 

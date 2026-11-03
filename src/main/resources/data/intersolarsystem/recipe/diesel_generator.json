@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": "intersolarsystem:scrap_metal",
+    "W": "intersolarsystem:salvaged_wiring",
+    "F": "minecraft:furnace",
+    "C": "intersolarsystem:salvaged_circuit"
+  },
+  "pattern": [
+    "SSS",
+    "WFW",
+    "SCS"
+  ],
+  "result": {
+    "id": "intersolarsystem:diesel_generator",
+    "count": 1
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": "intersolarsystem:scrap_metal",
+    "C": "minecraft:copper_ingot",
+    "F": "minecraft:blast_furnace",
+    "W": "intersolarsystem:salvaged_wiring"
+  },
+  "pattern": [
+    "SCS",
+    "SFS",
+    "SWS"
+  ],
+  "result": {
+    "id": "intersolarsystem:smelter_module",
+    "count": 1
+  }
+}
