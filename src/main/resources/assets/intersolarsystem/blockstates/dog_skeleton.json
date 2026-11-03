@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/dog_skeleton"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/dog_skeleton",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/dog_skeleton",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/dog_skeleton",
+      "y": 270
+    }
+  }
+}

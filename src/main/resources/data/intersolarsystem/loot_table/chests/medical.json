@@ -87,6 +87,26 @@
           }
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:note",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"nurse_ashlung\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 1
+        }
+      ]
     }
   ]
 }

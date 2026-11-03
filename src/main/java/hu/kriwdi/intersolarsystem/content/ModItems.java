@@ -111,6 +111,13 @@ public final class ModItems {
 	/** CO2 scrubber cartridge for the life support unit (four flights). */
 	public static final Item AIR_FILTER = register("air_filter", Item::new, new Item.Properties().stacksTo(16));
 
+	/** Lore: a handwritten note, a data tape (audio log) and a technical manual; the text id is in the custom data. */
+	public static final Item NOTE = register("note", Item::new, new Item.Properties().stacksTo(1));
+
+	public static final Item DATA_TAPE = register("data_tape", Item::new, new Item.Properties().stacksTo(1));
+
+	public static final Item MANUAL = register("manual", Item::new, new Item.Properties().stacksTo(1));
+
 	private static Item register(String name, Function<Item.Properties, Item> factory, Item.Properties properties) {
 		ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, ModIds.id(name));
 		return Registry.register(BuiltInRegistries.ITEM, key, factory.apply(properties.setId(key)));

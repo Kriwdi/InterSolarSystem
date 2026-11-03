@@ -204,6 +204,59 @@
           }
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:note",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"child_letter\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:note",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"exodus_lottery\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:note",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"farmer_diary\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:data_tape",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"aurora_exodus\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 4
+        }
+      ]
     }
   ]
 }

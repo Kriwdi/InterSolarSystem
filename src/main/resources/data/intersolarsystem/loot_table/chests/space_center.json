@@ -139,6 +139,103 @@
           }
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:note",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"launch_director\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:data_tape",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"aurora_exodus\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:note",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"exodus_lottery\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:data_tape",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"seed_sower_briefing\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:manual",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"drive_kits\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:manual",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"meteor_piloting\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:manual",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"nav_console\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:manual",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"launch_checklist\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 8
+        }
+      ]
     }
   ]
 }

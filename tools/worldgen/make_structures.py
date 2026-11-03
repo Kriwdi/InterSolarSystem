@@ -33,7 +33,12 @@ MOD_BLOCKS = {"station_hull", "station_foil", "station_window", "station_light",
               "antenna_dish", "data_terminal", "rusted_panel", "scrap_pile", "rubble", "toxic_barrel",
               "mining_drone", "lander_engine", "compacted_junk", "dead_log", "petrified_log", "trinitite",
               "irradiated_soil", "tar_sand", "oil_shale", "ash", "salt_block", "repair_station", "tar_puddle",
-              "living_soil", "oasis_grass", "dead_fence", "dead_planks", "station_glass"}
+              "living_soil", "oasis_grass", "dead_fence", "dead_planks", "station_glass",
+              "skeleton_lying", "skeleton_sitting", "skeleton_curled", "skeleton_suited", "dog_skeleton",
+              "cow_skeleton", "horse_skeleton"}
+
+SKELETONS = tuple(NS + n for n in ("skeleton_lying", "skeleton_sitting", "skeleton_curled", "skeleton_suited",
+                                     "dog_skeleton", "cow_skeleton", "horse_skeleton", "data_terminal"))
 
 
 def S(name, **props):
@@ -109,7 +114,8 @@ class Build:
 
     # -- ruin
     def decay(self, amount, keep=(), cracked=None, top_bias=True):
-        """Removes blocks (more near the top), cracks some, scatters rubble on floors."""
+        """Removes blocks (more near the top), cracks some, scatters rubble on floors. Story props always stay."""
+        keep = tuple(keep) + SKELETONS
         if not self.blocks:
             return
         ys = [p[1] for p in self.blocks]
@@ -197,7 +203,10 @@ def bunker_small():
     b.chest(7, 1, 1, "bunker_food", "west", "barrel")
     b.set(4, 1, 7, S("crafting_table"))
     b.set(5, 1, 7, S("furnace", facing="north", lit="false"))
-    b.set(7, 1, 4, S("data_terminal", facing="west", log=0))
+    b.set(7, 1, 4, S("data_terminal", facing="west", log=8))
+    # The last one awake: curled up on the bunk, the dog at the foot of the bed.
+    b.set(2, 1, 6, S("skeleton_curled", facing="east"))
+    b.set(2, 1, 4, S("dog_skeleton", facing="south"))
     b.decay(0.03, keep=("minecraft:ladder",), cracked=CONCRETE, top_bias=False)
     return b
 
@@ -227,7 +236,9 @@ def bunker_large():
     b.chest(15, 1, 1, "military", "west")
     b.chest(15, 1, 2, "military", "west", "barrel")
     b.chest(1, 1, 11, "bunker", "east")
-    b.set(14, 1, 11, S("data_terminal", facing="north", log=1))
+    b.set(14, 1, 11, S("data_terminal", facing="north", log=8))
+    b.set(13, 1, 10, S("skeleton_sitting", facing="north"))  # by the terminal, waiting for the all-clear
+    b.set(3, 6, 6, S("skeleton_lying", facing="east"))
     b.set(12, 1, 11, S("repair_station", facing="north"))
     b.fill(8, 1, 1, 8, 4, 11, S("iron_bars"))
     b.fill(8, 1, 5, 8, 3, 7, AIR)
@@ -278,7 +289,9 @@ def space_center():
     b.set(4, 1, 22, AIR)
     b.set(4, 2, 22, AIR)
     for x in range(2, 8):
-        b.set(x, 1, 29, S("data_terminal", facing="north", log=x % 4))
+        b.set(x, 1, 29, S("data_terminal", facing="north", log=(9, 6, 9, 4, 10, 9)[x - 2]))
+    b.set(4, 1, 27, S("skeleton_sitting", facing="north"))  # the launch director never left his desk
+    b.set(20, 1, 10, S("skeleton_suited", facing="south"))  # a pad crew member by the wreck
     b.chest(1, 1, 23, "space_center", "east")
     b.chest(8, 1, 23, "space_center", "west")
     b.chest(1, 1, 28, "lab", "east", "barrel")
@@ -299,7 +312,9 @@ def research_lab():
     for x in range(3, 12, 2):  # lab benches with brewing stands and terminals
         b.set(x, 1, 5, S("smooth_stone_slab", type="top"))
         b.set(x, 2, 5, S("brewing_stand", has_bottle_0="false", has_bottle_1="false", has_bottle_2="false"))
-    b.set(13, 1, 5, S("data_terminal", facing="west", log=2))
+    b.set(13, 1, 5, S("data_terminal", facing="west", log=6))
+    b.set(6, 1, 3, S("skeleton_lying", facing="west"))
+    b.set(10, 6, 3, S("skeleton_curled", facing="north"))
     b.chest(13, 1, 9, "lab", "west")
     b.chest(13, 6, 9, "lab", "west")
     b.chest(1, 6, 9, "medical", "east", "barrel")
@@ -353,7 +368,7 @@ def seed_bank():
     for x in (1, 11):
         b.chest(x, 1, 41, "seed_bank", "north")
     b.chest(6, 1, 41, "seed_bank", "north", "barrel")
-    b.set(6, 2, 41, S("data_terminal", facing="north", log=0))
+    b.set(6, 2, 41, S("data_terminal", facing="north", log=11))
     for z in range(4, 30, 5):
         b.set(6, 4, z, S("lantern", hanging="true"))
     b.decay(0.02, cracked=CONCRETE, top_bias=False)
@@ -448,8 +463,9 @@ def radio_tower():
     b.room(10, 0, 0, 16, 4, 6, RUST, S("polished_andesite"))
     b.set(10, 1, 3, AIR)
     b.set(10, 2, 3, AIR)
-    b.set(15, 1, 3, S("data_terminal", facing="west", log=3))
+    b.set(15, 1, 3, S("data_terminal", facing="west", log=10))
     b.chest(15, 1, 1, "radio", "west")
+    b.set(14, 1, 4, S("skeleton_sitting", facing="east"))  # the operator, still at the radio
     b.decay(0.02, keep=(NS + "truss",))
     return b
 
@@ -473,6 +489,8 @@ def hospital():
             b.set(x, y, 10, S("white_bed", facing="north", part="foot"))
             b.set(x, y, 9, S("white_bed", facing="north", part="head"))
         b.chest(19, y, 1, "medical", "west")
+        b.set(4 + floor * 5, y, 6, S("skeleton_lying", facing="east" if floor % 2 else "west"))
+    b.set(19, 1, 6, S("data_terminal", facing="west", log=7))
     b.chest(19, 1, 11, "medical", "west", "barrel")
     b.decay(0.05, cracked={"minecraft:white_concrete": "calcite"})
     return b
@@ -490,6 +508,8 @@ def barracks():
     b.chest(21, 1, 1, "military", "west")
     b.chest(1, 1, 1, "military", "east", "barrel")
     b.chest(21, 1, 4, "bunker_food", "west", "barrel")
+    b.set(9, 1, 3, S("skeleton_lying", facing="north"))
+    b.set(27, 11, 3, S("skeleton_sitting", facing="north"))  # the last guard on the tower
     # Watchtower and a fence line.
     for y in range(0, 10):
         for (x, z) in ((26, 0), (29, 0), (26, 3), (29, 3)):
@@ -576,6 +596,9 @@ def farmhouse():
     b.fill(0, 10, 4, 12, 10, 5, S("dark_oak_planks"))
     b.fill(5, 1, 0, 7, 4, 0, AIR)
     b.fill(1, 1, 7, 3, 2, 8, S("hay_block", axis="y"))
+    b.set(7, 1, 4, S("cow_skeleton", facing="east"))
+    b.set(9, 1, 7, S("dog_skeleton", facing="west"))
+    b.set(4, 1, 13, S("horse_skeleton", facing="north"))
     b.chest(11, 1, 8, "farm", "west")
     b.chest(11, 1, 1, "farm", "west", "barrel")
     for y in range(0, 14):
@@ -812,7 +835,9 @@ def colony(fate):
         b.set(x, 3, z - 1, AIR)
     b.chest(-5, 2, -1, "colony", "south")
     b.chest(4, 2, 4, "colony", "north", "barrel")
-    b.set(0, 2, -6, S("data_terminal", facing="south", log=2))
+    b.set(0, 2, -6, S("data_terminal", facing="south", log=4))
+    b.set(-5, 1, 3, S("skeleton_suited" if fate == "frozen" else "skeleton_lying", facing="east"))
+    b.set(4, 1, -4, S("skeleton_curled", facing="south"))
     if fate == "overgrown":
         for _ in range(40):
             x, z = b.rnd.randint(-7, 7), b.rnd.randint(-7, 7)
@@ -901,7 +926,7 @@ def oasis_refuge():
     b.set(8, 1, 5, S("red_bed", facing="west", part="foot", occupied="false"))
     b.chest(9, 1, 3, "oasis_refuge", "west")
     b.chest(5, 1, 5, "oasis_refuge", "north", "barrel")
-    b.set(6, 2, 1, S("data_terminal", facing="south", log=2))
+    b.set(6, 2, 1, S("data_terminal", facing="south", log=5))
     b.set(5, 1, 1, S("crafting_table"))
     b.set(7, 4, 3, S("station_light"))
     # Solar panels on posts along the south side.
@@ -934,6 +959,7 @@ def dry_shipwreck():
     b.chest(24, 1, 0, "wreck", "east")
     b.chest(10, 1, 1, "cargo", "north", "barrel")
     b.chest(27, 8, 2, "wreck", "west")
+    b.set(25, 8, 0, S("skeleton_sitting", facing="north"))  # the captain stayed with his ship
     b.decay(0.03, keep=("minecraft:chest", "minecraft:barrel"))
     return b
 
@@ -1026,6 +1052,37 @@ def loot_tables():
         "wreck": [pool((3, 6), salvage + [("minecraft:compass", 2, 1, 1), ("minecraft:map", 2, 1, 1),
                                           ("minecraft:gold_ingot", 2, 1, 3), ("minecraft:iron_ingot", 4, 1, 4)])],
     }
+    # Story: one roll per chest that may find a note, a data tape or a manual (the rest of the weight is nothing).
+    lore = {
+        "bunker": [("note", "radio_operator"), ("note", "soldier_short_war"), ("data_tape", "short_war_broadcast"),
+                   ("manual", "space_suit"), ("manual", "repairs")],
+        "bunker_food": [("note", "farmer_diary"), ("note", "child_letter")],
+        "military": [("note", "soldier_short_war"), ("data_tape", "short_war_broadcast"), ("manual", "repairs")],
+        "medical": [("note", "nurse_ashlung")],
+        "lab": [("note", "verdant_breach"), ("data_tape", "verdant_alarm"), ("note", "halcyon_memo")],
+        "research_station": [("note", "halcyon_memo"), ("data_tape", "seed_sower_briefing"),
+                             ("manual", "ship_systems"), ("manual", "diagnostics")],
+        "seed_bank": [("note", "seed_vault"), ("manual", "ship_farm")],
+        "space_center": [("note", "launch_director"), ("data_tape", "aurora_exodus"), ("note", "exodus_lottery"),
+                         ("data_tape", "seed_sower_briefing"), ("manual", "drive_kits"), ("manual", "meteor_piloting"),
+                         ("manual", "nav_console"), ("manual", "launch_checklist")],
+        "space_debris": [("data_tape", "seed_sower_briefing")],
+        "cargo": [("note", "exodus_lottery"), ("note", "child_letter")],
+        "industrial": [("note", "drone_tech"), ("note", "dam_engineer")],
+        "radio": [("note", "radio_operator"), ("data_tape", "mars_last")],
+        "civic": [("note", "child_letter"), ("note", "exodus_lottery"), ("note", "farmer_diary"),
+                  ("data_tape", "aurora_exodus")],
+        "farm": [("note", "farmer_diary"), ("manual", "ship_farm")],
+        "colony": [("note", "colony_overgrown"), ("note", "colony_burnt"), ("note", "colony_frozen")],
+        "oasis_refuge": [("note", "oasis_keeper"), ("data_tape", "oasis_message"), ("manual", "ship_farm")],
+        "wreck": [("note", "wreck_captain")],
+    }
+    for name, finds in lore.items():
+        entries = [{"type": "minecraft:item", "name": NS + item, "weight": 2,
+                    "modifier": [{"type": "minecraft:set_custom_data", "tag": '{lore:"%s"}' % id_}]}
+                   for item, id_ in finds]
+        entries.append({"type": "minecraft:empty", "weight": len(finds)})
+        tables[name].append({"rolls": 1, "entries": entries})
     for name, pools in tables.items():
         write(f"intersolarsystem/loot_table/chests/{name}.json", {"type": "minecraft:chest", "pools": pools})
 

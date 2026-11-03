@@ -178,6 +178,48 @@
           }
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:note",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"colony_overgrown\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:note",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"colony_burnt\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:note",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"colony_frozen\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 3
+        }
+      ]
     }
   ]
 }

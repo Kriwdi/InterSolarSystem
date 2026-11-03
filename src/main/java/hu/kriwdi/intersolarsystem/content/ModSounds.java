@@ -13,6 +13,8 @@ public final class ModSounds {
 	public static final SoundEvent OXYGEN_ALARM = register("oxygen_alarm");
 	public static final SoundEvent SUFFOCATE = register("suffocate");
 	public static final SoundEvent HELMET_BLOCKED = register("helmet_blocked");
+	public static final SoundEvent TAPE_START = register("tape_start");
+	public static final SoundEvent TAPE_STATIC = register("tape_static");
 
 	private ModSounds() {
 	}

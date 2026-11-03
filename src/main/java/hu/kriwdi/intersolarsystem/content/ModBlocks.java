@@ -318,6 +318,20 @@ public final class ModBlocks {
 	private ModBlocks() {
 	}
 
+	// Skeletons of the dead Earth (people in four poses, animals): story props in the ruins, they drop bones.
+	public static final Block SKELETON_LYING = skeleton("skeleton_lying", new double[] {3, 0, 0, 14, 4, 16});
+	public static final Block SKELETON_SITTING = skeleton("skeleton_sitting", new double[] {3, 0, 0, 13, 16, 16});
+	public static final Block SKELETON_CURLED = skeleton("skeleton_curled", new double[] {2, 0, 2, 15, 5, 13});
+	public static final Block SKELETON_SUITED = skeleton("skeleton_suited", new double[] {1, 0, 0, 15, 6, 16});
+	public static final Block DOG_SKELETON = skeleton("dog_skeleton", new double[] {1, 0, 0, 15, 4, 16});
+	public static final Block COW_SKELETON = skeleton("cow_skeleton", new double[] {0, 0, 0, 16, 7, 16});
+	public static final Block HORSE_SKELETON = skeleton("horse_skeleton", new double[] {0, 0, 0, 16, 7, 16});
+
+	private static Block skeleton(String name, double[] box) {
+		return register(name, p -> new ShipFacingBlock(p, box), BlockBehaviour.Properties.of().strength(0.4F)
+				.sound(SoundType.BONE_BLOCK).noOcclusion().noCollision());
+	}
+
 	private static Block ore(String name, float hardness, SoundType sound, int light) {
 		return register(name, Block::new, BlockBehaviour.Properties.of().strength(hardness, 3.0F).sound(sound)
 				.requiresCorrectToolForDrops().lightLevel(state -> light));

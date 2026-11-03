@@ -52,6 +52,32 @@ public class SceneScreenshots implements FabricClientGameTest {
 			context.takeScreenshot("06_pressure");
 			context.setScreen(() -> null);
 
+			// The story: a note, a manual, a terminal, a data tape playing.
+			context.runOnClient(client -> hu.kriwdi.intersolarsystem.client.lore.LoreClient.open("notes", "bunker7"));
+			context.waitTicks(10);
+			context.takeScreenshot("06b_lore_note");
+			context.runOnClient(client -> hu.kriwdi.intersolarsystem.client.lore.LoreClient.open("manuals", "launch_checklist"));
+			context.waitTicks(10);
+			context.takeScreenshot("06c_lore_manual");
+			context.runOnClient(client -> hu.kriwdi.intersolarsystem.client.lore.LoreClient.open("terminals", "terminal_9"));
+			context.waitTicks(10);
+			context.takeScreenshot("06d_lore_terminal");
+			context.setScreen(() -> null);
+			context.runOnClient(client -> hu.kriwdi.intersolarsystem.client.lore.LoreClient.open("tapes", "mars_last"));
+			context.waitTicks(80);
+			context.takeScreenshot("06e_lore_tape");
+
+			// Skeletons in a row on a concrete plate.
+			game.getServer().runCommand("fill 0 150 0 30 150 8 minecraft:gray_concrete");
+			String[] skeletons = {"skeleton_lying", "skeleton_sitting", "skeleton_curled", "skeleton_suited", "dog_skeleton",
+					"cow_skeleton", "horse_skeleton"};
+			for (int i = 0; i < skeletons.length; i++) {
+				game.getServer().runCommand("setblock " + (2 + i * 4) + " 151 3 intersolarsystem:" + skeletons[i] + "[facing=north]");
+			}
+			game.getServer().runCommand("execute in minecraft:overworld run tp @a 15 156 -9 0 28");
+			context.waitTicks(60);
+			context.takeScreenshot("06f_skeletons");
+
 			// Earth orbit: the ISS, the Earth below, and the night sky.
 			game.getServer().runOnServer(server -> OrbitStation.build(server.getLevel(ShipDimensions.ORBIT)));
 			game.getServer().runCommand("time set noon");

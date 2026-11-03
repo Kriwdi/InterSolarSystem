@@ -178,6 +178,48 @@
           }
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:note",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"oasis_keeper\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:data_tape",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"oasis_message\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:manual",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"ship_farm\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 3
+        }
+      ]
     }
   ]
 }

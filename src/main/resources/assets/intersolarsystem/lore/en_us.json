@@ -1,0 +1,480 @@
+{
+ "notes": {
+  "bunker7": {
+   "title": "Bunker 7 - last entry",
+   "subtitle": "Dr. Ilona Varga, bunker physician",
+   "pages": [
+    "To whoever wakes up next to the wreck:\n\nYou were in the last cryo bay of Bunker 7. The filters gave out on day 2,914. I was the last one awake, so I carried you out myself.",
+    "The ship outside is an Aurora research tender, a spare from the Seed Sower programme. She crashed here years ago with nobody aboard. The autopilot still answers. The hatch still opens.",
+    "There is nothing left here. The soil is grey, the seas are dry, the cities are tombs. But the tender can fly. The Moon base had helium-3. The oasis in the south had living soil.",
+    "Salvage. Repair her. Learn her. The manuals are in the barrel.\n\nAnd if you ever reach the stars, take a handful of living soil with you. That is all of us now.\n\n- I."
+   ]
+  },
+  "halcyon_memo": {
+   "title": "INTERNAL - Halcyon phase III",
+   "subtitle": "Aurora Consortium, climate division, 2058",
+   "pages": [
+    "Phase III dispersal approved. 4.1 million tonnes of reflective aerosol over 36 months. Projected cooling: 1.2 degrees.",
+    "Risk note (B. Okafor): the monsoon models disagree. Two of five predict a collapse of continental rainfall.\n\nBoard response: the three good models are the newer ones. Proceed.",
+    "Handwritten in the margin: 'Two of five is not a rounding error.'"
+   ]
+  },
+  "verdant_breach": {
+   "title": "Verdant lab - incident 0447",
+   "subtitle": "Containment report, Sector C",
+   "pages": [
+    "Strain VRD-7 (carbon-fixing, engineered) detected outside Greenhouse 4. Probable route: irrigation runoff into the river.",
+    "Field samples 40 km downstream: VRD-7 has a new behaviour. It breaks down humus. The soil turns grey and loose, like ash. Nothing germinates in it.",
+    "We have named it the Grey Bloom. We cannot stop it. We can only document it.\n\nRecommendation: tell the public. Decision: classified."
+   ]
+  },
+  "farmer_diary": {
+   "title": "Kovacs farm diary",
+   "subtitle": "Spring, the year the rain stopped",
+   "pages": [
+    "March. Third dry month. The well is down to a bucket an hour. The wheat came up thin.",
+    "May. Grey patches in the south field, like someone spilled cement dust. The cows will not graze there. The dog digs and whines.",
+    "July. The whole farm is grey. You can push a stick a metre into the ground. Seeds rot before they sprout.\n\nWe are leaving for the city. They say there is food in the city."
+   ]
+  },
+  "nurse_ashlung": {
+   "title": "Ward 3 shift notes",
+   "subtitle": "Nurse T. Halasz",
+   "pages": [
+    "New admissions: 41. All the same: dry cough, grey sputum, fever in the evenings. The doctors call it Ashlung. Spores from the dead soil, they think.",
+    "It spreads by breath. We wear two masks now. Masks are rationed.",
+    "Day 19 of the quarantine. The army closed the doors from outside. We still have water. I am writing this so someone knows we stayed."
+   ]
+  },
+  "child_letter": {
+   "title": "A letter in crayon",
+   "subtitle": "To Grandma",
+   "pages": [
+    "Dear Grandma,\n\nWe are in the big hall now with lots of people. Daddy says the ship will take us to the Moon and then somewhere with blue sky.",
+    "They give us numbers. Ours is 88412. Daddy says it is a lucky number.\n\nI drew you the rocket. Love, Panna"
+   ]
+  },
+  "soldier_short_war": {
+   "title": "Field notebook",
+   "subtitle": "Sgt. D. Molnar, 4th Engineers",
+   "pages": [
+    "06:10. Orders: hold the reservoir road at all costs. Three nations want the same water.",
+    "11:42. A flash in the north. Then another. The radio says the dams at Kerch and Volta are gone.",
+    "19:00. They are calling it the Short War because it lasted one day. It will not feel short to anyone downwind."
+   ]
+  },
+  "dam_engineer": {
+   "title": "Turbine hall log",
+   "subtitle": "Chief engineer, Gorge Dam",
+   "pages": [
+    "The lake is 40 metres below the spillway. The turbines have nothing to turn. We are holding the gates closed anyway: whatever water is left is worth more than power.",
+    "Armed men at the north gate asking for the lake. I gave them the keys. There is no one left to fight for."
+   ]
+  },
+  "exodus_lottery": {
+   "title": "EXODUS boarding draw - result",
+   "subtitle": "Aurora Consortium, citizen notice",
+   "pages": [
+    "Applicant 88412: NOT SELECTED.\n\nThank you for your patience. The Consortium is working to secure further seats in later departures.",
+    "On the back, in pencil: 'There are no later departures. Tell Panna it is a lucky number anyway.'"
+   ]
+  },
+  "launch_director": {
+   "title": "Launch director's desk note",
+   "subtitle": "Karman Spaceport, pad 3",
+   "pages": [
+    "Ark-4 is the last. After her the pad has no fuel, no crew, no orders. 2,300 aboard. 41,000 at the fence.",
+    "If anyone comes after us: the assembly hall still has the keel of Ark-5. Half a ship. The cranes work if the reactor works. The reactor works if someone fixes the coolant loop.",
+    "I am sorry. We picked by lottery because nobody could pick by worth."
+   ]
+  },
+  "colony_overgrown": {
+   "title": "New Eden colony journal",
+   "subtitle": "Week 31",
+   "pages": [
+    "The dome kept the spores out for thirty weeks. The garden was green. We had tomatoes.",
+    "Week 31: grey at the roots of the beans. The Bloom came in on our own boots. We let the garden grow wild over the habitat to hide the dead ground. It does not help."
+   ]
+  },
+  "colony_burnt": {
+   "title": "Scorched colony log",
+   "subtitle": "Last page",
+   "pages": [
+    "They came at night for the water tank. We fought. Somebody hit the fuel store.",
+    "If you find this: the tank was empty anyway. We had been lying to them for a month."
+   ]
+  },
+  "colony_frozen": {
+   "title": "Northern colony - heater log",
+   "subtitle": "Temperature: -31",
+   "pages": [
+    "Halcyon was supposed to cool the planet by one degree. Here it took twenty.",
+    "We burn furniture now. Then books. I am keeping this notebook for last."
+   ]
+  },
+  "oasis_keeper": {
+   "title": "The keeper's notes",
+   "subtitle": "Oasis refuge",
+   "pages": [
+    "This valley is the test field of the Reversal project: a counter-microbe that eats the Grey Bloom. Here, it worked. The ground is black and alive again.",
+    "It spreads slowly, a hand's width a year. The rest of the world does not have centuries.",
+    "Living soil carries the Reversal culture. Plant it where you want life. A ship's farm will do. A planet would be better.\n\nWe buried three of our own by the dome. They wanted to be part of the green."
+   ]
+  },
+  "seed_vault": {
+   "title": "Seed vault ledger",
+   "subtitle": "Svalbard annex, row K",
+   "pages": [
+    "1,247 varieties stored dry and cold. Germination test, row K: 3 of 40. The cold kept them, the Bloom never reached the vault.",
+    "Note for whoever comes: seeds alone are not enough. They need living soil. The keeper in the southern oasis has it."
+   ]
+  },
+  "radio_operator": {
+   "title": "Radio log, relay tower 9",
+   "subtitle": "Operator on duty: nobody else",
+   "pages": [
+    "Day 1,102. Ark-2 (Mars) carrier still on 7.1 GHz, no voice.",
+    "Day 1,190. Carrier gone. Then, for eleven seconds, a voice: 'ground the rover, the rover has the key, do not open the...'\n\nNothing since."
+   ]
+  },
+  "drone_tech": {
+   "title": "Maintenance tag",
+   "subtitle": "Autonomous miner MD-14",
+   "pages": [
+    "Unit left in autonomous mode when the crews were recalled. It will keep digging until the cells die.",
+    "Salvage tip: the circuit boards are intact. Pull the cells, rewire the bus, it will run again."
+   ]
+  },
+  "wreck_captain": {
+   "title": "Ship's log, MV Aranyhal",
+   "subtitle": "Captain's last entry",
+   "pages": [
+    "The sea went down three metres in a year. Then it went grey and thick. We ran aground on what used to be the shipping lane.",
+    "The crew walked to the coast. I stayed. A captain stays with the ship, even when the sea leaves her."
+   ]
+  }
+ },
+ "tapes": {
+  "aurora_exodus": {
+   "title": "Tape: Aurora public address",
+   "subtitle": "Recorded broadcast",
+   "lines": [
+    {
+     "at": 0,
+     "who": "",
+     "text": "[static]"
+    },
+    {
+     "at": 40,
+     "who": "Aurora CEO",
+     "text": "Citizens of Earth. The Exodus programme begins today."
+    },
+    {
+     "at": 140,
+     "who": "Aurora CEO",
+     "text": "Four Arks will carry the seed of humanity to the Moon, to Mars, and beyond."
+    },
+    {
+     "at": 260,
+     "who": "Aurora CEO",
+     "text": "Seats will be allocated fairly, by public draw."
+    },
+    {
+     "at": 360,
+     "who": "Crowd",
+     "text": "[shouting, a siren]"
+    },
+    {
+     "at": 440,
+     "who": "",
+     "text": "[the recording cuts out]"
+    }
+   ]
+  },
+  "verdant_alarm": {
+   "title": "Tape: Verdant lab, Sector C",
+   "subtitle": "Security recording",
+   "lines": [
+    {
+     "at": 0,
+     "who": "",
+     "text": "[alarm]"
+    },
+    {
+     "at": 30,
+     "who": "Voice 1",
+     "text": "Greenhouse 4 seals are open! Who opened the seals?"
+    },
+    {
+     "at": 120,
+     "who": "Voice 2",
+     "text": "Irrigation flush, it is scheduled, it runs every Tuesday..."
+    },
+    {
+     "at": 220,
+     "who": "Voice 1",
+     "text": "Shut it down. Shut the whole valley down."
+    },
+    {
+     "at": 320,
+     "who": "Voice 2",
+     "text": "It is already in the river."
+    }
+   ]
+  },
+  "mars_last": {
+   "title": "Tape: Ark-2, last transmission",
+   "subtitle": "Received by relay tower 9",
+   "lines": [
+    {
+     "at": 0,
+     "who": "",
+     "text": "[heavy static]"
+    },
+    {
+     "at": 50,
+     "who": "Ark-2",
+     "text": "...colony status critical. The rover team found something under Jezero."
+    },
+    {
+     "at": 170,
+     "who": "Ark-2",
+     "text": "Ground the rover. The rover has the key. Do not open the..."
+    },
+    {
+     "at": 300,
+     "who": "",
+     "text": "[carrier lost]"
+    }
+   ]
+  },
+  "short_war_broadcast": {
+   "title": "Tape: Emergency broadcast",
+   "subtitle": "Civil defence, channel 1",
+   "lines": [
+    {
+     "at": 0,
+     "who": "",
+     "text": "[three long tones]"
+    },
+    {
+     "at": 60,
+     "who": "Announcer",
+     "text": "This is not a drill. Take shelter immediately."
+    },
+    {
+     "at": 160,
+     "who": "Announcer",
+     "text": "Stay away from rivers, dams and reservoirs. Do not drink surface water."
+    },
+    {
+     "at": 280,
+     "who": "Announcer",
+     "text": "Shelters will open their doors when the all-clear sounds."
+    },
+    {
+     "at": 380,
+     "who": "",
+     "text": "[the tones repeat; there is no all-clear]"
+    }
+   ]
+  },
+  "oasis_message": {
+   "title": "Tape: Message from the oasis",
+   "subtitle": "Looped on the refuge radio",
+   "lines": [
+    {
+     "at": 0,
+     "who": "",
+     "text": "[birdsong]"
+    },
+    {
+     "at": 40,
+     "who": "Keeper",
+     "text": "If you can hear birds on this tape, the oasis is still alive."
+    },
+    {
+     "at": 150,
+     "who": "Keeper",
+     "text": "Take living soil. Take clean water. Take seeds from the vault in the north."
+    },
+    {
+     "at": 270,
+     "who": "Keeper",
+     "text": "Do not stay. One valley cannot feed the future. Fly."
+    }
+   ]
+  },
+  "seed_sower_briefing": {
+   "title": "Tape: Seed Sower mission briefing",
+   "subtitle": "Aurora, classified",
+   "lines": [
+    {
+     "at": 0,
+     "who": "",
+     "text": "[click]"
+    },
+    {
+     "at": 30,
+     "who": "Mission control",
+     "text": "Target: Proxima Centauri b. Habitable zone. Liquid water likely."
+    },
+    {
+     "at": 150,
+     "who": "Mission control",
+     "text": "The Seed Sower carries no passengers. It carries a library of life: seeds, embryos, soil cultures."
+    },
+    {
+     "at": 290,
+     "who": "Mission control",
+     "text": "Its tender ships will stay in the Solar System as couriers. If the Sower fails, a tender must follow."
+    },
+    {
+     "at": 420,
+     "who": "",
+     "text": "[end of tape]"
+    }
+   ]
+  }
+ },
+ "terminals": {
+  "terminal_4": {
+   "title": "COLONY NETWORK",
+   "subtitle": "node 3 / status",
+   "pages": [
+    "> status\nDOME INTEGRITY ..... 92%\nWATER ............ 4 DAYS\nSOIL TEST ........ GREY BLOOM POSITIVE\nCOLONISTS ........ 17 -> 9\n\n> message\nWe are sealing the dome from inside. Do not open."
+   ]
+  },
+  "terminal_5": {
+   "title": "REVERSAL FIELD STATION",
+   "subtitle": "plot 12 / soil monitor",
+   "pages": [
+    "> soil plot12\nGREY BLOOM ....... 0.0%\nREVERSAL CULTURE . ACTIVE\nORGANIC CARBON ... 4.1% (RISING)\n\nNOTE: culture survives in transported soil for > 10 years if kept moist. A ship farm qualifies."
+   ]
+  },
+  "terminal_6": {
+   "title": "VERDANT LAB",
+   "subtitle": "strain archive",
+   "pages": [
+    "> archive VRD-7\nORIGIN ........... GREENHOUSE 4\nFUNCTION ......... CARBON FIXING\nMUTATION ......... HUMUS DIGESTION (GREY BLOOM)\nCOUNTER-STRAIN ... PROJECT REVERSAL -> FIELD TEST SOUTH\n\n> access denied"
+   ]
+  },
+  "terminal_7": {
+   "title": "HOSPITAL ADMISSIONS",
+   "subtitle": "ward summary",
+   "pages": [
+    "> wards\nWARD 1 .. FULL\nWARD 2 .. FULL\nWARD 3 .. QUARANTINE (ASHLUNG)\nSTAFF ... 4 OF 60 ON DUTY\n\n> last entry\nDoors sealed by order of the military district."
+   ]
+  },
+  "terminal_8": {
+   "title": "SHELTER CONTROL",
+   "subtitle": "bunker systems",
+   "pages": [
+    "> systems\nAIR FILTERS ...... 3% LIFE LEFT\nWATER RECYCLER ... OFFLINE\nCRYO BAYS ........ 1 OCCUPIED\nDOOR ............. LOCKED (ALL-CLEAR NEVER RECEIVED)"
+   ]
+  },
+  "terminal_9": {
+   "title": "LAUNCH CONTROL",
+   "subtitle": "Karman spaceport",
+   "pages": [
+    "> manifest\nARK-1 MOON ....... DEPARTED\nARK-2 MARS ....... DEPARTED (SILENT)\nARK-3 MOON-RELAY . DEPARTED\nARK-4 PROXIMA .... DEPARTED\nARK-5 ............ KEEL ONLY / ASSEMBLY HALL\n\n> note\nReactor coolant loop leaking. Cranes offline."
+   ]
+  },
+  "terminal_10": {
+   "title": "RELAY TOWER 9",
+   "subtitle": "signal log",
+   "pages": [
+    "> signals\n7.1 GHz ARK-2 ..... LOST (DAY 1190)\n2.3 GHz MOON ...... BEACON ONLY\n0.4 GHz LOCAL ..... OASIS LOOP (BIRDSONG)\n\nThe oasis loop is the only voice left on Earth."
+   ]
+  },
+  "terminal_11": {
+   "title": "SEED VAULT",
+   "subtitle": "inventory",
+   "pages": [
+    "> inventory\nVARIETIES ........ 1247\nVIABLE (EST.) ..... 7%\nTEMPERATURE ...... -18 C\n\nSeeds need living soil to wake. Soil source: southern oasis (Reversal field)."
+   ]
+  }
+ },
+ "manuals": {
+  "nav_console": {
+   "title": "Navigation console",
+   "subtitle": "Manual N-1, Aurora tender class",
+   "pages": [
+    "1. Right click the console on the bridge. The star chart opens: the Solar System strip, the destinations with travel times, and the details of the selected one.",
+    "2. Select a destination (click, or the arrow keys) and press SET COURSE (or Enter). The course is stored; the ship does not launch yet.",
+    "3. Launch is done from the pilot's seat: see manual N-2 (launch checklist).\n\nDuring a meteor shower, a click on the console engages the autopilot."
+   ]
+  },
+  "launch_checklist": {
+   "title": "Launch checklist",
+   "subtitle": "Manual N-2",
+   "pages": [
+    "1. Course set at the navigation console.\n2. Switch panel (left of the pilot's seat): MAIN POWER, FUEL PUMPS, AVIONICS, LIFE SUPPORT all on (green).",
+    "3. Reactor, coolant and air filter not empty; coolant pipes and power cable whole (manual S-1).\n4. Pilot in the pilot's seat.",
+    "5. Push the throttle (right of the seat) three notches to full. The countdown starts. If anything is missing, the lever springs back and the missing steps are listed.\n\nAfter landing everything powers down."
+   ]
+  },
+  "meteor_piloting": {
+   "title": "Evasive piloting",
+   "subtitle": "Manual N-3",
+   "pages": [
+    "A proximity alert means a meteor shower ahead (about 30 seconds). The radar (top right) shows the rocks around the ship: red ones are on a collision course.",
+    "From the pilot's seat steer with W (up), S (down), A (left), D (right). The ship drifts and slows on its own.",
+    "Every hit costs 5% hull and 1% navigation. Without a pilot the ship drifts; the autopilot (navigation console) dodges what it can for a little fuel."
+   ]
+  },
+  "repairs": {
+   "title": "Field repairs",
+   "subtitle": "Manual R-1",
+   "pages": [
+    "Incidents show where they happen:\n- sparking wall panel: short circuit\n- steaming vent: overheating\n- spraying pipe: leak or pressure loss\n- flames on the floor: electrical fire",
+    "Tools: soldering iron (sparks), multitool (steam), sealant foam (pipes), extinguisher or a water bucket (fire). A repair kit replaces any of them.",
+    "Right click the fault with the tool. Most repairs open a quick board (wiring, valve, pressure). A wrong answer costs 5% and the fault stays. Unfixed incidents cost 25% when their time runs out."
+   ]
+  },
+  "ship_systems": {
+   "title": "Reactor, coolant, life support",
+   "subtitle": "Manual S-1",
+   "pages": [
+    "Engine room:\n- reactor: 8 units, a uranium fuel rod adds 4\n- coolant tank: 4 units, clean water or ice adds 2\n- life support unit: 4 units, an air filter adds 4\nEach flight uses 1 of each. Test hops are free.",
+    "Coolant pipes (copper) must join the reactor to both engine ports and to the coolant tank. The power cable (black and yellow) must run from the reactor to the bridge.",
+    "Pipes and cables join up by themselves and can be broken and laid again. Recipes: 3 scrap metal = 6 pipes, 3 salvaged wiring = 6 cables."
+   ]
+  },
+  "space_suit": {
+   "title": "EVA suit",
+   "subtitle": "Manual E-1",
+   "pages": [
+    "Four pieces: helmet, suit (with the oxygen tank), trousers, boots. Without all four, vacuum takes your air in about 15 seconds.",
+    "A full tank lasts about 10 minutes; it refills aboard the ship while life support is above 20%. Below 20% oxygen the suit beeps.",
+    "The suit also protects against acid water and radiation on Earth. You cannot eat or drink with the helmet on."
+   ]
+  },
+  "diagnostics": {
+   "title": "Diagnostics and test hops",
+   "subtitle": "Manual D-1",
+   "pages": [
+    "Worn subsystems can hide faults after a landing. Hidden faults raise the risk that a takeoff ends in an explosion.",
+    "The diagnostic console scans the ship (once a minute) and lists what it finds, with a risk estimate.",
+    "Test hop: sneak and click the diagnostic console twice within 5 seconds. The ship lifts off and lands in place; every hidden fault shows up as an incident you can repair at home."
+   ]
+  },
+  "drive_kits": {
+   "title": "Drive upgrades",
+   "subtitle": "Manual P-1",
+   "pages": [
+    "Tier 1: x1. Tier 2 (ion drive kit): x3. Tier 3 (fusion drive kit): x10. Install them in order: hold the kit and right click the navigation console while landed.",
+    "Ion drive kit: 4 titanium plates, a rare-earth magnet, 2 battery cells, a circuit, a solar cell.\nFusion drive kit: 4 titanium plates, helium-3 regolith (Moon), 2 uranium fuel rods, a circuit, a magnet."
+   ]
+  },
+  "ship_farm": {
+   "title": "Ship's farm",
+   "subtitle": "Manual F-1",
+   "pages": [
+    "Earth's soil is dead (Grey Bloom). Nothing can be tilled or planted outside a ship.",
+    "Bring living soil from an oasis. Aboard, a hoe turns it into farmland. Ordinary dirt stays dead even aboard.",
+    "Seeds: seed vault, farms, the oasis refuge. Clean water: fill a canister in an oasis pond (other water is polluted)."
+   ]
+  }
+ }
+}

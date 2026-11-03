@@ -76,6 +76,11 @@ def loot():
     drop_ore("oil_shale", "bitumen", 1, 2)
     drop_ore("lithium_brine_crust", "lithium_dust", 1, 2)
     drop_items("scrap_pile", [("scrap_metal", 1, 3, 1), ("salvaged_wiring", 1, 1, 0.3)])
+    for name in ("skeleton_lying", "skeleton_sitting", "skeleton_curled", "skeleton_suited"):
+        drop_items(name, [("minecraft:bone", 2, 4, 1)])
+    drop_items("dog_skeleton", [("minecraft:bone", 1, 2, 1)])
+    for name in ("cow_skeleton", "horse_skeleton"):
+        drop_items(name, [("minecraft:bone", 3, 6, 1), ("minecraft:bone_block", 1, 1, 0.5)])
     drop_items("rubble", [("minecraft:gravel", 1, 1, 1), ("scrap_metal", 1, 1, 0.25)])
     drop_items("mining_drone", [("salvaged_circuit", 1, 2, 1), ("salvaged_wiring", 1, 3, 1), ("scrap_metal", 2, 4, 1),
                                 ("battery_cell", 1, 1, 0.35)])

@@ -1410,6 +1410,62 @@ public final class ModLangTable {
 				"Unknown difficulty: %s (easy, normal, realistic)",
 				"Unbekannte Schwierigkeit: %s (easy, normal, realistic)",
 				"Ismeretlen nehézség: %s (easy, normal, realistic)");
+		add(rows, "item.intersolarsystem.note",
+				"Note",
+				"Notiz",
+				"Feljegyzés");
+		add(rows, "item.intersolarsystem.data_tape",
+				"Data Tape",
+				"Datenband",
+				"Adatszalag");
+		add(rows, "item.intersolarsystem.manual",
+				"Technical Manual",
+				"Technisches Handbuch",
+				"Műszaki kézikönyv");
+		add(rows, "subtitles.intersolarsystem.tape_start",
+				"Tape clicks into place",
+				"Band rastet ein",
+				"Szalag bekattan");
+		add(rows, "subtitles.intersolarsystem.tape_static",
+				"Tape hisses",
+				"Band rauscht",
+				"Szalag sistereg");
+		add(rows, "lore.intersolarsystem.use_hint",
+				"Right click to read",
+				"Rechtsklick zum Lesen",
+				"Jobb klikk: elolvasás");
+		add(rows, "lore.intersolarsystem.play_hint",
+				"Right click to play",
+				"Rechtsklick zum Abspielen",
+				"Jobb klikk: lejátszás");
+		add(rows, "block.intersolarsystem.skeleton_lying",
+				"Skeleton (Lying)",
+				"Skelett (liegend)",
+				"Csontváz (fekvő)");
+		add(rows, "block.intersolarsystem.skeleton_sitting",
+				"Skeleton (Sitting)",
+				"Skelett (sitzend)",
+				"Csontváz (ülő)");
+		add(rows, "block.intersolarsystem.skeleton_curled",
+				"Skeleton (Curled Up)",
+				"Skelett (zusammengerollt)",
+				"Csontváz (összegömbölyödött)");
+		add(rows, "block.intersolarsystem.skeleton_suited",
+				"Astronaut's Remains",
+				"Überreste eines Astronauten",
+				"Űrhajós maradványai");
+		add(rows, "block.intersolarsystem.dog_skeleton",
+				"Dog Skeleton",
+				"Hundeskelett",
+				"Kutyacsontváz");
+		add(rows, "block.intersolarsystem.cow_skeleton",
+				"Cow Skeleton",
+				"Kuhskelett",
+				"Tehéncsontváz");
+		add(rows, "block.intersolarsystem.horse_skeleton",
+				"Horse Skeleton",
+				"Pferdeskelett",
+				"Lócsontváz");
 		check(rows);
 		return List.copyOf(rows);
 	}

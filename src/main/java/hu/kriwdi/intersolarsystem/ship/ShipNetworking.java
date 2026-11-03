@@ -14,6 +14,8 @@ public final class ShipNetworking {
 		PayloadTypeRegistry.clientboundPlay().register(ShipStatusPayload.TYPE, ShipStatusPayload.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(ShipViewPayload.TYPE, ShipViewPayload.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(ManeuverPayload.TYPE, ManeuverPayload.CODEC);
+		PayloadTypeRegistry.clientboundPlay().register(hu.kriwdi.intersolarsystem.lore.LoreOpenPayload.TYPE,
+				hu.kriwdi.intersolarsystem.lore.LoreOpenPayload.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(RepairBoardPayloads.Open.TYPE, RepairBoardPayloads.Open.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(RepairBoardPayloads.Result.TYPE, RepairBoardPayloads.Result.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(NavigationPayloads.Open.TYPE, NavigationPayloads.Open.CODEC);

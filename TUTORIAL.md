@@ -45,7 +45,7 @@ Az új világ kezdőpontja mellett, kelet felé áll a **hajód**: félig beteme
 
 **Az első lépések sorrendje:**
 
-1. **Nyisd ki a hordót** a hajó mellett. Benne: 2 javítókészlet, multiszerszám, kőcsákány, fáklyák, kenyér, egy vödör víz, fémhulladék, vetőmag, 2 tölgycsemete, gyapjú.
+1. **Nyisd ki a hordót** a hajó mellett. Benne: **Dr. Varga Ilona búcsúlevele** (olvasd el!), a hajó **kézikönyvei**, 2 javítókészlet, multiszerszám, kőcsákány, fáklyák, kenyér, egy vödör víz, fémhulladék, vetőmag, 2 tölgycsemete, gyapjú.
 2. **Szállj be** a hajóba (jobb klikk az ajtóra). Nézz körül: a hídon van a navigációs konzol, oldalt a diagnosztikai konzolok, a középső részben az ágyak, a raktár és a javítóállomás, hátul a gépterem.
 3. A bal felső sarokban a **hajó állapotjelzője** (HUD) látszik: a fázis (leszállt, visszaszámlálás, repülés) és a nyolc alrendszer állapota százalékban.
 4. Menj ki, és **kezdd a fosztogatást**: a környéken romok, lezuhant kapszulák, műholdak, bunkerek vannak (lásd [6. fejezet](#6-romok-és-zsákmány)). A fémhulladékból vas, a mentett vezetékből réz olvasztható.
@@ -202,6 +202,24 @@ A struktúrák ládáiban és hordóiban kimentett technológia, élelem és ala
 | **Hajóroncs**, **bálnacsontváz** | kiszáradt tengerfenék | rakomány, iránytű, térkép, arany |
 | **Holt város** (tér, utcák, felhőkarcolók, lakóházak, boltok) | befagyott megapolisz, hamusivatag | városi zsákmány minden épületben |
 | **Metróhálózat** (állomás lépcsővel, alagutak) | megapolisz, hamusivatag, farmvidék, szeméthegyek | városi zsákmány, élelem |
+
+### Történet: feljegyzések, adatszalagok, terminálok, kézikönyvek
+
+A romokban megtudhatod, mi történt a Földdel (Halcyon, a Szürke Virágzás, a Hamutüdő, a Rövid Háború, az Exodus).
+
+- **Feljegyzés** (kézírásos cetli): jobb klikk kézben → lapozható olvasó (nyilak, görgő, ←/→ billentyűk).
+- **Adatszalag**: jobb klikk → lejátszás; a hang (sistergés, kattanás) mellett felirat jelenik meg a képernyő alján.
+- **Műszaki kézikönyv**: a hajó minden rendszeréhez (navigáció, indítási lista, kitérő manőverek, javítás, reaktor és
+  hűtés, űrruha, diagnosztika, hajtómű-fejlesztés, farm). A kezdő hordóban nyolc van, a hajtómű-kézikönyv űrközpontokban.
+- **Adatterminál**: a bunkerekben, laborokban, kórházban, rádiótoronyban, magbankban, kolóniákban, oázisban és
+  űrközpontban egy-egy terminál a hely saját naplóját mutatja (jobb klikk).
+- A tárgy nevén túl a leírásában (tooltip) a címe is látszik, így tudod, mit találtál.
+
+Majdnem minden ládatípusban van esély egy, a helyhez illő feljegyzésre, szalagra vagy kézikönyvre (a kórházban az
+ápolónő naplója, a rádiótoronyban a Bárka-2 utolsó adása, az oázisban a gondnok üzenete stb.).
+
+**Csontvázak:** a romokban emberi maradványok (fekvő, falnak dőlve ülő, összegömbölyödött, szkafanderes) és állatok
+(kutya, tehén, ló) mesélik el az utolsó perceket. Csontot adnak, ha kibányászod őket.
 
 **Elszórt törmelék:**
 
@@ -553,6 +571,6 @@ Ha a hajó terén kívülre kerülsz, a játék fél másodpercen belül visszat
 - **Több hajóosztály** és bővíthető belső tér: most egy alap hajó van.
 - **Bányászdrónok megjavítása**, olajfinomítás üzemanyaggá, víz- és levegőszűrés.
 - **A 4-es hajtómű-szint** beszerezhető alkatrésze.
-- A **Föld-romok szöveges naplói** (a Holdon már vannak adatterminálok).
+- **Nagyobb, összefüggő földi struktúrák** sok új blokkal, és a **Kármán-űrkikötő** az anyahajóval (következő rész).
 
 A fejlesztés állapota a [`docs/roadmap.md`](docs/roadmap.md)-ben követhető.

@@ -57,6 +57,10 @@ public class InterSolarSystemClient implements ClientModInitializer {
 		HudElementRegistry.addLast(ModIds.id("ship_status"), new ShipHudElement());
 		HudElementRegistry.addLast(ModIds.id("oxygen"), new OxygenHudElement());
 		HudElementRegistry.addLast(ModIds.id("radar"), new RadarHudElement());
+		HudElementRegistry.addLast(ModIds.id("tape"), new hu.kriwdi.intersolarsystem.client.lore.TapePlayer());
+		hu.kriwdi.intersolarsystem.client.lore.LoreClient.register();
+		net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK
+				.register(client -> hu.kriwdi.intersolarsystem.client.lore.TapePlayer.tick());
 		ClientPlayNetworking.registerGlobalReceiver(hu.kriwdi.intersolarsystem.ship.ManeuverPayload.TYPE,
 				(payload, context) -> context.client().execute(() -> hu.kriwdi.intersolarsystem.client.sky.ClientManeuver
 						.accept(payload)));

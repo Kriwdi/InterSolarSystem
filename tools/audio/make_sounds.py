@@ -105,11 +105,33 @@ def helmet_clunk(seed):
     return knock + ring
 
 
+def tape_click(seed):
+    """A tape deck: a mechanical clunk and a short motor whine."""
+    rnd = np.random.default_rng(seed)
+    n = seconds(0.35)
+    t = np.arange(n) / RATE
+    clunk = lowpass(rnd.normal(size=n), 1500) * np.exp(-t * 35)
+    whine = np.sin(2 * np.pi * (180 + 300 * t) * t) * np.exp(-t * 6) * 0.25
+    return clunk + whine
+
+
+def radio_static(seed):
+    """A burst of radio static with a carrier tone fading in and out."""
+    rnd = np.random.default_rng(seed)
+    n = seconds(0.9)
+    t = np.arange(n) / RATE
+    hiss = bandpass(rnd.normal(size=n), 900, 5000) * (0.6 + 0.4 * np.sin(2 * np.pi * 7 * t))
+    carrier = np.sin(2 * np.pi * 1180 * t) * 0.15
+    return (hiss + carrier) * envelope(n, 0.1, 0.4)
+
+
 SOUNDS = {
     "suit_breath": [("suit_breath1", lambda: breath(1)), ("suit_breath2", lambda: breath(2))],
     "oxygen_alarm": [("oxygen_alarm", alarm)],
     "suffocate": [("suffocate1", lambda: gasp(3)), ("suffocate2", lambda: gasp(4))],
     "helmet_blocked": [("helmet_blocked", lambda: helmet_clunk(5))],
+    "tape_start": [("tape_start", lambda: tape_click(6))],
+    "tape_static": [("tape_static1", lambda: radio_static(7)), ("tape_static2", lambda: radio_static(8))],
 }
 
 SUBTITLES = {
@@ -117,6 +139,8 @@ SUBTITLES = {
     "oxygen_alarm": "subtitles.intersolarsystem.oxygen_alarm",
     "suffocate": "subtitles.intersolarsystem.suffocate",
     "helmet_blocked": "subtitles.intersolarsystem.helmet_blocked",
+    "tape_start": "subtitles.intersolarsystem.tape_start",
+    "tape_static": "subtitles.intersolarsystem.tape_static",
 }
 
 

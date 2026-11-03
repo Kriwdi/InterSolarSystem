@@ -24,5 +24,18 @@
     "sounds": [
       "intersolarsystem:helmet_blocked"
     ]
+  },
+  "tape_start": {
+    "subtitle": "subtitles.intersolarsystem.tape_start",
+    "sounds": [
+      "intersolarsystem:tape_start"
+    ]
+  },
+  "tape_static": {
+    "subtitle": "subtitles.intersolarsystem.tape_static",
+    "sounds": [
+      "intersolarsystem:tape_static1",
+      "intersolarsystem:tape_static2"
+    ]
   }
 }

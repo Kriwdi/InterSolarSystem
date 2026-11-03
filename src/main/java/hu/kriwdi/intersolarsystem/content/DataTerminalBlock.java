@@ -17,7 +17,9 @@ import net.minecraft.world.phys.BlockHitResult;
  * happened. The log number is part of the block state, so each terminal keeps its own story.
  */
 public class DataTerminalBlock extends ShipFacingBlock {
-	public static final int LOGS = 4;
+	/** Logs 0..3 are the Moon base's (told in chat); 4 and up are Earth logs, shown on the terminal's screen. */
+	public static final int LOGS = 12;
+	public static final int MOON_LOGS = 4;
 	public static final IntegerProperty LOG = IntegerProperty.create("log", 0, LOGS - 1);
 
 	public DataTerminalBlock(Properties properties) {
@@ -37,6 +39,13 @@ public class DataTerminalBlock extends ShipFacingBlock {
 			BlockHitResult hit) {
 		if (player instanceof ServerPlayer serverPlayer) {
 			int log = state.getValue(LOG);
+			level.playSound(null, pos, net.minecraft.sounds.SoundEvents.BEACON_ACTIVATE, net.minecraft.sounds.SoundSource.BLOCKS,
+					0.4F, 1.6F);
+			if (log >= MOON_LOGS) {
+				net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking.send(serverPlayer,
+						new hu.kriwdi.intersolarsystem.lore.LoreOpenPayload("terminal", "terminal_" + log));
+				return InteractionResult.SUCCESS_SERVER;
+			}
 			serverPlayer.sendSystemMessage(Component.translatable("lore.intersolarsystem.terminal.header", log + 1));
 			serverPlayer.sendSystemMessage(Component.translatable("lore.intersolarsystem.terminal." + log));
 			return InteractionResult.SUCCESS_SERVER;
