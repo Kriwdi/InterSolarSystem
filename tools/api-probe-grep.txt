@@ -1,1 +1,1 @@
-# none
+Pig\.class|PigModel|SpiderModel|WanderingTrader\.class|PigRenderer|QuadrupedModel

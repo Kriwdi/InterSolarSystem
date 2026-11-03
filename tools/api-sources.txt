@@ -1,4 +1,7 @@
-# Decompiled sources to read.
-net.minecraft.client.renderer.entity.state.HumanoidRenderState
-net.minecraft.client.renderer.entity.ZombieRenderer
-net.minecraft.client.renderer.entity.AbstractZombieRenderer
+net.minecraft.world.entity.animal.pig.Pig
+net.minecraft.client.model.animal.pig.PigModel
+net.minecraft.client.model.QuadrupedModel
+net.minecraft.client.renderer.entity.PigRenderer
+net.minecraft.world.entity.npc.wanderingtrader.WanderingTrader
+net.minecraft.client.model.monster.spider.SpiderModel
+net.minecraft.client.model.HumanoidModel
