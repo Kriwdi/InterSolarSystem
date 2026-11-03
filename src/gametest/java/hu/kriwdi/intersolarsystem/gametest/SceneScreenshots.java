@@ -28,7 +28,7 @@ import hu.kriwdi.intersolarsystem.space.OrbitStation;
 public class SceneScreenshots implements FabricClientGameTest {
 	@Override
 	public void runTest(ClientGameTestContext context) {
-		try (TestSingleplayerContext game = context.worldBuilder().create()) {
+		try (TestSingleplayerContext game = context.worldBuilder().setUseConsistentSettings(false).create()) {
 			context.waitTicks(60);
 			game.getServer().runCommand("gamemode creative @a");
 			game.getServer().runCommand("gamerule doDaylightCycle false");
