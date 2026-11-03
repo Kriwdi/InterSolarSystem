@@ -86,15 +86,15 @@ public class ShipJourney implements FabricClientGameTest {
 				st.addIncident(new ShipIncident(ShipSubsystem.LANDING_LAUNCH, ShipIncidentType.FIRE, t));
 			});
 			context.waitTicks(30);
-			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 7.5, 0.5, 66, 3.5);
+			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 4.5, 0.5, 66.2, 3.5);
 			context.waitTicks(30);
 			context.takeScreenshot("44b_fault_steam_vent");
-			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 7.5, 7.5, 65.2, 3.5);
+			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 4.5, 7.5, 65.2, 3.5);
 			context.waitTicks(15);
 			context.takeScreenshot("44c_fault_fire");
 			// Put the fire out with the extinguisher (use key), then clear the rest.
 			game.getServer().runCommand("item replace entity @a weapon.mainhand with intersolarsystem:fire_extinguisher");
-			tp(game, "intersolarsystem:ship_interior", 5.5, 65, 5.5, 7.5, 65.3, 3.5);
+			tp(game, "intersolarsystem:ship_interior", 5.5, 65, 3.5, 7.5, 65.3, 3.5);
 			context.waitTicks(5);
 			context.getInput().lookAt(new BlockPos(7, 65, 3));
 			context.waitTicks(5);
