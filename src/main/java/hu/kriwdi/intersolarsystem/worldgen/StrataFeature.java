@@ -3,6 +3,8 @@ package hu.kriwdi.intersolarsystem.worldgen;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -22,10 +24,22 @@ public final class StrataFeature implements Feature {
 	public static final StrataFeature INSTANCE = new StrataFeature();
 	public static final MapCodec<StrataFeature> CODEC = MapCodec.unit(INSTANCE);
 
-	private static final Block[] BANDS = {Blocks.TERRACOTTA, Blocks.ORANGE_TERRACOTTA, Blocks.TERRACOTTA,
-			Blocks.RED_TERRACOTTA, Blocks.YELLOW_TERRACOTTA, Blocks.TERRACOTTA, Blocks.BROWN_TERRACOTTA,
-			Blocks.ORANGE_TERRACOTTA, Blocks.WHITE_TERRACOTTA, Blocks.LIGHT_GRAY_TERRACOTTA, Blocks.RED_TERRACOTTA,
-			Blocks.TERRACOTTA};
+	/** Band colours by id (the coloured terracotta blocks are no longer single fields of {@code Blocks}). */
+	private static final String[] BAND_IDS = {"terracotta", "orange_terracotta", "terracotta", "red_terracotta",
+			"yellow_terracotta", "terracotta", "brown_terracotta", "orange_terracotta", "white_terracotta",
+			"light_gray_terracotta", "red_terracotta", "terracotta"};
+	private static Block[] bands;
+
+	private static Block[] bands() {
+		if (bands == null) {
+			Block[] b = new Block[BAND_IDS.length];
+			for (int i = 0; i < b.length; i++) {
+				b[i] = BuiltInRegistries.BLOCK.getValue(Identifier.withDefaultNamespace(BAND_IDS[i]));
+			}
+			bands = b;
+		}
+		return bands;
+	}
 
 	private StrataFeature() {
 	}
@@ -38,8 +52,8 @@ public final class StrataFeature implements Feature {
 	/** Band for a height: 1-3 block thick layers with a slow wobble. */
 	static Block band(int y, int x, int z) {
 		int wobble = (int) Math.round(Math.sin(x * 0.05) * 1.5 + Math.cos(z * 0.04) * 1.5);
-		int layer = Math.floorMod((y + wobble) / 2 + (y + wobble) / 5, BANDS.length);
-		return BANDS[layer];
+		int layer = Math.floorMod((y + wobble) / 2 + (y + wobble) / 5, BAND_IDS.length);
+		return bands()[layer];
 	}
 
 	@Override
