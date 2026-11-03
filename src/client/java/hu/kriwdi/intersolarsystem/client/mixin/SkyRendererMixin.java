@@ -113,6 +113,12 @@ public abstract class SkyRendererMixin {
 			intersolarsystem$renderShipView(renderPass, poseStack, sunAngle);
 			return;
 		}
+		net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
+		if (mc.level != null && (mc.level.dimension().equals(hu.kriwdi.intersolarsystem.ship.ShipDimensions.ORBIT)
+				|| mc.level.dimension().equals(hu.kriwdi.intersolarsystem.ship.ShipDimensions.MOON)
+				|| mc.level.dimension().equals(hu.kriwdi.intersolarsystem.ship.ShipDimensions.MOTHERSHIP))) {
+			intersolarsystem$drawSpace(renderPass, poseStack, 1.0F, starAngle * 360.0F);
+		}
 		EarthInSky.View view = EarthInSky.current();
 		if (view == EarthInSky.View.NONE) {
 			return;
@@ -133,6 +139,10 @@ public abstract class SkyRendererMixin {
 			poseStack.rotateDegrees(Axis.XP, scene.starAngle());
 			renderStars(renderPass, scene.stars(), poseStack);
 			poseStack.popPose();
+			intersolarsystem$drawSpace(renderPass, poseStack, scene.stars(), scene.starAngle());
+			if (ShipView.cruising() && scene.stars() > 0.5F) {
+				intersolarsystem$drawStreaks(renderPass, poseStack, ShipView.time(partial));
+			}
 		}
 		if (scene.earth() != null) {
 			ShipView.Body e = scene.earth();
@@ -174,6 +184,79 @@ public abstract class SkyRendererMixin {
 
 	@Unique
 	private GpuBuffer intersolarsystem$meteor;
+
+	@Unique
+	private final java.util.Map<String, GpuBuffer> intersolarsystem$space = new java.util.HashMap<>();
+
+	@Unique
+	private void intersolarsystem$sprite(final RenderPass renderPass, final PoseStack poseStack, final String name,
+			final float distance, final float scale, final float brightness) {
+		GpuBuffer buffer = intersolarsystem$space.computeIfAbsent(name, n -> intersolarsystem$buildSprite(celestialsAtlas, n));
+		Matrix4f matrix = applyCelestialBodyTransform(poseStack, distance, scale);
+		GpuBufferSlice transforms = RenderSystem.getDynamicUniforms().writeTransform(matrix,
+				new Vector4f(brightness, brightness, brightness, 1.0F));
+		drawCelestialBody(() -> "Space " + name, renderPass, transforms, quadIndices.getBuffer(6), buffer, 0);
+	}
+
+	/**
+	 * The deep sky of space (orbit, the Moon, the mothership, the ship's windows in flight): the Milky Way as a band
+	 * of eight segments along a tilted great circle, four coloured nebulae and twelve dense star fields, all drawn
+	 * additively so black is nothing. {@code turn}: the sky's slow rotation (degrees).
+	 */
+	@Unique
+	private void intersolarsystem$drawSpace(final RenderPass renderPass, final PoseStack poseStack, final float brightness,
+			final float turn) {
+		float d = 100.0F;
+		poseStack.pushPose();
+		poseStack.rotateDegrees(Axis.YP, -90.0F);
+		poseStack.rotateDegrees(Axis.XP, turn);
+		for (int i = 0; i < 12; i++) {
+			poseStack.pushPose();
+			poseStack.rotateDegrees(Axis.XP, i * 67.0F);
+			poseStack.rotateDegrees(Axis.ZP, i * 41.0F + 13.0F);
+			intersolarsystem$sprite(renderPass, poseStack, "space/stars_" + (i % 4), d, d * 0.62F, 0.75F * brightness);
+			poseStack.popPose();
+		}
+		poseStack.pushPose();
+		poseStack.rotateDegrees(Axis.ZP, 62.0F);
+		for (int i = 0; i < 8; i++) {
+			poseStack.pushPose();
+			poseStack.rotateDegrees(Axis.XP, i * 45.0F);
+			poseStack.rotateDegrees(Axis.YP, 90.0F);
+			intersolarsystem$sprite(renderPass, poseStack, "space/milky_way_" + i, d, d * 0.42F, 0.9F * brightness);
+			poseStack.popPose();
+		}
+		poseStack.popPose();
+		float[][] nebulae = {{35.0F, 20.0F, 0.32F}, {150.0F, -40.0F, 0.26F}, {230.0F, 70.0F, 0.22F}, {300.0F, -15.0F, 0.3F}};
+		for (int i = 0; i < nebulae.length; i++) {
+			poseStack.pushPose();
+			poseStack.rotateDegrees(Axis.XP, nebulae[i][0]);
+			poseStack.rotateDegrees(Axis.ZP, nebulae[i][1]);
+			intersolarsystem$sprite(renderPass, poseStack, "space/nebula_" + i, d, d * nebulae[i][2], 0.85F * brightness);
+			poseStack.popPose();
+		}
+		poseStack.popPose();
+	}
+
+	/** Dust and ice grains streaking past the bow while the ship cruises: the feeling of speed. */
+	@Unique
+	private void intersolarsystem$drawStreaks(final RenderPass renderPass, final PoseStack poseStack, final float time) {
+		java.util.Random rnd = new java.util.Random(4242L);
+		for (int i = 0; i < 40; i++) {
+			float dirX = rnd.nextFloat() * 70.0F - 35.0F;
+			float dirZ = rnd.nextFloat() * 70.0F - 35.0F;
+			float speed = 0.35F + rnd.nextFloat() * 0.5F;
+			float p = (time * speed / 20.0F + rnd.nextFloat()) % 1.0F;
+			float distance = 100.0F - 95.0F * p;
+			poseStack.pushPose();
+			poseStack.rotateDegrees(Axis.YP, -90.0F);
+			poseStack.rotateDegrees(Axis.ZP, -90.0F);
+			poseStack.rotateDegrees(Axis.XP, dirX * (1.0F + p * 1.5F));
+			poseStack.rotateDegrees(Axis.ZP, dirZ * (1.0F + p * 1.5F));
+			intersolarsystem$sprite(renderPass, poseStack, "space/dust", distance, 0.4F + 2.5F * p * p, Math.min(1.0F, p * 2.0F));
+			poseStack.popPose();
+		}
+	}
 
 	/** The meteor shower ahead of the bow: rocks grow as they close in, offset by where the pilot has moved the ship. */
 	@Unique
@@ -324,6 +407,8 @@ public abstract class SkyRendererMixin {
 			intersolarsystem$meteor = null;
 		}
 		intersolarsystem$grounds.clear();
+		intersolarsystem$space.values().forEach(GpuBuffer::close);
+		intersolarsystem$space.clear();
 	}
 
 	/** Eight quads, one per lighting phase, in the same layout as vanilla's moon phases. */
