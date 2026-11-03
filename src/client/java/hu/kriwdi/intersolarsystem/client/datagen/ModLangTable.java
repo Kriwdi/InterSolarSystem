@@ -2026,6 +2026,214 @@ public final class ModLangTable {
 				"Empty the drawers",
 				"Schubladen leeren",
 				"Fiókok kiürítése");
+		add(rows, "block.intersolarsystem.power_cabinet",
+				"Power Plant Control Cabinet",
+				"Kraftwerks-Schaltschrank",
+				"Erőmű vezérlőszekrény");
+		add(rows, "block.intersolarsystem.control_cabinet",
+				"Launch Control Cabinet",
+				"Startkontroll-Schaltschrank",
+				"Indítóközpont vezérlőszekrény");
+		add(rows, "block.intersolarsystem.fabrication_cabinet",
+				"Fabrication Hall Control Cabinet",
+				"Fertigungshallen-Schaltschrank",
+				"Gyártócsarnok vezérlőszekrény");
+		add(rows, "block.intersolarsystem.fuel_cabinet",
+				"Fuel Depot Control Cabinet",
+				"Treibstofflager-Schaltschrank",
+				"Üzemanyagtelep vezérlőszekrény");
+		add(rows, "block.intersolarsystem.crane_cabinet",
+				"Assembly Crane Control Cabinet",
+				"Montagekran-Schaltschrank",
+				"Szerelődaru vezérlőszekrény");
+		add(rows, "block.intersolarsystem.fabricator",
+				"Fabricator",
+				"Fertigungsmaschine",
+				"Gyártógép");
+		add(rows, "block.intersolarsystem.crane_console",
+				"Crane Console",
+				"Kranpult",
+				"Darukonzol");
+		add(rows, "block.intersolarsystem.manual_printer",
+				"Manual Printer",
+				"Handbuchdrucker",
+				"Kézikönyv-nyomtató");
+		add(rows, "block.intersolarsystem.crane_hook",
+				"Crane Hook",
+				"Kranhaken",
+				"Darukampó");
+		add(rows, "item.intersolarsystem.keel_kit",
+				"Mothership Keel Kit",
+				"Kielbausatz (Mutterschiff)",
+				"Anyahajó-gerinc készlet");
+		add(rows, "item.intersolarsystem.hull_kit",
+				"Mothership Hull Kit",
+				"Rumpfbausatz (Mutterschiff)",
+				"Anyahajó-törzs készlet");
+		add(rows, "item.intersolarsystem.engine_kit",
+				"Mothership Engine Kit",
+				"Triebwerksbausatz (Mutterschiff)",
+				"Anyahajó-hajtómű készlet");
+		add(rows, "item.intersolarsystem.reactor_kit",
+				"Mothership Reactor Kit",
+				"Reaktorbausatz (Mutterschiff)",
+				"Anyahajó-reaktor készlet");
+		add(rows, "item.intersolarsystem.life_support_kit",
+				"Mothership Life Support Kit",
+				"Lebenserhaltungsbausatz (Mutterschiff)",
+				"Anyahajó-életfenntartó készlet");
+		add(rows, "item.intersolarsystem.hydroponics_kit",
+				"Mothership Hydroponics Kit",
+				"Hydrokulturbausatz (Mutterschiff)",
+				"Anyahajó-farm készlet");
+		add(rows, "item.intersolarsystem.laboratory_kit",
+				"Mothership Laboratory Kit",
+				"Laborbausatz (Mutterschiff)",
+				"Anyahajó-labor készlet");
+		add(rows, "item.intersolarsystem.quarters_kit",
+				"Mothership Quarters Kit",
+				"Quartierbausatz (Mutterschiff)",
+				"Anyahajó-szállás készlet");
+		add(rows, "item.intersolarsystem.hangar_kit",
+				"Mothership Hangar Kit",
+				"Hangarbausatz (Mutterschiff)",
+				"Anyahajó-hangár készlet");
+		add(rows, "item.intersolarsystem.bridge_kit",
+				"Mothership Bridge Kit",
+				"Brückenbausatz (Mutterschiff)",
+				"Anyahajó-híd készlet");
+		add(rows, "item.intersolarsystem.research_ship_kit",
+				"Research Ship Kit",
+				"Forschungsschiff-Bausatz",
+				"Kutatóhajó-készlet");
+		add(rows, "spaceport.intersolarsystem.facility.power",
+				"Power Plant",
+				"Kraftwerk",
+				"Erőmű");
+		add(rows, "spaceport.intersolarsystem.facility.control",
+				"Launch Control",
+				"Startkontrolle",
+				"Indítóközpont");
+		add(rows, "spaceport.intersolarsystem.facility.fabrication",
+				"Fabrication Hall",
+				"Fertigungshalle",
+				"Gyártócsarnok");
+		add(rows, "spaceport.intersolarsystem.facility.fuel",
+				"Fuel Depot",
+				"Treibstofflager",
+				"Üzemanyagtelep");
+		add(rows, "spaceport.intersolarsystem.facility.crane",
+				"Assembly Crane",
+				"Montagekran",
+				"Szerelődaru");
+		add(rows, "spaceport.intersolarsystem.checklist",
+				"%s - restoration checklist",
+				"%s - Wiederherstellungsliste",
+				"%s - helyreállítási lista");
+		add(rows, "spaceport.intersolarsystem.needs_previous",
+				"%s must be working first",
+				"%s muss zuerst laufen",
+				"Előbb a(z) %s működjön");
+		add(rows, "spaceport.intersolarsystem.debris",
+				"Debris near the cabinet: %s blocks left (rubble and broken concrete within %s blocks)",
+				"Schutt am Schrank: noch %s Blöcke (Schutt und Bruchbeton im Umkreis von %s)",
+				"Törmelék a szekrény körül: még %s blokk (törmelék és törött beton %s blokkon belül)");
+		add(rows, "spaceport.intersolarsystem.material",
+				"%s: %s/%s",
+				"%s: %s/%s",
+				"%s: %s/%s");
+		add(rows, "spaceport.intersolarsystem.calibrate_now",
+				"Everything is in place: calibrating now",
+				"Alles bereit: Kalibrierung beginnt",
+				"Minden a helyén: indul a kalibrálás");
+		add(rows, "spaceport.intersolarsystem.calibrate_later",
+				"Calibration: once everything above is done (right click with an empty hand)",
+				"Kalibrierung: wenn alles oben erledigt ist (Rechtsklick mit leerer Hand)",
+				"Kalibrálás: ha a fentiek megvannak (jobb klikk üres kézzel)");
+		add(rows, "spaceport.intersolarsystem.delivered",
+				"%s delivered (%s/%s)",
+				"%s geliefert (%s/%s)",
+				"%s leadva (%s/%s)");
+		add(rows, "spaceport.intersolarsystem.enough",
+				"Enough %s",
+				"Genug %s",
+				"Elég %s");
+		add(rows, "spaceport.intersolarsystem.not_needed",
+				"%s does not need that",
+				"%s braucht das nicht",
+				"A(z) %s ezt nem kéri");
+		add(rows, "spaceport.intersolarsystem.online",
+				"%s is back online!",
+				"%s läuft wieder!",
+				"A(z) %s újra működik!");
+		add(rows, "spaceport.intersolarsystem.calibration_failed",
+				"Calibration failed. Try again.",
+				"Kalibrierung fehlgeschlagen. Nochmal versuchen.",
+				"A kalibrálás nem sikerült. Próbáld újra.");
+		add(rows, "spaceport.intersolarsystem.reactor_status",
+				"Reactor running: fuel for %s min (uranium fuel rods top it up)",
+				"Reaktor läuft: Brennstoff für %s min (Uranbrennstäbe nachlegen)",
+				"A reaktor működik: üzemanyag %s percre (urán fűtőelemmel tölthető)");
+		add(rows, "spaceport.intersolarsystem.reactor_fault",
+				"Reactor fault! The spaceport is down: repair it with a repair kit at the power plant cabinet",
+				"Reaktorstörung! Der Raumhafen steht: mit einem Reparaturset am Kraftwerksschrank reparieren",
+				"Reaktorhiba! Az űrkikötő leállt: javítókészlettel javítsd az erőmű szekrényénél");
+		add(rows, "spaceport.intersolarsystem.reactor_repaired",
+				"Reactor repaired",
+				"Reaktor repariert",
+				"Reaktor megjavítva");
+		add(rows, "spaceport.intersolarsystem.reactor_empty",
+				"The reactor is out of fuel: the spaceport is down",
+				"Der Reaktor hat keinen Brennstoff mehr: der Raumhafen steht",
+				"A reaktor kifogyott: az űrkikötő leállt");
+		add(rows, "spaceport.intersolarsystem.propellant",
+				"Propellant %s/%s (the mothership needs %s; bitumen +2, helium-3 regolith +12)",
+				"Treibstoff %s/%s (das Mutterschiff braucht %s; Bitumen +2, Helium-3-Regolith +12)",
+				"Hajtóanyag %s/%s (az anyahajónak %s kell; bitumen +2, hélium-3 regolit +12)");
+		add(rows, "spaceport.intersolarsystem.working",
+				"%s is working",
+				"%s läuft",
+				"A(z) %s működik");
+		add(rows, "spaceport.intersolarsystem.no_power",
+				"%s has no power (the power plant is down)",
+				"%s hat keinen Strom (das Kraftwerk steht)",
+				"A(z) %s nem kap áramot (az erőmű áll)");
+		add(rows, "spaceport.intersolarsystem.needs_working",
+				"The %s must be restored and powered first",
+				"Zuerst %s wiederherstellen und mit Strom versorgen",
+				"Előbb a(z) %s legyen helyreállítva és áram alatt");
+		add(rows, "spaceport.intersolarsystem.recipe",
+				"Fabricating: %s (sneak + right click: next recipe)",
+				"Fertigung: %s (Schleichen + Rechtsklick: nächstes Rezept)",
+				"Gyártás: %s (guggolás + jobb klikk: következő recept)");
+		add(rows, "spaceport.intersolarsystem.made",
+				"%s fabricated",
+				"%s gefertigt",
+				"%s elkészült");
+		add(rows, "spaceport.intersolarsystem.crane_building",
+				"The crane is building: %s, %s%%",
+				"Der Kran baut: %s, %s%%",
+				"A daru épít: %s, %s%%");
+		add(rows, "spaceport.intersolarsystem.crane_next",
+				"Mothership: %s of %s sections built. Next: %s",
+				"Mutterschiff: %s von %s Sektionen gebaut. Als Nächstes: %s",
+				"Anyahajó: %s/%s szekció kész. Következik: %s");
+		add(rows, "spaceport.intersolarsystem.crane_started",
+				"The crane starts building: %s",
+				"Der Kran beginnt: %s",
+				"A daru nekiáll: %s");
+		add(rows, "spaceport.intersolarsystem.section_done",
+				"Section built: %s (%s/%s)",
+				"Sektion fertig: %s (%s/%s)",
+				"Szekció kész: %s (%s/%s)");
+		add(rows, "spaceport.intersolarsystem.mothership_complete",
+				"The mothership is complete. Propellant %s/%s for launch.",
+				"Das Mutterschiff ist fertig. Treibstoff %s/%s für den Start.",
+				"Az anyahajó kész. Hajtóanyag %s/%s az indításhoz.");
+		add(rows, "spaceport.intersolarsystem.printer_paper",
+				"The printer needs paper (right click with paper)",
+				"Der Drucker braucht Papier (Rechtsklick mit Papier)",
+				"A nyomtatónak papír kell (jobb klikk papírral)");
 		check(rows);
 		return List.copyOf(rows);
 	}

@@ -230,7 +230,7 @@ public class SceneScreenshots implements FabricClientGameTest {
 			}
 			for (String name : new String[] {"dead_city", "space_center", "hospital", "seed_bank", "colony_overgrown",
 					"oil_pumpjack", "dry_shipwreck", "oasis_refuge", "terraformer", "farmhouse", "radio_tower", "airport", "barracks",
-					"verdant_lab", "bunker_network"}) {
+					"verdant_lab", "bunker_network", "karman_spaceport"}) {
 				BlockPos at = game.getServer().computeOnServer(server -> {
 					ServerLevel earth = server.overworld();
 					var structure = server.registryAccess().lookupOrThrow(Registries.STRUCTURE)
@@ -245,7 +245,7 @@ public class SceneScreenshots implements FabricClientGameTest {
 						+ " " + at.getZ() + " -45 32");
 				context.waitTicks(160);
 				context.takeScreenshot("30_structure_" + name);
-				if (name.equals("dead_city") || name.equals("airport") || name.equals("hospital") || name.equals("verdant_lab")) {
+				if (name.equals("dead_city") || name.equals("airport") || name.equals("hospital") || name.equals("verdant_lab") || name.equals("karman_spaceport")) {
 					// The big ones also from high above, looking both ways.
 					game.getServer().runCommand("execute in minecraft:overworld run tp @a " + (at.getX() - 30) + " "
 							+ (at.getY() + 70) + " " + (at.getZ() - 30) + " -45 40");

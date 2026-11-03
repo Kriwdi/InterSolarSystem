@@ -32,6 +32,22 @@ public final class ShipRepairBoards {
 
 	private static final Map<UUID, Pending> PENDING = new HashMap<>();
 
+	/** A board opened by something other than a ship incident (the spaceport's calibrations, later machines). */
+	private record External(RepairMinigame kind, long seed, int size, long openedTick, java.util.function.Consumer<Boolean> done) {
+	}
+
+	private static final Map<UUID, External> EXTERNAL = new HashMap<>();
+
+	/** Opens a board whose result goes to {@code done} (true: solved). */
+	public static void openExternal(MinecraftServer server, ServerPlayer player, RepairMinigame kind, int size,
+			java.util.function.Consumer<Boolean> done) {
+		long now = server.overworld().getGameTime();
+		long seed = server.overworld().getRandom().nextLong();
+		PENDING.remove(player.getUUID());
+		EXTERNAL.put(player.getUUID(), new External(kind, seed, size, now, done));
+		ServerPlayNetworking.send(player, new RepairBoardPayloads.Open(kind, seed, size));
+	}
+
 	private ShipRepairBoards() {
 	}
 
@@ -52,6 +68,16 @@ public final class ShipRepairBoards {
 	}
 
 	public static void handleResult(MinecraftServer server, ServerPlayer player, RepairBoardPayloads.Result result) {
+		External external = EXTERNAL.get(player.getUUID());
+		if (external != null && external.seed() == result.seed() && external.kind() == result.kind()) {
+			EXTERNAL.remove(player.getUUID());
+			long now = server.overworld().getGameTime();
+			int maxTick = (int) Math.min(Integer.MAX_VALUE, now - external.openedTick() + CLOCK_SLACK_TICKS);
+			boolean solved = now - external.openedTick() <= BOARD_TIMEOUT_TICKS
+					&& external.kind().isSolvedBy(external.seed(), external.size(), result.answer(), maxTick);
+			external.done().accept(solved);
+			return;
+		}
 		Pending pending = PENDING.remove(player.getUUID());
 		if (pending == null || pending.seed() != result.seed() || pending.kind() != result.kind()) {
 			return;
@@ -94,5 +120,6 @@ public final class ShipRepairBoards {
 
 	public static void reset() {
 		PENDING.clear();
+		EXTERNAL.clear();
 	}
 }

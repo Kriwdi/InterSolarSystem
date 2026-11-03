@@ -175,6 +175,42 @@ public final class UrbanBlocks {
 			p -> new RadioSetBlock(p, new double[] {1, 0, 2, 15, 12, 13}),
 			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
 
+	public static final Block POWER_CABINET = register("power_cabinet",
+			p -> new FacilityCabinetBlock(p, FacilityCabinetBlock.Facility.POWER, new double[] {1, 0, 2, 15, 16, 15}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block CONTROL_CABINET = register("control_cabinet",
+			p -> new FacilityCabinetBlock(p, FacilityCabinetBlock.Facility.CONTROL, new double[] {1, 0, 2, 15, 16, 15}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block FABRICATION_CABINET = register("fabrication_cabinet",
+			p -> new FacilityCabinetBlock(p, FacilityCabinetBlock.Facility.FABRICATION, new double[] {1, 0, 2, 15, 16, 15}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block FUEL_CABINET = register("fuel_cabinet",
+			p -> new FacilityCabinetBlock(p, FacilityCabinetBlock.Facility.FUEL, new double[] {1, 0, 2, 15, 16, 15}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block CRANE_CABINET = register("crane_cabinet",
+			p -> new FacilityCabinetBlock(p, FacilityCabinetBlock.Facility.CRANE, new double[] {1, 0, 2, 15, 16, 15}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block FABRICATOR = register("fabricator",
+			p -> new FabricatorBlock(p, new double[] {0, 0, 0, 16, 16, 16}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block CRANE_CONSOLE = register("crane_console",
+			p -> new CraneConsoleBlock(p, new double[] {0, 0, 4, 16, 14, 16}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block MANUAL_PRINTER = register("manual_printer",
+			p -> new ManualPrinterBlock(p, new double[] {1, 0, 2, 15, 10, 14}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block CRANE_HOOK = register("crane_hook",
+			p -> new ShipFacingBlock(p, new double[] {4, 0, 4, 12, 16, 12}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
 	public static final Block CRYO_POD = register("cryo_pod",
 			p -> new ShipFacingBlock(p, new double[] {2, 0, 2, 14, 16, 14}),
 			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).lightLevel(state -> 3).noOcclusion());

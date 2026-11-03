@@ -1,0 +1,16 @@
+{
+  "placement": {
+    "type": "minecraft:concentric_rings",
+    "distance": 100,
+    "spread": 3,
+    "count": 3,
+    "preferred_biomes": "#intersolarsystem:preferred/karman_spaceport",
+    "salt": 70050
+  },
+  "structures": [
+    {
+      "structure": "intersolarsystem:karman_spaceport",
+      "weight": 1
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/crane_hook"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/crane_hook",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/crane_hook",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/crane_hook",
+      "y": 270
+    }
+  }
+}

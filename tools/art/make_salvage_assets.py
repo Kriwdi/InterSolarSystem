@@ -90,3 +90,39 @@ if __name__ == "__main__":
         write(ASSETS / f"models/item/{name}.json", {"parent": parent, "textures": {"layer0": NS + "item/" + name}})
         write(ASSETS / f"items/{name}.json", {"model": {"type": "minecraft:model", "model": NS + "item/" + name}})
     print("salvage items written")
+
+
+KITS = {"keel_kit": ("6f757b", "K"), "hull_kit": ("c8ccd0", "H"), "engine_kit": ("d9822b", "E"),
+        "reactor_kit": ("5dfa98", "R"), "life_support_kit": ("4fc3f7", "L"), "hydroponics_kit": ("6ce07a", "F"),
+        "laboratory_kit": ("b07ae0", "S"), "quarters_kit": ("e3a22a", "Q"), "hangar_kit": ("a8302a", "G"),
+        "bridge_kit": ("1f4f86", "B"), "research_ship_kit": ("e9e4d4", "X")}
+GLYPHS = {"K": ["#.#", "##.", "#.#"], "H": ["#.#", "###", "#.#"], "E": ["###", "##.", "###"], "R": ["##.", "##.", "#.#"],
+          "L": ["#..", "#..", "###"], "F": ["###", "##.", "#.."], "S": [".##", ".#.", "##."], "Q": ["###", "#.#", "###"],
+          "G": ["##.", "#.#", "###"], "B": ["##.", "###", "###"], "X": ["#.#", ".#.", "#.#"]}
+
+
+def kits():
+    """Section kits: a reinforced crate with a coloured band and a stencilled letter."""
+    for name, (band, glyph) in KITS.items():
+        rnd = random.Random(name)
+        img = Image.new("RGBA", (16, 16))
+        px = img.load()
+        for y in range(2, 15):
+            for x in range(1, 15):
+                edge = x in (1, 14) or y in (2, 14)
+                c = OUT if edge else mix(hexc("7a6a4a"), hexc("5c4f36"), rnd.random() * 0.5)
+                if not edge and y in (6, 7, 8, 9, 10):
+                    c = shade(hexc(band), 0.85 + rnd.random() * 0.2)
+                if not edge and x in (2, 13):
+                    c = hexc("3e4246")
+                px[x, y] = c
+        for gy, row in enumerate(GLYPHS[glyph]):
+            for gx, ch in enumerate(row):
+                if ch == "#":
+                    px[6 + gx, 7 + gy] = hexc("1e1a16")
+        save(img, "item/" + name)
+        write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": NS + "item/" + name}})
+        write(ASSETS / f"items/{name}.json", {"model": {"type": "minecraft:model", "model": NS + "item/" + name}})
+
+
+kits()

@@ -623,6 +623,46 @@ def m_battery_bank():
     return els
 
 
+def m_cabinet():
+    """A facility control cabinet: tall steel cabinet, a door with a window onto breakers, gauges, a status lamp."""
+    els = [e((1, 0, 3), (15, 30, 15), "metal_grey", faces={"north": "metal_dark"}), e((0.5, 30, 2.5), (15.5, 31, 15.5), "metal_dark"),
+           e((2, 2, 2.5), (14, 28, 3), "metal_grey"), e((4, 16, 2.3), (12, 25, 2.5), "glass_dark"),
+           e((12.5, 12, 2), (13.5, 16, 2.5), "chrome"), e((4, 6, 2.3), (7, 9, 2.5), "screen"), e((9, 6, 2.3), (12, 9, 2.5), "screen"),
+           e((7, 26.5, 2.2), (9, 27.5, 2.5), "lamp_red"), e((2, 0, 2), (14, 1, 3), "hazard")]
+    for x in (5, 7, 9, 11):
+        els.append(e((x, 18, 2.6), (x + 1, 23, 2.8), "chrome" if x % 4 == 1 else "lamp_amber"))
+    return els
+
+
+def m_fabricator():
+    """The fabricator: a heavy machine bed with a gantry arm, a print head, a control screen and material hoppers."""
+    return [e((-4, 0, 0), (20, 4, 16), "metal_dark"), e((-3, 4, 2), (19, 6, 14), "metal_grey"),
+            e((-4, 4, 0), (-2, 22, 2), "yellow"), e((18, 4, 0), (20, 22, 2), "yellow"), e((-4, 4, 14), (-2, 22, 16), "yellow"),
+            e((18, 4, 14), (20, 22, 16), "yellow"), e((-4, 22, 0), (20, 24, 2), "yellow"), e((-4, 22, 14), (20, 24, 16), "yellow"),
+            e((6, 21, 0), (10, 25, 16), "metal_dark"), e((7, 14, 7), (9, 21, 9), "chrome"), e((6.5, 12, 6.5), (9.5, 14, 9.5), "lamp_amber"),
+            e((2, 6, 4), (14, 8, 12), "metal_white"), e((20, 6, 4), (24, 14, 12), "metal_grey", faces={"north": "screen"}),
+            e((-8, 4, 3), (-4, 12, 13), "metal_grey"), e((-8, 12, 3), (-4, 14, 13), "rust")]
+
+
+def m_crane_console():
+    return [e((0, 0, 4), (16, 10, 16), "metal_grey"), e((-2, 10, 6), (18, 12, 16), "metal_dark",
+            rot={"origin": [8, 10, 11], "axis": "x", "angle": -22.5}),
+            e((1, 12, 12), (15, 22, 14), "metal_dark", faces={"north": "screen"}), e((3, 12, 7), (5, 16, 9), "rubber"),
+            e((11, 12, 7), (13, 16, 9), "rubber"), e((3, 16, 7), (5, 17, 9), "lamp_red"), e((11, 16, 7), (13, 17, 9), "lamp_green"),
+            e((6, 11.5, 6), (10, 12.5, 9), "hazard")]
+
+
+def m_manual_printer():
+    return [e((1, 0, 2), (15, 9, 14), "metal_white", faces={"north": "metal_grey"}), e((3, 9, 4), (13, 10, 12), "metal_grey"),
+            e((3, 6, 1), (13, 7, 2), "metal_dark"), e((4, 6.5, -2), (12, 7, 1), "metal_white"),
+            e((10, 9, 2.5), (14, 10, 4), "screen"), e((2, 2, 1.5), (4, 3, 2), "lamp_green")]
+
+
+def m_crane_hook():
+    return [e((7, 6, 7), (9, 16, 9), "metal_dark"), e((4, 2, 4), (12, 6, 12), "yellow"),
+            e((7, -6, 6), (9, 2, 10), "chrome"), e((7, -8, 9), (9, -4, 12), "chrome"), e((7, -9, 4), (9, -7, 10), "chrome")]
+
+
 def m_cryo_pod():
     return [e((2, 0, 2), (14, 2, 14), "metal_dark"), e((3, 2, 4), (13, 29, 14), "metal_white", faces={"north": "frost"}),
             e((3.5, 4, 3.5), (12.5, 27, 4), "frost"), e((2.5, 29, 3), (13.5, 31, 14.5), "metal_grey"),
@@ -758,6 +798,20 @@ BLOCKS = {
     "runway_bollard": (P(m_runway_bollard, (6, 0, 6, 10, 12, 10)), "Bollard", "Poller", "Terelőoszlop"),
     "dino_skull": (P(m_dino_skull, FULL, "bone"), "Tyrannosaurus Skull", "Tyrannosaurus-Schädel", "Tyrannosaurus-koponya"),
     "radio_set": (P(m_radio_set, (1, 0, 2, 15, 12, 13), cls="RadioSetBlock"), "Radio Set", "Funkgerät", "Rádió"),
+    "power_cabinet": (P(m_cabinet, (1, 0, 2, 15, 16, 15), ctor="new FacilityCabinetBlock(p, FacilityCabinetBlock.Facility.POWER, {box})"),
+                      "Power Plant Control Cabinet", "Kraftwerks-Schaltschrank", "Erőmű vezérlőszekrény"),
+    "control_cabinet": (P(m_cabinet, (1, 0, 2, 15, 16, 15), ctor="new FacilityCabinetBlock(p, FacilityCabinetBlock.Facility.CONTROL, {box})"),
+                        "Launch Control Cabinet", "Startkontroll-Schaltschrank", "Indítóközpont vezérlőszekrény"),
+    "fabrication_cabinet": (P(m_cabinet, (1, 0, 2, 15, 16, 15), ctor="new FacilityCabinetBlock(p, FacilityCabinetBlock.Facility.FABRICATION, {box})"),
+                            "Fabrication Hall Control Cabinet", "Fertigungshallen-Schaltschrank", "Gyártócsarnok vezérlőszekrény"),
+    "fuel_cabinet": (P(m_cabinet, (1, 0, 2, 15, 16, 15), ctor="new FacilityCabinetBlock(p, FacilityCabinetBlock.Facility.FUEL, {box})"),
+                     "Fuel Depot Control Cabinet", "Treibstofflager-Schaltschrank", "Üzemanyagtelep vezérlőszekrény"),
+    "crane_cabinet": (P(m_cabinet, (1, 0, 2, 15, 16, 15), ctor="new FacilityCabinetBlock(p, FacilityCabinetBlock.Facility.CRANE, {box})"),
+                      "Assembly Crane Control Cabinet", "Montagekran-Schaltschrank", "Szerelődaru vezérlőszekrény"),
+    "fabricator": (P(m_fabricator, FULL, cls="FabricatorBlock"), "Fabricator", "Fertigungsmaschine", "Gyártógép"),
+    "crane_console": (P(m_crane_console, (0, 0, 4, 16, 14, 16), cls="CraneConsoleBlock"), "Crane Console", "Kranpult", "Darukonzol"),
+    "manual_printer": (P(m_manual_printer, (1, 0, 2, 15, 10, 14), cls="ManualPrinterBlock"), "Manual Printer", "Handbuchdrucker", "Kézikönyv-nyomtató"),
+    "crane_hook": (P(m_crane_hook, (4, 0, 4, 12, 16, 12)), "Crane Hook", "Kranhaken", "Darukampó"),
     "cryo_pod": (P(m_cryo_pod, (2, 0, 2, 14, 16, 14), light=3), "Cryo Pod", "Kryokapsel", "Hibernációs fülke"),
     "lab_bench": (P(m_lab_bench, (0, 0, 1, 16, 15, 15)), "Lab Bench", "Labortisch", "Laborasztal"),
     "fume_hood": (P(m_fume_hood, (0, 0, 2, 16, 16, 16)), "Fume Hood", "Abzug", "Vegyifülke"),
@@ -818,7 +872,8 @@ def write_java():
                 props += ".noCollision()"
             b = ", ".join(str(v) for v in box)
             cls = o.get("cls", "ShipFacingBlock")
-            lines.append(f'\tpublic static final Block {const} = register("{name}",\n\t\t\tp -> new {cls}(p, new double[] {{{b}}}),\n\t\t\t{props});')
+            ctor = o.get("ctor", "new " + cls + "(p, {box})").replace("{box}", "new double[] {" + b + "}")
+            lines.append(f'\tpublic static final Block {const} = register("{name}",\n\t\t\tp -> {ctor},\n\t\t\t{props});')
     src = '''package hu.kriwdi.intersolarsystem.content;
 
 import net.minecraft.world.level.block.Block;

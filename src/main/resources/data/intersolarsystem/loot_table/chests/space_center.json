@@ -232,8 +232,41 @@
           ]
         },
         {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:manual",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"spaceport\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:manual",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"mothership\"}"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "intersolarsystem:manual",
+          "weight": 2,
+          "modifier": [
+            {
+              "type": "minecraft:set_custom_data",
+              "tag": "{lore:\"salvage\"}"
+            }
+          ]
+        },
+        {
           "type": "minecraft:empty",
-          "weight": 8
+          "weight": 11
         }
       ]
     }

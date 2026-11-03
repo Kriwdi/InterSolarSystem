@@ -507,6 +507,34 @@
     "Bring living soil from an oasis. Aboard, a hoe turns it into farmland. Ordinary dirt stays dead even aboard.",
     "Seeds: seed vault, farms, the oasis refuge. Clean water: fill a canister in an oasis pond (other water is polluted)."
    ]
+  },
+  "salvage": {
+   "title": "Salvage and power",
+   "subtitle": "Manual M-1",
+   "pages": [
+    "Take wrecks and machines apart where they stand: the multitool for bolts, panels and boards, the cutting torch for metal. One step per click; each step gives parts.",
+    "The recycler turns parts and finds into materials. Feed it a stack (right click), give it power (4 kW, +2 per module) and a chest beside it for the output.",
+    "Modules beside the recycler: shredder (twice as fast), smelter (+15%, scrap comes out as iron), sorter (+10% and rare materials). Power: solar panels by day, diesel generators on fuel, battery banks in between, joined by cable."
+   ]
+  },
+  "spaceport": {
+   "title": "Restoring a Kármán spaceport",
+   "subtitle": "Manual K-1, Aurora launch operations",
+   "pages": [
+    "Order: power plant, launch control, fabrication hall, fuel depot, assembly crane. Each has a control cabinet; right click it for the checklist.",
+    "Every cabinet wants: the facility before it running, the debris around the cabinet cleared (rubble and broken concrete), its materials delivered, and finally a calibration.",
+    "The reactor burns uranium fuel rods (one lasts three days) and breaks down now and then: a repair kit at the power plant cabinet. Without power the whole spaceport stops.",
+    "Launch control prints manuals (paper in the printer). The fuel depot stores propellant: bitumen or helium-3 regolith."
+   ]
+  },
+  "mothership": {
+   "title": "Building the mothership",
+   "subtitle": "Manual K-2, Ark-5 programme",
+   "pages": [
+    "The fabricator makes the section kits (sneak + right click chooses the kit, then deliver the materials). Engines, reactor and laboratory need the Moon's materials.",
+    "Give the crane console the next kit: keel, hull, engines, reactor, life support, hydroponics, laboratory, quarters, hangar, bridge. The crane builds each section in the hall, block by block.",
+    "When all ten are built and the depot holds enough propellant, the mothership can leave."
+   ]
   }
  }
 }

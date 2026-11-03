@@ -61,6 +61,19 @@ public final class ModItems {
 	public static final Item RUBBER_SCRAP = simple("rubber_scrap");
 	public static final Item GLASS_SHARDS = simple("glass_shards");
 	public static final Item CUTTING_TORCH = register("cutting_torch", Item::new, new Item.Properties().durability(160));
+
+	// ---- Mothership section kits and ship kits, made by a spaceport's fabricator (see spaceport.Section).
+	public static final Item KEEL_KIT = kit("keel_kit");
+	public static final Item HULL_KIT = kit("hull_kit");
+	public static final Item ENGINE_KIT = kit("engine_kit");
+	public static final Item REACTOR_KIT = kit("reactor_kit");
+	public static final Item LIFE_SUPPORT_KIT = kit("life_support_kit");
+	public static final Item HYDROPONICS_KIT = kit("hydroponics_kit");
+	public static final Item LABORATORY_KIT = kit("laboratory_kit");
+	public static final Item QUARTERS_KIT = kit("quarters_kit");
+	public static final Item HANGAR_KIT = kit("hangar_kit");
+	public static final Item BRIDGE_KIT = kit("bridge_kit");
+	public static final Item RESEARCH_SHIP_KIT = kit("research_ship_kit");
 	public static final Item SOLAR_CELL = simple("solar_cell");
 	public static final Item BATTERY_CELL = simple("battery_cell");
 	public static final Item RARE_EARTH_MAGNET = simple("rare_earth_magnet");
@@ -94,6 +107,10 @@ public final class ModItems {
 			new Item.Properties().sword(TITANIUM, 3.0F, -2.4F));
 
 	private ModItems() {
+	}
+
+	private static Item kit(String name) {
+		return register(name, Item::new, new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
 	}
 
 	private static Item simple(String name) {

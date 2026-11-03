@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/manual_printer"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/manual_printer",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/manual_printer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/manual_printer",
+      "y": 270
+    }
+  }
+}

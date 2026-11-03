@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/fabricator"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/fabricator",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/fabricator",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/fabricator",
+      "y": 270
+    }
+  }
+}

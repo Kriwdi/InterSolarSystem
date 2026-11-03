@@ -507,6 +507,34 @@
     "Hozz élő talajt egy oázisból. A hajóban kapával termőföld lesz belőle. A sima föld a hajóban is halott marad.",
     "Mag: magbank, tanyák, az oázis menedéktelepe. Tiszta víz: tölts meg egy kannát egy oázistóban (minden más víz szennyezett)."
    ]
+  },
+  "salvage": {
+   "title": "Bontás és energia",
+   "subtitle": "M-1-es kézikönyv",
+   "pages": [
+    "A roncsokat és gépeket a helyükön szedd szét: multiszerszám a csavarokhoz, burkolatokhoz, lapokhoz, vágópisztoly a fémhez. Kattintásonként egy lépés, mindegyik ad alkatrészt.",
+    "A bontógép az alkatrészeket és leleteket nyersanyaggá bontja. Adj bele egy köteget (jobb klikk), áramot (4 kW, modulonként +2), és tegyél mellé ládát a kimenetnek.",
+    "Modulok a bontógép mellett: daráló (kétszer gyorsabb), olvasztó (+15%, a hulladék vasként jön ki), szétválogató (+10% és ritka anyagok). Áram: napelem nappal, dízelaggregátor üzemanyaggal, akkumulátortelep a kettő között, kábellel összekötve."
+   ]
+  },
+  "spaceport": {
+   "title": "Egy Kármán-űrkikötő helyreállítása",
+   "subtitle": "K-1-es kézikönyv, Aurora indítási műveletek",
+   "pages": [
+    "Sorrend: erőmű, indítóközpont, gyártócsarnok, üzemanyagtelep, szerelődaru. Mindegyiknek van vezérlőszekrénye; jobb klikk rá: ellenőrzőlista.",
+    "Minden szekrény kéri: az előző létesítmény működjön, a szekrény körüli törmelék (törmelék és törött beton) legyen eltakarítva, az anyagai legyenek leadva, végül a kalibrálást.",
+    "A reaktor urán fűtőelemet éget (egy három napig tart), és időnként meghibásodik: javítókészlet az erőmű szekrényénél. Áram nélkül az egész űrkikötő leáll.",
+    "Az indítóközpont kézikönyvet nyomtat (papír a nyomtatóba). Az üzemanyagtelep hajtóanyagot tárol: bitument vagy hélium-3 regolitot."
+   ]
+  },
+  "mothership": {
+   "title": "Az anyahajó építése",
+   "subtitle": "K-2-es kézikönyv, Bárka-5 program",
+   "pages": [
+    "A gyártógép készíti a szekciókészleteket (guggolás + jobb klikk: készlet választása, utána add le az anyagokat). A hajtómű, a reaktor és a labor holdi anyagot kér.",
+    "A darukonzolnak add a következő készletet: gerinc, törzs, hajtóművek, reaktor, életfenntartás, farm, labor, szállás, hangár, híd. A daru blokkról blokkra építi fel a szekciót a csarnokban.",
+    "Ha mind a tíz kész, és a telepen elég hajtóanyag van, az anyahajó indulhat."
+   ]
   }
  }
 }

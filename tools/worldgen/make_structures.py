@@ -952,7 +952,8 @@ def loot_tables():
         "seed_bank": [("note", "seed_vault"), ("manual", "ship_farm")],
         "space_center": [("note", "launch_director"), ("data_tape", "aurora_exodus"), ("note", "exodus_lottery"),
                          ("data_tape", "seed_sower_briefing"), ("manual", "drive_kits"), ("manual", "meteor_piloting"),
-                         ("manual", "nav_console"), ("manual", "launch_checklist")],
+                         ("manual", "nav_console"), ("manual", "launch_checklist"), ("manual", "spaceport"),
+                         ("manual", "mothership"), ("manual", "salvage")],
         "space_debris": [("data_tape", "seed_sower_briefing")],
         "cargo": [("note", "exodus_lottery"), ("note", "child_letter"), ("note", "gate_agent")],
         "industrial": [("note", "drone_tech"), ("note", "dam_engineer")],
@@ -1001,7 +1002,7 @@ NO_MOBS = {c: {"bounding_box": "full", "spawns": []} for c in
 # Things that fell out of the sky or lie half buried: no clearing above them, only a short blend.
 CRASH_SITES = {"cargo_capsule", "crashed_satellite", "rocket_stage", "whale_skeleton", "dry_shipwreck"}
 FLAT = {"airport": (110, 12, 0, 24), "hospital": (48, 12, 6, 24), "dead_city": (64, 18, 0, 24),
-        "verdant_lab": (56, 12, 9, 24)}
+        "verdant_lab": (56, 12, 9, 24), "karman_spaceport": (160, 14, 6, 30)}
 
 # The Earth is 20 000 blocks across (1250 chunks). Rare and important ruins are placed on concentric rings so every
 # world has them: (count, ring distance in chunks (the first ring lies at about 4x this), sites in the first ring).
@@ -1010,7 +1011,7 @@ FLAT = {"airport": (110, 12, 0, 24), "hospital": (48, 12, 6, 24), "dead_city": (
 RINGS = {"oasis_refuge": (8, 16, 4), "colony_frozen": (3, 20, 3), "colony_overgrown": (3, 28, 3),
          "colony_burnt": (3, 34, 3), "seed_bank": (3, 40, 3), "dam": (3, 46, 3), "hospital": (5, 50, 5),
          "dead_city": (6, 62, 6), "airport": (4, 72, 4), "space_center": (3, 80, 3), "bunker_network": (3, 24, 3),
-         "verdant_lab": (2, 88, 2)}
+         "verdant_lab": (2, 88, 2), "karman_spaceport": (3, 100, 3)}
 
 
 def structure(name, pool_name, biomes, spacing, separation, salt, depth=0, size=1, adaptation="beard_thin",
@@ -1130,6 +1131,13 @@ def main():
     single_pool("verdant_lab", "verdant_lab")
     structure("verdant_lab", "verdant_lab", ["acid_swamp", "petrified_forest", "abandoned_farmland"], 64, 24, 70041,
               -10, adaptation="beard_box", ground_offset=9)
+    import karman
+    b = karman.karman_spaceport()
+    sizes["karman_spaceport"] = b.save("karman_spaceport")
+    single_pool("karman_spaceport", "karman_spaceport")
+    structure("karman_spaceport", "karman_spaceport", ["salt_flats", "ash_desert", "dried_seabed", "abandoned_farmland"],
+              80, 30, 70050, -7, adaptation="beard_box", ground_offset=6)
+    karman.write_blueprints()
     loot_tables()
     for k, v in sizes.items():
         print(f"{k:28s} {v}")

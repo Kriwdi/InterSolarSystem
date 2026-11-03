@@ -367,4 +367,33 @@ MANUALS = {
             "A Föld talaja halott (Szürke Virágzás). Hajón kívül semmit nem lehet kapálni vagy ültetni.",
             "Hozz élő talajt egy oázisból. A hajóban kapával termőföld lesz belőle. A sima föld a hajóban is halott marad.",
             "Mag: magbank, tanyák, az oázis menedéktelepe. Tiszta víz: tölts meg egy kannát egy oázistóban (minden más víz szennyezett)."]}},
+    "salvage": {
+        "en": {"title": "Salvage and power", "subtitle": "Manual M-1", "pages": [
+            "Take wrecks and machines apart where they stand: the multitool for bolts, panels and boards, the cutting torch for metal. One step per click; each step gives parts.",
+            "The recycler turns parts and finds into materials. Feed it a stack (right click), give it power (4 kW, +2 per module) and a chest beside it for the output.",
+            "Modules beside the recycler: shredder (twice as fast), smelter (+15%, scrap comes out as iron), sorter (+10% and rare materials). Power: solar panels by day, diesel generators on fuel, battery banks in between, joined by cable."]},
+        "hu": {"title": "Bontás és energia", "subtitle": "M-1-es kézikönyv", "pages": [
+            "A roncsokat és gépeket a helyükön szedd szét: multiszerszám a csavarokhoz, burkolatokhoz, lapokhoz, vágópisztoly a fémhez. Kattintásonként egy lépés, mindegyik ad alkatrészt.",
+            "A bontógép az alkatrészeket és leleteket nyersanyaggá bontja. Adj bele egy köteget (jobb klikk), áramot (4 kW, modulonként +2), és tegyél mellé ládát a kimenetnek.",
+            "Modulok a bontógép mellett: daráló (kétszer gyorsabb), olvasztó (+15%, a hulladék vasként jön ki), szétválogató (+10% és ritka anyagok). Áram: napelem nappal, dízelaggregátor üzemanyaggal, akkumulátortelep a kettő között, kábellel összekötve."]}},
+    "spaceport": {
+        "en": {"title": "Restoring a Kármán spaceport", "subtitle": "Manual K-1, Aurora launch operations", "pages": [
+            "Order: power plant, launch control, fabrication hall, fuel depot, assembly crane. Each has a control cabinet; right click it for the checklist.",
+            "Every cabinet wants: the facility before it running, the debris around the cabinet cleared (rubble and broken concrete), its materials delivered, and finally a calibration.",
+            "The reactor burns uranium fuel rods (one lasts three days) and breaks down now and then: a repair kit at the power plant cabinet. Without power the whole spaceport stops.",
+            "Launch control prints manuals (paper in the printer). The fuel depot stores propellant: bitumen or helium-3 regolith."]},
+        "hu": {"title": "Egy Kármán-űrkikötő helyreállítása", "subtitle": "K-1-es kézikönyv, Aurora indítási műveletek", "pages": [
+            "Sorrend: erőmű, indítóközpont, gyártócsarnok, üzemanyagtelep, szerelődaru. Mindegyiknek van vezérlőszekrénye; jobb klikk rá: ellenőrzőlista.",
+            "Minden szekrény kéri: az előző létesítmény működjön, a szekrény körüli törmelék (törmelék és törött beton) legyen eltakarítva, az anyagai legyenek leadva, végül a kalibrálást.",
+            "A reaktor urán fűtőelemet éget (egy három napig tart), és időnként meghibásodik: javítókészlet az erőmű szekrényénél. Áram nélkül az egész űrkikötő leáll.",
+            "Az indítóközpont kézikönyvet nyomtat (papír a nyomtatóba). Az üzemanyagtelep hajtóanyagot tárol: bitument vagy hélium-3 regolitot."]}},
+    "mothership": {
+        "en": {"title": "Building the mothership", "subtitle": "Manual K-2, Ark-5 programme", "pages": [
+            "The fabricator makes the section kits (sneak + right click chooses the kit, then deliver the materials). Engines, reactor and laboratory need the Moon's materials.",
+            "Give the crane console the next kit: keel, hull, engines, reactor, life support, hydroponics, laboratory, quarters, hangar, bridge. The crane builds each section in the hall, block by block.",
+            "When all ten are built and the depot holds enough propellant, the mothership can leave."]},
+        "hu": {"title": "Az anyahajó építése", "subtitle": "K-2-es kézikönyv, Bárka-5 program", "pages": [
+            "A gyártógép készíti a szekciókészleteket (guggolás + jobb klikk: készlet választása, utána add le az anyagokat). A hajtómű, a reaktor és a labor holdi anyagot kér.",
+            "A darukonzolnak add a következő készletet: gerinc, törzs, hajtóművek, reaktor, életfenntartás, farm, labor, szállás, hangár, híd. A daru blokkról blokkra építi fel a szekciót a csarnokban.",
+            "Ha mind a tíz kész, és a telepen elég hajtóanyag van, az anyahajó indulhat."]}},
 }
