@@ -33,7 +33,7 @@ class AssetsTest {
 			.resolve("src/main/resources/assets/intersolarsystem");
 	private static final String NS = "intersolarsystem:";
 	private static final Set<String> VANILLA_PARENTS = Set.of("minecraft:block/block", "minecraft:block/cube_all",
-			"minecraft:block/cube", "minecraft:block/cube_column", "minecraft:block/cube_column_horizontal",
+			"minecraft:block/cube", "minecraft:block/cube_column", "minecraft:block/cube_bottom_top", "minecraft:block/cube_column_horizontal",
 			"minecraft:block/slab", "minecraft:block/slab_top", "minecraft:block/stairs", "minecraft:block/inner_stairs",
 			"minecraft:block/outer_stairs", "minecraft:block/fence_post", "minecraft:block/fence_side",
 			"minecraft:block/fence_inventory", "minecraft:item/generated", "minecraft:item/handheld",

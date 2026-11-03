@@ -94,6 +94,12 @@ public final class ModItems {
 		return register(name, Item::new, new Item.Properties());
 	}
 
+	/** Empty aluminium canister; filled at an oasis pond it holds clean water. */
+	public static final Item WATER_CANISTER = register("water_canister", Item::new, new Item.Properties().stacksTo(16));
+
+	public static final Item CLEAN_WATER_CANISTER = register("clean_water_canister", Item::new,
+			new Item.Properties().stacksTo(16));
+
 	private static Item register(String name, Function<Item.Properties, Item> factory, Item.Properties properties) {
 		ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, ModIds.id(name));
 		return Registry.register(BuiltInRegistries.ITEM, key, factory.apply(properties.setId(key)));

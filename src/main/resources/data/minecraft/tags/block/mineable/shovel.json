@@ -13,6 +13,8 @@
     "intersolarsystem:acidic_mud",
     "intersolarsystem:tar_sand",
     "intersolarsystem:silica_sand",
-    "intersolarsystem:tar_puddle"
+    "intersolarsystem:tar_puddle",
+    "intersolarsystem:oasis_grass",
+    "intersolarsystem:living_soil"
   ]
 }

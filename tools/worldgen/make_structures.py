@@ -32,7 +32,8 @@ def bid(name):
 MOD_BLOCKS = {"station_hull", "station_foil", "station_window", "station_light", "truss", "solar_panel",
               "antenna_dish", "data_terminal", "rusted_panel", "scrap_pile", "rubble", "toxic_barrel",
               "mining_drone", "lander_engine", "compacted_junk", "dead_log", "petrified_log", "trinitite",
-              "irradiated_soil", "tar_sand", "oil_shale", "ash", "salt_block", "repair_station", "tar_puddle"}
+              "irradiated_soil", "tar_sand", "oil_shale", "ash", "salt_block", "repair_station", "tar_puddle",
+              "living_soil", "oasis_grass", "dead_fence", "dead_planks", "station_glass"}
 
 
 def S(name, **props):
@@ -834,6 +835,88 @@ def colony(fate):
     return b
 
 
+def oasis_refuge():
+    """The survivors who kept the oasis alive: a greenhouse dome over living soil, a water purifier tower fed from the
+    spring, a prefab habitat with bunks and their records, solar panels, a fence of dead wood, and three graves."""
+    b = Build("oasis_refuge", 1030)
+    soil = S("living_soil")
+    # Ground pad.
+    for x in range(-11, 12):
+        for z in range(-11, 12):
+            if x * x + z * z <= 125:
+                b.set(x, 0, z, soil if b.rnd.random() < 0.7 else S("oasis_grass"))
+    # Fence of dead wood with a gate gap to the south.
+    for x in range(-11, 12):
+        for z in range(-11, 12):
+            d = x * x + z * z
+            if 100 <= d <= 125 and not (abs(x) <= 1 and z > 0):
+                b.set(x, 1, z, S("dead_fence") if b.rnd.random() > 0.15 else AIR)
+    # Greenhouse dome (radius 6) to the west: glass over rows of crops on farmland, a water channel in the middle.
+    cx, cz, r = -4, -2, 6
+    for x in range(cx - r, cx + r + 1):
+        for z in range(cz - r, cz + r + 1):
+            for y in range(1, r + 1):
+                d = math.sqrt((x - cx) ** 2 + (y - 0.5) ** 2 * 1.3 + (z - cz) ** 2)
+                if r - 0.6 <= d <= r + 0.4:
+                    frame = (x - cx) % 3 == 0 or (z - cz) % 3 == 0
+                    b.set(x, y, z, S("station_hull") if frame and y < 3 else S("station_glass"))
+                elif d < r - 0.6:
+                    b.set(x, y, z, AIR)
+    crops = [S("wheat", age=7), S("carrots", age=7), S("potatoes", age=7), S("beetroots", age=3)]
+    for x in range(cx - 4, cx + 5):
+        for z in range(cz - 4, cz + 5):
+            if (x - cx) ** 2 + (z - cz) ** 2 > 17:
+                continue
+            if x == cx:
+                b.set(x, 0, z, S("water", level=0))
+                continue
+            b.set(x, 0, z, S("farmland", moisture=7))
+            b.set(x, 1, z, crops[(abs(x - cx) - 1) % 4] if b.rnd.random() > 0.2 else AIR)
+    b.set(cx, 1, cz + 5, AIR)
+    b.set(cx, 2, cz + 5, AIR)
+    # Water purifier tower to the north-east: a steel column with tanks, a pipe down to the spring.
+    for y in range(1, 10):
+        for x in range(5, 8):
+            for z in range(-8, -5):
+                edge = x in (5, 7) or z in (-8, -6)
+                if edge:
+                    b.set(x, y, z, S("iron_block") if y in (1, 5, 9) else S("rusted_panel"))
+                else:
+                    b.set(x, y, z, AIR)
+    b.set(6, 0, -7, S("water", level=0))
+    b.set(6, 10, -7, S("lightning_rod") if False else S("iron_bars"))
+    b.set(6, 4, -6, S("cauldron"))
+    b.set(6, 1, -6, AIR)
+    b.set(6, 2, -6, AIR)
+    for (x, y, z) in ((4, 6, -7), (4, 6, -6), (8, 6, -7)):
+        b.set(x, y, z, S("barrel", facing="up", open="false"))
+    # Prefab habitat to the east: hull walls, a window row, bunks, a terminal with their records, the last supplies.
+    b.room(3, 0, 0, 10, 5, 6, S("station_hull"), S("dead_planks"))
+    b.windows(3, 3, 0, 10, 6, 2, S("station_window"))
+    b.set(3, 1, 3, AIR)
+    b.set(3, 2, 3, AIR)
+    b.set(9, 1, 1, S("red_bed", facing="west", part="head", occupied="false"))
+    b.set(8, 1, 1, S("red_bed", facing="west", part="foot", occupied="false"))
+    b.set(9, 1, 5, S("red_bed", facing="west", part="head", occupied="false"))
+    b.set(8, 1, 5, S("red_bed", facing="west", part="foot", occupied="false"))
+    b.chest(9, 1, 3, "oasis_refuge", "west")
+    b.chest(5, 1, 5, "oasis_refuge", "north", "barrel")
+    b.set(6, 2, 1, S("data_terminal", facing="south", log=2))
+    b.set(5, 1, 1, S("crafting_table"))
+    b.set(7, 4, 3, S("station_light"))
+    # Solar panels on posts along the south side.
+    for x in (-8, -5, 6, 9):
+        b.set(x, 1, 8, S("iron_bars"))
+        b.set(x, 2, 8, S("solar_panel"))
+        b.set(x + 1, 2, 8, S("solar_panel"))
+    # Three graves under the dome's shade, marked with dead wood and candles.
+    for i, x in enumerate((-9, -7, -5)):
+        b.set(x, 1, 7, S("coarse_dirt"))
+        b.set(x, 1, 6, S("dead_fence"))
+        b.set(x, 2, 6, S("candle", candles=1 + i, lit="false"))
+    return b
+
+
 def dry_shipwreck():
     b = Build("dry_shipwreck", 1023)
     # A freighter stranded on the old sea floor, listing, hull plates rusted through.
@@ -933,6 +1016,13 @@ def loot_tables():
                                         ("minecraft:white_wool", 5, 2, 5), ("minecraft:leather", 3, 1, 2),
                                         ("minecraft:wheat_seeds", 5, 2, 6), ("repair_kit", 2, 1, 1),
                                         ("space_helmet", 1, 1, 1)])],
+        "oasis_refuge": [pool((4, 8), [("minecraft:wheat_seeds", 8, 2, 8), ("minecraft:beetroot_seeds", 6, 2, 6),
+                                       ("minecraft:carrot", 6, 1, 4), ("minecraft:potato", 6, 1, 4),
+                                       ("minecraft:pumpkin_seeds", 4, 1, 3), ("minecraft:melon_seeds", 4, 1, 3),
+                                       ("living_soil", 8, 4, 12), ("clean_water_canister", 6, 1, 3),
+                                       ("water_canister", 4, 1, 2), ("minecraft:bone_meal", 6, 2, 8),
+                                       ("minecraft:bread", 6, 1, 3), ("minecraft:apple", 5, 1, 3),
+                                       ("minecraft:oak_sapling", 3, 1, 2)])],
         "wreck": [pool((3, 6), salvage + [("minecraft:compass", 2, 1, 1), ("minecraft:map", 2, 1, 1),
                                           ("minecraft:gold_ingot", 2, 1, 3), ("minecraft:iron_ingot", 4, 1, 4)])],
     }
@@ -1010,10 +1100,11 @@ SINGLES = [
     ("crashed_satellite", crashed_satellite, ALL, 22, 7, 70017, -1, "beard_thin"),
     ("rocket_stage", rocket_stage, ALL, 30, 10, 70018, -2, "beard_thin"),
     ("drone_site", drone_site, ["junk_mountains", "deep_canyons", "oil_field"], 24, 8, 70019, -12, "none"),
-    ("colony_overgrown", lambda: colony("overgrown"), ["oasis", "acid_swamp"], 40, 14, 70020, 0, "beard_thin"),
+    ("colony_overgrown", lambda: colony("overgrown"), ["acid_swamp"], 40, 14, 70020, 0, "beard_thin"),
     ("colony_burnt", lambda: colony("burnt"), ["ash_desert", "irradiated_crater"], 44, 16, 70021, 0, "beard_thin"),
     ("colony_frozen", lambda: colony("frozen"), ["frozen_megalopolis"], 40, 14, 70022, 0, "beard_thin"),
     ("dry_shipwreck", dry_shipwreck, ["dried_seabed"], 20, 6, 70023, -1, "beard_thin"),
+    ("oasis_refuge", oasis_refuge, ["oasis"], 10, 3, 70025, 0, "beard_thin"),
     ("whale_skeleton", whale_skeleton, ["dried_seabed"], 16, 5, 70024, -1, "beard_thin"),
 ]
 

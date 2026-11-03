@@ -247,6 +247,13 @@ public final class ModBlocks {
 	public static final Block ASTRONAUT_SEAT = register("astronaut_seat", AstronautSeatBlock::new,
 			BlockBehaviour.Properties.of().strength(2.0F, 6.0F).sound(SoundType.METAL).noOcclusion());
 
+	// ---- The oasis: the last living ground. Its soil is what a ship's farm needs.
+	public static final Block OASIS_GRASS = register("oasis_grass", Block::new,
+			BlockBehaviour.Properties.of().strength(0.6F).sound(SoundType.GRASS));
+
+	public static final Block LIVING_SOIL = register("living_soil", Block::new,
+			BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.ROOTED_DIRT));
+
 	// ---- Dead wood: planks sawn from the bleached trunks, and what is built from them.
 	public static final Block DEAD_PLANKS = register("dead_planks", Block::new,
 			BlockBehaviour.Properties.of().strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava());

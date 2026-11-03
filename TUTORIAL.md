@@ -124,7 +124,7 @@ A tengerek kiszáradtak, és nincs Nether és End (a portál nem visz sehová). 
 | **Szeméthegyek** | préselt hulladék | hulladékhalmok, elromlott bányászdrónok | – |
 | **Sósivatag** | sókéreg, sótömb | lítiumos sókéreg, űrközpont, repülőtér, napelemfarm | – |
 | **Mély kanyonok** | vörös homok, színes rétegzett falak | óriás kanyonok, gát | magas falak |
-| **Oázis** (ritka) | fű, tiszta víz, fák | az utolsó élő hely: fa, virág, cukornád, tök | – |
+| **Oázis** (nagyon ritka, kicsi) | oázisfű, élő talaj, tiszta víz, fák | az utolsó élő hely: a túlélők menedéke, **élő talaj** és **tiszta víz** (ezek kellenek a hajó farmjához) | – |
 | **Elhagyott farmvidék** | barna fű, durva föld | szalmabálák, tanya silóval, kiszáradt földek | – |
 | **Olajmező** | kátrányos homok, olajpala | olajkutak tartállyal, kátránytócsák (lassítanak) | – |
 
@@ -133,6 +133,15 @@ A tengerek kiszáradtak, és nincs Nether és End (a portál nem visz sehová). 
 - **Savas mocsár:** a vízben sebződsz és megmérgeződsz.
 - **Sugárzó kráter:** amíg a biome-ban vagy, lassan sebződsz és éhezel.
 - **A teljes űrruha (mind a négy darab) mindkettő ellen véd.**
+
+### Az oázis és a hajó farmja
+
+A Föld talaja halott: kapálni, vetni, ültetni csak a **hajó belsejében** lehet, és ott is csak **élő talajon**.
+
+- **Élő talaj:** az oázisban az oázisfű és az alatta lévő föld ásóval kiásva élő talajt ad. A menedéktelep ládáiban is van.
+- **A hajóban** kapával az élő talajból termőföld lesz. Közönséges földet hiába viszel fel, az halott marad.
+- **Tiszta víz:** az üres **vizeskannát** (3 alumíniumrúd + 1 üveglap a mintában, 2 db) az oázis vizébe mártva tiszta vizes kanna lesz. Máshol a víz szennyezett.
+- **Menedéktelep:** minden oázisban áll egy kis telep: üvegházkupola terménnyel, víztisztító torony, lakómodul ágyakkal, ládákkal és terminállal, napelemek, és három sír. Itt éltek az utolsók, akik az oázist életben tartották.
 
 ---
 

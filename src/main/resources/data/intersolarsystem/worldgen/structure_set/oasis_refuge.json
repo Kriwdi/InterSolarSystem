@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 70025,
+    "separation": 3,
+    "spacing": 10
+  },
+  "structures": [
+    {
+      "structure": "intersolarsystem:oasis_refuge",
+      "weight": 1
+    }
+  ]
+}

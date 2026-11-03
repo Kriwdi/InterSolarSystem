@@ -578,7 +578,7 @@
                       },
                       {
                         "type": "minecraft:block",
-                        "result_state": "minecraft:grass_block"
+                        "result_state": "intersolarsystem:oasis_grass"
                       }
                     ]
                   }
@@ -588,7 +588,7 @@
                   "if_true": "minecraft:under_floor",
                   "then_run": {
                     "type": "minecraft:block",
-                    "result_state": "minecraft:dirt"
+                    "result_state": "intersolarsystem:living_soil"
                   }
                 }
               ]

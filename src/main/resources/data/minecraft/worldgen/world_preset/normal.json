@@ -362,24 +362,24 @@
               "biome": "intersolarsystem:oasis",
               "parameters": {
                 "temperature": [
-                  0.55,
+                  0.7,
                   1.0
                 ],
                 "humidity": [
-                  0.45,
+                  0.6,
                   1.0
                 ],
                 "continentalness": [
-                  -0.11,
-                  1.0
-                ],
-                "erosion": [
                   0.0,
                   1.0
                 ],
+                "erosion": [
+                  0.2,
+                  1.0
+                ],
                 "weirdness": [
-                  -0.55,
-                  -0.2
+                  -0.45,
+                  -0.32
                 ],
                 "depth": 0.0,
                 "offset": 0.0

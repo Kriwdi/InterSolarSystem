@@ -1158,6 +1158,34 @@ public final class ModLangTable {
 				"Tinted Cockpit Window",
 				"Getöntes Cockpitfenster",
 				"Sötétített pilótafülke-ablak");
+		add(rows, "block.intersolarsystem.oasis_grass",
+				"Oasis Grass",
+				"Oasengras",
+				"Oázisfű");
+		add(rows, "block.intersolarsystem.living_soil",
+				"Living Soil",
+				"Lebendiger Boden",
+				"Élő talaj");
+		add(rows, "item.intersolarsystem.water_canister",
+				"Water Canister",
+				"Wasserkanister",
+				"Vizeskanna");
+		add(rows, "item.intersolarsystem.clean_water_canister",
+				"Clean Water Canister",
+				"Kanister mit sauberem Wasser",
+				"Tiszta vizes kanna");
+		add(rows, "message.intersolarsystem.dead_soil",
+				"This soil is dead: a ship's farm needs living soil from an oasis",
+				"Dieser Boden ist tot: die Schiffsfarm braucht lebendigen Boden aus einer Oase",
+				"Ez a talaj halott: a hajó farmjához élő talaj kell egy oázisból");
+		add(rows, "message.intersolarsystem.water_polluted",
+				"This water is polluted: clean water is found only at an oasis",
+				"Dieses Wasser ist verseucht: sauberes Wasser gibt es nur in einer Oase",
+				"Ez a víz szennyezett: tiszta víz csak az oázisban van");
+		add(rows, "message.intersolarsystem.water_filled",
+				"You fill the canister with clean water",
+				"Du füllst den Kanister mit sauberem Wasser",
+				"Megtöltöd a kannát tiszta vízzel");
 		check(rows);
 		return List.copyOf(rows);
 	}

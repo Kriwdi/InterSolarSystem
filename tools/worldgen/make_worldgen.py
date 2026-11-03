@@ -46,7 +46,8 @@ CLIMATE = [
     ("abandoned_farmland", [0.2, 0.55], [-0.1, 0.3], [-0.11, 0.3], [0.2, 1.0], FULL, 0.0),
     ("junk_mountains", [-0.45, 1.0], FULL, [0.03, 1.0], [-1.0, -0.38], FULL, 0.0),
     ("irradiated_crater", [-0.15, 1.0], [-0.35, 0.3], [0.03, 1.0], [-0.38, 1.0], [0.72, 1.0], 0.0),
-    ("oasis", [0.55, 1.0], [0.45, 1.0], [-0.11, 1.0], [0.0, 1.0], [-0.55, -0.2], 0.0),
+    # The oasis is small and rare: a narrow corner of the climate space.
+    ("oasis", [0.7, 1.0], [0.6, 1.0], [0.0, 1.0], [0.2, 1.0], [-0.45, -0.32], 0.0),
 ]
 
 
@@ -81,7 +82,7 @@ def block(b):
 
 
 OURS = {"ash", "cinder_rock", "dried_silt", "salt_crust", "salt_block", "irradiated_soil", "trinitite", "acidic_mud",
-        "compacted_junk", "tar_sand", "oil_shale", "silica_sand", "lithium_brine_crust"}
+        "compacted_junk", "tar_sand", "oil_shale", "silica_sand", "lithium_brine_crust", "oasis_grass", "living_soil"}
 
 
 def patches(default, spots):
@@ -105,7 +106,7 @@ SURFACE = {
     "junk_mountains": ("compacted_junk", [(0.2, 0.45, "gravel"), (-0.45, -0.25, "coarse_dirt")], "compacted_junk"),
     "salt_flats": ("salt_crust", [(0.55, 0.7, "lithium_brine_crust")], "salt_block"),
     "deep_canyons": ("red_sand", [(0.3, 0.6, "orange_terracotta")], "orange_terracotta"),
-    "oasis": ("grass_block", [(0.5, 0.8, "sand")], "dirt"),
+    "oasis": ("oasis_grass", [(0.5, 0.8, "sand")], "living_soil"),
     "abandoned_farmland": ("grass_block", [(0.25, 0.55, "coarse_dirt"), (-0.55, -0.4, "rooted_dirt")], "dirt"),
     "oil_field": ("tar_sand", [(0.3, 0.55, "oil_shale"), (-0.5, -0.35, "coarse_dirt")], "oil_shale"),
 }
