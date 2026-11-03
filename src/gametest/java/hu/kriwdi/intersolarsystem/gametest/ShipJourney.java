@@ -105,8 +105,9 @@ public class ShipJourney implements FabricClientGameTest {
 			waitForPhase(context, game, ShipFlightPhase.LANDED);
 			context.waitTicks(40);
 			context.takeScreenshot("53_moon_through_window");
-			LOGGER.info("[JOURNEY] landed: {}", game.getServer().computeOnServer(
-					server -> String.valueOf(ShipStateAccess.get(server).landingSite())));
+			String landed = game.getServer().computeOnServer(
+					server -> String.valueOf(ShipStateAccess.get(server).landingSite()));
+			LOGGER.info("[JOURNEY] landed: {}", landed);
 
 			// Leave the ship on the Moon and look back at it.
 			game.getServer().runOnServer(server -> ShipBoarding.use(server.getLevel(ShipDimensions.INTERIOR),
