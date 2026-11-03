@@ -1,8 +1,6 @@
 {
   "values": [
     "intersolarsystem:salt_flats",
-    "intersolarsystem:dried_seabed",
-    "intersolarsystem:ash_desert",
-    "intersolarsystem:abandoned_farmland"
+    "intersolarsystem:dried_seabed"
   ]
 }

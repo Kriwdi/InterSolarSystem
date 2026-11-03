@@ -191,16 +191,16 @@ A struktúrák ládáiban és hordóiban kimentett technológia, élelem és ala
 | **Napelemfarm** | sósivatag, hamusivatag, farmvidék | ipari zsákmány |
 | **Gát** | mély kanyonok | ipari zsákmány |
 | **Rádiótorony** | szeméthegyek, megkövült erdő, megapolisz, farmvidék | áramkör, vezeték, mágnes, vörös por |
-| **Kórház** (háromszintes) | megapolisz, hamusivatag, farmvidék, savas mocsár | orvosi zsákmány, aranyalma |
+| **St. Raphael kórházkomplexum** (hatszintes L alakú épület, sürgősségi bejárat mentőautókkal, kórtermek, intenzív osztály, műtők, helikopter-leszálló a tetőn, hullaház a pincében, drótkerítéses karanténtábor sátrakkal) | megapolisz, hamusivatag, farmvidék, savas mocsár | orvosi zsákmány, aranyalma, feljegyzések |
 | **Laktanya** (őrtoronnyal) | hamusivatag, kanyon, megkövült erdő, szeméthegyek | fegyver, páncél, TNT, titánlemez |
-| **Repülőtér** (kifutó, irányítótorony, lezuhant gép) | sósivatag, tengerfenék, hamusivatag | városi és rakomány-zsákmány |
+| **Aurora International repülőtér** (220 blokkos kifutó a végén kiégett, három darabra tört géppel, gurulóút, betonplatform parkoló utasszállítóval, háromszintes terminál utasbeszálló hidakkal és tábori kórházzal, 44 m-es irányítótorony, hangár, üzemanyagtelep, parkoló autóroncsokkal) | sósivatag, kiszáradt tengerfenék (nagyon ritka) | városi, rakomány-, ipari és labor-zsákmány |
 | **Olajkút** | olajmező | ipari zsákmány, bitumen |
 | **Tanya** (pajta, siló, kiszáradt földek) | farmvidék | vetőmag, bőr, gyapjú, eszközök |
 | **Lezuhant teherkapszula**, **műhold**, **rakétafokozat** | mindenhol | élelem, fémhulladék, alumínium, napelem |
 | **Bányászdrón-telep** (aknával) | szeméthegyek, kanyon, olajmező | ipari zsákmány; a drónokból áramkör, vezeték, akkumulátor |
 | **Kolóniák** (benőtt, leégett, befagyott) | oázis/savas mocsár, hamusivatag/kráter, megapolisz | élelem, titán, gyapjú, bőr, űrsisak |
 | **Hajóroncs**, **bálnacsontváz** | kiszáradt tengerfenék | rakomány, iránytű, térkép, arany |
-| **Holt város** (tér, utcák, felhőkarcolók, lakóházak, boltok) | befagyott megapolisz, hamusivatag | városi zsákmány minden épületben |
+| **Holt megaváros** (kereszteződések közlekedési lámpákkal, sugárutak autóroncsokkal, katonai ellenőrzőpontok, leomlott épületek; 90–110 m-es üvegfelhőkarcolók szerverszinttel, irodaházak, panelházak, rendőrség cellákkal, természettudományi múzeum T-rex csontvázzal, üzletsor, park) | befagyott megapolisz, hamusivatag | városi, katonai és labor-zsákmány minden épületben |
 | **Metróhálózat** (állomás lépcsővel, alagutak) | megapolisz, hamusivatag, farmvidék, szeméthegyek | városi zsákmány, élelem |
 
 ### Történet: feljegyzések, adatszalagok, terminálok, kézikönyvek
@@ -217,6 +217,8 @@ A romokban megtudhatod, mi történt a Földdel (Halcyon, a Szürke Virágzás, 
 
 Majdnem minden ládatípusban van esély egy, a helyhez illő feljegyzésre, szalagra vagy kézikönyvre (a kórházban az
 ápolónő naplója, a rádiótoronyban a Bárka-2 utolsó adása, az oázisban a gondnok üzenete stb.).
+
+**Városi berendezések:** az új romokban 49 új blokk van (repedt és kormos beton, aszfalt útburkolati jelekkel, üvegfal, csempék, irodai bútorok, kórházi ágyak, infúziós állványok, autó- és mentőautó-roncsok, sugárhajtómű, közlekedési lámpa, homokzsák, szögesdrót, karanténsorompó, plakátok). Kibányászva megkapod őket, így építhetsz is belőlük.
 
 **Csontvázak:** a romokban emberi maradványok (fekvő, falnak dőlve ülő, összegömbölyödött, szkafanderes) és állatok
 (kutya, tehén, ló) mesélik el az utolsó perceket. Csontot adnak, ha kibányászod őket.

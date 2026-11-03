@@ -308,6 +308,7 @@ def airport_complex():
     # Light decay over everything except the paved areas.
     b.decay(0.008, keep=("intersolarsystem:asphalt", "intersolarsystem:cracked_asphalt", "intersolarsystem:runway_marking",
                          "minecraft:ladder"))
+    b.clear_above(16)
     return b
 
 
@@ -715,6 +716,7 @@ def hospital_complex():
     collapse(b, 10, 10, 70, 72, storey * 4, top + 1, 0.08)
     b.decay(0.01, keep=("minecraft:ladder", "intersolarsystem:asphalt", "intersolarsystem:cracked_asphalt"),
             cracked={"minecraft:white_concrete": "calcite"}, top_bias=True)
+    b.clear_above(14)
     return b
 
 

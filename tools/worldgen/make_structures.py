@@ -131,6 +131,14 @@ class Build:
                 if below and below != AIR and below[0] not in ("minecraft:chest", "minecraft:barrel"):
                     self.set(x, y, z, S("rubble"))
 
+    def clear_above(self, height):
+        """Air over every ground column (y = 0) up to height wherever nothing is placed: the template then cuts the
+        structure out of hills (terrain adaptation alone only shaves the surface of large hills)."""
+        for (x, y, z) in [p for p in self.blocks if p[1] == 0]:
+            for yy in range(1, height + 1):
+                if (x, yy, z) not in self.blocks:
+                    self.blocks[(x, yy, z)] = AIR
+
     # -- output
     def save(self, rel):
         xs = [p[0] for p in self.blocks]
@@ -1028,7 +1036,7 @@ SINGLES = [
     ("barracks", barracks, ["ash_desert", "deep_canyons", "petrified_forest", "junk_mountains"], 36, 12, 70012, 0,
      "beard_thin"),
     ("airport", lambda: __import__("big_structures").airport_complex(),
-     ["salt_flats", "dried_seabed", "ash_desert", "abandoned_farmland"], 72, 28, 70013, -1, "beard_box"),
+     ["salt_flats", "dried_seabed"], 72, 28, 70013, -1, "beard_box"),
     ("oil_pumpjack", oil_pumpjack, ["oil_field"], 12, 4, 70014, 0, "beard_thin"),
     ("farmhouse", farmhouse, ["abandoned_farmland"], 16, 5, 70015, 0, "beard_thin"),
     ("cargo_capsule", cargo_capsule, ALL, 20, 6, 70016, -1, "beard_thin"),
@@ -1053,6 +1061,7 @@ def main():
         structure(name, name, biomes, spacing, sep, salt, depth, adaptation=adaptation)
     import city_structures
     for rel, b in city_structures.city_pieces().items():
+        b.clear_above(10)
         sizes[rel] = b.save(rel)
     for name, entries in city_structures.POOLS.items():
         pool(name, entries)
