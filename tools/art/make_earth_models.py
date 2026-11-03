@@ -125,3 +125,64 @@ if __name__ == "__main__":
     props()
     items()
     print("earth models written")
+
+
+def dead_wood_set():
+    """Planks, slab, stairs and fence of the dead wood, with vanilla's model shapes (like oak)."""
+    t = NS + "block/dead_planks"
+    m = NS + "block/"
+    write(ASSETS / "models/block/dead_planks.json", {"parent": "minecraft:block/cube_all", "textures": {"all": t}})
+    write(ASSETS / "blockstates/dead_planks.json", {"variants": {"": {"model": m + "dead_planks"}}})
+    item_from_block("dead_planks", "block/dead_planks")
+    three = {"bottom": t, "top": t, "side": t}
+    write(ASSETS / "models/block/dead_slab.json", {"parent": "minecraft:block/slab", "textures": three})
+    write(ASSETS / "models/block/dead_slab_top.json", {"parent": "minecraft:block/slab_top", "textures": three})
+    write(ASSETS / "blockstates/dead_slab.json", {"variants": {
+        "type=bottom": {"model": m + "dead_slab"}, "type=top": {"model": m + "dead_slab_top"},
+        "type=double": {"model": m + "dead_planks"}}})
+    item_from_block("dead_slab", "block/dead_slab")
+    for kind in ("stairs", "inner_stairs", "outer_stairs"):
+        name = "dead_stairs" if kind == "stairs" else "dead_stairs_" + kind.split("_")[0]
+        write(ASSETS / "models/block" / (name + ".json"), {"parent": "minecraft:block/" + kind, "textures": three})
+    variants = {}
+    facing_y = {"east": 0, "south": 90, "west": 180, "north": 270}
+    for facing, fy in facing_y.items():
+        for half in ("bottom", "top"):
+            for shape in ("straight", "inner_left", "inner_right", "outer_left", "outer_right"):
+                model = m + ("dead_stairs" if shape == "straight" else
+                             "dead_stairs_inner" if shape.startswith("inner") else "dead_stairs_outer")
+                y = fy
+                if shape in ("inner_left", "outer_left"):
+                    y = (fy + 270) % 360
+                v = {"model": model}
+                if half == "top":
+                    v["x"] = 180
+                    if shape in ("inner_left", "outer_left"):
+                        y = fy
+                    elif shape in ("inner_right", "outer_right"):
+                        y = (fy + 90) % 360
+                if y:
+                    v["y"] = y
+                if half == "top" or y:
+                    v["uvlock"] = True
+                variants[f"facing={facing},half={half},shape={shape}"] = v
+    write(ASSETS / "blockstates/dead_stairs.json", {"variants": variants})
+    item_from_block("dead_stairs", "block/dead_stairs")
+    write(ASSETS / "models/block/dead_fence_post.json", {"parent": "minecraft:block/fence_post",
+                                                         "textures": {"texture": t}})
+    write(ASSETS / "models/block/dead_fence_side.json", {"parent": "minecraft:block/fence_side",
+                                                         "textures": {"texture": t}})
+    write(ASSETS / "models/block/dead_fence_inventory.json", {"parent": "minecraft:block/fence_inventory",
+                                                              "textures": {"texture": t}})
+    parts = [{"apply": {"model": m + "dead_fence_post"}}]
+    for side, y in (("north", 0), ("east", 90), ("south", 180), ("west", 270)):
+        apply = {"model": m + "dead_fence_side", "uvlock": True}
+        if y:
+            apply["y"] = y
+        parts.append({"when": {side: "true"}, "apply": apply})
+    write(ASSETS / "blockstates/dead_fence.json", {"multipart": parts})
+    item_from_block("dead_fence", "block/dead_fence_inventory")
+
+
+if __name__ == "__main__":
+    dead_wood_set()

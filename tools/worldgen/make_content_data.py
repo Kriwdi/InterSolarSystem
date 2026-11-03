@@ -61,7 +61,7 @@ def drop_items(block, entries):
 
 SELF = ["ash", "cinder_rock", "dried_silt", "salt_crust", "salt_block", "irradiated_soil", "trinitite",
         "acidic_mud", "compacted_junk", "tar_sand", "silica_sand", "petrified_log", "petrified_wood", "dead_log",
-        "toxic_barrel", "tar_puddle", "lander_engine", "lunar_flag", "rover_wheel", "antenna_dish", "data_terminal"]
+        "toxic_barrel", "tar_puddle", "dead_planks", "dead_slab", "dead_stairs", "dead_fence", "lander_engine", "lunar_flag", "rover_wheel", "antenna_dish", "data_terminal"]
 
 
 def loot():
@@ -113,7 +113,11 @@ def recipes():
     cook("iron_nugget", "scrap_metal", "minecraft:iron_nugget", 0.1)
     cook("copper_ingot", "salvaged_wiring", "minecraft:copper_ingot", 0.2)
     cook("glass", "salt_crust", "minecraft:glass", 0.1, kinds=("smelting",))
-    shapeless("spruce_planks_from_dead_log", ["dead_log"], "minecraft:spruce_planks", 4)
+    shapeless("dead_planks", ["dead_log"], "dead_planks", 4)
+    shaped("dead_slab", ["PPP"], {"P": "dead_planks"}, "dead_slab", 6, category="building")
+    shaped("dead_stairs", ["P  ", "PP ", "PPP"], {"P": "dead_planks"}, "dead_stairs", 4, category="building")
+    shaped("dead_fence", ["PSP", "PSP"], {"P": "dead_planks", "S": "minecraft:stick"}, "dead_fence", 3,
+           category="building")
     shapeless("titanium_plate", ["titanium_ingot", "titanium_ingot"], "titanium_plate")
     shaped("solar_cell", ["GGG", "SSS", "AWA"],
            {"G": "minecraft:glass_pane", "S": "silicon", "A": "aluminium_ingot", "W": "salvaged_wiring"},
@@ -153,7 +157,14 @@ def tags():
             if NS + b not in values:
                 values.append(NS + b)
         write(f"minecraft/tags/block/mineable/{tool}.json", {"replace": False, "values": values})
-    write("minecraft/tags/block/mineable/axe.json", {"replace": False, "values": [NS + "dead_log"]})
+    wood = ["dead_log", "dead_planks", "dead_slab", "dead_stairs", "dead_fence"]
+    write("minecraft/tags/block/mineable/axe.json", {"replace": False, "values": [NS + w for w in wood]})
+    for kind in ("block", "item"):
+        write(f"minecraft/tags/{kind}/planks.json", {"replace": False, "values": [NS + "dead_planks"]})
+        write(f"minecraft/tags/{kind}/wooden_slabs.json", {"replace": False, "values": [NS + "dead_slab"]})
+        write(f"minecraft/tags/{kind}/wooden_stairs.json", {"replace": False, "values": [NS + "dead_stairs"]})
+        write(f"minecraft/tags/{kind}/wooden_fences.json", {"replace": False, "values": [NS + "dead_fence"]})
+        write(f"minecraft/tags/{kind}/logs.json", {"replace": False, "values": [NS + "dead_log"]})
     write("minecraft/tags/block/needs_stone_tool.json", {"replace": False, "values": [
         NS + o for o in ores if "bauxite" in o or "spodumene" in o] + [NS + "oil_shale"]})
     write("minecraft/tags/block/needs_iron_tool.json", {"replace": False, "values": [

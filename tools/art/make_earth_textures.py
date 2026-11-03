@@ -644,3 +644,32 @@ if __name__ == "__main__":
     props()
     items()
     print("earth textures written")
+
+
+def dead_planks():
+    """Planks sawn from the bleached dead wood: grey-brown boards with dry cracks and old nail holes."""
+    img = Image.new("RGBA", (16, 16))
+    px = img.load()
+    rnd = random.Random(701)
+    tones = [hexc("9a9083"), hexc("8a8073"), hexc("a69c8e"), hexc("918779")]
+    for board in range(4):
+        tone = tones[board]
+        for y in range(board * 4, board * 4 + 4):
+            for x in range(16):
+                px[x, y] = shade(tone, 1 + rnd.uniform(-0.05, 0.05) + (0.06 if (x + board * 5) % 7 == 0 else 0))
+        for x in range(16):
+            px[x, board * 4 + 3] = shade(tone, 0.68)  # gap below each board
+        joint = (board * 7 + 3) % 16
+        for y in range(board * 4, board * 4 + 3):
+            px[joint, y] = shade(tone, 0.72)
+        for (dx, dy) in ((2, 1), (13, 1)):
+            px[(joint + dx) % 16, board * 4 + dy] = hexc("4b4540")  # nail holes
+        if rnd.random() < 0.7:  # a dry crack along the grain
+            x0 = rnd.randrange(10)
+            for i in range(rnd.randint(3, 6)):
+                px[x0 + i, board * 4 + 1 + (i // 3) % 2] = shade(tone, 0.6)
+    save(img, "block/dead_planks")
+
+
+if __name__ == "__main__":
+    dead_planks()

@@ -9,7 +9,10 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
@@ -204,6 +207,20 @@ public final class ModBlocks {
 	public static final Block SHIP_VIEWPORT = register("ship_viewport", Block::new,
 			BlockBehaviour.Properties.of().strength(-1.0F, 3600000.0F).sound(SoundType.GLASS).noLootTable()
 					.noOcclusion().pushReaction(PushReaction.IMMOVEABLE));
+
+	// ---- Dead wood: planks sawn from the bleached trunks, and what is built from them.
+	public static final Block DEAD_PLANKS = register("dead_planks", Block::new,
+			BlockBehaviour.Properties.of().strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava());
+
+	public static final Block DEAD_SLAB = register("dead_slab", SlabBlock::new,
+			BlockBehaviour.Properties.of().strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava());
+
+	public static final Block DEAD_STAIRS = register("dead_stairs",
+			p -> new StairBlock(DEAD_PLANKS.defaultBlockState(), p),
+			BlockBehaviour.Properties.of().strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava());
+
+	public static final Block DEAD_FENCE = register("dead_fence", FenceBlock::new,
+			BlockBehaviour.Properties.of().strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava());
 
 	private ModBlocks() {
 	}

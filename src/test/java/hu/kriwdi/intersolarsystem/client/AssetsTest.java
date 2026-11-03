@@ -34,7 +34,10 @@ class AssetsTest {
 	private static final String NS = "intersolarsystem:";
 	private static final Set<String> VANILLA_PARENTS = Set.of("minecraft:block/block", "minecraft:block/cube_all",
 			"minecraft:block/cube", "minecraft:block/cube_column", "minecraft:block/cube_column_horizontal",
-			"minecraft:item/generated", "minecraft:item/handheld");
+			"minecraft:block/slab", "minecraft:block/slab_top", "minecraft:block/stairs", "minecraft:block/inner_stairs",
+			"minecraft:block/outer_stairs", "minecraft:block/fence_post", "minecraft:block/fence_side",
+			"minecraft:block/fence_inventory", "minecraft:item/generated", "minecraft:item/handheld",
+			"minecraft:item/template_spawn_egg");
 	private static final Set<String> ELEMENT_KEYS = Set.of("from", "to", "faces", "rotation", "shade", "__comment");
 	private static final Set<String> FACE_KEYS = Set.of("texture", "uv", "cullface", "rotation", "tintindex");
 	private static final Set<String> DIRECTIONS = Set.of("north", "south", "east", "west", "up", "down");
@@ -58,9 +61,15 @@ class AssetsTest {
 	@Test
 	void blockstatesPointAtExistingModels() throws IOException {
 		for (Path p : files("blockstates", ".json")) {
-			JsonObject variants = read(p).getAsJsonObject("variants");
-			for (String key : variants.keySet()) {
-				JsonElement v = variants.get(key);
+			JsonObject state = read(p);
+			List<JsonElement> entries = new ArrayList<>();
+			if (state.has("multipart")) {
+				state.getAsJsonArray("multipart").forEach(part -> entries.add(part.getAsJsonObject().get("apply")));
+			} else {
+				JsonObject variants = state.getAsJsonObject("variants");
+				variants.keySet().forEach(key -> entries.add(variants.get(key)));
+			}
+			for (JsonElement v : entries) {
 				List<JsonObject> options = new ArrayList<>();
 				if (v.isJsonArray()) {
 					v.getAsJsonArray().forEach(e -> options.add(e.getAsJsonObject()));

@@ -1,6 +1,10 @@
 {
   "replace": false,
   "values": [
-    "intersolarsystem:dead_log"
+    "intersolarsystem:dead_log",
+    "intersolarsystem:dead_planks",
+    "intersolarsystem:dead_slab",
+    "intersolarsystem:dead_stairs",
+    "intersolarsystem:dead_fence"
   ]
 }

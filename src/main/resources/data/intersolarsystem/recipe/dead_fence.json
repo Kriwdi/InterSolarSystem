@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "P": "intersolarsystem:dead_planks",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "PSP",
+    "PSP"
+  ],
+  "result": {
+    "id": "intersolarsystem:dead_fence",
+    "count": 3
+  }
+}

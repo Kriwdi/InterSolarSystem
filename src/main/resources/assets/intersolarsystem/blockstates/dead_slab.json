@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "intersolarsystem:block/dead_slab"
+    },
+    "type=top": {
+      "model": "intersolarsystem:block/dead_slab_top"
+    },
+    "type=double": {
+      "model": "intersolarsystem:block/dead_planks"
+    }
+  }
+}

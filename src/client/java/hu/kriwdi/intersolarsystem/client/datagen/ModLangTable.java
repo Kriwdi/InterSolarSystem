@@ -1054,6 +1054,22 @@ public final class ModLangTable {
 				"Viewport",
 				"Sichtfenster",
 				"Kilátóablak");
+		add(rows, "block.intersolarsystem.dead_planks",
+				"Dead Planks",
+				"Totholzbretter",
+				"Elhalt fa deszka");
+		add(rows, "block.intersolarsystem.dead_slab",
+				"Dead Slab",
+				"Totholzstufe",
+				"Elhalt fa lap");
+		add(rows, "block.intersolarsystem.dead_stairs",
+				"Dead Stairs",
+				"Totholztreppe",
+				"Elhalt fa lépcső");
+		add(rows, "block.intersolarsystem.dead_fence",
+				"Dead Fence",
+				"Totholzzaun",
+				"Elhalt fa kerítés");
 		check(rows);
 		return List.copyOf(rows);
 	}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "P": "intersolarsystem:dead_planks"
+  },
+  "pattern": [
+    "PPP"
+  ],
+  "result": {
+    "id": "intersolarsystem:dead_slab",
+    "count": 6
+  }
+}
