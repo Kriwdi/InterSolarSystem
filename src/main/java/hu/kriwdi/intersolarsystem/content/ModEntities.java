@@ -10,9 +10,12 @@ import net.minecraft.world.entity.MobCategory;
 import hu.kriwdi.intersolarsystem.core.ModIds;
 
 public final class ModEntities {
-	/** What a sitting player rides (see {@link AstronautSeatBlock}). */
+	/**
+	 * What a sitting player rides (see {@link AstronautSeatBlock}). It must stay serialisable (no noSave()): the server
+	 * refuses to let anyone ride an entity type that cannot be saved. An empty seat removes itself on its next tick.
+	 */
 	public static final EntityType<SeatEntity> SEAT = register("seat",
-			EntityType.Builder.<SeatEntity>of(SeatEntity::new, MobCategory.MISC).sized(0.4F, 0.2F).noSummon().noSave()
+			EntityType.Builder.<SeatEntity>of(SeatEntity::new, MobCategory.MISC).sized(0.4F, 0.2F).noSummon()
 					.clientTrackingRange(8));
 
 	private ModEntities() {

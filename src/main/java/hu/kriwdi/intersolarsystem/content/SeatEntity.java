@@ -16,7 +16,7 @@ import net.minecraft.world.phys.Vec3;
 
 /**
  * The invisible thing a player rides while sitting in a seat. It exists only while someone sits: it disappears as soon
- * as the seat is empty or the seat block is gone, and it is never saved.
+ * as the seat is empty or the seat block is gone (also right after a world is loaded).
  */
 public class SeatEntity extends Entity {
 	public SeatEntity(EntityType<?> type, Level level) {

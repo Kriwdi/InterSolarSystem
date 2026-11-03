@@ -56,14 +56,14 @@ public class SceneScreenshots implements FabricClientGameTest {
 			game.getServer().runOnServer(server -> OrbitStation.build(server.getLevel(ShipDimensions.ORBIT)));
 			game.getServer().runCommand("time set noon");
 			game.getServer().runCommand("gamemode spectator @a");
-			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 72 152 -96 facing 0 122 -12");
+			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 48 140 -66 facing 0 121 -10");
 			context.waitTicks(120);
 			context.takeScreenshot("07_orbit_iss");
 			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 30 112 -70 -20 70");
 			context.waitTicks(20);
 			context.takeScreenshot("08_orbit_earth_below");
 			game.getServer().runCommand("time set midnight");
-			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 72 152 -96 30 -30");
+			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 48 140 -66 30 -30");
 			context.waitTicks(40);
 			context.takeScreenshot("09_orbit_night_sky");
 			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 0 119 -27 0 5");
