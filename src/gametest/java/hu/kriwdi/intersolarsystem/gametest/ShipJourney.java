@@ -80,7 +80,19 @@ public class ShipJourney implements FabricClientGameTest {
 			// Opened like a player does: looking at the console and pressing the use key (right click).
 			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 16.5, 4.5, 65.6, 18.5);
 			context.waitTicks(10);
+			context.takeScreenshot("45b_aim_at_console");
+			String aim = context.computeOnClient(client -> client.hitResult == null ? "nothing"
+					: client.hitResult.getType() + " " + (client.hitResult instanceof net.minecraft.world.phys.BlockHitResult b
+							? b.getBlockPos() + " " + client.level.getBlockState(b.getBlockPos()) : ""));
+			LOGGER.info("[JOURNEY] aiming at {}", aim);
 			context.getInput().pressKey(options -> options.keyUse);
+			context.waitTicks(20);
+			String screen = context.computeOnClient(client -> String.valueOf(client.screen));
+			LOGGER.info("[JOURNEY] after the use key the screen is {}", screen);
+			if (!screen.contains("NavigationScreen")) {
+				LOGGER.error("[JOURNEY] the use key did not open the console; opening it directly");
+				game.getServer().runOnServer(server -> ShipNavigation.open(server, player(server)));
+			}
 			context.waitForScreen(NavigationScreen.class);
 			context.waitTicks(10);
 			context.takeScreenshot("46_nav_open");

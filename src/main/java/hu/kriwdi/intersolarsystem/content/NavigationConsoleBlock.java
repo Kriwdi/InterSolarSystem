@@ -71,6 +71,8 @@ public class NavigationConsoleBlock extends ShipFacingBlock {
 	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player,
 			BlockHitResult hit) {
 		if (level instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer) {
+			hu.kriwdi.intersolarsystem.InterSolarSystem.LOGGER.info("[nav] {} used the navigation console in {}",
+					serverPlayer.getName().getString(), level.dimension().identifier());
 			if (!level.dimension().equals(ShipDimensions.INTERIOR)) {
 				ShipRepair.showOutsideShip(serverPlayer);
 			} else if (!ShipTravelEvents.respond(serverLevel.getServer(), serverPlayer)) {
