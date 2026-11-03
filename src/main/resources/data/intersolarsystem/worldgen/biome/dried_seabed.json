@@ -38,33 +38,33 @@
     [],
     [],
     [
-      "minecraft:ore_gravel",
-      "minecraft:ore_granite_upper",
-      "minecraft:ore_granite_lower",
-      "minecraft:ore_diorite_upper",
-      "minecraft:ore_diorite_lower",
-      "minecraft:ore_andesite_upper",
-      "minecraft:ore_andesite_lower",
-      "minecraft:ore_tuff",
       "intersolarsystem:ore_bauxite",
+      "intersolarsystem:ore_monazite",
+      "intersolarsystem:ore_oil_shale",
+      "intersolarsystem:ore_spodumene",
       "intersolarsystem:ore_titanium",
       "intersolarsystem:ore_uraninite",
-      "intersolarsystem:ore_spodumene",
-      "intersolarsystem:ore_monazite",
-      "intersolarsystem:ore_oil_shale"
+      "minecraft:ore_andesite_lower",
+      "minecraft:ore_andesite_upper",
+      "minecraft:ore_diorite_lower",
+      "minecraft:ore_diorite_upper",
+      "minecraft:ore_granite_lower",
+      "minecraft:ore_granite_upper",
+      "minecraft:ore_gravel",
+      "minecraft:ore_tuff"
     ],
     [],
     [
       "minecraft:spring_lava"
     ],
     [
-      "intersolarsystem:salt_disk",
+      "intersolarsystem:bone_heap",
       "intersolarsystem:dead_brain_coral",
-      "intersolarsystem:dead_tube_coral",
+      "intersolarsystem:dead_bubble_coral",
       "intersolarsystem:dead_fire_coral",
       "intersolarsystem:dead_horn_coral",
-      "intersolarsystem:dead_bubble_coral",
-      "intersolarsystem:bone_heap",
+      "intersolarsystem:dead_tube_coral",
+      "intersolarsystem:salt_disk",
       "intersolarsystem:scrap_pile_sparse"
     ],
     []

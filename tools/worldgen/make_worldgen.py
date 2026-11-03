@@ -372,6 +372,8 @@ def biomes():
         steps[8] = ["minecraft:spring_lava"]
         steps[9] = [x if ":" in x else NS + x for x in b.get("deco", [])]
         steps[10] = b.get("top", [])
+        # Features of one step must keep the same relative order in every biome (else "Feature order cycle").
+        steps = [sorted(step) for step in steps]
         write(f"intersolarsystem/worldgen/biome/{name}.json", {
             "attributes": attrs,
             "carvers": ["minecraft:cave", "minecraft:cave_extra_underground", "minecraft:canyon"]

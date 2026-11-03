@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 70015,
+    "separation": 5,
+    "spacing": 16
+  },
+  "structures": [
+    {
+      "structure": "intersolarsystem:farmhouse",
+      "weight": 1
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 70024,
+    "separation": 5,
+    "spacing": 16
+  },
+  "structures": [
+    {
+      "structure": "intersolarsystem:whale_skeleton",
+      "weight": 1
+    }
+  ]
+}

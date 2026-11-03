@@ -53,30 +53,30 @@
     [],
     [],
     [
-      "minecraft:ore_gravel",
-      "minecraft:ore_granite_upper",
-      "minecraft:ore_granite_lower",
-      "minecraft:ore_diorite_upper",
-      "minecraft:ore_diorite_lower",
-      "minecraft:ore_andesite_upper",
-      "minecraft:ore_andesite_lower",
-      "minecraft:ore_tuff",
       "intersolarsystem:ore_bauxite",
-      "intersolarsystem:ore_titanium",
-      "intersolarsystem:ore_uraninite",
-      "intersolarsystem:ore_spodumene",
       "intersolarsystem:ore_monazite",
       "intersolarsystem:ore_oil_shale",
-      "intersolarsystem:ore_uraninite_fallout"
+      "intersolarsystem:ore_spodumene",
+      "intersolarsystem:ore_titanium",
+      "intersolarsystem:ore_uraninite",
+      "intersolarsystem:ore_uraninite_fallout",
+      "minecraft:ore_andesite_lower",
+      "minecraft:ore_andesite_upper",
+      "minecraft:ore_diorite_lower",
+      "minecraft:ore_diorite_upper",
+      "minecraft:ore_granite_lower",
+      "minecraft:ore_granite_upper",
+      "minecraft:ore_gravel",
+      "minecraft:ore_tuff"
     ],
     [],
     [
       "minecraft:spring_lava"
     ],
     [
-      "intersolarsystem:trinitite_blob",
+      "intersolarsystem:scrap_pile_sparse",
       "intersolarsystem:toxic_barrel_common",
-      "intersolarsystem:scrap_pile_sparse"
+      "intersolarsystem:trinitite_blob"
     ],
     []
   ],

@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 70017,
+    "separation": 7,
+    "spacing": 22
+  },
+  "structures": [
+    {
+      "structure": "intersolarsystem:crashed_satellite",
+      "weight": 1
+    }
+  ]
+}

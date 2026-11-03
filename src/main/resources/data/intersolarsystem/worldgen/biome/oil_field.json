@@ -50,21 +50,21 @@
     [],
     [],
     [
-      "minecraft:ore_gravel",
-      "minecraft:ore_granite_upper",
-      "minecraft:ore_granite_lower",
-      "minecraft:ore_diorite_upper",
-      "minecraft:ore_diorite_lower",
-      "minecraft:ore_andesite_upper",
-      "minecraft:ore_andesite_lower",
-      "minecraft:ore_tuff",
       "intersolarsystem:ore_bauxite",
-      "intersolarsystem:ore_titanium",
-      "intersolarsystem:ore_uraninite",
-      "intersolarsystem:ore_spodumene",
       "intersolarsystem:ore_monazite",
       "intersolarsystem:ore_oil_shale",
-      "intersolarsystem:ore_oil_shale_field"
+      "intersolarsystem:ore_oil_shale_field",
+      "intersolarsystem:ore_spodumene",
+      "intersolarsystem:ore_titanium",
+      "intersolarsystem:ore_uraninite",
+      "minecraft:ore_andesite_lower",
+      "minecraft:ore_andesite_upper",
+      "minecraft:ore_diorite_lower",
+      "minecraft:ore_diorite_upper",
+      "minecraft:ore_granite_lower",
+      "minecraft:ore_granite_upper",
+      "minecraft:ore_gravel",
+      "minecraft:ore_tuff"
     ],
     [],
     [
@@ -72,9 +72,9 @@
     ],
     [
       "intersolarsystem:oil_shale_disk",
+      "intersolarsystem:scrap_pile_sparse",
       "intersolarsystem:tar_puddle",
-      "intersolarsystem:toxic_barrel_rare",
-      "intersolarsystem:scrap_pile_sparse"
+      "intersolarsystem:toxic_barrel_rare"
     ],
     []
   ],
