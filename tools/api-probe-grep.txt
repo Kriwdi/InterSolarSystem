@@ -1,6 +1,1 @@
-# Regex.
-fabric.*ModelLayer.*class
-fabric.*EntityModel.*class
-client/renderer/entity/.*Trader.*class
-client/model/.*Villager.*class
-assets/minecraft/items/pig_spawn_egg.json
+# none

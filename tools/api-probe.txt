@@ -1,4 +1,10 @@
-net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
-net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry
-net.minecraft.world.entity.EntityType$Builder
-net.minecraft.world.item.SpawnEggItem
+# Classes.
+net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry
+net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry$TexturedLayerDefinitionProvider
+net.minecraft.client.model.geom.ModelLayerLocation
+net.minecraft.world.item.trading.MerchantOffer
+net.minecraft.world.item.trading.ItemCost
+net.minecraft.world.entity.animal.Animal
+net.minecraft.world.entity.monster.Monster
+net.minecraft.world.entity.EntityTypes
+net.minecraft.world.entity.npc.villager.AbstractVillager
