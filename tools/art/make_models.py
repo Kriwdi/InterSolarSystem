@@ -125,7 +125,7 @@ def navigation_console():
          "frame": "block/navigation_console_frame", "column": "block/navigation_console_column",
          "base": "block/navigation_console_base", "holo": "block/navigation_console_holo",
          "metal": "block/rusted_panel"}
-    tilt = {"origin": [8, 10, 8], "axis": "x", "angle": 22.5}
+    tilt = {"origin": [8, 10, 8], "axis": "x", "angle": -22.5}
     els = [
         # Base plate and the cable column.
         box((2, 0, 2), (14, 2, 14), "base", uv={"north": (2, 14, 14, 16), "south": (2, 14, 14, 16),

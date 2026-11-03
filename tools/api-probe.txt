@@ -1,0 +1,7 @@
+net.minecraft.world.entity.Entity
+net.minecraft.world.entity.EntityType$Builder
+net.minecraft.world.entity.EntityType$EntityFactory
+net.minecraft.client.renderer.entity.NoopRenderer
+net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
+net.minecraft.world.level.block.StairBlock
+net.minecraft.world.level.block.SlabBlock
