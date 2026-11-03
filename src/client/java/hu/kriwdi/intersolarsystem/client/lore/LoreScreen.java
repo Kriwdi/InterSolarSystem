@@ -180,8 +180,10 @@ public class LoreScreen extends Screen {
 				g.fill(l, t, l + W, t + H, 0xFFF4F4F0);
 				g.fill(l, t, l + W, t + 28, 0xFF2F5F9F);
 				g.fill(l, t + 28, l + W, t + 30, 0xFFD9A521);
-				g.fill(l + W - 34, t + 6, l + W - 10, t + 22, 0xFFE8E8E8);
-				g.text(font, "AURORA", l + W - 33, t + 10, 0xFF2F5F9F, false);
+				int badge = font.width("AURORA") + 8;
+				g.fill(l + W - 10 - badge, t + 6, l + W - 10, t + 22, 0xFFE8E8E8);
+				g.fill(l + W - 10 - badge, t + 20, l + W - 10, t + 22, 0xFFD9822B);
+				g.text(font, "AURORA", l + W - 6 - badge, t + 10, 0xFF2F5F9F, false);
 			}
 			case TERMINAL -> {
 				g.fill(l - 4, t - 4, l + W + 4, t + H + 4, 0xFF2B2F33);
