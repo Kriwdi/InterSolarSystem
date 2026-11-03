@@ -124,6 +124,7 @@ public class SceneScreenshots implements FabricClientGameTest {
 			game.getServer().runCommand("effect give @a minecraft:night_vision infinite 0 true");
 			// Spectators fly: the camera stays where it is put instead of falling to the ground.
 			game.getServer().runCommand("gamemode spectator @a");
+			context.runOnClient(client -> client.options.renderDistance().set(10));
 			for (var biome : hu.kriwdi.intersolarsystem.worldgen.DeadEarth.ALL) {
 				BlockPos at = game.getServer().computeOnServer(server -> {
 					ServerLevel earth = server.overworld();
@@ -143,7 +144,7 @@ public class SceneScreenshots implements FabricClientGameTest {
 				}
 				game.getServer().runCommand("execute in minecraft:overworld run tp @a " + at.getX() + " " + (at.getY() + 16)
 						+ " " + at.getZ() + " -45 30");
-				context.waitTicks(90);
+				context.waitTicks(160);
 				context.takeScreenshot("20_earth_" + biome.identifier().getPath());
 			}
 			for (String name : new String[] {"dead_city", "space_center", "hospital", "seed_bank", "colony_overgrown",
@@ -160,7 +161,7 @@ public class SceneScreenshots implements FabricClientGameTest {
 				}
 				game.getServer().runCommand("execute in minecraft:overworld run tp @a " + at.getX() + " " + (at.getY() + 18)
 						+ " " + at.getZ() + " -45 32");
-				context.waitTicks(90);
+				context.waitTicks(160);
 				context.takeScreenshot("30_structure_" + name);
 			}
 		}
