@@ -78,6 +78,7 @@ public class SceneScreenshots implements FabricClientGameTest {
 			for (int i = 0; i < skeletons.length; i++) {
 				game.getServer().runCommand("setblock " + (2 + i * 4) + " 220 3 intersolarsystem:" + skeletons[i] + "[facing=north]");
 			}
+			game.getServer().runCommand("execute in minecraft:overworld run tp @a 15 221 -5 0 30");
 			context.waitTicks(40);
 			context.takeScreenshot("06f_skeletons");
 
