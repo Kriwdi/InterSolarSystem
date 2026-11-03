@@ -132,6 +132,7 @@ public final class OrbitStation {
 			case HULL, DOCK_FLOOR -> ModBlocks.STATION_HULL.defaultBlockState();
 			case FOIL_HULL -> ModBlocks.STATION_FOIL.defaultBlockState();
 			case WINDOW -> ModBlocks.STATION_WINDOW.defaultBlockState();
+			case GLASS -> ModBlocks.STATION_GLASS.defaultBlockState();
 			case LIGHT -> ModBlocks.STATION_LIGHT.defaultBlockState();
 			case TRUSS -> ModBlocks.TRUSS.defaultBlockState();
 			case SOLAR -> ModBlocks.SOLAR_PANEL.defaultBlockState();

@@ -20,7 +20,7 @@ import java.util.Random;
  */
 public final class IssLayout {
 	public enum Piece {
-		HULL, FOIL_HULL, WINDOW, LIGHT, TRUSS, SOLAR, RADIATOR, SUPPLY, DOCK_FLOOR, AIR
+		HULL, FOIL_HULL, WINDOW, GLASS, LIGHT, TRUSS, SOLAR, RADIATOR, SUPPLY, DOCK_FLOOR, AIR
 	}
 
 	public record Placement(int x, int y, int z, Piece piece) {
@@ -154,14 +154,14 @@ public final class IssLayout {
 				for (int dz = -2; dz <= 2; dz++) {
 					boolean edge = Math.max(Math.abs(dx), Math.abs(dz)) == 2;
 					boolean corner = Math.abs(dx) == 2 && Math.abs(dz) == 2;
-					put(cells, x + dx, y, z + dz, corner ? Piece.HULL : edge ? Piece.WINDOW : Piece.AIR);
+					put(cells, x + dx, y, z + dz, corner ? Piece.HULL : edge ? Piece.GLASS : Piece.AIR);
 				}
 			}
 		}
 		for (int dx = -2; dx <= 2; dx++) {
 			for (int dz = -2; dz <= 2; dz++) {
 				boolean rim = Math.max(Math.abs(dx), Math.abs(dz)) == 2;
-				put(cells, x + dx, -5, z + dz, rim ? Piece.HULL : Piece.WINDOW);
+				put(cells, x + dx, -5, z + dz, rim ? Piece.HULL : Piece.GLASS);
 			}
 		}
 	}

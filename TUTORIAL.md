@@ -60,7 +60,16 @@ Az új világ kezdőpontja mellett, kelet felé áll a **hajód**: félig beteme
 
 ### Kívülről
 
-Ahol a hajó leszáll, ott egy valódi hajótest áll: fehér burkolat ablakokkal, elöl pilótafülke, hátul hajtóművek, alul négy leszállóláb. **A hajótest törhetetlen.** Kreatív módban guggolva le lehet bontani, ha takarítani kell. Felszálláskor a hajótest eltűnik, és a célnál újra felépül. Az ISS-hez dokkolva nincs külső hajótest, ott az ajtó a dokkolóporton van.
+Ahol a hajó leszáll, ott áll a **kutatóhajó** teste:
+
+- lekerekített, fehér törzs kék-narancs csíkkal és kerek ablakokkal;
+- elöl üvegkupolás pilótafülke;
+- oldalt nyilazott szárnyak, a végükön helyzetjelző fények (bal oldalt piros, jobb oldalt zöld);
+- hátul két hajtóműgondola és egy függőleges vezérsík piros fénnyel a tetején;
+- alul négy leszállóláb talpakkal;
+- az oldalán a **2 blokk magas ajtó**.
+
+**A hajótest törhetetlen.** Kreatív módban guggolva le lehet bontani, ha takarítani kell. Felszálláskor a hajótest eltűnik, és a célnál újra felépül: a Földön, a Holdon és az ISS-nél is. Az ISS-nél a hajó az állomás elülső dokkolóportjához kapcsolódik, az ajtaja egyenesen a dokkolóadapterbe nyílik.
 
 **A beszállás nem indítja el a hajót.** Felszállni csak a navigációs konzolról lehet.
 
@@ -68,11 +77,15 @@ Ahol a hajó leszáll, ott egy valódi hajótest áll: fehér burkolat ablakokka
 
 | Rész | Mi van ott |
 |---|---|
-| **Híd** (orr) | padlóig érő panorámaablak és tetőablak, navigációs konzol, két diagnosztikai konzol, két ülés |
+| **Híd** (orr) | padlóig érő panorámaablak és tetőablak, navigációs konzol, két diagnosztikai konzol, két **űrhajós ülés** |
 | **Lakórész** (közép) | két ágy, hordók és két láda (raktár), javítóállomás, kerek ablakok, bal oldalt a hajóajtó |
 | **Gépterem** (far) | reaktoroszlop rácsban, hajtóműnyílások a hátsó falban |
 
 A falak, az ablakok, a konzolok és az ajtó **belülről nem bonthatók** (kreatívban sem). A ládákba, hordókba nyugodtan pakolhatsz: ez a hajó raktára, és veled utazik. Ha valahogy mégis kikerülsz a hajó terén kívülre, a játék visszatesz.
+
+### Ülés
+
+Az űrhajós ülésbe **jobb klikkel ülsz le**, és **guggolással (Shift) állsz fel**, mint a csónakból. Az ülésből a konzolok felé nézel. Saját ülést is gyárthatsz (3 gyapjú, 1 bőr, 2 fémhulladék, 1 vasrúd), bárhová lerakhatod.
 
 ### Kilátás az ablakokon
 
@@ -361,7 +374,13 @@ Az idő a **játékidővel** telik: ha a szerver megáll, az út is. Az indítá
 Válaszd a navigációs konzolon a **Föld körüli pálya (ISS)** célt. A hajó felmegy pályára, és dokkol a régi **Nemzetközi Űrállomáshoz**. A hajóajtó a dokkolóporton lesz; kilépve az állomáson vagy.
 
 - **Mikrogravitáció:** a gravitáció 15%, nincs esési sebzés. A hajóban a stabilizátor ad mesterséges gravitációt; ha 20% alá esik, a hajóban is csökken.
-- **Az ISS:** dokkolómodul és platform, Destiny, Unity, az aranyfóliás orosz szegmens, ablakok a Föld peremére, rácsos főtartó napelemszárnyakkal. **Hat ellátmányláda** van rajta: zsákmány, élelem, űrruhadarabok, multiszerszámok.
+- **Az ISS valódi méretben** (1 blokk = 1 méter, kb. 120 × 75 méter):
+  - elöl a dokkolóadapter, ahová a hajód kapcsolódik, utána Harmony, Destiny, Unity, majd az aranyfóliás orosz szegmens (Zarja, Zvezda);
+  - oldalt Columbus, Kibo a raktármodullal és a nyitott kísérleti platformmal, Tranquility az alatta lévő **Cupolával** (hét ablakos kilátókupola, lefelé a Földre), és a Quest zsilip;
+  - fölül a Poisk, lent a Nauka és a Rasszvet;
+  - fölötte a 109 méteres rácsos főtartó a forgócsuklókkal, a fehér hűtőpanelekkel és **nyolc darab 35 méteres napelemszárnnyal**.
+- A modulok belül bejárhatók (3 × 3-as folyosó). **Tíz ellátmányhordó** van bennük: zsákmány, élelem, űrruhadarabok, multiszerszámok.
+- Régi világban a kis állomást a következő indításkor lecseréli a valódi méretű; ha a hajód épp ott dokkolt, átkerül az új dokkolóporthoz.
 - **Az állomás minden blokkja kibányászható** kimentett anyagnak.
 - Pályáról a **Föld** cél visszavisz az utolsó földi leszállóhelyedre, a **Hold** cél pedig a Holdra.
 

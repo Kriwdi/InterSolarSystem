@@ -1126,6 +1126,10 @@ public final class ModLangTable {
 				"Station Radiator",
 				"Stationsradiator",
 				"Állomás-hőleadó panel");
+		add(rows, "block.intersolarsystem.station_glass",
+				"Station Glass",
+				"Stationsglas",
+				"Állomásüveg");
 		check(rows);
 		return List.copyOf(rows);
 	}

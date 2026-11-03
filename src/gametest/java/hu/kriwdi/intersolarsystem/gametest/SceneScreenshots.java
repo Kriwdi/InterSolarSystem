@@ -55,6 +55,7 @@ public class SceneScreenshots implements FabricClientGameTest {
 			// Earth orbit: the ISS, the Earth below, and the night sky.
 			game.getServer().runOnServer(server -> OrbitStation.build(server.getLevel(ShipDimensions.ORBIT)));
 			game.getServer().runCommand("time set noon");
+			game.getServer().runCommand("gamemode spectator @a");
 			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 72 152 -96 facing 0 122 -12");
 			context.waitTicks(120);
 			context.takeScreenshot("07_orbit_iss");
@@ -75,6 +76,7 @@ public class SceneScreenshots implements FabricClientGameTest {
 			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a -40 135 -60 facing -40 126 -16");
 			context.waitTicks(30);
 			context.takeScreenshot("10c_iss_solar_wings");
+			game.getServer().runCommand("gamemode creative @a");
 
 			// The space suit, seen from the front.
 			game.getServer().runCommand("item replace entity @a armor.head with intersolarsystem:space_helmet");

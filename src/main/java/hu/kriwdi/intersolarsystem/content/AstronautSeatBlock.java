@@ -43,7 +43,14 @@ public class AstronautSeatBlock extends ShipFacingBlock {
 		float yaw = state.getValue(FACING).toYRot();
 		seat.snapTo(pos.getX() + 0.5, pos.getY() + SIT_HEIGHT, pos.getZ() + 0.5, yaw, 0.0F);
 		serverLevel.addFreshEntity(seat);
-		player.startRiding(seat);
+		// Forced: the seat is not a vehicle the player chose to board in the usual way (no boarding cooldown).
+		boolean sat = player.startRiding(seat, true, true);
+		hu.kriwdi.intersolarsystem.InterSolarSystem.LOGGER.info("[seat] {} sits down at {}: {}",
+				player.getName().getString(), pos.toShortString(), sat);
+		if (!sat) {
+			seat.discard();
+			return InteractionResult.PASS;
+		}
 		player.setYRot(yaw);
 		player.setYHeadRot(yaw);
 		return InteractionResult.SUCCESS_SERVER;

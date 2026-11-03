@@ -242,13 +242,14 @@ def seat_model():
         box((2, 4, 1), (14, 5, 14), "frame"),
         box((2.5, 5, 1.5), (13.5, 7, 13.5), "fabric"),
         box((2.5, 7, 1.5), (13.5, 7.5, 3), "fabric"),
-        # Backrest (leaning back) and the headrest above it.
-        box((2, 5, 13), (14, 23, 15.5), "fabric", rotation={"origin": [8, 5, 14], "axis": "x", "angle": 22.5}),
-        box((2, 5, 15.5), (14, 23, 16), "frame", rotation={"origin": [8, 5, 14], "axis": "x", "angle": 22.5}),
-        box((4, 23, 13.5), (12, 28, 15.5), "fabric", rotation={"origin": [8, 5, 14], "axis": "x", "angle": 22.5}),
+        # Backrest (leaning back) and the headrest above it, with a gap between them.
+        box((2.5, 5, 13), (13.5, 19, 15), "fabric", rotation={"origin": [8, 5, 14], "axis": "x", "angle": 22.5}),
+        box((3, 5, 15), (13, 18, 15.5), "frame", rotation={"origin": [8, 5, 14], "axis": "x", "angle": 22.5}),
+        box((7, 19, 14), (9, 21, 15), "frame", rotation={"origin": [8, 5, 14], "axis": "x", "angle": 22.5}),
+        box((4.5, 21, 13.5), (11.5, 25, 15), "fabric", rotation={"origin": [8, 5, 14], "axis": "x", "angle": 22.5}),
         # Harness straps over the shoulders, meeting at the buckle.
-        box((4.5, 9, 12.6), (6, 22, 13), "harness", rotation={"origin": [8, 5, 14], "axis": "x", "angle": 22.5}),
-        box((10, 9, 12.6), (11.5, 22, 13), "harness", rotation={"origin": [8, 5, 14], "axis": "x", "angle": 22.5}),
+        box((4.5, 9, 12.6), (6, 18.5, 13), "harness", rotation={"origin": [8, 5, 14], "axis": "x", "angle": 22.5}),
+        box((10, 9, 12.6), (11.5, 18.5, 13), "harness", rotation={"origin": [8, 5, 14], "axis": "x", "angle": 22.5}),
         box((6.5, 7, 6), (9.5, 7.6, 9), "harness"),
         # Armrests with their posts.
         box((0, 9, 2), (2, 10.5, 13), "frame"),
@@ -295,3 +296,21 @@ def radiator():
 
 if __name__ == "__main__":
     radiator()
+
+
+def station_glass():
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    px = img.load()
+    for i in range(16):
+        px[i, 0] = px[i, 15] = px[0, i] = px[15, i] = hexc("b7babb")
+    for i in range(3):
+        px[4 + i, 6 - i] = (225, 238, 255, 255)
+    save(img, "block/station_glass")
+    write(ASSETS / "models/block/station_glass.json",
+          {"parent": "minecraft:block/cube_all", "textures": {"all": NS + "block/station_glass"}})
+    write(ASSETS / "blockstates/station_glass.json", {"variants": {"": {"model": NS + "block/station_glass"}}})
+    item_from_block("station_glass", "block/station_glass")
+
+
+if __name__ == "__main__":
+    station_glass()

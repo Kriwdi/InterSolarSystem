@@ -62,6 +62,10 @@ public final class ModBlocks {
 			p -> new ShapedBlock(p, new double[] {0, 7, 0, 16, 9, 16}),
 			BlockBehaviour.Properties.of().strength(1.5F, 3.0F).sound(SoundType.GLASS).noOcclusion());
 
+	/** Clear window glass (the Cupola). */
+	public static final Block STATION_GLASS = register("station_glass", Block::new,
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.GLASS).noOcclusion());
+
 	/** The station's heat radiator: a thin white ribbed panel (like a solar panel, without cells). */
 	public static final Block STATION_RADIATOR = register("station_radiator",
 			p -> new ShapedBlock(p, new double[] {0, 7, 0, 16, 9, 16}),
