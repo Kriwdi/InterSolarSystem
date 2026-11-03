@@ -1,7 +1,7 @@
 {
   "placement": {
     "type": "minecraft:concentric_rings",
-    "distance": 22,
+    "distance": 20,
     "spread": 3,
     "count": 3,
     "preferred_biomes": "#intersolarsystem:preferred/colony_frozen",

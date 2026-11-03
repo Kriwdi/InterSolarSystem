@@ -1000,9 +1000,11 @@ FLAT = {"airport": (110, 12, 0, 24), "hospital": (48, 12, 6, 24), "dead_city": (
 
 # The Earth is 20 000 blocks across (1250 chunks). Rare and important ruins are placed on concentric rings so every
 # world has them: (count, ring distance in chunks (the first ring lies at about 4x this), sites in the first ring).
-RINGS = {"airport": (4, 48, 4), "hospital": (5, 36, 5), "dead_city": (6, 40, 3), "space_center": (3, 56, 3),
-         "seed_bank": (3, 32, 3), "dam": (3, 28, 3), "colony_overgrown": (3, 24, 3), "colony_burnt": (3, 26, 3),
-         "colony_frozen": (3, 22, 3), "oasis_refuge": (8, 16, 4)}
+# Every ring set starts at the same angle (vanilla seeds the rings with the world seed only), so the distances are all
+# different: the sites of different kinds then lie at least ~250 blocks apart along that direction.
+RINGS = {"oasis_refuge": (8, 16, 4), "colony_frozen": (3, 20, 3), "colony_overgrown": (3, 28, 3),
+         "colony_burnt": (3, 34, 3), "seed_bank": (3, 40, 3), "dam": (3, 46, 3), "hospital": (5, 52, 5),
+         "dead_city": (6, 58, 6), "airport": (4, 66, 4), "space_center": (3, 74, 3)}
 
 
 def structure(name, pool_name, biomes, spacing, separation, salt, depth=0, size=1, adaptation="beard_thin",

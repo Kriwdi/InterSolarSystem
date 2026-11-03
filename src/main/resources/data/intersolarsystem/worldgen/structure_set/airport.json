@@ -1,7 +1,7 @@
 {
   "placement": {
     "type": "minecraft:concentric_rings",
-    "distance": 48,
+    "distance": 66,
     "spread": 4,
     "count": 4,
     "preferred_biomes": "#intersolarsystem:preferred/airport",

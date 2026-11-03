@@ -1,7 +1,7 @@
 {
   "placement": {
     "type": "minecraft:concentric_rings",
-    "distance": 36,
+    "distance": 52,
     "spread": 5,
     "count": 5,
     "preferred_biomes": "#intersolarsystem:preferred/hospital",

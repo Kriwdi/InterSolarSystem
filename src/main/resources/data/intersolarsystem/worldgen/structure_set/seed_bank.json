@@ -1,7 +1,7 @@
 {
   "placement": {
     "type": "minecraft:concentric_rings",
-    "distance": 32,
+    "distance": 40,
     "spread": 3,
     "count": 3,
     "preferred_biomes": "#intersolarsystem:preferred/seed_bank",
