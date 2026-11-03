@@ -117,19 +117,21 @@ public class SceneScreenshots implements FabricClientGameTest {
 			// The spaceport's crane builds the mothership's keel (facilities restored by hand here), then the finished
 			// ship launches into its own dimension.
 			game.getServer().runCommand("gamemode spectator @a");
-			game.getServer().runCommand("setblock 300 150 300 intersolarsystem:crane_console[facing=north]");
-			game.getServer().runCommand("execute in minecraft:overworld run tp @a 300 200 340 180 40");
+			game.getServer().runCommand("setblock 60 170 60 intersolarsystem:crane_console[facing=north]");
+			game.getServer().runCommand("execute in minecraft:overworld run tp @a 60 215 95 180 35");
 			context.waitTicks(80);
 			game.getServer().runOnServer(server -> {
 				net.minecraft.server.level.ServerLevel earth = server.overworld();
 				var site = hu.kriwdi.intersolarsystem.spaceport.SpaceportState.get(server).site(
-						earth.dimension().identifier().toString(), new BlockPos(300, 150, 300));
+						earth.dimension().identifier().toString(), new BlockPos(60, 170, 60));
 				for (hu.kriwdi.intersolarsystem.spaceport.Facility f : hu.kriwdi.intersolarsystem.spaceport.Facility.values()) {
 					site.facility(f).calibrated = true;
 				}
 				site.reactorFuel = 1_000_000L;
+				site.reactorFault = false;
+				site.nextFaultCheck = Long.MAX_VALUE;
 				net.minecraft.server.level.ServerPlayer player = server.getPlayerList().getPlayers().get(0);
-				hu.kriwdi.intersolarsystem.spaceport.Spaceports.crane(earth, new BlockPos(300, 150, 300), player,
+				hu.kriwdi.intersolarsystem.spaceport.Spaceports.crane(earth, new BlockPos(60, 170, 60), player,
 						new net.minecraft.world.item.ItemStack(hu.kriwdi.intersolarsystem.content.ModItems.KEEL_KIT));
 			});
 			context.waitTicks(300);
@@ -139,11 +141,11 @@ public class SceneScreenshots implements FabricClientGameTest {
 			game.getServer().runOnServer(server -> {
 				net.minecraft.server.level.ServerLevel earth = server.overworld();
 				var site = hu.kriwdi.intersolarsystem.spaceport.SpaceportState.get(server).site(
-						earth.dimension().identifier().toString(), new BlockPos(300, 150, 300));
+						earth.dimension().identifier().toString(), new BlockPos(60, 170, 60));
 				org.slf4j.LoggerFactory.getLogger("spaceport-test").info("[SPACEPORT] sections done {}", site.sectionsDone);
 				site.sectionsDone = hu.kriwdi.intersolarsystem.spaceport.Section.mothershipSections();
 				net.minecraft.server.level.ServerPlayer player = server.getPlayerList().getPlayers().get(0);
-				boolean ok = hu.kriwdi.intersolarsystem.spaceport.Mothership.launch(earth, new BlockPos(300, 150, 300), player);
+				boolean ok = hu.kriwdi.intersolarsystem.spaceport.Mothership.launch(earth, new BlockPos(60, 170, 60), player);
 				org.slf4j.LoggerFactory.getLogger("spaceport-test").info("[SPACEPORT] mothership launched {}", ok);
 			});
 			context.waitTicks(60);

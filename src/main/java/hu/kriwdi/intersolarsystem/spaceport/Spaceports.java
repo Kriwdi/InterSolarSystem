@@ -352,7 +352,10 @@ public final class Spaceports {
 			}
 			if (site.online(Facility.POWER)) {
 				site.reactorFuel--;
-				if (now >= site.nextFaultCheck) {
+				if (site.nextFaultCheck == 0L) {
+					// Freshly started: the first wear check comes a day later.
+					site.nextFaultCheck = now + 24000;
+				} else if (now >= site.nextFaultCheck) {
 					site.nextFaultCheck = now + 24000;
 					if (level.getRandom().nextFloat() < 0.3F) {
 						site.reactorFault = true;
@@ -380,10 +383,8 @@ public final class Spaceports {
 		for (int i = 0; i < BLOCKS_PER_TICK && site.buildIndex < blocks.size(); i++) {
 			Blueprint.Entry e = blocks.get(site.buildIndex++);
 			BlockPos p = Blueprint.place(site.consolePos, rotation, e);
-			if (!level.isLoaded(p)) {
-				site.buildIndex--;
-				break;
-			}
+			// The hall is longer than a view distance: the crane works on unloaded ends too.
+			level.getChunk(p.getX() >> 4, p.getZ() >> 4);
 			level.setBlock(p, e.state().rotate(rotation), 2);
 			if (i == 0 && site.buildIndex % 6 == 0) {
 				level.sendParticles(ParticleTypes.ELECTRIC_SPARK, p.getX() + 0.5, p.getY() + 0.5, p.getZ() + 0.5, 4, 0.3, 0.3,

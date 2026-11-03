@@ -105,11 +105,6 @@ public final class ShipView {
 		};
 	}
 
-	/** Client ticks plus the partial tick: a smooth clock for sky effects. */
-	public static float time(float partialTick) {
-		return clientTicks + partialTick;
-	}
-
 	/** Whether the ship is in its cruise (free flight between bodies): dust streaks past the bow. */
 	public static boolean cruising() {
 		return last != null && phase() == ShipFlightPhase.FLIGHT;

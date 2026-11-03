@@ -91,7 +91,7 @@ public final class Mothership extends SavedData {
 		m.built = true;
 		m.location = "earth_orbit";
 		m.setDirty();
-		for (ServerPlayer p : hall.players()) {
+		for (ServerPlayer p : java.util.List.copyOf(hall.players())) {
 			if (p.blockPosition().distSqr(console) < 200 * 200) {
 				board(p);
 			}
