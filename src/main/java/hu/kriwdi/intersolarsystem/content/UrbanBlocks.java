@@ -207,6 +207,14 @@ public final class UrbanBlocks {
 			p -> new ManualPrinterBlock(p, new double[] {1, 0, 2, 15, 10, 14}),
 			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
 
+	public static final Block MOTHERSHIP_HELM = register("mothership_helm",
+			p -> new MothershipHelmBlock(p, new double[] {0, 0, 4, 16, 14, 16}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block HANGAR_LIFT = register("hangar_lift",
+			p -> new HangarLiftBlock(p, new double[] {0, 0, 0, 16, 2, 16}),
+			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
 	public static final Block CRANE_HOOK = register("crane_hook",
 			p -> new ShipFacingBlock(p, new double[] {4, 0, 4, 12, 16, 12}),
 			BlockBehaviour.Properties.of().strength(1.5F, 6.0F).sound(SoundType.METAL).noOcclusion());

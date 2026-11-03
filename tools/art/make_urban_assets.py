@@ -663,6 +663,24 @@ def m_crane_hook():
             e((7, -6, 6), (9, 2, 10), "chrome"), e((7, -8, 9), (9, -4, 12), "chrome"), e((7, -9, 4), (9, -7, 10), "chrome")]
 
 
+def m_helm():
+    """The mothership's helm: a wide console with three screens, a star chart table and the throttle."""
+    return [e((-6, 0, 4), (22, 10, 16), "metal_dark"), e((-6, 10, 6), (22, 12, 16), "metal_grey",
+            rot={"origin": [8, 10, 11], "axis": "x", "angle": -22.5}),
+            e((-4, 12, 13), (6, 22, 14), "metal_dark", faces={"north": "screen"}), e((6, 12, 13), (10, 24, 14), "metal_dark", faces={"north": "screen"}),
+            e((10, 12, 13), (20, 22, 14), "metal_dark", faces={"north": "screen"}), e((7, 11, 6), (9, 15, 8), "chrome"),
+            e((6.5, 15, 5.5), (9.5, 16, 8.5), "lamp_amber"), e((-5, 11, 7), (-1, 11.6, 10), "lamp_green"), e((17, 11, 7), (21, 11.6, 10), "lamp_red")]
+
+
+def m_lift():
+    """The hangar lift: a round pad with guard rails and a call panel."""
+    els = [e((-8, 0, -8), (24, 1, 24), "hazard"), e((-6, 1, -6), (22, 1.5, 22), "metal_grey")]
+    for (x, z) in ((-8, -8), (23, -8), (-8, 23), (23, 23)):
+        els.append(e((x, 1, z), (x + 1, 12, z + 1), "yellow"))
+    els += [e((22, 1, 6), (24, 14, 10), "metal_dark", faces={"west": "screen"}), e((21.5, 10, 7), (22, 12, 9), "lamp_green")]
+    return els
+
+
 def m_cryo_pod():
     return [e((2, 0, 2), (14, 2, 14), "metal_dark"), e((3, 2, 4), (13, 29, 14), "metal_white", faces={"north": "frost"}),
             e((3.5, 4, 3.5), (12.5, 27, 4), "frost"), e((2.5, 29, 3), (13.5, 31, 14.5), "metal_grey"),
@@ -811,6 +829,8 @@ BLOCKS = {
     "fabricator": (P(m_fabricator, FULL, cls="FabricatorBlock"), "Fabricator", "Fertigungsmaschine", "Gyártógép"),
     "crane_console": (P(m_crane_console, (0, 0, 4, 16, 14, 16), cls="CraneConsoleBlock"), "Crane Console", "Kranpult", "Darukonzol"),
     "manual_printer": (P(m_manual_printer, (1, 0, 2, 15, 10, 14), cls="ManualPrinterBlock"), "Manual Printer", "Handbuchdrucker", "Kézikönyv-nyomtató"),
+    "mothership_helm": (P(m_helm, (0, 0, 4, 16, 14, 16), cls="MothershipHelmBlock"), "Mothership Helm", "Steuerstand des Mutterschiffs", "Anyahajó-kormányállás"),
+    "hangar_lift": (P(m_lift, (0, 0, 0, 16, 2, 16), cls="HangarLiftBlock"), "Hangar Lift", "Hangarlift", "Hangárlift"),
     "crane_hook": (P(m_crane_hook, (4, 0, 4, 12, 16, 12)), "Crane Hook", "Kranhaken", "Darukampó"),
     "cryo_pod": (P(m_cryo_pod, (2, 0, 2, 14, 16, 14), light=3), "Cryo Pod", "Kryokapsel", "Hibernációs fülke"),
     "lab_bench": (P(m_lab_bench, (0, 0, 1, 16, 15, 15)), "Lab Bench", "Labortisch", "Laborasztal"),

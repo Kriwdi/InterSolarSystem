@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/hangar_lift"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/hangar_lift",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/hangar_lift",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/hangar_lift",
+      "y": 270
+    }
+  }
+}

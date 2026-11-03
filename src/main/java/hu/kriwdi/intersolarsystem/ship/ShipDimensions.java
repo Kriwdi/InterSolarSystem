@@ -17,6 +17,9 @@ public final class ShipDimensions {
 	/** The Moon (defined by datapack JSON). */
 	public static final ResourceKey<Level> MOON = ResourceKey.create(Registries.DIMENSION, ModIds.id("moon"));
 
+	/** The mothership, once launched from a Kármán spaceport (defined by datapack JSON). */
+	public static final ResourceKey<Level> MOTHERSHIP = ResourceKey.create(Registries.DIMENSION, ModIds.id("mothership"));
+
 	/** Lowest corner of the interior room inside {@link #INTERIOR}. */
 	public static final BlockPos ANCHOR = new BlockPos(0, 64, 0);
 

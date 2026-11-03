@@ -265,6 +265,29 @@ Minden kattintás egy lépés, és mindegyik ad alkatrészeket. Ha rossz a szers
   - **szétválogató**: +10% kihozatal, és kijönnek a ritka anyagok is (ritkaföldfém, arany, izzópor stb.).
 - Mindhárom modullal közel 100% a kihozatal.
 
+### Kármán-űrkikötő és az anyahajó
+
+Világonként 3 hatalmas űrkikötő van, a középponttól kb. 6–8 km-re (460 × 340 blokk). Itt indultak a Bárkák, és itt építheted meg a saját anyahajódat. Több űrkikötőt is helyreállíthatsz.
+
+**Helyreállítás** (sorrendben, mindegyiknek saját vezérlőszekrénye van; jobb klikk rá: ellenőrzőlista):
+1. **Erőmű** (kupolás reaktorépület): kábel, áramkör, titánlemez, urán fűtőelem; kalibrálás nyomás-minijátékkal.
+2. **Indítóközpont**: áramkör, vezeték, üvegszilánk, akkumulátor; vezetékes kalibrálás. Itt van a **kézikönyv-nyomtató** (papírral nyomtat).
+3. **Gyártócsarnok**: titánlemez, mágnes, áramkör, vas; szelepes kalibrálás. Itt van a **gyártógép**.
+4. **Üzemanyagtelep**: cső, fémhulladék, alumínium, áramkör. Utána **hajtóanyagot** tárol: bitumen +2, hélium-3 regolit +12 egység.
+5. **Szerelődaru** (az összeszerelő csarnokban): kábel, titán, akkumulátor, mágnes.
+
+Minden szekrény körül **törmeléket** (törmelék, törött beton) kell eltakarítani, és kell, hogy az előző létesítmény működjön. Az **erőmű** urán fűtőelemet éget (egy rúd kb. három napig tart), és időnként **meghibásodik**: ilyenkor javítókészlettel kattints a szekrényre, és jön egy szelepes minijáték. Ha az erőmű áll, az egész űrkikötő leáll.
+
+**Az anyahajó** (kb. 350 m):
+- A **gyártógépen** készülnek a szekciókészletek: guggolás + jobb klikk vált a készletek között, utána leadod az anyagokat.
+- A **hajtómű-, reaktor- és laborkészlethez holdi anyag kell** (hélium-3 regolit, ilmenit, mare bazalt).
+- A **darukonzolnak** sorban add a készleteket: gerinc, törzs, hajtóművek, reaktor, életfenntartás, farm, labor, szállás, hangár, híd. A daru látványosan, blokkról blokkra építi fel a csarnokban (a törzs a legnagyobb, néhány perc).
+- Ha mind a tíz kész, és a telepen legalább 600 hajtóanyag van: **guggolás + jobb klikk üres kézzel a darukonzolra = indulás**. A közelben állók a fedélzetre kerülnek.
+- **A fedélzeten:**
+  - A hídon áll a **kormányállás**: guggolva irányt választasz (Föld körüli vagy Hold körüli pálya), sima kattintással indulsz. Az út kb. 10 perc, közben események történnek.
+  - A hangárban a **hangárlift** levisz a pálya alatti égitestre. Egy lerakott hangárlift (recept: titán, antenna, áramkör, mágnes, akkumulátor) bárhonnan visszavisz a hangárba.
+  - A farmfedélzeten az élő talaj megművelhető.
+
 ## 7. Receptek
 
 A receptek a receptkönyvben is megjelennek. Az alábbi táblázatok a pontos hozzávalókat mutatják.

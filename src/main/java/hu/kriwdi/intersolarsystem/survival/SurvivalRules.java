@@ -138,7 +138,7 @@ public final class SurvivalRules {
 
 	/** Plants grow only aboard a ship (its interior dimension). */
 	public static boolean canGrowHere(Level level) {
-		return level.dimension().equals(ShipDimensions.INTERIOR);
+		return level.dimension().equals(ShipDimensions.INTERIOR) || level.dimension().equals(ShipDimensions.MOTHERSHIP);
 	}
 
 	static boolean isPlant(Block block) {

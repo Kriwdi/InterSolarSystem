@@ -2234,6 +2234,74 @@ public final class ModLangTable {
 				"The printer needs paper (right click with paper)",
 				"Der Drucker braucht Papier (Rechtsklick mit Papier)",
 				"A nyomtatónak papír kell (jobb klikk papírral)");
+		add(rows, "block.intersolarsystem.mothership_helm",
+				"Mothership Helm",
+				"Steuerstand des Mutterschiffs",
+				"Anyahajó-kormányállás");
+		add(rows, "block.intersolarsystem.hangar_lift",
+				"Hangar Lift",
+				"Hangarlift",
+				"Hangárlift");
+		add(rows, "spaceport.intersolarsystem.mothership_exists",
+				"This world already has a mothership",
+				"Diese Welt hat schon ein Mutterschiff",
+				"Ebben a világban már van anyahajó");
+		add(rows, "mothership.intersolarsystem.aboard",
+				"You are aboard the mothership",
+				"Du bist an Bord des Mutterschiffs",
+				"Az anyahajó fedélzetén vagy");
+		add(rows, "mothership.intersolarsystem.place.earth_orbit",
+				"Earth orbit",
+				"Erdorbit",
+				"Föld körüli pálya");
+		add(rows, "mothership.intersolarsystem.place.moon_orbit",
+				"Lunar orbit",
+				"Mondorbit",
+				"Hold körüli pálya");
+		add(rows, "mothership.intersolarsystem.travelling",
+				"Under way to %s, %s min left",
+				"Unterwegs nach %s, noch %s min",
+				"Úton: %s, még %s perc");
+		add(rows, "mothership.intersolarsystem.course",
+				"Course: %s (right click to set off)",
+				"Kurs: %s (Rechtsklick zum Aufbruch)",
+				"Irány: %s (jobb klikk: indulás)");
+		add(rows, "mothership.intersolarsystem.here",
+				"We are already in %s (sneak + right click: choose a course)",
+				"Wir sind schon im %s (Schleichen + Rechtsklick: Kurs wählen)",
+				"Már itt vagyunk: %s (guggolás + jobb klikk: irányválasztás)");
+		add(rows, "mothership.intersolarsystem.departing",
+				"The mothership sets off for %s (%s min)",
+				"Das Mutterschiff bricht auf nach %s (%s min)",
+				"Az anyahajó elindul: %s (%s perc)");
+		add(rows, "mothership.intersolarsystem.arrived",
+				"The mothership has arrived: %s",
+				"Das Mutterschiff ist angekommen: %s",
+				"Az anyahajó megérkezett: %s");
+		add(rows, "mothership.intersolarsystem.event.micrometeors",
+				"Micrometeors rattle on the hull",
+				"Mikrometeoriten prasseln auf den Rumpf",
+				"Mikrometeoritok kopognak a törzsön");
+		add(rows, "mothership.intersolarsystem.event.solar_flare",
+				"Solar flare: stay away from the windows",
+				"Sonneneruption: weg von den Fenstern",
+				"Napkitörés: maradj távol az ablakoktól");
+		add(rows, "mothership.intersolarsystem.event.drift",
+				"Course drift corrected",
+				"Kursabweichung korrigiert",
+				"Pályaeltérés korrigálva");
+		add(rows, "mothership.intersolarsystem.event.systems",
+				"All systems nominal",
+				"Alle Systeme normal",
+				"Minden rendszer rendben");
+		add(rows, "mothership.intersolarsystem.lift_travelling",
+				"The lift is locked while the ship is under way",
+				"Der Lift ist während der Fahrt gesperrt",
+				"Utazás közben a lift zárva");
+		add(rows, "mothership.intersolarsystem.lift_down",
+				"The lift takes you down",
+				"Der Lift bringt dich hinunter",
+				"A lift levisz");
 		check(rows);
 		return List.copyOf(rows);
 	}

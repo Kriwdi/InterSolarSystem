@@ -284,6 +284,14 @@ public final class Spaceports {
 			return;
 		}
 		if (site.sectionsDone >= total) {
+			if (held.isEmpty() && player.isShiftKeyDown() && !site.launched && site.propellant >= PROPELLANT_TO_LAUNCH) {
+				if (Mothership.launch(level, pos, player)) {
+					site.launched = true;
+					site.propellant -= PROPELLANT_TO_LAUNCH;
+					changed(level);
+				}
+				return;
+			}
 			player.sendOverlayMessage(Component.translatable("spaceport.intersolarsystem.mothership_complete", site.propellant,
 					PROPELLANT_TO_LAUNCH));
 			return;

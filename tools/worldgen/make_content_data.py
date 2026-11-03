@@ -165,6 +165,8 @@ def salvage_recipes():
                                                    "W": "salvaged_wiring"}, "solar_panel")
     shaped("radio_set", ["  W", "SCS", "SBS"], {"W": "minecraft:iron_bars", "S": "scrap_metal", "C": "salvaged_circuit",
                                                  "B": "battery_cell"}, "radio_set")
+    shaped("hangar_lift", ["TAT", "CRC", "TBT"], {"T": "titanium_plate", "A": "antenna_dish", "C": "salvaged_circuit",
+                                                   "R": "rare_earth_magnet", "B": "battery_cell"}, "hangar_lift")
     cook("glass_from_shards", "glass_shards", "minecraft:glass", 0.1, kinds=("smelting",))
 
 

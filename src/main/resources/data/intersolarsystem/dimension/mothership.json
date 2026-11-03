@@ -1,0 +1,13 @@
+{
+  "type": "intersolarsystem:orbit",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "intersolarsystem:orbital_void",
+      "features": false,
+      "lakes": false,
+      "layers": [],
+      "structure_overrides": []
+    }
+  }
+}

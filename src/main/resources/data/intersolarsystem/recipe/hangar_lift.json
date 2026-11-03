@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "T": "intersolarsystem:titanium_plate",
+    "A": "intersolarsystem:antenna_dish",
+    "C": "intersolarsystem:salvaged_circuit",
+    "R": "intersolarsystem:rare_earth_magnet",
+    "B": "intersolarsystem:battery_cell"
+  },
+  "pattern": [
+    "TAT",
+    "CRC",
+    "TBT"
+  ],
+  "result": {
+    "id": "intersolarsystem:hangar_lift",
+    "count": 1
+  }
+}

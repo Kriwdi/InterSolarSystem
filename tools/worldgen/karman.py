@@ -495,6 +495,7 @@ def write_blueprints():
             put("hangar", x, SHIP_Y - 12, z, st("hazard_concrete") if z in (SHIP_Z - 12, SHIP_Z + 12) else st("metal_grating"))
         if x % 10 == 0:
             put("hangar", x, SHIP_Y - 3, SHIP_Z, st("crane_hook", facing="north"))
+    put("hangar", SHIP_X0 + 200, SHIP_Y - 10, SHIP_Z + 4, st("hangar_lift", facing="north"))
     # Bridge: the nose's command deck with consoles and the forward windows.
     bx = SHIP_X1 - 50
     for x in range(bx, bx + 30):
@@ -502,7 +503,7 @@ def write_blueprints():
             put("bridge", x, SHIP_Y + 3, z, st("office_carpet"))
     for z in range(SHIP_Z - 6, SHIP_Z + 7, 2):
         put("bridge", bx + 22, SHIP_Y + 4, z, st("data_terminal", facing="east", log=0))
-    put("bridge", bx + 18, SHIP_Y + 4, SHIP_Z, st("navigation_console", facing="east"))
+    put("bridge", bx + 18, SHIP_Y + 4, SHIP_Z, st("mothership_helm", facing="east"))
     for x in range(SHIP_X1 - 22, SHIP_X1 + 1):
         r = ship_radius((x - SHIP_X0) / length)
         for a in range(-60, 61, 6):
