@@ -1101,7 +1101,7 @@ def main():
         b = builder()
         sizes[name] = b.save(name)
         single_pool(name, name)
-        ground = -min(p[1] for p in b.blocks)  # the ground layer is y = 0 in the builder
+        ground = max(0, -min(p[1] for p in b.blocks))  # the ground layer is y = 0 in the builder
         structure(name, name, biomes, spacing, sep, salt, depth, adaptation=adaptation, ground_offset=ground)
     import city_structures
     for rel, b in city_structures.city_pieces().items():
