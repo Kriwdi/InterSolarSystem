@@ -1,2 +1,8 @@
-net.minecraft.world.level.block.Block
-net.minecraft.world.level.block.state.BlockBehaviour
+net.minecraft.client.gui.GuiGraphicsExtractor
+net.minecraft.client.gui.Font
+net.minecraft.nbt.CompoundTag
+net.minecraft.world.item.component.CustomData
+net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
+net.minecraft.server.packs.resources.ResourceManager
+net.minecraft.server.packs.resources.Resource
+net.minecraft.client.Options
