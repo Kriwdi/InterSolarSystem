@@ -190,7 +190,11 @@ public final class ShipView {
 
 	/** Shake strength now (0 none): the camera trembles by about this many degrees. */
 	public static float shake(float partialTick) {
-		return inShip() ? scene(partialTick).shake() : 0.0F;
+		return inShip() ? scene(partialTick).shake() + ClientManeuver.jolt() : 0.0F;
+	}
+
+	public static long ticks() {
+		return clientTicks;
 	}
 
 	public static float time(float partialTick) {
@@ -200,6 +204,7 @@ public final class ShipView {
 	/** Client tick: count time and play the ship's sounds (countdown beeps, engine roar, the hum of the drive). */
 	public static void tick(Minecraft minecraft) {
 		clientTicks++;
+		ClientManeuver.tick();
 		if (!inShip() || minecraft.player == null) {
 			lastPhase = ShipFlightPhase.LANDED;
 			return;

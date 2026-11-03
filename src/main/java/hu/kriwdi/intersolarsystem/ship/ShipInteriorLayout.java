@@ -21,13 +21,14 @@ public final class ShipInteriorLayout {
 	public static final int SIZE_Z = 21;
 
 	public enum Piece {
-		HULL_PANEL, FLOOR, VIEWPORT, LIGHT, HATCH, HATCH_TOP, REPAIR_STATION, DIAGNOSTIC_CONSOLE, NAVIGATION_CONSOLE, SEAT,
+		HULL_PANEL, FLOOR, VIEWPORT, LIGHT, HATCH, HATCH_TOP, REPAIR_STATION, DIAGNOSTIC_CONSOLE, NAVIGATION_CONSOLE, FLIGHT_PANEL, THROTTLE, SEAT,
 		BED_HEAD, BED_FOOT, BARREL, CHEST, ENGINE_PORT, REACTOR_CORE, REACTOR_CAGE, PIPE, AIR;
 
 		/** The ship itself: these cannot be broken from inside, even in creative. */
 		public boolean structural() {
 			return switch (this) {
 				case HULL_PANEL, FLOOR, VIEWPORT, LIGHT, HATCH, HATCH_TOP, REPAIR_STATION, DIAGNOSTIC_CONSOLE, NAVIGATION_CONSOLE,
+						FLIGHT_PANEL, THROTTLE,
 						ENGINE_PORT, REACTOR_CORE, REACTOR_CAGE, PIPE -> true;
 				default -> false;
 			};
@@ -45,6 +46,10 @@ public final class ShipInteriorLayout {
 	private static final Cell STATION = new Cell(7, 1, 10);
 	private static final Cell CONSOLE = new Cell(2, 1, 18);
 	private static final Cell NAVIGATION = new Cell(4, 1, 18);
+	/** The pilot's seat (in front of the navigation console), with the switch panel and the throttle beside it. */
+	private static final Cell PILOT_SEAT = new Cell(4, 1, 16);
+	private static final Cell FLIGHT_PANEL = new Cell(3, 1, 17);
+	private static final Cell THROTTLE = new Cell(5, 1, 17);
 	/** A cell of the panoramic viewport: if it is not a viewport, the room is an old capsule and is rebuilt. */
 	private static final Cell MARKER = new Cell(4, 3, SIZE_Z - 1);
 
@@ -116,7 +121,9 @@ public final class ShipInteriorLayout {
 		m.put(CONSOLE, Piece.DIAGNOSTIC_CONSOLE);
 		m.put(NAVIGATION, Piece.NAVIGATION_CONSOLE);
 		m.put(new Cell(2, 1, 16), Piece.SEAT);
-		m.put(new Cell(4, 1, 16), Piece.SEAT);
+		m.put(PILOT_SEAT, Piece.SEAT);
+		m.put(FLIGHT_PANEL, Piece.FLIGHT_PANEL);
+		m.put(THROTTLE, Piece.THROTTLE);
 		m.put(new Cell(6, 1, 18), Piece.DIAGNOSTIC_CONSOLE);
 		// Bunks on the left (head towards the bow).
 		m.put(new Cell(1, 1, 6), Piece.BED_FOOT);
@@ -175,6 +182,18 @@ public final class ShipInteriorLayout {
 
 	public Cell navigation() {
 		return NAVIGATION;
+	}
+
+	public Cell pilotSeat() {
+		return PILOT_SEAT;
+	}
+
+	public Cell flightPanel() {
+		return FLIGHT_PANEL;
+	}
+
+	public Cell throttle() {
+		return THROTTLE;
 	}
 
 	public Cell console() {

@@ -145,7 +145,7 @@ public class NavigationScreen extends Screen {
 					Component.translatable(bodies.get(i).translationKey()), () -> select(index)));
 		}
 		addRenderableWidget(new Hit(launchX(), launchY(), 94, 18,
-				Component.translatable("screen.intersolarsystem.nav.launch"), this::launch));
+				Component.translatable("screen.intersolarsystem.nav.set_course"), this::launch));
 	}
 
 	private void select(int index) {
@@ -275,7 +275,7 @@ public class NavigationScreen extends Screen {
 		g.text(font, build, l + WIDTH - 12 - font.width(build), mapY() + 2, 0xFF5C646B);
 		boolean launchable = launchable(bodies.get(selected));
 		ShipPanel.button(g, font, launchX(), launchY(), 94, 18,
-				Component.translatable("screen.intersolarsystem.nav.launch"),
+				Component.translatable("screen.intersolarsystem.nav.set_course"),
 				launchable && ShipPanel.inside(mouseX, mouseY, launchX(), launchY(), 94, 18),
 				launchable ? 0xFF2E6B47 : 0xFF3A3F44);
 	}

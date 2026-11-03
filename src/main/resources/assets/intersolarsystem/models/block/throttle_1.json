@@ -1,0 +1,126 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "intersolarsystem:block/navigation_console_frame",
+    "body": "intersolarsystem:block/navigation_console_frame",
+    "metal": "intersolarsystem:block/rusted_panel",
+    "grip": "intersolarsystem:block/throttle_grip",
+    "top": "intersolarsystem:block/flight_panel_top"
+  },
+  "elements": [
+    {
+      "from": [
+        3,
+        0,
+        3
+      ],
+      "to": [
+        13,
+        8,
+        13
+      ],
+      "faces": {
+        "north": {
+          "texture": "#body"
+        },
+        "east": {
+          "texture": "#body"
+        },
+        "south": {
+          "texture": "#body"
+        },
+        "west": {
+          "texture": "#body"
+        },
+        "up": {
+          "texture": "#top"
+        },
+        "down": {
+          "texture": "#body"
+        }
+      }
+    },
+    {
+      "from": [
+        7.5,
+        8,
+        7.5
+      ],
+      "to": [
+        8.5,
+        17,
+        8.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#metal"
+        },
+        "east": {
+          "texture": "#metal"
+        },
+        "south": {
+          "texture": "#metal"
+        },
+        "west": {
+          "texture": "#metal"
+        },
+        "up": {
+          "texture": "#metal"
+        },
+        "down": {
+          "texture": "#metal"
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          8,
+          8
+        ],
+        "axis": "x",
+        "angle": -22.5
+      }
+    },
+    {
+      "from": [
+        5.5,
+        16,
+        6.5
+      ],
+      "to": [
+        10.5,
+        18.5,
+        9.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#grip"
+        },
+        "east": {
+          "texture": "#grip"
+        },
+        "south": {
+          "texture": "#grip"
+        },
+        "west": {
+          "texture": "#grip"
+        },
+        "up": {
+          "texture": "#grip"
+        },
+        "down": {
+          "texture": "#grip"
+        }
+      },
+      "rotation": {
+        "origin": [
+          8,
+          8,
+          8
+        ],
+        "axis": "x",
+        "angle": -22.5
+      }
+    }
+  ]
+}

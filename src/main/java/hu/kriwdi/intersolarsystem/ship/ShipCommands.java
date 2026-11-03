@@ -35,6 +35,9 @@ public final class ShipCommands {
 										.then(Commands.argument("x", IntegerArgumentType.integer())
 												.then(Commands.argument("z", IntegerArgumentType.integer())
 														.executes(ShipCommands::fly))))
+								.then(Commands.literal("meteors")
+										.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
+										.executes(ShipCommands::meteors))
 								.then(Commands.literal("engine")
 										.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
 										.then(Commands.argument("tier", IntegerArgumentType.integer(1,
@@ -54,6 +57,16 @@ public final class ShipCommands {
 		ServerPlayer player = ctx.getSource().getPlayerOrException();
 		return ShipNavigation.launch(ctx.getSource().getServer(), player,
 				StringArgumentType.getString(ctx, "destination")) ? 1 : 0;
+	}
+
+	private static int meteors(CommandContext<CommandSourceStack> ctx) {
+		MinecraftServer server = ctx.getSource().getServer();
+		boolean started = ShipTravelEvents.startMeteorShower(server, ShipStateAccess.get(server),
+				server.overworld().getGameTime());
+		if (!started) {
+			ctx.getSource().sendFailure(Component.translatable("command.intersolarsystem.ship.meteors_failed"));
+		}
+		return started ? 1 : 0;
 	}
 
 	private static int info(CommandContext<CommandSourceStack> ctx) {

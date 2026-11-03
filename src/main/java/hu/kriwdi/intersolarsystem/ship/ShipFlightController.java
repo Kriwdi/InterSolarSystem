@@ -35,11 +35,15 @@ public final class ShipFlightController {
 		ServerTickEvents.END_SERVER_TICK.register(ShipFlightController::tick);
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
 			ShipStatusSync.reset();
+			ShipManeuver.reset();
+			FlightControls.reset();
 			ShipDiagnosticScan.reset();
 			ShipRepairBoards.reset();
 		});
 		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
 			ShipStatusSync.reset();
+			ShipManeuver.reset();
+			FlightControls.reset();
 			ShipDiagnosticScan.reset();
 			ShipRepairBoards.reset();
 		});
@@ -54,6 +58,7 @@ public final class ShipFlightController {
 
 	private static void advance(MinecraftServer server, ShipState state, long now) {
 		tickIncidents(server, state, now);
+		ShipManeuver.tick(server, state, now);
 		ShipFlightPhase phase = state.phase();
 		if (phase == ShipFlightPhase.LANDED) {
 			return;
@@ -150,6 +155,9 @@ public final class ShipFlightController {
 				state.addFaults(ShipFaultRules.rollLandingFaults(state.hazards().seed(), ShipRepair.conditions(state),
 						faultySubsystems(state)));
 				state.advancePhase(now);
+				// A shower still under way when the ship lands is over: it is behind us.
+				state.travel().event().ifPresent(e -> state.setTravelEvent(Optional.empty()));
+				FlightControls.powerDown(server);
 				ShipLanding.announce(server, landing);
 				playInterior(server, SoundEvents.ANVIL_LAND);
 			}

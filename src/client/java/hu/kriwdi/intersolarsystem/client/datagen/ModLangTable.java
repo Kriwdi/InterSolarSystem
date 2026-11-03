@@ -531,9 +531,9 @@ public final class ModLangTable {
 				"Reise: Rundflug um %s",
 				"Út: %s megkerülése");
 		add(rows, "message.intersolarsystem.travel.meteor_warning",
-				"PROXIMITY ALERT: meteor shower ahead! Steer clear at the navigation console within 30 seconds",
-				"ANNÄHERUNGSALARM: Meteoritenschauer voraus! Innerhalb von 30 Sekunden an der Navigationskonsole ausweichen",
-				"KÖZELSÉGI RIASZTÁS: meteorraj előttünk! 30 másodpercen belül térj ki a navigációs konzolnál");
+				"PROXIMITY ALERT: meteor shower ahead! Pilot: steer through it from the pilot's seat (W/A/S/D). No pilot? Engage the autopilot at the navigation console",
+				"ANNÄHERUNGSALARM: Meteoritenschauer voraus! Pilot: vom Pilotensitz aus hindurchsteuern (W/A/S/D). Kein Pilot? Autopilot an der Navigationskonsole einschalten",
+				"KÖZELSÉGI RIASZTÁS: meteorraj előttünk! Pilóta: a pilótaülésből kormányozz át rajta (W/A/S/D). Nincs pilóta? Kapcsold be a robotpilótát a navigációs konzolnál");
 		add(rows, "message.intersolarsystem.travel.evading",
 				"%s fires the thrusters: evasive course",
 				"%s zündet die Triebwerke: Ausweichkurs",
@@ -1186,6 +1186,106 @@ public final class ModLangTable {
 				"You fill the canister with clean water",
 				"Du füllst den Kanister mit sauberem Wasser",
 				"Megtöltöd a kannát tiszta vízzel");
+		add(rows, "message.intersolarsystem.travel.autopilot",
+				"%s engages the autopilot: it will dodge what it can (fuel cost)",
+				"%s schaltet den Autopiloten ein: er weicht aus, so gut er kann (kostet Treibstoff)",
+				"%s bekapcsolja a robotpilótát: kitér, amit tud (üzemanyagba kerül)");
+		add(rows, "message.intersolarsystem.travel.meteor_hits",
+				"The meteor shower is behind us: %s hits, hull -%s%%",
+				"Der Meteoritenschauer liegt hinter uns: %s Treffer, Hülle -%s%%",
+				"A meteorraj mögöttünk: %s találat, burkolat -%s%%");
+		add(rows, "message.intersolarsystem.nav.course_set",
+				"Course set: %s. Pilot to the seat: switches on, then push the throttle to full",
+				"Kurs gesetzt: %s. Pilot an den Sitz: Schalter ein, dann den Schubhebel ganz nach vorn",
+				"Irány beállítva: %s. Pilóta az ülésbe: kapcsolók be, aztán told előre teljesen a tolóerőkart");
+		add(rows, "message.intersolarsystem.checklist.header",
+				"Launch checklist, still to do:",
+				"Startcheckliste, noch offen:",
+				"Indítási ellenőrzőlista, még hátra van:");
+		add(rows, "message.intersolarsystem.checklist.course",
+				"choose a destination at the navigation console",
+				"ein Ziel an der Navigationskonsole wählen",
+				"válassz célt a navigációs konzolon");
+		add(rows, "message.intersolarsystem.checklist.switch",
+				"switch on: %s (switch panel left of the pilot's seat)",
+				"einschalten: %s (Schalttafel links vom Pilotensitz)",
+				"kapcsold be: %s (kapcsolótábla a pilótaülés bal oldalán)");
+		add(rows, "message.intersolarsystem.checklist.seat",
+				"push the throttle from the pilot's seat",
+				"den Schubhebel vom Pilotensitz aus bedienen",
+				"a tolóerőkart a pilótaülésből told előre");
+		add(rows, "message.intersolarsystem.switch.name.power",
+				"main power",
+				"Hauptstrom",
+				"fő áramellátás");
+		add(rows, "message.intersolarsystem.switch.name.fuel",
+				"fuel pumps",
+				"Treibstoffpumpen",
+				"üzemanyag-szivattyúk");
+		add(rows, "message.intersolarsystem.switch.name.avionics",
+				"avionics",
+				"Avionik",
+				"avionika");
+		add(rows, "message.intersolarsystem.switch.name.life",
+				"life support",
+				"Lebenserhaltung",
+				"életfenntartás");
+		add(rows, "message.intersolarsystem.switch.power",
+				"Main power: %s",
+				"Hauptstrom: %s",
+				"Fő áramellátás: %s");
+		add(rows, "message.intersolarsystem.switch.fuel",
+				"Fuel pumps: %s",
+				"Treibstoffpumpen: %s",
+				"Üzemanyag-szivattyúk: %s");
+		add(rows, "message.intersolarsystem.switch.avionics",
+				"Avionics: %s",
+				"Avionik: %s",
+				"Avionika: %s");
+		add(rows, "message.intersolarsystem.switch.life",
+				"Life support: %s",
+				"Lebenserhaltung: %s",
+				"Életfenntartás: %s");
+		add(rows, "message.intersolarsystem.switch.on",
+				"ON",
+				"EIN",
+				"BE");
+		add(rows, "message.intersolarsystem.switch.off",
+				"OFF",
+				"AUS",
+				"KI");
+		add(rows, "block.intersolarsystem.flight_panel",
+				"Flight Switch Panel",
+				"Flugschalttafel",
+				"Repülési kapcsolótábla");
+		add(rows, "block.intersolarsystem.throttle",
+				"Throttle",
+				"Schubhebel",
+				"Tolóerőkar");
+		add(rows, "screen.intersolarsystem.nav.set_course",
+				"SET COURSE",
+				"KURS SETZEN",
+				"IRÁNY BEÁLLÍTÁSA");
+		add(rows, "hud.intersolarsystem.radar.title",
+				"METEOR SHOWER",
+				"METEORITENSCHAUER",
+				"METEORRAJ");
+		add(rows, "hud.intersolarsystem.radar.steer",
+				"Steer: W/A/S/D",
+				"Steuern: W/A/S/D",
+				"Kormányzás: W/A/S/D");
+		add(rows, "hud.intersolarsystem.radar.no_pilot",
+				"No pilot! Sit in the pilot's seat",
+				"Kein Pilot! Setz dich auf den Pilotensitz",
+				"Nincs pilóta! Ülj a pilótaülésbe");
+		add(rows, "hud.intersolarsystem.radar.hits",
+				"Hits: %s",
+				"Treffer: %s",
+				"Találat: %s");
+		add(rows, "command.intersolarsystem.ship.meteors_failed",
+				"No meteor shower: the ship is not in flight, or another event is under way",
+				"Kein Meteoritenschauer: das Schiff fliegt nicht, oder ein anderes Ereignis läuft",
+				"Nincs meteorraj: a hajó nem repül, vagy már zajlik egy esemény");
 		check(rows);
 		return List.copyOf(rows);
 	}

@@ -75,6 +75,10 @@ public final class ShipInteriorBuilder {
 			BlockPos pos = at(p.cell());
 			BlockState want = stateFor(p.piece());
 			BlockState have = interior.getBlockState(pos);
+			boolean controls = p.piece() == Piece.FLIGHT_PANEL || p.piece() == Piece.THROTTLE;
+			if (controls && have.getBlock() == want.getBlock()) {
+				continue; // keep the switches and the lever where the crew left them
+			}
 			if (have != want && interior.getBlockEntity(pos) == null
 					&& (p.piece() != Piece.HULL_PANEL || !have.is(ModBlocks.RUSTED_PANEL))) {
 				interior.setBlock(pos, want, Block.UPDATE_ALL);
@@ -120,6 +124,9 @@ public final class ShipInteriorBuilder {
 			case NAVIGATION_CONSOLE -> ModBlocks.NAVIGATION_CONSOLE.defaultBlockState()
 					.setValue(ShipFacingBlock.FACING, Direction.NORTH);
 			// The seats face the consoles (south of them).
+			// Beside the pilot's seat, facing the seats (north): the switch panel to the left, the throttle to the right.
+			case FLIGHT_PANEL -> ModBlocks.FLIGHT_PANEL.defaultBlockState().setValue(ShipFacingBlock.FACING, Direction.NORTH);
+			case THROTTLE -> ModBlocks.THROTTLE.defaultBlockState().setValue(ShipFacingBlock.FACING, Direction.NORTH);
 			case SEAT -> ModBlocks.ASTRONAUT_SEAT.defaultBlockState().setValue(ShipFacingBlock.FACING, Direction.SOUTH);
 			case BED_HEAD -> bed().setValue(BedBlock.FACING, Direction.SOUTH)
 					.setValue(BedBlock.PART, BedPart.HEAD);

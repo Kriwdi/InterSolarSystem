@@ -264,3 +264,33 @@ if __name__ == "__main__":
     for name, make in ALL.items():
         save(name, make())
         print("ground", name)
+
+
+def meteor():
+    """A tumbling rock seen head-on, lit from one side, with a faint glowing rim."""
+    size = 64
+    yy, xx = np.mgrid[0:size, 0:size]
+    rng = np.random.default_rng(141)
+    ang = np.arctan2(yy - 32, xx - 32)
+    r0 = 24 + 3 * np.sin(ang * 3 + 1) + 2 * np.sin(ang * 7)
+    d = np.hypot(xx - 32, yy - 32)
+    rgba = np.zeros((size, size, 4))
+    body = d < r0
+    light = np.clip(0.55 + 0.45 * (-(xx - 32) - (yy - 32)) / 40, 0.25, 1.0)
+    tex = 0.85 + 0.3 * rng.random((size, size))
+    base = np.array([112, 98, 86])
+    rgba[..., :3] = base * (light * tex)[..., None]
+    for _ in range(9):
+        cx, cy, cr = rng.uniform(14, 50), rng.uniform(14, 50), rng.uniform(2, 5)
+        pit = np.hypot(xx - cx, yy - cy) < cr
+        rgba[pit, :3] *= 0.6
+    rgba[..., 3] = np.where(body, 255, 0)
+    rim = (d >= r0) & (d < r0 + 2.5)
+    rgba[rim] = (255, 150, 60, 150)
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    Image.fromarray(np.clip(rgba, 0, 255).astype(np.uint8), "RGBA").save(OUT.parent / "meteor.png")
+
+
+if __name__ == "__main__":
+    meteor()
+    print("meteor")

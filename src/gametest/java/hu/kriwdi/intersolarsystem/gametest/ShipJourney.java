@@ -12,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import hu.kriwdi.intersolarsystem.client.NavigationScreen;
+import hu.kriwdi.intersolarsystem.content.FlightPanelBlock;
+import hu.kriwdi.intersolarsystem.ship.FlightControls;
 import hu.kriwdi.intersolarsystem.ship.ShipBoarding;
 import hu.kriwdi.intersolarsystem.ship.ShipDimensions;
 import hu.kriwdi.intersolarsystem.ship.ShipFlightPhase;
@@ -120,11 +122,36 @@ public class ShipJourney implements FabricClientGameTest {
 			context.takeScreenshot("47_nav_moon_selected");
 			click(context, false);
 			context.waitTicks(10);
+			String course = game.getServer().computeOnServer(server -> FlightControls.course());
+			LOGGER.info("[JOURNEY] after clicking SET COURSE the course is '{}'", course);
+			// The checklist: all switches on, sit in the pilot's seat, push the throttle three notches.
+			game.getServer().runOnServer(server -> {
+				var interior = server.getLevel(ShipDimensions.INTERIOR);
+				var pos = ShipInteriorBuilder.at(ShipInteriorLayout.capsule().flightPanel());
+				var panel = interior.getBlockState(pos);
+				for (var sw : FlightPanelBlock.SWITCHES) {
+					panel = panel.setValue(sw, true);
+				}
+				interior.setBlock(pos, panel, 3);
+			});
+			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 14.5, 4.5, 65.4, 16.5);
+			context.waitTicks(5);
+			context.getInput().lookAt(new BlockPos(4, 65, 16));
+			context.waitTicks(5);
+			context.getInput().pressKey(options -> options.keyUse);
+			context.waitTicks(15);
+			context.getInput().lookAt(new BlockPos(5, 65, 17));
+			context.waitTicks(5);
+			context.takeScreenshot("47b_pilot_controls");
+			for (int i = 0; i < 3; i++) {
+				context.getInput().pressKey(options -> options.keyUse);
+				context.waitTicks(6);
+			}
+			context.waitTicks(10);
 			String phase = game.getServer().computeOnServer(server -> ShipStateAccess.get(server).phase().name());
-			LOGGER.info("[JOURNEY] after clicking LAUNCH the ship is {}", phase);
+			LOGGER.info("[JOURNEY] after the throttle the ship is {}", phase);
 			if (!"TAKEOFF".equals(phase)) {
-				LOGGER.error("[JOURNEY] the mouse clicks did not launch the ship; launching directly");
-				context.setScreen(() -> null);
+				LOGGER.error("[JOURNEY] the checklist did not launch the ship; launching directly");
 				game.getServer().runOnServer(server -> ShipNavigation.launch(server, player(server), "moon"));
 			}
 			context.waitTicks(120);
@@ -132,10 +159,13 @@ public class ShipJourney implements FabricClientGameTest {
 			waitForPhase(context, game, ShipFlightPhase.FLIGHT);
 			context.waitTicks(25);
 			context.takeScreenshot("49_liftoff");
-			context.waitTicks(50);
-			context.takeScreenshot("50_climbing");
-			context.waitTicks(80);
-			context.takeScreenshot("51_cruise");
+			// A meteor shower on the way: the pilot holds D (steer right) for a while.
+			game.getServer().runCommand("iss ship meteors");
+			context.getInput().holdKeyFor(options -> options.keyRight, 60);
+			context.waitTicks(100);
+			context.takeScreenshot("50_meteor_shower");
+			context.waitTicks(20);
+			context.takeScreenshot("51_meteor_shower_close");
 			waitForPhase(context, game, ShipFlightPhase.LANDING);
 			context.waitTicks(30);
 			context.takeScreenshot("52_landing");

@@ -343,3 +343,85 @@ def tinted_window():
 
 if __name__ == "__main__":
     tinted_window()
+
+
+def flight_controls():
+    from make_textures import metal_base as mb
+    # Textures: the panel's top with four labelled switch slots, the levers' caps, the throttle grip.
+    top = mb(651, light=1)
+    px = top.load()
+    for i in range(4):
+        x0 = 4 * i
+        for y in range(5, 11):
+            for x in range(x0 + 1, x0 + 3):
+                px[x, y] = hexc("1a1d20")
+        for x in range(x0, x0 + 4):
+            px[x, 2] = (hexc("5dfa98") if i % 2 else hexc("f2b233"))
+            px[x, 13] = hexc("d9a521") if (x + i) % 2 else hexc("1e1f21")
+    save(top, "block/flight_panel_top")
+    for name, col in (("switch_on", "4dff6a"), ("switch_off", "ff3b2b"), ("throttle_grip", "c5382a")):
+        img = Image.new("RGBA", (16, 16))
+        p = img.load()
+        for y in range(16):
+            for x in range(16):
+                p[x, y] = shade(hexc(col), 1.15 - y * 0.03)
+        save(img, "block/" + name)
+    t = {"particle": "block/navigation_console_frame", "body": "block/navigation_console_frame",
+         "top": "block/flight_panel_top", "metal": "block/rusted_panel"}
+    tilt = {"origin": [8, 12, 7], "axis": "x", "angle": -22.5}
+    model("block/flight_panel", t, [
+        box((2, 0, 3), (14, 9, 14), "body"),
+        box((0, 9, 0), (16, 12, 14), {"north": "body", "south": "body", "east": "body", "west": "body",
+                                      "up": "top", "down": "body"},
+            uv={"up": (0, 0, 16, 16)}, rotation=tilt),
+    ])
+    facings = (("north", 0), ("east", 90), ("south", 180), ("west", 270))
+    parts = []
+    for f, y in facings:
+        a = {"model": NS + "block/flight_panel"}
+        if y:
+            a["y"] = y
+        parts.append({"when": {"facing": f}, "apply": a})
+    names = ("power", "fuel", "avionics", "life")
+    for i, name in enumerate(names):
+        cx = 14 - 4 * i
+        for on in (True, False):
+            lever = {"origin": [cx, 12, 7], "axis": "x", "angle": 22.5 if on else -22.5}
+            model(f"block/flight_panel_switch{i}_{'on' if on else 'off'}",
+                  {"particle": "block/rusted_panel", "metal": "block/rusted_panel",
+                   "cap": "block/switch_on" if on else "block/switch_off"}, [
+                      box((cx - 0.5, 12, 6.5), (cx + 0.5, 15.5, 7.5), "metal", rotation=lever),
+                      box((cx - 1, 15.5, 6), (cx + 1, 17, 8), "cap", rotation=lever),
+                  ])
+            for f, y in facings:
+                a = {"model": NS + f"block/flight_panel_switch{i}_{'on' if on else 'off'}"}
+                if y:
+                    a["y"] = y
+                parts.append({"when": {"facing": f, name: "true" if on else "false"}, "apply": a})
+    write(ASSETS / "blockstates/flight_panel.json", {"multipart": parts})
+    item_from_block("flight_panel", "block/flight_panel")
+
+    angles = (-45, -22.5, 22.5, 45)
+    variants = {}
+    for level, angle in enumerate(angles):
+        rot = {"origin": [8, 8, 8], "axis": "x", "angle": angle}
+        model(f"block/throttle_{level}", {"particle": "block/navigation_console_frame",
+                                          "body": "block/navigation_console_frame", "metal": "block/rusted_panel",
+                                          "grip": "block/throttle_grip", "top": "block/flight_panel_top"}, [
+            box((3, 0, 3), (13, 8, 13), {"north": "body", "south": "body", "east": "body", "west": "body",
+                                         "up": "top", "down": "body"}),
+            box((7.5, 8, 7.5), (8.5, 17, 8.5), "metal", rotation=rot),
+            box((5.5, 16, 6.5), (10.5, 18.5, 9.5), "grip", rotation=rot),
+        ])
+        for f, y in facings:
+            v = {"model": NS + f"block/throttle_{level}"}
+            if y:
+                v["y"] = y
+            variants[f"facing={f},level={level}"] = v
+    write(ASSETS / "blockstates/throttle.json", {"variants": variants})
+    item_from_block("throttle", "block/throttle_0")
+
+
+if __name__ == "__main__":
+    flight_controls()
+    print("flight controls written")

@@ -1,0 +1,351 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel"
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "true"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch0_on"
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "true"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch0_on",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "true"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch0_on",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "true"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch0_on",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "power": "false"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch0_off"
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "power": "false"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch0_off",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "power": "false"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch0_off",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "power": "false"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch0_off",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fuel": "true"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch1_on"
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fuel": "true"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch1_on",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fuel": "true"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch1_on",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fuel": "true"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch1_on",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "fuel": "false"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch1_off"
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "fuel": "false"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch1_off",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "fuel": "false"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch1_off",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "fuel": "false"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch1_off",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "avionics": "true"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch2_on"
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "avionics": "true"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch2_on",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "avionics": "true"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch2_on",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "avionics": "true"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch2_on",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "avionics": "false"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch2_off"
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "avionics": "false"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch2_off",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "avionics": "false"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch2_off",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "avionics": "false"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch2_off",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "life": "true"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch3_on"
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "life": "true"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch3_on",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "life": "true"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch3_on",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "life": "true"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch3_on",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "life": "false"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch3_off"
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "life": "false"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch3_off",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "life": "false"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch3_off",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "life": "false"
+      },
+      "apply": {
+        "model": "intersolarsystem:block/flight_panel_switch3_off",
+        "y": 270
+      }
+    }
+  ]
+}

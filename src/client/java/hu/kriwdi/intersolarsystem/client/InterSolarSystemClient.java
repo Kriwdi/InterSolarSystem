@@ -52,8 +52,13 @@ public class InterSolarSystemClient implements ClientModInitializer {
 		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
 			ClientShipStatus.clear();
 			hu.kriwdi.intersolarsystem.client.sky.ShipView.clear();
+			hu.kriwdi.intersolarsystem.client.sky.ClientManeuver.clear();
 		});
 		HudElementRegistry.addLast(ModIds.id("ship_status"), new ShipHudElement());
 		HudElementRegistry.addLast(ModIds.id("oxygen"), new OxygenHudElement());
+		HudElementRegistry.addLast(ModIds.id("radar"), new RadarHudElement());
+		ClientPlayNetworking.registerGlobalReceiver(hu.kriwdi.intersolarsystem.ship.ManeuverPayload.TYPE,
+				(payload, context) -> context.client().execute(() -> hu.kriwdi.intersolarsystem.client.sky.ClientManeuver
+						.accept(payload)));
 	}
 }

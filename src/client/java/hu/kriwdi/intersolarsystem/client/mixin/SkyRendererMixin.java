@@ -34,6 +34,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import hu.kriwdi.intersolarsystem.client.sky.ClientManeuver;
 import hu.kriwdi.intersolarsystem.client.sky.EarthInSky;
 import hu.kriwdi.intersolarsystem.client.sky.ShipView;
 import hu.kriwdi.intersolarsystem.core.ModIds;
@@ -166,6 +167,61 @@ public abstract class SkyRendererMixin {
 		if (scene.ceiling() != -1) {
 			intersolarsystem$drawDisc(renderPass, poseStack, 20.0F, 500.0F, scene.ceiling());
 		}
+		if (ClientManeuver.active()) {
+			intersolarsystem$drawMeteors(renderPass, poseStack, partial);
+		}
+	}
+
+	@Unique
+	private GpuBuffer intersolarsystem$meteor;
+
+	/** The meteor shower ahead of the bow: rocks grow as they close in, offset by where the pilot has moved the ship. */
+	@Unique
+	private void intersolarsystem$drawMeteors(final RenderPass renderPass, final PoseStack poseStack,
+			final float partial) {
+		if (intersolarsystem$meteor == null) {
+			intersolarsystem$meteor = intersolarsystem$buildSprite(celestialsAtlas, "meteor");
+		}
+		float elapsed = ClientManeuver.elapsed(partial);
+		for (hu.kriwdi.intersolarsystem.travel.MeteorField.Meteor rock : ClientManeuver.field()) {
+			float p = (elapsed - rock.appear()) / hu.kriwdi.intersolarsystem.travel.MeteorField.APPROACH_TICKS;
+			if (p < 0.0F || p > 1.04F) {
+				continue;
+			}
+			float rx = rock.x() - ClientManeuver.shipX();
+			float ry = rock.y() - ClientManeuver.shipY();
+			// Close rocks spread out of the view (perspective): the offset grows as they approach.
+			float spread = 18.0F + 30.0F * p * p;
+			poseStack.pushPose();
+			poseStack.rotateDegrees(Axis.YP, -90.0F);
+			poseStack.rotateDegrees(Axis.XP, rx * spread);
+			poseStack.rotateDegrees(Axis.ZP, -90.0F + ry * spread);
+			poseStack.rotateDegrees(Axis.YP, (rock.arrive() * 37 % 360) + elapsed * 3.0F);
+			float scale = 0.6F + 16.0F * p * p * p * (rock.radius() / 0.25F);
+			Matrix4f matrix = applyCelestialBodyTransform(poseStack, EarthInSky.DISTANCE, scale);
+			GpuBufferSlice transforms = RenderSystem.getDynamicUniforms().writeTransform(matrix,
+					new Vector4f(1.0F, 1.0F, 1.0F, 1.0F));
+			drawCelestialBody(() -> "Meteor", renderPass, transforms, quadIndices.getBuffer(6), intersolarsystem$meteor,
+					0);
+			poseStack.popPose();
+		}
+	}
+
+	/** One quad of a celestial sprite. */
+	@Unique
+	private static GpuBuffer intersolarsystem$buildSprite(final TextureAtlas atlas, final String name) {
+		VertexFormat format = DefaultVertexFormat.POSITION_TEX;
+		try (ByteBufferBuilder bytes = ByteBufferBuilder.exactlySized(4 * format.getVertexSize())) {
+			BufferBuilder builder = new BufferBuilder(bytes, PrimitiveTopology.QUADS, format);
+			TextureAtlasSprite sprite = atlas.getSprite(ModIds.id(name));
+			builder.addVertex(-1.0F, 0.0F, -1.0F).setUv(sprite.getU1(), sprite.getV1());
+			builder.addVertex(1.0F, 0.0F, -1.0F).setUv(sprite.getU0(), sprite.getV1());
+			builder.addVertex(1.0F, 0.0F, 1.0F).setUv(sprite.getU0(), sprite.getV0());
+			builder.addVertex(-1.0F, 0.0F, 1.0F).setUv(sprite.getU1(), sprite.getV0());
+			try (MeshData mesh = builder.buildOrThrow()) {
+				return RenderSystem.getDevice().createBuffer(() -> "Sprite " + name, 32, mesh.vertexBuffer());
+			}
+		}
 	}
 
 	/** Tiles per side of the painted ground, and the size of one tile (in sky units, about blocks). */
@@ -263,6 +319,10 @@ public abstract class SkyRendererMixin {
 			intersolarsystem$disc.close();
 		}
 		intersolarsystem$grounds.values().forEach(GpuBuffer::close);
+		if (intersolarsystem$meteor != null) {
+			intersolarsystem$meteor.close();
+			intersolarsystem$meteor = null;
+		}
 		intersolarsystem$grounds.clear();
 	}
 

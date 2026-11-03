@@ -243,6 +243,13 @@ public final class ModBlocks {
 				.pushReaction(PushReaction.IMMOVEABLE);
 	}
 
+	/** The pilot's switch panel and throttle lever (the launch checklist). */
+	public static final Block FLIGHT_PANEL = register("flight_panel", FlightPanelBlock::new,
+			BlockBehaviour.Properties.of().strength(3.0F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
+	public static final Block THROTTLE = register("throttle", ThrottleBlock::new,
+			BlockBehaviour.Properties.of().strength(3.0F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
 	/** Padded flight seat to sit in (the pilot's and the crew's seats on the bridge). */
 	public static final Block ASTRONAUT_SEAT = register("astronaut_seat", AstronautSeatBlock::new,
 			BlockBehaviour.Properties.of().strength(2.0F, 6.0F).sound(SoundType.METAL).noOcclusion());

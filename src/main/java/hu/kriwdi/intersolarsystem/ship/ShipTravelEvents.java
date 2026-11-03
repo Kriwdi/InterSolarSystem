@@ -99,15 +99,24 @@ public final class ShipTravelEvents {
 		}
 	}
 
+	/** Starts a meteor shower now (debug command); does nothing outside a flight or during another event. */
+	public static boolean startMeteorShower(MinecraftServer server, ShipState state, long now) {
+		if (state.phase() != ShipFlightPhase.FLIGHT || state.travel().event().isPresent()) {
+			return false;
+		}
+		start(server, state, TravelEventType.METEOR_SHOWER, 0, now);
+		return true;
+	}
+
 	private static void resolve(MinecraftServer server, ShipState state, ShipTravel.ActiveEvent event) {
 		if (event.type() == TravelEventType.METEOR_SHOWER) {
-			if (event.evaded()) {
+			// The hits were taken as the rocks arrived (see ShipManeuver); this only sums up.
+			int hits = ShipManeuver.hits();
+			if (hits == 0) {
 				say(server, "message.intersolarsystem.travel.meteor_evaded");
 			} else {
-				damage(state, ShipSubsystem.HULL_ARMOR, METEOR_HULL_DAMAGE);
-				damage(state, ShipSubsystem.NAVIGATION_COMMS, METEOR_NAV_DAMAGE);
-				say(server, "message.intersolarsystem.travel.meteor_hit");
-				ShipFlightController.playInterior(server, SoundEvents.GENERIC_EXPLODE.value());
+				ShipFlightController.broadcast(server, Component.translatable("message.intersolarsystem.travel.meteor_hits",
+						hits, hits * ShipManeuver.HULL_DAMAGE_PER_HIT));
 			}
 		}
 	}
@@ -122,7 +131,7 @@ public final class ShipTravelEvents {
 		state.setTravelEvent(Optional.of(new ShipTravel.ActiveEvent(event.get().type(), event.get().deadlineTick(),
 				true)));
 		damage(state, ShipSubsystem.FUEL_ENERGY, EVADE_FUEL_COST);
-		ShipFlightController.broadcast(server, Component.translatable("message.intersolarsystem.travel.evading",
+		ShipFlightController.broadcast(server, Component.translatable("message.intersolarsystem.travel.autopilot",
 				player.getDisplayName()));
 		ShipFlightController.playInterior(server, SoundEvents.FIREWORK_ROCKET_LARGE_BLAST);
 		return true;

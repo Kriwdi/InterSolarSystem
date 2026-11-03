@@ -1,0 +1,92 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "intersolarsystem:block/rusted_panel",
+    "metal": "intersolarsystem:block/rusted_panel",
+    "cap": "intersolarsystem:block/switch_off"
+  },
+  "elements": [
+    {
+      "from": [
+        1.5,
+        12,
+        6.5
+      ],
+      "to": [
+        2.5,
+        15.5,
+        7.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#metal"
+        },
+        "east": {
+          "texture": "#metal"
+        },
+        "south": {
+          "texture": "#metal"
+        },
+        "west": {
+          "texture": "#metal"
+        },
+        "up": {
+          "texture": "#metal"
+        },
+        "down": {
+          "texture": "#metal"
+        }
+      },
+      "rotation": {
+        "origin": [
+          2,
+          12,
+          7
+        ],
+        "axis": "x",
+        "angle": -22.5
+      }
+    },
+    {
+      "from": [
+        1,
+        15.5,
+        6
+      ],
+      "to": [
+        3,
+        17,
+        8
+      ],
+      "faces": {
+        "north": {
+          "texture": "#cap"
+        },
+        "east": {
+          "texture": "#cap"
+        },
+        "south": {
+          "texture": "#cap"
+        },
+        "west": {
+          "texture": "#cap"
+        },
+        "up": {
+          "texture": "#cap"
+        },
+        "down": {
+          "texture": "#cap"
+        }
+      },
+      "rotation": {
+        "origin": [
+          2,
+          12,
+          7
+        ],
+        "axis": "x",
+        "angle": -22.5
+      }
+    }
+  ]
+}
