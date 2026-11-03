@@ -1,7 +1,7 @@
 {
   "placement": {
     "type": "minecraft:concentric_rings",
-    "distance": 37,
+    "distance": 88,
     "spread": 2,
     "count": 2,
     "preferred_biomes": "#intersolarsystem:preferred/verdant_lab",

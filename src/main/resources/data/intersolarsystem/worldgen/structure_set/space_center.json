@@ -1,7 +1,7 @@
 {
   "placement": {
     "type": "minecraft:concentric_rings",
-    "distance": 74,
+    "distance": 80,
     "spread": 3,
     "count": 3,
     "preferred_biomes": "#intersolarsystem:preferred/space_center",

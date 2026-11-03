@@ -1,7 +1,7 @@
 {
   "placement": {
     "type": "minecraft:concentric_rings",
-    "distance": 58,
+    "distance": 62,
     "spread": 6,
     "count": 6,
     "preferred_biomes": "#intersolarsystem:preferred/dead_city",
