@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/living_soil"
+      },
+      {
+        "model": "intersolarsystem:block/living_soil",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/living_soil",
+        "y": 180
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "intersolarsystem:aluminium_ingot",
+    "G": "minecraft:glass_pane"
+  },
+  "pattern": [
+    "AGA",
+    "A A",
+    "AAA"
+  ],
+  "result": {
+    "id": "intersolarsystem:water_canister",
+    "count": 2
+  }
+}
