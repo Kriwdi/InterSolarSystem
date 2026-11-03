@@ -66,6 +66,20 @@ public final class ShipInteriorBuilder {
 			return;
 		}
 		ShipInteriorLayout layout = ShipInteriorLayout.capsule();
+		// Newer versions of the fixed parts (the two-block hatch, turned consoles, seats) replace older ones in place;
+		// containers and anything players built in the free cells stay.
+		for (ShipInteriorLayout.Placement p : layout.placements()) {
+			if (!p.piece().structural() && p.piece() != Piece.SEAT) {
+				continue;
+			}
+			BlockPos pos = at(p.cell());
+			BlockState want = stateFor(p.piece());
+			BlockState have = interior.getBlockState(pos);
+			if (have != want && interior.getBlockEntity(pos) == null
+					&& (p.piece() != Piece.HULL_PANEL || !have.is(ModBlocks.RUSTED_PANEL))) {
+				interior.setBlock(pos, want, Block.UPDATE_ALL);
+			}
+		}
 		fillIfAir(interior, layout.station(), stateFor(Piece.REPAIR_STATION));
 		fillIfAir(interior, layout.console(), stateFor(Piece.DIAGNOSTIC_CONSOLE));
 		fillIfAir(interior, layout.navigation(), stateFor(Piece.NAVIGATION_CONSOLE));
@@ -97,6 +111,7 @@ public final class ShipInteriorBuilder {
 			case LIGHT -> ModBlocks.STATION_LIGHT.defaultBlockState();
 			// The hatch is in the left wall and faces into the ship.
 			case HATCH -> ModBlocks.SHIP_HATCH.defaultBlockState().setValue(ShipFacingBlock.FACING, Direction.EAST);
+			case HATCH_TOP -> ModBlocks.SHIP_HATCH_TOP.defaultBlockState().setValue(ShipFacingBlock.FACING, Direction.EAST);
 			case REPAIR_STATION -> ModBlocks.REPAIR_STATION.defaultBlockState()
 					.setValue(ShipFacingBlock.FACING, Direction.WEST);
 			// The consoles on the bridge face the pilot's seats (north of them).
@@ -104,7 +119,8 @@ public final class ShipInteriorBuilder {
 					.setValue(ShipFacingBlock.FACING, Direction.NORTH);
 			case NAVIGATION_CONSOLE -> ModBlocks.NAVIGATION_CONSOLE.defaultBlockState()
 					.setValue(ShipFacingBlock.FACING, Direction.NORTH);
-			case SEAT -> Blocks.POLISHED_BLACKSTONE_STAIRS.defaultBlockState().setValue(StairBlock.FACING, Direction.NORTH);
+			// The seats face the consoles (south of them).
+			case SEAT -> ModBlocks.ASTRONAUT_SEAT.defaultBlockState().setValue(ShipFacingBlock.FACING, Direction.SOUTH);
 			case BED_HEAD -> bed().setValue(BedBlock.FACING, Direction.SOUTH)
 					.setValue(BedBlock.PART, BedPart.HEAD);
 			case BED_FOOT -> bed().setValue(BedBlock.FACING, Direction.SOUTH)

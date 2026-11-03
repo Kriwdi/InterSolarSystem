@@ -21,13 +21,13 @@ public final class ShipInteriorLayout {
 	public static final int SIZE_Z = 21;
 
 	public enum Piece {
-		HULL_PANEL, FLOOR, VIEWPORT, LIGHT, HATCH, REPAIR_STATION, DIAGNOSTIC_CONSOLE, NAVIGATION_CONSOLE, SEAT,
+		HULL_PANEL, FLOOR, VIEWPORT, LIGHT, HATCH, HATCH_TOP, REPAIR_STATION, DIAGNOSTIC_CONSOLE, NAVIGATION_CONSOLE, SEAT,
 		BED_HEAD, BED_FOOT, BARREL, CHEST, ENGINE_PORT, REACTOR_CORE, REACTOR_CAGE, PIPE, AIR;
 
 		/** The ship itself: these cannot be broken from inside, even in creative. */
 		public boolean structural() {
 			return switch (this) {
-				case HULL_PANEL, FLOOR, VIEWPORT, LIGHT, HATCH, REPAIR_STATION, DIAGNOSTIC_CONSOLE, NAVIGATION_CONSOLE,
+				case HULL_PANEL, FLOOR, VIEWPORT, LIGHT, HATCH, HATCH_TOP, REPAIR_STATION, DIAGNOSTIC_CONSOLE, NAVIGATION_CONSOLE,
 						ENGINE_PORT, REACTOR_CORE, REACTOR_CAGE, PIPE -> true;
 				default -> false;
 			};
@@ -111,6 +111,7 @@ public final class ShipInteriorLayout {
 	private static Map<Cell, Piece> specials() {
 		Map<Cell, Piece> m = new HashMap<>();
 		m.put(HATCH, Piece.HATCH);
+		m.put(new Cell(HATCH.dx(), HATCH.dy() + 1, HATCH.dz()), Piece.HATCH_TOP);
 		m.put(STATION, Piece.REPAIR_STATION);
 		m.put(CONSOLE, Piece.DIAGNOSTIC_CONSOLE);
 		m.put(NAVIGATION, Piece.NAVIGATION_CONSOLE);

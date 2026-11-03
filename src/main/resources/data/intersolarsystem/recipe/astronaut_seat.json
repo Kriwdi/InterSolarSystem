@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": "intersolarsystem:scrap_metal",
+    "W": "#minecraft:wool",
+    "I": "minecraft:iron_ingot",
+    "L": "minecraft:leather"
+  },
+  "pattern": [
+    "W  ",
+    "WLW",
+    "SIS"
+  ],
+  "result": {
+    "id": "intersolarsystem:astronaut_seat"
+  }
+}

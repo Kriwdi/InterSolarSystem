@@ -1,29 +1,27 @@
-# Gradle
-.gradle/
-build/
-out/
-classes/
 
 # Fabric / Loom
-run/
-remappedSrc/
-
+# Gradle
 # IDEs
-.idea/
+# Java
+# OS
 *.iml
 *.ipr
 *.iws
-.vscode/
-.settings/
-.project
-.classpath
-bin/
-
-# OS
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# Java
 *.log
+.DS_Store
+.classpath
+.gradle/
+.idea/
+.project
+.settings/
+.vscode/
+Thumbs.db
+__pycache__/
+bin/
+build/
+classes/
+desktop.ini
 hs_err_pid*
+out/
+remappedSrc/
+run/

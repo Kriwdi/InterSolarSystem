@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "intersolarsystem:block/astronaut_seat"
+    },
+    "facing=east": {
+      "model": "intersolarsystem:block/astronaut_seat",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "intersolarsystem:block/astronaut_seat",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "intersolarsystem:block/astronaut_seat",
+      "y": 270
+    }
+  }
+}

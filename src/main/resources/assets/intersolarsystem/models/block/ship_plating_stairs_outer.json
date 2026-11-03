@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "intersolarsystem:block/ship_plating",
+    "top": "intersolarsystem:block/ship_plating",
+    "side": "intersolarsystem:block/ship_plating"
+  }
+}

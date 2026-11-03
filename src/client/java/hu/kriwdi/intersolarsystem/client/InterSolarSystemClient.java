@@ -18,6 +18,9 @@ import hu.kriwdi.intersolarsystem.ship.RepairBoardPayloads;
 public class InterSolarSystemClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
+		// The seat a player rides while sitting is invisible.
+		net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry.register(
+				hu.kriwdi.intersolarsystem.content.ModEntities.SEAT, net.minecraft.client.renderer.entity.NoopRenderer::new);
 		// The server is the only source of truth: the client just stores the last status and draws it.
 		ClientPlayNetworking.registerGlobalReceiver(ShipStatusPayload.TYPE, (payload, context) -> {
 			Minecraft minecraft = context.client();

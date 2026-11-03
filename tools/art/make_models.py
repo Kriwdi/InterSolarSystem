@@ -331,7 +331,7 @@ if __name__ == "__main__":
     repair_station()
     diagnostic_console()
     navigation_console()
-    ship_hatch()
+    # ship_hatch(): the two-block hatch is written by make_ship_hull_assets.py now.
     station_blocks()
     moon_blocks()
     rusted_panel()

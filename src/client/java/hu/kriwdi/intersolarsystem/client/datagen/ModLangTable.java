@@ -1090,6 +1090,38 @@ public final class ModLangTable {
 				"The ship is already here: choose another destination",
 				"Das Schiff ist schon hier: wähle ein anderes Ziel",
 				"A hajó már itt van: válassz másik célt");
+		add(rows, "block.intersolarsystem.ship_plating_stairs",
+				"Ship Plating Stairs",
+				"Schiffsbeplankungstreppe",
+				"Hajóburkolat-lépcső");
+		add(rows, "block.intersolarsystem.ship_plating_slab",
+				"Ship Plating Slab",
+				"Schiffsbeplankungsstufe",
+				"Hajóburkolat-lap");
+		add(rows, "block.intersolarsystem.ship_stripe",
+				"Ship Livery Plating",
+				"Schiffsbeplankung mit Zierstreifen",
+				"Csíkos hajóburkolat");
+		add(rows, "block.intersolarsystem.ship_light_red",
+				"Port Navigation Light",
+				"Backbord-Positionslicht",
+				"Bal oldali helyzetjelző fény");
+		add(rows, "block.intersolarsystem.ship_light_green",
+				"Starboard Navigation Light",
+				"Steuerbord-Positionslicht",
+				"Jobb oldali helyzetjelző fény");
+		add(rows, "block.intersolarsystem.ship_hatch_top",
+				"Ship Hatch (Upper Half)",
+				"Schiffsluke (obere Hälfte)",
+				"Hajóajtó (felső fele)");
+		add(rows, "block.intersolarsystem.astronaut_seat",
+				"Astronaut Seat",
+				"Astronautensitz",
+				"Űrhajós ülés");
+		add(rows, "entity.intersolarsystem.seat",
+				"Seat",
+				"Sitz",
+				"Ülés");
 		check(rows);
 		return List.copyOf(rows);
 	}

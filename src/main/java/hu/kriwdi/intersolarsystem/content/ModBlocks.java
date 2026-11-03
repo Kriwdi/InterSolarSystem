@@ -208,6 +208,33 @@ public final class ModBlocks {
 			BlockBehaviour.Properties.of().strength(-1.0F, 3600000.0F).sound(SoundType.GLASS).noLootTable()
 					.noOcclusion().pushReaction(PushReaction.IMMOVEABLE));
 
+	// ---- The research ship's outer hull: shaped plating, livery band, navigation lights, the hatch's upper half.
+	public static final Block SHIP_PLATING_STAIRS = register("ship_plating_stairs",
+			p -> new StairBlock(SHIP_PLATING.defaultBlockState(), p), hull(SoundType.METAL).noOcclusion());
+
+	public static final Block SHIP_PLATING_SLAB = register("ship_plating_slab", SlabBlock::new, hull(SoundType.METAL));
+
+	public static final Block SHIP_STRIPE = register("ship_stripe", Block::new, hull(SoundType.METAL));
+
+	public static final Block SHIP_LIGHT_RED = register("ship_light_red", Block::new,
+			hull(SoundType.GLASS).lightLevel(state -> 10));
+
+	public static final Block SHIP_LIGHT_GREEN = register("ship_light_green", Block::new,
+			hull(SoundType.GLASS).lightLevel(state -> 10));
+
+	/** Upper half of the two-block hatch: drawn by the lower half's model, a click on it opens the hatch below. */
+	public static final Block SHIP_HATCH_TOP = register("ship_hatch_top", ShipHatchTopBlock::new,
+			hull(SoundType.METAL).noOcclusion());
+
+	private static BlockBehaviour.Properties hull(SoundType sound) {
+		return BlockBehaviour.Properties.of().strength(-1.0F, 3600000.0F).sound(sound).noLootTable()
+				.pushReaction(PushReaction.IMMOVEABLE);
+	}
+
+	/** Padded flight seat to sit in (the pilot's and the crew's seats on the bridge). */
+	public static final Block ASTRONAUT_SEAT = register("astronaut_seat", AstronautSeatBlock::new,
+			BlockBehaviour.Properties.of().strength(2.0F, 6.0F).sound(SoundType.METAL).noOcclusion());
+
 	// ---- Dead wood: planks sawn from the bleached trunks, and what is built from them.
 	public static final Block DEAD_PLANKS = register("dead_planks", Block::new,
 			BlockBehaviour.Properties.of().strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava());
