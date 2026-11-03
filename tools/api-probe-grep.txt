@@ -1,2 +1,3 @@
 # Regex.
-client/gametest/v1/.*Input.*class
+BlockRenderLayer.*class
+ChunkSectionLayer.*class

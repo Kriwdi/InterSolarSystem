@@ -1,4 +1,7 @@
 # Classes.
-net.fabricmc.fabric.api.client.gametest.v1.TestInput
-net.minecraft.client.Camera
-net.minecraft.client.renderer.GameRenderer
+net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap
+net.minecraft.client.renderer.chunk.ChunkSectionLayer
+net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents
+net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents$Before
+net.minecraft.client.renderer.ItemBlockRenderTypes
+net.minecraft.world.entity.Entity
