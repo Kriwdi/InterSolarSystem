@@ -1,7 +1,7 @@
 {
   "type": "minecraft:jigsaw",
   "biomes": "#intersolarsystem:has_structure/dead_city",
-  "max_distance_from_center": 128,
+  "max_distance_from_center": 112,
   "size": 7,
   "spawn_overrides": {
     "ambient": {

@@ -1057,7 +1057,7 @@ def main():
     for name, entries in city_structures.POOLS.items():
         pool(name, entries)
     structure("dead_city", "city/start", ["frozen_megalopolis", "ash_desert"], 40, 14, 70030, 0, size=7,
-              adaptation="beard_thin", distance=128)
+              adaptation="beard_thin", distance=112)
     for rel, b in metro_pieces().items():
         sizes[rel] = b.save(rel)
     pool("metro/start", [("metro/station", 1)])
