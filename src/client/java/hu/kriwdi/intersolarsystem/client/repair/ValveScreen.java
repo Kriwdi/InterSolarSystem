@@ -5,6 +5,7 @@ import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 
+import hu.kriwdi.intersolarsystem.client.ui.ShipPanel;
 import hu.kriwdi.intersolarsystem.ship.RepairMinigame;
 import hu.kriwdi.intersolarsystem.ship.ValvePuzzle;
 
@@ -113,7 +114,7 @@ public class ValveScreen extends RepairBoardScreen {
 
 	@Override
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-		if (event.button() == 0 && inside(event.x(), event.y(), buttonX(), buttonY(), 100, 20)) {
+		if (event.button() == ShipPanel.LEFT_BUTTON && inside(event.x(), event.y(), buttonX(), buttonY(), 100, 20)) {
 			closeValve();
 			return true;
 		}

@@ -78,8 +78,10 @@ public class ShipJourney implements FabricClientGameTest {
 			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 16.5, 4.5, 66, 20.5);
 			context.waitTicks(10);
 			// Opened like a player does: looking at the console and pressing the use key (right click).
-			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 16.5, 4.5, 65.6, 18.5);
+			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 17.3, 4.5, 65.6, 18.5);
 			context.waitTicks(10);
+			context.getInput().lookAt(new BlockPos(4, 65, 18));
+			context.waitTicks(5);
 			context.takeScreenshot("45b_aim_at_console");
 			String aim = context.computeOnClient(client -> client.hitResult == null ? "nothing"
 					: client.hitResult.getType() + " " + (client.hitResult instanceof net.minecraft.world.phys.BlockHitResult b
@@ -96,10 +98,12 @@ public class ShipJourney implements FabricClientGameTest {
 			}
 			context.waitTicks(10);
 			context.takeScreenshot("46_nav_open");
-			click(context, 60, 82 + 2 + 2 * 12 + 6);
+			click(context, true);
+			int selectedRow = context.computeOnClient(client -> NavigationScreen.current.selectedIndex());
+			LOGGER.info("[JOURNEY] after clicking the Moon row the selected row is {}", selectedRow);
 			context.waitTicks(5);
 			context.takeScreenshot("47_nav_moon_selected");
-			click(context, 320 - 104 + 47, 274 - 26 + 9);
+			click(context, false);
 			context.waitTicks(10);
 			String phase = game.getServer().computeOnServer(server -> ShipStateAccess.get(server).phase().name());
 			LOGGER.info("[JOURNEY] after clicking LAUNCH the ship is {}", phase);
@@ -153,19 +157,18 @@ public class ShipJourney implements FabricClientGameTest {
 				+ " " + fy + " " + fz);
 	}
 
-	/** Clicks at a point of the navigation panel (panel coordinates in GUI pixels from its top-left corner). */
-	private static void click(ClientGameTestContext context, int px, int py) {
+	/** Clicks the Moon row or the launch button of the open star map with the mouse. */
+	private static void click(ClientGameTestContext context, boolean moonRow) {
 		double[] at = context.computeOnClient(client -> {
-			int w = client.getWindow().getGuiScaledWidth();
-			int h = client.getWindow().getGuiScaledHeight();
-			double scale = (double) client.getWindow().getWidth() / w;
-			int left = (w - 320) / 2;
-			int top = Math.max(0, (h - 274) / 2);
-			return new double[] {(left + px) * scale, (top + py) * scale};
+			NavigationScreen screen = NavigationScreen.current;
+			int[] p = moonRow ? screen.rowCentre(2) : screen.launchCentre();
+			double scale = (double) client.getWindow().getWidth() / client.getWindow().getGuiScaledWidth();
+			return new double[] {p[0] * scale, p[1] * scale};
 		});
 		context.getInput().setCursorPos(at[0], at[1]);
 		context.waitTicks(2);
-		context.getInput().pressMouse(0);
+		// Left button: 26.x numbers mouse buttons from 1.
+		context.getInput().pressMouse(1);
 	}
 
 	private static void waitForPhase(ClientGameTestContext context, TestSingleplayerContext game, ShipFlightPhase phase) {

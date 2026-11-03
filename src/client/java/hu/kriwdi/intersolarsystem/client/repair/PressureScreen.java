@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 
+import hu.kriwdi.intersolarsystem.client.ui.ShipPanel;
 import hu.kriwdi.intersolarsystem.ship.PressurePuzzle;
 import hu.kriwdi.intersolarsystem.ship.RepairMinigame;
 
@@ -99,7 +100,7 @@ public class PressureScreen extends RepairBoardScreen {
 
 	@Override
 	public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-		if (event.button() != 0 || sent()) {
+		if (event.button() != ShipPanel.LEFT_BUTTON || sent()) {
 			return super.mouseClicked(event, doubleClick);
 		}
 		for (int i = 0; i < values.length - 1; i++) {

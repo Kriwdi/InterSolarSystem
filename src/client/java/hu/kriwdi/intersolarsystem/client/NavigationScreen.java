@@ -33,8 +33,11 @@ import hu.kriwdi.intersolarsystem.travel.TravelMath;
  */
 public class NavigationScreen extends Screen {
 	private static final int WIDTH = 320;
-	private static final int HEIGHT = 274;
-	private static final int ROW = 12;
+	/** Full height; on short screens (big GUI scale) the map and the rows shrink so everything still fits. */
+	private static final int FULL_HEIGHT = 274;
+	private int panelHeight = FULL_HEIGHT;
+	private int rowHeight = 12;
+	private int mapHeight = 36;
 	private static final Map<String, Integer> COLOURS = Map.ofEntries(
 			Map.entry("earth", 0xFF3D7BD9), Map.entry("earth_orbit", 0xFF9FC4FF), Map.entry("moon", 0xFFC9C9C9), Map.entry("venus", 0xFFE3C27A),
 			Map.entry("mercury", 0xFF9E8F80), Map.entry("mars", 0xFFD0603A), Map.entry("ceres", 0xFF8A857C),
@@ -111,12 +114,34 @@ public class NavigationScreen extends Screen {
 		}
 	}
 
+	/** The open star map (for the client game test, which clicks its rows and button). */
+	public static NavigationScreen current;
+
+	/** Centre of a list row, in GUI pixels. */
+	public int[] rowCentre(int index) {
+		return new int[] {left() + 60, listY() + 2 + index * rowHeight + rowHeight / 2};
+	}
+
+	/** Centre of the launch button, in GUI pixels. */
+	public int[] launchCentre() {
+		return new int[] {launchX() + 47, launchY() + 9};
+	}
+
+	public int selectedIndex() {
+		return selected;
+	}
+
 	@Override
 	protected void init() {
+		current = this;
+		boolean compact = height < FULL_HEIGHT + 4;
+		rowHeight = compact ? 10 : 12;
+		mapHeight = compact ? 20 : 36;
+		panelHeight = FULL_HEIGHT - (compact ? 16 + 2 * bodies.size() : 0);
 		int x = left() + 10;
 		for (int i = 0; i < bodies.size(); i++) {
 			int index = i;
-			addRenderableWidget(new Hit(x, listY() + 2 + i * ROW, WIDTH - 20, ROW,
+			addRenderableWidget(new Hit(x, listY() + 2 + i * rowHeight, WIDTH - 20, rowHeight,
 					Component.translatable(bodies.get(i).translationKey()), () -> select(index)));
 		}
 		addRenderableWidget(new Hit(launchX(), launchY(), 94, 18,
@@ -195,7 +220,7 @@ public class NavigationScreen extends Screen {
 	}
 
 	private int top() {
-		return Math.max(0, (height - HEIGHT) / 2);
+		return Math.max(0, (height - panelHeight) / 2);
 	}
 
 	private long now() {
@@ -218,7 +243,7 @@ public class NavigationScreen extends Screen {
 	}
 
 	private int listY() {
-		return mapY() + 44;
+		return mapY() + mapHeight + 8;
 	}
 
 	private int launchX() {
@@ -226,7 +251,7 @@ public class NavigationScreen extends Screen {
 	}
 
 	private int launchY() {
-		return top() + HEIGHT - 26;
+		return top() + panelHeight - 26;
 	}
 
 	@Override
@@ -234,11 +259,11 @@ public class NavigationScreen extends Screen {
 		super.extractRenderState(g, mouseX, mouseY, partialTick);
 		int l = left();
 		int t = top();
-		ShipPanel.panel(g, font, l, t, WIDTH, HEIGHT, title, Component.translatable("screen.intersolarsystem.nav.engine",
+		ShipPanel.panel(g, font, l, t, WIDTH, panelHeight, title, Component.translatable("screen.intersolarsystem.nav.engine",
 				engineTier, TravelMath.multiplier(engineTier)));
-		drawMap(g, l + 10, mapY(), WIDTH - 20, 36, partialTick);
+		drawMap(g, l + 10, mapY(), WIDTH - 20, mapHeight, partialTick);
 		drawList(g, l + 10, listY(), mouseX, mouseY);
-		drawDetails(g, l + 10, listY() + bodies.size() * ROW + 10);
+		drawDetails(g, l + 10, listY() + bodies.size() * rowHeight + 10);
 		if (message != null) {
 			// Up to two lines left of the launch button.
 			List<String> lines = wrap(message.getString(), launchX() - l - 16);
@@ -247,7 +272,7 @@ public class NavigationScreen extends Screen {
 			}
 		}
 		String build = "v" + version;
-		g.text(font, build, l + WIDTH - 12 - font.width(build), mapY() + 27, 0xFF5C646B);
+		g.text(font, build, l + WIDTH - 12 - font.width(build), mapY() + mapHeight - 9, 0xFF5C646B);
 		boolean launchable = launchable(bodies.get(selected));
 		ShipPanel.button(g, font, launchX(), launchY(), 94, 18,
 				Component.translatable("screen.intersolarsystem.nav.launch"),
@@ -304,18 +329,18 @@ public class NavigationScreen extends Screen {
 
 	private void drawList(GuiGraphicsExtractor g, int x, int y, int mouseX, int mouseY) {
 		int w = WIDTH - 20;
-		ShipPanel.display(g, x, y, w, bodies.size() * ROW + 4);
+		ShipPanel.display(g, x, y, w, bodies.size() * rowHeight + 4);
 		for (int i = 0; i < bodies.size(); i++) {
 			CelestialBody b = bodies.get(i);
-			int ry = y + 2 + i * ROW;
-			boolean hover = ShipPanel.inside(mouseX, mouseY, x, ry, w, ROW);
+			int ry = y + 2 + i * rowHeight;
+			boolean hover = ShipPanel.inside(mouseX, mouseY, x, ry, w, rowHeight);
 			if (i == selected) {
-				g.fill(x + 1, ry, x + w - 1, ry + ROW, 0xFF1F3A2C);
+				g.fill(x + 1, ry, x + w - 1, ry + rowHeight, 0xFF1F3A2C);
 			} else if (hover) {
-				g.fill(x + 1, ry, x + w - 1, ry + ROW, 0xFF161D24);
+				g.fill(x + 1, ry, x + w - 1, ry + rowHeight, 0xFF161D24);
 			}
-			g.fill(x + 4, ry + 4, x + 9, ry + 9, COLOURS.getOrDefault(b.id(), 0xFFFFFFFF));
-			g.text(font, Component.translatable(b.translationKey()), x + 13, ry + 3, ShipPanel.TEXT);
+			g.fill(x + 4, ry + rowHeight / 2 - 2, x + 9, ry + rowHeight / 2 + 3, COLOURS.getOrDefault(b.id(), 0xFFFFFFFF));
+			g.text(font, Component.translatable(b.translationKey()), x + 13, ry + (rowHeight - 8) / 2 + 1, ShipPanel.TEXT);
 			Component status = Component.translatable("screen.intersolarsystem.nav.status." + b.status().name()
 					.toLowerCase(java.util.Locale.ROOT));
 			int statusColour = switch (b.status()) {
@@ -323,13 +348,13 @@ public class NavigationScreen extends Screen {
 				case FLYBY -> ShipPanel.reachableColour(ShipNavigation.reachable(b, here));
 				case LOCKED -> 0xFF6B737A;
 			};
-			g.text(font, status, x + 118, ry + 3, statusColour);
+			g.text(font, status, x + 118, ry + (rowHeight - 8) / 2 + 1, statusColour);
 			if (!b.id().equals(here) && b.status() != CelestialBody.Status.LOCKED) {
 				String time = TravelMath.formatDuration(legTicks(b));
-				g.text(font, time, x + w - 4 - font.width(time), ry + 3, ShipPanel.TEXT);
+				g.text(font, time, x + w - 4 - font.width(time), ry + (rowHeight - 8) / 2 + 1, ShipPanel.TEXT);
 			} else if (b.transferDays() > 0 && b.status() == CelestialBody.Status.LOCKED) {
 				String time = TravelMath.formatDuration(TravelMath.oneWayTicks(b, engineTier, now()));
-				g.text(font, time, x + w - 4 - font.width(time), ry + 3, ShipPanel.TEXT);
+				g.text(font, time, x + w - 4 - font.width(time), ry + (rowHeight - 8) / 2 + 1, ShipPanel.TEXT);
 			}
 		}
 	}

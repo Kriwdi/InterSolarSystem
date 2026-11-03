@@ -18,6 +18,12 @@ public final class ShipPanel {
 	private static final int STRIPE_BLACK = 0xFF1E1F21;
 	private static final int RIVET = 0xFF8D959C;
 
+	/**
+	 * The left mouse button. Minecraft 26.x numbers mouse buttons from 1 (SDL), not from 0 like GLFW did: checking for 0
+	 * made every click in the ship's screens do nothing.
+	 */
+	public static final int LEFT_BUTTON = 1;
+
 	private ShipPanel() {
 	}
 
