@@ -1,8 +1,6 @@
 {
-  "type": "minecraft:jigsaw",
+  "type": "intersolarsystem:flat_site",
   "biomes": "#intersolarsystem:has_structure/seed_bank",
-  "max_distance_from_center": 80,
-  "size": 1,
   "spawn_overrides": {
     "ambient": {
       "bounding_box": "full",
@@ -37,12 +35,10 @@
       "spawns": []
     }
   },
-  "start_height": {
-    "absolute": -1
-  },
-  "start_pool": "intersolarsystem:seed_bank",
   "step": "surface_structures",
   "terrain_adaptation": "beard_box",
-  "use_expansion_hack": false,
-  "project_start_to_heightmap": "WORLD_SURFACE_WG"
+  "layout": "intersolarsystem:seed_bank_layout",
+  "ground_offset": 0,
+  "clear_height": 16,
+  "blend": 8
 }

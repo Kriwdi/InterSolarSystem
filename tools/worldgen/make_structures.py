@@ -998,6 +998,8 @@ NO_MOBS = {c: {"bounding_box": "full", "spawns": []} for c in
 
 # Structures that only generate on level ground: (sample radius, allowed height difference, ground level above the
 # lowest block, how far above the ground leftover terrain is removed).
+# Things that fell out of the sky or lie half buried: no clearing above them, only a short blend.
+CRASH_SITES = {"cargo_capsule", "crashed_satellite", "rocket_stage", "whale_skeleton", "dry_shipwreck"}
 FLAT = {"airport": (110, 12, 0, 24), "hospital": (48, 12, 6, 24), "dead_city": (64, 18, 0, 24),
         "verdant_lab": (56, 12, 9, 24)}
 
@@ -1012,20 +1014,26 @@ RINGS = {"oasis_refuge": (8, 16, 4), "colony_frozen": (3, 20, 3), "colony_overgr
 
 
 def structure(name, pool_name, biomes, spacing, separation, salt, depth=0, size=1, adaptation="beard_thin",
-              step="surface_structures", project=True, distance=80):
+              step="surface_structures", project=True, distance=80, ground_offset=0):
     data = {"type": "minecraft:jigsaw", "biomes": "#" + NS + "has_structure/" + name,
             "max_distance_from_center": distance, "size": size, "spawn_overrides": NO_MOBS,
             "start_height": {"absolute": depth}, "start_pool": NS + pool_name, "step": step,
             "terrain_adaptation": adaptation, "use_expansion_hack": False}
     if project:
         data["project_start_to_heightmap"] = "WORLD_SURFACE_WG"
-    if name in FLAT:
-        # Big ruins: the jigsaw layout is wrapped in a flat-site check (see FlatSiteStructure.java).
-        radius, variation, ground_offset, clear_height = FLAT[name]
+    if adaptation != "none" and step == "surface_structures":
+        # Every surface ruin is wrapped (see FlatSiteStructure.java): the flattest spot for the big ones, clearing,
+        # foundations under overhangs and terrain sloping up to the edges.
+        radius, variation, offset, clear_height = FLAT.get(name, (0, 0, ground_offset, 16))
+        if name in CRASH_SITES:
+            clear_height = 0
         write(f"intersolarsystem/worldgen/structure/{name}_layout.json", data)
         data = {"type": NS + "flat_site", "biomes": data["biomes"], "spawn_overrides": NO_MOBS, "step": step,
-                "terrain_adaptation": adaptation, "layout": NS + name + "_layout", "check_radius": radius,
-                "max_variation": variation, "ground_offset": ground_offset, "clear_height": clear_height}
+                "terrain_adaptation": adaptation, "layout": NS + name + "_layout", "ground_offset": offset,
+                "clear_height": clear_height, "blend": 4 if name in CRASH_SITES else 8}
+        if variation:
+            data["check_radius"] = radius
+            data["max_variation"] = variation
     if name in RINGS:
         # Guaranteed: a fixed number of sites on rings around the world centre, each moved into a preferred biome
         # where one is near (otherwise it stands in any biome). No random sites on top.
@@ -1093,7 +1101,8 @@ def main():
         b = builder()
         sizes[name] = b.save(name)
         single_pool(name, name)
-        structure(name, name, biomes, spacing, sep, salt, depth, adaptation=adaptation)
+        ground = -min(p[1] for p in b.blocks)  # the ground layer is y = 0 in the builder
+        structure(name, name, biomes, spacing, sep, salt, depth, adaptation=adaptation, ground_offset=ground)
     import city_structures
     for rel, b in city_structures.city_pieces().items():
         b.clear_above(10)
@@ -1120,7 +1129,7 @@ def main():
     sizes["verdant_lab"] = b.save("verdant_lab")
     single_pool("verdant_lab", "verdant_lab")
     structure("verdant_lab", "verdant_lab", ["acid_swamp", "petrified_forest", "abandoned_farmland"], 64, 24, 70041,
-              -10, adaptation="beard_box")
+              -10, adaptation="beard_box", ground_offset=9)
     loot_tables()
     for k, v in sizes.items():
         print(f"{k:28s} {v}")

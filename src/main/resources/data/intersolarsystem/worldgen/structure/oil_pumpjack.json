@@ -1,8 +1,6 @@
 {
-  "type": "minecraft:jigsaw",
+  "type": "intersolarsystem:flat_site",
   "biomes": "#intersolarsystem:has_structure/oil_pumpjack",
-  "max_distance_from_center": 80,
-  "size": 1,
   "spawn_overrides": {
     "ambient": {
       "bounding_box": "full",
@@ -37,12 +35,10 @@
       "spawns": []
     }
   },
-  "start_height": {
-    "absolute": 0
-  },
-  "start_pool": "intersolarsystem:oil_pumpjack",
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin",
-  "use_expansion_hack": false,
-  "project_start_to_heightmap": "WORLD_SURFACE_WG"
+  "layout": "intersolarsystem:oil_pumpjack_layout",
+  "ground_offset": 0,
+  "clear_height": 16,
+  "blend": 8
 }

@@ -38,9 +38,10 @@
   "step": "surface_structures",
   "terrain_adaptation": "beard_box",
   "layout": "intersolarsystem:verdant_lab_layout",
-  "check_radius": 56,
-  "max_variation": 12,
   "ground_offset": 9,
   "clear_height": 24,
+  "blend": 8,
+  "check_radius": 56,
+  "max_variation": 12,
   "guaranteed": true
 }

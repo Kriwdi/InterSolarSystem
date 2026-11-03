@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.pieces.PiecesContainer;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
@@ -29,20 +30,31 @@ import hu.kriwdi.intersolarsystem.content.ModBlocks;
 import hu.kriwdi.intersolarsystem.core.ModIds;
 
 /**
- * A big ruin that needs level ground (the airport, the hospital complex, the megacity). Before the layout (an ordinary
- * jigsaw structure) is placed, the terrain around the chunk is sampled on a grid: if the surface varies by more than
- * {@code max_variation} blocks within {@code check_radius}, the site is skipped. Terrain adaptation can only shave a
- * few blocks off a hill, so a runway on a hillside would end up buried.
+ * Every surface ruin of the dead Earth is wrapped in this: the layout (an ordinary jigsaw structure) does the placing,
+ * this makes it sit in the landscape.
+ *
+ * <ul>
+ * <li><b>Site choice</b> (optional, {@code max_variation} &gt; 0): the flattest spot within 8 chunks is used; a site too
+ * hilly everywhere is skipped unless the structure is {@code guaranteed}.</li>
+ * <li><b>Clearing:</b> natural terrain left above the ruin's ground level inside its pieces is removed (up to
+ * {@code clear_height}), so nothing is buried by a hill the terrain adaptation could not shave off.</li>
+ * <li><b>Foundations:</b> wherever a piece's ground layer hangs over a dip, its own ground block is continued down to
+ * the terrain, so no ruin floats.</li>
+ * <li><b>Blending:</b> within {@code blend} blocks of the ruin the terrain slopes up or down to its ground level with
+ * the column's own natural blocks, instead of ending in a cliff or a trench.</li>
+ * </ul>
  */
 public final class FlatSiteStructure extends Structure {
 	public static final MapCodec<FlatSiteStructure> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 			settingsCodec(i),
 			Structure.CODEC.fieldOf("layout").forGetter(s -> s.layout),
-			Codec.intRange(16, 256).fieldOf("check_radius").forGetter(s -> s.checkRadius),
-			Codec.intRange(1, 64).fieldOf("max_variation").forGetter(s -> s.maxVariation),
+			Codec.intRange(0, 256).optionalFieldOf("check_radius", 0).forGetter(s -> s.checkRadius),
+			Codec.intRange(0, 64).optionalFieldOf("max_variation", 0).forGetter(s -> s.maxVariation),
 			Codec.intRange(0, 64).optionalFieldOf("ground_offset", 0).forGetter(s -> s.groundOffset),
 			Codec.intRange(0, 64).optionalFieldOf("clear_height", 24).forGetter(s -> s.clearHeight),
-			Codec.BOOL.optionalFieldOf("guaranteed", false).forGetter(s -> s.guaranteed))
+			Codec.BOOL.optionalFieldOf("guaranteed", false).forGetter(s -> s.guaranteed),
+			Codec.BOOL.optionalFieldOf("foundation", true).forGetter(s -> s.foundation),
+			Codec.intRange(0, 12).optionalFieldOf("blend", 8).forGetter(s -> s.blend))
 			.apply(i, FlatSiteStructure::new));
 
 	public static final StructureType<FlatSiteStructure> TYPE = () -> CODEC;
@@ -50,6 +62,8 @@ public final class FlatSiteStructure extends Structure {
 	/** Chunk offsets tried around a candidate (5 x 5 spots, up to 8 chunks away), the candidate itself first. */
 	private static final int[] OFFSETS = {0, -4, 4, -8, 8};
 	private static final int SEARCH_GRID = OFFSETS.length;
+	/** How deep a foundation may reach before it gives up (a ruin over a canyon keeps its overhang). */
+	private static final int MAX_FOUNDATION = 40;
 
 	private final Holder<Structure> layout;
 	private final int checkRadius;
@@ -57,9 +71,11 @@ public final class FlatSiteStructure extends Structure {
 	private final int groundOffset;
 	private final int clearHeight;
 	private final boolean guaranteed;
+	private final boolean foundation;
+	private final int blend;
 
 	public FlatSiteStructure(StructureSettings settings, Holder<Structure> layout, int checkRadius, int maxVariation,
-			int groundOffset, int clearHeight, boolean guaranteed) {
+			int groundOffset, int clearHeight, boolean guaranteed, boolean foundation, int blend) {
 		super(settings);
 		this.layout = layout;
 		this.checkRadius = checkRadius;
@@ -67,19 +83,19 @@ public final class FlatSiteStructure extends Structure {
 		this.groundOffset = groundOffset;
 		this.clearHeight = clearHeight;
 		this.guaranteed = guaranteed;
+		this.foundation = foundation;
+		this.blend = blend;
 	}
 
 	public static void register() {
 		Registry.register(BuiltInRegistries.STRUCTURE_TYPE, ModIds.id("flat_site"), TYPE);
 	}
 
-	/**
-	 * Looks for the flattest spot within 8 chunks of the candidate chunk and builds the layout there.
-	 * A site too hilly everywhere is skipped, unless the structure is guaranteed (placed on rings so every world has
-	 * it): then it goes on the flattest spot found and {@link #afterPlace} clears what is left of the hill.
-	 */
 	@Override
 	protected Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
+		if (maxVariation <= 0) {
+			return layout.value().findValidGenerationPoint(context);
+		}
 		if (!context.couldValidBiomeExistOnTopOfChunkCenter()) {
 			return Optional.empty();
 		}
@@ -126,29 +142,98 @@ public final class FlatSiteStructure extends Structure {
 		return max - min;
 	}
 
-	/**
-	 * After the ruin is placed in a chunk: whatever natural terrain is left above its ground level (a hill the
-	 * terrain adaptation could not shave off) is removed, so nothing is buried. Only natural blocks are touched
-	 * (stone, dirt, sand, gravel, ores, dead trees, plants, the dead Earth's soils), never the ruin itself.
-	 */
 	@Override
 	public void afterPlace(WorldGenLevel level, StructureManager structureManager, ChunkGenerator generator,
 			RandomSource random, BoundingBox chunkBox, ChunkPos chunkPos, PiecesContainer pieces) {
-		BoundingBox box = pieces.calculateBoundingBox();
-		int ground = box.minY() + groundOffset;
-		int top = Math.min(ground + clearHeight, level.getMaxY());
+		BoundingBox all = pieces.calculateBoundingBox();
+		int ground = all.minY() + groundOffset;
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 		BlockState air = Blocks.AIR.defaultBlockState();
-		for (int x = Math.max(box.minX(), chunkBox.minX()); x <= Math.min(box.maxX(), chunkBox.maxX()); x++) {
-			for (int z = Math.max(box.minZ(), chunkBox.minZ()); z <= Math.min(box.maxZ(), chunkBox.maxZ()); z++) {
-				for (int y = ground + 1; y <= top; y++) {
-					pos.set(x, y, z);
-					if (natural(level.getBlockState(pos))) {
-						level.setBlock(pos, air, 2);
+		for (int x = chunkBox.minX(); x <= chunkBox.maxX(); x++) {
+			for (int z = chunkBox.minZ(); z <= chunkBox.maxZ(); z++) {
+				boolean inside = false;
+				for (StructurePiece piece : pieces.pieces()) {
+					BoundingBox b = piece.getBoundingBox();
+					if (x >= b.minX() && x <= b.maxX() && z >= b.minZ() && z <= b.maxZ()) {
+						inside = true;
+						break;
+					}
+				}
+				if (inside) {
+					// Clear leftover terrain above the ground, then underpin the ground layer.
+					int top = Math.min(ground + clearHeight, level.getMaxY());
+					for (int y = ground + 1; y <= top; y++) {
+						pos.set(x, y, z);
+						if (natural(level.getBlockState(pos))) {
+							level.setBlock(pos, air, 2);
+						}
+					}
+					if (foundation) {
+						underpin(level, pos, x, ground, z);
+					}
+				} else if (blend > 0) {
+					int d = distanceOutside(all, x, z);
+					if (d > 0 && d <= blend) {
+						blendColumn(level, pos, x, z, ground, d);
 					}
 				}
 			}
 		}
+	}
+
+	/** Continues the ruin's ground block (or, under air, the nearest natural block) down to solid terrain. */
+	private static void underpin(WorldGenLevel level, BlockPos.MutableBlockPos pos, int x, int ground, int z) {
+		pos.set(x, ground, z);
+		BlockState top = level.getBlockState(pos);
+		if (top.isAir() || !top.isSolidRender()) {
+			return;
+		}
+		BlockState fill = top;
+		for (int y = ground - 1; y > ground - MAX_FOUNDATION && y > level.getMinY(); y--) {
+			pos.set(x, y, z);
+			BlockState below = level.getBlockState(pos);
+			if (!below.isAir() && !below.canBeReplaced() && below.getFluidState().isEmpty()) {
+				return;
+			}
+			level.setBlock(pos, fill, 2);
+		}
+	}
+
+	/** Slopes the natural terrain of one column towards the ruin's ground level ({@code d} blocks away from it). */
+	private void blendColumn(WorldGenLevel level, BlockPos.MutableBlockPos pos, int x, int z, int ground, int d) {
+		int surface = level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x, z) - 1;
+		double t = (double) d / (blend + 1);
+		t = t * t * (3 - 2 * t);
+		int target = (int) Math.round(ground + (surface - ground) * t);
+		if (surface > target) {
+			for (int y = surface; y > target; y--) {
+				pos.set(x, y, z);
+				if (natural(level.getBlockState(pos))) {
+					level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
+				}
+			}
+			// The cut keeps its surface: the block that was on top goes onto the new top.
+			pos.set(x, target, z);
+		} else if (surface < target) {
+			pos.set(x, surface, z);
+			BlockState top = level.getBlockState(pos);
+			if (!natural(top)) {
+				return;
+			}
+			BlockState under = top.is(BlockTags.DIRT) || top.is(BlockTags.SAND) ? top : Blocks.STONE.defaultBlockState();
+			for (int y = surface + 1; y <= target; y++) {
+				pos.set(x, y, z);
+				if (level.getBlockState(pos).isAir()) {
+					level.setBlock(pos, y == target ? top : under, 2);
+				}
+			}
+		}
+	}
+
+	private static int distanceOutside(BoundingBox b, int x, int z) {
+		int dx = Math.max(0, Math.max(b.minX() - x, x - b.maxX()));
+		int dz = Math.max(0, Math.max(b.minZ() - z, z - b.maxZ()));
+		return Math.max(dx, dz);
 	}
 
 	private static boolean natural(BlockState state) {
