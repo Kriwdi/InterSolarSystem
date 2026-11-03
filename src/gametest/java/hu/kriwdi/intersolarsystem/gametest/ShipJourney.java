@@ -20,7 +20,10 @@ import hu.kriwdi.intersolarsystem.ship.ShipFlightPhase;
 import hu.kriwdi.intersolarsystem.ship.ShipInteriorBuilder;
 import hu.kriwdi.intersolarsystem.ship.ShipInteriorLayout;
 import hu.kriwdi.intersolarsystem.ship.ShipNavigation;
+import hu.kriwdi.intersolarsystem.ship.ShipIncident;
+import hu.kriwdi.intersolarsystem.ship.ShipIncidentType;
 import hu.kriwdi.intersolarsystem.ship.ShipState;
+import hu.kriwdi.intersolarsystem.ship.ShipSubsystem;
 import hu.kriwdi.intersolarsystem.ship.ShipStateAccess;
 
 /**
@@ -74,6 +77,38 @@ public class ShipJourney implements FabricClientGameTest {
 			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 8.5, 4.5, 65.5, 20.5);
 			context.waitTicks(30);
 			context.takeScreenshot("45_toward_bridge");
+
+			// Incidents show where they happen: one of each kind, seen from the engine room's doorway.
+			game.getServer().runOnServer(server -> {
+				ShipState st = ShipStateAccess.get(server);
+				long t = server.overworld().getGameTime() + 6000;
+				st.addIncident(new ShipIncident(ShipSubsystem.ENGINE, ShipIncidentType.SHORT_CIRCUIT, t));
+				st.addIncident(new ShipIncident(ShipSubsystem.LANDING_LAUNCH, ShipIncidentType.OVERHEAT, t));
+				st.addIncident(new ShipIncident(ShipSubsystem.FUEL_ENERGY, ShipIncidentType.LEAK, t));
+				st.addIncident(new ShipIncident(ShipSubsystem.LIFE_SUPPORT, ShipIncidentType.FIRE, t));
+			});
+			context.waitTicks(30);
+			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 7.5, 4.5, 66, 0.5);
+			context.waitTicks(30);
+			context.takeScreenshot("44b_faults_in_the_engine_room");
+			// Put the fire out with the extinguisher (use key), then clear the rest.
+			game.getServer().runCommand("item replace entity @a weapon.mainhand with intersolarsystem:fire_extinguisher");
+			tp(game, "intersolarsystem:ship_interior", 5.5, 65, 6.5, 6.5, 65.3, 4.5);
+			context.waitTicks(5);
+			context.getInput().lookAt(new BlockPos(6, 65, 4));
+			context.waitTicks(5);
+			context.getInput().pressKey(options -> options.keyUse);
+			context.waitTicks(10);
+			int left = game.getServer().computeOnServer(server -> ShipStateAccess.get(server).hazards().incidents().size());
+			LOGGER.info("[JOURNEY] incidents after the extinguisher: {} (was 4)", left);
+			game.getServer().runOnServer(server -> {
+				ShipState st = ShipStateAccess.get(server);
+				for (ShipIncident i : java.util.List.copyOf(st.hazards().incidents())) {
+					st.resolveIncident(i);
+				}
+			});
+			game.getServer().runCommand("item replace entity @a weapon.mainhand with minecraft:air");
+			context.waitTicks(20);
 
 			// Sit down in the pilot's seat with the use key, look at the consoles, get up again with sneak.
 			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 14.5, 4.5, 65.4, 16.5);
@@ -143,6 +178,9 @@ public class ShipJourney implements FabricClientGameTest {
 			context.getInput().lookAt(new BlockPos(5, 65, 17));
 			context.waitTicks(5);
 			context.takeScreenshot("47b_pilot_controls");
+			String missing = game.getServer().computeOnServer(server -> String.valueOf(FlightControls.missing(server,
+					player(server), true).stream().map(c -> c.getString()).toList()));
+			LOGGER.info("[JOURNEY] checklist before the throttle: {}", missing);
 			for (int i = 0; i < 3; i++) {
 				context.getInput().pressKey(options -> options.keyUse);
 				context.waitTicks(6);
