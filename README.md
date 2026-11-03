@@ -48,9 +48,13 @@ Subsystems: `engine`, `fuel_energy`, `hull_armor`, `life_support`, `navigation_c
 
 ## Ship hatch and interior
 
-Place a `ship_hatch` block (creative: the InterSolarSystem tab, helmet icon) and right-click it to board the ship. You arrive in the sealed capsule room in the `intersolarsystem:ship_interior` dimension. Right-clicking the hatch in the wall leaves the ship again, next to the hatch you boarded through. If that hatch is gone, you are put at the world spawn. The hatch cannot be broken inside the ship.
+Where the ship stands, its **hull** stands in the world: indestructible plating with portholes, a cockpit windshield, thrusters at the stern and four landing legs, built around the hatch when the ship lands and taken away when it takes off (only creative players can remove plating by hand, while sneaking). Right-click the hatch to board. Boarding never launches the ship: only the navigation console does.
 
-The ship save (`ship_state.dat`) is format version 6; older saves are migrated when loaded (`ShipStateMigrations`).
+Inside is the **standard ship** (9 x 7 x 21, in the `intersolarsystem:ship_interior` dimension): the bridge in the bow behind a panoramic viewport and a skylight, with the navigation console, two diagnostic consoles and two seats; the living section with bunks, cargo barrels and chests, the repair station and portholes; the engine room with the reactor column. The walls, viewports, consoles and the hatch cannot be broken from inside (not even in creative), and anyone who ends up outside the room is put back. Interiors from older versions (the one-room capsule) are rebuilt as the standard ship the next time someone boards (what was inside the old capsule is lost).
+
+**The view out of the windows** follows the ship: dusty sky and ground on Earth, the Earth filling the view in orbit, the grey Moon with the Earth above it. During a journey the countdown beeps, the cabin shakes, the engines roar, the ground falls away, the planet shrinks behind and the destination grows ahead while the stars drift past.
+
+Placing a `ship_hatch` block (creative: the InterSolarSystem tab) still works to move the ship's door by hand.
 
 ## Flight
 
