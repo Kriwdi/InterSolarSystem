@@ -69,14 +69,14 @@ public class SceneScreenshots implements FabricClientGameTest {
 
 			// Skeletons in a row on a concrete plate (teleport first so the chunks are loaded).
 			context.runOnClient(client -> hu.kriwdi.intersolarsystem.client.lore.TapePlayer.stop());
-			game.getServer().runCommand("execute in minecraft:overworld run tp @a 15 156 -9 0 28");
+			game.getServer().runCommand("execute in minecraft:overworld run tp @a 15 225 -6 0 35");
 			context.waitTicks(60);
-			game.getServer().runCommand("fill 0 150 0 30 150 8 minecraft:gray_concrete");
-			game.getServer().runCommand("fill 0 151 0 30 155 8 minecraft:air");
+			game.getServer().runCommand("fill 0 219 0 30 219 8 minecraft:gray_concrete");
+			game.getServer().runCommand("fill 0 220 0 30 224 8 minecraft:air");
 			String[] skeletons = {"skeleton_lying", "skeleton_sitting", "skeleton_curled", "skeleton_suited", "dog_skeleton",
 					"cow_skeleton", "horse_skeleton"};
 			for (int i = 0; i < skeletons.length; i++) {
-				game.getServer().runCommand("setblock " + (2 + i * 4) + " 151 3 intersolarsystem:" + skeletons[i] + "[facing=north]");
+				game.getServer().runCommand("setblock " + (2 + i * 4) + " 220 3 intersolarsystem:" + skeletons[i] + "[facing=north]");
 			}
 			context.waitTicks(40);
 			context.takeScreenshot("06f_skeletons");
