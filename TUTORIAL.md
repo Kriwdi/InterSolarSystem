@@ -327,11 +327,18 @@ Kattints jobb gombbal a **navigációs konzolra** (a hídon). Megnyílik a **csi
 - **felül:** a Naprendszer sávja (bal oldalt a Nap);
 - **lista:** minden célpont az állapotával és az utazási idővel a hajód hajtóművével;
 - **alul:** a kiválasztott célpont részletei (indítási ablak, időtartam);
-- **INDÍTÁS** gomb: csak akkor zöld, ha a hajó le van szállva és indítható.
+- **IRÁNY BEÁLLÍTÁSA** gomb: csak akkor zöld, ha a hajó le van szállva és indítható.
 
-**Indulás:** kattints a célpontra a listában, majd az **INDÍTÁS** gombra. Billentyűzettel is megy: **fel/le nyíl** a választás, **Enter** az indítás. Ha a hajó nem tud elindulni (sérült, már úton van stb.), a gomb mellett piros szöveg írja ki, miért.
+### Indulás: az ellenőrzőlista
 
-Ugyanez parancsként, a hajóból: `/iss nav moon` (célok: `earth`, `earth_orbit`, `moon`). A térkép jobb alsó sarkában a mod verziója látszik (pl. `v1.0.0+build.70`), így látod, melyik build van fent.
+1. **Irány:** a navigációs konzolon kattints a célra, majd az **IRÁNY BEÁLLÍTÁSA** gombra (billentyűzettel: fel/le nyíl, Enter). Ha a hajó nem indulhat (sérült, már úton van stb.), piros szöveg írja ki, miért.
+2. **Kapcsolók:** a pilótaülés bal oldalán álló **kapcsolótáblán** kapcsold be mind a négyet. Mindegyik oda kattintva vált, ahol a kapcsoló van, balról jobbra: fő áramellátás, üzemanyag-szivattyúk, avionika, életfenntartás. Zöld = be, piros = ki.
+3. **Pilóta:** ülj be a **pilótaülésbe** (a középső ülés a navigációs konzol előtt).
+4. **Tolóerő:** a jobb oldali **tolóerőkart** kattintásonként egy fokkal told előre. Teljes tolóerőnél indul a visszaszámlálás; ha valami hiányzik, a kar visszaugrik, és a chat felsorolja, mi van még hátra.
+
+Leszállás után a kapcsolók kikapcsolnak, a kar visszaáll: minden útnak a lista az eleje.
+
+Vészmegoldás parancsként, a hajóból: `/iss nav moon` (célok: `earth`, `earth_orbit`, `moon`) azonnal indít, a lista nélkül. A térkép jobb alsó sarkában a mod verziója látszik (pl. `v1.0.0+build.70`), így látod, melyik build van fent.
 
 **Mi történik utána:**
 
@@ -358,7 +365,7 @@ Az idő a **játékidővel** telik: ha a szerver megáll, az út is. Az indítá
 
 | Esemény | Mi történik | Mit tehetsz |
 |---|---|---|
-| **Meteorzápor** | a burkolat és az érzékelők sérülhetnek | 30 mp-en belül kattints a navigációs konzolra, hogy kitérj (kevés üzemanyagba kerül) |
+| **Meteorraj** | 30 mp-ig sziklák zúdulnak a hajó felé; minden találat -5% burkolat, -1% navigáció | **kormányozz a pilótaülésből**: W fel, S le, A balra, D jobbra. A sziklákat látod az ablakon és a jobb felső **radaron** (piros: ütközőpályán). Pilóta nélkül a hajó sodródik; a navigációs konzolon a **robotpilóta** bekapcsolható (üzemanyagba kerül, és nem tér ki mindenből) |
 | **Napkitörés** | sérül az elektronika és az életfenntartás | – |
 | **Rendszerhiba** | incidens a legrosszabb alrendszeren | javítsd meg |
 | **Sodródó roncs** | zsákmány érkezik a zsilipen át | szedd fel |
@@ -452,6 +459,7 @@ A hajtómű szintje osztja az utazási időt:
 | `/iss ship set <alrendszer> <érték>` | operátor | alrendszer állapotának beállítása (tesztelésre) |
 | `/iss ship fly <x> <z>` | operátor | repülés egy földi koordinátára (a hajóból) |
 | `/iss ship engine <1-4>` | operátor | hajtómű-szint beállítása (tesztelésre) |
+| `/iss ship meteors` | operátor | meteorraj indítása repülés közben (tesztelésre) |
 
 Alrendszer nevek: `engine`, `fuel_energy`, `hull_armor`, `life_support`, `navigation_comms`, `stabilizer`, `landing_launch`, `cargo`.
 

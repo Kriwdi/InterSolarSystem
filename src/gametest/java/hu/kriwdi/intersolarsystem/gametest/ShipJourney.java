@@ -161,6 +161,7 @@ public class ShipJourney implements FabricClientGameTest {
 			context.takeScreenshot("49_liftoff");
 			// A meteor shower on the way: the pilot holds D (steer right) for a while.
 			game.getServer().runCommand("iss ship meteors");
+			context.getInput().lookAt(new BlockPos(4, 66, 21));
 			context.getInput().holdKeyFor(options -> options.keyRight, 60);
 			context.waitTicks(100);
 			context.takeScreenshot("50_meteor_shower");
