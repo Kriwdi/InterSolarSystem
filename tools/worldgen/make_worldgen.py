@@ -46,6 +46,8 @@ CLIMATE = [
     ("abandoned_farmland", [0.2, 0.55], [-0.1, 0.3], [-0.11, 0.3], [0.2, 1.0], FULL, 0.0),
     ("junk_mountains", [-0.45, 1.0], FULL, [0.03, 1.0], [-1.0, -0.38], FULL, 0.0),
     ("irradiated_crater", [-0.15, 1.0], [-0.35, 0.3], [0.03, 1.0], [-0.38, 1.0], [0.72, 1.0], 0.0),
+    # Hot and humid land is mostly acid swamp (with a penalty, so the narrow oasis box below wins inside itself).
+    ("acid_swamp", [0.55, 1.0], [0.45, 1.0], LAND, FULL, FULL, 0.12),
     # The oasis is small and rare: a narrow corner of the climate space.
     ("oasis", [0.7, 1.0], [0.6, 1.0], [0.0, 1.0], [0.2, 1.0], [-0.45, -0.32], 0.0),
 ]

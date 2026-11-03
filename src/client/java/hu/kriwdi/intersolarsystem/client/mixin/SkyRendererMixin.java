@@ -185,8 +185,10 @@ public abstract class SkyRendererMixin {
 				n -> intersolarsystem$buildGround(celestialsAtlas, n));
 		int indices = 6 * GROUND_TILES * GROUND_TILES;
 		Matrix4f matrix = applyCelestialBodyTransform(poseStack, depth, GROUND_TILE / 2.0F);
+		// The airless Moon's ground is lit harshly but its regolith is darker than the painting.
+		float light = "moon".equals(name) ? 0.72F : 0.95F;
 		GpuBufferSlice transforms = RenderSystem.getDynamicUniforms().writeTransform(matrix,
-				new Vector4f(1.0F, 1.0F, 1.0F, 1.0F));
+				new Vector4f(light, light, light, 1.0F));
 		renderPass.pushDebugGroup(() -> "InterSolarSystem ground");
 		renderPass.setPipeline(RenderSystem.getCompiledPipeline(RenderPipelines.CELESTIAL));
 		RenderSystem.bindDefaultUniforms(renderPass);
