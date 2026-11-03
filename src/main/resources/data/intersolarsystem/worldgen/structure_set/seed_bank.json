@@ -1,9 +1,11 @@
 {
   "placement": {
-    "type": "minecraft:random_spread",
-    "salt": 70006,
-    "separation": 16,
-    "spacing": 48
+    "type": "minecraft:concentric_rings",
+    "distance": 32,
+    "spread": 3,
+    "count": 3,
+    "preferred_biomes": "#intersolarsystem:preferred/seed_bank",
+    "salt": 70006
   },
   "structures": [
     {

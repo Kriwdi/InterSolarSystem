@@ -1,9 +1,11 @@
 {
   "placement": {
-    "type": "minecraft:random_spread",
-    "salt": 70030,
-    "separation": 14,
-    "spacing": 40
+    "type": "minecraft:concentric_rings",
+    "distance": 40,
+    "spread": 3,
+    "count": 6,
+    "preferred_biomes": "#intersolarsystem:preferred/dead_city",
+    "salt": 70030
   },
   "structures": [
     {

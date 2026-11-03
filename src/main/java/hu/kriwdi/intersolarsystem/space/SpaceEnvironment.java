@@ -38,6 +38,8 @@ public final class SpaceEnvironment {
 	public static final double FAILED_STABILISER_GRAVITY_FACTOR = -0.6;
 	public static final int STABILISER_FAILURE = 20;
 	public static final int LIFE_SUPPORT_MINIMUM = 20;
+	/** Width of the Earth (the overworld border) in blocks. */
+	public static final double EARTH_SIZE = 20_000.0;
 	/** Net air lost per tick in vacuum after vanilla's own refill of 4 (15 s from full to empty). */
 	private static final int AIR_LOSS = 5;
 	private static final Identifier GRAVITY_ID = ModIds.id("microgravity");
@@ -53,6 +55,13 @@ public final class SpaceEnvironment {
 			ServerLevel moon = server.getLevel(ShipDimensions.MOON);
 			if (moon != null) {
 				moon.getWorldBorder().setSize(MOON_SIZE);
+			}
+			// The Earth is 20 000 blocks across. Only a border still at the vanilla default is changed, so a size an
+			// admin set on purpose stays.
+			var earthBorder = server.overworld().getWorldBorder();
+			if (earthBorder.getSize() > EARTH_SIZE * 2) {
+				earthBorder.setCenter(0.0, 0.0);
+				earthBorder.setSize(EARTH_SIZE);
 			}
 		});
 	}

@@ -1,5 +1,15 @@
 {
   "values": [
-    "intersolarsystem:oasis"
+    "intersolarsystem:oasis",
+    "intersolarsystem:ash_desert",
+    "intersolarsystem:petrified_forest",
+    "intersolarsystem:frozen_megalopolis",
+    "intersolarsystem:acid_swamp",
+    "intersolarsystem:junk_mountains",
+    "intersolarsystem:salt_flats",
+    "intersolarsystem:deep_canyons",
+    "intersolarsystem:abandoned_farmland",
+    "intersolarsystem:oil_field",
+    "intersolarsystem:irradiated_crater"
   ]
 }

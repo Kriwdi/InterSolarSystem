@@ -998,6 +998,12 @@ NO_MOBS = {c: {"bounding_box": "full", "spawns": []} for c in
 # lowest block, how far above the ground leftover terrain is removed).
 FLAT = {"airport": (110, 12, 0, 24), "hospital": (48, 12, 6, 24), "dead_city": (64, 18, 0, 24)}
 
+# The Earth is 20 000 blocks across (1250 chunks). Rare and important ruins are placed on concentric rings so every
+# world has them: (count, ring distance in chunks (the first ring lies at about 4x this), sites in the first ring).
+RINGS = {"airport": (4, 48, 4), "hospital": (5, 36, 5), "dead_city": (6, 40, 3), "space_center": (3, 56, 3),
+         "seed_bank": (3, 32, 3), "dam": (3, 28, 3), "colony_overgrown": (3, 24, 3), "colony_burnt": (3, 26, 3),
+         "colony_frozen": (3, 22, 3), "oasis_refuge": (8, 16, 4)}
+
 
 def structure(name, pool_name, biomes, spacing, separation, salt, depth=0, size=1, adaptation="beard_thin",
               step="surface_structures", project=True, distance=80):
@@ -1014,10 +1020,21 @@ def structure(name, pool_name, biomes, spacing, separation, salt, depth=0, size=
         data = {"type": NS + "flat_site", "biomes": data["biomes"], "spawn_overrides": NO_MOBS, "step": step,
                 "terrain_adaptation": adaptation, "layout": NS + name + "_layout", "check_radius": radius,
                 "max_variation": variation, "ground_offset": ground_offset, "clear_height": clear_height}
+    if name in RINGS:
+        # Guaranteed: a fixed number of sites on rings around the world centre, each moved into a preferred biome
+        # where one is near (otherwise it stands in any land biome). No random sites on top.
+        count, distance, spread = RINGS[name]
+        if name in FLAT:
+            data["guaranteed"] = True
+        placement = {"type": "minecraft:concentric_rings", "distance": distance, "spread": spread, "count": count,
+                     "preferred_biomes": "#" + NS + "preferred/" + name, "salt": salt}
+        write(f"intersolarsystem/tags/worldgen/biome/preferred/{name}.json", {"values": [NS + b for b in biomes]})
+        biomes = list(dict.fromkeys(biomes + LAND))
+    else:
+        placement = {"type": "minecraft:random_spread", "salt": salt, "separation": separation, "spacing": spacing}
     write(f"intersolarsystem/worldgen/structure/{name}.json", data)
     write(f"intersolarsystem/worldgen/structure_set/{name}.json", {
-        "placement": {"type": "minecraft:random_spread", "salt": salt, "separation": separation, "spacing": spacing},
-        "structures": [{"structure": NS + name, "weight": 1}]})
+        "placement": placement, "structures": [{"structure": NS + name, "weight": 1}]})
     write(f"intersolarsystem/tags/worldgen/biome/has_structure/{name}.json", {"values": [NS + b for b in biomes]})
 
 

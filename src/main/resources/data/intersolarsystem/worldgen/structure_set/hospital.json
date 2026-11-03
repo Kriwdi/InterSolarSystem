@@ -1,9 +1,11 @@
 {
   "placement": {
-    "type": "minecraft:random_spread",
-    "salt": 70011,
-    "separation": 20,
-    "spacing": 56
+    "type": "minecraft:concentric_rings",
+    "distance": 36,
+    "spread": 5,
+    "count": 5,
+    "preferred_biomes": "#intersolarsystem:preferred/hospital",
+    "salt": 70011
   },
   "structures": [
     {

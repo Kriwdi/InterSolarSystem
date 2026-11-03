@@ -1,9 +1,11 @@
 {
   "placement": {
-    "type": "minecraft:random_spread",
-    "salt": 70022,
-    "separation": 14,
-    "spacing": 40
+    "type": "minecraft:concentric_rings",
+    "distance": 22,
+    "spread": 3,
+    "count": 3,
+    "preferred_biomes": "#intersolarsystem:preferred/colony_frozen",
+    "salt": 70022
   },
   "structures": [
     {

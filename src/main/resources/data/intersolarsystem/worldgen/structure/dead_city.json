@@ -41,5 +41,6 @@
   "check_radius": 64,
   "max_variation": 18,
   "ground_offset": 0,
-  "clear_height": 24
+  "clear_height": 24,
+  "guaranteed": true
 }

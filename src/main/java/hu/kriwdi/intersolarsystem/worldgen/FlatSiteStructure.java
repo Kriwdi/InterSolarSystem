@@ -41,59 +41,89 @@ public final class FlatSiteStructure extends Structure {
 			Codec.intRange(16, 256).fieldOf("check_radius").forGetter(s -> s.checkRadius),
 			Codec.intRange(1, 64).fieldOf("max_variation").forGetter(s -> s.maxVariation),
 			Codec.intRange(0, 64).optionalFieldOf("ground_offset", 0).forGetter(s -> s.groundOffset),
-			Codec.intRange(0, 64).optionalFieldOf("clear_height", 24).forGetter(s -> s.clearHeight))
+			Codec.intRange(0, 64).optionalFieldOf("clear_height", 24).forGetter(s -> s.clearHeight),
+			Codec.BOOL.optionalFieldOf("guaranteed", false).forGetter(s -> s.guaranteed))
 			.apply(i, FlatSiteStructure::new));
 
 	public static final StructureType<FlatSiteStructure> TYPE = () -> CODEC;
 
-	/** Samples per side of the grid (terrain height lookups are expensive: 5 x 5 at most per candidate). */
-	private static final int GRID = 5;
+	/** Chunk offsets tried around a candidate (5 x 5 spots, up to 8 chunks away), the candidate itself first. */
+	private static final int[] OFFSETS = {0, -4, 4, -8, 8};
+	private static final int SEARCH_GRID = OFFSETS.length;
 
 	private final Holder<Structure> layout;
 	private final int checkRadius;
 	private final int maxVariation;
 	private final int groundOffset;
 	private final int clearHeight;
+	private final boolean guaranteed;
 
 	public FlatSiteStructure(StructureSettings settings, Holder<Structure> layout, int checkRadius, int maxVariation,
-			int groundOffset, int clearHeight) {
+			int groundOffset, int clearHeight, boolean guaranteed) {
 		super(settings);
 		this.layout = layout;
 		this.checkRadius = checkRadius;
 		this.maxVariation = maxVariation;
 		this.groundOffset = groundOffset;
 		this.clearHeight = clearHeight;
+		this.guaranteed = guaranteed;
 	}
 
 	public static void register() {
 		Registry.register(BuiltInRegistries.STRUCTURE_TYPE, ModIds.id("flat_site"), TYPE);
 	}
 
+	/**
+	 * Looks for the flattest spot within 8 chunks of the candidate chunk and builds the layout there.
+	 * A site too hilly everywhere is skipped, unless the structure is guaranteed (placed on rings so every world has
+	 * it): then it goes on the flattest spot found and {@link #afterPlace} clears what is left of the hill.
+	 */
 	@Override
 	protected Optional<GenerationStub> findGenerationPoint(GenerationContext context) {
-		int cx = context.chunkPos().getMinBlockX() + 8;
-		int cz = context.chunkPos().getMinBlockZ() + 8;
 		if (!context.couldValidBiomeExistOnTopOfChunkCenter()) {
 			return Optional.empty();
 		}
-		int min = Integer.MAX_VALUE;
-		int max = Integer.MIN_VALUE;
-		int step = 2 * checkRadius / (GRID - 1);
-		for (int i = 0; i < GRID; i++) {
-			for (int j = 0; j < GRID; j++) {
-				// Centre and corners first: most hilly sites fail within the first few samples.
-				int dx = -checkRadius + ((i + 2) % GRID) * step;
-				int dz = -checkRadius + ((j + 2) % GRID) * step;
-				int y = context.chunkGenerator().getFirstOccupiedHeight(cx + dx, cz + dz, Heightmap.Types.WORLD_SURFACE_WG,
-						context.heightAccessor(), context.randomState());
-				min = Math.min(min, y);
-				max = Math.max(max, y);
-				if (max - min > maxVariation) {
-					return Optional.empty();
-				}
+		int chunkX = context.chunkPos().getMinBlockX() >> 4;
+		int chunkZ = context.chunkPos().getMinBlockZ() >> 4;
+		int bestVariation = Integer.MAX_VALUE;
+		int bestX = chunkX;
+		int bestZ = chunkZ;
+		for (int i = 0; i < SEARCH_GRID * SEARCH_GRID && bestVariation > 2; i++) {
+			// Start at the candidate itself, then spread outwards.
+			int ox = OFFSETS[i % SEARCH_GRID];
+			int oz = OFFSETS[i / SEARCH_GRID];
+			int variation = variation(context, ((chunkX + ox) << 4) + 8, ((chunkZ + oz) << 4) + 8, bestVariation);
+			if (variation < bestVariation) {
+				bestVariation = variation;
+				bestX = chunkX + ox;
+				bestZ = chunkZ + oz;
 			}
 		}
-		return layout.value().findValidGenerationPoint(context);
+		if (bestVariation > maxVariation && !guaranteed) {
+			return Optional.empty();
+		}
+		GenerationContext moved = new GenerationContext(context.registryAccess(), context.chunkGenerator(),
+				context.biomeSource(), context.climateSampler(), context.randomState(), context.structureTemplateManager(),
+				context.seed(), new ChunkPos(bestX, bestZ), context.heightAccessor(), context.validBiome());
+		return layout.value().findValidGenerationPoint(moved);
+	}
+
+	/** Height difference over a 3 x 3 grid spanning the check radius (stops early once it exceeds {@code limit}). */
+	private int variation(GenerationContext context, int cx, int cz, int limit) {
+		int min = Integer.MAX_VALUE;
+		int max = Integer.MIN_VALUE;
+		for (int i = 0; i < 9; i++) {
+			int dx = (i % 3 - 1) * checkRadius;
+			int dz = (i / 3 - 1) * checkRadius;
+			int y = context.chunkGenerator().getFirstOccupiedHeight(cx + dx, cz + dz, Heightmap.Types.WORLD_SURFACE_WG,
+					context.heightAccessor(), context.randomState());
+			min = Math.min(min, y);
+			max = Math.max(max, y);
+			if (max - min >= limit) {
+				return max - min;
+			}
+		}
+		return max - min;
 	}
 
 	/**

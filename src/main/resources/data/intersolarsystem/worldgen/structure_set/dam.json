@@ -1,9 +1,11 @@
 {
   "placement": {
-    "type": "minecraft:random_spread",
-    "salt": 70009,
-    "separation": 12,
-    "spacing": 36
+    "type": "minecraft:concentric_rings",
+    "distance": 28,
+    "spread": 3,
+    "count": 3,
+    "preferred_biomes": "#intersolarsystem:preferred/dam",
+    "salt": 70009
   },
   "structures": [
     {

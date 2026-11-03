@@ -3,6 +3,13 @@
     "intersolarsystem:salt_flats",
     "intersolarsystem:dried_seabed",
     "intersolarsystem:ash_desert",
-    "intersolarsystem:abandoned_farmland"
+    "intersolarsystem:abandoned_farmland",
+    "intersolarsystem:petrified_forest",
+    "intersolarsystem:frozen_megalopolis",
+    "intersolarsystem:acid_swamp",
+    "intersolarsystem:junk_mountains",
+    "intersolarsystem:deep_canyons",
+    "intersolarsystem:oil_field",
+    "intersolarsystem:irradiated_crater"
   ]
 }

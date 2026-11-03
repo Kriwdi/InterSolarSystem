@@ -1,9 +1,11 @@
 {
   "placement": {
-    "type": "minecraft:random_spread",
-    "salt": 70013,
-    "separation": 24,
-    "spacing": 64
+    "type": "minecraft:concentric_rings",
+    "distance": 48,
+    "spread": 4,
+    "count": 4,
+    "preferred_biomes": "#intersolarsystem:preferred/airport",
+    "salt": 70013
   },
   "structures": [
     {

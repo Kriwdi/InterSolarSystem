@@ -1,9 +1,11 @@
 {
   "placement": {
-    "type": "minecraft:random_spread",
-    "salt": 70003,
-    "separation": 24,
-    "spacing": 64
+    "type": "minecraft:concentric_rings",
+    "distance": 56,
+    "spread": 3,
+    "count": 3,
+    "preferred_biomes": "#intersolarsystem:preferred/space_center",
+    "salt": 70003
   },
   "structures": [
     {

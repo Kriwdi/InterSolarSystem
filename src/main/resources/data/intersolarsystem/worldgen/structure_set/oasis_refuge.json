@@ -1,9 +1,11 @@
 {
   "placement": {
-    "type": "minecraft:random_spread",
-    "salt": 70025,
-    "separation": 3,
-    "spacing": 10
+    "type": "minecraft:concentric_rings",
+    "distance": 16,
+    "spread": 4,
+    "count": 8,
+    "preferred_biomes": "#intersolarsystem:preferred/oasis_refuge",
+    "salt": 70025
   },
   "structures": [
     {

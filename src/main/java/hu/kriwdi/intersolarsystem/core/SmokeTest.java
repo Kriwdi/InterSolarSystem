@@ -197,14 +197,20 @@ public final class SmokeTest {
 		java.util.Map<String, String> structures = new java.util.TreeMap<>();
 		server.registryAccess().lookupOrThrow(net.minecraft.core.registries.Registries.STRUCTURE).listElements()
 				.filter(h -> h.key().identifier().getNamespace().equals(ModIds.MOD_ID))
+				.filter(h -> !h.key().identifier().getPath().endsWith("_layout"))
 				.forEach(h -> {
 					BlockPos at = earth.findNearestMapStructure(net.minecraft.core.HolderSet.direct(h), spawn, 100, false);
+					if (at == null) {
+						// Rare ones: anywhere inside the 20 000-block Earth (625 chunks from the centre).
+						at = earth.findNearestMapStructure(net.minecraft.core.HolderSet.direct(h), spawn, 640, false);
+					}
 					structures.put(h.key().identifier().getPath(), at == null ? "MISSING" : at.toShortString());
 				});
 		LOGGER.info("[SMOKETEST] Earth structures nearest to spawn: {}", structures);
+		LOGGER.info("[SMOKETEST] Earth border {}", earth.getWorldBorder().getSize());
 		long missing = structures.values().stream().filter("MISSING"::equals).count();
-		if (structures.size() < 20 || missing > structures.size() / 3) {
-			LOGGER.error("[SMOKETEST-FAIL] {} of {} structures not found within 1600 blocks", missing, structures.size());
+		if (structures.size() < 20 || missing > 0) {
+			LOGGER.error("[SMOKETEST-FAIL] {} of {} structures not found anywhere on the Earth", missing, structures.size());
 		}
 		if (earth.getGameRules().get(net.minecraft.world.level.gamerules.GameRules.SPAWN_PHANTOMS)) {
 			LOGGER.error("[SMOKETEST-FAIL] phantoms still spawn");
