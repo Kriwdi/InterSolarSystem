@@ -182,6 +182,18 @@ public final class SmokeTest {
 		if (!ores.keySet().stream().anyMatch(o -> o.startsWith("intersolarsystem:"))) {
 			LOGGER.error("[SMOKETEST-FAIL] no space ore around spawn");
 		}
+		java.util.Map<String, String> structures = new java.util.TreeMap<>();
+		server.registryAccess().lookupOrThrow(net.minecraft.core.registries.Registries.STRUCTURE).listElements()
+				.filter(h -> h.key().identifier().getNamespace().equals(ModIds.MOD_ID))
+				.forEach(h -> {
+					BlockPos at = earth.findNearestMapStructure(net.minecraft.core.HolderSet.direct(h), spawn, 100, false);
+					structures.put(h.key().identifier().getPath(), at == null ? "MISSING" : at.toShortString());
+				});
+		LOGGER.info("[SMOKETEST] Earth structures nearest to spawn: {}", structures);
+		long missing = structures.values().stream().filter("MISSING"::equals).count();
+		if (structures.size() < 20 || missing > structures.size() / 3) {
+			LOGGER.error("[SMOKETEST-FAIL] {} of {} structures not found within 1600 blocks", missing, structures.size());
+		}
 		if (earth.getGameRules().get(net.minecraft.world.level.gamerules.GameRules.SPAWN_PHANTOMS)) {
 			LOGGER.error("[SMOKETEST-FAIL] phantoms still spawn");
 		}

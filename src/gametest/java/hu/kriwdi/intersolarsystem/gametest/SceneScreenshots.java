@@ -5,9 +5,14 @@ import net.fabricmc.fabric.api.client.gametest.v1.context.ClientGameTestContext;
 import net.fabricmc.fabric.api.client.gametest.v1.context.TestSingleplayerContext;
 
 import net.minecraft.client.CameraType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 
 import hu.kriwdi.intersolarsystem.client.NavigationScreen;
+import hu.kriwdi.intersolarsystem.core.ModIds;
 import hu.kriwdi.intersolarsystem.client.repair.PressureScreen;
 import hu.kriwdi.intersolarsystem.client.repair.ValveScreen;
 import hu.kriwdi.intersolarsystem.client.repair.WiringScreen;
@@ -113,6 +118,41 @@ public class SceneScreenshots implements FabricClientGameTest {
 			game.getServer().runCommand("time set 53100");
 			context.waitTicks(40);
 			context.takeScreenshot("16_moon_night_sky");
+
+			// The dead Earth: every biome and the main structures, at noon.
+			game.getServer().runCommand("time set 6000");
+			game.getServer().runCommand("effect give @a minecraft:night_vision infinite 0 true");
+			for (var biome : hu.kriwdi.intersolarsystem.worldgen.DeadEarth.ALL) {
+				BlockPos at = game.getServer().computeOnServer(server -> {
+					ServerLevel earth = server.overworld();
+					var hit = earth.findClosestBiome3d(h -> h.is(biome), BlockPos.ZERO, 4000, 32, 64);
+					return hit == null ? null : MoonSites.surface(earth, hit.getFirst().getX(), hit.getFirst().getZ());
+				});
+				if (at == null) {
+					continue;
+				}
+				game.getServer().runCommand("execute in minecraft:overworld run tp @a " + at.getX() + " " + (at.getY() + 14)
+						+ " " + at.getZ() + " -45 28");
+				context.waitTicks(90);
+				context.takeScreenshot("20_earth_" + biome.identifier().getPath());
+			}
+			for (String name : new String[] {"dead_city", "space_center", "hospital", "seed_bank", "colony_overgrown",
+					"oil_pumpjack", "dry_shipwreck", "terraformer", "farmhouse", "radio_tower", "airport", "barracks"}) {
+				BlockPos at = game.getServer().computeOnServer(server -> {
+					ServerLevel earth = server.overworld();
+					var structure = server.registryAccess().lookupOrThrow(Registries.STRUCTURE)
+							.getOrThrow(ResourceKey.create(Registries.STRUCTURE, ModIds.id(name)));
+					BlockPos found = earth.findNearestMapStructure(HolderSet.direct(structure), BlockPos.ZERO, 120, false);
+					return found == null ? null : MoonSites.surface(earth, found.getX() - 18, found.getZ() - 18);
+				});
+				if (at == null) {
+					continue;
+				}
+				game.getServer().runCommand("execute in minecraft:overworld run tp @a " + at.getX() + " " + (at.getY() + 12)
+						+ " " + at.getZ() + " -45 24");
+				context.waitTicks(90);
+				context.takeScreenshot("30_structure_" + name);
+			}
 		}
 	}
 
