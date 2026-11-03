@@ -1026,14 +1026,14 @@ def structure(name, pool_name, biomes, spacing, separation, salt, depth=0, size=
                 "max_variation": variation, "ground_offset": ground_offset, "clear_height": clear_height}
     if name in RINGS:
         # Guaranteed: a fixed number of sites on rings around the world centre, each moved into a preferred biome
-        # where one is near (otherwise it stands in any land biome). No random sites on top.
+        # where one is near (otherwise it stands in any biome). No random sites on top.
         count, distance, spread = RINGS[name]
         if name in FLAT:
             data["guaranteed"] = True
         placement = {"type": "minecraft:concentric_rings", "distance": distance, "spread": spread, "count": count,
                      "preferred_biomes": "#" + NS + "preferred/" + name, "salt": salt}
         write(f"intersolarsystem/tags/worldgen/biome/preferred/{name}.json", {"values": [NS + b for b in biomes]})
-        biomes = list(dict.fromkeys(biomes + LAND))
+        biomes = list(dict.fromkeys(biomes + ALL))
     else:
         placement = {"type": "minecraft:random_spread", "salt": salt, "separation": separation, "spacing": spacing}
     write(f"intersolarsystem/worldgen/structure/{name}.json", data)

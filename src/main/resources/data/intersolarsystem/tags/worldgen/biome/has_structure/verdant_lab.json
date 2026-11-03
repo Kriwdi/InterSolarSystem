@@ -9,6 +9,8 @@
     "intersolarsystem:salt_flats",
     "intersolarsystem:deep_canyons",
     "intersolarsystem:oil_field",
-    "intersolarsystem:irradiated_crater"
+    "intersolarsystem:irradiated_crater",
+    "intersolarsystem:dried_seabed",
+    "intersolarsystem:oasis"
   ]
 }
