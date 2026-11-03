@@ -212,7 +212,7 @@ A struktúrák ládáiban és hordóiban kimentett technológia, élelem és ala
 A romokban megtudhatod, mi történt a Földdel (Halcyon, a Szürke Virágzás, a Hamutüdő, a Rövid Háború, az Exodus).
 
 - **Feljegyzés** (kézírásos cetli): jobb klikk kézben → lapozható olvasó (nyilak, görgő, ←/→ billentyűk).
-- **Adatszalag**: jobb klikk → lejátszás; a hang (sistergés, kattanás) mellett felirat jelenik meg a képernyő alján.
+- **Adatszalag**: csak **adatterminálban vagy rádióban** játszható le: kézben a szalaggal kattints jobb gombbal a gépre. A gépből szól (a közelben mindenki hallja): kattanás, zúgás, a beszélők torzított rádióhangja és a helyszíni effektek. Közben felirat jelenik meg a képernyő alján. A kezdő hordóban van egy **rádió** és egy szalag.
 - **Műszaki kézikönyv**: a hajó minden rendszeréhez (navigáció, indítási lista, kitérő manőverek, javítás, reaktor és
   hűtés, űrruha, diagnosztika, hajtómű-fejlesztés, farm). A kezdő hordóban nyolc van, a hajtómű-kézikönyv űrközpontokban.
 - **Adatterminál**: a bunkerekben, laborokban, kórházban, rádiótoronyban, magbankban, kolóniákban, oázisban és
@@ -445,14 +445,16 @@ Az idő a **játékidővel** telik: ha a szerver megáll, az út is. Az indítá
 
 ## 11. Űrruha és oxigén
 
-**Vákuum** van a pályán és a Holdon. A **teljes űrruha** (sisak, ruha, nadrág, csizma) nélkül kb. 15 másodperc alatt elfogy a levegőd, utána fulladsz.
+**Vákuum** van a pályán és a Holdon. Itt nincs vízalatti fulladás és nincsenek buborékok, helyette:
 
-- Az **űrruha (mellrész) az oxigéntartály**: vákuumban másodpercenként egy pontot fogy, teli állapotban kb. 10 percig bírja.
-- **A hajóban újratöltődik**, ha az életfenntartás legalább 20%-on van.
-- A gyorsgombsor fölött **O₂-jelző** mutatja a szintet. Pályán tömítetlen ruhában a HUD vákuumfigyelmeztetést villog.
+- **Hipoxia:** teljes ruhában, de üres tartállyal kb. 15 másodpercig bírod. A kép széle elsötétül és a szívveréssel együtt lüktet, zihálsz, lelassulsz, végül sebződsz („kifogyott az oxigénből”).
+- **Dekompresszió:** ha hiányzik egy ruhadarab (pl. a sisak), pár másodperc alatt elfogy a levegőd. A kép bederesedik és villódzik, cseng a füled, és gyorsan sebződsz.
+- Az **űrruha (mellrész) az oxigéntartály**: vákuumban másodpercenként egy pontot fogy, teli állapotban kb. 10 percig bírja. **A hajóban újratöltődik**, ha az életfenntartás legalább 20%-on van.
+- **Sisak-kijelző:** sisakban a bal oldali ív az oxigén, a jobb oldali a ruha tömítése és nyomása. Lent figyelmeztetés jelenik meg (SZIVÁRGÁS, KEVÉS O2, HIPOXIA).
+- **Sérülő ruha:** egy erősebb ütés (3+ sebzés) 30% eséllyel kilyukasztja a ruhát. Ilyenkor sziszeg, és négyszer olyan gyorsan fogy az oxigén. **Tömítőhabbal** (jobb klikk a kezedben) befoltozod.
 - A teljes ruha a Földön **a sav és a sugárzás ellen is véd**.
 - **Sisakban nem lehet enni és inni.** Előbb vedd le (a hajóban vagy ahol van levegő).
-- **Hangok:** a ruhában hallod a saját légzésedet; ha 20% alá fogy az oxigén, a ruha sípolva riaszt; levegő nélkül fulladozol.
+- **Hangok:** a ruhában hallod a saját légzésedet; ha 20% alá fogy az oxigén, a ruha sípolva riaszt.
 
 ---
 
