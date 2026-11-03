@@ -63,6 +63,9 @@ public class ShipJourney implements FabricClientGameTest {
 			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 15.5, 4.5, 67, 20.5);
 			context.waitTicks(40);
 			context.takeScreenshot("43_bridge_view_earth");
+			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 17.5, 4.5, 63.5, 21.5);
+			context.waitTicks(20);
+			context.takeScreenshot("43b_bridge_looking_down");
 			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 9.5, 4.5, 65.5, 1.5);
 			context.waitTicks(30);
 			context.takeScreenshot("44_toward_engine_room");
@@ -105,6 +108,9 @@ public class ShipJourney implements FabricClientGameTest {
 			waitForPhase(context, game, ShipFlightPhase.LANDED);
 			context.waitTicks(40);
 			context.takeScreenshot("53_moon_through_window");
+			tp(game, "intersolarsystem:ship_interior", 4.5, 65, 17.5, 4.5, 63.5, 21.5);
+			context.waitTicks(20);
+			context.takeScreenshot("53b_moon_ground_through_window");
 			String landed = game.getServer().computeOnServer(
 					server -> String.valueOf(ShipStateAccess.get(server).landingSite()));
 			LOGGER.info("[JOURNEY] landed: {}", landed);

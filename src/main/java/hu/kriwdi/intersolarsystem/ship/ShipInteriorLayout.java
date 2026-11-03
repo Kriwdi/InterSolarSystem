@@ -86,14 +86,14 @@ public final class ShipInteriorLayout {
 			return skylight ? Piece.VIEWPORT : light ? Piece.LIGHT : Piece.HULL_PANEL;
 		}
 		if (end && z == SIZE_Z - 1) {
-			// Panoramic viewport across the nose, with a sill below.
-			return y >= 2 && x >= 1 && x <= SIZE_X - 2 ? Piece.VIEWPORT : Piece.HULL_PANEL;
+			// Panoramic viewport across the nose, down to the floor: the ground shows when you look down.
+			return x >= 1 && x <= SIZE_X - 2 ? Piece.VIEWPORT : Piece.HULL_PANEL;
 		}
 		if (end) {
 			return y == 2 && (x == 2 || x == 6) ? Piece.ENGINE_PORT : Piece.HULL_PANEL;
 		}
 		if (side) {
-			boolean bridgeWindow = z >= 16 && z <= 19 && y >= 2 && y <= 4;
+			boolean bridgeWindow = z >= 16 && z <= 19 && y >= 1 && y <= 4;
 			boolean porthole = y == 3 && (z == 7 || z == 11 || z == 13 && x == SIZE_X - 1 || z == 2);
 			return bridgeWindow || porthole ? Piece.VIEWPORT : Piece.HULL_PANEL;
 		}
