@@ -11,6 +11,7 @@ public final class ModWorldgen {
 	}
 
 	public static void initialize() {
+		FlatSiteStructure.register();
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, ModIds.id("lunar_surface"), LunarSurfaceFeature.CODEC);
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, ModIds.id("crater"), CraterFeature.CODEC);
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, ModIds.id("dead_tree"), DeadTreeFeature.CODEC);

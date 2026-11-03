@@ -994,6 +994,10 @@ NO_MOBS = {c: {"bounding_box": "full", "spawns": []} for c in
             "water_creature")}
 
 
+# Structures that only generate on level ground: (sample radius, allowed height difference).
+FLAT = {"airport": (120, 8), "hospital": (56, 8), "dead_city": (96, 12)}
+
+
 def structure(name, pool_name, biomes, spacing, separation, salt, depth=0, size=1, adaptation="beard_thin",
               step="surface_structures", project=True, distance=80):
     data = {"type": "minecraft:jigsaw", "biomes": "#" + NS + "has_structure/" + name,
@@ -1002,6 +1006,13 @@ def structure(name, pool_name, biomes, spacing, separation, salt, depth=0, size=
             "terrain_adaptation": adaptation, "use_expansion_hack": False}
     if project:
         data["project_start_to_heightmap"] = "WORLD_SURFACE_WG"
+    if name in FLAT:
+        # Big ruins: the jigsaw layout is wrapped in a flat-site check (see FlatSiteStructure.java).
+        radius, variation = FLAT[name]
+        write(f"intersolarsystem/worldgen/structure/{name}_layout.json", data)
+        data = {"type": NS + "flat_site", "biomes": data["biomes"], "spawn_overrides": NO_MOBS, "step": step,
+                "terrain_adaptation": adaptation, "layout": NS + name + "_layout", "check_radius": radius,
+                "max_variation": variation}
     write(f"intersolarsystem/worldgen/structure/{name}.json", data)
     write(f"intersolarsystem/worldgen/structure_set/{name}.json", {
         "placement": {"type": "minecraft:random_spread", "salt": salt, "separation": separation, "spacing": spacing},
@@ -1036,7 +1047,7 @@ SINGLES = [
     ("barracks", barracks, ["ash_desert", "deep_canyons", "petrified_forest", "junk_mountains"], 36, 12, 70012, 0,
      "beard_thin"),
     ("airport", lambda: __import__("big_structures").airport_complex(),
-     ["salt_flats", "dried_seabed"], 72, 28, 70013, -1, "beard_box"),
+     ["salt_flats", "dried_seabed", "ash_desert", "abandoned_farmland"], 64, 24, 70013, -1, "beard_box"),
     ("oil_pumpjack", oil_pumpjack, ["oil_field"], 12, 4, 70014, 0, "beard_thin"),
     ("farmhouse", farmhouse, ["abandoned_farmland"], 16, 5, 70015, 0, "beard_thin"),
     ("cargo_capsule", cargo_capsule, ALL, 20, 6, 70016, -1, "beard_thin"),
