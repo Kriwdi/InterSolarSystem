@@ -995,7 +995,7 @@ NO_MOBS = {c: {"bounding_box": "full", "spawns": []} for c in
 
 
 # Structures that only generate on level ground: (sample radius, allowed height difference).
-FLAT = {"airport": (120, 8), "hospital": (56, 8), "dead_city": (96, 12)}
+FLAT = {"airport": (110, 12), "hospital": (48, 12), "dead_city": (64, 18)}
 
 
 def structure(name, pool_name, biomes, spacing, separation, salt, depth=0, size=1, adaptation="beard_thin",

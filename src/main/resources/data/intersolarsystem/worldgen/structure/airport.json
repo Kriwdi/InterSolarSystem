@@ -38,6 +38,6 @@
   "step": "surface_structures",
   "terrain_adaptation": "beard_box",
   "layout": "intersolarsystem:airport_layout",
-  "check_radius": 120,
-  "max_variation": 8
+  "check_radius": 110,
+  "max_variation": 12
 }

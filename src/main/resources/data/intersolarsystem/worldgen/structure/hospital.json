@@ -38,6 +38,6 @@
   "step": "surface_structures",
   "terrain_adaptation": "beard_box",
   "layout": "intersolarsystem:hospital_layout",
-  "check_radius": 56,
-  "max_variation": 8
+  "check_radius": 48,
+  "max_variation": 12
 }
