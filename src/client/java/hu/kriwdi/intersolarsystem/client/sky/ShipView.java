@@ -22,16 +22,22 @@ public final class ShipView {
 			Body moon, float shake) {
 	}
 
-	/** A body on the sky: pitch from straight up (0) to straight down (180), roll, sprite half-size at distance 100. */
+	/**
+	 * A body on the sky. With pitch 0 the roll alone places it in the north-south plane: 0 is straight up, negative
+	 * rolls towards the south (where the bridge viewport looks), -90 is the southern horizon, 180 straight down.
+	 * Positive pitch moves it to the west. scale: sprite half-size at distance 100.
+	 */
 	public record Body(float pitch, float roll, float scale, int phase) {
 	}
 
 	private static final int EARTH_SKY = 0xB9AD9C;
 	private static final int EARTH_GROUND = 0x5E5244;
 	private static final int MOON_GROUND = 0x8D8B86;
-	private static final Body EARTH_BELOW = new Body(180.0F, 0.0F, 170.0F, 0);
-	private static final Body EARTH_FROM_MOON = new Body(-35.0F, 12.0F, 38.0F, 0);
-	private static final Body MOON_AHEAD = new Body(-60.0F, 0.0F, 30.0F, 0);
+	/** In orbit: the planet fills the view ahead and below the bow. */
+	private static final Body EARTH_BELOW = new Body(0.0F, -150.0F, 170.0F, 0);
+	/** On the Moon: the Earth hangs above the southern horizon, in front of the bridge. */
+	private static final Body EARTH_FROM_MOON = new Body(0.0F, -50.0F, 38.0F, 0);
+	private static final Body MOON_AHEAD = new Body(0.0F, -60.0F, 30.0F, 0);
 
 	private static ShipViewPayload last;
 	private static long receivedTick;
@@ -143,12 +149,14 @@ public final class ShipView {
 		Body earth;
 		Body moon = null;
 		if ("moon".equals(from)) {
-			earth = new Body(-60.0F, 0.0F, 38.0F + 132.0F * leg * leg, 0);
-			moon = new Body(160.0F, 0.0F, 30.0F * (1.0F - leg) + 4.0F, 0);
+			// Leaving the Moon: it sinks away below the bow, the Earth grows ahead.
+			earth = new Body(0.0F, -60.0F, 38.0F + 132.0F * leg * leg, 0);
+			moon = new Body(0.0F, -150.0F, 60.0F * (1.0F - leg) + 4.0F, 0);
 		} else {
-			earth = new Body(180.0F - 60.0F * leg, 0.0F, 170.0F * (1.0F - leg) * (1.0F - leg) + 8.0F, 0);
+			// Leaving the Earth: it shrinks below the bow; the Moon (if that is the target) grows ahead.
+			earth = new Body(0.0F, -150.0F + 30.0F * leg, 170.0F * (1.0F - leg) * (1.0F - leg) + 8.0F, 0);
 			if ("moon".equals(to)) {
-				moon = new Body(MOON_AHEAD.pitch(), 0.0F, 4.0F + 90.0F * leg * leg, 0);
+				moon = new Body(0.0F, MOON_AHEAD.roll(), 4.0F + 90.0F * leg * leg, 0);
 			}
 		}
 		return new Scene(-1, -1, 0.0F, 1.0F, starAngle, earth, moon, shake);

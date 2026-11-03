@@ -17,7 +17,8 @@
       "modifier": "overlay"
     },
     "minecraft:visual/sky_color": "#000000",
-    "minecraft:visual/fog_color": "#000000"
+    "minecraft:visual/fog_color": "#000000",
+    "minecraft:visual/sky_fog_end_distance": 4096.0
   },
   "carvers": [],
   "downfall": 0.0,

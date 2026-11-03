@@ -77,22 +77,13 @@ def thruster():
 
 
 def viewport():
+    """Clear glass: only a few glints, so a wall of viewports reads as one big pane (cut-out, no frame lines)."""
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
     px = img.load()
-    frame = hexc("4a5056")
-    for i in range(16):
-        for (x, y) in ((i, 0), (i, 15), (0, i), (15, i)):
-            px[x, y] = frame
-        for (x, y) in ((i, 1), (1, i)):
-            px[x, y] = hexc("737b82")
-        for (x, y) in ((i, 14), (14, i)):
-            px[x, y] = hexc("2b2f33")
-    for (x, y) in [(3, 2), (2, 3), (4, 2), (2, 4), (12, 13), (13, 12)]:
-        px[x, y] = hexc("8d959c")
-    # Faint glint lines on the glass (cut-out: everything else stays fully clear).
     for i in range(4):
-        px[4 + i, 9 - i] = (220, 235, 255, 255)
-    px[10, 5] = (220, 235, 255, 255)
+        px[3 + i, 8 - i] = (225, 238, 255, 255)
+    px[9, 4] = (225, 238, 255, 255)
+    px[12, 11] = (190, 210, 230, 255)
     save(img, "block/ship_viewport")
 
 

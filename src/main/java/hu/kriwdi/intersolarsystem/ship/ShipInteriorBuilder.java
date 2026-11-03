@@ -33,6 +33,20 @@ public final class ShipInteriorBuilder {
 			// Beds are placed as two halves; the second half must not be re-placed through a neighbour update.
 			interior.setBlock(pos, stateFor(placement.piece()), Block.UPDATE_CLIENTS);
 		}
+		if (clearInterior) {
+			paintSpace(interior);
+		}
+	}
+
+	/**
+	 * Sets the biome around the ship to the black space biome. Interiors generated before had the vanilla void biome,
+	 * whose blue sky and fog would show through the viewports.
+	 */
+	public static void paintSpace(ServerLevel interior) {
+		var server = interior.getServer();
+		server.getCommands().performPrefixedCommand(server.createCommandSourceStack().withSuppressedOutput(),
+				"execute in " + ShipDimensions.INTERIOR.identifier() + " run fillbiome 0 56 0 15 79 31 "
+						+ "intersolarsystem:orbital_void");
 	}
 
 	/** Whether the interior is the current ship (the panoramic viewport is there), not an older one-room capsule. */
