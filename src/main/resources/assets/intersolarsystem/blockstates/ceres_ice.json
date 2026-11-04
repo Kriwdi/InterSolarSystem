@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/ceres_ice"
+      },
+      {
+        "model": "intersolarsystem:block/ceres_ice",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/ceres_ice",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/ceres_ice",
+        "y": 270
+      }
+    ]
+  }
+}

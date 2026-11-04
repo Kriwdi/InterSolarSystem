@@ -148,5 +148,80 @@
   -56,
   -17,
   -56
+ ],
+ "venus/cloud_city": [
+  -34,
+  -31,
+  -34
+ ],
+ "venus/lift_foot": [
+  -7,
+  -4,
+  -7
+ ],
+ "venus/venera13": [
+  -6,
+  -4,
+  -6
+ ],
+ "venus/venera9": [
+  -6,
+  -4,
+  -6
+ ],
+ "venus/descent_capsule": [
+  -9,
+  -4,
+  -9
+ ],
+ "mercury/sunshade_base": [
+  -34,
+  -6,
+  -34
+ ],
+ "mercury/messenger_impact": [
+  -8,
+  -4,
+  -8
+ ],
+ "ceres/occator_station": [
+  -30,
+  -14,
+  -30
+ ],
+ "ceres/ahuna_cone": [
+  -14,
+  -4,
+  -14
+ ],
+ "belt/mining_outpost": [
+  -42,
+  -29,
+  -30
+ ],
+ "belt/ore_hauler_wreck": [
+  -14,
+  -8,
+  -25
+ ],
+ "jupiter/aerostat": [
+  -34,
+  -96,
+  -34
+ ],
+ "jupiter/galileo_probe": [
+  -3,
+  0,
+  -3
+ ],
+ "io/volcano_observatory": [
+  -30,
+  -4,
+  -30
+ ],
+ "europa/drill_station": [
+  -26,
+  -34,
+  -26
  ]
 }

@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/io_silicate"
+      },
+      {
+        "model": "intersolarsystem:block/io_silicate",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/io_silicate",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/io_silicate",
+        "y": 270
+      }
+    ]
+  }
+}

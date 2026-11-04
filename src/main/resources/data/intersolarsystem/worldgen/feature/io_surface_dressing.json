@@ -1,0 +1,11 @@
+{
+  "type": "intersolarsystem:planet_surface",
+  "base": "intersolarsystem:io_silicate",
+  "top": "intersolarsystem:sulfur_plain",
+  "alt": "intersolarsystem:so2_frost",
+  "alt_chance": 0.08,
+  "under": "intersolarsystem:sulfur_plain",
+  "depth": 4,
+  "ore": "intersolarsystem:sulfur_crust",
+  "ore_chance": 20
+}

@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/microbial_mat"
+      },
+      {
+        "model": "intersolarsystem:block/microbial_mat",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/microbial_mat",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/microbial_mat",
+        "y": 270
+      }
+    ]
+  }
+}

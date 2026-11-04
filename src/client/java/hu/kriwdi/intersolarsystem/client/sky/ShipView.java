@@ -48,6 +48,8 @@ public final class ShipView {
 	private static final Body EARTH_FROM_MOON = new Body(0.0F, -50.0F, 38.0F, 0);
 	private static final Body MOON_AHEAD = new Body(0.0F, -60.0F, 30.0F, 0);
 
+	/** The Earth-Moon system; anything else is interplanetary. */
+	private static final java.util.Set<String> LOCAL = java.util.Set.of("earth", "earth_orbit", "moon");
 	private static ShipViewPayload last;
 	private static long receivedTick;
 	private static long clientTicks;
@@ -101,7 +103,14 @@ public final class ShipView {
 		return switch (id) {
 			case "moon" -> new Scene(-1, MOON_GROUND, LANDED_DEPTH, 1.0F, 0.0F, EARTH_FROM_MOON, null, 0.0F, "moon");
 			case "mars" -> new Scene(MARS_SKY, MARS_GROUND, LANDED_DEPTH, 0.0F, 0.0F, null, null, 0.0F, "mars");
-			case "mothership" -> new Scene(-1, -1, 0.0F, 1.0F, 0.0F, null, null, 0.0F);
+			case "mothership", "asteroid_belt" -> new Scene(-1, -1, 0.0F, 1.0F, 0.0F, null, null, 0.0F);
+			// Venus and Jupiter: a cloud deck below and a coloured sky (the ship sets down on a floating station).
+			case "venus" -> new Scene(0xC88A46, 0xD8B074, LANDED_DEPTH, 0.0F, 0.0F, null, null, 0.0F);
+			case "jupiter" -> new Scene(0x7A92C0, 0xD8C49A, LANDED_DEPTH, 0.0F, 0.0F, null, null, 0.0F);
+			case "mercury" -> new Scene(-1, 0x7D7A76, LANDED_DEPTH, 1.0F, 0.0F, null, null, 0.0F);
+			case "ceres" -> new Scene(-1, 0x55504A, LANDED_DEPTH, 1.0F, 0.0F, null, null, 0.0F);
+			case "io" -> new Scene(-1, 0xD8C24A, LANDED_DEPTH, 1.0F, 0.0F, null, null, 0.0F);
+			case "europa" -> new Scene(-1, 0xC9C2B4, LANDED_DEPTH, 1.0F, 0.0F, null, null, 0.0F);
 			case "earth_orbit" -> new Scene(-1, -1, 0.0F, 1.0F, 0.0F, EARTH_BELOW, null, 0.0F);
 			case "earth" -> new Scene(EARTH_SKY, EARTH_GROUND, LANDED_DEPTH, 0.0F, 0.0F, null, null, 0.0F,
 					ground.isEmpty() ? "ash_desert" : ground);
@@ -145,7 +154,8 @@ public final class ShipView {
 	/** Where a journey's target leaves the ship ("earth_orbit" docks, "moon" lands, "earth" lands, others fly by). */
 	private static String destination(String target) {
 		return switch (target) {
-			case "moon", "earth_orbit", "earth", "mars", "mothership" -> target;
+			case "moon", "earth_orbit", "earth", "mars", "mothership", "venus", "mercury", "ceres", "asteroid_belt",
+					"jupiter", "io", "europa" -> target;
 			default -> last.from();
 		};
 	}
@@ -155,7 +165,7 @@ public final class ShipView {
 		String to = last.to();
 		float shake = p < 0.08F ? 0.5F * (1.0F - p / 0.08F) + 0.06F : 0.05F;
 		float starAngle = time * 0.4F;
-		boolean fromSurface = "earth".equals(from) || "moon".equals(from) || "mars".equals(from);
+		boolean fromSurface = !"earth_orbit".equals(from) && !"mothership".equals(from) && !"asteroid_belt".equals(from);
 		// First part: the ground falls away and the sky turns black.
 		if (fromSurface && p < 0.25F) {
 			Scene base = place(from);
@@ -171,7 +181,7 @@ public final class ShipView {
 		float leg = fromSurface ? (p - 0.25F) / 0.75F : p;
 		Body earth;
 		Body moon = null;
-		if ("mars".equals(from) || "mars".equals(to)) {
+		if (far(from) || far(to)) {
 			// Interplanetary: the planet left behind shrinks to a point; the stars and the Milky Way do the rest.
 			earth = "earth".equals(from) || "earth_orbit".equals(from)
 					? new Body(0.0F, -150.0F + 30.0F * leg, 170.0F * (1.0F - leg) * (1.0F - leg) + 3.0F, 0) : null;
@@ -187,6 +197,11 @@ public final class ShipView {
 			}
 		}
 		return new Scene(-1, -1, 0.0F, 1.0F, starAngle, earth, moon, shake);
+	}
+
+	/** Beyond the Earth-Moon system (the mothership goes either way, so it counts as neither). */
+	private static boolean far(String place) {
+		return !LOCAL.contains(place) && !"mothership".equals(place);
 	}
 
 	private static Scene with(Scene s, float shake, float starAngle) {

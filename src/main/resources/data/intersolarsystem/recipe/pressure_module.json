@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "T": "intersolarsystem:titanium_plate",
+    "M": "intersolarsystem:rare_earth_magnet",
+    "C": "intersolarsystem:salvaged_circuit"
+  },
+  "pattern": [
+    "TTT",
+    "MCM",
+    "TTT"
+  ],
+  "result": {
+    "id": "intersolarsystem:pressure_module",
+    "count": 1
+  }
+}

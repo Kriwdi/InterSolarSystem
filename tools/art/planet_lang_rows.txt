@@ -1,0 +1,30 @@
+block.intersolarsystem.venus_basalt|Venusian Basalt|Venusbasalt|Vénuszi bazalt
+block.intersolarsystem.venus_regolith|Venusian Regolith|Venus-Regolith|Vénuszi regolit
+block.intersolarsystem.sulfur_crust|Sulfur Crust|Schwefelkruste|Kénkéreg
+block.intersolarsystem.mercury_rock|Mercurian Rock|Merkurgestein|Merkúri kőzet
+block.intersolarsystem.mercury_regolith|Mercurian Regolith|Merkur-Regolith|Merkúri regolit
+block.intersolarsystem.hollow_crust|Hollows Crust|Mulden-Kruste|Mélyedéskéreg
+block.intersolarsystem.ceres_clay|Cerean Clay|Ceres-Ton|Ceresi agyag
+block.intersolarsystem.ceres_ice|Cerean Ice|Ceres-Eis|Ceresi jég
+block.intersolarsystem.carbonate_salt|Carbonate Salt|Karbonatsalz|Karbonátsó
+block.intersolarsystem.chondrite|Chondrite|Chondrit|Kondrit
+block.intersolarsystem.carbonaceous_rock|Carbonaceous Rock|Kohliges Gestein|Széntartalmú kőzet
+block.intersolarsystem.nickel_iron_ore|Nickel-Iron Ore|Nickel-Eisen-Erz|Nikkel-vas érc
+block.intersolarsystem.iridium_ore|Iridium Ore|Iridiumerz|Irídiumérc
+block.intersolarsystem.ammonia_cloud|Ammonia Cloud|Ammoniakwolke|Ammóniafelhő
+block.intersolarsystem.sulfide_cloud|Hydrosulfide Cloud|Hydrosulfidwolke|Hidroszulfid-felhő
+block.intersolarsystem.water_cloud|Water Cloud|Wasserwolke|Vízfelhő
+block.intersolarsystem.storm_cloud|Great Red Spot Cloud|Wolke des Großen Roten Flecks|A Nagy Vörös Folt felhője
+block.intersolarsystem.metallic_hydrogen|Metallic Hydrogen Crystal|Metallischer Wasserstoff|Fémes hidrogén kristály
+block.intersolarsystem.sulfur_plain|Ionian Sulfur|Io-Schwefel|Iói kén
+block.intersolarsystem.io_silicate|Ionian Silicate Rock|Io-Silikatgestein|Iói szilikátkőzet
+block.intersolarsystem.so2_frost|Sulfur Dioxide Frost|Schwefeldioxid-Reif|Kén-dioxid dér
+block.intersolarsystem.europa_ice|Europan Ice|Europa-Eis|Európai jég
+block.intersolarsystem.lineae_ice|Lineae Ice|Lineae-Eis|Vonalas jég
+block.intersolarsystem.europa_salt|Europan Salt|Europa-Salz|Európai só
+block.intersolarsystem.microbial_mat|Microbial Mat|Mikrobenmatte|Mikrobaszőnyeg
+item.intersolarsystem.iridium_ingot|Iridium Ingot|Iridiumbarren|Irídiumrúd
+item.intersolarsystem.thermal_module|Suit Module: Heat Shield|Anzugmodul: Hitzeschild|Ruhamodul: hőpajzs
+item.intersolarsystem.pressure_module|Suit Module: Pressure Shell|Anzugmodul: Druckhülle|Ruhamodul: nyomásálló réteg
+item.intersolarsystem.radiation_module|Suit Module: Radiation Shielding|Anzugmodul: Strahlenschutz|Ruhamodul: sugárvédelem
+item.intersolarsystem.tank_module|Suit Module: Extended Tank|Anzugmodul: Großer Tank|Ruhamodul: nagy tartály

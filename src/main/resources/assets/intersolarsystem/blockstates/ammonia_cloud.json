@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/ammonia_cloud"
+      },
+      {
+        "model": "intersolarsystem:block/ammonia_cloud",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/ammonia_cloud",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/ammonia_cloud",
+        "y": 270
+      }
+    ]
+  }
+}

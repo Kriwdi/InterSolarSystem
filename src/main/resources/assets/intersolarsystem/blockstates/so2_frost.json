@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/so2_frost"
+      },
+      {
+        "model": "intersolarsystem:block/so2_frost",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/so2_frost",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/so2_frost",
+        "y": 270
+      }
+    ]
+  }
+}

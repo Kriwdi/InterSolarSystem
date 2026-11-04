@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/metallic_hydrogen"
+      },
+      {
+        "model": "intersolarsystem:block/metallic_hydrogen",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/metallic_hydrogen",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/metallic_hydrogen",
+        "y": 270
+      }
+    ]
+  }
+}

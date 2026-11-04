@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/europa_salt"
+      },
+      {
+        "model": "intersolarsystem:block/europa_salt",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/europa_salt",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/europa_salt",
+        "y": 270
+      }
+    ]
+  }
+}

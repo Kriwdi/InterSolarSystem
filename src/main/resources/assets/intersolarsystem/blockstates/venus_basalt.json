@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/venus_basalt"
+      },
+      {
+        "model": "intersolarsystem:block/venus_basalt",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/venus_basalt",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/venus_basalt",
+        "y": 270
+      }
+    ]
+  }
+}

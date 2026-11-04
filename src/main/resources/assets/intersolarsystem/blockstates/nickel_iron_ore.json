@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/nickel_iron_ore"
+      },
+      {
+        "model": "intersolarsystem:block/nickel_iron_ore",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/nickel_iron_ore",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/nickel_iron_ore",
+        "y": 270
+      }
+    ]
+  }
+}

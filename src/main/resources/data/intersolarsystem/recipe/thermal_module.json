@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "T": "intersolarsystem:titanium_plate",
+    "W": "minecraft:white_wool",
+    "C": "intersolarsystem:salvaged_circuit",
+    "R": "intersolarsystem:station_radiator"
+  },
+  "pattern": [
+    "TWT",
+    "WCW",
+    "TRT"
+  ],
+  "result": {
+    "id": "intersolarsystem:thermal_module",
+    "count": 1
+  }
+}

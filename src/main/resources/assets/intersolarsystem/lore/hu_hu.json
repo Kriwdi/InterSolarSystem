@@ -462,6 +462,97 @@
     "> asatas 0419\nA rover karja megérintette a rést, és a lüktetés megváltozott. A rover memóriájában most 2,1 GB van, amit nem mi tettünk oda. A parancsnok a rover leállítását kéri. Egyetértek. A roveren van a kulcs.",
     "> asatas 0421\nMa reggelre szélesebb lett a rés. Ne nyissátok ki. Ne engedjétek a rovert a közelébe. Ha ezt olvasod, hajóval jöttél: a rover memóriamagját a Földre vidd, ne a falhoz."
    ]
+  },
+  "terminal_18": {
+   "title": "APHRODITE FELHŐÁLLOMÁS",
+   "subtitle": "R. Adeyemi állomásparancsnok",
+   "pages": [
+    "> naplo, 1. nap\nÖtvenöt kilométer magasan kint egy bar a nyomás és huszonhét fok. Kénsavas, de könnyű ruhában ki lehet állni a fedélzetre. Az egyetlen hely a Naprendszerben, ami olyan, mint egy nyári délután.",
+    "> naplo, 412. nap\nMegjött a Bárkák menetrendje. A Bárka-4 kihagyja a Vénuszt: \"az ablak lezárult, a személyzet várja meg a Bárka-6-ot\". A listán nincs Bárka-6. 214 ember van a fedélzeten. Még nem mondtam meg nekik.",
+    "> naplo, 590. nap\nÉjjel kiszakadt a D emelőballon. Napi harminc métert vesztünk. Ötven kilométer alatt a sav mindenbe beeszi magát. Kowalczyk a 2-es kapszulával lemegy a régi felszíni reléhez, hogy hívja a Földet. Negyven perc hűtés. Azt mondja, elég.",
+    "> naplo, 593. nap\nNincs hívás. A lift még működik, és a savüzem béléséből gyártott hőpajzsok rövid sétára jók odalent. Senki nem megy le többé. Ballasztot dobunk és várunk. Ha hajóval jöttél: te vagy az a hajó, amire vártunk."
+   ]
+  },
+  "terminal_19": {
+   "title": "2-ES KAPSZULA",
+   "subtitle": "Dr. A. Kowalczyk / ruharögzítő",
+   "pages": [
+    "> 00:00\nLent vagyok. Keményen. Az ernyő hat kilométeren leégett, a többit a lengéscsillapítók nyelték el. 462 fok. A ruha negyven percet mond. Narancssárga az ég, és mindenhonnan jön a fény.",
+    "> 00:09\nA relé halott. Sav van a kapcsolódobozban. Innen látom a Venyera-13-at: egy szovjet szonda, amit fél órára építettek, és nyolcvan év után is áll. Ezen valamiért nevetnem kell.",
+    "> 00:21\nA hűtés hatvan százalékon. Nem elég, hogy visszamásszak a lift aljához. Mondjátok meg az Aphroditénak, hogy ne várják tovább a Földet. Mondjátok meg, hogy a bazalt itt meleg és gyönyörű. Mondjátok meg a bátyámnak Gdańskban... nem. Gdańskban nincs senki."
+   ]
+  },
+  "terminal_20": {
+   "title": "SUNSHADE IRÁNYÍTÁS",
+   "subtitle": "automata / személyzet nincs a fedélzeten",
+   "pages": [
+    "> allapot\nSZEMÉLYZET ....... 0 (ELMENT A BÁRKA-3-MAL)\nENERGIARELÉ ...... NINCS VEVŐ\nNAPKITÖRÉSEK ..... 1214 AZ INDULÁS ÓTA\nÓVÓHELY .......... KÉSZ",
+    "> menetrend\nA napkitörések az aktív területeket követik. Olvasom őket, és mindegyik előtt 20 másodperccel megszólaltatom a riasztót. Senki nem hallja. Tartom a menetrendet. Ezért vagyok.",
+    "> uzenet a latogatonak\nA nappali oldal 430 fokos, az éjszakai mínusz 180. A bázis árnyékában járj, vagy viselj hőpajzsot. Ha szól a riasztó, menj le az óvóhelyre, vagy viselj sugárvédelmet. Szólok, ha vége. Nekik is mindig szóltam."
+   ]
+  },
+  "terminal_21": {
+   "title": "OCCATOR ÁLLOMÁS",
+   "subtitle": "hideg archívum / Dr. Y. Tanabe",
+   "pages": [
+    "> archivum\nAz Occator alatti sólé a só miatt mínusz negyven fokon is folyékony marad. A benne tartott mikrobák évtizedekig alszanak. A Konzorcium tizenkét törzset küldött megőrzésre: a Visszafordítás-projekt ellenkultúráját, amely felfalja a Szürke Virágzást.",
+    "> archivum, 3. ev\nA törzsek élnek. Minden hónapban ellenőriztem őket. A Föld már nem kér jelentést. A Bárkák megállás nélkül elhúztak mellettünk: a Ceres \"nem kiemelt célpont\".",
+    "> archivum, utolso\nAz archívumot a tartályokban hagyom, a kutat nyitva a sólé felé. Ha a Földnek valaha vissza kell kapnia a talaját, a gyógymód itt van, a hidegben, és vár. Zárd le a tartályokat, ha elviszed őket. Tartsd őket nedvesen."
+   ]
+  },
+  "terminal_22": {
+   "title": "VESTA BÁNYÁSZÁLLOMÁS",
+   "subtitle": "L. Eriksen műszakvezető",
+   "pages": [
+    "> muszakjelentes\nMinden Bárka-hajtómű plazmakamrájához harminc kiló irídium kell. A Földön már nincs mit bányászni. Az itteni fémes sziklák magjában van. Kivágjuk, megőröljük, a teherhajók pedig elviszik Kármánba.",
+    "> muszakjelentes\nTizenkét hajtóműnyit szállítottunk el. Az INGRID BJØRNSTAD a tizenharmadik rakománnyal indult el, és a törmelékmező szélén elhallgatott. Kettétörve találtuk meg. Haugen kapitány még mindig a kormánynál ül.",
+    "> annak, aki jon\nOlvaszd ki az irídiumot. A hajtóműkészlethez az kell, egy fúziós maggal és mágnesekkel együtt: attól lesz elég forró egy Bárka-hajtómű a Jupiterhez. Mindig csatold be magad. Itt kint az elengedés örök zuhanás."
+   ]
+  },
+  "terminal_23": {
+   "title": "ZEPHYR AEROSZTÁT",
+   "subtitle": "I. Petrova betakarítás-vezető",
+   "pages": [
+    "> betakaritas\nA kanalak isszák az ammóniaréteget, és tonnaszám adják a hidrogént és a hélium-3-at. Minél mélyebbre ér a vezeték, annál gazdagabb a gáz. A barna réteg alatt a nyomás héj nélkül összeroppantja az embert. A kék réteg alatt meg is főzi.",
+    "> betakaritas, 301. nap\nOkafor kristályokat látott a vízfelhők alatt: fémes hidrogént, a Konzorcium álmát, amitől egy fúziós mag dalolni kezd. Hőpajzzsal és nyomásálló héjjal leereszkedett a hosszú kábelen. Negyven perc. Négy kristállyal jött vissza, és mindkét modulja tönkrement.",
+    "> betakaritas, 340. nap\nOkafor újra lement. A kábel kilencven méternél tisztán elvágva jött fel, mintha pengével vágták volna. Odalent nincs semmi, csak felhő. Semmi. Leállítottam a mélybetakarítást."
+   ]
+  },
+  "terminal_24": {
+   "title": "LOKI OBSZERVATÓRIUM",
+   "subtitle": "Dr. R. Mendes / doziméter",
+   "pages": [
+    "> dozis\nAz Io a Jupiter sugárövein belül kering. Ezeken a falakon kívül néhány óra alatt halálos dózist kapsz. Belül egy havi munka egy évnyi dózis. Számolom a napokat. A vulkánt nem érdekli.",
+    "> dozis, 28. nap\nA Loki éjjel átfordult. A lávató kérge egy hullámban süllyedt el, ami végigment az egész tavon, ahogy 540 naponként mindig. Ezt még senki nem látta a felszínről. Az egészet felvettem.",
+    "> dozis, 31. nap\nAz Európa felé menő relé leállt, így a felvétel itt marad. Már túl vagyok a határértéken. Ha ki kell menned, az ajtó melletti polcon van sugárvédő modul. Nézd meg helyettem, ahogy átfordul a tó."
+   ]
+  },
+  "terminal_25": {
+   "title": "THERA FÚRÓÁLLOMÁS",
+   "subtitle": "Dr. S. Lindqvist",
+   "pages": [
+    "> akna\nAz olvasztószonda harminc méternél áttörte a jeget. A víz a jég alatt plusz négy fokos, sós, és mozog: áramlatok vannak, a tengerfenékről melegednek.",
+    "> 2-es kamera\nTelepek. A kürtőkön, a jégmennyezeten, mindenhol, ahol a meleg víz hozzáér. Világítanak, amikor lekapcsol a lámpa. Az 1-3. mintatartályban vannak minták. Élnek. Nem a Földről valók.",
+    "> utolso\nAz első élet, amit valaha a Földön kívül találtak, és nem maradt senki a Földön, akinek elmondhatnám. Minden címre elküldtem, ami megvan. Ha ezt olvasod, akkor valaki tudja. Ez elég. Menj le az aknán. Nézd meg."
+   ]
+  },
+  "terminal_26": {
+   "title": "BÁRKA-1 HIBERNÁCIÓS CSARNOK",
+   "subtitle": "ébresztőkonzol",
+   "pages": [
+    "> ebresztesi sorozat\nÉBRESZTŐKÓDOK .... ELFOGADVA\nKAPSZULA 001-380 .. NINCS ÉLETJEL\nENERGIANAPLÓ ..... NAPTORNYOK LEÁLLTAK, 1690. NAP\nTARTALÉK ......... KIMERÜLT, 1702. NAP",
+    "> ugyeletes, 1701. nap\nÉn vagyok az utolsó, aki ébren van. A tornyok eljegesedtek a hosszú éjszakában, és az akkumulátorok nem bírják. Nem tudom felébreszteni őket: nincs mire. Nincs étel, nincs levegő 380 embernek.",
+    "> ugyeletes, 1702. nap\nLeülök közéjük. Sajnálom. Bárki is nyitotta meg ezt: nem tettél semmi rosszat. Vártunk rád, ameddig csak tudtunk."
+   ]
+  },
+  "terminal_27": {
+   "title": "BÁRKA-2 FELTÁRÁS",
+   "subtitle": "terepi terminál / Dr. M. Ferreira",
+   "pages": [
+    "> asatas 0423\nSzürke por jön ki a résből, amikor lüktet. Finom, laza, mint a hamu. A fal körüli üledék is szürkül, naponta egy tenyérnyit. Semmi nem nő benne.",
+    "> asatas 0425\nSzekvenáltam a port. VRD-7. Nem hasonlít rá: ez az, a Szürke Virágzás, régebbi bármelyik kőzetnél ezen a deltán. A Halcyon nem megalkotta a Virágzást. Egy marsi meteoritban találták, és megtanították gyorsabban enni a talajt.",
+    "> asatas 0426\nÉjjelente valami kopog a túloldalon, solonként egyszer, a lüktetés ütemére. Nem megyek le többé. Azért írom ezt, hogy a következő megértse: a fal nem ajtó valahová. Ajtó valaminek."
+   ]
   }
  },
  "manuals": {

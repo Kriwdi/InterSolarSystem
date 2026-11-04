@@ -189,6 +189,37 @@ def salvage_recipes():
     cook("iron_from_hematite", "hematite_ore", "minecraft:iron_ingot", 0.7)
 
 
+def far_recipes():
+    """The worlds beyond Mars: iridium from the belt, the plasma drive, the suit modules, oxygen from ice, what the
+    clouds give."""
+    cook("iridium_ingot", "iridium_ore", "iridium_ingot", 1.5)
+    cook("iron_from_nickel_iron", "nickel_iron_ore", "minecraft:iron_ingot", 0.7)
+    shaped("plasma_drive_kit", ["PIP", "MFM", "PIP"],
+           {"P": "titanium_plate", "I": "iridium_ingot", "M": "rare_earth_magnet", "F": "fusion_drive_kit"},
+           "plasma_drive_kit")
+    shaped("thermal_module", ["TWT", "WCW", "TRT"],
+           {"T": "titanium_plate", "W": "minecraft:white_wool", "C": "salvaged_circuit", "R": "station_radiator"},
+           "thermal_module", category="equipment")
+    shaped("pressure_module", ["TTT", "MCM", "TTT"],
+           {"T": "titanium_plate", "M": "rare_earth_magnet", "C": "salvaged_circuit"}, "pressure_module",
+           category="equipment")
+    shaped("radiation_module", ["IAI", "ACA", "IAI"],
+           {"I": "iridium_ingot", "A": "aluminium_ingot", "C": "salvaged_circuit"}, "radiation_module",
+           category="equipment")
+    shaped("tank_module", ["AOA", "OCO", "AOA"],
+           {"A": "aluminium_ingot", "O": "oxygen_canister", "C": "salvaged_circuit"}, "tank_module",
+           category="equipment")
+    shapeless("oxygen_canister_ceres_ice", ["ceres_ice", "ceres_ice", "minecraft:glass_bottle", "battery_cell"],
+              "oxygen_canister", count=2)
+    shapeless("oxygen_canister_europa_ice", ["europa_ice", "europa_ice", "minecraft:glass_bottle", "battery_cell"],
+              "oxygen_canister", count=2)
+    shapeless("gunpowder_from_sulfur", ["sulfur_crust", "minecraft:charcoal"], "minecraft:gunpowder", count=2)
+    shapeless("bone_meal_from_ammonia", ["ammonia_cloud"], "minecraft:bone_meal", count=3)
+    shapeless("water_canister_from_cloud", ["water_cloud", "water_cloud", "minecraft:glass_bottle"], "water_canister")
+    shaped("uranium_fuel_rod_from_metallic_hydrogen", ["P", "H", "P"],
+           {"P": "titanium_plate", "H": "metallic_hydrogen"}, "uranium_fuel_rod", count=4)
+
+
 def tags():
     write("intersolarsystem/tags/item/titanium_tool_materials.json", {"values": [NS + "titanium_ingot"]})
     write("intersolarsystem/tags/block/incorrect_for_titanium_tool.json", {"values": []})
@@ -216,7 +247,8 @@ def tags():
     write("minecraft/tags/block/needs_stone_tool.json", {"replace": False, "values": [
         NS + o for o in ores if "bauxite" in o or "spodumene" in o] + [NS + "oil_shale"]})
     write("minecraft/tags/block/needs_iron_tool.json", {"replace": False, "values": [
-        NS + o for o in ores if "titanium" in o or "uraninite" in o or "monazite" in o]})
+        NS + o for o in ores if "titanium" in o or "uraninite" in o or "monazite" in o] + [
+        NS + o for o in ("nickel_iron_ore", "iridium_ore", "metallic_hydrogen")]})
     write("minecraft/tags/block/logs_that_burn.json", {"replace": False, "values": [NS + "dead_log"]})
     write("minecraft/tags/item/logs_that_burn.json", {"replace": False, "values": [NS + "dead_log"]})
     write("minecraft/tags/item/pickaxes.json", {"replace": False, "values": [NS + "titanium_pickaxe"]})
@@ -231,4 +263,5 @@ if __name__ == "__main__":
     recipes()
     tags()
     salvage_recipes()
+    far_recipes()
     print("content data written")

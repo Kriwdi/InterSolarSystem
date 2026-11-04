@@ -348,6 +348,18 @@ public final class Mothership extends SavedData {
 				player.teleport(new TeleportTransition(mars, Vec3.atBottomCenterOf(at), Vec3.ZERO, player.getYRot(), 0.0F,
 						TeleportTransition.DO_NOTHING));
 			}
+		} else if (hu.kriwdi.intersolarsystem.space.Worlds.byStation(location).isPresent()) {
+			var w = hu.kriwdi.intersolarsystem.space.Worlds.byStation(location).get();
+			ServerLevel far = server.getLevel(w.dimension());
+			if (far != null) {
+				hu.kriwdi.intersolarsystem.space.Worlds.ensureSites(far, w);
+				BlockPos at = MoonSites.surface(far, w.landX() - 8, w.landZ());
+				if (at.getY() <= far.getMinY() + 1) {
+					at = hu.kriwdi.intersolarsystem.space.Worlds.emergencyPad(far, w);
+				}
+				player.teleport(new TeleportTransition(far, Vec3.atBottomCenterOf(at), Vec3.ZERO, player.getYRot(), 0.0F,
+						TeleportTransition.DO_NOTHING));
+			}
 		} else if ("moon_orbit".equals(location)) {
 			ServerLevel moon = server.getLevel(ShipDimensions.MOON);
 			if (moon != null) {

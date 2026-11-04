@@ -1,0 +1,8 @@
+{
+  "type": "intersolarsystem:crater",
+  "min_radius": 7,
+  "max_radius": 9,
+  "floor": "intersolarsystem:mercury_regolith",
+  "fresh": "intersolarsystem:hollow_crust",
+  "rim": "intersolarsystem:mercury_rock"
+}

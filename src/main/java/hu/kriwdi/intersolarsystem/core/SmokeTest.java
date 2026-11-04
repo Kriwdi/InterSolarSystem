@@ -43,6 +43,7 @@ public final class SmokeTest {
 			checkStation(server);
 			checkMoon(server);
 			checkMars(server);
+			checkFarWorlds(server);
 			checkEarth(server);
 			LOGGER.info("[SMOKETEST] server started, stopping");
 			server.halt(false);
@@ -75,6 +76,38 @@ public final class SmokeTest {
 		}
 		if (!ShipShell.isHull(orbit.getBlockState(hatch.above()))) {
 			LOGGER.error("[SMOKETEST-FAIL] the docked ship has no hull at the ISS");
+		}
+	}
+
+	/**
+	 * The worlds beyond Mars: each dimension exists, its sites are placed, the landing spot has something to stand
+	 * on (the floating stations included), the hazards and the border are as listed.
+	 */
+	private static void checkFarWorlds(MinecraftServer server) {
+		for (var w : hu.kriwdi.intersolarsystem.space.Worlds.ALL) {
+			ServerLevel level = server.getLevel(w.dimension());
+			if (level == null) {
+				LOGGER.error("[SMOKETEST-FAIL] {} dimension is missing", w.body());
+				continue;
+			}
+			hu.kriwdi.intersolarsystem.space.Worlds.ensureSites(level, w);
+			for (var site : w.sites()) {
+				if (!hu.kriwdi.intersolarsystem.space.SpaceSites.PLACED_AT.containsKey(site.template())) {
+					LOGGER.error("[SMOKETEST-FAIL] {} was not placed", site.template());
+				}
+			}
+			net.minecraft.core.BlockPos land = MoonSites.surface(level, w.landX(), w.landZ());
+			String under = net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(
+					level.getBlockState(land.below()).getBlock()).toString();
+			LOGGER.info("[SMOKETEST] {}: landing at {} on {}, border {}", w.body(), land, under,
+					level.getWorldBorder().getSize());
+			if (land.getY() <= level.getMinY() + 1) {
+				LOGGER.error("[SMOKETEST-FAIL] nothing to land on at {}", w.body());
+			}
+		}
+		if (hu.kriwdi.intersolarsystem.space.PlanetHazards.zone("venus", 80, true, true, 0)
+				!= hu.kriwdi.intersolarsystem.space.PlanetHazards.Zone.VENUS_SURFACE) {
+			LOGGER.error("[SMOKETEST-FAIL] Venus surface hazard rule");
 		}
 	}
 

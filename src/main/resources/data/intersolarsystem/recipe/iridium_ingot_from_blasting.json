@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 1.5,
+  "ingredient": "intersolarsystem:iridium_ore",
+  "result": {
+    "id": "intersolarsystem:iridium_ingot"
+  }
+}

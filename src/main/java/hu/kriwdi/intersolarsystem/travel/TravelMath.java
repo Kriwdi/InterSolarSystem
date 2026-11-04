@@ -79,7 +79,8 @@ public final class TravelMath {
 			// Between the mothership and the body it orbits (or a neighbour in the Earth-Moon system): a short hop.
 			return Math.max(1, Math.round(DOCK_DAYS * REAL_DAY_TICKS / multiplier(engineTier)));
 		}
-		double days = Math.abs(placeDays(to) - placeDays(from));
+		// Never shorter than a hop to the mothership (between two moons of the same planet the catalogue says 0).
+		double days = Math.max(DOCK_DAYS, Math.abs(placeDays(to) - placeDays(from)));
 		String far = placeDays(to) >= placeDays(from) ? to : from;
 		double window = SolarSystem.byId(far).map(b -> windowFactor(b, gameTime)).orElse(1.0);
 		return Math.max(1, Math.round(days * REAL_DAY_TICKS / multiplier(engineTier) * window));

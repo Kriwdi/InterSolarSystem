@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/chondrite"
+      },
+      {
+        "model": "intersolarsystem:block/chondrite",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/chondrite",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/chondrite",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": "intersolarsystem:titanium_plate",
+    "I": "intersolarsystem:iridium_ingot",
+    "M": "intersolarsystem:rare_earth_magnet",
+    "F": "intersolarsystem:fusion_drive_kit"
+  },
+  "pattern": [
+    "PIP",
+    "MFM",
+    "PIP"
+  ],
+  "result": {
+    "id": "intersolarsystem:plasma_drive_kit",
+    "count": 1
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": "intersolarsystem:iridium_ingot",
+    "A": "intersolarsystem:aluminium_ingot",
+    "C": "intersolarsystem:salvaged_circuit"
+  },
+  "pattern": [
+    "IAI",
+    "ACA",
+    "IAI"
+  ],
+  "result": {
+    "id": "intersolarsystem:radiation_module",
+    "count": 1
+  }
+}

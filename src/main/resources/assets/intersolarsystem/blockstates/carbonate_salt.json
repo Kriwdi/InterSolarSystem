@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/carbonate_salt"
+      },
+      {
+        "model": "intersolarsystem:block/carbonate_salt",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/carbonate_salt",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/carbonate_salt",
+        "y": 270
+      }
+    ]
+  }
+}

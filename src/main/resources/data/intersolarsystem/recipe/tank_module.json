@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": "intersolarsystem:aluminium_ingot",
+    "O": "intersolarsystem:oxygen_canister",
+    "C": "intersolarsystem:salvaged_circuit"
+  },
+  "pattern": [
+    "AOA",
+    "OCO",
+    "AOA"
+  ],
+  "result": {
+    "id": "intersolarsystem:tank_module",
+    "count": 1
+  }
+}

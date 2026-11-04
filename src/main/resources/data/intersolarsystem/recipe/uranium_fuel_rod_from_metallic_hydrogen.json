@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": "intersolarsystem:titanium_plate",
+    "H": "intersolarsystem:metallic_hydrogen"
+  },
+  "pattern": [
+    "P",
+    "H",
+    "P"
+  ],
+  "result": {
+    "id": "intersolarsystem:uranium_fuel_rod",
+    "count": 4
+  }
+}

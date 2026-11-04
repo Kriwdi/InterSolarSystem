@@ -1,0 +1,8 @@
+{
+  "type": "intersolarsystem:crater",
+  "min_radius": 7,
+  "max_radius": 9,
+  "floor": "intersolarsystem:ceres_clay",
+  "fresh": "intersolarsystem:carbonate_salt",
+  "rim": "intersolarsystem:ceres_clay"
+}

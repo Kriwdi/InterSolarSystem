@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/sulfur_plain"
+      },
+      {
+        "model": "intersolarsystem:block/sulfur_plain",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/sulfur_plain",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/sulfur_plain",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -92,12 +92,14 @@ public class HelmetHudElement implements HudElement {
 		if (warning != null && (time / 8) % 2 == 0) {
 			centred(g, mc, warning, cx, h - 70, colour);
 		}
+		modules(g, mc, player, rx - 10, ty + 12);
+		hazard(g, mc, player, cx, h - 82, time);
 		eva(g, mc, player, cx, cy + radius / 2 + 8, time);
 	}
 
 	/** Spacewalk readouts under the visor: tether, drift, the manoeuvring unit, debris streams. */
 	private static void eva(GuiGraphicsExtractor g, Minecraft mc, LocalPlayer player, int cx, int y, long time) {
-		if (!mc.level.dimension().equals(hu.kriwdi.intersolarsystem.ship.ShipDimensions.ORBIT)) {
+		if (!hu.kriwdi.intersolarsystem.space.Worlds.weightless(mc.level.dimension())) {
 			return;
 		}
 		var tether = ZeroGravity.tether();
@@ -130,6 +132,39 @@ public class HelmetHudElement implements HudElement {
 			var line = lines.get(i);
 			g.text(mc.font, line, cx - mc.font.width(line) / 2, y + i * 10, colours.get(i), true);
 		}
+	}
+
+	/** The suit's fitted modules, under the pressure readout. */
+	private static void modules(GuiGraphicsExtractor g, Minecraft mc, LocalPlayer player, int x, int y) {
+		net.minecraft.world.item.ItemStack suit = player.getItemBySlot(EquipmentSlot.CHEST);
+		int i = 0;
+		for (String m : hu.kriwdi.intersolarsystem.space.SuitModules.ALL) {
+			if (hu.kriwdi.intersolarsystem.space.SuitModules.has(suit, m)) {
+				g.text(mc.font, Component.translatable("hud.intersolarsystem.module." + m), x, y + i * 9, 0xFF9AD0E6, true);
+				i++;
+			}
+		}
+	}
+
+	/** The danger of the place (the same rules as the server's), green when the suit answers it. */
+	private static void hazard(GuiGraphicsExtractor g, Minecraft mc, LocalPlayer player, int cx, int y, long time) {
+		var world = hu.kriwdi.intersolarsystem.space.Worlds.byDimension(mc.level.dimension());
+		if (world.isEmpty()) {
+			return;
+		}
+		boolean open = mc.level.canSeeSky(player.blockPosition().above());
+		var zone = hu.kriwdi.intersolarsystem.space.PlanetHazards.zone(world.get().body(), player.blockPosition().getY(),
+				open, mc.level.isBrightOutside(), time);
+		if (zone == hu.kriwdi.intersolarsystem.space.PlanetHazards.Zone.NONE) {
+			return;
+		}
+		boolean ok = hu.kriwdi.intersolarsystem.space.PlanetHazards.answered(player.getItemBySlot(EquipmentSlot.CHEST),
+				ModArmor.fullSuit(player), zone);
+		if (!ok && (time / 8) % 2 != 0) {
+			return;
+		}
+		Component line = Component.translatable(zone.key());
+		g.text(mc.font, line, cx - mc.font.width(line) / 2, y, ok ? 0xFF6CE07A : 0xFFFF5A3C, true);
 	}
 
 	/** Dots along a circular arc (degrees, 0 = right, counter-clockwise up); the first {@code fill} part is lit. */

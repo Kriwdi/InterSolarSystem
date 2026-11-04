@@ -1,0 +1,11 @@
+{
+  "type": "intersolarsystem:io",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "intersolarsystem:io_surface"
+    },
+    "settings": "intersolarsystem:io"
+  }
+}

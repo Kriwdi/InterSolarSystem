@@ -6,6 +6,9 @@
     "intersolarsystem:monazite_ore",
     "intersolarsystem:deepslate_titanium_ore",
     "intersolarsystem:deepslate_uraninite_ore",
-    "intersolarsystem:deepslate_monazite_ore"
+    "intersolarsystem:deepslate_monazite_ore",
+    "intersolarsystem:nickel_iron_ore",
+    "intersolarsystem:iridium_ore",
+    "intersolarsystem:metallic_hydrogen"
   ]
 }

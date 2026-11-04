@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/mercury_rock"
+      },
+      {
+        "model": "intersolarsystem:block/mercury_rock",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/mercury_rock",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/mercury_rock",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -82,7 +82,7 @@ public final class ZeroGravity {
 		if (p == null || mc.level == null) {
 			return;
 		}
-		if (!mc.level.dimension().equals(ShipDimensions.ORBIT) || p.isSpectator() || p.getAbilities().flying
+		if (!hu.kriwdi.intersolarsystem.space.Worlds.weightless(mc.level.dimension()) || p.isSpectator() || p.getAbilities().flying
 				|| p.isPassenger()) {
 			last = p.getDeltaMovement();
 			free = false;

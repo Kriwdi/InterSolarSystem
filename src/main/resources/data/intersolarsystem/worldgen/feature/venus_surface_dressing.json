@@ -1,0 +1,11 @@
+{
+  "type": "intersolarsystem:planet_surface",
+  "base": "intersolarsystem:venus_basalt",
+  "top": "intersolarsystem:venus_regolith",
+  "alt": "intersolarsystem:sulfur_crust",
+  "alt_chance": 0.06,
+  "under": "intersolarsystem:venus_regolith",
+  "depth": 3,
+  "ore": "intersolarsystem:sulfur_crust",
+  "ore_chance": 40
+}

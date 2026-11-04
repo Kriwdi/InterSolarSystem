@@ -1,0 +1,13 @@
+{
+  "type": "intersolarsystem:planet_surface",
+  "base": "intersolarsystem:mercury_rock",
+  "top": "intersolarsystem:mercury_regolith",
+  "alt": "intersolarsystem:hollow_crust",
+  "alt_chance": 0.03,
+  "under": "intersolarsystem:mercury_regolith",
+  "depth": 3,
+  "ore": "minecraft:iron_ore",
+  "ore_chance": 60,
+  "cap": "intersolarsystem:ceres_ice",
+  "cap_from": 3600
+}

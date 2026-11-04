@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/ceres_clay"
+      },
+      {
+        "model": "intersolarsystem:block/ceres_clay",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/ceres_clay",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/ceres_clay",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/europa_ice"
+      },
+      {
+        "model": "intersolarsystem:block/europa_ice",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/europa_ice",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/europa_ice",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -18,6 +18,20 @@
     "intersolarsystem:living_soil",
     "intersolarsystem:mars_regolith",
     "intersolarsystem:mars_dust",
-    "intersolarsystem:perchlorate_crust"
+    "intersolarsystem:perchlorate_crust",
+    "intersolarsystem:venus_regolith",
+    "intersolarsystem:sulfur_crust",
+    "intersolarsystem:mercury_regolith",
+    "intersolarsystem:hollow_crust",
+    "intersolarsystem:ceres_clay",
+    "intersolarsystem:carbonate_salt",
+    "intersolarsystem:ammonia_cloud",
+    "intersolarsystem:sulfide_cloud",
+    "intersolarsystem:water_cloud",
+    "intersolarsystem:storm_cloud",
+    "intersolarsystem:sulfur_plain",
+    "intersolarsystem:so2_frost",
+    "intersolarsystem:europa_salt",
+    "intersolarsystem:microbial_mat"
   ]
 }

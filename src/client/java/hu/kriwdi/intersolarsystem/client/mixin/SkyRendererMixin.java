@@ -116,8 +116,15 @@ public abstract class SkyRendererMixin {
 		net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
 		if (mc.level != null && (mc.level.dimension().equals(hu.kriwdi.intersolarsystem.ship.ShipDimensions.ORBIT)
 				|| mc.level.dimension().equals(hu.kriwdi.intersolarsystem.ship.ShipDimensions.MOON)
-				|| mc.level.dimension().equals(hu.kriwdi.intersolarsystem.ship.ShipDimensions.MOTHERSHIP))) {
+				|| mc.level.dimension().equals(hu.kriwdi.intersolarsystem.ship.ShipDimensions.MOTHERSHIP)
+				|| hu.kriwdi.intersolarsystem.space.Worlds.starry(mc.level.dimension()))) {
 			intersolarsystem$drawSpace(renderPass, poseStack, 1.0F, (float) Math.toDegrees(starAngle));
+		}
+		if (mc.level != null) {
+			var far = hu.kriwdi.intersolarsystem.space.Worlds.byDimension(mc.level.dimension());
+			if (far.isPresent()) {
+				intersolarsystem$drawFarSky(renderPass, poseStack, far.get().body(), (float) Math.toDegrees(sunAngle));
+			}
 		}
 		if (intersolarsystem$onMars()) {
 			intersolarsystem$drawSpace(renderPass, poseStack, starBrightness * 0.8F, (float) Math.toDegrees(starAngle));
@@ -219,6 +226,37 @@ public abstract class SkyRendererMixin {
 		poseStack.rotateDegrees(Axis.XP, sunDegrees + 28.0F);
 		intersolarsystem$sprite(renderPass, poseStack, "mars/earth_star", 100.0F, 1.6F, 1.0F);
 		poseStack.popPose();
+		poseStack.popPose();
+	}
+
+	/**
+	 * The worlds beyond Mars: Jupiter hangs fixed in the sky of its tidally locked moons (19 degrees across from Io,
+	 * 12 from Europa, low in the south), and Mercury's sun burns two and a half times as wide as Earth's, with its
+	 * corona.
+	 */
+	@Unique
+	private void intersolarsystem$drawFarSky(final RenderPass renderPass, final PoseStack poseStack, final String body,
+			final float sunDegrees) {
+		poseStack.pushPose();
+		poseStack.rotateDegrees(Axis.YP, -90.0F);
+		switch (body) {
+			case "io", "europa" -> {
+				poseStack.pushPose();
+				poseStack.rotateDegrees(Axis.XP, -38.0F);
+				poseStack.rotateDegrees(Axis.ZP, 8.0F);
+				intersolarsystem$sprite(renderPass, poseStack, "far/jupiter", 100.0F, "io".equals(body) ? 17.0F : 10.5F,
+						1.0F);
+				poseStack.popPose();
+			}
+			case "mercury" -> {
+				poseStack.pushPose();
+				poseStack.rotateDegrees(Axis.XP, sunDegrees);
+				intersolarsystem$sprite(renderPass, poseStack, "far/sun_corona", 100.0F, 42.0F, 1.0F);
+				poseStack.popPose();
+			}
+			default -> {
+			}
+		}
 		poseStack.popPose();
 	}
 

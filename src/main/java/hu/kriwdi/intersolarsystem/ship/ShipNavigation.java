@@ -58,6 +58,10 @@ public final class ShipNavigation {
 		if (ShipDimensions.MOTHERSHIP.identifier().toString().equals(dimension)) {
 			return "mothership";
 		}
+		var far = hu.kriwdi.intersolarsystem.space.Worlds.byDimension(dimension);
+		if (far.isPresent()) {
+			return far.get().body();
+		}
 		return "earth";
 	}
 
@@ -169,10 +173,14 @@ public final class ShipNavigation {
 		switch (body.get().status()) {
 			case LANDING -> {
 				flightTicks = TravelMath.legTicks(here(state), body.get().id(), tier, now);
+				var far = hu.kriwdi.intersolarsystem.space.Worlds.byBody(body.get().id());
 				boolean mars = "mars".equals(body.get().id());
-				int[] zone = mars ? hu.kriwdi.intersolarsystem.space.MarsSites.LANDING_ZONE : MoonSites.LANDING_ZONE;
+				int[] zone = far.isPresent() ? new int[] {far.get().landX(), far.get().landZ()}
+						: mars ? hu.kriwdi.intersolarsystem.space.MarsSites.LANDING_ZONE : MoonSites.LANDING_ZONE;
+				String dim = far.isPresent() ? far.get().dimension().identifier().toString()
+						: (mars ? ShipDimensions.MARS : ShipDimensions.MOON).identifier().toString();
 				started = state.beginTakeoff(zone[0], zone[1], now, seed, ShipFlightKind.NORMAL, body.get().id(),
-						flightTicks, (mars ? ShipDimensions.MARS : ShipDimensions.MOON).identifier().toString());
+						flightTicks, dim);
 			}
 			case DOCK -> {
 				flightTicks = TravelMath.legTicks(here(state), "mothership", tier, now);

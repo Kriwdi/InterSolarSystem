@@ -97,6 +97,14 @@ public final class ModItems {
 	public static final Item FUSION_DRIVE_KIT = register("fusion_drive_kit", Item::new,
 			new Item.Properties().stacksTo(1).rarity(Rarity.RARE));
 
+	/** From the asteroid belt's metal: the plasma drive and the radiation shielding need it. */
+	public static final Item IRIDIUM_INGOT = register("iridium_ingot", Item::new, new Item.Properties());
+	/** Suit modules: used while wearing the space suit, they are fitted to it for good (see space.SuitModules). */
+	public static final Item THERMAL_MODULE = register("thermal_module", Item::new, new Item.Properties().stacksTo(1));
+	public static final Item PRESSURE_MODULE = register("pressure_module", Item::new, new Item.Properties().stacksTo(1));
+	public static final Item RADIATION_MODULE = register("radiation_module", Item::new, new Item.Properties().stacksTo(1));
+	public static final Item TANK_MODULE = register("tank_module", Item::new, new Item.Properties().stacksTo(1));
+
 	/** Tier 4, for the mothership (installed at the helm): built from the asteroid belt's metals. */
 	public static final Item PLASMA_DRIVE_KIT = register("plasma_drive_kit", Item::new,
 			new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));

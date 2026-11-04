@@ -1,0 +1,11 @@
+{
+  "type": "intersolarsystem:planet_surface",
+  "base": "intersolarsystem:europa_ice",
+  "top": "intersolarsystem:europa_ice",
+  "alt": "intersolarsystem:lineae_ice",
+  "alt_chance": 0.12,
+  "under": "intersolarsystem:europa_ice",
+  "depth": 2,
+  "ore": "intersolarsystem:europa_salt",
+  "ore_chance": 50
+}

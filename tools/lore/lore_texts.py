@@ -323,6 +323,98 @@ TERMINALS = {
             "> asatas 0412\nA felülete mikrométerre sima, és hidegebb a körülötte lévő üledéknél. Középen egy rés fut le. A résből fény jön. 24 óra 39 percenként lüktet egyet: egy marsi nap.",
             "> asatas 0419\nA rover karja megérintette a rést, és a lüktetés megváltozott. A rover memóriájában most 2,1 GB van, amit nem mi tettünk oda. A parancsnok a rover leállítását kéri. Egyetértek. A roveren van a kulcs.",
             "> asatas 0421\nMa reggelre szélesebb lett a rés. Ne nyissátok ki. Ne engedjétek a rovert a közelébe. Ha ezt olvasod, hajóval jöttél: a rover memóriamagját a Földre vidd, ne a falhoz."]}},
+    "terminal_18": {
+        "en": {"title": "APHRODITE CLOUD STATION", "subtitle": "station chief R. Adeyemi", "pages": [
+            "> log, day 1\nFifty-five kilometres up, the air outside is one bar and twenty-seven degrees. Sulphuric, but you can stand on the deck in a light suit. The only place in the system that feels like a summer afternoon.",
+            "> log, day 412\nThe Ark schedule came in. Ark-4 skips Venus: 'window missed, crew to wait for Ark-6'. There is no Ark-6 on the list. 214 people on board. I have not told them yet.",
+            "> log, day 590\nLobe D tore in the night. We lose thirty metres a day. Below fifty kilometres the acid gets into everything. Kowalczyk takes capsule 2 down to the old surface relay to call Earth. Forty minutes of cooling. She says it is enough.",
+            "> log, day 593\nNo call. The lift still works, and the heat shields we made from the acid works' liners are good for a short walk below. Nobody goes down again. We trim ballast and wait. If you came by ship: you are the ship we waited for."]},
+        "hu": {"title": "APHRODITE FELHŐÁLLOMÁS", "subtitle": "R. Adeyemi állomásparancsnok", "pages": [
+            "> naplo, 1. nap\nÖtvenöt kilométer magasan kint egy bar a nyomás és huszonhét fok. Kénsavas, de könnyű ruhában ki lehet állni a fedélzetre. Az egyetlen hely a Naprendszerben, ami olyan, mint egy nyári délután.",
+            "> naplo, 412. nap\nMegjött a Bárkák menetrendje. A Bárka-4 kihagyja a Vénuszt: \"az ablak lezárult, a személyzet várja meg a Bárka-6-ot\". A listán nincs Bárka-6. 214 ember van a fedélzeten. Még nem mondtam meg nekik.",
+            "> naplo, 590. nap\nÉjjel kiszakadt a D emelőballon. Napi harminc métert vesztünk. Ötven kilométer alatt a sav mindenbe beeszi magát. Kowalczyk a 2-es kapszulával lemegy a régi felszíni reléhez, hogy hívja a Földet. Negyven perc hűtés. Azt mondja, elég.",
+            "> naplo, 593. nap\nNincs hívás. A lift még működik, és a savüzem béléséből gyártott hőpajzsok rövid sétára jók odalent. Senki nem megy le többé. Ballasztot dobunk és várunk. Ha hajóval jöttél: te vagy az a hajó, amire vártunk."]}},
+    "terminal_19": {
+        "en": {"title": "CAPSULE 2", "subtitle": "Dr. A. Kowalczyk / suit recorder", "pages": [
+            "> 00:00\nDown. Hard. The parachute burnt off at six kilometres, the shock struts took the rest. 462 degrees. The suit says forty minutes. The sky is orange and the light comes from everywhere.",
+            "> 00:09\nThe relay is dead. Acid in the junction box. I can see Venera 13 from here: a Soviet probe built to last half an hour, still standing after eighty years. Something about that makes me laugh.",
+            "> 00:21\nCooling at sixty percent. Not enough to climb back to the lift foot. Tell Aphrodite to stop waiting for Earth. Tell them the basalt here is warm and beautiful. Tell my brother in Gdansk... no. Nobody is in Gdansk."]},
+        "hu": {"title": "2-ES KAPSZULA", "subtitle": "Dr. A. Kowalczyk / ruharögzítő", "pages": [
+            "> 00:00\nLent vagyok. Keményen. Az ernyő hat kilométeren leégett, a többit a lengéscsillapítók nyelték el. 462 fok. A ruha negyven percet mond. Narancssárga az ég, és mindenhonnan jön a fény.",
+            "> 00:09\nA relé halott. Sav van a kapcsolódobozban. Innen látom a Venyera-13-at: egy szovjet szonda, amit fél órára építettek, és nyolcvan év után is áll. Ezen valamiért nevetnem kell.",
+            "> 00:21\nA hűtés hatvan százalékon. Nem elég, hogy visszamásszak a lift aljához. Mondjátok meg az Aphroditénak, hogy ne várják tovább a Földet. Mondjátok meg, hogy a bazalt itt meleg és gyönyörű. Mondjátok meg a bátyámnak Gdańskban... nem. Gdańskban nincs senki."]}},
+    "terminal_20": {
+        "en": {"title": "SUNSHADE CONTROL", "subtitle": "automatic / no crew aboard", "pages": [
+            "> status\nCREW ............. 0 (DEPARTED ON ARK-3)\nPOWER RELAY ...... NO RECEIVER\nFLARES LOGGED .... 1214 SINCE DEPARTURE\nSHELTER .......... READY",
+            "> schedule\nThe sun's flares follow the active regions. I read them and I sound the alarm 20 seconds before each. Nobody hears it. I keep the schedule. The schedule is what I am for.",
+            "> note to visitor\nThe day side is 430 degrees, the night side minus 180. Walk in the base's shadow or wear a heat shield. When the alarm sounds, go down to the flare shelter, or wear radiation shielding. I will tell you when it is over. I have always told them."]},
+        "hu": {"title": "SUNSHADE IRÁNYÍTÁS", "subtitle": "automata / személyzet nincs a fedélzeten", "pages": [
+            "> allapot\nSZEMÉLYZET ....... 0 (ELMENT A BÁRKA-3-MAL)\nENERGIARELÉ ...... NINCS VEVŐ\nNAPKITÖRÉSEK ..... 1214 AZ INDULÁS ÓTA\nÓVÓHELY .......... KÉSZ",
+            "> menetrend\nA napkitörések az aktív területeket követik. Olvasom őket, és mindegyik előtt 20 másodperccel megszólaltatom a riasztót. Senki nem hallja. Tartom a menetrendet. Ezért vagyok.",
+            "> uzenet a latogatonak\nA nappali oldal 430 fokos, az éjszakai mínusz 180. A bázis árnyékában járj, vagy viselj hőpajzsot. Ha szól a riasztó, menj le az óvóhelyre, vagy viselj sugárvédelmet. Szólok, ha vége. Nekik is mindig szóltam."]}},
+    "terminal_21": {
+        "en": {"title": "OCCATOR STATION", "subtitle": "cold archive / Dr. Y. Tanabe", "pages": [
+            "> archive\nThe brine under Occator stays liquid at minus forty because of the salt. Microbes kept in it sleep for decades. The Consortium sent us twelve strains to keep: the counter-culture from Project Reversal, the one that eats the Grey Bloom.",
+            "> archive, year 3\nThe strains are alive. I checked them every month. Earth stopped asking for reports. The Arks flew past without stopping: Ceres was 'not a priority destination'.",
+            "> archive, last\nI am leaving the archive in the tanks and the well open to the brine. If Earth ever needs its soil back, the cure is here, in the cold, waiting. Seal the tanks if you take them. Keep them moist."]},
+        "hu": {"title": "OCCATOR ÁLLOMÁS", "subtitle": "hideg archívum / Dr. Y. Tanabe", "pages": [
+            "> archivum\nAz Occator alatti sólé a só miatt mínusz negyven fokon is folyékony marad. A benne tartott mikrobák évtizedekig alszanak. A Konzorcium tizenkét törzset küldött megőrzésre: a Visszafordítás-projekt ellenkultúráját, amely felfalja a Szürke Virágzást.",
+            "> archivum, 3. ev\nA törzsek élnek. Minden hónapban ellenőriztem őket. A Föld már nem kér jelentést. A Bárkák megállás nélkül elhúztak mellettünk: a Ceres \"nem kiemelt célpont\".",
+            "> archivum, utolso\nAz archívumot a tartályokban hagyom, a kutat nyitva a sólé felé. Ha a Földnek valaha vissza kell kapnia a talaját, a gyógymód itt van, a hidegben, és vár. Zárd le a tartályokat, ha elviszed őket. Tartsd őket nedvesen."]}},
+    "terminal_22": {
+        "en": {"title": "VESTA MINING OUTPOST", "subtitle": "foreman L. Eriksen", "pages": [
+            "> shift report\nEvery Ark drive needs thirty kilos of iridium for the plasma chamber. Earth has none left to mine. The metal rocks out here have it in their cores. We cut it, mill it, and the haulers take it to Kármán.",
+            "> shift report\nTwelve drives' worth shipped. The INGRID BJORNSTAD left with the thirteenth load and went quiet at the edge of the debris field. We found her broken in two. Captain Haugen is still at the helm.",
+            "> to whoever comes\nSmelt the iridium. The drive kit wants it, with a fusion core and magnets: that makes an Ark drive run hot enough for Jupiter. Clip on, always. Out here, letting go is falling forever."]},
+        "hu": {"title": "VESTA BÁNYÁSZÁLLOMÁS", "subtitle": "L. Eriksen műszakvezető", "pages": [
+            "> muszakjelentes\nMinden Bárka-hajtómű plazmakamrájához harminc kiló irídium kell. A Földön már nincs mit bányászni. Az itteni fémes sziklák magjában van. Kivágjuk, megőröljük, a teherhajók pedig elviszik Kármánba.",
+            "> muszakjelentes\nTizenkét hajtóműnyit szállítottunk el. Az INGRID BJØRNSTAD a tizenharmadik rakománnyal indult el, és a törmelékmező szélén elhallgatott. Kettétörve találtuk meg. Haugen kapitány még mindig a kormánynál ül.",
+            "> annak, aki jon\nOlvaszd ki az irídiumot. A hajtóműkészlethez az kell, egy fúziós maggal és mágnesekkel együtt: attól lesz elég forró egy Bárka-hajtómű a Jupiterhez. Mindig csatold be magad. Itt kint az elengedés örök zuhanás."]}},
+    "terminal_23": {
+        "en": {"title": "ZEPHYR AEROSTAT", "subtitle": "harvest master I. Petrova", "pages": [
+            "> harvest\nThe scoops drink the ammonia deck and give us hydrogen and helium-3 by the tonne. The deeper the line, the richer the gas. Below the brown deck the pressure crushes a man without a shell. Below the blue deck it boils him too.",
+            "> harvest, day 301\nOkafor saw crystals under the water deck: metallic hydrogen, the Consortium's dream, the thing that makes a fusion core sing. He went down the long cable with a heat shield and a pressure shell. Forty minutes. He came back with four crystals and both modules ruined.",
+            "> harvest, day 340\nOkafor went down again. The cable came back up cut clean, as if by a blade, at ninety metres. There is nothing down there but cloud. Nothing at all. I have stopped the deep harvest."]},
+        "hu": {"title": "ZEPHYR AEROSZTÁT", "subtitle": "I. Petrova betakarítás-vezető", "pages": [
+            "> betakaritas\nA kanalak isszák az ammóniaréteget, és tonnaszám adják a hidrogént és a hélium-3-at. Minél mélyebbre ér a vezeték, annál gazdagabb a gáz. A barna réteg alatt a nyomás héj nélkül összeroppantja az embert. A kék réteg alatt meg is főzi.",
+            "> betakaritas, 301. nap\nOkafor kristályokat látott a vízfelhők alatt: fémes hidrogént, a Konzorcium álmát, amitől egy fúziós mag dalolni kezd. Hőpajzzsal és nyomásálló héjjal leereszkedett a hosszú kábelen. Negyven perc. Négy kristállyal jött vissza, és mindkét modulja tönkrement.",
+            "> betakaritas, 340. nap\nOkafor újra lement. A kábel kilencven méternél tisztán elvágva jött fel, mintha pengével vágták volna. Odalent nincs semmi, csak felhő. Semmi. Leállítottam a mélybetakarítást."]}},
+    "terminal_24": {
+        "en": {"title": "LOKI OBSERVATORY", "subtitle": "Dr. R. Mendes / dosimeter", "pages": [
+            "> dose\nIo sits inside Jupiter's radiation belts. Outside these walls: a lethal dose in a few hours. Inside: a working year's dose in a month. I count the days. The volcano does not care.",
+            "> dose, day 28\nLoki overturned last night. The crust of the lava lake sank in a wave that crossed the whole lake, like it does every 540 days. Nobody has seen that from the ground before. I have the whole thing on tape.",
+            "> dose, day 31\nThe relay to Europa is down, so the tape stays here. Over the limit now. Shielding module on the rack by the door if you need to go outside. Watch the lake turn over for me."]},
+        "hu": {"title": "LOKI OBSZERVATÓRIUM", "subtitle": "Dr. R. Mendes / doziméter", "pages": [
+            "> dozis\nAz Io a Jupiter sugárövein belül kering. Ezeken a falakon kívül néhány óra alatt halálos dózist kapsz. Belül egy havi munka egy évnyi dózis. Számolom a napokat. A vulkánt nem érdekli.",
+            "> dozis, 28. nap\nA Loki éjjel átfordult. A lávató kérge egy hullámban süllyedt el, ami végigment az egész tavon, ahogy 540 naponként mindig. Ezt még senki nem látta a felszínről. Az egészet felvettem.",
+            "> dozis, 31. nap\nAz Európa felé menő relé leállt, így a felvétel itt marad. Már túl vagyok a határértéken. Ha ki kell menned, az ajtó melletti polcon van sugárvédő modul. Nézd meg helyettem, ahogy átfordul a tó."]}},
+    "terminal_25": {
+        "en": {"title": "THERA DRILL STATION", "subtitle": "Dr. S. Lindqvist", "pages": [
+            "> shaft\nThe melt probe broke through at thirty metres. The water under the ice is plus four degrees, salty, and it moves: there are currents, warmed from the sea floor.",
+            "> camera 2\nMats. On the vents, on the ice ceiling, everywhere the warm water touches. They glow when the lamp goes off. Specimen tanks 1 to 3 hold samples. They are alive. They are not from Earth.",
+            "> last\nThe first life ever found beyond Earth, and there is nobody left on Earth to tell. I have sent it to every address I have. If you read this, then somebody knows. That is enough. Go down the shaft. Look."]},
+        "hu": {"title": "THERA FÚRÓÁLLOMÁS", "subtitle": "Dr. S. Lindqvist", "pages": [
+            "> akna\nAz olvasztószonda harminc méternél áttörte a jeget. A víz a jég alatt plusz négy fokos, sós, és mozog: áramlatok vannak, a tengerfenékről melegednek.",
+            "> 2-es kamera\nTelepek. A kürtőkön, a jégmennyezeten, mindenhol, ahol a meleg víz hozzáér. Világítanak, amikor lekapcsol a lámpa. Az 1-3. mintatartályban vannak minták. Élnek. Nem a Földről valók.",
+            "> utolso\nAz első élet, amit valaha a Földön kívül találtak, és nem maradt senki a Földön, akinek elmondhatnám. Minden címre elküldtem, ami megvan. Ha ezt olvasod, akkor valaki tudja. Ez elég. Menj le az aknán. Nézd meg."]}},
+    "terminal_26": {
+        "en": {"title": "ARK-1 CRYO HALL", "subtitle": "wake console", "pages": [
+            "> wake sequence\nWAKE CODES ....... ACCEPTED\nPOD 001-380 ...... NO LIFE SIGNS\nPOWER LOG ........ SOLAR TOWERS FAILED DAY 1690\nBACKUP ........... EXHAUSTED DAY 1702",
+            "> watch officer, day 1701\nI am the last one awake. The towers iced over in the long night and the batteries will not last. I cannot wake them: there is nothing to wake them to. No food, no air for 380.",
+            "> watch officer, day 1702\nI am going to sit with them. I am sorry. Whoever opened this: you did nothing wrong. We waited for you as long as we could."]},
+        "hu": {"title": "BÁRKA-1 HIBERNÁCIÓS CSARNOK", "subtitle": "ébresztőkonzol", "pages": [
+            "> ebresztesi sorozat\nÉBRESZTŐKÓDOK .... ELFOGADVA\nKAPSZULA 001-380 .. NINCS ÉLETJEL\nENERGIANAPLÓ ..... NAPTORNYOK LEÁLLTAK, 1690. NAP\nTARTALÉK ......... KIMERÜLT, 1702. NAP",
+            "> ugyeletes, 1701. nap\nÉn vagyok az utolsó, aki ébren van. A tornyok eljegesedtek a hosszú éjszakában, és az akkumulátorok nem bírják. Nem tudom felébreszteni őket: nincs mire. Nincs étel, nincs levegő 380 embernek.",
+            "> ugyeletes, 1702. nap\nLeülök közéjük. Sajnálom. Bárki is nyitotta meg ezt: nem tettél semmi rosszat. Vártunk rád, ameddig csak tudtunk."]}},
+    "terminal_27": {
+        "en": {"title": "ARK-2 DIG SITE", "subtitle": "field terminal / Dr. M. Ferreira", "pages": [
+            "> dig 0423\nGrey dust comes out of the seam when it pulses. Fine, loose, like ash. The sediment around the wall is going grey too, a hand's width a day. Nothing grows in it.",
+            "> dig 0425\nI sequenced the dust. It is VRD-7. Not like it: it is it, the Grey Bloom, older than any rock on this delta. Halcyon did not make the Bloom. They found it in a Martian meteorite and taught it to eat soil faster.",
+            "> dig 0426\nSomething knocks on the other side at night, once per sol, on the pulse. I have stopped going down. I am writing this so the next person understands: the wall is not a door to anything. It is a door for something."]},
+        "hu": {"title": "BÁRKA-2 FELTÁRÁS", "subtitle": "terepi terminál / Dr. M. Ferreira", "pages": [
+            "> asatas 0423\nSzürke por jön ki a résből, amikor lüktet. Finom, laza, mint a hamu. A fal körüli üledék is szürkül, naponta egy tenyérnyit. Semmi nem nő benne.",
+            "> asatas 0425\nSzekvenáltam a port. VRD-7. Nem hasonlít rá: ez az, a Szürke Virágzás, régebbi bármelyik kőzetnél ezen a deltán. A Halcyon nem megalkotta a Virágzást. Egy marsi meteoritban találták, és megtanították gyorsabban enni a talajt.",
+            "> asatas 0426\nÉjjelente valami kopog a túloldalon, solonként egyszer, a lüktetés ütemére. Nem megyek le többé. Azért írom ezt, hogy a következő megértse: a fal nem ajtó valahová. Ajtó valaminek."]}},
 }
 
 MANUALS = {

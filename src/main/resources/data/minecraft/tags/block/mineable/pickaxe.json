@@ -31,6 +31,17 @@
     "intersolarsystem:mars_rock",
     "intersolarsystem:mars_sandstone",
     "intersolarsystem:hematite_ore",
-    "intersolarsystem:mars_ice"
+    "intersolarsystem:mars_ice",
+    "intersolarsystem:venus_basalt",
+    "intersolarsystem:mercury_rock",
+    "intersolarsystem:ceres_ice",
+    "intersolarsystem:chondrite",
+    "intersolarsystem:carbonaceous_rock",
+    "intersolarsystem:nickel_iron_ore",
+    "intersolarsystem:iridium_ore",
+    "intersolarsystem:metallic_hydrogen",
+    "intersolarsystem:io_silicate",
+    "intersolarsystem:europa_ice",
+    "intersolarsystem:lineae_ice"
   ]
 }

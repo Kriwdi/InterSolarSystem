@@ -15,7 +15,7 @@ import java.util.Optional;
 public record CelestialBody(String id, Kind kind, Optional<String> parent, double transferDays, double synodicDays,
 		Status status, Optional<String> assist, int minTier, boolean viaMothership) {
 	public enum Kind {
-		PLANET, ORBIT, MOON, DWARF_PLANET, GAS_GIANT, ICE_GIANT;
+		PLANET, ORBIT, MOON, DWARF_PLANET, GAS_GIANT, ICE_GIANT, BELT;
 
 		static Kind of(String id) {
 			return valueOf(id.toUpperCase(Locale.ROOT));

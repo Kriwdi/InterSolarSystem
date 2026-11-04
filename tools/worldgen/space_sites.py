@@ -576,7 +576,8 @@ def ark1_colony():
             b.set(cx, 1, cz, S("control_cabinet", facing="north"))
             b.set(cx + 1, 1, cz, S("server_rack", facing="north"))
             b.set(cx - 1, 1, cz, S("battery_bank", facing="north"))
-            b.set(cx, 1, cz + 2, S("data_terminal", facing="south", log=15))
+            # The wake console: the colony's wake codes (log 26 runs the wake sequence).
+            b.set(cx, 1, cz + 2, S("data_terminal", facing="south", log=26))
         elif kind == "greenhouse":
             for x in range(-6, 7):
                 for z in range(-6, 7):
@@ -919,6 +920,8 @@ def ark2_colony():
         b.set(px + 12, y, pz, S("truss"))
     for y in range(-12, 12):
         b.set(px + 2, y, pz, S("iron_chain", axis="y", waterlogged="false"))
+    # Dr. Ferreira's field terminal at the bottom of the pit, facing the wall.
+    b.set(px - 4, -11, pz + 1, S("data_terminal", facing="north", log=27))
     # The wall: smooth black, curved, with a seam that glows.
     for x in range(-5, 6):
         for y in range(-16, -9):
@@ -958,13 +961,13 @@ def main():
          ark1_colony()] + \
         [viking(1), viking(2), pathfinder(), mer("spirit", True), mer("opportunity", False), curiosity(),
          perseverance(), zhurong(), insight(), ark2_colony()]
-    index = {}
+    out = Path(__file__).resolve().parents[2] / "src/main/resources/intersolarsystem/space_sites.json"
+    index = json.loads(out.read_text()) if out.exists() else {}
     for b in builds:
         size = b.save(b.name)
         index[b.name] = [min(p[i] for p in b.blocks) for i in range(3)]
         print(f"{b.name:28s} {size}")
     # Where the builder's origin lies inside each template (the Java side places by origin).
-    out = Path(__file__).resolve().parents[2] / "src/main/resources/intersolarsystem/space_sites.json"
     out.write_text(json.dumps(index, indent=1) + "\n")
 
 

@@ -62,6 +62,7 @@ public final class SpaceEnvironment {
 			if (mars != null) {
 				mars.getWorldBorder().setSize(hu.kriwdi.intersolarsystem.worldgen.MarsSurfaceFeature.SIZE);
 			}
+			Worlds.setBorders(server);
 			// The Earth is 20 000 blocks across. Only a border still at the vanilla default is changed, so a size an
 			// admin set on purpose stays.
 			var earthBorder = server.overworld().getWorldBorder();
@@ -80,7 +81,9 @@ public final class SpaceEnvironment {
 			boolean moon = player.level().dimension().equals(ShipDimensions.MOON);
 			boolean mars = player.level().dimension().equals(ShipDimensions.MARS);
 			boolean interior = player.level().dimension().equals(ShipDimensions.INTERIOR);
+			var far = Worlds.byDimension(player.level().dimension());
 			double gravity = orbit ? ORBIT_GRAVITY_FACTOR
+					: far.isPresent() ? far.get().gravity()
 					: moon ? MOON_GRAVITY_FACTOR
 					: mars ? MARS_GRAVITY_FACTOR
 					: interior && ship.condition(ShipSubsystem.STABILIZER) < STABILISER_FAILURE
@@ -91,9 +94,10 @@ public final class SpaceEnvironment {
 			if (player.isCreative() || player.isSpectator()) {
 				continue;
 			}
-			if (orbit || moon || mars) {
+			if (orbit || moon || mars || far.isPresent()) {
 				// Mars has air, but six millibars of carbon dioxide: as good as none.
 				VacuumBreathing.breathe(player, now);
+				far.ifPresent(w -> PlanetHazards.tick(player, w, now));
 			} else {
 				VacuumBreathing.breatheAir(player, now);
 				if (interior && ship.condition(ShipSubsystem.LIFE_SUPPORT) >= LIFE_SUPPORT_MINIMUM && now % 5 == 0) {

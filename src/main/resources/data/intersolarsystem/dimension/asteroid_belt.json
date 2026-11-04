@@ -1,0 +1,11 @@
+{
+  "type": "intersolarsystem:asteroid_belt",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "intersolarsystem:asteroid_belt_surface"
+    },
+    "settings": "intersolarsystem:asteroid_belt"
+  }
+}

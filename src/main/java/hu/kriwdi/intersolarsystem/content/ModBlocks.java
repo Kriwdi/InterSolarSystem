@@ -379,5 +379,6 @@ public final class ModBlocks {
 	/** Loads the class, which registers everything above. The items are listed in {@link ModCreativeTab}. */
 	public static void initialize() {
 		UrbanBlocks.initialize();
+		PlanetBlocks.initialize();
 	}
 }

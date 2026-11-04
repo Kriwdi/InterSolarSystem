@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/carbonaceous_rock"
+      },
+      {
+        "model": "intersolarsystem:block/carbonaceous_rock",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/carbonaceous_rock",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/carbonaceous_rock",
+        "y": 270
+      }
+    ]
+  }
+}

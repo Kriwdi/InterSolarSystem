@@ -2594,6 +2594,346 @@ public final class ModLangTable {
 				"Plasma Drive Kit (tier 4, mothership)",
 				"Plasmaantriebsset (Stufe 4, Mutterschiff)",
 				"Plazmahajtómű-készlet (4. szint, anyahajó)");
+		add(rows, "block.intersolarsystem.venus_basalt",
+				"Venusian Basalt",
+				"Venusbasalt",
+				"Vénuszi bazalt");
+		add(rows, "block.intersolarsystem.venus_regolith",
+				"Venusian Regolith",
+				"Venus-Regolith",
+				"Vénuszi regolit");
+		add(rows, "block.intersolarsystem.sulfur_crust",
+				"Sulfur Crust",
+				"Schwefelkruste",
+				"Kénkéreg");
+		add(rows, "block.intersolarsystem.mercury_rock",
+				"Mercurian Rock",
+				"Merkurgestein",
+				"Merkúri kőzet");
+		add(rows, "block.intersolarsystem.mercury_regolith",
+				"Mercurian Regolith",
+				"Merkur-Regolith",
+				"Merkúri regolit");
+		add(rows, "block.intersolarsystem.hollow_crust",
+				"Hollows Crust",
+				"Mulden-Kruste",
+				"Mélyedéskéreg");
+		add(rows, "block.intersolarsystem.ceres_clay",
+				"Cerean Clay",
+				"Ceres-Ton",
+				"Ceresi agyag");
+		add(rows, "block.intersolarsystem.ceres_ice",
+				"Cerean Ice",
+				"Ceres-Eis",
+				"Ceresi jég");
+		add(rows, "block.intersolarsystem.carbonate_salt",
+				"Carbonate Salt",
+				"Karbonatsalz",
+				"Karbonátsó");
+		add(rows, "block.intersolarsystem.chondrite",
+				"Chondrite",
+				"Chondrit",
+				"Kondrit");
+		add(rows, "block.intersolarsystem.carbonaceous_rock",
+				"Carbonaceous Rock",
+				"Kohliges Gestein",
+				"Széntartalmú kőzet");
+		add(rows, "block.intersolarsystem.nickel_iron_ore",
+				"Nickel-Iron Ore",
+				"Nickel-Eisen-Erz",
+				"Nikkel-vas érc");
+		add(rows, "block.intersolarsystem.iridium_ore",
+				"Iridium Ore",
+				"Iridiumerz",
+				"Irídiumérc");
+		add(rows, "block.intersolarsystem.ammonia_cloud",
+				"Ammonia Cloud",
+				"Ammoniakwolke",
+				"Ammóniafelhő");
+		add(rows, "block.intersolarsystem.sulfide_cloud",
+				"Hydrosulfide Cloud",
+				"Hydrosulfidwolke",
+				"Hidroszulfid-felhő");
+		add(rows, "block.intersolarsystem.water_cloud",
+				"Water Cloud",
+				"Wasserwolke",
+				"Vízfelhő");
+		add(rows, "block.intersolarsystem.storm_cloud",
+				"Great Red Spot Cloud",
+				"Wolke des Großen Roten Flecks",
+				"A Nagy Vörös Folt felhője");
+		add(rows, "block.intersolarsystem.metallic_hydrogen",
+				"Metallic Hydrogen Crystal",
+				"Metallischer Wasserstoff",
+				"Fémes hidrogén kristály");
+		add(rows, "block.intersolarsystem.sulfur_plain",
+				"Ionian Sulfur",
+				"Io-Schwefel",
+				"Iói kén");
+		add(rows, "block.intersolarsystem.io_silicate",
+				"Ionian Silicate Rock",
+				"Io-Silikatgestein",
+				"Iói szilikátkőzet");
+		add(rows, "block.intersolarsystem.so2_frost",
+				"Sulfur Dioxide Frost",
+				"Schwefeldioxid-Reif",
+				"Kén-dioxid dér");
+		add(rows, "block.intersolarsystem.europa_ice",
+				"Europan Ice",
+				"Europa-Eis",
+				"Európai jég");
+		add(rows, "block.intersolarsystem.lineae_ice",
+				"Lineae Ice",
+				"Lineae-Eis",
+				"Vonalas jég");
+		add(rows, "block.intersolarsystem.europa_salt",
+				"Europan Salt",
+				"Europa-Salz",
+				"Európai só");
+		add(rows, "block.intersolarsystem.microbial_mat",
+				"Microbial Mat",
+				"Mikrobenmatte",
+				"Mikrobaszőnyeg");
+		add(rows, "item.intersolarsystem.iridium_ingot",
+				"Iridium Ingot",
+				"Iridiumbarren",
+				"Irídiumrúd");
+		add(rows, "item.intersolarsystem.thermal_module",
+				"Suit Module: Heat Shield",
+				"Anzugmodul: Hitzeschild",
+				"Ruhamodul: hőpajzs");
+		add(rows, "item.intersolarsystem.pressure_module",
+				"Suit Module: Pressure Shell",
+				"Anzugmodul: Druckhülle",
+				"Ruhamodul: nyomásálló réteg");
+		add(rows, "item.intersolarsystem.radiation_module",
+				"Suit Module: Radiation Shielding",
+				"Anzugmodul: Strahlenschutz",
+				"Ruhamodul: sugárvédelem");
+		add(rows, "item.intersolarsystem.tank_module",
+				"Suit Module: Extended Tank",
+				"Anzugmodul: Großer Tank",
+				"Ruhamodul: nagy tartály");
+		add(rows, "body.intersolarsystem.asteroid_belt",
+				"Asteroid Belt",
+				"Asteroidengürtel",
+				"Kisbolygóöv");
+		add(rows, "body.intersolarsystem.io",
+				"Io",
+				"Io",
+				"Io");
+		add(rows, "body.intersolarsystem.europa",
+				"Europa",
+				"Europa",
+				"Európa");
+		add(rows, "mothership.intersolarsystem.place.mercury_orbit",
+				"Mercury orbit",
+				"Merkurumlaufbahn",
+				"Merkúr körüli pálya");
+		add(rows, "mothership.intersolarsystem.place.venus_orbit",
+				"Venus orbit",
+				"Venusumlaufbahn",
+				"Vénusz körüli pálya");
+		add(rows, "mothership.intersolarsystem.place.asteroid_belt_orbit",
+				"Asteroid Belt (Ceres)",
+				"Asteroidengürtel (Ceres)",
+				"Kisbolygóöv (Ceres)");
+		add(rows, "mothership.intersolarsystem.place.jupiter_orbit",
+				"Jupiter orbit",
+				"Jupiterumlaufbahn",
+				"Jupiter körüli pálya");
+		add(rows, "message.intersolarsystem.landed.venus",
+				"Docked at the Aphrodite cloud city, 55 km above the surface of Venus (%s, %s). Below the clouds: 460 °C and 92 bar.",
+				"An der Wolkenstadt Aphrodite angelegt, 55 km über der Venusoberfläche (%s, %s). Unter den Wolken: 460 °C und 92 bar.",
+				"Kikötöttünk az Aphrodite felhővárosnál, 55 km-rel a Vénusz felszíne fölött (%s, %s). A felhők alatt: 460 °C és 92 bar.");
+		add(rows, "message.intersolarsystem.landed.mercury",
+				"Landed in the shadow of Sunshade Base on Mercury (%s, %s). Mind the sun and the flare warnings.",
+				"Im Schatten der Sunshade-Basis auf dem Merkur gelandet (%s, %s). Achte auf die Sonne und die Flare-Warnungen.",
+				"Leszálltunk a Merkúron, a Sunshade bázis árnyékában (%s, %s). Vigyázz a napra és a napkitörés-figyelmeztetésekre.");
+		add(rows, "message.intersolarsystem.landed.ceres",
+				"Landed by Occator crater on Ceres (%s, %s).",
+				"Am Krater Occator auf Ceres gelandet (%s, %s).",
+				"Leszálltunk a Ceresen, az Occator-kráter mellett (%s, %s).");
+		add(rows, "message.intersolarsystem.landed.asteroid_belt",
+				"Docked at the Vesta Mining Outpost in the asteroid belt (%s, %s). Weightless: clip your tether.",
+				"An der Bergbaustation Vesta im Asteroidengürtel angedockt (%s, %s). Schwerelos: Sicherungsleine einklinken.",
+				"Kikötöttünk a Vesta bányászállomásnál a kisbolygóövben (%s, %s). Súlytalanság: akaszd be a biztosítókötelet.");
+		add(rows, "message.intersolarsystem.landed.jupiter",
+				"Docked at the Zephyr aerostat above Jupiter's ammonia clouds (%s, %s). There is no ground. The deeper, the richer, and the deadlier.",
+				"Am Aerostat Zephyr über Jupiters Ammoniakwolken angedockt (%s, %s). Es gibt keinen Boden. Je tiefer, desto reicher und tödlicher.",
+				"Kikötöttünk a Zephyr aerosztátnál a Jupiter ammóniafelhői fölött (%s, %s). Nincs talaj. Minél mélyebbre, annál értékesebb és halálosabb.");
+		add(rows, "message.intersolarsystem.landed.io",
+				"Landed on Io by the Loki observatory (%s, %s). Jupiter's radiation: stay under cover without shielding.",
+				"Auf Io beim Loki-Observatorium gelandet (%s, %s). Jupiters Strahlung: ohne Abschirmung in Deckung bleiben.",
+				"Leszálltunk az Ión, a Loki obszervatóriumnál (%s, %s). Jupiter sugárzása: árnyékolás nélkül maradj fedezékben.");
+		add(rows, "message.intersolarsystem.landed.europa",
+				"Landed on Europa by the Thera drill station (%s, %s). Under the ice: an ocean.",
+				"Auf Europa bei der Bohrstation Thera gelandet (%s, %s). Unter dem Eis: ein Ozean.",
+				"Leszálltunk az Európán, a Thera fúróállomásnál (%s, %s). A jég alatt: óceán.");
+		add(rows, "suit.intersolarsystem.module.wear_suit",
+				"Put on the space suit to fit a module.",
+				"Zieh den Raumanzug an, um ein Modul einzubauen.",
+				"Vedd fel az űrruhát a modul beszereléséhez.");
+		add(rows, "suit.intersolarsystem.module.already",
+				"The suit already has the %s.",
+				"Der Anzug hat bereits: %s.",
+				"A ruhán már van: %s.");
+		add(rows, "suit.intersolarsystem.module.fitted",
+				"Fitted: %s.",
+				"Eingebaut: %s.",
+				"Beszerelve: %s.");
+		add(rows, "suit.intersolarsystem.module.thermal",
+				"heat shield",
+				"Hitzeschild",
+				"hőpajzs");
+		add(rows, "suit.intersolarsystem.module.pressure",
+				"pressure shell",
+				"Druckhülle",
+				"nyomásálló héj");
+		add(rows, "suit.intersolarsystem.module.radiation",
+				"radiation shielding",
+				"Strahlenschutz",
+				"sugárvédelem");
+		add(rows, "suit.intersolarsystem.module.tank",
+				"extended tank",
+				"Zusatztank",
+				"kiegészítő tartály");
+		add(rows, "hud.intersolarsystem.module.thermal",
+				"◆ THERMAL",
+				"◆ THERMO",
+				"◆ HŐ");
+		add(rows, "hud.intersolarsystem.module.pressure",
+				"◆ PRESSURE",
+				"◆ DRUCK",
+				"◆ NYOMÁS");
+		add(rows, "hud.intersolarsystem.module.radiation",
+				"◆ RAD",
+				"◆ STRAHL",
+				"◆ SUGÁR");
+		add(rows, "hud.intersolarsystem.module.tank",
+				"◆ TANK+",
+				"◆ TANK+",
+				"◆ TARTÁLY+");
+		add(rows, "hazard.intersolarsystem.none",
+				"-",
+				"-",
+				"-");
+		add(rows, "hazard.intersolarsystem.acid",
+				"SULPHURIC ACID: SUIT CORRODING",
+				"SCHWEFELSÄURE: ANZUG KORRODIERT",
+				"KÉNSAV: A RUHA KORRODÁL");
+		add(rows, "hazard.intersolarsystem.venus_surface",
+				"460 °C · 92 BAR",
+				"460 °C · 92 BAR",
+				"460 °C · 92 BAR");
+		add(rows, "hazard.intersolarsystem.sun_heat",
+				"SUNLIT SIDE: 430 °C",
+				"SONNENSEITE: 430 °C",
+				"NAPOS OLDAL: 430 °C");
+		add(rows, "hazard.intersolarsystem.night_cold",
+				"NIGHT SIDE: -180 °C",
+				"NACHTSEITE: -180 °C",
+				"ÉJSZAKAI OLDAL: -180 °C");
+		add(rows, "hazard.intersolarsystem.flare_warning",
+				"SOLAR FLARE INCOMING: TAKE COVER",
+				"SONNENERUPTION NAHT: IN DECKUNG",
+				"NAPKITÖRÉS ÉRKEZIK: FEDEZÉKBE");
+		add(rows, "hazard.intersolarsystem.flare",
+				"SOLAR FLARE",
+				"SONNENERUPTION",
+				"NAPKITÖRÉS");
+		add(rows, "hazard.intersolarsystem.radiation",
+				"RADIATION: JUPITER'S BELTS",
+				"STRAHLUNG: JUPITERS GÜRTEL",
+				"SUGÁRZÁS: A JUPITER SUGÁRÖVEI");
+		add(rows, "hazard.intersolarsystem.jupiter_pressure",
+				"CRUSHING PRESSURE",
+				"ERDRÜCKENDER DRUCK",
+				"ZÚZÓ NYOMÁS");
+		add(rows, "hazard.intersolarsystem.jupiter_heat",
+				"PRESSURE AND HEAT",
+				"DRUCK UND HITZE",
+				"NYOMÁS ÉS HŐSÉG");
+		add(rows, "hazard.intersolarsystem.jupiter_death",
+				"NO RETURN",
+				"KEINE RÜCKKEHR",
+				"NINCS VISSZAÚT");
+		add(rows, "death.attack.intersolarsystem.heat",
+				"%1$s was cooked alive",
+				"%1$s wurde lebendig gegart",
+				"%1$s élve megfőtt");
+		add(rows, "death.attack.intersolarsystem.heat.player",
+				"%1$s was cooked alive whilst fighting %2$s",
+				"%1$s wurde im Kampf mit %2$s lebendig gegart",
+				"%1$s élve megfőtt, miközben %2$s ellen harcolt");
+		add(rows, "death.attack.intersolarsystem.crushing",
+				"%1$s was crushed by the atmosphere",
+				"%1$s wurde von der Atmosphäre zerquetscht",
+				"%1$s-t összeroppantotta a légkör");
+		add(rows, "death.attack.intersolarsystem.crushing.player",
+				"%1$s was crushed by the atmosphere whilst fighting %2$s",
+				"%1$s wurde im Kampf mit %2$s von der Atmosphäre zerquetscht",
+				"%1$s-t összeroppantotta a légkör, miközben %2$s ellen harcolt");
+		add(rows, "death.attack.intersolarsystem.radiation",
+				"%1$s received a lethal dose",
+				"%1$s erhielt eine tödliche Dosis",
+				"%1$s halálos dózist kapott");
+		add(rows, "death.attack.intersolarsystem.radiation.player",
+				"%1$s received a lethal dose whilst fighting %2$s",
+				"%1$s erhielt im Kampf mit %2$s eine tödliche Dosis",
+				"%1$s halálos dózist kapott, miközben %2$s ellen harcolt");
+		add(rows, "venus.intersolarsystem.lift_down",
+				"The lift drops through the clouds: 55 km, eleven minutes. The hull groans as the pressure builds.",
+				"Der Aufzug fällt durch die Wolken: 55 km, elf Minuten. Die Hülle ächzt unter dem steigenden Druck.",
+				"A lift lezuhan a felhőkön át: 55 km, tizenegy perc. A burkolat nyög, ahogy nő a nyomás.");
+		add(rows, "venus.intersolarsystem.lift_up",
+				"The lift climbs back up to Aphrodite.",
+				"Der Aufzug steigt zurück nach Aphrodite.",
+				"A lift visszakapaszkodik az Aphroditéhoz.");
+		add(rows, "wake.intersolarsystem.ark1.accepted",
+				"> WAKE CODES ACCEPTED. Colony wake sequence started.",
+				"> WECKCODES AKZEPTIERT. Weckablauf der Kolonie gestartet.",
+				"> ÉBRESZTŐKÓDOK ELFOGADVA. A kolónia ébresztési sorozata elindult.");
+		add(rows, "wake.intersolarsystem.ark1.thawing",
+				"> Thawing... pod heaters on... circulation priming...",
+				"> Auftauen... Kapselheizungen an... Kreislauf wird vorbereitet...",
+				"> Kiolvasztás... kapszulafűtés be... keringés indítása...");
+		add(rows, "wake.intersolarsystem.ark1.pod",
+				"> POD %s ........ NO LIFE SIGNS",
+				"> KAPSEL %s ...... KEINE LEBENSZEICHEN",
+				"> KAPSZULA %s .... NINCS ÉLETJEL");
+		add(rows, "wake.intersolarsystem.ark1.all",
+				"> PODS 001-380 ... NO LIFE SIGNS. Wake sequence aborted.",
+				"> KAPSELN 001-380 . KEINE LEBENSZEICHEN. Weckablauf abgebrochen.",
+				"> KAPSZULÁK 001-380  NINCS ÉLETJEL. Az ébresztés megszakítva.");
+		add(rows, "wake.intersolarsystem.ark1.message",
+				"One stored message from the watch officer.",
+				"Eine gespeicherte Nachricht des Wachoffiziers.",
+				"Egy tárolt üzenet az ügyeletes tiszttől.");
+		add(rows, "jezero.intersolarsystem.whisper.0",
+				"...open...",
+				"...öffne...",
+				"...nyisd...");
+		add(rows, "jezero.intersolarsystem.whisper.1",
+				"...you came on a ship...",
+				"...du kamst mit einem Schiff...",
+				"...hajóval jöttél...");
+		add(rows, "jezero.intersolarsystem.whisper.2",
+				"...the soil was ours first...",
+				"...der Boden war zuerst unser...",
+				"...a talaj előbb a miénk volt...");
+		add(rows, "jezero.intersolarsystem.whisper.3",
+				"[signal on the suit channel: no source]",
+				"[Signal auf dem Anzugkanal: keine Quelle]",
+				"[jel a ruha csatornáján: nincs forrás]");
+		add(rows, "jezero.intersolarsystem.whisper.4",
+				"...grey... grey... grey...",
+				"...grau... grau... grau...",
+				"...szürke... szürke... szürke...");
+		add(rows, "jezero.intersolarsystem.core_answers",
+				"The memory core grows warm in your hand. The seam answers it.",
+				"Der Speicherkern wird warm in deiner Hand. Der Spalt antwortet ihm.",
+				"A memóriamag felmelegszik a kezedben. A rés válaszol neki.");
 		check(rows);
 		return List.copyOf(rows);
 	}

@@ -36,14 +36,18 @@
       "kind": "planet",
       "transfer_days": 150,
       "synodic_days": 584,
-      "status": "locked"
+      "status": "landing",
+      "min_tier": 3,
+      "via_mothership": true
     },
     {
       "id": "mercury",
       "kind": "planet",
       "transfer_days": 105,
       "synodic_days": 116,
-      "status": "locked"
+      "status": "landing",
+      "min_tier": 3,
+      "via_mothership": true
     },
     {
       "id": "mars",
@@ -55,18 +59,52 @@
       "via_mothership": true
     },
     {
+      "id": "asteroid_belt",
+      "kind": "belt",
+      "transfer_days": 420,
+      "synodic_days": 450,
+      "status": "landing",
+      "min_tier": 3,
+      "via_mothership": true
+    },
+    {
       "id": "ceres",
       "kind": "dwarf_planet",
       "transfer_days": 460,
       "synodic_days": 467,
-      "status": "locked"
+      "status": "landing",
+      "min_tier": 3,
+      "via_mothership": true,
+      "parent": "asteroid_belt"
     },
     {
       "id": "jupiter",
       "kind": "gas_giant",
       "transfer_days": 2190,
       "synodic_days": 399,
-      "status": "locked"
+      "status": "landing",
+      "min_tier": 4,
+      "via_mothership": true
+    },
+    {
+      "id": "io",
+      "kind": "moon",
+      "parent": "jupiter",
+      "transfer_days": 2190,
+      "synodic_days": 399,
+      "status": "landing",
+      "min_tier": 4,
+      "via_mothership": true
+    },
+    {
+      "id": "europa",
+      "kind": "moon",
+      "parent": "jupiter",
+      "transfer_days": 2190,
+      "synodic_days": 399,
+      "status": "landing",
+      "min_tier": 4,
+      "via_mothership": true
     },
     {
       "id": "saturn",

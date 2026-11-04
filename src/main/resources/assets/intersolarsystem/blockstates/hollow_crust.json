@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/hollow_crust"
+      },
+      {
+        "model": "intersolarsystem:block/hollow_crust",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/hollow_crust",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/hollow_crust",
+        "y": 270
+      }
+    ]
+  }
+}

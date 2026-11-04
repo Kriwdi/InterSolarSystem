@@ -71,7 +71,7 @@ public final class OrbitalEva {
 	public static void register() {
 		UseBlockCallback.EVENT.register((player, level, hand, hit) -> {
 			ItemStack held = player.getItemInHand(hand);
-			if (!held.is(ModItems.SAFETY_TETHER) || !level.dimension().equals(ShipDimensions.ORBIT)) {
+			if (!held.is(ModItems.SAFETY_TETHER) || !Worlds.weightless(level.dimension())) {
 				return InteractionResult.PASS;
 			}
 			if (player instanceof ServerPlayer sp && !player.isShiftKeyDown()) {
@@ -137,7 +137,7 @@ public final class OrbitalEva {
 
 	/** Uses up the manoeuvring unit's propellant (its wear) for the jets' burn. */
 	private static void burn(ServerPlayer player, int ticks) {
-		if (ticks == 0 || !player.level().dimension().equals(ShipDimensions.ORBIT)) {
+		if (ticks == 0 || !Worlds.weightless(player.level().dimension())) {
 			return;
 		}
 		ItemStack mmu = findMmu(player);

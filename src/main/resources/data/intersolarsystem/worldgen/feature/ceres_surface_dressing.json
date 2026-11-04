@@ -1,0 +1,11 @@
+{
+  "type": "intersolarsystem:planet_surface",
+  "base": "intersolarsystem:ceres_clay",
+  "top": "intersolarsystem:ceres_clay",
+  "alt": "intersolarsystem:carbonate_salt",
+  "alt_chance": 0.02,
+  "under": "intersolarsystem:ceres_clay",
+  "depth": 4,
+  "ore": "intersolarsystem:ceres_ice",
+  "ore_chance": 8
+}

@@ -147,7 +147,8 @@ public final class VacuumBreathing {
 				level.playSound(null, player.blockPosition(), ModSounds.SUIT_LEAK, SoundSource.PLAYERS, 0.45F,
 						0.9F + player.getRandom().nextFloat() * 0.2F);
 			}
-			int every = leak ? 5 : 20;
+			// The extended tank module makes the oxygen last half again as long.
+			int every = leak ? 5 : SuitModules.has(suit, SuitModules.TANK) ? 30 : 20;
 			if (now % every == 0) {
 				suit.setDamageValue(Math.min(suit.getMaxDamage() - 1, suit.getDamageValue() + 1));
 				if (suit.getDamageValue() >= suit.getMaxDamage() - 1) {

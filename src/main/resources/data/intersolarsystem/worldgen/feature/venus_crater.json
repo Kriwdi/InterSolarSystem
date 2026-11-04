@@ -1,0 +1,8 @@
+{
+  "type": "intersolarsystem:crater",
+  "min_radius": 6,
+  "max_radius": 9,
+  "floor": "intersolarsystem:venus_regolith",
+  "fresh": "intersolarsystem:sulfur_crust",
+  "rim": "intersolarsystem:venus_basalt"
+}

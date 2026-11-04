@@ -135,6 +135,39 @@ public final class SpaceSites extends SavedData {
 		state.setDirty();
 	}
 
+	/** The sites of one of the worlds beyond Mars ({@link Worlds}), once. */
+	public static void ensureWorld(ServerLevel level, Worlds.World w) {
+		SpaceSites state = get(level.getServer());
+		if (state.placed.contains(w.body())) {
+			return;
+		}
+		for (Worlds.Site s : w.sites()) {
+			int x = w.landX() + s.dx();
+			int z = w.landZ() + s.dz();
+			BlockPos at = s.height() >= 0 ? new BlockPos(x, s.height(), z) : groundBelow(level, x, z, 8,
+					Worlds.groundScanFrom(w));
+			SiteTemplates.place(level, s.template(), at);
+			PLACED_AT.put(s.template(), at);
+		}
+		state.placed.add(w.body());
+		state.setDirty();
+	}
+
+	/** Whether a group of sites ("moon", "mars", a far world) is in this world yet. */
+	public boolean placedGroup(String group) {
+		return placed.contains(group);
+	}
+
+	/** One-time story events of this world (the Ark-1 wake). */
+	public boolean flagged(String key) {
+		return placed.contains("flag:" + key);
+	}
+
+	public void flag(String key) {
+		placed.add("flag:" + key);
+		setDirty();
+	}
+
 	/** The regolith layer a site stands on: the median surface over a few samples round the centre. */
 	public static BlockPos ground(ServerLevel moon, int x, int z, int spread) {
 		int[] ys = new int[9];
@@ -142,6 +175,19 @@ public final class SpaceSites extends SavedData {
 		for (int dx = -1; dx <= 1; dx++) {
 			for (int dz = -1; dz <= 1; dz++) {
 				ys[i++] = MoonSites.surface(moon, x + dx * spread, z + dz * spread).getY();
+			}
+		}
+		java.util.Arrays.sort(ys);
+		return new BlockPos(x, ys[4] - 1, z);
+	}
+
+	/** Like {@link #ground}, scanning down from {@code fromY} (under Venus's cloud city). */
+	static BlockPos groundBelow(ServerLevel level, int x, int z, int spread, int fromY) {
+		int[] ys = new int[9];
+		int i = 0;
+		for (int dx = -1; dx <= 1; dx++) {
+			for (int dz = -1; dz <= 1; dz++) {
+				ys[i++] = Worlds.surfaceBelow(level, x + dx * spread, z + dz * spread, fromY).getY();
 			}
 		}
 		java.util.Arrays.sort(ys);

@@ -2,6 +2,9 @@
   "replace": false,
   "values": [
     "intersolarsystem:hypoxia",
-    "intersolarsystem:decompression"
+    "intersolarsystem:decompression",
+    "intersolarsystem:heat",
+    "intersolarsystem:crushing",
+    "intersolarsystem:radiation"
   ]
 }
