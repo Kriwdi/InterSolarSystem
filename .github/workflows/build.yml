@@ -48,6 +48,8 @@ jobs:
         run: |
           # Starts the dedicated server with the mod; it stops itself once data packs, recipes and loot are loaded.
           mkdir -p run && echo "eula=true" > run/eula.txt
+          # The smoke test searches the whole map for every structure in one tick: no watchdog.
+          printf "max-tick-time=-1\n" > run/server.properties
           timeout 900 ./gradlew runServer -Psmoketest 2>&1 | tee server.log || true
           if ! grep -q "\[SMOKETEST\] server started" server.log; then
             echo "::error::Smoke test: the server did not finish starting"; exit 1
