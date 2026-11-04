@@ -1,0 +1,84 @@
+===== net.minecraft.world.level.biome.BiomeSource
+Compiled from "BiomeSource.java"
+public abstract class net.minecraft.world.level.biome.BiomeSource {
+  public static final com.mojang.serialization.Codec<net.minecraft.world.level.biome.BiomeSource> CODEC;
+  protected net.minecraft.world.level.biome.BiomeSource();
+  protected abstract com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.biome.BiomeSource> codec();
+  protected abstract java.util.stream.Stream<net.minecraft.core.Holder<net.minecraft.world.level.biome.Biome>> collectPossibleBiomes();
+  public java.util.Set<net.minecraft.core.Holder<net.minecraft.world.level.biome.Biome>> possibleBiomes();
+  public com.mojang.datafixers.util.Pair<net.minecraft.core.BlockPos, net.minecraft.core.Holder<net.minecraft.world.level.biome.Biome>> findBiomeHorizontal(int, int, int, int, java.util.function.Predicate<net.minecraft.core.Holder<net.minecraft.world.level.biome.Biome>>, net.minecraft.util.RandomSource, net.minecraft.world.level.levelgen.RandomState);
+  public com.mojang.datafixers.util.Pair<net.minecraft.core.BlockPos, net.minecraft.core.Holder<net.minecraft.world.level.biome.Biome>> findClosestBiome3d(net.minecraft.core.BlockPos, int, int, int, java.util.function.Predicate<net.minecraft.core.Holder<net.minecraft.world.level.biome.Biome>>, net.minecraft.world.level.levelgen.RandomState, net.minecraft.world.level.LevelReader);
+  public com.mojang.datafixers.util.Pair<net.minecraft.core.BlockPos, net.minecraft.core.Holder<net.minecraft.world.level.biome.Biome>> findBiomeHorizontal(int, int, int, int, int, java.util.function.Predicate<net.minecraft.core.Holder<net.minecraft.world.level.biome.Biome>>, net.minecraft.util.RandomSource, boolean, net.minecraft.world.level.levelgen.RandomState);
+  public final net.minecraft.world.level.biome.BiomeResolver createUncachedResolver(net.minecraft.world.level.levelgen.RandomState);
+  public final net.minecraft.world.level.biome.BiomeResolver createCachingResolver(net.minecraft.world.level.levelgen.RandomState);
+  public abstract net.minecraft.world.level.biome.BiomeResolver createResolver(net.minecraft.world.level.biome.Climate$Sampler);
+  public net.minecraft.world.level.biome.BiomeResolver createResolverForChunk(net.minecraft.world.level.biome.Climate$Sampler, int, int, int, int, int, int);
+  public void addDebugInfo(java.util.List<java.lang.String>, net.minecraft.core.BlockPos, net.minecraft.world.level.biome.Climate$Sampler);
+}
+===== net.minecraft.world.level.biome.BiomeResolver
+Compiled from "BiomeResolver.java"
+public interface net.minecraft.world.level.biome.BiomeResolver {
+  public abstract net.minecraft.core.Holder<net.minecraft.world.level.biome.Biome> getNoiseBiome(int, int, int);
+  public default java.util.Set<net.minecraft.core.Holder<net.minecraft.world.level.biome.Biome>> getBiomesWithin(int, int, int, int);
+}
+===== net.minecraft.world.level.biome.Climate$Sampler
+Compiled from "Climate.java"
+public final class net.minecraft.world.level.biome.Climate$Sampler extends java.lang.Record {
+  public net.minecraft.world.level.biome.Climate$Sampler(net.minecraft.world.level.levelgen.densityfunction.DensitySampler$Bound, net.minecraft.world.level.levelgen.densityfunction.DensitySampler$Bound, net.minecraft.world.level.levelgen.densityfunction.DensitySampler$Bound, net.minecraft.world.level.levelgen.densityfunction.DensitySampler$Bound, net.minecraft.world.level.levelgen.densityfunction.DensitySampler$Bound, net.minecraft.world.level.levelgen.densityfunction.DensitySampler$Bound);
+  public net.minecraft.world.level.biome.Climate$TargetPoint sample(int, int, int);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.level.levelgen.densityfunction.DensitySampler$Bound temperature();
+  public net.minecraft.world.level.levelgen.densityfunction.DensitySampler$Bound humidity();
+  public net.minecraft.world.level.levelgen.densityfunction.DensitySampler$Bound continentalness();
+  public net.minecraft.world.level.levelgen.densityfunction.DensitySampler$Bound erosion();
+  public net.minecraft.world.level.levelgen.densityfunction.DensitySampler$Bound depth();
+  public net.minecraft.world.level.levelgen.densityfunction.DensitySampler$Bound weirdness();
+}
+===== net.minecraft.world.level.biome.Climate$TargetPoint
+Compiled from "Climate.java"
+public final class net.minecraft.world.level.biome.Climate$TargetPoint extends java.lang.Record {
+  public net.minecraft.world.level.biome.Climate$TargetPoint(long, long, long, long, long, long);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public long temperature();
+  public long humidity();
+  public long continentalness();
+  public long erosion();
+  public long depth();
+  public long weirdness();
+}
+===== net.minecraft.world.level.biome.MultiNoiseBiomeSource
+Compiled from "MultiNoiseBiomeSource.java"
+public class net.minecraft.world.level.biome.MultiNoiseBiomeSource extends net.minecraft.world.level.biome.BiomeSource {
+  public static final com.mojang.serialization.MapCodec<net.minecraft.world.level.biome.Climate$ParameterList<net.minecraft.core.Holder<net.minecraft.world.level.biome.Biome>>> DIRECT_CODEC;
+  public static final com.mojang.serialization.MapCodec<net.minecraft.world.level.biome.MultiNoiseBiomeSource> CODEC;
+  public static net.minecraft.world.level.biome.MultiNoiseBiomeSource createFromList(net.minecraft.world.level.biome.Climate$ParameterList<net.minecraft.core.Holder<net.minecraft.world.level.biome.Biome>>);
+  public static net.minecraft.world.level.biome.MultiNoiseBiomeSource createFromPreset(net.minecraft.core.Holder<net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterList>);
+  protected java.util.stream.Stream<net.minecraft.core.Holder<net.minecraft.world.level.biome.Biome>> collectPossibleBiomes();
+  protected com.mojang.serialization.MapCodec<net.minecraft.world.level.biome.MultiNoiseBiomeSource> codec();
+  public boolean stable(net.minecraft.resources.ResourceKey<net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterList>);
+  public net.minecraft.world.level.biome.BiomeResolver createResolver(net.minecraft.world.level.biome.Climate$Sampler);
+  public net.minecraft.world.level.biome.BiomeResolver createResolverForChunk(net.minecraft.world.level.biome.Climate$Sampler, int, int, int, int, int, int);
+  public net.minecraft.core.Holder<net.minecraft.world.level.biome.Biome> getNoiseBiome(net.minecraft.world.level.biome.Climate$TargetPoint);
+  public void addDebugInfo(java.util.List<java.lang.String>, net.minecraft.core.BlockPos, net.minecraft.world.level.biome.Climate$Sampler);
+}
+===== net.minecraft.world.level.levelgen.RandomState
+Compiled from "RandomState.java"
+public final class net.minecraft.world.level.levelgen.RandomState {
+  public static net.minecraft.world.level.levelgen.RandomState create(net.minecraft.core.HolderGetter<net.minecraft.world.level.levelgen.synth.NormalNoise>, long, net.minecraft.world.level.levelgen.NoiseGeneratorSettings);
+  public static net.minecraft.world.level.levelgen.RandomState create(net.minecraft.core.HolderGetter<net.minecraft.world.level.levelgen.synth.NormalNoise>, long, boolean, net.minecraft.world.level.block.state.BlockState, int, net.minecraft.world.level.levelgen.NoiseRouter);
+  public net.minecraft.world.level.levelgen.densityfunction.DensitySamplerSet samplersWithContext(net.minecraft.world.level.levelgen.densityfunction.SamplerContext);
+  public net.minecraft.world.level.biome.Climate$Sampler createClimateSampler(net.minecraft.world.level.levelgen.densityfunction.SamplerContext);
+  public net.minecraft.world.level.levelgen.synth.Noise getOrCreateNoise(net.minecraft.resources.ResourceKey<net.minecraft.world.level.levelgen.synth.NormalNoise>);
+  public net.minecraft.world.level.levelgen.PositionalRandomFactory getOrCreateRandomFactory(net.minecraft.resources.Identifier);
+  public net.minecraft.world.level.levelgen.material.MaterialSystem surfaceSystem();
+  public net.minecraft.world.level.levelgen.densityfunction.DensitySampler getSampler(net.minecraft.world.level.levelgen.densityfunction.DensityFunction);
+  public float sampleBlockValueUncached(net.minecraft.world.level.levelgen.densityfunction.DensityFunction, int, int, int);
+  public net.minecraft.world.level.levelgen.densityfunction.DensityBufferPool acquireDensityBufferPool();
+  public void releaseDensityBufferPool(net.minecraft.world.level.levelgen.densityfunction.DensityBufferPool);
+  public void garbageCollect();
+  public long seed();
+}
