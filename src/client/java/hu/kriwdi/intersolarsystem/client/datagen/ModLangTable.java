@@ -2302,6 +2302,54 @@ public final class ModLangTable {
 				"The lift takes you down",
 				"Der Lift bringt dich hinunter",
 				"A lift levisz");
+		add(rows, "subtitles.intersolarsystem.ambient.ash_desert",
+				"Ash gust / metal groans",
+				"Aschebö / Metall ächzt",
+				"Hamuroham / fém nyikorog");
+		add(rows, "subtitles.intersolarsystem.ambient.dried_seabed",
+				"Sand hisses / salt cracks",
+				"Sand zischt / Salz knackt",
+				"Homok sziszeg / só reped");
+		add(rows, "subtitles.intersolarsystem.ambient.petrified_forest",
+				"Stone trunk cracks",
+				"Steinstamm knackt",
+				"Kőtörzs reccsen");
+		add(rows, "subtitles.intersolarsystem.ambient.irradiated_crater",
+				"Geiger counter crackles",
+				"Geigerzähler knistert",
+				"Geiger-számláló pattog");
+		add(rows, "subtitles.intersolarsystem.ambient.frozen_megalopolis",
+				"Ice cracks / tower groans",
+				"Eis knackt / Turm ächzt",
+				"Jég reped / torony nyög");
+		add(rows, "subtitles.intersolarsystem.ambient.acid_swamp",
+				"Acid bubbles",
+				"Säure blubbert",
+				"Sav bugyog");
+		add(rows, "subtitles.intersolarsystem.ambient.junk_mountains",
+				"Scrap slides",
+				"Schrott rutscht",
+				"Hulladék csúszik");
+		add(rows, "subtitles.intersolarsystem.ambient.salt_flats",
+				"Salt crust cracks",
+				"Salzkruste knackt",
+				"Sókéreg pattan");
+		add(rows, "subtitles.intersolarsystem.ambient.deep_canyons",
+				"Rockfall",
+				"Steinschlag",
+				"Kőomlás");
+		add(rows, "subtitles.intersolarsystem.ambient.oasis",
+				"Bird sings",
+				"Vogel singt",
+				"Madár csiripel");
+		add(rows, "subtitles.intersolarsystem.ambient.abandoned_farmland",
+				"Barn door creaks",
+				"Scheunentor knarrt",
+				"Pajtaajtó nyikorog");
+		add(rows, "subtitles.intersolarsystem.ambient.oil_field",
+				"Oil gurgles / pump clanks",
+				"Öl gluckert / Pumpe klappert",
+				"Olaj bugyog / szivattyú csattog");
 		check(rows);
 		return List.copyOf(rows);
 	}

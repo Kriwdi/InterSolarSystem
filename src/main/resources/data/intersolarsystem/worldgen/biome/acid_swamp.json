@@ -19,6 +19,13 @@
     "minecraft:visual/sky_color": "#93a07a",
     "minecraft:visual/fog_color": "#8a9a62",
     "minecraft:visual/water_fog_color": "#4c7a1e",
+    "minecraft:audio/ambient_sounds": {
+      "loop": "intersolarsystem:ambient.acid_swamp.loop",
+      "additions": {
+        "sound": "intersolarsystem:ambient.acid_swamp.additions",
+        "tick_chance": 0.006
+      }
+    },
     "minecraft:visual/ambient_particles": {
       "argument": [
         {
@@ -75,6 +82,15 @@
     [
       "intersolarsystem:dead_trees",
       "intersolarsystem:rubble_sparse",
+      "intersolarsystem:shipping_crate",
+      "intersolarsystem:skeleton_curled_east",
+      "intersolarsystem:skeleton_curled_north",
+      "intersolarsystem:skeleton_curled_south",
+      "intersolarsystem:skeleton_curled_west",
+      "intersolarsystem:skeleton_lying_east",
+      "intersolarsystem:skeleton_lying_north",
+      "intersolarsystem:skeleton_lying_south",
+      "intersolarsystem:skeleton_lying_west",
       "intersolarsystem:toxic_barrel_common"
     ],
     []

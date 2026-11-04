@@ -17,7 +17,25 @@
       "modifier": "overlay"
     },
     "minecraft:visual/sky_color": "#b0a08a",
-    "minecraft:visual/fog_color": "#c09a72"
+    "minecraft:visual/fog_color": "#c09a72",
+    "minecraft:audio/ambient_sounds": {
+      "loop": "intersolarsystem:ambient.deep_canyons.loop",
+      "additions": {
+        "sound": "intersolarsystem:ambient.deep_canyons.additions",
+        "tick_chance": 0.003
+      }
+    },
+    "minecraft:visual/ambient_particles": {
+      "argument": [
+        {
+          "particle": {
+            "type": "minecraft:ash"
+          },
+          "probability": 0.003
+        }
+      ],
+      "modifier": "append"
+    }
   },
   "carvers": [
     "minecraft:cave",
@@ -63,6 +81,15 @@
     ],
     [
       "intersolarsystem:rubble_sparse",
+      "intersolarsystem:shipping_crate",
+      "intersolarsystem:skeleton_curled_east",
+      "intersolarsystem:skeleton_curled_north",
+      "intersolarsystem:skeleton_curled_south",
+      "intersolarsystem:skeleton_curled_west",
+      "intersolarsystem:skeleton_lying_east",
+      "intersolarsystem:skeleton_lying_north",
+      "intersolarsystem:skeleton_lying_south",
+      "intersolarsystem:skeleton_lying_west",
       "minecraft:patch_dead_bush"
     ],
     []

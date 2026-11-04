@@ -18,7 +18,25 @@
     },
     "minecraft:visual/sky_color": "#7fa8d8",
     "minecraft:visual/fog_color": "#c0d8ff",
-    "minecraft:visual/water_fog_color": "#050533"
+    "minecraft:visual/water_fog_color": "#050533",
+    "minecraft:audio/ambient_sounds": {
+      "loop": "intersolarsystem:ambient.oasis.loop",
+      "additions": {
+        "sound": "intersolarsystem:ambient.oasis.additions",
+        "tick_chance": 0.008
+      }
+    },
+    "minecraft:visual/ambient_particles": {
+      "argument": [
+        {
+          "particle": {
+            "type": "minecraft:firefly"
+          },
+          "probability": 0.003
+        }
+      ],
+      "modifier": "append"
+    }
   },
   "carvers": [
     "minecraft:cave",

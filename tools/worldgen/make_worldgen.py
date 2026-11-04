@@ -179,7 +179,10 @@ def state(b, props=None):
     return s
 
 
-PROPS = {"scrap_pile", "rubble", "toxic_barrel", "mining_drone", "tar_puddle", "dead_log", "petrified_log"}
+PROPS = {"scrap_pile", "rubble", "toxic_barrel", "mining_drone", "tar_puddle", "dead_log", "petrified_log",
+         "car_wreck_red", "car_wreck_blue", "car_wreck_white", "taxi_wreck", "police_car_wreck", "skeleton_lying",
+         "skeleton_curled", "street_lamp", "warning_sign", "shipping_crate"}
+CARS = ("car_wreck_red", "car_wreck_blue", "car_wreck_white", "taxi_wreck", "police_car_wreck")
 
 
 def simple(name, b, props=None):
@@ -255,6 +258,18 @@ def features():
     for coral in ("brain", "tube", "fire", "horn", "bubble"):
         placed(f"dead_{coral}_coral", f"dead_{coral}_coral", surface_scatter(rarity=2))
 
+    # The remains of the old world: abandoned cars along vanished roads, the dead where they fell, cargo crates.
+    for car in CARS:
+        for f in ("north", "east", "south", "west"):
+            simple(f"{car}_{f}", car, {"facing": f})
+            placed(f"{car}_{f}", f"{car}_{f}", surface_scatter(rarity=90))
+    for pose in ("skeleton_lying", "skeleton_curled"):
+        for f in ("north", "east", "south", "west"):
+            simple(f"{pose}_{f}", pose, {"facing": f})
+            placed(f"{pose}_{f}", f"{pose}_{f}", surface_scatter(rarity=160))
+    simple("shipping_crate", "shipping_crate")
+    placed("shipping_crate", "shipping_crate", surface_scatter(rarity=40))
+
     # Boulders and blobs.
     blob("cinder_boulder", "cinder_rock", ["ash", "silica_sand", "cinder_rock"])
     placed("cinder_boulder", "cinder_boulder", surface_scatter(rarity=3, heightmap="MOTION_BLOCKING", air=False))
@@ -320,17 +335,17 @@ BIOMES = {
     "ash_desert": dict(t=1.6, sky="#a59a8c", fog="#9a8f80", grass="#8a7d5e", particle=("minecraft:white_ash", 0.02),
                        deco=["minecraft:patch_dead_bush", "stumps", "cinder_boulder", "rubble_sparse",
                              "scrap_pile_sparse"]),
-    "dried_seabed": dict(t=1.4, sky="#a8b4b8", fog="#b9c2c0",
+    "dried_seabed": dict(fossils=["minecraft:fossil_upper", "minecraft:fossil_lower"], particle=("minecraft:white_ash", 0.003), t=1.4, sky="#a8b4b8", fog="#b9c2c0",
                          deco=["salt_disk", "dead_brain_coral", "dead_tube_coral", "dead_fire_coral",
                                "dead_horn_coral", "dead_bubble_coral", "bone_heap", "scrap_pile_sparse"]),
-    "petrified_forest": dict(t=0.8, sky="#9ba1a6", fog="#a7a59b", grass="#7d7a5a",
+    "petrified_forest": dict(fossils=["minecraft:fossil_upper"], particle=("minecraft:white_ash", 0.002), t=0.8, sky="#9ba1a6", fog="#a7a59b", grass="#7d7a5a",
                              deco=["petrified_trees", "rubble_sparse", "minecraft:patch_dead_bush"]),
     "irradiated_crater": dict(t=1.0, sky="#8ea36f", fog="#7f9a5a", water="#6fd13a", water_fog="#3a6a14",
                               grass="#6e8a3a", particle=("minecraft:warped_spore", 0.012),
                               local=["fallout_crater"], ores=[NS + "ore_uraninite_fallout"],
                               deco=["trinitite_blob", "toxic_barrel_common", "scrap_pile_sparse"]),
-    "frozen_megalopolis": dict(t=-0.7, down=0.5, precip=True, sky="#b9c4d0", fog="#d2dae2",
-                               deco=["ice_boulder", "rubble_dense", "scrap_pile_sparse"],
+    "frozen_megalopolis": dict(particle=("minecraft:snowflake", 0.01), t=-0.7, down=0.5, precip=True, sky="#b9c4d0", fog="#d2dae2",
+                               deco=["ice_boulder", "rubble_dense", "scrap_pile_sparse", "minecraft:ice_spike"],
                                top=["minecraft:freeze_top_layer"]),
     "acid_swamp": dict(t=0.9, down=0.9, precip=True, sky="#93a07a", fog="#8a9a62", water="#8fd13a",
                        water_fog="#4c7a1e", grass="#6b7a35", foliage="#5f6d2c", particle=("minecraft:spore_blossom_air", 0.004),
@@ -338,14 +353,14 @@ BIOMES = {
     "junk_mountains": dict(t=1.1, sky="#a39a8f", fog="#958b7d", particle=("minecraft:ash", 0.01),
                            deco=["junk_heap", "scrap_pile_dense", "toxic_barrel_rare", "mining_drone_north",
                                  "mining_drone_east", "mining_drone_south", "mining_drone_west"]),
-    "salt_flats": dict(t=1.8, sky="#c3ccd2", fog="#e2e3de", deco=["lithium_disk", "salt_boulder"]),
-    "deep_canyons": dict(t=1.5, sky="#b0a08a", fog="#c09a72", grass="#90814d", carvers=[NS + "deep_canyon"],
+    "salt_flats": dict(particle=("minecraft:white_ash", 0.002), t=1.8, sky="#c3ccd2", fog="#e2e3de", deco=["lithium_disk", "salt_boulder"]),
+    "deep_canyons": dict(particle=("minecraft:ash", 0.003), t=1.5, sky="#b0a08a", fog="#c09a72", grass="#90814d", carvers=[NS + "deep_canyon"],
                          local=["canyon_strata"], deco=["minecraft:patch_dead_bush", "rubble_sparse"]),
-    "oasis": dict(t=0.9, down=0.8, precip=True, sky="#7fa8d8", fog="#c0d8ff", water="#3f76e4", water_fog="#050533",
+    "oasis": dict(particle=("minecraft:firefly", 0.003), t=0.9, down=0.8, precip=True, sky="#7fa8d8", fog="#c0d8ff", water="#3f76e4", water_fog="#050533",
                   grass="#6aa84f", foliage="#5a9a40", lakes=["oasis_pond"],
                   deco=["minecraft:trees_plains", "minecraft:flower_plains", "minecraft:patch_grass_plain",
                         "minecraft:patch_sugar_cane", "minecraft:patch_pumpkin"]),
-    "abandoned_farmland": dict(t=0.9, down=0.3, sky="#a9aeb0", fog="#b8b4a4", grass="#a3955a", foliage="#8a7a45",
+    "abandoned_farmland": dict(particle=("minecraft:white_ash", 0.0015), t=0.9, down=0.3, sky="#a9aeb0", fog="#b8b4a4", grass="#a3955a", foliage="#8a7a45",
                                deco=["minecraft:patch_dry_grass_badlands", "minecraft:patch_dead_bush", "hay_bale",
                                      "dead_trees_sparse", "scrap_pile_sparse"]),
     "oil_field": dict(t=1.5, sky="#9a8f86", fog="#857a70", water="#2a2620", water_fog="#0d0b09",
@@ -354,12 +369,32 @@ BIOMES = {
 }
 
 
+def remains(name):
+    """Cars, the dead and lost cargo, scattered over the biomes people lived in."""
+    out = []
+    if name in ("frozen_megalopolis", "ash_desert", "abandoned_farmland", "salt_flats", "oil_field", "dried_seabed"):
+        out += [f"{car}_{f}" for car in CARS for f in ("north", "east", "south", "west")]
+    if name != "oasis":
+        out += [f"{p}_{f}" for p in ("skeleton_lying", "skeleton_curled") for f in ("north", "east", "south", "west")]
+        out.append("shipping_crate")
+    return out
+
+
+# How often a one-shot ambience sound plays (per tick), from tools/audio/make_ambience.py.
+AMBIENT_CHANCE = {"ash_desert": 0.004, "dried_seabed": 0.003, "petrified_forest": 0.003, "irradiated_crater": 0.006,
+                  "frozen_megalopolis": 0.005, "acid_swamp": 0.006, "junk_mountains": 0.005, "salt_flats": 0.003,
+                  "deep_canyons": 0.003, "oasis": 0.008, "abandoned_farmland": 0.003, "oil_field": 0.004}
+
+
 def biomes():
     for name, b in BIOMES.items():
         attrs = {"minecraft:gameplay/natural_mob_spawns": NO_SPAWNS,
                  "minecraft:visual/sky_color": b["sky"], "minecraft:visual/fog_color": b["fog"]}
         if "water_fog" in b:
             attrs["minecraft:visual/water_fog_color"] = b["water_fog"]
+        attrs["minecraft:audio/ambient_sounds"] = {
+            "loop": NS + f"ambient.{name}.loop",
+            "additions": {"sound": NS + f"ambient.{name}.additions", "tick_chance": AMBIENT_CHANCE.get(name, 0.004)}}
         if "particle" in b:
             attrs["minecraft:visual/ambient_particles"] = {
                 "argument": [{"particle": {"type": b["particle"][0]}, "probability": b["particle"][1]}],
@@ -372,9 +407,10 @@ def biomes():
         steps = [[] for _ in range(11)]
         steps[1] = [NS + x for x in b.get("lakes", [])] + ["minecraft:lake_lava_underground"]
         steps[2] = [NS + x for x in b.get("local", [])]
+        steps[3] = b.get("fossils", [])
         steps[6] = ROCK_VARIETY + SPACE_ORES + b.get("ores", [])
         steps[8] = ["minecraft:spring_lava"]
-        steps[9] = [x if ":" in x else NS + x for x in b.get("deco", [])]
+        steps[9] = [x if ":" in x else NS + x for x in b.get("deco", []) + remains(name)]
         steps[10] = b.get("top", [])
         # Features of one step must keep the same relative order in every biome (else "Feature order cycle").
         steps = [sorted(step) for step in steps]

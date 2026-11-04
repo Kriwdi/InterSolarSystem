@@ -17,7 +17,25 @@
       "modifier": "overlay"
     },
     "minecraft:visual/sky_color": "#b9c4d0",
-    "minecraft:visual/fog_color": "#d2dae2"
+    "minecraft:visual/fog_color": "#d2dae2",
+    "minecraft:audio/ambient_sounds": {
+      "loop": "intersolarsystem:ambient.frozen_megalopolis.loop",
+      "additions": {
+        "sound": "intersolarsystem:ambient.frozen_megalopolis.additions",
+        "tick_chance": 0.005
+      }
+    },
+    "minecraft:visual/ambient_particles": {
+      "argument": [
+        {
+          "particle": {
+            "type": "minecraft:snowflake"
+          },
+          "probability": 0.01
+        }
+      ],
+      "modifier": "append"
+    }
   },
   "carvers": [
     "minecraft:cave",
@@ -58,9 +76,39 @@
       "minecraft:spring_lava"
     ],
     [
+      "intersolarsystem:car_wreck_blue_east",
+      "intersolarsystem:car_wreck_blue_north",
+      "intersolarsystem:car_wreck_blue_south",
+      "intersolarsystem:car_wreck_blue_west",
+      "intersolarsystem:car_wreck_red_east",
+      "intersolarsystem:car_wreck_red_north",
+      "intersolarsystem:car_wreck_red_south",
+      "intersolarsystem:car_wreck_red_west",
+      "intersolarsystem:car_wreck_white_east",
+      "intersolarsystem:car_wreck_white_north",
+      "intersolarsystem:car_wreck_white_south",
+      "intersolarsystem:car_wreck_white_west",
       "intersolarsystem:ice_boulder",
+      "intersolarsystem:police_car_wreck_east",
+      "intersolarsystem:police_car_wreck_north",
+      "intersolarsystem:police_car_wreck_south",
+      "intersolarsystem:police_car_wreck_west",
       "intersolarsystem:rubble_dense",
-      "intersolarsystem:scrap_pile_sparse"
+      "intersolarsystem:scrap_pile_sparse",
+      "intersolarsystem:shipping_crate",
+      "intersolarsystem:skeleton_curled_east",
+      "intersolarsystem:skeleton_curled_north",
+      "intersolarsystem:skeleton_curled_south",
+      "intersolarsystem:skeleton_curled_west",
+      "intersolarsystem:skeleton_lying_east",
+      "intersolarsystem:skeleton_lying_north",
+      "intersolarsystem:skeleton_lying_south",
+      "intersolarsystem:skeleton_lying_west",
+      "intersolarsystem:taxi_wreck_east",
+      "intersolarsystem:taxi_wreck_north",
+      "intersolarsystem:taxi_wreck_south",
+      "intersolarsystem:taxi_wreck_west",
+      "minecraft:ice_spike"
     ],
     [
       "minecraft:freeze_top_layer"

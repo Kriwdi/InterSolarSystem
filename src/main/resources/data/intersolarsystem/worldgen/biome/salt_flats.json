@@ -17,7 +17,25 @@
       "modifier": "overlay"
     },
     "minecraft:visual/sky_color": "#c3ccd2",
-    "minecraft:visual/fog_color": "#e2e3de"
+    "minecraft:visual/fog_color": "#e2e3de",
+    "minecraft:audio/ambient_sounds": {
+      "loop": "intersolarsystem:ambient.salt_flats.loop",
+      "additions": {
+        "sound": "intersolarsystem:ambient.salt_flats.additions",
+        "tick_chance": 0.003
+      }
+    },
+    "minecraft:visual/ambient_particles": {
+      "argument": [
+        {
+          "particle": {
+            "type": "minecraft:white_ash"
+          },
+          "probability": 0.002
+        }
+      ],
+      "modifier": "append"
+    }
   },
   "carvers": [
     "minecraft:cave",
@@ -58,8 +76,37 @@
       "minecraft:spring_lava"
     ],
     [
+      "intersolarsystem:car_wreck_blue_east",
+      "intersolarsystem:car_wreck_blue_north",
+      "intersolarsystem:car_wreck_blue_south",
+      "intersolarsystem:car_wreck_blue_west",
+      "intersolarsystem:car_wreck_red_east",
+      "intersolarsystem:car_wreck_red_north",
+      "intersolarsystem:car_wreck_red_south",
+      "intersolarsystem:car_wreck_red_west",
+      "intersolarsystem:car_wreck_white_east",
+      "intersolarsystem:car_wreck_white_north",
+      "intersolarsystem:car_wreck_white_south",
+      "intersolarsystem:car_wreck_white_west",
       "intersolarsystem:lithium_disk",
-      "intersolarsystem:salt_boulder"
+      "intersolarsystem:police_car_wreck_east",
+      "intersolarsystem:police_car_wreck_north",
+      "intersolarsystem:police_car_wreck_south",
+      "intersolarsystem:police_car_wreck_west",
+      "intersolarsystem:salt_boulder",
+      "intersolarsystem:shipping_crate",
+      "intersolarsystem:skeleton_curled_east",
+      "intersolarsystem:skeleton_curled_north",
+      "intersolarsystem:skeleton_curled_south",
+      "intersolarsystem:skeleton_curled_west",
+      "intersolarsystem:skeleton_lying_east",
+      "intersolarsystem:skeleton_lying_north",
+      "intersolarsystem:skeleton_lying_south",
+      "intersolarsystem:skeleton_lying_west",
+      "intersolarsystem:taxi_wreck_east",
+      "intersolarsystem:taxi_wreck_north",
+      "intersolarsystem:taxi_wreck_south",
+      "intersolarsystem:taxi_wreck_west"
     ],
     []
   ],

@@ -19,6 +19,11 @@ public final class ModSounds {
 	public static final SoundEvent SUIT_LEAK = register("suit_leak");
 	public static final SoundEvent HEARTBEAT = register("heartbeat");
 	public static final SoundEvent EAR_RING = register("ear_ring");
+	/**
+	 * Biome ambience (loops and one-shot additions, see tools/audio/make_ambience.py); the biomes refer to them by
+	 * name. The list comes from intersolarsystem/ambience.txt, written by the same script.
+	 */
+	public static final java.util.List<SoundEvent> AMBIENCE = registerAmbience();
 
 	private ModSounds() {
 	}
@@ -26,6 +31,22 @@ public final class ModSounds {
 	private static SoundEvent register(String name) {
 		Identifier id = ModIds.id(name);
 		return Registry.register(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));
+	}
+
+	private static java.util.List<SoundEvent> registerAmbience() {
+		java.util.List<SoundEvent> out = new java.util.ArrayList<>();
+		try (java.io.InputStream in = ModSounds.class.getResourceAsStream("/intersolarsystem/ambience.txt")) {
+			if (in != null) {
+				for (String line : new String(in.readAllBytes(), java.nio.charset.StandardCharsets.UTF_8).split("\n")) {
+					if (!line.isBlank()) {
+						out.add(register(line.trim()));
+					}
+				}
+			}
+		} catch (java.io.IOException e) {
+			throw new java.io.UncheckedIOException(e);
+		}
+		return java.util.List.copyOf(out);
 	}
 
 	public static void initialize() {

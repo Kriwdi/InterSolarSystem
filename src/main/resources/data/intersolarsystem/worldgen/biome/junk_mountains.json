@@ -18,6 +18,13 @@
     },
     "minecraft:visual/sky_color": "#a39a8f",
     "minecraft:visual/fog_color": "#958b7d",
+    "minecraft:audio/ambient_sounds": {
+      "loop": "intersolarsystem:ambient.junk_mountains.loop",
+      "additions": {
+        "sound": "intersolarsystem:ambient.junk_mountains.additions",
+        "tick_chance": 0.005
+      }
+    },
     "minecraft:visual/ambient_particles": {
       "argument": [
         {
@@ -75,6 +82,15 @@
       "intersolarsystem:mining_drone_south",
       "intersolarsystem:mining_drone_west",
       "intersolarsystem:scrap_pile_dense",
+      "intersolarsystem:shipping_crate",
+      "intersolarsystem:skeleton_curled_east",
+      "intersolarsystem:skeleton_curled_north",
+      "intersolarsystem:skeleton_curled_south",
+      "intersolarsystem:skeleton_curled_west",
+      "intersolarsystem:skeleton_lying_east",
+      "intersolarsystem:skeleton_lying_north",
+      "intersolarsystem:skeleton_lying_south",
+      "intersolarsystem:skeleton_lying_west",
       "intersolarsystem:toxic_barrel_rare"
     ],
     []

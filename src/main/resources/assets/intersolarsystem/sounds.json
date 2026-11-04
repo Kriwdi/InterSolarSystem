@@ -66,5 +66,249 @@
       "intersolarsystem:tape_voice5",
       "intersolarsystem:tape_voice6"
     ]
+  },
+  "ambient.ash_desert.loop": {
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/ash_desert_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.ash_desert.additions": {
+    "subtitle": "subtitles.intersolarsystem.ambient.ash_desert",
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/ash_desert_add1",
+        "volume": 0.6
+      },
+      {
+        "name": "intersolarsystem:ambience/ash_desert_add2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "ambient.dried_seabed.loop": {
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/dried_seabed_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.dried_seabed.additions": {
+    "subtitle": "subtitles.intersolarsystem.ambient.dried_seabed",
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/dried_seabed_add1",
+        "volume": 0.6
+      },
+      {
+        "name": "intersolarsystem:ambience/dried_seabed_add2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "ambient.petrified_forest.loop": {
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/petrified_forest_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.petrified_forest.additions": {
+    "subtitle": "subtitles.intersolarsystem.ambient.petrified_forest",
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/petrified_forest_add1",
+        "volume": 0.6
+      },
+      {
+        "name": "intersolarsystem:ambience/petrified_forest_add2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "ambient.irradiated_crater.loop": {
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/irradiated_crater_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.irradiated_crater.additions": {
+    "subtitle": "subtitles.intersolarsystem.ambient.irradiated_crater",
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/irradiated_crater_add1",
+        "volume": 0.6
+      }
+    ]
+  },
+  "ambient.frozen_megalopolis.loop": {
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/frozen_megalopolis_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.frozen_megalopolis.additions": {
+    "subtitle": "subtitles.intersolarsystem.ambient.frozen_megalopolis",
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/frozen_megalopolis_add1",
+        "volume": 0.6
+      },
+      {
+        "name": "intersolarsystem:ambience/frozen_megalopolis_add2",
+        "volume": 0.6
+      },
+      {
+        "name": "intersolarsystem:ambience/frozen_megalopolis_add3",
+        "volume": 0.6
+      }
+    ]
+  },
+  "ambient.acid_swamp.loop": {
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/acid_swamp_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.acid_swamp.additions": {
+    "subtitle": "subtitles.intersolarsystem.ambient.acid_swamp",
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/acid_swamp_add1",
+        "volume": 0.6
+      }
+    ]
+  },
+  "ambient.junk_mountains.loop": {
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/junk_mountains_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.junk_mountains.additions": {
+    "subtitle": "subtitles.intersolarsystem.ambient.junk_mountains",
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/junk_mountains_add1",
+        "volume": 0.6
+      },
+      {
+        "name": "intersolarsystem:ambience/junk_mountains_add2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "ambient.salt_flats.loop": {
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/salt_flats_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.salt_flats.additions": {
+    "subtitle": "subtitles.intersolarsystem.ambient.salt_flats",
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/salt_flats_add1",
+        "volume": 0.6
+      }
+    ]
+  },
+  "ambient.deep_canyons.loop": {
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/deep_canyons_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.deep_canyons.additions": {
+    "subtitle": "subtitles.intersolarsystem.ambient.deep_canyons",
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/deep_canyons_add1",
+        "volume": 0.6
+      },
+      {
+        "name": "intersolarsystem:ambience/deep_canyons_add2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "ambient.oasis.loop": {
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/oasis_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.oasis.additions": {
+    "subtitle": "subtitles.intersolarsystem.ambient.oasis",
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/oasis_add1",
+        "volume": 0.6
+      },
+      {
+        "name": "intersolarsystem:ambience/oasis_add2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "ambient.abandoned_farmland.loop": {
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/abandoned_farmland_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.abandoned_farmland.additions": {
+    "subtitle": "subtitles.intersolarsystem.ambient.abandoned_farmland",
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/abandoned_farmland_add1",
+        "volume": 0.6
+      },
+      {
+        "name": "intersolarsystem:ambience/abandoned_farmland_add2",
+        "volume": 0.6
+      }
+    ]
+  },
+  "ambient.oil_field.loop": {
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/oil_field_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.oil_field.additions": {
+    "subtitle": "subtitles.intersolarsystem.ambient.oil_field",
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/oil_field_add1",
+        "volume": 0.6
+      },
+      {
+        "name": "intersolarsystem:ambience/oil_field_add2",
+        "volume": 0.6
+      }
+    ]
   }
 }
