@@ -5,6 +5,7 @@
     "intersolarsystem:decompression",
     "intersolarsystem:heat",
     "intersolarsystem:crushing",
-    "intersolarsystem:radiation"
+    "intersolarsystem:radiation",
+    "intersolarsystem:frostbite"
   ]
 }

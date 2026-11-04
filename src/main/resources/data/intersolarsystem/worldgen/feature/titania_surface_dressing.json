@@ -1,0 +1,9 @@
+{
+  "type": "intersolarsystem:planet_surface",
+  "base": "intersolarsystem:titania_ice",
+  "top": "intersolarsystem:titania_ice",
+  "alt": "intersolarsystem:titania_frost",
+  "alt_chance": 0.06,
+  "under": "intersolarsystem:titania_ice",
+  "depth": 3
+}

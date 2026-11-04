@@ -1,0 +1,7 @@
+{
+  "type": "intersolarsystem:moon_terrain",
+  "style": "grooves",
+  "primary": "intersolarsystem:ganymede_dark_ice",
+  "secondary": "intersolarsystem:grooved_ice",
+  "accent": "intersolarsystem:ganymede_frost"
+}

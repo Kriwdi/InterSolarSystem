@@ -32,6 +32,21 @@
     "intersolarsystem:sulfur_plain",
     "intersolarsystem:so2_frost",
     "intersolarsystem:europa_salt",
-    "intersolarsystem:microbial_mat"
+    "intersolarsystem:microbial_mat",
+    "intersolarsystem:ganymede_frost",
+    "intersolarsystem:callisto_regolith",
+    "intersolarsystem:saturn_haze",
+    "intersolarsystem:saturn_belt_cloud",
+    "intersolarsystem:hexagon_storm_cloud",
+    "intersolarsystem:tholin_sand",
+    "intersolarsystem:hydrocarbon_sludge",
+    "intersolarsystem:enceladus_snow",
+    "intersolarsystem:vent_colony",
+    "intersolarsystem:uranus_methane_cloud",
+    "intersolarsystem:deep_sulfide_cloud",
+    "intersolarsystem:titania_frost",
+    "intersolarsystem:neptune_methane_cloud",
+    "intersolarsystem:dark_spot_cloud",
+    "intersolarsystem:geyser_soot"
   ]
 }

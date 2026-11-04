@@ -1,0 +1,11 @@
+{
+  "type": "intersolarsystem:moon_terrain",
+  "style": "tiger_stripes",
+  "primary": "intersolarsystem:enceladus_ice",
+  "secondary": "intersolarsystem:enceladus_snow",
+  "accent": "intersolarsystem:fissure_ice",
+  "special": "intersolarsystem:geyser_vent",
+  "centre_x": 0,
+  "centre_z": -180,
+  "size": 520
+}

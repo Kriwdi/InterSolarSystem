@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/fissure_ice"
+      },
+      {
+        "model": "intersolarsystem:block/fissure_ice",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/fissure_ice",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/fissure_ice",
+        "y": 270
+      }
+    ]
+  }
+}

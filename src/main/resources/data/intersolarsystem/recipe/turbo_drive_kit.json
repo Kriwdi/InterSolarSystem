@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": "intersolarsystem:silent_crystal",
+    "G": "minecraft:diamond",
+    "D": "intersolarsystem:deuterium_ice",
+    "K": "intersolarsystem:deuterium_drive_kit"
+  },
+  "pattern": [
+    "SGS",
+    "DKD",
+    "SGS"
+  ],
+  "result": {
+    "id": "intersolarsystem:turbo_drive_kit",
+    "count": 1
+  }
+}

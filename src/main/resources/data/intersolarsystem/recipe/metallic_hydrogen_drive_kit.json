@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": "intersolarsystem:metallic_hydrogen",
+    "M": "intersolarsystem:rare_earth_magnet",
+    "I": "intersolarsystem:iridium_ingot",
+    "P": "intersolarsystem:plasma_drive_kit"
+  },
+  "pattern": [
+    "HMH",
+    "IPI",
+    "HMH"
+  ],
+  "result": {
+    "id": "intersolarsystem:metallic_hydrogen_drive_kit",
+    "count": 1
+  }
+}

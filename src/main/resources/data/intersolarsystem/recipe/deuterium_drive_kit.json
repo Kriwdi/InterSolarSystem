@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": "intersolarsystem:deuterium_ice",
+    "T": "intersolarsystem:tholin_resin",
+    "I": "intersolarsystem:iridium_ingot",
+    "K": "intersolarsystem:metallic_hydrogen_drive_kit"
+  },
+  "pattern": [
+    "DTD",
+    "IKI",
+    "DTD"
+  ],
+  "result": {
+    "id": "intersolarsystem:deuterium_drive_kit",
+    "count": 1
+  }
+}

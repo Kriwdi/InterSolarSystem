@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/diamond_hail"
+      },
+      {
+        "model": "intersolarsystem:block/diamond_hail",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/diamond_hail",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/diamond_hail",
+        "y": 270
+      }
+    ]
+  }
+}

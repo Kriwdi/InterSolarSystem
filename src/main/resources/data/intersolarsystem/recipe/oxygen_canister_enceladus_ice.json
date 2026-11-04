@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "intersolarsystem:enceladus_ice",
+    "intersolarsystem:enceladus_ice",
+    "minecraft:glass_bottle",
+    "intersolarsystem:battery_cell"
+  ],
+  "result": {
+    "id": "intersolarsystem:oxygen_canister",
+    "count": 2
+  }
+}

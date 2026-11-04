@@ -31,6 +31,7 @@ public class InterSolarSystem implements ModInitializer {
 		ShipNetworking.register();
 		ShipCommands.register();
 		hu.kriwdi.intersolarsystem.ship.TestTeleport.register();
+		hu.kriwdi.intersolarsystem.travel.Discoveries.register();
 		ShipFlightController.register();
 		hu.kriwdi.intersolarsystem.ship.ShipInteriorGuard.register();
 		hu.kriwdi.intersolarsystem.space.OrbitStation.register();

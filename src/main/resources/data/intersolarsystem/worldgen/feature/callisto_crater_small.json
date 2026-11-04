@@ -1,0 +1,8 @@
+{
+  "type": "intersolarsystem:crater",
+  "min_radius": 3,
+  "max_radius": 5,
+  "floor": "intersolarsystem:callisto_regolith",
+  "fresh": "intersolarsystem:callisto_ice",
+  "rim": "intersolarsystem:callisto_ice"
+}

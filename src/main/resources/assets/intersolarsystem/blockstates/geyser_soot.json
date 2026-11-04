@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/geyser_soot"
+      },
+      {
+        "model": "intersolarsystem:block/geyser_soot",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/geyser_soot",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/geyser_soot",
+        "y": 270
+      }
+    ]
+  }
+}

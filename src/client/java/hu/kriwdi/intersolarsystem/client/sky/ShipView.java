@@ -111,6 +111,18 @@ public final class ShipView {
 			case "ceres" -> new Scene(-1, 0x55504A, LANDED_DEPTH, 1.0F, 0.0F, null, null, 0.0F);
 			case "io" -> new Scene(-1, 0xD8C24A, LANDED_DEPTH, 1.0F, 0.0F, null, null, 0.0F);
 			case "europa" -> new Scene(-1, 0xC9C2B4, LANDED_DEPTH, 1.0F, 0.0F, null, null, 0.0F);
+			case "ganymede" -> new Scene(-1, 0x6E6255, LANDED_DEPTH, 1.0F, 0.0F, null, null, 0.0F);
+			case "callisto" -> new Scene(-1, 0x3A332B, LANDED_DEPTH, 1.0F, 0.0F, null, null, 0.0F);
+			case "saturn" -> new Scene(0xD8C48E, 0xE8D6A8, LANDED_DEPTH, 0.0F, 0.0F, null, null, 0.0F);
+			case "saturn_rings" -> new Scene(-1, -1, 0.0F, 1.0F, 0.0F, null, null, 0.0F);
+			case "titan" -> new Scene(0xB88A3C, 0x8F5A28, LANDED_DEPTH, 0.0F, 0.0F, null, null, 0.0F);
+			case "enceladus" -> new Scene(-1, 0xEEF5F9, LANDED_DEPTH, 1.0F, 0.0F, null, null, 0.0F);
+			case "uranus" -> new Scene(0x8FD8DC, 0xB8EEF0, LANDED_DEPTH, 0.0F, 0.0F, null, null, 0.0F);
+			case "miranda" -> new Scene(-1, 0x92979C, LANDED_DEPTH, 1.0F, 0.0F, null, null, 0.0F);
+			case "titania" -> new Scene(-1, 0x807B74, LANDED_DEPTH, 1.0F, 0.0F, null, null, 0.0F);
+			case "neptune" -> new Scene(0x3A5AC0, 0x5A7AD8, LANDED_DEPTH, 0.0F, 0.0F, null, null, 0.0F);
+			case "triton" -> new Scene(-1, 0xA5A88F, LANDED_DEPTH, 1.0F, 0.0F, null, null, 0.0F);
+			case "nameless" -> new Scene(-1, 0x46423E, LANDED_DEPTH, 1.0F, 0.0F, null, null, 0.0F);
 			case "earth_orbit" -> new Scene(-1, -1, 0.0F, 1.0F, 0.0F, EARTH_BELOW, null, 0.0F);
 			case "earth" -> new Scene(EARTH_SKY, EARTH_GROUND, LANDED_DEPTH, 0.0F, 0.0F, null, null, 0.0F,
 					ground.isEmpty() ? "ash_desert" : ground);
@@ -154,9 +166,8 @@ public final class ShipView {
 	/** Where a journey's target leaves the ship ("earth_orbit" docks, "moon" lands, "earth" lands, others fly by). */
 	private static String destination(String target) {
 		return switch (target) {
-			case "moon", "earth_orbit", "earth", "mars", "mothership", "venus", "mercury", "ceres", "asteroid_belt",
-					"jupiter", "io", "europa" -> target;
-			default -> last.from();
+			case "moon", "earth_orbit", "earth", "mars", "mothership" -> target;
+			default -> hu.kriwdi.intersolarsystem.space.Worlds.byBody(target).isPresent() ? target : last.from();
 		};
 	}
 

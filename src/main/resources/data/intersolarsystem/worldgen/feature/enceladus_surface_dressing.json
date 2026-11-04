@@ -1,0 +1,9 @@
+{
+  "type": "intersolarsystem:planet_surface",
+  "base": "intersolarsystem:enceladus_ice",
+  "top": "intersolarsystem:enceladus_snow",
+  "alt": "intersolarsystem:enceladus_ice",
+  "alt_chance": 0.08,
+  "under": "intersolarsystem:enceladus_snow",
+  "depth": 3
+}

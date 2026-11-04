@@ -1,0 +1,11 @@
+{
+  "type": "intersolarsystem:planet_surface",
+  "base": "intersolarsystem:callisto_ice",
+  "top": "intersolarsystem:callisto_regolith",
+  "alt": "intersolarsystem:callisto_ice",
+  "alt_chance": 0.05,
+  "under": "intersolarsystem:callisto_regolith",
+  "depth": 3,
+  "ore": "intersolarsystem:nickel_iron_ore",
+  "ore_chance": 80
+}

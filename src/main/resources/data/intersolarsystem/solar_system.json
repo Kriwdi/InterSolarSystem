@@ -1,5 +1,5 @@
 {
-  "__comment": "Travel data for the navigation console. transfer_days: real-world one-way transfer time from Earth (minimum-energy route, rounded); synodic_days: real-world time between launch windows from Earth. Times in game are divided by 10 and by the engine multiplier. Order = order on the console. status: surface (Earth), orbit (dock in Earth orbit), flyby (free-return loop), landing (has its own world), locked. dock: the mothership's hangar (wherever it is). via_mothership: beyond the Earth-Moon system the small ship only goes from the mothership in that body's orbit; min_tier then is the mothership's engine tier.",
+  "__comment": "Travel data for the navigation console. transfer_days: real-world one-way transfer time from Earth (minimum-energy route, rounded); synodic_days: real-world time between launch windows from Earth. Times in game are divided by 10 and by the engine multiplier. Order = order on the console. hidden: never listed until something reveals it (travel/Discoveries). status: surface (Earth), orbit (dock in Earth orbit), flyby (free-return loop), landing (has its own world), locked. dock: the mothership's hangar (wherever it is). via_mothership: beyond the Earth-Moon system the small ship only goes from the mothership in that body's orbit; min_tier then is the mothership's engine tier.",
   "bodies": [
     {
       "id": "earth",
@@ -107,28 +107,125 @@
       "via_mothership": true
     },
     {
+      "id": "ganymede",
+      "kind": "moon",
+      "parent": "jupiter",
+      "transfer_days": 2190,
+      "synodic_days": 399,
+      "status": "landing",
+      "min_tier": 4,
+      "via_mothership": true
+    },
+    {
+      "id": "callisto",
+      "kind": "moon",
+      "parent": "jupiter",
+      "transfer_days": 2190,
+      "synodic_days": 399,
+      "status": "landing",
+      "min_tier": 4,
+      "via_mothership": true
+    },
+    {
       "id": "saturn",
       "kind": "gas_giant",
       "transfer_days": 2220,
       "synodic_days": 378,
-      "status": "locked",
-      "assist": "jupiter"
+      "status": "landing",
+      "assist": "jupiter",
+      "min_tier": 5,
+      "via_mothership": true
+    },
+    {
+      "id": "saturn_rings",
+      "kind": "belt",
+      "parent": "saturn",
+      "transfer_days": 2220,
+      "synodic_days": 378,
+      "status": "landing",
+      "min_tier": 5,
+      "via_mothership": true
+    },
+    {
+      "id": "titan",
+      "kind": "moon",
+      "parent": "saturn",
+      "transfer_days": 2220,
+      "synodic_days": 378,
+      "status": "landing",
+      "min_tier": 5,
+      "via_mothership": true
+    },
+    {
+      "id": "enceladus",
+      "kind": "moon",
+      "parent": "saturn",
+      "transfer_days": 2220,
+      "synodic_days": 378,
+      "status": "landing",
+      "min_tier": 5,
+      "via_mothership": true
     },
     {
       "id": "uranus",
       "kind": "ice_giant",
       "transfer_days": 3650,
       "synodic_days": 370,
-      "status": "locked",
-      "assist": "jupiter"
+      "status": "landing",
+      "assist": "jupiter",
+      "min_tier": 6,
+      "via_mothership": true
+    },
+    {
+      "id": "miranda",
+      "kind": "moon",
+      "parent": "uranus",
+      "transfer_days": 3650,
+      "synodic_days": 370,
+      "status": "landing",
+      "min_tier": 6,
+      "via_mothership": true
+    },
+    {
+      "id": "titania",
+      "kind": "moon",
+      "parent": "uranus",
+      "transfer_days": 3650,
+      "synodic_days": 370,
+      "status": "landing",
+      "min_tier": 6,
+      "via_mothership": true
     },
     {
       "id": "neptune",
       "kind": "ice_giant",
       "transfer_days": 4380,
       "synodic_days": 367,
-      "status": "locked",
-      "assist": "jupiter"
+      "status": "landing",
+      "assist": "jupiter",
+      "min_tier": 6,
+      "via_mothership": true
+    },
+    {
+      "id": "triton",
+      "kind": "moon",
+      "parent": "neptune",
+      "transfer_days": 4380,
+      "synodic_days": 367,
+      "status": "landing",
+      "min_tier": 6,
+      "via_mothership": true
+    },
+    {
+      "id": "nameless",
+      "kind": "moon",
+      "parent": "neptune",
+      "transfer_days": 4380,
+      "synodic_days": 367,
+      "status": "landing",
+      "min_tier": 6,
+      "via_mothership": true,
+      "hidden": true
     }
   ]
 }

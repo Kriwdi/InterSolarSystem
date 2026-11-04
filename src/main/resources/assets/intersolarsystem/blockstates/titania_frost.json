@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/titania_frost"
+      },
+      {
+        "model": "intersolarsystem:block/titania_frost",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/titania_frost",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/titania_frost",
+        "y": 270
+      }
+    ]
+  }
+}

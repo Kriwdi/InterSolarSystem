@@ -1,0 +1,8 @@
+{
+  "type": "intersolarsystem:ring_field",
+  "ice": "intersolarsystem:ring_ice",
+  "dusty": "intersolarsystem:dusty_ring_ice",
+  "heavy": "intersolarsystem:deuterium_ice",
+  "plane": 120,
+  "half_thickness": 14
+}

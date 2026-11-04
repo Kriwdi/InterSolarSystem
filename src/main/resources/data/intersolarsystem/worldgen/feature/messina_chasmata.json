@@ -1,0 +1,9 @@
+{
+  "type": "intersolarsystem:moon_terrain",
+  "style": "canyons",
+  "primary": "intersolarsystem:titania_ice",
+  "secondary": "intersolarsystem:titania_frost",
+  "accent": "intersolarsystem:titania_ice",
+  "centre_z": 80,
+  "height": 30
+}

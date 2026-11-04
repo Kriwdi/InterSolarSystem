@@ -1,0 +1,8 @@
+{
+  "type": "intersolarsystem:crater",
+  "min_radius": 6,
+  "max_radius": 9,
+  "floor": "intersolarsystem:titania_ice",
+  "fresh": "intersolarsystem:titania_frost",
+  "rim": "intersolarsystem:titania_ice"
+}

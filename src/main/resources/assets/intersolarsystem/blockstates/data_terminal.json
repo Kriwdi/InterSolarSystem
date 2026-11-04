@@ -419,6 +419,186 @@
     "facing=west,log=27": {
       "model": "intersolarsystem:block/data_terminal",
       "y": 270
+    },
+    "facing=north,log=28": {
+      "model": "intersolarsystem:block/data_terminal"
+    },
+    "facing=north,log=29": {
+      "model": "intersolarsystem:block/data_terminal"
+    },
+    "facing=north,log=30": {
+      "model": "intersolarsystem:block/data_terminal"
+    },
+    "facing=north,log=31": {
+      "model": "intersolarsystem:block/data_terminal"
+    },
+    "facing=north,log=32": {
+      "model": "intersolarsystem:block/data_terminal"
+    },
+    "facing=north,log=33": {
+      "model": "intersolarsystem:block/data_terminal"
+    },
+    "facing=north,log=34": {
+      "model": "intersolarsystem:block/data_terminal"
+    },
+    "facing=north,log=35": {
+      "model": "intersolarsystem:block/data_terminal"
+    },
+    "facing=north,log=36": {
+      "model": "intersolarsystem:block/data_terminal"
+    },
+    "facing=north,log=37": {
+      "model": "intersolarsystem:block/data_terminal"
+    },
+    "facing=north,log=38": {
+      "model": "intersolarsystem:block/data_terminal"
+    },
+    "facing=north,log=39": {
+      "model": "intersolarsystem:block/data_terminal"
+    },
+    "facing=east,log=28": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 90
+    },
+    "facing=east,log=29": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 90
+    },
+    "facing=east,log=30": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 90
+    },
+    "facing=east,log=31": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 90
+    },
+    "facing=east,log=32": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 90
+    },
+    "facing=east,log=33": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 90
+    },
+    "facing=east,log=34": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 90
+    },
+    "facing=east,log=35": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 90
+    },
+    "facing=east,log=36": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 90
+    },
+    "facing=east,log=37": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 90
+    },
+    "facing=east,log=38": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 90
+    },
+    "facing=east,log=39": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 90
+    },
+    "facing=south,log=28": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 180
+    },
+    "facing=south,log=29": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 180
+    },
+    "facing=south,log=30": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 180
+    },
+    "facing=south,log=31": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 180
+    },
+    "facing=south,log=32": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 180
+    },
+    "facing=south,log=33": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 180
+    },
+    "facing=south,log=34": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 180
+    },
+    "facing=south,log=35": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 180
+    },
+    "facing=south,log=36": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 180
+    },
+    "facing=south,log=37": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 180
+    },
+    "facing=south,log=38": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 180
+    },
+    "facing=south,log=39": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 180
+    },
+    "facing=west,log=28": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 270
+    },
+    "facing=west,log=29": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 270
+    },
+    "facing=west,log=30": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 270
+    },
+    "facing=west,log=31": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 270
+    },
+    "facing=west,log=32": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 270
+    },
+    "facing=west,log=33": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 270
+    },
+    "facing=west,log=34": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 270
+    },
+    "facing=west,log=35": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 270
+    },
+    "facing=west,log=36": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 270
+    },
+    "facing=west,log=37": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 270
+    },
+    "facing=west,log=38": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 270
+    },
+    "facing=west,log=39": {
+      "model": "intersolarsystem:block/data_terminal",
+      "y": 270
     }
   }
 }

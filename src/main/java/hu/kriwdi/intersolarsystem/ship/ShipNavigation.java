@@ -88,7 +88,7 @@ public final class ShipNavigation {
 	 * not built), and back up to it.
 	 */
 	public static boolean reachable(CelestialBody body, String here, String mothershipAt) {
-		if (body.id().equals(here) || body.status() == CelestialBody.Status.LOCKED) {
+		if (body.id().equals(here) || body.status() == CelestialBody.Status.LOCKED || !SolarSystem.visible(body)) {
 			return false;
 		}
 		boolean dockedLocal = "mothership".equals(here) && LOCAL_STATIONS.contains(mothershipAt);
@@ -131,7 +131,8 @@ public final class ShipNavigation {
 	public static void open(MinecraftServer server, ServerPlayer player) {
 		ShipState state = ShipStateAccess.get(server);
 		ServerPlayNetworking.send(player, new NavigationPayloads.Open(state.travel().engineTier(),
-				server.overworld().getGameTime(), blocker(state), here(state), mothershipAt(server)));
+				server.overworld().getGameTime(), blocker(state), here(state), mothershipAt(server),
+				String.join(",", SolarSystem.discovered())));
 	}
 
 	/**

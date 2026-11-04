@@ -1,0 +1,8 @@
+{
+  "type": "intersolarsystem:moon_terrain",
+  "style": "cantaloupe",
+  "primary": "intersolarsystem:cantaloupe_ice",
+  "secondary": "intersolarsystem:nitrogen_ice",
+  "accent": "intersolarsystem:geyser_soot",
+  "special": "intersolarsystem:nitrogen_geyser"
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "intersolarsystem:block/nitrogen_geyser"
+    },
+    "lit=true": {
+      "model": "intersolarsystem:block/nitrogen_geyser"
+    }
+  }
+}

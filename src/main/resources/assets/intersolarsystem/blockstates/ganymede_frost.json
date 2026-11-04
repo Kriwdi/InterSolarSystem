@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/ganymede_frost"
+      },
+      {
+        "model": "intersolarsystem:block/ganymede_frost",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/ganymede_frost",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/ganymede_frost",
+        "y": 270
+      }
+    ]
+  }
+}

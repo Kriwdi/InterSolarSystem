@@ -254,9 +254,38 @@ public abstract class SkyRendererMixin {
 				intersolarsystem$sprite(renderPass, poseStack, "far/sun_corona", 100.0F, 42.0F, 1.0F);
 				poseStack.popPose();
 			}
+			// The outer system: each moon's planet hangs fixed in its sky (sizes as seen from there, a little
+			// enlarged to read well), Ganymede has its own aurora, and inside Saturn's rings the planet fills the
+			// horizon.
+			case "ganymede", "callisto" -> {
+				intersolarsystem$fixed(renderPass, poseStack, "far/jupiter", "ganymede".equals(body) ? 8.5F : 5.0F, -40.0F,
+						10.0F, 1.0F);
+				if ("ganymede".equals(body)) {
+					intersolarsystem$fixed(renderPass, poseStack, "far/aurora", 70.0F, 55.0F, -20.0F, 0.8F);
+					intersolarsystem$fixed(renderPass, poseStack, "far/aurora", 60.0F, 70.0F, 160.0F, 0.6F);
+				}
+			}
+			case "enceladus" -> intersolarsystem$fixed(renderPass, poseStack, "far/saturn", 34.0F, -30.0F, 6.0F, 1.0F);
+			case "titan" -> intersolarsystem$fixed(renderPass, poseStack, "far/saturn", 9.0F, -55.0F, 4.0F, 0.35F);
+			case "saturn_rings" -> intersolarsystem$fixed(renderPass, poseStack, "far/saturn", 70.0F, -8.0F, 0.0F, 1.0F);
+			case "miranda" -> intersolarsystem$fixed(renderPass, poseStack, "far/uranus", 24.0F, -35.0F, -8.0F, 1.0F);
+			case "titania" -> intersolarsystem$fixed(renderPass, poseStack, "far/uranus", 7.0F, -42.0F, -8.0F, 1.0F);
+			case "triton" -> intersolarsystem$fixed(renderPass, poseStack, "far/neptune", 9.0F, -38.0F, 12.0F, 1.0F);
+			case "nameless" -> intersolarsystem$fixed(renderPass, poseStack, "far/neptune", 2.0F, -50.0F, 12.0F, 1.0F);
 			default -> {
 			}
 		}
+		poseStack.popPose();
+	}
+
+	/** A sprite fixed in the sky: {@code tilt} from overhead towards the south, {@code roll} sideways. */
+	@Unique
+	private void intersolarsystem$fixed(final RenderPass renderPass, final PoseStack poseStack, final String name,
+			final float scale, final float tilt, final float roll, final float brightness) {
+		poseStack.pushPose();
+		poseStack.rotateDegrees(Axis.XP, tilt);
+		poseStack.rotateDegrees(Axis.ZP, roll);
+		intersolarsystem$sprite(renderPass, poseStack, name, 100.0F, scale, brightness);
 		poseStack.popPose();
 	}
 

@@ -1,0 +1,11 @@
+{
+  "type": "intersolarsystem:callisto",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "intersolarsystem:callisto_surface"
+    },
+    "settings": "intersolarsystem:callisto"
+  }
+}

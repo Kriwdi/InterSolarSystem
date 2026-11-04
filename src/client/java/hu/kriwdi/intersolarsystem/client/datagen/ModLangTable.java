@@ -2934,6 +2934,338 @@ public final class ModLangTable {
 				"The memory core grows warm in your hand. The seam answers it.",
 				"Der Speicherkern wird warm in deiner Hand. Der Spalt antwortet ihm.",
 				"A memóriamag felmelegszik a kezedben. A rés válaszol neki.");
+		add(rows, "block.intersolarsystem.ganymede_dark_ice",
+				"Dark Ganymedean Ice",
+				"Dunkles Ganymed-Eis",
+				"Sötét ganümédészi jég");
+		add(rows, "block.intersolarsystem.grooved_ice",
+				"Grooved Ice",
+				"Rilleneis",
+				"Barázdás jég");
+		add(rows, "block.intersolarsystem.ganymede_frost",
+				"Polar Frost",
+				"Polarreif",
+				"Sarki dér");
+		add(rows, "block.intersolarsystem.callisto_regolith",
+				"Callistoan Regolith",
+				"Kallisto-Regolith",
+				"Kallisztói regolit");
+		add(rows, "block.intersolarsystem.callisto_ice",
+				"Callistoan Ice",
+				"Kallisto-Eis",
+				"Kallisztói jég");
+		add(rows, "block.intersolarsystem.pinnacle_frost",
+				"Pinnacle Frost",
+				"Zinnenreif",
+				"Tüskedér");
+		add(rows, "block.intersolarsystem.saturn_haze",
+				"Saturnian Haze",
+				"Saturn-Dunst",
+				"Szaturnuszi pára");
+		add(rows, "block.intersolarsystem.saturn_belt_cloud",
+				"Saturnian Belt Cloud",
+				"Saturn-Bandwolke",
+				"Szaturnuszi sávfelhő");
+		add(rows, "block.intersolarsystem.hexagon_storm_cloud",
+				"Hexagon Storm Cloud",
+				"Hexagon-Sturmwolke",
+				"Hatszögvihar-felhő");
+		add(rows, "block.intersolarsystem.ring_ice",
+				"Ring Ice",
+				"Ringeis",
+				"Gyűrűjég");
+		add(rows, "block.intersolarsystem.dusty_ring_ice",
+				"Dusty Ring Ice",
+				"Staubiges Ringeis",
+				"Poros gyűrűjég");
+		add(rows, "block.intersolarsystem.deuterium_ice",
+				"Heavy-Water Ice",
+				"Schwerwassereis",
+				"Nehézvízjég");
+		add(rows, "block.intersolarsystem.tholin_sand",
+				"Tholin Sand",
+				"Tholin-Sand",
+				"Tolinhomok");
+		add(rows, "block.intersolarsystem.titan_bedrock_ice",
+				"Titanian Ice Bedrock",
+				"Titan-Eisgestein",
+				"Titáni jég-alapkőzet");
+		add(rows, "block.intersolarsystem.hydrocarbon_sludge",
+				"Hydrocarbon Sludge",
+				"Kohlenwasserstoffschlamm",
+				"Szénhidrogén-iszap");
+		add(rows, "block.intersolarsystem.cryolava_ice",
+				"Cryolava Ice",
+				"Kryolava-Eis",
+				"Krioláva-jég");
+		add(rows, "block.intersolarsystem.enceladus_snow",
+				"Geyser Snow",
+				"Geysirschnee",
+				"Gejzírhó");
+		add(rows, "block.intersolarsystem.enceladus_ice",
+				"Enceladan Ice",
+				"Enceladus-Eis",
+				"Enceladusi jég");
+		add(rows, "block.intersolarsystem.fissure_ice",
+				"Tiger Stripe Ice",
+				"Tigerstreifen-Eis",
+				"Tigriscsík-jég");
+		add(rows, "block.intersolarsystem.vent_colony",
+				"Vent Colony",
+				"Schlotkolonie",
+				"Kürtőtelep");
+		add(rows, "block.intersolarsystem.uranus_methane_cloud",
+				"Uranian Methane Cloud",
+				"Uranus-Methanwolke",
+				"Uránuszi metánfelhő");
+		add(rows, "block.intersolarsystem.deep_sulfide_cloud",
+				"Hydrogen Sulfide Cloud",
+				"Schwefelwasserstoffwolke",
+				"Kén-hidrogén-felhő");
+		add(rows, "block.intersolarsystem.diamond_hail",
+				"Diamond Hail",
+				"Diamantenhagel",
+				"Gyémántjégeső");
+		add(rows, "block.intersolarsystem.miranda_ice",
+				"Mirandan Ice",
+				"Miranda-Eis",
+				"Mirandai jég");
+		add(rows, "block.intersolarsystem.corona_ice",
+				"Corona Ice",
+				"Koronaeis",
+				"Koronajég");
+		add(rows, "block.intersolarsystem.scarp_ice",
+				"Scarp Ice",
+				"Steilwandeis",
+				"Szirtjég");
+		add(rows, "block.intersolarsystem.titania_ice",
+				"Titania Ice",
+				"Titania-Eis",
+				"Titániai jég");
+		add(rows, "block.intersolarsystem.titania_frost",
+				"Carbon Dioxide Frost",
+				"Kohlendioxidreif",
+				"Szén-dioxid dér");
+		add(rows, "block.intersolarsystem.neptune_methane_cloud",
+				"Neptunian Methane Cloud",
+				"Neptun-Methanwolke",
+				"Neptunuszi metánfelhő");
+		add(rows, "block.intersolarsystem.dark_spot_cloud",
+				"Dark Spot Cloud",
+				"Wolke des Dunklen Flecks",
+				"A Sötét Folt felhője");
+		add(rows, "block.intersolarsystem.nitrogen_ice",
+				"Nitrogen Ice",
+				"Stickstoffeis",
+				"Nitrogénjég");
+		add(rows, "block.intersolarsystem.cantaloupe_ice",
+				"Cantaloupe Terrain Ice",
+				"Kantalupen-Eis",
+				"Sárgadinnyehéj-jég");
+		add(rows, "block.intersolarsystem.geyser_soot",
+				"Geyser Soot",
+				"Geysirruß",
+				"Gejzírkorom");
+		add(rows, "block.intersolarsystem.nameless_rock",
+				"Dark Moon Rock",
+				"Dunkles Mondgestein",
+				"Sötét holdkőzet");
+		add(rows, "block.intersolarsystem.silent_crystal",
+				"Silent Crystal",
+				"Stummer Kristall",
+				"Néma kristály");
+		add(rows, "block.intersolarsystem.geyser_vent",
+				"Geyser Vent",
+				"Geysirschlot",
+				"Gejzírkürtő");
+		add(rows, "block.intersolarsystem.nitrogen_geyser",
+				"Nitrogen Geyser",
+				"Stickstoffgeysir",
+				"Nitrogéngejzír");
+		add(rows, "block.intersolarsystem.dragonfly_flight_computer",
+				"Dragonfly Flight Computer",
+				"Dragonfly-Flugrechner",
+				"Dragonfly fedélzeti számítógép");
+		add(rows, "item.intersolarsystem.biosample",
+				"Enceladan Biosample",
+				"Enceladus-Bioprobe",
+				"Enceladusi biominta");
+		add(rows, "item.intersolarsystem.tholin_resin",
+				"Tholin Resin",
+				"Tholin-Harz",
+				"Tolingyanta");
+		add(rows, "item.intersolarsystem.metallic_hydrogen_drive_kit",
+				"Metallic Hydrogen Drive Kit (tier 5, mothership)",
+				"Metallwasserstoff-Antriebsset (Stufe 5, Mutterschiff)",
+				"Fémeshidrogén-hajtómű készlet (5. szint, anyahajó)");
+		add(rows, "item.intersolarsystem.deuterium_drive_kit",
+				"Deuterium Torch Drive Kit (tier 6, mothership)",
+				"Deuterium-Fackelantriebsset (Stufe 6, Mutterschiff)",
+				"Deutérium-fáklyahajtómű készlet (6. szint, anyahajó)");
+		add(rows, "item.intersolarsystem.turbo_drive_kit",
+				"Turbo Drive Kit (tier 7, mothership)",
+				"Turboantriebsset (Stufe 7, Mutterschiff)",
+				"Turbóhajtómű-készlet (7. szint, anyahajó)");
+		add(rows, "body.intersolarsystem.ganymede",
+				"Ganymede",
+				"Ganymed",
+				"Ganümédész");
+		add(rows, "body.intersolarsystem.callisto",
+				"Callisto",
+				"Kallisto",
+				"Kallisztó");
+		add(rows, "body.intersolarsystem.saturn_rings",
+				"Saturn's Rings",
+				"Saturnringe",
+				"A Szaturnusz gyűrűi");
+		add(rows, "body.intersolarsystem.titan",
+				"Titan",
+				"Titan",
+				"Titán");
+		add(rows, "body.intersolarsystem.enceladus",
+				"Enceladus",
+				"Enceladus",
+				"Enceladus");
+		add(rows, "body.intersolarsystem.miranda",
+				"Miranda",
+				"Miranda",
+				"Miranda");
+		add(rows, "body.intersolarsystem.titania",
+				"Titania",
+				"Titania",
+				"Titánia");
+		add(rows, "body.intersolarsystem.triton",
+				"Triton",
+				"Triton",
+				"Triton");
+		add(rows, "body.intersolarsystem.nameless",
+				"S/2041 N 1 (no name)",
+				"S/2041 N 1 (ohne Namen)",
+				"S/2041 N 1 (névtelen)");
+		add(rows, "mothership.intersolarsystem.place.saturn_orbit",
+				"Saturn orbit",
+				"Saturnumlaufbahn",
+				"Szaturnusz-pálya");
+		add(rows, "mothership.intersolarsystem.place.uranus_orbit",
+				"Uranus orbit",
+				"Uranusumlaufbahn",
+				"Uránusz-pálya");
+		add(rows, "mothership.intersolarsystem.place.neptune_orbit",
+				"Neptune orbit",
+				"Neptunumlaufbahn",
+				"Neptunusz-pálya");
+		add(rows, "mothership.intersolarsystem.turbo_installed",
+				"The turbo drive is in. It hums at a pitch nobody can hear. Nothing in this solar system needs it.",
+				"Der Turboantrieb ist eingebaut. Er summt in einer Tonhöhe, die niemand hört. Nichts in diesem Sonnensystem braucht ihn.",
+				"A turbóhajtómű a helyén van. Olyan hangon zümmög, amit senki sem hall. Ebben a Naprendszerben semmihez sem kell.");
+		add(rows, "nav.intersolarsystem.discovered",
+				"New entry on the navigation console: %s (from Neptune's orbit)",
+				"Neuer Eintrag in der Navigationskonsole: %s (von der Neptunumlaufbahn)",
+				"Új bejegyzés a navigációs konzolon: %s (a Neptunusz pályájáról)");
+		add(rows, "hazard.intersolarsystem.cryo_cold",
+				"DEEP COLD: -180 °C AND BELOW",
+				"TIEFKÄLTE: -180 °C UND KÄLTER",
+				"MÉLYHIDEG: -180 °C ÉS ALATTA");
+		add(rows, "hazard.intersolarsystem.extreme_cold",
+				"EXTREME COLD: -235 °C",
+				"EXTREME KÄLTE: -235 °C",
+				"SZÉLSŐSÉGES HIDEG: -235 °C");
+		add(rows, "hazard.intersolarsystem.ring_storm_warning",
+				"RING STORM COMING: GET INSIDE",
+				"RINGSTURM NAHT: HINEIN",
+				"GYŰRŰVIHAR ÉRKEZIK: BE A FEDEZÉKBE");
+		add(rows, "hazard.intersolarsystem.ring_storm",
+				"RING STORM: ICE AND DUST",
+				"RINGSTURM: EIS UND STAUB",
+				"GYŰRŰVIHAR: JÉG ÉS POR");
+		add(rows, "death.attack.intersolarsystem.frostbite",
+				"%1$s froze solid",
+				"%1$s ist steif gefroren",
+				"%1$s csonttá fagyott");
+		add(rows, "death.attack.intersolarsystem.frostbite.player",
+				"%1$s froze solid whilst fighting %2$s",
+				"%1$s ist im Kampf mit %2$s steif gefroren",
+				"%1$s csonttá fagyott, miközben %2$s ellen harcolt");
+		add(rows, "titan.intersolarsystem.dragonfly_repaired",
+				"Dragonfly's flight computer wakes up: the rotors spin up for a test, then idle. It will hop you between Titan's sites.",
+				"Dragonflys Flugrechner erwacht: die Rotoren drehen zum Test hoch, dann im Leerlauf. Er fliegt dich zwischen Titans Orten.",
+				"A Dragonfly fedélzeti számítógépe magához tér: a rotorok tesztre felpörögnek, aztán alapjáraton járnak. Átrepít a Titán helyszínei között.");
+		add(rows, "titan.intersolarsystem.dragonfly_dead",
+				"The flight computer is dead. A repair kit might wake it.",
+				"Der Flugrechner ist tot. Ein Reparaturset könnte ihn wecken.",
+				"A fedélzeti számítógép halott. Egy javítókészlet talán felébreszti.");
+		add(rows, "titan.intersolarsystem.dragonfly_hop",
+				"Dragonfly lifts you off through the haze to %s and lets you drift down.",
+				"Dragonfly trägt dich durch den Dunst zu %s und lässt dich hinabschweben.",
+				"A Dragonfly a ködön át elvisz ide: %s, és lassan leereszt.");
+		add(rows, "site.intersolarsystem.titan.selk_habitat",
+				"the Selk habitat",
+				"die Selk-Station",
+				"a Selk lakóállomás");
+		add(rows, "site.intersolarsystem.titan.huygens",
+				"the Huygens lander",
+				"den Huygens-Lander",
+				"a Huygens leszállóegység");
+		add(rows, "site.intersolarsystem.titan.dragonfly",
+				"Dragonfly's landing site",
+				"Dragonflys Landeplatz",
+				"a Dragonfly leszállóhelye");
+		add(rows, "site.intersolarsystem.titan.kraken_harbour",
+				"Kraken harbour",
+				"den Kraken-Hafen",
+				"a Kraken-kikötő");
+		add(rows, "site.intersolarsystem.titan.sotra_vent",
+				"the Sotra cryovolcano",
+				"den Kryovulkan Sotra",
+				"a Sotra kriovulkán");
+		add(rows, "message.intersolarsystem.landed.ganymede",
+				"Landed on Ganymede at the Uruk Sulcus camp (%s, %s). Its own magnetic field shields the equator: stay within a thousand blocks of it without radiation shielding.",
+				"Auf Ganymed beim Lager Uruk Sulcus gelandet (%s, %s). Sein eigenes Magnetfeld schützt den Äquator: ohne Strahlenschutz bleib innerhalb von tausend Blöcken davon.",
+				"Leszálltunk a Ganümédészen, az Uruk Sulcus tábornál (%s, %s). A saját mágneses tere védi az egyenlítőt: sugárvédelem nélkül maradj tőle ezer blokkon belül.");
+		add(rows, "message.intersolarsystem.landed.callisto",
+				"Landed on Callisto at HOPE base (%s, %s). Outside Jupiter's belts: no radiation here. The fuel depot is west of the pad.",
+				"Auf Kallisto bei der HOPE-Basis gelandet (%s, %s). Außerhalb von Jupiters Gürteln: hier keine Strahlung. Das Treibstofflager liegt westlich der Plattform.",
+				"Leszálltunk a Kallisztón, a HOPE bázisnál (%s, %s). A Jupiter sugárövein kívül: itt nincs sugárzás. Az üzemanyagtelep a padtól nyugatra van.");
+		add(rows, "message.intersolarsystem.landed.saturn",
+				"Docked at the Kronos aerostat above Saturn's haze (%s, %s). The polar hexagon is 2.5 km north.",
+				"Am Aerostat Kronos über Saturns Dunst angedockt (%s, %s). Das Polarhexagon liegt 2,5 km nördlich.",
+				"Kikötöttünk a Kronos aerosztátnál a Szaturnusz párája fölött (%s, %s). A sarki hatszög 2,5 km-re északra van.");
+		add(rows, "message.intersolarsystem.landed.saturn_rings",
+				"Docked at the Daphnis depot inside Saturn's rings (%s, %s). Weightless. Ring storms come on a schedule: watch the warning.",
+				"Am Depot Daphnis in Saturns Ringen angedockt (%s, %s). Schwerelos. Ringstürme kommen nach Plan: achte auf die Warnung.",
+				"Kikötöttünk a Daphnis raktárnál a Szaturnusz gyűrűiben (%s, %s). Súlytalanság. A gyűrűviharok menetrend szerint jönnek: figyeld a figyelmeztetést.");
+		add(rows, "message.intersolarsystem.landed.titan",
+				"Landed on Titan by the Selk habitat (%s, %s). Thick air, a seventh of Earth's gravity: falls are slow. -179 °C.",
+				"Auf Titan bei der Selk-Station gelandet (%s, %s). Dichte Luft, ein Siebtel der Erdschwere: Stürze sind langsam. -179 °C.",
+				"Leszálltunk a Titánon, a Selk lakóállomásnál (%s, %s). Sűrű levegő, a földi gravitáció hetede: lassan esel. -179 °C.");
+		add(rows, "message.intersolarsystem.landed.enceladus",
+				"Landed on Enceladus by the Baghdad Sulcus lab (%s, %s). The geysers along the tiger stripes will throw you high.",
+				"Auf Enceladus beim Labor Baghdad Sulcus gelandet (%s, %s). Die Geysire an den Tigerstreifen schleudern dich hoch.",
+				"Leszálltunk az Enceladuson, a Baghdad Sulcus labornál (%s, %s). A tigriscsíkok gejzírjei magasra repítenek.");
+		add(rows, "message.intersolarsystem.landed.uranus",
+				"Docked at the Meridian aerostat above Uranus' cyan clouds (%s, %s). The sun here does not move. Diamonds hail far below.",
+				"Am Aerostat Meridian über Uranus' cyanfarbenen Wolken angedockt (%s, %s). Die Sonne bewegt sich hier nicht. Tief unten hagelt es Diamanten.",
+				"Kikötöttünk a Meridian aerosztátnál az Uránusz ciánkék felhői fölött (%s, %s). A Nap itt nem mozdul. Mélyen lent gyémánt hullik.");
+		add(rows, "message.intersolarsystem.landed.miranda",
+				"Landed on Miranda on top of Verona Rupes (%s, %s). The tallest cliff in the solar system is a few dozen blocks west.",
+				"Auf Miranda oben auf Verona Rupes gelandet (%s, %s). Die höchste Klippe des Sonnensystems ist ein paar Dutzend Blöcke westlich.",
+				"Leszálltunk a Mirandán, a Verona Rupes tetején (%s, %s). A Naprendszer legmagasabb szirtje néhány tucat blokkra nyugatra van.");
+		add(rows, "message.intersolarsystem.landed.titania",
+				"Landed on Titania by Messina station (%s, %s). The rift runs north of here.",
+				"Auf Titania bei der Station Messina gelandet (%s, %s). Der Graben verläuft nördlich von hier.",
+				"Leszálltunk a Titánián, a Messina állomásnál (%s, %s). A hasadék innen északra fut.");
+		add(rows, "message.intersolarsystem.landed.neptune",
+				"Docked at the Le Verrier aerostat in Neptune's winds (%s, %s). Crouch to hold on.",
+				"Am Aerostat Le Verrier in Neptuns Winden angedockt (%s, %s). Duck dich, um dich festzuhalten.",
+				"Kikötöttünk a Le Verrier aerosztátnál a Neptunusz szelében (%s, %s). Guggolj le, hogy megkapaszkodj.");
+		add(rows, "message.intersolarsystem.landed.triton",
+				"Landed on Triton at Hili outpost (%s, %s). -235 °C: the coldest place we know.",
+				"Auf Triton beim Außenposten Hili gelandet (%s, %s). -235 °C: der kälteste Ort, den wir kennen.",
+				"Leszálltunk a Tritonon, a Hili előőrsnél (%s, %s). -235 °C: a leghidegebb hely, amit ismerünk.");
+		add(rows, "message.intersolarsystem.landed.nameless",
+				"Landed on the moon with no name (%s, %s). A beacon is still on. It has not moved in years.",
+				"Auf dem Mond ohne Namen gelandet (%s, %s). Ein Peilsender läuft noch. Er hat sich seit Jahren nicht bewegt.",
+				"Leszálltunk a névtelen holdon (%s, %s). Egy jeladó még szól. Évek óta nem mozdult.");
 		check(rows);
 		return List.copyOf(rows);
 	}

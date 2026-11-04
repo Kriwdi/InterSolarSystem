@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/saturn_haze"
+      },
+      {
+        "model": "intersolarsystem:block/saturn_haze",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/saturn_haze",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/saturn_haze",
+        "y": 270
+      }
+    ]
+  }
+}

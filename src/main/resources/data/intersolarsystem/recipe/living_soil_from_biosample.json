@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "intersolarsystem:biosample",
+    "intersolarsystem:clean_water_canister",
+    "minecraft:dirt",
+    "minecraft:dirt"
+  ],
+  "result": {
+    "id": "intersolarsystem:living_soil",
+    "count": 4
+  }
+}

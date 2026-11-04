@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.5,
+  "ingredient": "intersolarsystem:tholin_sand",
+  "result": {
+    "id": "intersolarsystem:tholin_resin"
+  }
+}

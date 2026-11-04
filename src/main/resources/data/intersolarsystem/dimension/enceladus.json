@@ -1,0 +1,11 @@
+{
+  "type": "intersolarsystem:enceladus",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "intersolarsystem:enceladus_surface"
+    },
+    "settings": "intersolarsystem:enceladus"
+  }
+}
