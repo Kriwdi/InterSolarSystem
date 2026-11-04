@@ -34,7 +34,10 @@ class TravelMathTest {
 		long one = TravelMath.oneWayTicks(body("mars"), 1, 0);
 		assertEquals(Math.round(one / 3.0), TravelMath.oneWayTicks(body("mars"), 2, 0));
 		assertEquals(Math.round(one / 30.0), TravelMath.oneWayTicks(body("mars"), 4, 0));
-		assertEquals(30, TravelMath.multiplier(99));
+		// Tiers 5-7 (the outer system's drives and the turbo drive), clamped at the top one.
+		assertEquals(Math.round(one / 100.0), TravelMath.oneWayTicks(body("mars"), 6, 0));
+		assertEquals(300, TravelMath.multiplier(7));
+		assertEquals(300, TravelMath.multiplier(99));
 	}
 
 	@Test
