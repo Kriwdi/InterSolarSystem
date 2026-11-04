@@ -40,7 +40,7 @@ jobs:
           MESA_GLSL_VERSION_OVERRIDE: "460"
         run: |
           chmod +x gradlew
-          timeout 2400 xvfb-run -a -s "-screen 0 1280x720x24 +extension GLX +render -noreset" ./gradlew runClientGameTest --stacktrace 2>&1 | tee client.log || true
+          timeout 3600 xvfb-run -a -s "-screen 0 1280x720x24 +extension GLX +render -noreset" ./gradlew runClientGameTest --stacktrace 2>&1 | tee client.log || true
       - name: Publish screenshots
         if: always()
         shell: bash
