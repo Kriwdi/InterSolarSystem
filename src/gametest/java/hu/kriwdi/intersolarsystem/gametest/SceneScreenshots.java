@@ -340,6 +340,33 @@ public class SceneScreenshots implements FabricClientGameTest {
 			context.waitTicks(40);
 			context.takeScreenshot("18e_mars_night_sky");
 
+			// The worlds beyond Mars: each arrival site from above, then one view at eye level.
+			game.getServer().runCommand("time set 6000");
+			int shot = 0;
+			for (var w : hu.kriwdi.intersolarsystem.space.Worlds.ALL) {
+				game.getServer().runOnServer(server -> hu.kriwdi.intersolarsystem.space.Worlds.ensureSites(
+						server.getLevel(w.dimension()), w));
+				int wy = game.getServer().computeOnServer(server -> MoonSites.surface(server.getLevel(w.dimension()),
+						w.landX(), w.landZ()).getY());
+				String dim = w.dimension().identifier().toString();
+				char tag = (char) ('a' + shot++);
+				game.getServer().runCommand("execute in " + dim + " run tp @a " + (w.landX() + 38) + " " + (wy + 26)
+						+ " " + (w.landZ() + 38) + " 135 28");
+				context.waitTicks(160);
+				context.takeScreenshot("19" + tag + "_" + w.body() + "_site");
+				game.getServer().runCommand("execute in " + dim + " run tp @a " + (w.landX() + 12) + " " + (wy + 2)
+						+ " " + (w.landZ() + 6) + " 120 -5");
+				context.waitTicks(60);
+				context.takeScreenshot("19" + tag + "_" + w.body() + "_eye");
+			}
+			BlockPos foot = hu.kriwdi.intersolarsystem.space.SpaceSites.PLACED_AT.get("venus/venera13");
+			if (foot != null) {
+				game.getServer().runCommand("execute in intersolarsystem:venus run tp @a " + (foot.getX() + 7) + " "
+						+ (foot.getY() + 4) + " " + (foot.getZ() + 7) + " 135 20");
+				context.waitTicks(120);
+				context.takeScreenshot("19h_venus_surface_venera13");
+			}
+
 			// The dead Earth: every biome and the main structures, at noon.
 			game.getServer().runCommand("time set 6000");
 			game.getServer().runCommand("effect give @a minecraft:night_vision infinite 0 true");
