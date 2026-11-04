@@ -20,7 +20,7 @@ Ez az útmutató végigvezet a mod jelenlegi tartalmán: hogyan indulj, mit csin
 10. [Navigáció és utazás](#10-navigáció-és-utazás)
 11. [Űrruha és oxigén](#11-űrruha-és-oxigén)
 12. [Föld körüli pálya és az ISS](#12-föld-körüli-pálya-és-az-iss)
-13. [A Hold](#13-a-hold) · [A Mars](#13b-a-mars)
+13. [A Hold](#13-a-hold) · [A Mars](#13b-a-mars) · [A Vénusz](#13c-a-vénusz) · [A Merkúr](#13d-a-merkúr) · [Kisbolygóöv és Ceres](#13e-a-kisbolygóöv-és-a-ceres) · [A Jupiter](#13f-a-jupiter) · [Io és Európa](#13g-az-io-és-az-európa) · [Űrruha-modulok](#13h-űrruha-modulok)
 14. [Hajtómű-fejlesztés](#14-hajtómű-fejlesztés)
 15. [Parancsok](#15-parancsok)
 16. [Tippek és gyakori kérdések](#16-tippek-és-gyakori-kérdések)
@@ -286,7 +286,9 @@ Minden szekrény körül **törmeléket** (törmelék, törött beton) kell elta
 - A **darukonzolnak** sorban add a készleteket: gerinc, törzs, hajtóművek, reaktor, életfenntartás, farm, labor, szállás, hangár, híd. A daru látványosan, blokkról blokkra építi fel a csarnokban (a törzs a legnagyobb, néhány perc).
 - Ha mind a tíz kész, és a telepen legalább 600 hajtóanyag van: **guggolás + jobb klikk üres kézzel a darukonzolra = indulás**. A közelben állók a fedélzetre kerülnek.
 - **A fedélzeten:**
-  - A hídon áll a **kormányállás**: guggolva irányt választasz (Föld körüli vagy Hold körüli pálya), sima kattintással indulsz. Az út kb. 10 perc, közben események történnek; néha **meghibásodás** (hűtőkör, energiabusz, légtisztítók): a hajó megáll, amíg valaki **javítókészlettel a kormányhoz** nem megy és meg nem oldja a javítótáblát.
+  - A hídon áll a **kormányállás**: guggolva lapozod a célokat (Föld és Hold körüli pálya, majd a Merkúr, a Vénusz, a Mars, a kisbolygóöv és a Jupiter körüli pálya), és kiírja az út hosszát; sima kattintással indulsz. A Föld–Hold rendszeren belül kb. 10 perc az út, a távoli bolygókhoz a valódi átviteli idők szerint hosszabb; közben események történnek, néha **meghibásodás** (hűtőkör, energiabusz, légtisztítók): a hajó megáll, amíg valaki **javítókészlettel a kormányhoz** nem megy és meg nem oldja a javítótáblát.
+  - **Az anyahajó a mozgó bázis.** A kishajó csak a Föld–Hold rendszerben repül (Föld, Föld körüli pálya, Hold). Minden, ami ennél távolabb van, az anyahajóval érhető el: az anyahajó leparkol a bolygó körüli pályán, a kishajó a navigációs konzolon a **„Anyahajó”** céllal **kiköt az oldalsó dokkolóporton**, onnan pedig leszáll a bolygóra (vagy annak holdjára), és vissza.
+  - **Hajtómű:** az anyahajó fúziós hajtóművel (3-as szint) indul; ezzel a Merkúr, a Vénusz, a Mars és a kisbolygóöv érhető el. A Jupiter rendszeréhez 4-es szint kell: a **plazmahajtómű-készletet** (irídium a kisbolygóövből) kézben tartva kattints a kormányra.
   - A hangárban a **hangárlift** levisz a pálya alatti égitestre. Egy lerakott hangárlift (recept: titán, antenna, áramkör, mágnes, akkumulátor) bárhonnan visszavisz a hangárba.
   - **Berendezett fedélzetek:** életfenntartó üzem (légtisztítók, oxigéngenerátorok, víztartályok, vezérlőterem), hidropónikus ágyások termő növényekkel és öntözőcsatornával, üvegfalú laborok (biológia, anyagvizsgálat, megfigyelő, a vezető kutató irodája), kabinsor (ágy, szekrény, íróasztal minden kabinban), étkező konyhával, gyengélkedő, társalgó, hangár leszállóbölcsőkkel és irányítófülkével, lépcsőzetes híd állomásokkal és hologram-asztallal.
   - A farmfedélzeten az élő talaj megművelhető.
@@ -329,6 +331,23 @@ A receptek a receptkönyvben is megjelennek. Az alábbi táblázatok a pontos ho
 | Oxigénpalack (2 db) | 2 alumínium, 2 perklorátkéreg, 1 üvegpalack |
 | Oxigénpalack | 2 alumínium, 2 ilmenit, 1 üvegpalack |
 | Oxigénpalack (2 db) | 2 sarki jég, 1 üvegpalack, 1 akkumulátorcella |
+| Oxigénpalack (2 db) | 2 ceresi jég (vagy 2 európai jég), 1 üvegpalack, 1 akkumulátorcella |
+
+### A távoli világok
+
+| Tárgy | Hozzávalók |
+|---|---|
+| Irídiumrúd | irídiumérc kemencében / kohóban |
+| Vasrúd | nikkel-vas érc kemencében / kohóban |
+| Plazmahajtómű-készlet | 4 titánlemez, 2 irídiumrúd, 2 mágnes, 1 fúziós hajtómű-készlet |
+| Hőpajzs-modul | 4 titánlemez, 3 fehér gyapjú, 1 áramkör, 1 radiátor |
+| Nyomásálló modul | 6 titánlemez, 2 mágnes, 1 áramkör |
+| Sugárvédő modul | 4 irídiumrúd, 4 alumínium, 1 áramkör |
+| Kiegészítő tartály | 4 alumínium, 4 oxigénpalack, 1 áramkör |
+| Puskapor (2 db) | 1 kénkéreg, 1 faszén |
+| Csontliszt (3 db) | 1 ammóniafelhő |
+| Vízpalack | 2 vízfelhő, 1 üvegpalack |
+| Urán fűtőelem (4 db) | 2 titánlemez, 1 fémes hidrogén |
 
 A **hematitgömböcskék** kohóban vasrúddá olvaszthatók.
 
@@ -572,7 +591,7 @@ Válaszd a **Hold** célt a Földről vagy pályáról. A hajó a **Nyugalom ten
   - az Apollo–11, 12, 14, 15, 16 és 17 valódi leszállóhelyén leszállóegységek, kifakult zászlók, műszercsomagok, a 15–17-nél holdjárók;
   - a **Tranquility bázis** romjai ellátmánnyal, napelemmezővel és adatterminálokkal, amelyek a bázis utolsó napjait mesélik.
   - **további történelmi missziók** a valódi helyükön, táblával: Luna–9 (az első lágy leszállás), Surveyor–3 (az Apollo–12 mellett), Luna–17 a **Lunohod–1** holdjáróval és Luna–21 a **Lunohod–2**-vel (keréknyomokkal), Csang'o–3 a Jütu holdjáróval, Csang'o–4 a túlsó oldalon, Csandrajána–3 (Vikram és Pragján) a déli pólus közelében, SLIM (orral lefelé), Luna–24;
-  - a **Bárka–1 kolónia** a déli póluson, a Shackleton-kráter peremén: a leszállólábain álló Bárka (bejárható híd és raktér), regolittal fedett lakókupolák alagutakkal (hálóterem, **hibernációs csarnok 380 alvó telepessel**, üvegház, műhely), jégbánya fúrótoronnyal, poláris naptornyok, leszállópályák, tömegkatapult-sín és a Föld felé forduló antennaárboc. A terminálok elmondják, mi történt velük.
+  - a **Bárka–1 kolónia** a déli póluson, a Shackleton-kráter peremén: a leszállólábain álló Bárka (bejárható híd és raktér), regolittal fedett lakókupolák alagutakkal (hálóterem, **hibernációs csarnok 380 alvó telepessel**, üvegház, műhely), jégbánya fúrótoronnyal, poláris naptornyok, leszállópályák, tömegkatapult-sín és a Föld felé forduló antennaárboc. A hibernációs csarnok **ébresztőkonzolja** elfogadja a kódokat, és elindítja az ébresztést. *Hogy mi lesz belőle, azt nézd meg magad.*
 
 A Holdról a **Föld körüli pálya** vagy egyenesen a **Föld** felé indulhatsz vissza.
 
@@ -580,7 +599,7 @@ A Holdról a **Föld körüli pálya** vagy egyenesen a **Föld** felé indulhat
 
 ## 13b. A Mars
 
-A **Mars** cél a **fúziós hajtóművel** (3-as szint) nyílik meg; az út hosszú (a startablaktól függően kb. 40–60 perc), közben a csillagok, a Tejút és az elsuhanó por kísér. A hajó a **Jezero-kráterben** száll le, a Bárka–2 kolóniától délre.
+A Marsra az **anyahajóval** jutsz el: a kormányállásnál válaszd a Mars körüli pályát, utána a kishajóval kikötsz az anyahajón, és onnan választod a **Mars** célt. A kishajó a **Jezero-kráterben** száll le, a Bárka–2 kolóniától délre. A hangárlift is levisz a felszínre.
 
 - **A világ:** 10 600 blokk körbe. Rozsdás regolitsíkságok sötét bazaltfoltokkal, narancssárga **dűnetengerek**, kráteres **felföldek** kanyonokkal, a sarkokon (kb. ±4250-től) réteges **sarki jégsapkák**.
 - **Levegő és gravitáció:** a légkör a földinek századrésze, szén-dioxid: **űrruha kell**. A gravitáció 38%.
@@ -590,6 +609,79 @@ A **Mars** cél a **fúziós hajtóművel** (3-as szint) nyílik meg; az út hos
 - **Oxigén más világokon:** az **oxigénpalack** (perklorátból, holdi ilmenitből vagy sarki jégből + akkumulátor) felvett űrruhában használva a tartály harmadát tölti fel – így a hajótól távol is kitart a ruha.
 - **Relikviák** a valódi helyükön, táblával: Viking–1 és –2, Pathfinder a Sojournerrel, a homokba ragadt **Spirit**, a porvihar elnémította **Opportunity**, a **Curiosity** a Sharp-hegy rétegein, a **Perseverance** mintacsövekkel és az **Ingenuity** helikopterrel, a Zhurong, az InSight.
 - **A Bárka–2 kolónia:** a deltára leszállt, megdőlt Bárka (bejárható híd a hajónaplóval), lakómodulok, labor (a geológus naplója), halott üvegház, napelemek, antenna, leszállópálya – és északon a **feltárás**: lépcsőzetes gödör állvánnyal és daruval, az alján valami, amit nem ember épített. A szélén az oldalára borult kolóniarover, benne a **rover memóriamagja**. *A szalagok és a terminálok elmondják a többit.*
+- **A fal:** ha közel mész, lüktetni kezd (minél közelebb vagy, annál sűrűbben), a réséből szürke por száll, és a talaj körülötte lassan elszürkül és elhal – egyre nagyobb körben. Éjjel valami kopog a túloldalon. Közvetlenül mellette a sisak rádiója töredékeket fog. A gödör alján Dr. Ferreira terepi terminálja áll. Ha a rover memóriamagja a kezedben van, a rés válaszol.
+
+---
+
+## 13c. A Vénusz
+
+A Vénusz körüli pályáról a kishajó az **Aphrodite felhővárosnál** köt ki, 55 km-rel a felszín fölött.
+
+- **A felhőváros:** acéllemez korong öt emelőballon alatt (az egyik kiszakadt és lóg), a közepén leszállópálya, a peremen üvegkupolás lakóházak, labor, savüzem, a felhőkbe lógó mintavevő kötelek. A terminál elmondja a város történetét.
+- **Kénsavfelhők:** a felhőrétegben (150-es magasság fölött) a szabad ég alatt a sav **koptatja a ruhát** (gyorsabban fogy az oxigén). Ruha nélkül éget.
+- **A felszín:** a felhőváros **liftje** leviszi a felszínre, a lift alsó végének óvóhelyére. Lent **460 °C és 92 bar** van: **hőpajzs- és nyomásálló modul nélkül** pár másodperc alatt meghalsz. Mindkét modullal is fogy a hűtés: **időkorlátos merülés**.
+- **A felszínen:** bazalt, vénuszi regolit, **kénkéreg**, lávató; a **Venyera–13** és a **Venyera–9** szovjet leszállóegység a helyén, és Dr. Kowalczyk lezuhant mentőkapszulája a halott relé mellett.
+- **Gravitáció:** a földi 90%-a. A világ 19 200 blokk széles.
+
+## 13d. A Merkúr
+
+A kishajó a **Sunshade bázisnál** száll le, egy kráterfal árnyékában.
+
+- **Nappal 430 °C, éjjel −180 °C:** a szabad ég alatt **hőpajzs** nélkül éget, illetve fagyaszt. A hőpajzs nappal fogyasztja a ruhát.
+- **Napkitörések:** menetrend szerint jönnek, előtte **figyelmeztetés** (a visor kiírja). Kitörés alatt a szabad ég alatt **sugárvédelem** kell, vagy menj fedél alá – a bázisnak saját **óvóhelye** van a csarnokok alatt, létrán.
+- **A bázis:** regolittöltés alatti csarnokok (reaktor, szerverek, a bázis számítógépének naplója), hatalmas napellenző panelmezőn, radiátorbordák, jégtartályok; arrébb a **MESSENGER** szonda becsapódási krátere.
+- **Ég:** fekete, csillagos; a Nap két és félszer akkora, koronával. A gravitáció 38%. A világ 7720 blokk széles; a sarkoknál jég van.
+
+## 13e. A kisbolygóöv és a Ceres
+
+**A kisbolygóöv** súlytalan űr-dimenzió, tele sodródó sziklákkal (kő-, széntartalmú és fémes kisbolygók; a fémesek magjában **irídium**).
+
+- **Súlytalanság**, mint a Föld körüli pályán: kapaszkodás, **biztosítókötél**, **MMU**. Itt kint az elengedés örök zuhanás.
+- **A Vesta bányászállomás:** egy lebegő sziklába ásva; leszállópálya, ércmalom, **kőfejtő**, ahol látszik az irídiummag, kötélpályák két kisebb sziklához, dokkolókar, legénységi modul a művezető naplójával. Arrébb a kettétört **Ingrid Bjørnstad** ércszállító és kiszóródott rakománya.
+- **Nyersanyag:** kondrit, széntartalmú kőzet, **nikkel-vas érc** (vas), **irídiumérc** (irídiumrúd) – ebből készül a **plazmahajtómű** és a **sugárvédő modul**.
+
+**A Ceres** (ugyanarról a pályáról): kicsi, de érdemes – 1490 blokk széles, alacsony gravitáció (3%).
+
+- **Az Occator állomás** a fényes sólerakódások mellett: sólé-fúrótorony, **hideg archívum** mintatartályokkal, labor. A terminál elárul valamit, ami a Földnek még fontos lehet.
+- Agyag, **ceresi jég** (oxigén), fényes **karbonátsó**; egy kis jégvulkán (Ahuna).
+
+## 13f. A Jupiter
+
+A Jupiterhez **4-es szintű anyahajó-hajtómű** kell. A kishajó a **Zephyr aeroszátnál** köt ki, az ammóniafelhők fölött. **Nincs talaj.**
+
+- **Felhőrétegek** (rajtuk járni és bányászni lehet): fent a fehér **ammóniafelhők** (230 körül az aerosztát, 210-en a réteg), lejjebb a barna **ammónium-hidroszulfid** réteg (140), legalul a kék **vízfelhők** (70), amelyek alján ritka **fémes hidrogén** kristályok vannak.
+- **Minél mélyebbre, annál értékesebb és veszélyesebb:** 120 alatt **zúzó nyomás** (nyomásálló modul kell), 60 alatt **nyomás és hőség** (hőpajzs is), 20 alatt nincs visszaút.
+- **A Nagy Vörös Folt:** egy ovális vihar, ahol a középső réteg vörösre vált és toronnyá magasodik.
+- **Szelek:** a világos sávokban kelet, a sötétekben nyugat felé sodornak (guggolva a talajon megállsz).
+- **Gravitáció:** két és félszeres (a zuhanás nem sebez, de a mélység igen).
+- **Mit adnak a felhők:** ammónia → **csontliszt** (trágya), vízfelhő → **vízpalack**, fémes hidrogén → **fűtőelem**.
+- Arrébb a **Galileo szonda** hővédő pajzsa és ejtőernyője fekszik a barna felhőkön.
+
+## 13g. Az Io és az Európa
+
+A Jupiter körüli pályáról mindkét holdra le lehet szállni (és át is lehet repülni egyikről a másikra). Az égen ott áll a hatalmas Jupiter.
+
+**Az Io** (5770 blokk): kénsíkságok, SO₂-dér, lávatavak.
+- **Sugárzás:** a szabad ég alatt **sugárvédő modul** nélkül kevesebb mint egy perc alatt halálos. Fedél alatt biztonságban vagy.
+- **A Loki obszervatórium:** vastag falú bunker a lávató mellett, periszkópkupolával; a bejárat melletti polcon sugárvédő modul.
+
+**Az Európa** (4940 blokk): sima jégkéreg vörösesbarna sávokkal (lineae), sóval.
+- **Sugárzás** a jégen (gyengébb, mint az Ión); a jég alatt menedék.
+- **A jég alatt óceán**: kb. 24 blokk jég alatt víz, a fenekén só, meleg kürtők, és **világító mikrobatelepek**.
+- **A Thera fúróállomás:** fúrótorony, akna létrával le egészen az óceánig, kupola mintatartályokkal. *Nézd meg.*
+
+## 13h. Űrruha-modulok
+
+Egy ruha, amit a világok egyre keményebb körülményeihez szerelsz fel. A modult **felvett űrruhában jobb klikkel** szereled be; végleg a ruhán marad (a ruha adataiban), és a visor a nyomásjelző alatt listázza.
+
+| Modul | Mire jó |
+|---|---|
+| **Hőpajzs** | Vénusz felszíne, Merkúr nappal és éjjel, Jupiter mélye |
+| **Nyomásálló héj** | Vénusz felszíne, Jupiter a felhők alatt |
+| **Sugárvédelem** | Io, Európa, a Merkúr napkitörései |
+| **Kiegészítő tartály** | másfélszer tovább tart az oxigén |
+
+A visor alján a hely veszélye: **zölden**, ha a ruhád kezeli, **pirosan villogva**, ha nem.
 
 ---
 
@@ -601,8 +693,10 @@ A hajtómű szintje osztja az utazási időt:
 |---|---|---|
 | 1 | ×1 | alap |
 | 2 | ×3 | **ionhajtómű-készlet** (Föld érceiből) |
-| 3 | ×10 | **fúziós hajtómű-készlet** (urán a Földről + hélium-3 a Holdról); **ez kell a Marshoz** |
-| 4 | ×30 | később (a külső bolygókhoz) |
+| 3 | ×10 | **fúziós hajtómű-készlet** (urán a Földről + hélium-3 a Holdról) |
+| 4 | ×30 | **plazmahajtómű-készlet** (irídium a kisbolygóövből): az **anyahajó** kormányára, a Jupiterhez |
+
+A Föld–Hold rendszeren túl az **anyahajó hajtóműve** számít (alapból 3-as szint); a kishajóé csak a Föld és a Hold között.
 
 **Beszerelés:**
 
@@ -675,12 +769,10 @@ Ha a hajó terén kívülre kerülsz, a játék fél másodpercen belül visszat
 ## 17. Ami még nincs kész
 
 - **Saját élőlények** (mutánsok, drónok): most a világ üres.
-- A **többi bolygó** (Vénusz, Merkúr, aszteroidaöv, külső bolygók): a listában látszanak, de zárva vannak. (A Mars már elérhető.)
-- A Jezero alatti fal és a rover „kulcsa”: a történet folytatása.
+- A **külső bolygók** (Szaturnusz, Uránusz, Neptunusz) és további holdak: a listában látszanak, de zárva vannak.
+- A Jezero alatti fal és a rover „kulcsa”: a történet folytatása (a fal már él).
 - **Több hajóosztály** és bővíthető belső tér: most egy alap hajó van.
 - **Bányászdrónok megjavítása**, olajfinomítás üzemanyaggá, víz- és levegőszűrés.
-- **A 4-es hajtómű-szint** beszerezhető alkatrésze.
 - A **kutatóhajó** készlete és dokkolása az anyahajó hangárjába.
-- A **Bárka–1** telepeseinek felébresztése (a terminálok már utalnak rá).
 
 A fejlesztés állapota a [`docs/roadmap.md`](docs/roadmap.md)-ben követhető.
