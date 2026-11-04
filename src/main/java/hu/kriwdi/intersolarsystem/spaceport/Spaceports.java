@@ -287,6 +287,7 @@ public final class Spaceports {
 			if (held.isEmpty() && player.isShiftKeyDown() && !site.launched && site.propellant >= PROPELLANT_TO_LAUNCH) {
 				if (Mothership.launch(level, pos, player)) {
 					site.launched = true;
+					site.clearing = 0L;
 					site.propellant -= PROPELLANT_TO_LAUNCH;
 					changed(level);
 				}
@@ -373,7 +374,39 @@ public final class Spaceports {
 			if (site.building >= 0 && site.working(Facility.CRANE) && level.isLoaded(site.consolePos)) {
 				build(level, site, state);
 			}
+			if (site.clearing >= 0) {
+				clearHall(level, site, state);
+			}
 		}
+	}
+
+	/** The launched ship leaves the hall: its blocks there go, section by section, a few hundred per tick. */
+	private static void clearHall(ServerLevel level, Site site, SpaceportState state) {
+		Section[] all = Section.values();
+		int sec = (int) (site.clearing / 1_000_000L);
+		int index = (int) (site.clearing % 1_000_000L);
+		Rotation rotation = Rotation.values()[site.consoleRotation & 3];
+		int budget = 600;
+		while (budget > 0 && sec < all.length) {
+			if (!all[sec].mothership()) {
+				sec++;
+				index = 0;
+				continue;
+			}
+			List<Blueprint.Entry> blocks = Blueprint.of(all[sec].id());
+			while (budget > 0 && index < blocks.size()) {
+				BlockPos p = Blueprint.place(site.consolePos, rotation, blocks.get(index++));
+				level.getChunk(p.getX() >> 4, p.getZ() >> 4);
+				level.setBlock(p, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), 2);
+				budget--;
+			}
+			if (index >= blocks.size()) {
+				sec++;
+				index = 0;
+			}
+		}
+		site.clearing = sec >= all.length ? -1L : sec * 1_000_000L + index;
+		state.changed();
 	}
 
 	private static void build(ServerLevel level, Site site, SpaceportState state) {

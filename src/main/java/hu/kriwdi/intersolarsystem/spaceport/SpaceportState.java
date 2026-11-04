@@ -72,6 +72,8 @@ public class SpaceportState extends SavedData {
 		public int consoleRotation;
 		public boolean launched;
 		public int printed;
+		/** After the launch the ship's copy in the hall is taken away (section index * 1 000 000 + block index; -1 done). */
+		public long clearing = -1L;
 
 		public FacilityState facility(Facility f) {
 			return facilities.computeIfAbsent(f, k -> new FacilityState());
@@ -115,6 +117,7 @@ public class SpaceportState extends SavedData {
 			t.putInt("rot", consoleRotation);
 			t.putBoolean("launched", launched);
 			t.putInt("printed", printed);
+			t.putLong("clearing", clearing);
 			return t;
 		}
 
@@ -145,6 +148,7 @@ public class SpaceportState extends SavedData {
 			s.consoleRotation = t.getIntOr("rot", 0);
 			s.launched = t.getBooleanOr("launched", false);
 			s.printed = t.getIntOr("printed", 0);
+			s.clearing = t.getLongOr("clearing", -1L);
 			return s;
 		}
 	}
