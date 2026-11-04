@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="hu.kriwdi.intersolarsystem.ship.ShipRepairRulesTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-04T10:52:34.364Z" hostname="runnervm48cm3" time="0.009">
+  <properties/>
+  <testcase name="nothingWhenAllFull()" classname="hu.kriwdi.intersolarsystem.ship.ShipRepairRulesTest" time="0.005"/>
+  <testcase name="earliestIncidentComesFirst()" classname="hu.kriwdi.intersolarsystem.ship.ShipRepairRulesTest" time="0.0"/>
+  <testcase name="worstSubsystemWithoutIncidents()" classname="hu.kriwdi.intersolarsystem.ship.ShipRepairRulesTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

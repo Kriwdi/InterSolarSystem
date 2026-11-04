@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="hu.kriwdi.intersolarsystem.ship.ShipFaultRulesTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-04T10:52:33.940Z" hostname="runnervm48cm3" time="0.388">
+  <properties/>
+  <testcase name="percentRoundsUp()" classname="hu.kriwdi.intersolarsystem.ship.ShipFaultRulesTest" time="0.001"/>
+  <testcase name="riskIgnoresUnknownFaultsForTheEstimateAndHalvesForTests()" classname="hu.kriwdi.intersolarsystem.ship.ShipFaultRulesTest" time="0.364"/>
+  <testcase name="riskIsCappedAndZeroForAHealthyShip()" classname="hu.kriwdi.intersolarsystem.ship.ShipFaultRulesTest" time="0.0"/>
+  <testcase name="wreckedShipGetsFaultsAboutHalfTheTime()" classname="hu.kriwdi.intersolarsystem.ship.ShipFaultRulesTest" time="0.011"/>
+  <testcase name="perfectNavigationScanFindsEverything()" classname="hu.kriwdi.intersolarsystem.ship.ShipFaultRulesTest" time="0.001"/>
+  <testcase name="scanNeverHidesAKnownFault()" classname="hu.kriwdi.intersolarsystem.ship.ShipFaultRulesTest" time="0.0"/>
+  <testcase name="healthyShipNeverGetsFaults()" classname="hu.kriwdi.intersolarsystem.ship.ShipFaultRulesTest" time="0.001"/>
+  <testcase name="landingRollIsDeterministicAndSkipsExistingFaults()" classname="hu.kriwdi.intersolarsystem.ship.ShipFaultRulesTest" time="0.0"/>
+  <testcase name="faultChanceIsZeroWhenHealthyAndHalfAtZero()" classname="hu.kriwdi.intersolarsystem.ship.ShipFaultRulesTest" time="0.0"/>
+  <testcase name="noRiskMeansNoDisaster()" classname="hu.kriwdi.intersolarsystem.ship.ShipFaultRulesTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

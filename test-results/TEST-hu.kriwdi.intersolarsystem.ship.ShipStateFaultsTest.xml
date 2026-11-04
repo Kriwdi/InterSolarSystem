@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="hu.kriwdi.intersolarsystem.ship.ShipStateFaultsTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-04T10:52:34.374Z" hostname="runnervm48cm3" time="0.05">
+  <properties/>
+  <testcase name="testHopIsShorterAndWearsLess()" classname="hu.kriwdi.intersolarsystem.ship.ShipStateFaultsTest" time="0.002"/>
+  <testcase name="faultsFlightKindAndScansSurviveSaving()" classname="hu.kriwdi.intersolarsystem.ship.ShipStateFaultsTest" time="0.034"/>
+  <testcase name="abortedTakeoffIsLandedWithoutDestination()" classname="hu.kriwdi.intersolarsystem.ship.ShipStateFaultsTest" time="0.002"/>
+  <testcase name="revealAllReturnsOnlyNewOnes()" classname="hu.kriwdi.intersolarsystem.ship.ShipStateFaultsTest" time="0.002"/>
+  <testcase name="version4SaveLoadsWithNoFaults()" classname="hu.kriwdi.intersolarsystem.ship.ShipStateFaultsTest" time="0.005"/>
+  <testcase name="knownFaultComesBeforeWearAtTheStation()" classname="hu.kriwdi.intersolarsystem.ship.ShipStateFaultsTest" time="0.001"/>
+  <testcase name="fixingAnIncidentAlsoFixesTheFaultBehindIt()" classname="hu.kriwdi.intersolarsystem.ship.ShipStateFaultsTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

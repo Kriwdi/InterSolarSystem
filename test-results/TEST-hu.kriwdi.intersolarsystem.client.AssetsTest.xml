@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="hu.kriwdi.intersolarsystem.client.AssetsTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-04T10:52:32.642Z" hostname="runnervm48cm3" time="1.116">
+  <properties/>
+  <testcase name="modelsAreValid()" classname="hu.kriwdi.intersolarsystem.client.AssetsTest" time="0.217"/>
+  <testcase name="itemDefinitionsPointAtExistingModels()" classname="hu.kriwdi.intersolarsystem.client.AssetsTest" time="0.025"/>
+  <testcase name="blockstatesPointAtExistingModels()" classname="hu.kriwdi.intersolarsystem.client.AssetsTest" time="0.036"/>
+  <testcase name="equipmentAssetsPointAtExistingLayers()" classname="hu.kriwdi.intersolarsystem.client.AssetsTest" time="0.001"/>
+  <testcase name="texturesHaveValidSizes()" classname="hu.kriwdi.intersolarsystem.client.AssetsTest" time="0.812"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,34 @@
+Starting a Gradle Daemon (subsequent builds will be faster)
+Calculating task graph as no cached configuration is available for tasks: build
+
+> Configure project :
+Fabric Loom: 1.19.3
+
+> Task :processIncludeJars
+> Task :processClientResources
+> Task :processTestResources NO-SOURCE
+> Task :validateAccessWidener NO-SOURCE
+> Task :sourcesJar
+> Task :processResources
+> Task :compileJava
+> Task :classes
+
+> Task :compileClientJava
+Note: /home/runner/work/InterSolarSystem/InterSolarSystem/src/client/java/hu/kriwdi/intersolarsystem/client/InterSolarSystemClient.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :clientClasses
+> Task :compileTestJava
+> Task :testClasses
+> Task :jar
+> Task :assemble
+> Task :test
+> Task :check
+> Task :build
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run-1793789533433.json
+
+[Incubating] Problems report is available at: file:///home/runner/work/InterSolarSystem/InterSolarSystem/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 28s
+9 actionable tasks: 9 executed
+Configuration cache entry stored.

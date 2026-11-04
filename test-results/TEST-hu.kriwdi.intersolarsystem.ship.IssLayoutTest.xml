@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="hu.kriwdi.intersolarsystem.ship.IssLayoutTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-04T10:52:33.836Z" hostname="runnervm48cm3" time="0.08">
+  <properties/>
+  <testcase name="stationIsFullSize()" classname="hu.kriwdi.intersolarsystem.ship.IssLayoutTest" time="0.031"/>
+  <testcase name="stationHasSuppliesLightsWindowsSolarWingsAndRadiators()" classname="hu.kriwdi.intersolarsystem.ship.IssLayoutTest" time="0.01"/>
+  <testcase name="dockingPortOpensIntoTheModules()" classname="hu.kriwdi.intersolarsystem.ship.IssLayoutTest" time="0.01"/>
+  <testcase name="layoutIsDeterministicAndHasNoDuplicates()" classname="hu.kriwdi.intersolarsystem.ship.IssLayoutTest" time="0.029"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

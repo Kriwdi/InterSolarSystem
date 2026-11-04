@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="hu.kriwdi.intersolarsystem.ship.TravelMathTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-04T10:52:34.662Z" hostname="runnervm48cm3" time="0.015">
+  <properties/>
+  <testcase name="reachabilityDependsOnWhereTheShipIs()" classname="hu.kriwdi.intersolarsystem.ship.TravelMathTest" time="0.004"/>
+  <testcase name="flybyIsARoundTrip()" classname="hu.kriwdi.intersolarsystem.ship.TravelMathTest" time="0.001"/>
+  <testcase name="moonAndMarsMatchTheAgreedTimesAtTheBestWindow()" classname="hu.kriwdi.intersolarsystem.ship.TravelMathTest" time="0.001"/>
+  <testcase name="launchWindowCostsUpToHalfMore()" classname="hu.kriwdi.intersolarsystem.ship.TravelMathTest" time="0.001"/>
+  <testcase name="catalogueLoadsWithEarthAndMoon()" classname="hu.kriwdi.intersolarsystem.ship.TravelMathTest" time="0.0"/>
+  <testcase name="durationsReadNaturally()" classname="hu.kriwdi.intersolarsystem.ship.TravelMathTest" time="0.004"/>
+  <testcase name="enginesDivideTheTime()" classname="hu.kriwdi.intersolarsystem.ship.TravelMathTest" time="0.001"/>
+  <testcase name="legsFollowTheDistanceBetweenPlaces()" classname="hu.kriwdi.intersolarsystem.ship.TravelMathTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

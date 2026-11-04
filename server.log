@@ -1,0 +1,179 @@
+Calculating task graph as no cached configuration is available for tasks: runServer
+
+> Configure project :
+Fabric Loom: 1.19.3
+
+> Task :deleteGameTestRunDir UP-TO-DATE
+> Task :generateLog4jConfig
+> Task :acceptGameTestEula
+> Task :processResources UP-TO-DATE
+> Task :generateDLIConfig
+> Task :configureLaunch
+> Task :compileJava UP-TO-DATE
+> Task :classes UP-TO-DATE
+
+> Task :runServer
+[10:52:37] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 26.3 with Fabric Loader 0.20.1
+[10:52:37] [main/INFO] (FabricLoader/Mappings) Mappings not present!
+[10:52:37] [main/INFO] (FabricLoader) Loading 44 mods:
+	- fabric-advancement-api-v1 1.0.1+38c7a2d55d
+	- fabric-api 0.165.0+26.3
+	- fabric-api-base 2.0.6+fcdff87f5d
+	- fabric-api-lookup-api-v1 2.0.24+3434d6d95d
+	- fabric-biome-api-v1 20.1.1+85210bca5d
+	- fabric-block-api-v1 3.1.0+0ae6f9115d
+	- fabric-block-getter-api-v2 2.0.9+3434d6d95d
+	- fabric-command-api-v2 3.1.2+fcdff87f5d
+	- fabric-content-registries-v0 15.0.6+74ed1ea55d
+	- fabric-convention-tags-v2 4.10.5+187b64905d
+	- fabric-crash-report-info-v1 1.0.7+fcdff87f5d
+	- fabric-creative-tab-api-v1 5.0.22+fcdff87f5d
+	- fabric-data-attachment-api-v1 2.2.33+b9b88df45d
+	- fabric-data-generation-api-v1 27.4.2+187b64905d
+	- fabric-debug-api-v1 1.0.5+5af7744b5d
+	- fabric-dimensions-v1 5.1.20+5af7744b5d
+	- fabric-entity-events-v1 6.0.4+3434d6d95d
+	- fabric-events-interaction-v0 5.3.9+b9b88df45d
+	- fabric-game-rule-api-v1 4.0.10+3434d6d95d
+	- fabric-gametest-api-v1 4.0.35+3434d6d95d
+	- fabric-item-api-v1 14.8.0+d1c0d72b5d
+	- fabric-lifecycle-events-v1 4.1.9+ffef5f675d
+	- fabric-loot-api-v3 4.0.9+4068fd645d
+	- fabric-menu-api-v1 2.0.30+ed66f0a35d
+	- fabric-message-api-v1 7.0.10+3434d6d95d
+	- fabric-networking-api-v1 6.4.0+a21c9eb65d
+	- fabric-object-builder-api-v1 24.1.12+e2f63d3e5d
+	- fabric-particles-v1 5.0.27+3434d6d95d
+	- fabric-permission-api-v1 1.0.8+fcdff87f5d
+	- fabric-recipe-api-v1 10.0.11+b9b88df45d
+	- fabric-registry-sync-v0 8.0.4+1ca9f6365d
+	- fabric-rendering-fluids-v1 6.0.6+3434d6d95d
+	- fabric-resource-conditions-api-v1 6.2.0+0d124ae85d
+	- fabric-resource-loader-v0 3.3.27+4fc5413f5d
+	- fabric-resource-loader-v1 3.1.0+5af7744b5d
+	- fabric-serialization-api-v1 2.0.7+74ed1ea55d
+	- fabric-tag-api-v1 2.1.11+fcdff87f5d
+	- fabric-transfer-api-v1 8.0.25+fcdff87f5d
+	- fabric-transitive-access-wideners-v1 8.1.17+e2f63d3e5d
+	- fabricloader 0.20.1
+	- intersolarsystem 1.0.0+build.191
+	- java 25
+	- minecraft 26.3
+	- mixinextras 0.5.5
+[10:52:38] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/home/runner/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.17.5+mixin.0.8.7/cef8519a91129d0c21fa03bb9378f0e8ca810e5/sponge-mixin-0.17.5+mixin.0.8.7.jar Service=Knot/Fabric Env=SERVER
+[10:52:38] [main/INFO] (FabricLoader/MixinExtras|Service) Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
+[10:52:46] [main/INFO] (intersolarsystem) InterSolarSystem initialized
+[10:52:47] [main/INFO] (Minecraft) Environment: Environment[discoveryUrl=https://discovery.minecraftservices.com/minecraft/client, name=PROD]
+[10:52:48] [Worker-Main-2/INFO] (Minecraft) No existing world data, creating new world
+[10:52:49] [Worker-Main-1/INFO] (Minecraft) Loaded 1866 advancements
+[10:52:49] [main/INFO] (BiomeModificationImpl) Applied 0 biome modifications to 0 of 103 new biomes in 1.270 ms
+[10:52:49] [Server thread/INFO] (Minecraft) Starting minecraft server version 26.3
+[10:52:49] [Server thread/INFO] (Minecraft) Loading properties
+[10:52:49] [Server thread/INFO] (Minecraft) Default game type: SURVIVAL
+[10:52:49] [Server thread/INFO] (Minecraft) Generating keypair
+[10:52:49] [Server thread/INFO] (Minecraft) Starting Minecraft server on *:25565
+[10:52:49] [Server thread/INFO] (Minecraft) Preparing level "world"
+[10:52:50] [Server thread/INFO] (Minecraft) Selecting global world spawn...
+[10:52:53] [Server thread/INFO] (Minecraft) Loading 0 persistent chunks...
+[10:52:53] [Server thread/INFO] (Minecraft) Preparing spawn area: 100%
+[10:52:53] [Server thread/INFO] (Minecraft) Time elapsed: 3363 ms
+[10:52:53] [Server thread/INFO] (Minecraft) Done (3.593s)! For help, type "help"
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:mothership
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:asteroid_belt
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:enceladus
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:uranus
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:jupiter
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:mars
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:orbit
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:saturn
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:ship_interior
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:nameless
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:callisto
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:ganymede
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:europa
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:neptune
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:moon
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:io
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:mercury
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:saturn_rings
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:titania
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:titan
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:triton
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:venus
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:ceres
+[10:52:53] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:miranda
+[10:52:55] [Server thread/INFO] (intersolarsystem) [SMOKETEST] salvage pool in 11 chest loot tables
+[10:52:55] [Server thread/INFO] (intersolarsystem) [SMOKETEST] ISS built, docking port and 10 supply containers ready
+[10:52:59] [Server thread/INFO] (intersolarsystem) [SMOKETEST] Moon heightmaps at the base: motion_blocking=0 world_surface=76 scanned=76
+[10:53:05] [Server thread/INFO] (intersolarsystem) [SMOKETEST] Moon surface heights 65..75, top blocks {intersolarsystem:fresh_regolith=31, intersolarsystem:helium3_regolith=2, intersolarsystem:lunar_regolith=182, intersolarsystem:mare_regolith=74}
+[10:53:05] [Server thread/INFO] (intersolarsystem) [SMOKETEST] Moon border 5500.0
+[10:53:08] [Server thread/INFO] (intersolarsystem) [SMOKETEST] Mars surface heights 106..118, top blocks {intersolarsystem:mars_dust=214, intersolarsystem:mars_regolith=61, intersolarsystem:mars_rock=7, intersolarsystem:perchlorate_crust=1, intersolarsystem:station_glass=1, intersolarsystem:station_hull=2, minecraft:dirt=1, minecraft:gray_concrete=2}, border 10600.0
+[10:53:10] [Server thread/INFO] (intersolarsystem) [SMOKETEST] venus: landing at BlockPos{x=1200, y=201, z=-400} on minecraft:yellow_concrete, border 19200.0
+[10:53:10] [Server thread/INFO] (intersolarsystem) [SMOKETEST] mercury: landing at BlockPos{x=-600, y=74, z=900} on minecraft:yellow_concrete, border 7720.0
+[10:53:11] [Server thread/INFO] (intersolarsystem) [SMOKETEST] ceres: landing at BlockPos{x=300, y=74, z=200} on minecraft:yellow_concrete, border 1490.0
+[10:53:12] [Server thread/INFO] (intersolarsystem) [SMOKETEST] asteroid_belt: landing at BlockPos{x=0, y=122, z=0} on intersolarsystem:truss, border 6000.0
+[10:53:12] [Server thread/INFO] (intersolarsystem) [SMOKETEST] jupiter: landing at BlockPos{x=0, y=231, z=0} on minecraft:yellow_concrete, border 20000.0
+[10:53:13] [Server thread/INFO] (intersolarsystem) [SMOKETEST] io: landing at BlockPos{x=400, y=90, z=-300} on minecraft:yellow_concrete, border 5770.0
+[10:53:13] [Server thread/INFO] (intersolarsystem) [SMOKETEST] europa: landing at BlockPos{x=-200, y=81, z=500} on minecraft:yellow_concrete, border 4940.0
+[10:53:14] [Server thread/INFO] (intersolarsystem) [SMOKETEST] ganymede: landing at BlockPos{x=300, y=88, z=-200} on minecraft:yellow_concrete, border 8340.0
+[10:53:15] [Server thread/INFO] (intersolarsystem) [SMOKETEST] callisto: landing at BlockPos{x=-400, y=79, z=300} on minecraft:yellow_concrete, border 7630.0
+[10:53:16] [Server thread/INFO] (intersolarsystem) [SMOKETEST] saturn: landing at BlockPos{x=0, y=231, z=0} on minecraft:yellow_concrete, border 20000.0
+[10:53:16] [Server thread/INFO] (intersolarsystem) [SMOKETEST] saturn_rings: landing at BlockPos{x=0, y=121, z=0} on minecraft:yellow_concrete, border 6000.0
+[10:53:17] [Server thread/INFO] (intersolarsystem) [SMOKETEST] titan: landing at BlockPos{x=500, y=91, z=400} on minecraft:yellow_concrete, border 8150.0
+[10:53:18] [Server thread/INFO] (intersolarsystem) [SMOKETEST] enceladus: landing at BlockPos{x=0, y=84, z=-300} on minecraft:yellow_concrete, border 2000.0
+[10:53:19] [Server thread/INFO] (intersolarsystem) [SMOKETEST] uranus: landing at BlockPos{x=0, y=231, z=0} on minecraft:yellow_concrete, border 20000.0
+[10:53:19] [Server thread/INFO] (intersolarsystem) [SMOKETEST] miranda: landing at BlockPos{x=160, y=219, z=0} on minecraft:yellow_concrete, border 2000.0
+[10:53:19] [Server thread/INFO] (intersolarsystem) [SMOKETEST] titania: landing at BlockPos{x=200, y=82, z=-120} on minecraft:yellow_concrete, border 2500.0
+[10:53:20] [Server thread/INFO] (intersolarsystem) [SMOKETEST] neptune: landing at BlockPos{x=0, y=231, z=0} on minecraft:yellow_concrete, border 20000.0
+[10:53:20] [Server thread/INFO] (intersolarsystem) [SMOKETEST] triton: landing at BlockPos{x=-250, y=85, z=350} on minecraft:yellow_concrete, border 4290.0
+[10:53:21] [Server thread/INFO] (intersolarsystem) [SMOKETEST] nameless: landing at BlockPos{x=0, y=81, z=0} on minecraft:yellow_concrete, border 2000.0
+[10:53:21] [Server thread/INFO] (intersolarsystem) [SMOKETEST] Earth biomes nearest to spawn 0, 65, 16: {abandoned_farmland=64, 65, -16, acid_swamp=768, 65, -752, ash_desert=992, 65, -1008, deep_canyons=64, 65, -48, dried_seabed=256, 65, -112, frozen_megalopolis=32, 65, 400, irradiated_crater=-512, 65, -1040, junk_mountains=-320, 65, -272, oasis=-192, 65, -1424, oil_field=544, 65, -1200, petrified_forest=0, 65, 16, salt_flats=2816, 65, -1552}
+[10:53:24] [Server thread/INFO] (intersolarsystem) [SMOKETEST] Earth around spawn: biomes {intersolarsystem:abandoned_farmland=7, intersolarsystem:deep_canyons=1, intersolarsystem:petrified_forest=17}, top blocks {intersolarsystem:ash=2, intersolarsystem:barbed_wire=1, intersolarsystem:dead_log=1, minecraft:coarse_dirt=12, minecraft:grass_block=5, minecraft:gravel=3, minecraft:red_sand=1}
+[10:53:25] [Server thread/INFO] (intersolarsystem) [SMOKETEST] ores in the 3x3 chunks at spawn: {intersolarsystem:bauxite_ore=213, intersolarsystem:deepslate_bauxite_ore=53, intersolarsystem:deepslate_monazite_ore=103, intersolarsystem:deepslate_spodumene_ore=34, intersolarsystem:deepslate_titanium_ore=80, intersolarsystem:deepslate_uraninite_ore=64, intersolarsystem:monazite_ore=5, intersolarsystem:spodumene_ore=91, intersolarsystem:titanium_ore=147, intersolarsystem:uraninite_ore=7}
+[10:53:25] [Server thread/INFO] (intersolarsystem) [SMOKETEST] start site: ship hatch at 3 65 16
+[10:53:27] [Server thread/INFO] (intersolarsystem) [SMOKETEST] Earth structures nearest to spawn: {airport=3568, 0, -1984, barracks=16, 0, 64, bunker_large=336, 0, 128, bunker_network=576, 0, 1280, bunker_small=112, 0, 144, cargo_capsule=208, 0, 0, colony_burnt=928, 0, 1712, colony_frozen=464, 0, 1088, colony_overgrown=768, 0, 1408, crashed_satellite=208, 0, 144, dam=1248, 0, 2320, dead_city=1600, 0, -2848, drone_site=-672, 0, -608, dry_shipwreck=832, 0, -464, farmhouse=96, 0, 32, hospital=2528, 0, -544, karman_spaceport=2640, 0, 5104, metro=-368, 0, -304, oasis_refuge=784, 0, -416, oil_pumpjack=1344, 0, -1344, radio_tower=0, 0, 64, research_lab=-496, 0, 144, research_station=-432, 0, 752, rocket_stage=64, 0, 192, seed_bank=1008, 0, 1920, solar_farm=96, 0, -240, space_center=2176, 0, 4032, terraformer=800, 0, -1280, verdant_lab=2496, 0, 4528, whale_skeleton=-752, 0, -192}
+[10:53:27] [Server thread/INFO] (intersolarsystem) [SMOKETEST] Earth border 20000.0
+[10:53:27] [Server thread/INFO] (intersolarsystem) [SMOKETEST] mothership blueprints: keel=10023 hull=96620 engines=2281 reactor=585 life_support=1030 hydroponics=3525 laboratory=1347 quarters=3526 hangar=2113 bridge=942 
+[10:53:27] [Server thread/INFO] (intersolarsystem) [SMOKETEST] space site templates: orbit/debris_cloud_1 orbit/debris_cloud_2 orbit/debris_cloud_3 orbit/debris_cloud_4 orbit/debris_cloud_5 orbit/halcyon orbit/dead_satellite orbit/upper_stage orbit/space_telescope orbit/capsule_adrift moon/luna9 moon/surveyor3 moon/lunokhod1 moon/lunokhod2 moon/change3 moon/change4 moon/chandrayaan3 moon/slim moon/luna24 moon/ark1_colony mars/viking1 mars/viking2 mars/pathfinder mars/spirit mars/opportunity mars/curiosity mars/perseverance mars/zhurong mars/insight mars/ark2_colony 
+[10:53:27] [Server thread/INFO] (intersolarsystem) [SMOKETEST] server started, stopping
+[10:53:27] [Server thread/WARN] (TranslationConventionLogWarnings) 
+	Dev warning - Untranslated Item Tags detected. Please translate your item tags so other mods such as recipe viewers can properly display your tag's name.
+	The format desired is tag.item.<namespace>.<path> for the translation key with slashes in path turned into periods.
+	To disable this message, set this system property in your runs: `-Dfabric-tag-conventions-v2.missingTagTranslationWarning=SILENCED`.
+	To see individual untranslated item tags found, set the system property to `-Dfabric-tag-conventions-v2.missingTagTranslationWarning=VERBOSE`.
+	Default is `SHORT`.
+
+[10:53:27] [Server thread/INFO] (Minecraft) Stopping server
+[10:53:27] [Server thread/INFO] (Minecraft) Saving players
+[10:53:27] [Server thread/INFO] (Minecraft) Saving worlds
+[10:53:34] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[10:53:34] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:mothership
+[10:53:34] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:asteroid_belt
+[10:53:34] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:enceladus
+[10:53:34] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:uranus
+[10:53:34] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:jupiter
+[10:53:34] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:mars
+[10:53:38] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:orbit
+[10:53:38] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:saturn
+[10:53:38] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:ship_interior
+[10:53:38] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:nameless
+[10:53:38] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:callisto
+[10:53:38] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:ganymede
+[10:53:38] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:europa
+[10:53:38] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:neptune
+[10:53:38] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:moon
+[10:53:40] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:io
+[10:53:40] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:mercury
+[10:53:40] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:saturn_rings
+[10:53:40] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:titania
+[10:53:40] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:titan
+[10:53:40] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:triton
+[10:53:40] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:venus
+[10:53:40] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:ceres
+[10:53:40] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[world]'/intersolarsystem:miranda
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_3-1793789556056.json
+
+BUILD SUCCESSFUL in 1m 5s
+7 actionable tasks: 4 executed, 3 up-to-date
+Configuration cache entry stored.

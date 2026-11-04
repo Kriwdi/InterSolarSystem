@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="hu.kriwdi.intersolarsystem.ship.WiringPuzzleTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-04T10:52:34.679Z" hostname="runnervm48cm3" time="0.009">
+  <properties/>
+  <testcase name="bothSidesHoldEveryColourOnce()" classname="hu.kriwdi.intersolarsystem.ship.WiringPuzzleTest" time="0.002"/>
+  <testcase name="correctAnswerSolves()" classname="hu.kriwdi.intersolarsystem.ship.WiringPuzzleTest" time="0.003"/>
+  <testcase name="wrongOrMalformedAnswersFail()" classname="hu.kriwdi.intersolarsystem.ship.WiringPuzzleTest" time="0.0"/>
+  <testcase name="sizeIsClampedAndFollowsTheSubsystemCondition()" classname="hu.kriwdi.intersolarsystem.ship.WiringPuzzleTest" time="0.001"/>
+  <testcase name="sameSeedSameBoard()" classname="hu.kriwdi.intersolarsystem.ship.WiringPuzzleTest" time="0.0"/>
+  <testcase name="incidentsMapToTheirMinigame()" classname="hu.kriwdi.intersolarsystem.ship.WiringPuzzleTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

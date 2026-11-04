@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="hu.kriwdi.intersolarsystem.ship.ShipHazardsCodecTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-04T10:52:34.328Z" hostname="runnervm48cm3" time="0.035">
+  <properties/>
+  <testcase name="roundTrip()" classname="hu.kriwdi.intersolarsystem.ship.ShipHazardsCodecTest" time="0.014"/>
+  <testcase name="oneBrokenIncidentKeepsTheOthers()" classname="hu.kriwdi.intersolarsystem.ship.ShipHazardsCodecTest" time="0.016"/>
+  <testcase name="unknownSubsystemIsDropped()" classname="hu.kriwdi.intersolarsystem.ship.ShipHazardsCodecTest" time="0.002"/>
+  <system-out><![CDATA[[10:52:34] [Test worker/WARN]: Ignoring unreadable ship incident: No key deadline_tick in MapLike[{"subsystem":"cargo","type":"fire"}]
+[10:52:34] [Test worker/WARN]: Ignoring ship incident with unknown subsystem 'warp_core' or type 'fire'
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
