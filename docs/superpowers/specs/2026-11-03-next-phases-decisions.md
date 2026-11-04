@@ -115,7 +115,7 @@ A felhasználó kérése: később több bolygó, hold és objektum jön, a prog
 
 ## Megvalósítás állapota (2026-11-04)
 
-Kód és adat kész, **CI-ben még nem ellenőrizve** (a GitHub Actions számlázás miatt nem indul):
+Kód és adat kész, **CI-ben ellenőrizve** (2026-11-04, build #179, az 50061cd commiton): a fordítás hibátlan, mind a 65 egységteszt zöld, a szerveres smoke test minden új világon talál leszállóhelyet.
 
 - **Mozgó bázis:** a kishajó a Föld–Hold rendszerben; minden más az anyahajóról (dokkolóport, `mothership` cél, leszállás a pálya alatti égitestre, vissza). Anyahajó-hajtómű: 3-as alap, plazmakészlettel 4-es.
 - **Világok** (`space/Worlds.java`, `tools/worldgen/make_planets.py`, `far_sites.py`): Vénusz 19 200, Merkúr 7720, Ceres 1490, kisbolygóöv 6000 (súlytalan), Jupiter 20 000 (320 magas, felhőrétegek 210/140/70, Nagy Vörös Folt), Io 5770, Európa 4940 (óceán a jég alatt).
@@ -125,4 +125,4 @@ Kód és adat kész, **CI-ben még nem ellenőrizve** (a GitHub Actions számlá
 - **Receptek:** irídium, plazmakészlet, modulok, oxigén ceresi/európai jégből, felhőkből trágya/víz, fémes hidrogénből fűtőelem.
 - **Történet:** 18–27. napló. Bárka–1: tragikus ébresztés (26-os konzol, egyszeri jelenet, semmi kézzelfogható előny). Jezero-fal (27-es napló): lüktetés, szürke por, terjedő Szürke Virágzás (hamu, 14 blokkos körig), éjszakai kopogás, suttogások, a memóriamag „válasza”; a lore szerint a VRD-7 marsi eredetű.
 
-Hátravan: CI-ellenőrzés és a fordítási hibák javítása, képernyőképek a helyszínekről, a Jupiter-mélység „merülés” eszköze (most csak építéssel/repüléssel), külső bolygók.
+Hátravan: képernyőképek ellenőrzése (Client screenshots workflow), az `oasis` biome nem található a spawn körül a smoke testben, a helyszínekről, a Jupiter-mélység „merülés” eszköze (most csak építéssel/repüléssel), külső bolygók.
