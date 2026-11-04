@@ -2465,6 +2465,102 @@ def whale_skeleton():
             b.set(x, 1, z, S("dead_bush") if b.rnd.random() < 0.5 else S("bone_block", axis="x"))
     return b
 
+
+# ---------------------------------------------------------------- metro
+def metro_station():
+    """A metro station: two tracks between tiled platforms with benches, line maps, ticket machines and the departure
+    board stuck on the last train; the derailed train of three cars; the ticket hall above with turnstiles and the
+    staff room; stairs up to a glass entrance kiosk on the street. Same jigsaw connections as the old station."""
+    from make_structures import jigsaw
+    b = Build("metro/station", 3001)
+    tile, dark = S("wall_tiles"), S("polished_deepslate")
+    b.room(0, 0, 0, 10, 6, 20, S("stone_bricks"), S("polished_andesite"))
+    for z in range(0, 21):
+        for y in range(1, 6):
+            for x in (0, 10):
+                b.set(x, y, z, tile if y > 1 else dark)
+        for x in range(3, 8):
+            b.set(x, 0, z, S("gravel"))
+        b.set(4, 1, z, S("rail", shape="north_south", waterlogged="false"))
+        b.set(6, 1, z, S("rail", shape="north_south", waterlogged="false"))
+    for z in range(2, 19):
+        for x in (1, 2, 8, 9):
+            b.set(x, 1, z, S("smooth_stone_slab", type="top", waterlogged="false"))
+        b.set(2, 1, z, S("yellow_concrete"))
+        b.set(8, 1, z, S("yellow_concrete"))
+    for z in (5, 10, 15):
+        b.set(1, 2, z, S("park_bench", facing="east"))
+        b.set(9, 2, z, S("park_bench", facing="west"))
+        b.set(0, 3, z + 1, S("poster_exodus", facing="east"))
+        b.set(10, 3, z + 1, S("poster_quarantine", facing="west"))
+    for z in (3, 17):
+        b.set(1, 2, z, S("vending_machine", facing="east"))
+        b.set(9, 2, z, S("departure_board", facing="west"))
+    for z in range(2, 19, 4):
+        b.set(5, 5, z, S("ceiling_light"))
+    # The derailed train: three cars, the first jack-knifed against the wall.
+    for car, (z0, dx) in enumerate(((5, 0), (11, 0), (16, 1))):
+        for z in range(z0, z0 + 4 if car < 2 else z0 + 3):
+            for x in (5 + dx, 6 + dx, 7 + dx):
+                for y in (2, 3, 4):
+                    edge = x in (5 + dx, 7 + dx) or y in (2, 4)
+                    if x <= 9:
+                        b.set(x, y, z, (S("tinted_glass") if y == 3 and z % 2 else S("iron_block")) if edge else AIR)
+    b.chest(6, 2, 7, "civic", "west")
+    skeleton(b, 6, 2, 12, "north", "skeleton_sitting")
+    skeleton(b, 2, 2, 9, "east", "skeleton_lying")
+    b.chest(1, 2, 12, "bunker_food", "east", "barrel")
+    # Stairs up to the ticket hall (6 up) along the west side.
+    stairs = S("stone_brick_stairs", facing="south", half="bottom", shape="straight", waterlogged="false")
+    for i in range(0, 6):
+        z = 2 + i
+        b.fill(-3, 1 + i, z, -1, 4 + i, z, AIR)
+        for x in (-3, -2, -1):
+            b.set(x, i, z, stairs)
+        b.set(-4, 1 + i, z, tile)
+        b.set(-4, 2 + i, z, tile)
+    b.fill(0, 1, 2, 0, 3, 3, AIR)
+    # Ticket hall (y 6..11): turnstiles, machines, the staff room.
+    b.room(-6, 5, 8, 4, 11, 16, tile, S("floor_tiles"))
+    for x in (-3, -2, -1):
+        for y in (6, 7, 8):
+            b.set(x, y, 8, AIR)
+    for x in range(-5, 4, 2):
+        b.set(x, 6, 12, S("iron_bars", north="false", south="false", east="true", west="true", waterlogged="false"))
+    b.set(0, 6, 12, S("quarantine_barrier", facing="south"))
+    b.set(3, 6, 10, S("vending_machine", facing="west"))
+    b.set(3, 6, 14, S("vending_machine", facing="west"))
+    b.set(-5, 6, 15, S("office_desk", facing="north"))
+    b.set(-5, 6, 14, S("office_chair", facing="north"))
+    b.set(-4, 6, 15, S("radio_set", facing="north"))
+    b.set(-1, 9, 12, S("departure_board", facing="south"))
+    b.set(-1, 10, 10, S("ceiling_light"))
+    b.set(-1, 10, 14, S("ceiling_light"))
+    # Exit stairs (8 up) to the street and the glass entrance kiosk.
+    for i in range(0, 8):
+        z = 16 + i
+        for x in (-2, -1, 0):
+            b.set(x, 5 + i, z, stairs)
+            for y in range(6 + i, 9 + i):
+                b.set(x, y, z, AIR)
+        b.set(-3, 6 + i, z, tile)
+        b.set(1, 6 + i, z, tile)
+    for x in range(-3, 2):
+        for z in range(22, 26):
+            b.set(x, 17, z, S("glass") if (x, z) != (-1, 23) else S("station_light"))
+    for (x, z) in ((-3, 22), (1, 22), (-3, 25), (1, 25)):
+        for y in range(14, 17):
+            b.set(x, y, z, S("iron_block"))
+    b.set(-1, 18, 23, S("warning_sign", facing="south"))
+    b.fill(3, 1, 0, 7, 4, 0, AIR)
+    b.fill(3, 1, 20, 7, 4, 20, AIR)
+    st, tag = jigsaw("tunnel", "tunnel", "metro/tunnels", "north_up", "minecraft:gravel")
+    b.set(5, 0, 0, st, tag)
+    st, tag = jigsaw("tunnel", "tunnel", "metro/tunnels", "south_up", "minecraft:gravel")
+    b.set(5, 0, 20, st, tag)
+    b.decay(0.015, keep=("minecraft:rail",), cracked=CONCRETE, top_bias=False)
+    return b
+
 BUILDERS = {
     "bunker_small": bunker_small,
     "bunker_large": bunker_large,

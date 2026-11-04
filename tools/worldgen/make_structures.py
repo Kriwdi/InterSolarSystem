@@ -1121,7 +1121,9 @@ def main():
         pool(name, entries)
     structure("dead_city", "city/start", ["frozen_megalopolis", "ash_desert"], 40, 14, 70030, 0, size=7,
               adaptation="beard_thin", distance=112)
-    for rel, b in metro_pieces().items():
+    metro = metro_pieces()
+    metro["metro/station"] = overhaul.metro_station()
+    for rel, b in metro.items():
         sizes[rel] = b.save(rel)
     pool("metro/start", [("metro/station", 1)])
     pool("metro/tunnels", [("metro/straight", 4), ("metro/collapsed_end", 1)], fallback=NS + "metro/ends")
