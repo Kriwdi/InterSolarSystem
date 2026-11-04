@@ -1,4 +1,4 @@
-data/minecraft/worldgen/biome/basalt_deltas.json
-data/minecraft/worldgen/biome/pale_garden.json
-data/minecraft/worldgen/biome/deep_dark.json
-data/minecraft/worldgen/biome/snowy_plains.json
+data/minecraft/dimension_type/overworld.json
+data/minecraft/tags/timeline/in_overworld.json
+data/minecraft/worldgen/configured_feature/ice_spike.json
+data/minecraft/worldgen/configured_feature/forest_rock.json

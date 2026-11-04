@@ -1,5 +1,1 @@
-net.minecraft.server.MinecraftServer
-net.minecraft.world.entity.Entity
-net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket
-net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager
-net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate
+net.minecraft.world.level.block.state.BlockState
