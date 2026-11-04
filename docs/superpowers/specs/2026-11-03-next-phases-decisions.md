@@ -126,3 +126,27 @@ Kód és adat kész, **CI-ben ellenőrizve** (2026-11-04, build #179, az 50061cd
 - **Történet:** 18–27. napló. Bárka–1: tragikus ébresztés (26-os konzol, egyszeri jelenet, semmi kézzelfogható előny). Jezero-fal (27-es napló): lüktetés, szürke por, terjedő Szürke Virágzás (hamu, 14 blokkos körig), éjszakai kopogás, suttogások, a memóriamag „válasza”; a lore szerint a VRD-7 marsi eredetű.
 
 Hátravan: képernyőképek ellenőrzése (Client screenshots workflow), az `oasis` biome nem található a spawn körül a smoke testben, a helyszínekről, a Jupiter-mélység „merülés” eszköze (most csak építéssel/repüléssel), külső bolygók.
+
+## Döntések (2026-11-04 délelőtt): a külső Naprendszer
+- **Oázis:** minden Föld-világban garantáltan van legalább egy (`worldgen/OasisBiomeSource`), a klímából jövők mellett.
+- **Sorrend:** 1. a Naprendszer többi része (ez a kör), 2. Kuiper-öv, Oort-felhő, Plútó, 3. Proxima-rendszer.
+- **Ebben a körben:** Ganümédész és Kallisztó; Szaturnusz (felhőrétegek, hatszögű sarki vihar), gyűrű (súlytalan
+  jégmező holdacskákkal, jégbányászat, részecskeviharok), Titán, Enceladus; Uránusz, Miranda, Titánia; Neptunusz,
+  Triton. A Mars holdjai most nem.
+- **Hajtómű:** 5-ös szint a Szaturnusz-rendszerhez, 6-os a jégóriásokhoz; minden szint egy előző rendszer anyagából.
+- **Rejtett anyag:** egy kis holdon a Neptunusz körül, amit a konzol nem listáz; csak egy naplóban talált koordináta
+  nyitja meg. Sehol nincs kimondva, mire jó, csak naplótöredékek utalnak rá. Belőle készül a **turbóhajtómű**, ami
+  a Proxima-utat nyitja meg (a Proxima a 3. körben jön; az út hosszú és nagy a kockázata).
+- **Élet:** egyszerű élet (mikrobaszőnyegek, kemoszintetikus telepek) kutatási anyagként; emellett emberi nyomok,
+  szondák. Nincs kapcsolat a Szürke Virágzással.
+- **Mechanikák és extrák:** Ganümédész: saját mágneses tér (sarki fény, sugárvédett zóna), barázdás jégszirtek, JUICE.
+  Kallisztó: Valhalla-medence, szublimációs jégtüskék, elhagyott HOPE-bázis tankolóhellyel. Titán: narancs köd,
+  metáneső, Kraken-tenger hajóval, szénhidrogén-dűnék, Sotra kriovulkán, Huygens, javítható Dragonfly-helikopter,
+  sűrű légkör + kis gravitáció (siklás). Enceladus: gejzírek (felrepítenek), tigriscsíkok, gejzírhó, óceán a jég
+  alatt. Uránusz: álló Nap (98° dőlés), gyémánteső. Miranda: Verona Rupes (hosszú zuhanás). Titánia: Messina-kanyonok,
+  kutatóállomás. Neptunusz: a legerősebb szelek, Sötét Folt. Triton: nitrogéngejzírek, „sárgadinnyehéj”, előőrs.
+- **Űrdaru:** az anyahajó rögzítési pontjaira kisebb modulok, blokkról blokkra, mint a földi darunál: sugárvédő
+  burkolat, extra tartály és raktér, megfigyelőkupola + labor, napelem-/RTG-szárny.
+- **Proxima (3. kör):** 3–4 bolygó: egy élettel teli, Minecraft-szerű világ sok faluval és nagyvárossal, a többi
+  Mars-szerű, emberi maradványok nélkül.
+- **Tesztparancs:** paranccsal bármely égitestre el lehet jutni (teszteléshez).
