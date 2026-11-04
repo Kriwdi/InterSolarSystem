@@ -39,6 +39,9 @@
   "terrain_adaptation": "beard_box",
   "layout": "intersolarsystem:seed_bank_layout",
   "ground_offset": 0,
-  "clear_height": 16,
-  "blend": 8
+  "clear_height": 20,
+  "blend": 8,
+  "check_radius": 48,
+  "max_variation": 12,
+  "guaranteed": true
 }

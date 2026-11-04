@@ -792,7 +792,7 @@ def radio_tower():
     b.set(9, 4, 12, S("ship_light_red"))
     b.set(10, 1, 7, S("filing_cabinet", facing="south"))
     b.set(11, 1, 7, S("filing_cabinet", facing="south"))
-    b.set(15, 1, 17, S("data_terminal", facing="north", log=6))
+    b.set(15, 1, 17, S("data_terminal", facing="north", log=10))
     # Transmitter hall: racks of valves, the big transmitter cabinets, cable trays to the mast.
     for x in range(17, 24):
         b.set(x, 1, 7, S("server_rack", facing="south"))
@@ -803,7 +803,8 @@ def radio_tower():
     b.set(17, 1, 12, S("sparking_panel"))
     # Bunk room of the engineer.
     b.set(23, 1, 17, S("bunk_bed", facing="west"))
-    b.chest(23, 1, 15, "bunker", "west")
+    b.chest(23, 1, 15, "radio", "west")
+    b.chest(10, 1, 8, "radio", "south", "barrel")
     b.set(18, 1, 17, S("smoker", facing="north", lit="false"))
     b.set(17, 1, 17, S("barrel", facing="up", open="false"))
     lights(b, 10, 8, 23, 17, 5, 4)
@@ -1037,7 +1038,8 @@ def oil_pumpjack():
     b.set(-4, 1, 13, S("office_desk", facing="north"))
     b.set(-4, 2, 13, S("radio_set", facing="north"))
     b.set(-4, 1, 12, S("office_chair", facing="north"))
-    b.chest(-7, 1, 9, "bunker", "east")
+    b.chest(-7, 1, 9, "industrial", "east")
+    b.chest(13, 1, -1, "industrial", "north", "barrel")
     b.set(-5, 3, 11, S("lantern", hanging="true", waterlogged="false"))
     b.set(-8, 2, 11, pane())
     # Spilled oil and drums.
@@ -1103,7 +1105,8 @@ def solar_farm():
     b.set(47, 1, 22, S("office_chair", facing="north"))
     b.set(49, 1, 29, S("battery_bank", facing="north"))
     b.set(46, 1, 29, S("battery_bank", facing="north"))
-    b.chest(45, 1, 29, "lab", "south")
+    b.chest(45, 1, 29, "industrial", "south")
+    b.chest(50, 1, 21, "industrial", "west", "barrel")
     skeleton(b, 48, 1, 23, "north", "skeleton_sitting")
     lights(b, 46, 22, 50, 28, 4, 3)
     b.set(48, 6, 25, S("antenna_dish"))
@@ -1114,6 +1117,745 @@ def solar_farm():
     return b
 
 
+
+# ---------------------------------------------------------------- space centre
+def rocket_standing(b, cx, cz, height, r=1.6, stripe="black_concrete"):
+    """A standing rocket on its fins: white hull with stripes, an interstage ring, the nose cone."""
+    for y in range(1, height + 1):
+        rr = r if y < height - 3 else r * (height - y + 1) / 4.0
+        disc(b, cx, cz, y, rr, S(stripe) if y % 7 == 3 else S("station_hull") if y != height // 2 else S("station_foil"))
+    for (dx, dz) in ((2, 0), (-2, 0), (0, 2), (0, -2)):
+        for y in (1, 2, 3):
+            b.set(cx + dx * (1 if y > 1 else 1), y, cz + dz, S("gray_concrete") if y < 3 else S("station_hull"))
+    b.set(cx, height + 1, cz, S("lightning_rod", facing="up", powered="false", waterlogged="false"))
+
+
+def space_center():
+    """The national launch complex, where the last evacuation flights lifted off: the pad with its flame trench and
+    the mobile service tower, the rocket that never left lying broken across it, lightning masts, the water tower
+    for the sound suppression deluge, propellant spheres, the domed blockhouse with its tiered firing room, a
+    grandstand where families watched, and a rocket garden of old boosters."""
+    b = Build("space_center", 1003)
+    ground(b, -6, -6, 70, 56, lambda x, z: concrete(b, 0.08) if x < 46 and z < 46 else dead_ground(b))
+    # Pad: a raised plate, the flame trench crossing it (deep, scorched), the deflector.
+    for x in range(4, 42):
+        for z in range(4, 42):
+            b.set(x, 0, z, S("light_gray_concrete") if (x + z) % 9 else S("hazard_concrete"))
+    for x in range(18, 28):
+        for z in range(2, 44):
+            for y in range(-4, 1):
+                b.set(x, y, z, AIR)
+            b.set(x, -4, z, S("polished_blackstone") if b.rnd.random() < 0.7 else S("blackstone"))
+        for z in (2, 43):
+            for y in range(-4, 1):
+                b.set(x, y, z, S("gray_concrete"))
+    for x in range(17, 29):
+        for z in range(2, 44):
+            if x in (17, 28):
+                for y in range(-4, 1):
+                    b.set(x, y, z, S("sooty_concrete"))
+    for z in range(18, 28):
+        b.set(22, -3 + (z - 18) // 4, z, S("iron_block"))
+        b.set(23, -3 + (z - 18) // 4, z, S("iron_block"))
+    # Launch mount: four hold-down posts round the trench.
+    for (x, z) in ((19, 19), (26, 19), (19, 26), (26, 26)):
+        for y in (1, 2):
+            b.set(x, y, z, S("iron_block"))
+    # Mobile service tower: lattice, swing arms reaching to where the rocket stood.
+    for y in range(1, 46):
+        for (x, z) in ((8, 18), (13, 18), (8, 27), (13, 27)):
+            b.set(x, y, z, S("truss") if y % 5 else S("iron_block"))
+        if y % 5 == 0:
+            for x in range(8, 14):
+                for z in range(18, 28):
+                    if x in (8, 13) or z in (18, 27):
+                        b.set(x, y, z, S("metal_grating"))
+            if y in (20, 30, 40):
+                for x in range(14, 21):
+                    b.set(x, y, 22, S("metal_grating"))
+                    b.set(x, y, 23, S("metal_grating"))
+                    b.set(x, y + 1, 21, bars(east=True, west=True))
+                    b.set(x, y + 1, 24, bars(east=True, west=True))
+    for y in range(1, 46):
+        b.set(10, y, 22, S("ladder", facing="south"))
+    for x in range(7, 15):
+        for z in range(17, 29):
+            b.set(x, 46, z, S("truss"))
+    b.set(10, 47, 22, S("antenna_dish"))
+    b.set(12, 47, 20, S("station_light"))
+    # The rocket: broken in three, lying across the pad from the mount to the north-east.
+    def ring(cx, cy, z, r, st):
+        for dx in range(-r, r + 1):
+            for dy in range(-r, r + 1):
+                if dx * dx + dy * dy <= r * r + 1:
+                    b.set(cx + dx, cy + dy, z, st)
+    for i in range(0, 34):
+        z = 8 + i
+        if 14 <= i <= 15 or 26 <= i <= 27:
+            continue   # the breaks
+        x = 34 + (i // 14)
+        st = S("station_foil") if i % 9 == 4 else S("black_concrete") if i % 9 == 0 else S("station_hull")
+        r = 3 if i < 26 else max(1, 3 - (i - 26) // 3)
+        ring(x, 4 if i < 26 else 3, z, r, st)
+        if 0 < i < 13 and r == 3:
+            for dx in range(-2, 3):
+                for dy in range(-2, 3):
+                    if dx * dx + dy * dy < 5:
+                        b.set(x + dx, 4 + dy, z, AIR)
+    for (dx, dy) in ((-1, -1), (1, -1), (-1, 1), (1, 1), (0, 0)):
+        b.set(34 + dx, 4 + dy, 7, S("lander_engine"))
+    for (dx, dy) in ((-4, 0), (4, 0), (0, 4)):
+        for z in range(7, 11):
+            b.set(34 + dx, 4 + dy, z, S("station_hull"))
+    for z in range(9, 20, 2):
+        b.set(30, 1, z, S("scrap_pile"))
+    skeleton(b, 31, 1, 15, "west", "skeleton_suited")
+    # Lightning masts at the pad corners.
+    for (x, z) in ((2, 2), (43, 2), (2, 43), (43, 43)):
+        for y in range(1, 36):
+            b.set(x, y, z, S("iron_block") if y % 6 == 0 else bars())
+        b.set(x, 36, z, S("lightning_rod", facing="up", powered="false", waterlogged="false"))
+        b.set(x, 35, z, S("ship_light_red"))
+    # Water tower for the deluge: a sphere on legs.
+    for y in range(1, 18):
+        for (dx, dz) in ((-2, -2), (2, -2), (-2, 2), (2, 2)):
+            b.set(52 + dx, y, 8 + dz, bars() if y % 4 else S("iron_block"))
+    for x in range(-4, 5):
+        for y in range(-4, 5):
+            for z in range(-4, 5):
+                d = math.sqrt(x * x + y * y + z * z)
+                if 3.4 <= d <= 4.4:
+                    b.set(52 + x, 22 + y, 8 + z, WHITE if y > -2 else LGREY)
+    for x in range(28, 50):
+        b.set(x, 1, 8, S("pipe", east="true", west="true", north="false", south="false", up="false", down="false"))
+    # Propellant spheres (LOX and kerosene) behind a berm.
+    for (cx, cz, st) in ((56, 26, WHITE), (56, 36, S("light_gray_concrete"))):
+        for x in range(-4, 5):
+            for y in range(-4, 5):
+                for z in range(-4, 5):
+                    d = math.sqrt(x * x + y * y + z * z)
+                    if 3.4 <= d <= 4.4 and y > -4:
+                        b.set(cx + x, 6 + y, cz + z, st)
+        for y in range(1, 3):
+            for (dx, dz) in ((-3, 0), (3, 0), (0, -3), (0, 3)):
+                b.set(cx + dx, y, cz + dz, S("iron_block"))
+    for z in range(20, 42):
+        b.set(49, 1, z, S("coarse_dirt"))
+        b.set(49, 2, z, S("coarse_dirt") if z % 3 else S("dead_bush"))
+    # Blockhouse: a low concrete dome west of the pad, the tiered firing room under it.
+    cx, cz = -18, 24
+    for x in range(-11, 12):
+        for z in range(-11, 12):
+            for y in range(0, 10):
+                d = math.sqrt(x * x + (y * 1.25) ** 2 + z * z)
+                if d <= 11:
+                    b.set(cx + x, y, cz + z, S("sooty_concrete") if d > 9.6 else AIR)
+            if math.hypot(x, z) <= 11:
+                b.set(cx + x, 0, cz + z, S("polished_andesite"))
+    for k in range(0, 3):
+        for x in range(-6 + k, 7 - k):
+            b.set(cx + x, 1 + k, cz + 4 + k * 2, S("smooth_stone"))
+            b.set(cx + x, 1 + k, cz + 5 + k * 2, S("smooth_stone"))
+    logs = (9, 6, 4, 10, 9, 6)
+    for i, x in enumerate(range(-5, 7, 2)):
+        b.set(cx + x, 1, cz + 3, S("data_terminal", facing="north", log=logs[i]))
+        b.set(cx + x + 1, 1, cz + 3, S("navigation_console", facing="north"))
+        b.set(cx + x, 2, cz + 5, S("diagnostic_console", facing="north"))
+        b.set(cx + x, 2, cz + 6, S("office_chair", facing="north"))
+        b.set(cx + x, 3, cz + 8, S("office_chair", facing="north"))
+    for x in range(-6, 7):
+        b.set(cx + x, 3, cz - 6, S("tinted_glass"))
+        b.set(cx + x, 4, cz - 6, S("tinted_glass")) if abs(x) < 5 else None
+    b.set(cx, 1, cz - 2, S("office_desk", facing="north"))
+    skeleton(b, cx, 1, cz - 1, "north", "skeleton_sitting")
+    skeleton(b, cx - 3, 2, cz + 6, "north", "skeleton_sitting")
+    b.chest(cx - 8, 1, cz, "space_center", "east")
+    b.chest(cx + 8, 1, cz, "space_center", "west")
+    b.chest(cx - 7, 1, cz + 4, "lab", "east", "barrel")
+    for x in (-7, -6, 6, 7):
+        b.set(cx + x, 1, cz - 3, S("locker", facing="south"))
+    skeleton(b, cx + 6, 1, cz - 2, "south", "skeleton_suited")
+    b.set(cx, 7, cz, S("ceiling_light"))
+    b.set(cx - 4, 6, cz + 4, S("ceiling_light"))
+    b.set(cx + 4, 6, cz + 4, S("ceiling_light"))
+    for z in range(cz - 2, cz + 1):
+        for y in (1, 2):
+            b.set(cx + 10, y, z, AIR)
+            b.set(cx + 11, y, z, AIR)
+    iron_door(b, cx + 10, 1, cz - 1, "east")
+    # Periscope tubes on the dome.
+    for (dx, dz) in ((-3, -3), (3, -3)):
+        for y in range(8, 11):
+            b.set(cx + dx, y, cz + dz, S("iron_block") if y == 10 else bars())
+    # Grandstand: tiers of seats facing the pad, the families who came to watch.
+    for k in range(0, 6):
+        for z in range(48, 62):
+            b.set(-4 - k, k, z, S("smooth_stone"))
+            b.set(-4 - k, k + 1, z, S("blue_concrete") if z % 2 else AIR)
+            b.set(-4 - k, k + 1, z, S("spruce_stairs", facing="west", half="bottom", shape="straight",
+                                     waterlogged="false"))
+    for z in range(48, 62):
+        for y in range(1, 10):
+            b.set(-10, y, z, S("gray_concrete") if y < 7 else AIR)
+        b.set(-10, 9, z, S("smooth_stone_slab", type="bottom", waterlogged="false"))
+        b.set(-9, 8, z, S("smooth_stone_slab", type="top", waterlogged="false"))
+    for (x, y, z) in ((-5, 2, 50), (-6, 3, 53), (-6, 3, 54), (-8, 5, 58), (-4, 2, 60)):
+        skeleton(b, x, y, z, "east", "skeleton_sitting")
+    b.set(-5, 2, 55, S("dog_skeleton", facing="east"))
+    # Rocket garden: old boosters standing on their fins.
+    rocket_standing(b, 62, 48, 18, 1.2)
+    rocket_standing(b, 66, 52, 24, 1.6, "red_concrete")
+    rocket_standing(b, 60, 54, 14, 1.0)
+    # The crawlerway: two gravel lanes leaving the pad to the south.
+    for z in range(46, 57):
+        for x in list(range(16, 21)) + list(range(25, 30)):
+            b.set(x, 0, z, S("gravel"))
+    b.decay(0.02, keep=("minecraft:ladder", "intersolarsystem:truss"), cracked=CONCRETE)
+    return b
+
+
+# ---------------------------------------------------------------- research lab
+def research_lab():
+    """A biomedical research institute: glass lobby with reception and the quarantine checkpoint, the BSL-3 suite
+    behind an airlock (fume hoods, specimen tanks, cryo pods, the sequencer racks), offices and a break room
+    upstairs, rooftop plant. The vaccine team stayed to the end; their last notes are on the terminal."""
+    b = Build("research_lab", 1004)
+    W, F = S("white_concrete"), S("floor_tiles")
+    ground(b, -4, -8, 34, 24, lambda x, z: concrete(b, 0.1) if z < 0 else dead_ground(b))
+    # Shell: two floors of 5, a curtain-wall front.
+    for y in range(0, 11):
+        for x in range(0, 31):
+            for z in range(0, 21):
+                edge = x in (0, 30) or z in (0, 20)
+                if y in (0, 5, 10):
+                    b.set(x, y, z, F if y < 10 and not edge else W)
+                elif edge:
+                    front = z == 0 and 0 < x < 30
+                    b.set(x, y, z, S("curtain_wall") if front and y % 5 != 0 else
+                          (pane() if (x + z) % 4 == 2 and y % 5 in (2, 3) else W))
+                else:
+                    b.set(x, y, z, AIR)
+    for x in range(12, 18):
+        door(b, x, 1, 0, height=3)
+    # Lobby: reception desk, waiting chairs, the checkpoint barrier.
+    for x in range(10, 20):
+        b.set(x, 1, 6, S("office_desk", facing="south") if x % 3 else S("quartz_block"))
+    b.set(14, 1, 7, S("office_chair", facing="north"))
+    b.set(16, 1, 7, S("data_terminal", facing="south", log=6))
+    for x in range(2, 9):
+        b.set(x, 1, 2, S("airport_seats", facing="south"))
+    for x in range(21, 29):
+        b.set(x, 1, 2, S("airport_seats", facing="south"))
+    b.set(2, 1, 5, S("potted_dead_bush"))
+    b.set(28, 1, 5, S("potted_dead_bush"))
+    for x in range(10, 21):
+        b.set(x, 1, 9, S("quarantine_barrier", facing="south") if x != 15 else AIR)
+    b.set(9, 2, 9, S("poster_quarantine", facing="south"))
+    b.set(21, 2, 9, S("warning_sign", facing="south"))
+    skeleton(b, 15, 1, 4, "north", "skeleton_lying")
+    partition_z(b, 10, 1, 29, 1, 4, W)
+    iron_door(b, 15, 1, 10, "south", open_=True)
+    # Airlock and the BSL-3 suite (z 11..19).
+    partition_x(b, 13, 11, 13, 1, 4, W)
+    partition_x(b, 17, 11, 13, 1, 4, W)
+    partition_z(b, 13, 1, 29, 1, 4, S("white_stained_glass"))
+    b.set(15, 1, 13, AIR)
+    b.set(15, 2, 13, AIR)
+    b.set(14, 1, 11, S("locker", facing="east"))
+    b.set(16, 1, 11, S("locker", facing="west"))
+    b.set(14, 3, 12, S("leaking_pipe"))
+    for x in range(2, 12, 3):
+        b.set(x, 1, 19, S("fume_hood", facing="north"))
+        b.set(x + 1, 1, 19, S("lab_bench", facing="north"))
+        b.set(x, 1, 16, S("lab_bench", facing="south"))
+        b.set(x + 1, 1, 16, S("lab_bench", facing="south"))
+        b.set(x, 2, 16, S("brewing_stand", has_bottle_0="true", has_bottle_1="false", has_bottle_2="true"))
+    for x in range(19, 29, 2):
+        b.set(x, 1, 19, S("specimen_tank"))
+        b.set(x, 1, 14, S("cryo_pod", facing="south"))
+    for z in (16, 17):
+        b.set(29, 1, z, S("server_rack", facing="west"))
+        b.set(29, 2, z, S("server_rack", facing="west"))
+    b.set(24, 1, 17, S("office_chair", facing="east"))
+    skeleton(b, 7, 1, 17, "south", "skeleton_curled")
+    skeleton(b, 25, 1, 16, "south", "skeleton_lying")
+    b.chest(1, 1, 12, "lab", "east")
+    b.chest(1, 1, 14, "medical", "east", "barrel")
+    b.set(18, 1, 12, S("toxic_barrel"))
+    lights(b, 3, 3, 27, 18, 4, 4)
+    # Stairs to the upper floor along the west wall.
+    for k in range(0, 5):
+        b.set(1, 1 + k, 4 + k, S("quartz_stairs", facing="south", half="bottom", shape="straight",
+                                 waterlogged="false"))
+        b.set(1, 5, 4 + k, AIR)
+    # Upper floor: offices (glass partitions), break room, the director's room.
+    partition_z(b, 10, 2, 29, 6, 9, S("white_stained_glass"))
+    for x in (8, 16, 23):
+        partition_x(b, x, 1, 9, 6, 9, S("white_stained_glass"))
+        b.set(x, 6, 9, AIR)
+        b.set(x, 7, 9, AIR)
+    for x0 in (3, 10, 18, 25):
+        b.set(x0, 6, 3, S("office_desk", facing="south"))
+        b.set(x0 + 1, 6, 3, S("office_desk", facing="south"))
+        b.set(x0, 6, 4, S("office_chair", facing="north"))
+        b.set(x0 + 2, 6, 1, S("filing_cabinet", facing="south"))
+        b.set(x0 + 1, 7, 3, S("data_terminal", facing="south", log=6)) if x0 == 25 else None
+    for x in range(2, 12):
+        b.set(x, 6, 19, S("smooth_stone"))
+    b.set(3, 7, 19, S("cauldron"))
+    b.set(5, 6, 18, S("vending_machine", facing="north"))
+    long_table(b, 4, 9, 6, 15)
+    for x in range(14, 29):
+        b.set(x, 6, 19, S("bookshelf") if x % 3 else S("filing_cabinet", facing="north"))
+    b.set(20, 6, 15, S("office_desk", facing="north"))
+    b.set(21, 6, 15, S("office_desk", facing="north"))
+    b.set(20, 6, 16, S("office_chair", facing="south"))
+    skeleton(b, 21, 6, 16, "south", "skeleton_sitting")
+    b.chest(28, 6, 14, "lab", "west")
+    lights(b, 3, 3, 27, 18, 9, 4)
+    # Roof plant: air handlers, the exhaust stacks of the BSL suite, an antenna.
+    for (x0, z0) in ((4, 12), (20, 12)):
+        for x in range(x0, x0 + 5):
+            for z in range(z0, z0 + 4):
+                b.set(x, 11, z, S("iron_block") if (x + z) % 2 else S("light_gray_concrete"))
+                b.set(x, 12, z, S("iron_trapdoor", facing="north", half="bottom", open="false", powered="false",
+                                  waterlogged="false"))
+    for (x, z) in ((12, 16), (17, 16)):
+        for y in range(11, 16):
+            b.set(x, y, z, S("pipe", up="true", down="true", north="false", south="false", east="false",
+                             west="false"))
+    for y in range(11, 18):
+        b.set(27, y, 4, bars())
+    b.set(27, 18, 4, S("antenna_dish"))
+    collapse(b, 0, 0, 30, 20, 6, 12, 0.08)
+    b.decay(0.02, cracked={"minecraft:white_concrete": "calcite"})
+    return b
+
+
+# ---------------------------------------------------------------- field station
+def research_station():
+    """A field research station on stilts: living module (bunks, galley, mess table), laboratory (benches,
+    microscopes, sample freezers), power module, a garage with the snow rover, linked by covered walkways; the
+    weather mast, the comms dish, fuel bladders and a ring of flag markers in the snow."""
+    b = Build("research_station", 1005)
+    ground(b, -6, -6, 46, 30, lambda x, z: S("snow_block") if b.rnd.random() < 0.6 else S("packed_ice")
+           if b.rnd.random() < 0.2 else S("gravel"))
+    mods = {"living": (0, 0, 12, 7), "lab": (18, 0, 30, 7), "power": (18, 14, 26, 20), "garage": (0, 14, 12, 22)}
+    for name, (x0, z0, x1, z1) in mods.items():
+        stilt = name != "garage"
+        y0 = 3 if stilt else 0
+        if stilt:
+            for x in (x0, (x0 + x1) // 2, x1):
+                for z in (z0, z1):
+                    for y in range(0, y0):
+                        b.set(x, y, z, S("truss"))
+        b.room(x0, y0, z0, x1, y0 + 5, z1, S("station_hull"), S("polished_andesite"))
+        for x in range(x0 + 2, x1 - 1, 3):
+            b.set(x, y0 + 3, z0, S("station_window"))
+            b.set(x, y0 + 3, z1, S("station_window"))
+        for x in range(x0, x1 + 1):
+            b.set(x, y0 + 5, z0, S("red_concrete"))
+            b.set(x, y0 + 5, z1, S("red_concrete"))
+        lights(b, x0 + 2, z0 + 2, x1 - 2, z1 - 2, y0 + 4, 4, S("station_light"))
+    # Walkways between living and lab (covered), lab and power.
+    for x in range(12, 19):
+        for z in (3, 4):
+            b.set(x, 3, z, S("metal_grating"))
+            b.set(x, 7, z, S("station_hull"))
+            for y in (4, 5, 6):
+                b.set(x, y, z, AIR)
+        for y in range(4, 7):
+            b.set(x, y, 2, S("station_window") if y == 5 else S("station_hull"))
+            b.set(x, y, 5, S("station_window") if y == 5 else S("station_hull"))
+    for z in range(7, 15):
+        for x in (22, 23):
+            b.set(x, 3, z, S("metal_grating"))
+            b.set(x, 7, z, S("station_hull"))
+            for y in (4, 5, 6):
+                b.set(x, y, z, AIR)
+        for y in range(4, 7):
+            b.set(21, y, z, S("station_window") if y == 5 else S("station_hull"))
+            b.set(24, y, z, S("station_window") if y == 5 else S("station_hull"))
+    # Steps up to the living module.
+    for k in range(0, 4):
+        b.set(6, k, -1 - (3 - k), S("metal_grating"))
+    door(b, 6, 4, 0)
+    # Living: bunks, lockers, galley, mess table, a guitar (note block) and the expedition photo wall.
+    for x in (1, 3, 5):
+        b.set(x, 4, 6, S("bunk_bed", facing="north"))
+        b.set(x, 4, 1, S("locker", facing="south")) if x != 5 else None
+    for x in range(8, 12):
+        b.set(x, 4, 6, S("smoker", facing="north", lit="false") if x == 8 else S("cauldron") if x == 9 else
+              S("smooth_stone"))
+    long_table(b, 8, 10, 4, 3)
+    b.set(2, 4, 3, S("note_block", instrument="guitar", note=5, powered="false"))
+    b.chest(11, 4, 1, "research_station", "south", "barrel")
+    skeleton(b, 3, 5, 6, "north", "skeleton_curled")
+    # Lab: benches, freezers, the core sample rack.
+    for x in range(19, 30, 2):
+        b.set(x, 4, 6, S("lab_bench", facing="north"))
+        b.set(x + 1, 4, 6, S("specimen_tank")) if x < 28 else None
+    for x in range(19, 25):
+        b.set(x, 4, 1, S("lab_bench", facing="south"))
+    b.set(20, 5, 1, S("brewing_stand", has_bottle_0="false", has_bottle_1="true", has_bottle_2="false"))
+    b.set(29, 4, 3, S("data_terminal", facing="west", log=3))
+    b.set(28, 4, 3, S("office_chair", facing="east"))
+    b.chest(29, 4, 1, "lab", "west")
+    for y in (4, 5):
+        for x in (26, 27):
+            b.set(x, y, 1, S("end_rod", facing="up"))
+    skeleton(b, 28, 4, 4, "east", "skeleton_sitting")
+    # Power module: generators, battery bank, fuel day tank.
+    b.set(19, 4, 19, S("diesel_generator", facing="north"))
+    b.set(21, 4, 19, S("diesel_generator", facing="north"))
+    b.set(25, 4, 19, S("battery_bank", facing="north"))
+    b.set(25, 4, 15, S("control_cabinet", facing="west"))
+    b.set(19, 4, 15, S("toxic_barrel"))
+    # Garage: the snow rover (tracks, cabin), tools, a sledge.
+    for x in range(2, 9):
+        for z in (16, 20):
+            b.set(x, 1, z, S("black_concrete"))
+        for z in range(16, 21):
+            b.set(x, 2, z, S("orange_concrete"))
+            if x > 4:
+                b.set(x, 3, z, S("orange_concrete") if z in (16, 20) or x == 8 else AIR)
+                b.set(x, 4, z, S("orange_concrete"))
+    for z in (17, 18, 19):
+        b.set(8, 3, z, pane())
+    b.set(6, 3, 18, S("spruce_stairs", facing="west", half="bottom", shape="straight", waterlogged="false"))
+    b.set(11, 1, 21, S("repair_station", facing="north"))
+    b.set(10, 1, 21, S("anvil", facing="east"))
+    for x in range(1, 5):
+        b.set(x, 1, 21, S("spruce_slab", type="bottom", waterlogged="false"))
+    for z in range(16, 21):
+        b.set(12, 1, z, AIR)
+        b.set(12, 2, z, AIR)
+        b.set(12, 3, z, AIR)
+    # Weather mast and comms dish, fuel bladders, flags.
+    for y in range(0, 16):
+        b.set(36, y, 4, bars() if y % 4 else S("iron_block"))
+    b.set(36, 16, 4, S("lightning_rod", facing="up", powered="false", waterlogged="false"))
+    for (dx, dz, f) in ((1, 0, "east"), (-1, 0, "west"), (0, 1, "south")):
+        b.set(36 + dx, 14, 4 + dz, S("iron_trapdoor", facing=f, half="top", open="true", powered="false",
+                                     waterlogged="false"))
+    dish(b, 36, 1, 14, 3)
+    for (x, z) in ((32, 22), (35, 22), (38, 22)):
+        for dx in (0, 1):
+            b.set(x + dx, 1, z, S("black_wool"))
+    for k in range(0, 12):
+        a = k * math.pi / 6
+        x, z = int(15 + 26 * math.cos(a)), int(12 + 18 * math.sin(a))
+        b.set(x, 1, z, S("spruce_fence", north="false", south="false", east="false", west="false",
+                         waterlogged="false"))
+        b.set(x, 2, z, S("red_wool") if k % 2 else S("orange_wool"))
+    b.decay(0.02, keep=("minecraft:ladder", "intersolarsystem:truss"))
+    return b
+
+
+# ---------------------------------------------------------------- seed vault
+def seed_bank():
+    """The global seed vault: the wedge-shaped portal with its light-art panel, built into an earth-and-ice mound;
+    a long tunnel with cable trays and lights; the service hall (control room, transformer room); three vault halls
+    behind blast doors: one sealed, one opened and half emptied, one collapsed and iced over."""
+    b = Build("seed_bank", 1006)
+    G = S("gray_concrete")
+    ground(b, -12, -8, 40, 70, lambda x, z: S("snow_block") if b.rnd.random() < 0.55 else S("packed_ice")
+           if b.rnd.random() < 0.3 else S("gravel"))
+    # The mound: an elongated hill over tunnel and halls.
+    for x in range(-12, 41):
+        for z in range(6, 70):
+            h = 14 - ((x - 14) / 20.0) ** 2 * 10 - max(0, (12 - z)) * 1.4 - max(0, z - 62) * 1.6
+            for y in range(1, int(h) + 1):
+                b.set(x, y, z, S("snow_block") if y == int(h) else S("packed_ice") if b.rnd.random() < 0.15 else
+                      S("dirt"))
+    # Portal wedge.
+    for i in range(0, 10):
+        for x in range(10 - i // 3, 19 + i // 3):
+            for y in range(0, i + 1):
+                b.set(x, y, i, G if (x, y) not in () else G)
+    for x in range(12, 17):
+        for y in range(1, 6):
+            for z in range(0, 10):
+                b.set(x, y, z, AIR)
+    for x in range(11, 18):
+        for y in range(7, 10):
+            b.set(x, y, 7, S("light_blue_stained_glass") if (x + y) % 2 else S("cyan_stained_glass"))
+    iron_door(b, 14, 1, 2, "north", open_=True)
+    door(b, 13, 1, 2)
+    # Tunnel z 10..44.
+    for z in range(10, 45):
+        for x in range(11, 18):
+            for y in range(0, 7):
+                edge = x in (11, 17) or y in (0, 6)
+                b.set(x, y, z, (S("polished_andesite") if y == 0 else G) if edge else AIR)
+        if z % 6 == 0:
+            b.set(14, 5, z, S("ceiling_light"))
+        b.set(12, 4, z, S("cable", north="true", south="true", east="false", west="false", up="false",
+                          down="false"))
+        b.set(16, 4, z, S("pipe", north="true", south="true", east="false", west="false", up="false",
+                          down="false"))
+    for z in (20, 32):
+        b.set(13, 1, z, S("shipping_crate"))
+    b.set(16, 1, 26, S("leaking_pipe"))
+    b.set(15, 0, 27, S("packed_ice"))
+    skeleton(b, 13, 1, 38, "south", "skeleton_suited")
+    # Service hall z 44..52 across x 2..26.
+    b.room(2, 0, 44, 26, 7, 52, G, S("polished_andesite"))
+    for x in range(12, 17):
+        for y in range(1, 6):
+            b.set(x, y, 44, AIR)
+    partition_x(b, 9, 45, 51, 1, 6, G)
+    partition_x(b, 19, 45, 51, 1, 6, G)
+    door(b, 9, 1, 48)
+    door(b, 19, 1, 48)
+    for z in range(45, 52, 2):
+        b.set(3, 1, z, S("server_rack", facing="east"))
+    b.set(6, 1, 51, S("office_desk", facing="north"))
+    b.set(7, 1, 51, S("data_terminal", facing="north", log=11))
+    b.set(6, 1, 50, S("office_chair", facing="north"))
+    b.set(4, 1, 45, S("filing_cabinet", facing="south"))
+    for (x, z) in ((22, 46), (24, 46), (22, 50), (24, 50)):
+        for y in (1, 2):
+            b.set(x, y, z, S("iron_block") if y == 1 else S("station_radiator"))
+    b.set(25, 1, 48, S("control_cabinet", facing="west"))
+    lights(b, 5, 47, 24, 50, 6, 5)
+    # Vault halls z 52..68: west sealed, middle opened, east collapsed.
+    for (x0, state) in ((2, "sealed"), (11, "open"), (20, "collapsed")):
+        b.room(x0, 0, 52, x0 + 7, 6, 68, G, S("polished_andesite"))
+        b.set(x0 + 3, 1, 52, S("blast_door", facing="north") if state == "sealed" else AIR)
+        b.set(x0 + 3, 2, 52, G if state == "sealed" else AIR)
+        if state != "sealed":
+            b.set(x0 + 4, 1, 52, AIR)
+            b.set(x0 + 4, 2, 52, AIR)
+        for z in range(54, 68, 2):
+            for x in (x0 + 1, x0 + 6):
+                for y in range(1, 5):
+                    if state == "open" and b.rnd.random() < 0.4:
+                        continue
+                    b.set(x, y, z, S("barrel", facing="up", open="false") if y % 2 else S("shipping_crate"))
+        lights(b, x0 + 3, 55, x0 + 4, 66, 5, 5)
+    for x in (12, 18):
+        b.chest(x, 1, 67, "seed_bank", "north")
+    b.chest(15, 1, 67, "seed_bank", "north", "barrel")
+    b.chest(4, 1, 66, "seed_bank", "north")
+    skeleton(b, 15, 1, 60, "north", "skeleton_curled")
+    for x in range(21, 27):
+        for z in range(56, 68):
+            for y in range(1, 6):
+                if b.rnd.random() < 0.35 + (y < 3) * 0.4:
+                    b.set(x, y, z, S("packed_ice") if b.rnd.random() < 0.6 else S("rubble"))
+    b.decay(0.015, cracked=CONCRETE, top_bias=False)
+    return b
+
+
+# ---------------------------------------------------------------- terraformer
+def terraformer():
+    """A terraforming test site: the atmosphere processor (a ringed stack with intake fans and the catalyst
+    chambers), a cracked biodome over a dead garden, condenser tanks, mirror arrays, the control annex, pipes to the
+    poisoned overflow pond."""
+    b = Build("terraformer", 1007)
+    ground(b, -22, -22, 30, 24, lambda x, z: dead_ground(b))
+    # Processor: base hall, the stack.
+    for x in range(-5, 6):
+        for z in range(-5, 6):
+            for y in range(0, 7):
+                edge = abs(x) == 5 or abs(z) == 5
+                b.set(x, y, z, (S("hazard_concrete") if y == 0 else S("station_hull")) if edge or y in (0, 6)
+                      else AIR)
+    for y in range(7, 40):
+        r = 3.0 if y < 30 else 2.2
+        disc(b, 0, 0, y, r, S("station_hull") if y % 6 else S("station_foil"), hollow=True)
+        if y % 6 == 0:
+            disc(b, 0, 0, y, r + 1.4, S("metal_grating"), hollow=True)
+    for y in range(40, 44):
+        disc(b, 0, 0, y, 2.2, S("sooty_concrete"), hollow=True)
+    for (dx, dz, f) in ((4, 0, "east"), (-4, 0, "west"), (0, 4, "south"), (0, -4, "north")):
+        for y in (14, 15, 26, 27):
+            b.set(dx, y, dz, S("iron_trapdoor", facing=f, half="bottom", open="true", powered="false",
+                               waterlogged="false"))
+    for y in range(1, 40):
+        b.set(0, y, -2, S("ladder", facing="south"))
+    for (x, z) in ((-3, -3), (3, -3), (-3, 3), (3, 3)):
+        b.set(x, 1, z, S("reactor") if (x + z) == 0 else S("coolant_tank", facing="north", level=0))
+    b.set(0, 1, 3, S("control_cabinet", facing="south"))
+    b.set(2, 1, -3, S("sparking_panel"))
+    door(b, 0, 1, 5, height=3)
+    b.set(0, 5, 0, S("station_light"))
+    # Biodome to the east: cracked glass over a dead garden with paths and benches.
+    R = 9
+    for x in range(-R, R + 1):
+        for z in range(-R, R + 1):
+            d = math.hypot(x, z)
+            if d <= R:
+                b.set(16 + x, 0, z, S("coarse_dirt") if b.rnd.random() < 0.6 else S("podzol", snowy="false"))
+            for y in range(1, R + 1):
+                dd = math.sqrt(x * x + y * y + z * z)
+                if R - 0.6 <= dd <= R + 0.4:
+                    st = S("green_stained_glass") if (x + y + z) % 5 else S("iron_block")
+                    b.set(16 + x, y, z, st if b.rnd.random() > 0.2 else AIR)
+                elif dd < R - 0.6:
+                    b.set(16 + x, y, z, AIR)
+    for x in range(-R + 1, R):
+        b.set(16 + x, 0, 0, S("gravel"))
+        b.set(16, 0, x, S("gravel"))
+    for (x, z) in ((11, -4), (20, 4), (13, 5), (21, -3), (18, -6)):
+        for y in range(1, 5):
+            b.set(x, y, z, S("dead_log", axis="y"))
+        b.set(x, 5, z, S("dead_log", axis="x"))
+    b.set(14, 1, 2, S("park_bench", facing="east"))
+    b.set(18, 1, -2, S("park_bench", facing="west"))
+    for x in range(6, 8):
+        for y in range(1, 3):
+            b.set(x, y, 0, AIR)
+    for x in range(5, 8):
+        b.set(x, 3, 0, S("station_hull"))
+        b.set(x, 1, -1, S("station_hull"))
+        b.set(x, 1, 1, S("station_hull"))
+    # Condenser tanks and mirror arrays.
+    for (cx, cz) in ((-12, -8), (-12, 0), (-12, 8)):
+        cylinder(b, cx, cz, 1, 8, 2.2, S("iron_block"))
+        disc(b, cx, cz, 9, 2.2, S("light_gray_concrete"))
+        b.set(cx + 3, 4, cz, S("pipe", east="true", west="true", north="false", south="false", up="false",
+                               down="false"))
+    for x in range(-9, -5):
+        b.set(x, 4, 0, S("pipe", east="true", west="true", north="false", south="false", up="false", down="false"))
+    for row in range(0, 3):
+        for x in range(-18, 2, 3):
+            z = -16 - row * 2
+            b.set(x, 1, z, S("truss"))
+            b.set(x, 2, z, S("solar_panel") if b.rnd.random() > 0.2 else S("glass"))
+            b.set(x + 1, 2, z, S("solar_panel") if b.rnd.random() > 0.2 else AIR)
+    # Control annex.
+    b.room(-8, 0, 12, 0, 5, 20, S("white_concrete"), S("floor_tiles"))
+    door(b, -4, 1, 12)
+    windows_band(b, -8, 12, 0, 20, 3, 2, pane())
+    b.set(-1, 1, 16, S("data_terminal", facing="west", log=1))
+    b.set(-1, 1, 18, S("navigation_console", facing="west"))
+    b.set(-2, 1, 16, S("office_chair", facing="east"))
+    b.chest(-7, 1, 19, "lab", "east")
+    b.set(-7, 1, 13, S("lab_bench", facing="east"))
+    b.set(-7, 1, 15, S("specimen_tank"))
+    skeleton(b, -3, 1, 18, "east", "skeleton_lying")
+    b.set(-4, 4, 16, S("ceiling_light"))
+    # The overflow pond: pipes running to a pool of acid mud, barrels.
+    for z in range(6, 16):
+        b.set(8, 1, z, S("pipe", north="true", south="true", east="false", west="false", up="false", down="false"))
+    for x in range(4, 14):
+        for z in range(15, 23):
+            if math.hypot(x - 9, z - 19) < 4.5:
+                b.set(x, 0, z, S("acidic_mud"))
+    b.set(8, 1, 15, S("leaking_pipe"))
+    for (x, z) in ((13, 13), (14, 14), (3, 21)):
+        b.set(x, 1, z, S("toxic_barrel"))
+    b.set(5, 1, 13, S("warning_sign", facing="south"))
+    b.decay(0.02, keep=("minecraft:ladder", "intersolarsystem:station_hull"))
+    return b
+
+
+# ---------------------------------------------------------------- dam
+def dam():
+    """A gravity dam across a dry canyon: the curved wall with its stepped downstream face, the crest road with
+    railings and lamps, spillway gates, two intake towers on the dry reservoir side, the valve house with the
+    control room, and the powerhouse at the foot (turbine hall, transformers). The reservoir is a cracked silt
+    plain; a pleasure boat sits where the water was."""
+    b = Build("dam", 1009)
+    L = 48
+    for z in range(0, L):
+        bow = int(round(3 * math.sin(math.pi * z / (L - 1))))
+        for y in range(0, 26):
+            thick = 4 + (26 - y) // 2
+            for x in range(0, thick):
+                face = x == thick - 1
+                st = (S("light_gray_concrete") if (y + z) % 6 else S("gray_concrete")) if not face else \
+                    (S("light_gray_concrete") if y % 3 else S("smooth_stone"))
+                b.set(x - bow, y, z, st)
+        # Crest road with railings, the downstream parapet.
+        for x in range(-bow - 1, 5 - bow):
+            b.set(x, 26, z, S("asphalt") if 0 <= x + bow <= 3 else S("smooth_stone"))
+        b.set(-bow - 1, 27, z, bars(north=True, south=True))
+        b.set(4 - bow, 27, z, bars(north=True, south=True))
+        if z % 8 == 4:
+            b.set(4 - bow, 28, z, S("street_lamp", facing="west"))
+    # Spillway gates: openings in the crest with steel gates hanging half-raised, a scoured chute below.
+    for z in range(18, 30):
+        for y in range(21, 26):
+            for x in range(-4, 8):
+                b.set(x, y, z, AIR)
+        if z % 4 == 2:
+            for y in range(21, 27):
+                b.set(1, y, z, S("gray_concrete"))
+        else:
+            b.set(1, 24, z, S("iron_block"))
+            b.set(1, 25, z, S("iron_block"))
+    for z in range(18, 30):
+        for y in range(0, 21):
+            b.set(4 + (26 - y) // 2 - 1, y, z, S("sooty_concrete") if y % 2 else S("light_gray_concrete"))
+    # Intake towers on the upstream side.
+    for zc in (8, 40):
+        for y in range(0, 30):
+            disc(b, -7, zc, y, 2.2, S("gray_concrete"), hollow=y > 0)
+        disc(b, -7, zc, 30, 2.6, S("smooth_stone"))
+        b.set(-7, 31, zc, S("station_light"))
+        for x in range(-5, -2):
+            b.set(x, 26, zc, S("metal_grating"))
+    # Valve house on the crest.
+    b.room(-1, 26, 4, 6, 31, 12, S("light_gray_concrete"), S("polished_andesite"))
+    windows_band(b, -1, 4, 6, 12, 29, 2, pane())
+    door(b, 2, 27, 4)
+    b.set(5, 27, 9, S("data_terminal", facing="west", log=2))
+    b.set(5, 27, 7, S("control_cabinet", facing="west"))
+    b.set(5, 27, 11, S("navigation_console", facing="west"))
+    b.set(4, 27, 9, S("office_chair", facing="east"))
+    b.chest(0, 27, 11, "industrial", "east")
+    b.set(0, 27, 5, S("filing_cabinet", facing="east"))
+    skeleton(b, 3, 27, 7, "east", "skeleton_sitting")
+    b.set(2, 30, 8, S("ceiling_light"))
+    # Powerhouse at the foot of the dam: turbine hall with three generator housings, transformers outside.
+    b.room(17, 0, 6, 30, 9, 42, S("light_gray_concrete"), S("polished_andesite"))
+    windows_band(b, 17, 6, 30, 42, 6, 3, pane())
+    for zc in (14, 24, 34):
+        cylinder(b, 23, zc, 1, 3, 3.0, S("iron_block"))
+        disc(b, 23, zc, 4, 2.0, S("yellow_concrete"))
+        b.set(23, 5, zc, S("iron_block"))
+        b.set(27, 1, zc, S("control_cabinet", facing="west"))
+    for z in range(7, 42):
+        b.set(28, 8, z, S("iron_block") if z % 5 == 0 else AIR)
+    for z in range(8, 41):
+        b.set(19, 8, z, bars(north=True, south=True))
+    door(b, 30, 1, 24, height=3)
+    b.chest(29, 1, 8, "industrial", "west", "barrel")
+    lights(b, 21, 10, 27, 38, 8, 6)
+    for z in range(10, 40, 6):
+        for x in (32, 33, 34):
+            b.set(x, 1, z, S("gray_concrete"))
+            b.set(x, 2, z, S("iron_block"))
+        b.set(33, 3, z, S("lightning_rod", facing="up", powered="false", waterlogged="false"))
+    # Penstocks from the dam into the powerhouse.
+    for zc in (14, 24, 34):
+        for x in range(10, 18):
+            disc(b, x, zc, 0, 0, S("rusted_panel"))
+            b.set(x, 2, zc, S("rusted_panel"))
+            b.set(x, 3, zc, S("rusted_panel"))
+    # Dry reservoir: cracked silt, a stranded pleasure boat, the old water line.
+    for x in range(-24, -3):
+        for z in range(-2, L + 2):
+            b.set(x, 0, z, S("dried_silt") if b.rnd.random() < 0.7 else S("mud"))
+    for z in range(0, L):
+        b.set(-1, 12, z, S("sooty_concrete")) if z % 2 else None
+    bx, bz = -18, 20
+    for i in range(0, 9):
+        w = 1 if i in (0, 8) else 2
+        for dz in range(-w, w + 1):
+            b.set(bx + i, 1, bz + dz, S("white_concrete"))
+            if abs(dz) == w:
+                b.set(bx + i, 2, bz + dz, S("white_concrete"))
+    for i in range(3, 6):
+        for dz in (-1, 0, 1):
+            b.set(bx + i, 3, bz + dz, S("white_concrete") if i != 4 else pane())
+    b.set(bx + 4, 2, bz, S("spruce_stairs", facing="east", half="bottom", shape="straight", waterlogged="false"))
+    b.decay(0.02, cracked=CONCRETE)
+    return b
+
 BUILDERS = {
     "bunker_small": bunker_small,
     "bunker_large": bunker_large,
@@ -1122,4 +1864,10 @@ BUILDERS = {
     "barracks": barracks,
     "oil_pumpjack": oil_pumpjack,
     "solar_farm": solar_farm,
+    "space_center": space_center,
+    "research_lab": research_lab,
+    "research_station": research_station,
+    "seed_bank": seed_bank,
+    "terraformer": terraformer,
+    "dam": dam,
 }

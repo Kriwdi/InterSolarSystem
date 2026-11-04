@@ -1002,7 +1002,8 @@ NO_MOBS = {c: {"bounding_box": "full", "spawns": []} for c in
 # Things that fell out of the sky or lie half buried: no clearing above them, only a short blend.
 CRASH_SITES = {"cargo_capsule", "crashed_satellite", "rocket_stage", "whale_skeleton", "dry_shipwreck"}
 FLAT = {"airport": (110, 12, 0, 24), "hospital": (48, 12, 6, 24), "dead_city": (64, 18, 0, 24),
-        "verdant_lab": (56, 12, 9, 24), "karman_spaceport": (160, 14, 6, 30)}
+        "verdant_lab": (56, 12, 9, 24), "karman_spaceport": (160, 14, 6, 30),
+        "space_center": (64, 12, 4, 30), "seed_bank": (48, 12, 0, 20), "dam": (40, 14, 0, 34)}
 
 # The Earth is 20 000 blocks across (1250 chunks). Rare and important ruins are placed on concentric rings so every
 # world has them: (count, ring distance in chunks (the first ring lies at about 4x this), sites in the first ring).

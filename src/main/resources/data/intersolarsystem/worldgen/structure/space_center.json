@@ -39,6 +39,9 @@
   "terrain_adaptation": "beard_box",
   "layout": "intersolarsystem:space_center_layout",
   "ground_offset": 4,
-  "clear_height": 16,
-  "blend": 8
+  "clear_height": 30,
+  "blend": 8,
+  "check_radius": 64,
+  "max_variation": 12,
+  "guaranteed": true
 }

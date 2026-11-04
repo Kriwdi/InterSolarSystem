@@ -179,6 +179,17 @@ public final class FlatSiteStructure extends Structure {
 				}
 			}
 		}
+		if (clearHeight > 0) {
+			// The clearing also took the ruin's own earth, snow and dead plants (a mound over a vault, crops in a
+			// field): place the pieces once more over the cleared ground.
+			BlockPos centre = all.getCenter();
+			BlockPos pivot = new BlockPos(centre.getX(), all.minY(), centre.getZ());
+			for (StructurePiece piece : pieces.pieces()) {
+				if (piece.getBoundingBox().intersects(chunkBox)) {
+					piece.postProcess(level, structureManager, generator, random, chunkBox, chunkPos, pivot);
+				}
+			}
+		}
 	}
 
 	/** Continues the ruin's ground block (or, under air, the nearest natural block) down to solid terrain. */
