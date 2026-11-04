@@ -1,6 +1,1 @@
-net.minecraft.world.level.biome.BiomeSource
-net.minecraft.world.level.biome.BiomeResolver
-net.minecraft.world.level.biome.Climate$Sampler
-net.minecraft.world.level.biome.Climate$TargetPoint
-net.minecraft.world.level.biome.MultiNoiseBiomeSource
-net.minecraft.world.level.levelgen.RandomState
+net.minecraft.world.level.block.state.BlockState

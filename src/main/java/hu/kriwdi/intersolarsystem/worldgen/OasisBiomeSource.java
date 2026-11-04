@@ -9,6 +9,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeResolver;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.biome.Climate;
 
@@ -39,7 +40,7 @@ public final class OasisBiomeSource extends BiomeSource {
 
 	private final BiomeSource climate;
 	private final Holder<Biome> oasis;
-	/** The centre chosen for the last sampler (one per world); recomputed only if the sampler changes. */
+	/** The centre chosen for the last world; recomputed only when another seed shows up. */
 	private volatile Centre centre;
 
 	public OasisBiomeSource(BiomeSource climate, Holder<Biome> oasis) {
@@ -62,12 +63,29 @@ public final class OasisBiomeSource extends BiomeSource {
 	}
 
 	@Override
-	public Holder<Biome> getNoiseBiome(int quartX, int quartY, int quartZ, Climate.Sampler sampler) {
+	public BiomeResolver createResolver(Climate.Sampler sampler) {
+		return wrap(climate.createResolver(sampler), centre(sampler));
+	}
+
+	@Override
+	public BiomeResolver createResolverForChunk(Climate.Sampler sampler, int minQuartX, int minQuartY, int minQuartZ,
+			int quartSizeX, int quartSizeY, int quartSizeZ) {
 		Centre c = centre(sampler);
-		if (insideOasis(quartX * 4 - c.x, quartZ * 4 - c.z)) {
-			return oasis;
+		BiomeResolver inner = climate.createResolverForChunk(sampler, minQuartX, minQuartY, minQuartZ, quartSizeX,
+				quartSizeY, quartSizeZ);
+		// Chunks far from the oasis keep the climate source's own resolver untouched.
+		int x0 = minQuartX * 4 - c.x;
+		int z0 = minQuartZ * 4 - c.z;
+		int reach = (int) (RADIUS_BLOCKS * 1.3) + 1;
+		if (x0 > reach || z0 > reach || x0 + quartSizeX * 4 < -reach || z0 + quartSizeZ * 4 < -reach) {
+			return inner;
 		}
-		return climate.getNoiseBiome(quartX, quartY, quartZ, sampler);
+		return wrap(inner, c);
+	}
+
+	private BiomeResolver wrap(BiomeResolver inner, Centre c) {
+		return (quartX, quartY, quartZ) -> insideOasis(quartX * 4 - c.x, quartZ * 4 - c.z)
+				? oasis : inner.getNoiseBiome(quartX, quartY, quartZ);
 	}
 
 	/** Whether a block offset from the oasis centre lies inside its wavy edge. */
@@ -82,18 +100,23 @@ public final class OasisBiomeSource extends BiomeSource {
 		return d2 <= r * r;
 	}
 
+	/**
+	 * The oasis centre for the world of {@code sampler}. Samplers are made per chunk, so the choice is cached by a
+	 * fingerprint of the seed (the climate at the world's centre) rather than by the sampler itself.
+	 */
 	private Centre centre(Climate.Sampler sampler) {
+		Climate.TargetPoint fingerprint = sampler.sample(0, 0, 0);
 		Centre c = centre;
-		if (c != null && c.sampler == sampler) {
+		if (c != null && c.fingerprint.equals(fingerprint)) {
 			return c;
 		}
-		c = choose(sampler);
+		c = choose(sampler, fingerprint);
 		centre = c;
 		return c;
 	}
 
 	/** The candidate spot with the best oasis climate; land beats sea, then hot and humid wins. */
-	private static Centre choose(Climate.Sampler sampler) {
+	private static Centre choose(Climate.Sampler sampler, Climate.TargetPoint fingerprint) {
 		int bestX = DISTANCES_BLOCKS[1];
 		int bestZ = 0;
 		long bestScore = Long.MIN_VALUE;
@@ -114,15 +137,9 @@ public final class OasisBiomeSource extends BiomeSource {
 				}
 			}
 		}
-		return new Centre(sampler, bestX, bestZ);
+		return new Centre(fingerprint, bestX, bestZ);
 	}
 
-	/** Block position of the oasis centre in the world of {@code sampler}. */
-	public int[] centreBlock(Climate.Sampler sampler) {
-		Centre c = centre(sampler);
-		return new int[] {c.x, c.z};
-	}
-
-	private record Centre(Climate.Sampler sampler, int x, int z) {
+	private record Centre(Climate.TargetPoint fingerprint, int x, int z) {
 	}
 }

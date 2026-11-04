@@ -206,11 +206,8 @@ public final class SmokeTest {
 		if ("MISSING".equals(found.get("oasis"))) {
 			LOGGER.error("[SMOKETEST-FAIL] the guaranteed oasis is missing");
 		}
-		if (earth.getChunkSource().getGenerator().getBiomeSource()
-				instanceof hu.kriwdi.intersolarsystem.worldgen.OasisBiomeSource oasisSource) {
-			int[] c = oasisSource.centreBlock(earth.getChunkSource().randomState().sampler());
-			LOGGER.info("[SMOKETEST] guaranteed oasis centred at {} {}", c[0], c[1]);
-		} else {
+		if (!(earth.getChunkSource().getGenerator().getBiomeSource()
+				instanceof hu.kriwdi.intersolarsystem.worldgen.OasisBiomeSource)) {
 			LOGGER.error("[SMOKETEST-FAIL] the Earth does not use the oasis biome source");
 		}
 		if (found.values().stream().filter("MISSING"::equals).count() > 2) {
