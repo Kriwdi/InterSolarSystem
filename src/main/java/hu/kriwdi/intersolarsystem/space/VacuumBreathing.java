@@ -69,6 +69,27 @@ public final class VacuumBreathing {
 			}
 		});
 		UseItemCallback.EVENT.register((player, level, hand) -> {
+			// An oxygen canister tops up the suit's tank (a third of it).
+			ItemStack held = player.getItemInHand(hand);
+			ItemStack suit = player.getItemBySlot(EquipmentSlot.CHEST);
+			if (held.getItem() != ModItems.OXYGEN_CANISTER || suit.getItem() != ModItems.SPACE_SUIT
+					|| suit.getDamageValue() == 0) {
+				return InteractionResult.PASS;
+			}
+			if (!level.isClientSide()) {
+				suit.setDamageValue(Math.max(0, suit.getDamageValue() - suit.getMaxDamage() / 3));
+				if (!player.isCreative()) {
+					held.shrink(1);
+				}
+				level.playSound(null, player.blockPosition(), ModSounds.SUIT_BREATH, SoundSource.PLAYERS, 1.0F, 1.3F);
+				if (player instanceof ServerPlayer sp) {
+					sp.sendOverlayMessage(Component.translatable("message.intersolarsystem.oxygen_refilled",
+							Math.round(100 * ModArmor.oxygen(sp))));
+				}
+			}
+			return InteractionResult.SUCCESS;
+		});
+		UseItemCallback.EVENT.register((player, level, hand) -> {
 			ItemStack held = player.getItemInHand(hand);
 			ItemStack suit = player.getItemBySlot(EquipmentSlot.CHEST);
 			if (held.getItem() != ModItems.SEALANT || suit.getItem() != ModItems.SPACE_SUIT || !leaking(suit)) {

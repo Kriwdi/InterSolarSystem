@@ -178,6 +178,15 @@ def salvage_recipes():
                                                "B": "battery_cell", "N": "nitrogen_tank"}, "mmu_pack",
            category="equipment")
     shapeless("mmu_pack_refill", ["mmu_pack", "nitrogen_tank", "nitrogen_tank"], "mmu_pack")
+    # Oxygen from other worlds: perchlorate (Mars), ilmenite (the Moon), polar ice (Mars) split with a battery.
+    shaped("oxygen_canister_perchlorate", [" A ", "PBP", " A "], {"A": "aluminium_ingot", "P": "perchlorate_crust",
+                                                                 "B": "minecraft:glass_bottle"}, "oxygen_canister",
+           count=2)
+    shaped("oxygen_canister_ilmenite", [" A ", "IBI", " A "], {"A": "aluminium_ingot", "I": "ilmenite_ore",
+                                                              "B": "minecraft:glass_bottle"}, "oxygen_canister")
+    shapeless("oxygen_canister_ice", ["mars_ice", "mars_ice", "minecraft:glass_bottle", "battery_cell"],
+              "oxygen_canister", count=2)
+    cook("iron_from_hematite", "hematite_ore", "minecraft:iron_ingot", 0.7)
 
 
 def tags():

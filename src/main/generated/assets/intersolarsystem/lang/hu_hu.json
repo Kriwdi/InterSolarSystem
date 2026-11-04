@@ -277,6 +277,7 @@
   "item.intersolarsystem.multitool": "Multiszerszám",
   "item.intersolarsystem.nitrogen_tank": "Nitrogéntartály",
   "item.intersolarsystem.note": "Feljegyzés",
+  "item.intersolarsystem.oxygen_canister": "Oxigénpalack",
   "item.intersolarsystem.plastic_scrap": "Műanyaghulladék",
   "item.intersolarsystem.quarters_kit": "Anyahajó-szállás készlet",
   "item.intersolarsystem.rare_earth_dust": "Ritkaföldfém-por",
@@ -287,6 +288,7 @@
   "item.intersolarsystem.reactor_kit": "Anyahajó-reaktor készlet",
   "item.intersolarsystem.repair_kit": "Javítókészlet",
   "item.intersolarsystem.research_ship_kit": "Kutatóhajó-készlet",
+  "item.intersolarsystem.rover_memory_core": "Rover-memóriamag",
   "item.intersolarsystem.rubber_scrap": "Gumihulladék",
   "item.intersolarsystem.safety_tether": "Biztosítókötél",
   "item.intersolarsystem.salvaged_circuit": "Kimentett áramkör",
@@ -367,6 +369,7 @@
   "message.intersolarsystem.nav.launch": "Irány beállítva: %s. Az út hossza %s. A felszállási sorozat elindult",
   "message.intersolarsystem.nav.unreachable": "Ez a cél elérhetetlen",
   "message.intersolarsystem.orbit.docked": "Dokkolás kész. Üdv azon, ami az ISS-ből megmaradt. Vedd fel az űrruhát, mielőtt kinyitod a zsilipet",
+  "message.intersolarsystem.oxygen_refilled": "Ruha oxigénje: %s%%",
   "message.intersolarsystem.radio_silence": "Csak zúgás. Senki nem ad.",
   "message.intersolarsystem.ship.alert_line": "%s: %s (%s)",
   "message.intersolarsystem.ship.board_expired": "A javítópanel már nem érvényes",
@@ -612,6 +615,8 @@
   "subtitles.intersolarsystem.tape_voice": "Hang a szalagon",
   "tooltip.intersolarsystem.mmu_pack": "Pályán, kapaszkodóktól távol: a mozgásgombok a fúvókákat működtetik (ugrás fel, lopakodás le). Utántöltés: két nitrogéntartállyal.",
   "tooltip.intersolarsystem.nitrogen_tank": "Hajtógáz a manőverező egységhez.",
+  "tooltip.intersolarsystem.oxygen_canister": "Felvett űrruhában használd: a tartály harmadát tölti fel. Perklorátból (Mars), ilmenitből (Hold) vagy sarki jégből készül.",
+  "tooltip.intersolarsystem.rover_memory_core": "2,1 GB, amit senki nem írt. Meleg tapintású. „A Földre vidd, ne a falhoz.”",
   "tooltip.intersolarsystem.safety_tether": "Pályán: blokkra használva rácsatolsz (16 m kötél, +16 m minden nálad lévő tekercsért). Lopakodás + használat: lecsatolás.",
   "tooltip.intersolarsystem.tether_spool": "Plusz kötél a biztosítókötélhez (legfeljebb 3 tekercs)."
 }

@@ -66,6 +66,11 @@ public final class ModItems {
 	public static final Item TETHER_SPOOL = register("tether_spool", Item::new, new Item.Properties().stacksTo(3));
 	public static final Item MMU_PACK = register("mmu_pack", Item::new, new Item.Properties().durability(1200));
 	public static final Item NITROGEN_TANK = register("nitrogen_tank", Item::new, new Item.Properties().stacksTo(16));
+	/** Oxygen won on other worlds (perchlorate on Mars, ilmenite on the Moon, polar ice): refills the suit's tank. */
+	public static final Item OXYGEN_CANISTER = register("oxygen_canister", Item::new, new Item.Properties().stacksTo(16));
+	/** What the Ark-2 rover brought up from the wall under Jezero. */
+	public static final Item ROVER_MEMORY_CORE = register("rover_memory_core", Item::new,
+			new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
 
 	// ---- Mothership section kits and ship kits, made by a spaceport's fabricator (see spaceport.Section).
 	public static final Item KEEL_KIT = kit("keel_kit");

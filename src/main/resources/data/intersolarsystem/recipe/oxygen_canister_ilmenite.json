@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "intersolarsystem:aluminium_ingot",
+    "I": "intersolarsystem:ilmenite_ore",
+    "B": "minecraft:glass_bottle"
+  },
+  "pattern": [
+    " A ",
+    "IBI",
+    " A "
+  ],
+  "result": {
+    "id": "intersolarsystem:oxygen_canister",
+    "count": 1
+  }
+}

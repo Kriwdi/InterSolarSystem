@@ -933,7 +933,7 @@ def ark2_colony():
             b.set(rx + dx, 1 + dy, rz, S("white_concrete") if dy < 2 else S("orange_concrete"))
         b.set(rx + dx, 1, rz - 1, S("rover_wheel", facing="east") if dx % 2 == 0 else AIR)
         b.set(rx + dx, 3, rz - 1, S("rover_wheel", facing="east") if dx % 2 == 0 else AIR)
-    b.chest(rx + 2, 1, rz + 1, "space_debris", "north", "barrel")
+    b.chest(rx + 2, 1, rz + 1, "ark2_rover", "north", "barrel")
     skeleton(b, rx - 2, 1, rz + 2, "east", "skeleton_suited")
     # Solar arrays, comms mast, landing pad.
     for row in range(0, 3):

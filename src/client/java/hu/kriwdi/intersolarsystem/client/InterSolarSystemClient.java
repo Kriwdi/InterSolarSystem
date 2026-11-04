@@ -61,7 +61,9 @@ public class InterSolarSystemClient implements ClientModInitializer {
 			String key = item == hu.kriwdi.intersolarsystem.content.ModItems.SAFETY_TETHER ? "safety_tether"
 					: item == hu.kriwdi.intersolarsystem.content.ModItems.TETHER_SPOOL ? "tether_spool"
 					: item == hu.kriwdi.intersolarsystem.content.ModItems.MMU_PACK ? "mmu_pack"
-					: item == hu.kriwdi.intersolarsystem.content.ModItems.NITROGEN_TANK ? "nitrogen_tank" : null;
+					: item == hu.kriwdi.intersolarsystem.content.ModItems.NITROGEN_TANK ? "nitrogen_tank"
+					: item == hu.kriwdi.intersolarsystem.content.ModItems.OXYGEN_CANISTER ? "oxygen_canister"
+					: item == hu.kriwdi.intersolarsystem.content.ModItems.ROVER_MEMORY_CORE ? "rover_memory_core" : null;
 			if (key != null) {
 				lines.add(net.minecraft.network.chat.Component.translatable("tooltip.intersolarsystem." + key)
 						.withStyle(net.minecraft.ChatFormatting.GRAY));

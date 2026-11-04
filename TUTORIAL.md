@@ -570,9 +570,10 @@ A **Mars** cél a **fúziós hajtóművel** (3-as szint) nyílik meg; az út hos
 - **A világ:** 10 600 blokk körbe. Rozsdás regolitsíkságok sötét bazaltfoltokkal, narancssárga **dűnetengerek**, kráteres **felföldek** kanyonokkal, a sarkokon (kb. ±4250-től) réteges **sarki jégsapkák**.
 - **Levegő és gravitáció:** a légkör a földinek századrésze, szén-dioxid: **űrruha kell**. A gravitáció 38%.
 - **Ég:** nappal vajkaramell színű, éjjel csillagos; a **Phobos** naponta háromszor átrohan az égen, a **Deimos** kis pont, a **Föld** kék esthajnalcsillag a nap közelében.
-- **Nyersanyag:** marsi bazalt, regolit, por, **rétegzett homokkő**, **hematitgömböcskék** (vas), **perklorátkéreg** (jövőbeli oxigéngyártáshoz), **sarki jég**.
+- **Nyersanyag:** marsi bazalt, regolit, por, **rétegzett homokkő**, **hematitgömböcskék** (kiolvasztva vas), **perklorátkéreg**, **sarki jég**.
+- **Oxigén más világokon:** az **oxigénpalack** (perklorátból, holdi ilmenitből vagy sarki jégből + akkumulátor) felvett űrruhában használva a tartály harmadát tölti fel – így a hajótól távol is kitart a ruha.
 - **Relikviák** a valódi helyükön, táblával: Viking–1 és –2, Pathfinder a Sojournerrel, a homokba ragadt **Spirit**, a porvihar elnémította **Opportunity**, a **Curiosity** a Sharp-hegy rétegein, a **Perseverance** mintacsövekkel és az **Ingenuity** helikopterrel, a Zhurong, az InSight.
-- **A Bárka–2 kolónia:** a deltára leszállt, megdőlt Bárka (bejárható híd a hajónaplóval), lakómodulok, labor (a geológus naplója), halott üvegház, napelemek, antenna, leszállópálya – és északon a **feltárás**: lépcsőzetes gödör állvánnyal és daruval, az alján valami, amit nem ember épített. A szélén az oldalára borult kolóniarover. *A szalagok és a terminálok elmondják a többit.*
+- **A Bárka–2 kolónia:** a deltára leszállt, megdőlt Bárka (bejárható híd a hajónaplóval), lakómodulok, labor (a geológus naplója), halott üvegház, napelemek, antenna, leszállópálya – és északon a **feltárás**: lépcsőzetes gödör állvánnyal és daruval, az alján valami, amit nem ember épített. A szélén az oldalára borult kolóniarover, benne a **rover memóriamagja**. *A szalagok és a terminálok elmondják a többit.*
 
 ---
 

@@ -277,6 +277,7 @@
   "item.intersolarsystem.multitool": "Multiwerkzeug",
   "item.intersolarsystem.nitrogen_tank": "Stickstofftank",
   "item.intersolarsystem.note": "Notiz",
+  "item.intersolarsystem.oxygen_canister": "Sauerstoffkanister",
   "item.intersolarsystem.plastic_scrap": "Plastikschrott",
   "item.intersolarsystem.quarters_kit": "Quartierbausatz (Mutterschiff)",
   "item.intersolarsystem.rare_earth_dust": "Seltenerdstaub",
@@ -287,6 +288,7 @@
   "item.intersolarsystem.reactor_kit": "Reaktorbausatz (Mutterschiff)",
   "item.intersolarsystem.repair_kit": "Reparaturset",
   "item.intersolarsystem.research_ship_kit": "Forschungsschiff-Bausatz",
+  "item.intersolarsystem.rover_memory_core": "Rover-Speicherkern",
   "item.intersolarsystem.rubber_scrap": "Gummireste",
   "item.intersolarsystem.safety_tether": "Sicherungsleine",
   "item.intersolarsystem.salvaged_circuit": "Geborgener Schaltkreis",
@@ -367,6 +369,7 @@
   "message.intersolarsystem.nav.launch": "Kurs gesetzt: %s. Reisezeit %s. Startsequenz eingeleitet",
   "message.intersolarsystem.nav.unreachable": "Dieses Ziel ist unerreichbar",
   "message.intersolarsystem.orbit.docked": "Andocken abgeschlossen. Willkommen auf dem, was von der ISS übrig ist. Raumanzug anlegen, bevor du die Luke öffnest",
+  "message.intersolarsystem.oxygen_refilled": "Anzugsauerstoff: %s%%",
   "message.intersolarsystem.radio_silence": "Nur Rauschen. Niemand sendet.",
   "message.intersolarsystem.ship.alert_line": "%s: %s (%s)",
   "message.intersolarsystem.ship.board_expired": "Die Reparaturtafel ist nicht mehr gültig",
@@ -612,6 +615,8 @@
   "subtitles.intersolarsystem.tape_voice": "Stimme auf dem Band",
   "tooltip.intersolarsystem.mmu_pack": "Im Orbit, fern von Haltegriffen: die Bewegungstasten zünden die Düsen (Springen hoch, Schleichen runter). Nachfüllen: mit zwei Stickstofftanks.",
   "tooltip.intersolarsystem.nitrogen_tank": "Treibgas für die Manövriereinheit.",
+  "tooltip.intersolarsystem.oxygen_canister": "Mit angelegtem Raumanzug benutzen: füllt ein Drittel des Tanks. Aus Perchlorat (Mars), Ilmenit (Mond) oder Polareis.",
+  "tooltip.intersolarsystem.rover_memory_core": "2,1 GB, die niemand geschrieben hat. Fühlt sich warm an. „Bring ihn zur Erde, nicht zur Wand.“",
   "tooltip.intersolarsystem.safety_tether": "Im Orbit: an einem Block benutzen zum Einklinken (16 m Leine, +16 m je mitgeführter Spule). Schleichen + benutzen zum Lösen.",
   "tooltip.intersolarsystem.tether_spool": "Zusätzliche Leine für die Sicherungsleine (bis zu 3 Spulen)."
 }

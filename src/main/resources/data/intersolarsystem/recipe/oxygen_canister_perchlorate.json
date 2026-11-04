@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "intersolarsystem:aluminium_ingot",
+    "P": "intersolarsystem:perchlorate_crust",
+    "B": "minecraft:glass_bottle"
+  },
+  "pattern": [
+    " A ",
+    "PBP",
+    " A "
+  ],
+  "result": {
+    "id": "intersolarsystem:oxygen_canister",
+    "count": 2
+  }
+}

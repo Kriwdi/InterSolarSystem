@@ -277,6 +277,7 @@
   "item.intersolarsystem.multitool": "Multitool",
   "item.intersolarsystem.nitrogen_tank": "Nitrogen Tank",
   "item.intersolarsystem.note": "Note",
+  "item.intersolarsystem.oxygen_canister": "Oxygen Canister",
   "item.intersolarsystem.plastic_scrap": "Plastic Scrap",
   "item.intersolarsystem.quarters_kit": "Mothership Quarters Kit",
   "item.intersolarsystem.rare_earth_dust": "Rare Earth Dust",
@@ -287,6 +288,7 @@
   "item.intersolarsystem.reactor_kit": "Mothership Reactor Kit",
   "item.intersolarsystem.repair_kit": "Repair Kit",
   "item.intersolarsystem.research_ship_kit": "Research Ship Kit",
+  "item.intersolarsystem.rover_memory_core": "Rover Memory Core",
   "item.intersolarsystem.rubber_scrap": "Rubber Scrap",
   "item.intersolarsystem.safety_tether": "Safety Tether",
   "item.intersolarsystem.salvaged_circuit": "Salvaged Circuit",
@@ -367,6 +369,7 @@
   "message.intersolarsystem.nav.launch": "Course set: %s. Journey time %s. Takeoff sequence started",
   "message.intersolarsystem.nav.unreachable": "That destination is out of reach",
   "message.intersolarsystem.orbit.docked": "Docking complete. Welcome aboard what is left of the ISS. Suit up before you open the hatch",
+  "message.intersolarsystem.oxygen_refilled": "Suit oxygen: %s%%",
   "message.intersolarsystem.radio_silence": "Only static. Nobody is broadcasting.",
   "message.intersolarsystem.ship.alert_line": "%s: %s (%s)",
   "message.intersolarsystem.ship.board_expired": "The repair board is no longer valid",
@@ -612,6 +615,8 @@
   "subtitles.intersolarsystem.tape_voice": "Voice on the tape",
   "tooltip.intersolarsystem.mmu_pack": "In orbit, away from handholds: the movement keys fire its jets (jump up, sneak down). Refill: with two nitrogen tanks.",
   "tooltip.intersolarsystem.nitrogen_tank": "Propellant for the manoeuvring unit.",
+  "tooltip.intersolarsystem.oxygen_canister": "Use while wearing the space suit: refills a third of its tank. Made from perchlorate (Mars), ilmenite (the Moon) or polar ice.",
+  "tooltip.intersolarsystem.rover_memory_core": "2.1 GB that nobody wrote. Warm to the touch. \"Take it to Earth, not to the wall.\"",
   "tooltip.intersolarsystem.safety_tether": "In orbit: use on a block to clip on (16 m of line, +16 m per spool carried). Sneak + use to unclip.",
   "tooltip.intersolarsystem.tether_spool": "Extra line for the safety tether (up to 3 spools)."
 }

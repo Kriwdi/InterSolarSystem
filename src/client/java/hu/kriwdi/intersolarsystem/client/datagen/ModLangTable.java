@@ -2510,6 +2510,26 @@ public final class ModLangTable {
 				"The ship's engines cannot make that journey: Mars needs the fusion drive (engine tier 3)",
 				"Die Triebwerke schaffen diese Reise nicht: Für den Mars braucht es den Fusionsantrieb (Triebwerksstufe 3)",
 				"A hajtóművek ezt az utat nem bírják: a Marshoz fúziós hajtómű kell (3-as szint)");
+		add(rows, "item.intersolarsystem.oxygen_canister",
+				"Oxygen Canister",
+				"Sauerstoffkanister",
+				"Oxigénpalack");
+		add(rows, "item.intersolarsystem.rover_memory_core",
+				"Rover Memory Core",
+				"Rover-Speicherkern",
+				"Rover-memóriamag");
+		add(rows, "tooltip.intersolarsystem.oxygen_canister",
+				"Use while wearing the space suit: refills a third of its tank. Made from perchlorate (Mars), ilmenite (the Moon) or polar ice.",
+				"Mit angelegtem Raumanzug benutzen: füllt ein Drittel des Tanks. Aus Perchlorat (Mars), Ilmenit (Mond) oder Polareis.",
+				"Felvett űrruhában használd: a tartály harmadát tölti fel. Perklorátból (Mars), ilmenitből (Hold) vagy sarki jégből készül.");
+		add(rows, "tooltip.intersolarsystem.rover_memory_core",
+				"2.1 GB that nobody wrote. Warm to the touch. \"Take it to Earth, not to the wall.\"",
+				"2,1 GB, die niemand geschrieben hat. Fühlt sich warm an. „Bring ihn zur Erde, nicht zur Wand.“",
+				"2,1 GB, amit senki nem írt. Meleg tapintású. „A Földre vidd, ne a falhoz.”");
+		add(rows, "message.intersolarsystem.oxygen_refilled",
+				"Suit oxygen: %s%%",
+				"Anzugsauerstoff: %s%%",
+				"Ruha oxigénje: %s%%");
 		check(rows);
 		return List.copyOf(rows);
 	}
