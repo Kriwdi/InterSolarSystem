@@ -317,6 +317,21 @@ A receptek a receptkönyvben is megjelennek. Az alábbi táblázatok a pontos ho
 
 Állatok nincsenek, ezért gyapjút és bőrt a romokban találsz: bunker, város, tanya, kolónia, kórház. A kezdőhordóban is van gyapjú.
 
+### Űrséta és oxigén
+
+| Tárgy | Hozzávalók |
+|---|---|
+| Biztosítókötél | 2 vasrúd, 4 gumihulladék |
+| Kötéltekercs | 8 madzag, 1 vasrúd |
+| Nitrogéntartály (2 db) | 4 alumínium, 1 üvegpalack |
+| Manőverező egység (MMU) | 2 alumínium, 1 áramkör, 2 titánlemez, 1 akkumulátorcella, 2 nitrogéntartály |
+| MMU utántöltés | MMU + 2 nitrogéntartály |
+| Oxigénpalack (2 db) | 2 alumínium, 2 perklorátkéreg, 1 üvegpalack |
+| Oxigénpalack | 2 alumínium, 2 ilmenit, 1 üvegpalack |
+| Oxigénpalack (2 db) | 2 sarki jég, 1 üvegpalack, 1 akkumulátorcella |
+
+A **hematitgömböcskék** kohóban vasrúddá olvaszthatók.
+
 ### Alkatrészek
 
 | Alkatrész | Hozzávalók | Darab |
