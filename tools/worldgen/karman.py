@@ -464,46 +464,253 @@ def write_blueprints():
         put("reactor", x, SHIP_Y, SHIP_Z, st("minecraft:beacon") if x == rx else st("cable", east="true", west="true", north="false", south="false", up="false", down="false"))
     for z in (-6, 6):
         put("reactor", rx + 6, SHIP_Y - 9, SHIP_Z + z, st("coolant_tank"))
-    # Life support: machines and air lines on the lower deck behind the reactor.
-    for x in range(SHIP_X0 + 64, SHIP_X0 + 90, 3):
-        for z in (-12, 12):
-            put("life_support", x, SHIP_Y - 10, SHIP_Z + z, st("life_support_unit"))
-            put("life_support", x, SHIP_Y - 6, SHIP_Z + z, st("pipe", east="true", west="true", north="false", south="false", up="false", down="false"))
-    # Hydroponics: rows of living soil with lights on the middle deck.
-    for x in range(SHIP_X0 + 100, SHIP_X0 + 160):
-        for z in range(SHIP_Z - 14, SHIP_Z + 15):
-            if abs(z - SHIP_Z) > 2 and z % 3:
-                put("hydroponics", x, SHIP_Y - 1, z, st("living_soil"))
-            if x % 6 == 0 and z % 5 == 0:
-                put("hydroponics", x, SHIP_Y + 8, z, st("ceiling_light"))
-    # Laboratory on the upper deck.
-    for x in range(SHIP_X0 + 100, SHIP_X0 + 150, 4):
-        for z in (-10, 10):
-            put("laboratory", x, SHIP_Y + 10, SHIP_Z + z, st("lab_bench", facing="south" if z < 0 else "north"))
-            put("laboratory", x + 2, SHIP_Y + 10, SHIP_Z + z, st("specimen_tank"))
-        put("laboratory", x, SHIP_Y + 10, SHIP_Z - 14, st("fume_hood", facing="south"))
-    # Quarters and the mess on the upper deck forward.
-    for x in range(SHIP_X0 + 170, SHIP_X0 + 240, 3):
-        for z in (-14, 14):
-            put("quarters", x, SHIP_Y + 10, SHIP_Z + z, st("bunk_bed", facing="south" if z < 0 else "north"))
-        if x % 9 == 0:
-            for z in range(SHIP_Z - 4, SHIP_Z + 5):
-                put("quarters", x, SHIP_Y, z, st("smooth_stone_slab", type="top"))
-    # Hangar: the open bay under the belly with its doors and lights.
+    def inside(x, y):
+        """Half-width of the hull's inside at (x, y), one block in from the shell."""
+        r = ship_radius((x - SHIP_X0) / length) - 1
+        dy = y - SHIP_Y
+        return int(math.sqrt(max(0, r * r - dy * dy))) - 1
+
+    def walk(deck):
+        return SHIP_Y + deck
+
+    def wall_x(sec, x, deck, door_zs=(0,), height=6, state=None):
+        """A partition across the ship at x on a deck, with doorways (2 high) at door_zs."""
+        y0 = walk(deck)
+        for y in range(y0, y0 + height):
+            w = inside(x, y)
+            for z in range(-w, w + 1):
+                if any(abs(z - dz) <= 1 for dz in door_zs) and y < y0 + 3:
+                    continue
+                put(sec, x, y, SHIP_Z + z, state or st("ship_plating"))
+
+    def wall_z(sec, z, x0, x1, deck, door_xs=(), height=5, state=None):
+        y0 = walk(deck)
+        for x in range(x0, x1 + 1):
+            for y in range(y0, y0 + height):
+                if abs(z) > inside(x, y):
+                    continue
+                if any(abs(x - dx) <= 0 for dx in door_xs) and y < y0 + 2:
+                    continue
+                put(sec, x, y, SHIP_Z + z, state or st("ship_plating"))
+
+    def lamp_row(sec, x0, x1, deck, step=6, zs=(-6, 6)):
+        for x in range(x0, x1 + 1, step):
+            for z in zs:
+                put(sec, x, walk(deck) + 7, SHIP_Z + z, st("station_light"))
+
+    pipe_x = st("pipe", east="true", west="true", north="false", south="false", up="false", down="false")
+    cable_x = st("cable", east="true", west="true", north="false", south="false", up="false", down="false")
+
+    # Life support (lower deck, behind the reactor): air scrubbers, oxygen generators, water recycling tanks, the
+    # control room; pipes and cable trays under the ceiling.
+    L0, L1, dk = SHIP_X0 + 62, SHIP_X0 + 96, -10
+    wall_x("life_support", L0, dk)
+    wall_x("life_support", L1, dk)
+    wall_x("life_support", L0 + 22, dk, door_zs=(0,))
+    for x in range(L0 + 2, L0 + 21, 3):
+        for z in (-11, -8, 8, 11):
+            put("life_support", x, walk(dk), SHIP_Z + z, st("life_support_unit"))
+        for z in (-9, 9):
+            put("life_support", x, walk(dk) + 1, SHIP_Z + z, st("station_radiator"))
+    for x in range(L0 + 1, L1):
+        for z in (-12, -5, 5, 12):
+            put("life_support", x, walk(dk) + 6, SHIP_Z + z, pipe_x)
+        put("life_support", x, walk(dk) + 7, SHIP_Z - 3, cable_x)
+        put("life_support", x, walk(dk) + 7, SHIP_Z + 3, cable_x)
+    for (cx_, cz_) in ((L0 + 27, -9), (L0 + 27, 9), (L0 + 31, -9), (L0 + 31, 9)):
+        for y in range(walk(dk), walk(dk) + 5):
+            for dz in (-1, 0, 1):
+                for dx in (-1, 0, 1):
+                    if abs(dx) + abs(dz) < 2 or y in (walk(dk), walk(dk) + 4):
+                        put("life_support", cx_ + dx, y, SHIP_Z + cz_ + dz,
+                            st("light_blue_stained_glass") if 0 < y - walk(dk) < 4 and abs(dx) + abs(dz) == 1
+                            else st("iron_block"))
+    for z in (-4, -2, 2, 4):
+        put("life_support", L1 - 2, walk(dk), SHIP_Z + z, st("control_cabinet", facing="west"))
+    put("life_support", L1 - 2, walk(dk), SHIP_Z, st("diagnostic_console", facing="west"))
+    put("life_support", L1 - 3, walk(dk), SHIP_Z, st("office_chair", facing="east"))
+    put("life_support", L0 + 1, walk(dk) + 2, SHIP_Z + 4, st("warning_sign", facing="east"))
+    for z in (-7, 7):
+        put("life_support", L0 + 25, walk(dk), SHIP_Z + z, st("coolant_tank", facing="north", level=0))
+    lamp_row("life_support", L0 + 3, L1 - 3, dk, 6, (-4, 4))
+
+    # Hydroponics (middle deck): planting beds with crops under grow lights, trellises, the irrigation channel down
+    # the middle, seed lockers, composters; glass bulkheads at both ends.
+    H0, H1, dk = SHIP_X0 + 98, SHIP_X0 + 162, 0
+    wall_x("hydroponics", H0, dk, door_zs=(0,), state=st("station_glass"))
+    wall_x("hydroponics", H1, dk, door_zs=(0,), state=st("station_glass"))
+    crops = [st("minecraft:wheat", age=7), st("minecraft:carrots", age=7), st("minecraft:potatoes", age=7),
+             st("minecraft:beetroots", age=3)]
+    for x in range(H0 + 2, H1 - 1):
+        w = inside(x, walk(dk))
+        for z in range(-w + 1, w):
+            if abs(z) <= 2:
+                continue
+            bed = (abs(z) - 3) % 5
+            if bed in (0, 1, 2):
+                put("hydroponics", x, walk(dk) - 1, SHIP_Z + z, st("living_soil"))
+                put("hydroponics", x, walk(dk), SHIP_Z + z, crops[(x // 4 + abs(z)) % 4])
+            elif bed == 3 and x % 2 == 0:
+                put("hydroponics", x, walk(dk), SHIP_Z + z, st("minecraft:composter", level=0) if x % 16 == 0 else
+                    st("minecraft:oak_fence", north="false", south="false", east="false", west="false",
+                       waterlogged="false"))
+            if x % 4 == 0 and bed == 1:
+                put("hydroponics", x, walk(dk) + 6, SHIP_Z + z, st("ceiling_light"))
+        put("hydroponics", x, walk(dk) - 1, SHIP_Z, st("minecraft:light_blue_stained_glass"))
+    for x in range(H0 + 4, H1 - 3, 12):
+        for z in (-2, 2):
+            put("hydroponics", x, walk(dk), SHIP_Z + z, st("specimen_tank"))
+            put("hydroponics", x + 1, walk(dk), SHIP_Z + z, st("minecraft:barrel", facing="up", open="false"))
+
+    # Laboratory (upper deck): a corridor down the middle with glass-walled labs both sides: biology (benches, fume
+    # hoods, specimen tanks, a cryo pod), materials (racks, the analyser), the observatory with the telescope console,
+    # and the chief scientist's office.
+    B0, B1, dk = SHIP_X0 + 98, SHIP_X0 + 152, 10
+    wall_x("laboratory", B0, dk)
+    wall_x("laboratory", B1, dk)
+    for z in (-3, 3):
+        wall_z("laboratory", z, B0, B1, dk, door_xs=(B0 + 7, B0 + 20, B0 + 34, B0 + 47), state=st("station_glass"))
+    for x in (B0 + 14, B0 + 27, B0 + 40):
+        for z in range(4, 20):
+            for y in range(walk(dk), walk(dk) + 5):
+                if z <= inside(x, y):
+                    put("laboratory", x, y, SHIP_Z + z, st("ship_plating"))
+                    put("laboratory", x, y, SHIP_Z - z, st("ship_plating"))
+    for x in range(B0 + 2, B0 + 13, 2):
+        put("laboratory", x, walk(dk), SHIP_Z - 12, st("fume_hood", facing="south"))
+        put("laboratory", x, walk(dk), SHIP_Z - 8, st("lab_bench", facing="south"))
+        put("laboratory", x + 1, walk(dk), SHIP_Z - 8, st("lab_bench", facing="south"))
+        put("laboratory", x, walk(dk), SHIP_Z + 12, st("specimen_tank"))
+        put("laboratory", x, walk(dk), SHIP_Z + 8, st("lab_bench", facing="north"))
+    put("laboratory", B0 + 3, walk(dk), SHIP_Z + 5, st("cryo_pod", facing="south"))
+    for x in range(B0 + 16, B0 + 26, 2):
+        put("laboratory", x, walk(dk), SHIP_Z - 11, st("server_rack", facing="south"))
+        put("laboratory", x, walk(dk) + 1, SHIP_Z - 11, st("server_rack", facing="south"))
+        put("laboratory", x, walk(dk), SHIP_Z + 11, st("lab_bench", facing="north"))
+    put("laboratory", B0 + 20, walk(dk), SHIP_Z - 6, st("diagnostic_console", facing="south"))
+    put("laboratory", B0 + 20, walk(dk), SHIP_Z + 6, st("data_terminal", facing="north", log=4))
+    for x in range(B0 + 29, B0 + 39, 3):
+        put("laboratory", x, walk(dk), SHIP_Z - 12, st("navigation_console", facing="south"))
+        put("laboratory", x, walk(dk), SHIP_Z - 11, st("office_chair", facing="north"))
+    put("laboratory", B0 + 33, walk(dk) + 3, SHIP_Z + 12, st("antenna_dish"))
+    for x in range(B0 + 42, B0 + 52, 3):
+        put("laboratory", x, walk(dk), SHIP_Z - 12, st("filing_cabinet", facing="south"))
+        put("laboratory", x, walk(dk), SHIP_Z + 12, st("minecraft:bookshelf"))
+    put("laboratory", B0 + 46, walk(dk), SHIP_Z - 7, st("office_desk", facing="south"))
+    put("laboratory", B0 + 46, walk(dk), SHIP_Z - 6, st("office_chair", facing="north"))
+    lamp_row("laboratory", B0 + 3, B1 - 3, dk, 5, (-9, 0, 9))
+
+    # Quarters (upper deck forward): cabins either side of the corridor, each with a bunk, locker, desk and rug.
+    # The mess and galley, the infirmary and a lounge on the middle deck under them.
+    Q0, Q1, dk = SHIP_X0 + 168, SHIP_X0 + 242, 10
+    wall_x("quarters", Q0, dk)
+    wall_x("quarters", Q1, dk)
+    for z in (-3, 3):
+        wall_z("quarters", z, Q0, Q1, dk, door_xs=list(range(Q0 + 3, Q1, 6)))
+    for x in range(Q0 + 6, Q1, 6):
+        for z in range(4, 20):
+            for y in range(walk(dk), walk(dk) + 5):
+                if z <= inside(x, y):
+                    put("quarters", x, y, SHIP_Z + z, st("ship_plating"))
+                    put("quarters", x, y, SHIP_Z - z, st("ship_plating"))
+    for x in range(Q0 + 1, Q1 - 4, 6):
+        for side in (-1, 1):
+            f = "south" if side < 0 else "north"
+            put("quarters", x + 1, walk(dk), SHIP_Z + side * 12, st("bunk_bed", facing=f))
+            put("quarters", x + 3, walk(dk), SHIP_Z + side * 12, st("locker", facing=f))
+            put("quarters", x + 4, walk(dk), SHIP_Z + side * 8, st("office_desk", facing="west"))
+            put("quarters", x + 3, walk(dk), SHIP_Z + side * 8, st("office_chair", facing="east"))
+            for dx in range(1, 5):
+                for dz in (5, 6, 7):
+                    put("quarters", x + dx, walk(dk), SHIP_Z + side * (dz + 4),
+                        st("minecraft:" + ("blue" if (x // 6) % 2 else "brown") + "_carpet"))
+            put("quarters", x + 2, walk(dk) + 4, SHIP_Z + side * 9, st("station_light"))
+    dk = 0
+    M0, M1 = SHIP_X0 + 168, SHIP_X0 + 200
+    wall_x("quarters", M1, dk)
+    for z in (-9, -4, 4, 9):
+        for x in range(M0 + 3, M1 - 6):
+            put("quarters", x, walk(dk), SHIP_Z + z, st("smooth_stone_slab", type="top"))
+            put("quarters", x, walk(dk), SHIP_Z + z - 1, st("minecraft:spruce_stairs", facing="south", half="bottom",
+                                                             shape="straight", waterlogged="false"))
+            put("quarters", x, walk(dk), SHIP_Z + z + 1, st("minecraft:spruce_stairs", facing="north", half="bottom",
+                                                             shape="straight", waterlogged="false"))
+    for z in range(-14, 15, 2):
+        put("quarters", M1 - 2, walk(dk), SHIP_Z + z, st("minecraft:smoker", facing="west", lit="false") if z % 4 == 0
+            else st("minecraft:cauldron"))
+    put("quarters", M1 - 2, walk(dk), SHIP_Z + 16, st("vending_machine", facing="west"))
+    lamp_row("quarters", M0 + 3, M1 - 3, dk, 5, (-7, 0, 7))
+    I0 = M1 + 1
+    for x in range(I0 + 2, I0 + 18, 3):
+        put("quarters", x, walk(dk), SHIP_Z - 14, st("hospital_bed", facing="south"))
+        put("quarters", x + 1, walk(dk), SHIP_Z - 14, st("iv_stand"))
+    put("quarters", I0 + 2, walk(dk), SHIP_Z - 6, st("medical_cabinet", facing="east"))
+    for x in range(I0 + 2, I0 + 18, 4):
+        put("quarters", x, walk(dk), SHIP_Z + 12, st("park_bench", facing="north"))
+        put("quarters", x + 2, walk(dk), SHIP_Z + 14, st("minecraft:potted_azalea_bush"))
+    lamp_row("quarters", I0 + 3, I0 + 18, dk, 5, (-8, 8))
+
+    # Hangar: the bay under the belly: deck, landing cradles, refuelling arms, the crane rail and hooks, the control
+    # booth, suit lockers, fuel drums.
     for x in range(SHIP_X0 + 170, SHIP_X0 + 240):
         for z in range(SHIP_Z - 12, SHIP_Z + 13):
             put("hangar", x, SHIP_Y - 12, z, st("hazard_concrete") if z in (SHIP_Z - 12, SHIP_Z + 12) else st("metal_grating"))
         if x % 10 == 0:
             put("hangar", x, SHIP_Y - 3, SHIP_Z, st("crane_hook", facing="north"))
+        put("hangar", x, SHIP_Y - 2, SHIP_Z - 1, st("minecraft:iron_block"))
+        put("hangar", x, SHIP_Y - 2, SHIP_Z + 1, st("minecraft:iron_block"))
+    for cxh in (SHIP_X0 + 186, SHIP_X0 + 222):
+        for x in range(cxh - 5, cxh + 6):
+            for z in range(-6, 7):
+                if abs(x - cxh) in (5,) or abs(z) == 6:
+                    put("hangar", x, SHIP_Y - 11, SHIP_Z + z, st("hazard_concrete"))
+        for z in (-8, 8):
+            for y in range(SHIP_Y - 11, SHIP_Y - 6):
+                put("hangar", cxh, y, SHIP_Z + z, st("pipe", up="true", down="true", north="false", south="false",
+                                                      east="false", west="false"))
+    for x in range(SHIP_X0 + 172, SHIP_X0 + 180):
+        for z in range(9, 12):
+            for y in range(SHIP_Y - 11, SHIP_Y - 7):
+                edge = x in (SHIP_X0 + 172, SHIP_X0 + 179) or z in (9, 11) or y == SHIP_Y - 8
+                put("hangar", x, y, SHIP_Z + z, st("station_glass") if edge else "minecraft:air")
+    put("hangar", SHIP_X0 + 175, SHIP_Y - 11, SHIP_Z + 10, st("control_cabinet", facing="north"))
+    put("hangar", SHIP_X0 + 176, SHIP_Y - 11, SHIP_Z + 10, st("radio_set", facing="north"))
+    for x in range(SHIP_X0 + 228, SHIP_X0 + 238, 2):
+        put("hangar", x, SHIP_Y - 11, SHIP_Z - 11, st("locker", facing="south"))
+        put("hangar", x + 1, SHIP_Y - 11, SHIP_Z - 11, st("toxic_barrel"))
     put("hangar", SHIP_X0 + 200, SHIP_Y - 10, SHIP_Z + 4, st("hangar_lift", facing="north"))
-    # Bridge: the nose's command deck with consoles and the forward windows.
+    put("hangar", SHIP_X0 + 196, SHIP_Y - 11, SHIP_Z + 10, st("repair_station", facing="north"))
+
+    # Bridge: a tiered command deck in the nose: the captain's chair and helm, two arcs of stations (navigation,
+    # flight, comms, systems), the holo table, the window band.
     bx = SHIP_X1 - 50
     for x in range(bx, bx + 30):
         for z in range(SHIP_Z - 8, SHIP_Z + 9):
             put("bridge", x, SHIP_Y + 3, z, st("office_carpet"))
-    for z in range(SHIP_Z - 6, SHIP_Z + 7, 2):
-        put("bridge", bx + 22, SHIP_Y + 4, z, st("data_terminal", facing="east", log=0))
+    for x in range(bx + 14, bx + 26):
+        for z in range(SHIP_Z - 7, SHIP_Z + 8):
+            if x >= bx + 20:
+                put("bridge", x, SHIP_Y + 3, z, st("ship_plating"))
+                put("bridge", x, SHIP_Y + 4, z, st("office_carpet"))
+    for k, z in enumerate(range(SHIP_Z - 6, SHIP_Z + 7, 2)):
+        put("bridge", bx + 24, SHIP_Y + 5, z, st("flight_panel", facing="east") if k % 2 else
+            st("navigation_console", facing="east"))
+        put("bridge", bx + 23, SHIP_Y + 5, z, st("astronaut_seat", facing="east"))
+    for z in (-7, 7):
+        for x in range(bx + 4, bx + 14, 2):
+            put("bridge", x, SHIP_Y + 4, SHIP_Z + z, st("data_terminal", facing="south" if z < 0 else "north", log=0)
+                if x == bx + 8 else st("radio_set", facing="south" if z < 0 else "north") if x == bx + 4
+                else st("diagnostic_console", facing="south" if z < 0 else "north"))
+            put("bridge", x, SHIP_Y + 4, SHIP_Z + z + (1 if z < 0 else -1), st("office_chair",
+                                                                             facing="north" if z < 0 else "south"))
     put("bridge", bx + 18, SHIP_Y + 4, SHIP_Z, st("mothership_helm", facing="east"))
+    put("bridge", bx + 16, SHIP_Y + 4, SHIP_Z, st("astronaut_seat", facing="east"))
+    for (dx, dz) in ((0, 0), (1, 0), (0, 1), (1, 1)):
+        put("bridge", bx + 9 + dx, SHIP_Y + 4, SHIP_Z - 1 + dz, st("minecraft:light_blue_stained_glass"))
+    put("bridge", bx + 9, SHIP_Y + 5, SHIP_Z, st("minecraft:end_rod", facing="up"))
+    for x in range(bx + 2, bx + 28, 5):
+        for z in (-5, 0, 5):
+            put("bridge", x, SHIP_Y + 10, SHIP_Z + z, st("station_light"))
     for x in range(SHIP_X1 - 22, SHIP_X1 + 1):
         r = ship_radius((x - SHIP_X0) / length)
         for a in range(-60, 61, 6):

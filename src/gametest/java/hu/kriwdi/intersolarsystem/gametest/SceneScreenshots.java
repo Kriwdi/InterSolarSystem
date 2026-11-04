@@ -152,7 +152,7 @@ public class SceneScreenshots implements FabricClientGameTest {
 			});
 			context.waitTicks(60);
 			context.takeScreenshot("06j_mothership_hangar");
-			game.getServer().runCommand("execute in intersolarsystem:mothership run tp @a 120 104 -5 90 10");
+			game.getServer().runCommand("execute in intersolarsystem:mothership run tp @a 124 106 -4 -90 12");
 			context.waitTicks(60);
 			context.takeScreenshot("06k_mothership_bridge");
 			game.getServer().runCommand("execute in intersolarsystem:mothership run tp @a -80 130 90 225 25");
