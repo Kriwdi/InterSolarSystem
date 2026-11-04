@@ -52,7 +52,7 @@ public final class SiteTemplates {
 
 	/** Places {@code name} (e.g. "moon/luna9") with its builder origin at {@code origin}. False if it is missing. */
 	public static boolean place(ServerLevel level, String name, BlockPos origin) {
-		Optional<StructureTemplate> template = level.getStructureManager().get(ModIds.id(name));
+		Optional<StructureTemplate> template = level.getServer().getStructureTemplateManager().get(ModIds.id(name));
 		if (template.isEmpty()) {
 			return false;
 		}
@@ -71,6 +71,6 @@ public final class SiteTemplates {
 
 	/** Whether the template exists (smoke test). */
 	public static boolean exists(ServerLevel level, String name) {
-		return level.getStructureManager().get(ModIds.id(name)).isPresent();
+		return level.getServer().getStructureTemplateManager().get(ModIds.id(name)).isPresent();
 	}
 }

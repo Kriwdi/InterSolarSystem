@@ -220,17 +220,17 @@ public final class SmokeTest {
 		}
 		LOGGER.info("[SMOKETEST] mothership blueprints: {}", blueprints);
 		StringBuilder sites = new StringBuilder();
-		for (var site : hu.kriwdi.intersolarsystem.space.SpaceSites.ORBIT) {
-			if (!hu.kriwdi.intersolarsystem.space.SiteTemplates.exists(earth, site.template())) {
-				LOGGER.error("[SMOKETEST-FAIL] space site template {} is missing", site.template());
+		for (var orbitSite : hu.kriwdi.intersolarsystem.space.SpaceSites.ORBIT) {
+			if (!hu.kriwdi.intersolarsystem.space.SiteTemplates.exists(earth, orbitSite.template())) {
+				LOGGER.error("[SMOKETEST-FAIL] space site template {} is missing", orbitSite.template());
 			}
-			sites.append(site.template()).append(' ');
+			sites.append(orbitSite.template()).append(' ');
 		}
-		for (var site : hu.kriwdi.intersolarsystem.space.SpaceSites.MOON) {
-			if (!hu.kriwdi.intersolarsystem.space.SiteTemplates.exists(earth, site.template())) {
-				LOGGER.error("[SMOKETEST-FAIL] space site template {} is missing", site.template());
+		for (var moonSite : hu.kriwdi.intersolarsystem.space.SpaceSites.MOON) {
+			if (!hu.kriwdi.intersolarsystem.space.SiteTemplates.exists(earth, moonSite.template())) {
+				LOGGER.error("[SMOKETEST-FAIL] space site template {} is missing", moonSite.template());
 			}
-			sites.append(site.template()).append(' ');
+			sites.append(moonSite.template()).append(' ');
 		}
 		LOGGER.info("[SMOKETEST] space site templates: {}", sites);
 		long missing = structures.values().stream().filter("MISSING"::equals).count();

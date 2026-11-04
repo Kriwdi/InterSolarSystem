@@ -206,7 +206,8 @@ public final class OrbitalEva {
 					player.teleportTo(back.x, back.y - 0.9, back.z);
 				}
 				player.setDeltaMovement(v);
-				player.hurtMarked = true;
+				player.needsSync = true;
+				player.connection.send(new net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket(player));
 			}
 			if (now % 3 == 0) {
 				int steps = Math.max(2, (int) (d / 1.2));
