@@ -1,0 +1,8 @@
+{
+  "type": "intersolarsystem:mars_surface",
+  "top": "intersolarsystem:mars_dust",
+  "alt": "intersolarsystem:mars_dust",
+  "alt_chance": 0.0,
+  "under": "intersolarsystem:mars_dust",
+  "depth": 6
+}

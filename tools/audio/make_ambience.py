@@ -191,6 +191,10 @@ BIOMES = {
                            [lambda r: creak(r, 1.4, 160), lambda r: creak(r, 0.9, 210)], 0.003),
     "oil_field": (lambda r: 0.6 * thump_loop(r, L) + 0.4 * wind(r, L, 80, 600, 0.5),
                   [lambda r: gurgle(r), lambda r: clatter(r, 0.8) * 0.6], 0.004),
+    # Mars: the thin air carries little; a faint high hiss of dust and the far whistle of a dust devil.
+    "mars": (lambda r: 0.35 * wind(r, L, 900, 5000, 0.5) + 0.25 * wind(r, L, 120, 500, 0.6, whistle=330),
+             [lambda r: wind(r, n(4), 300, 4000, 1.0) * np.hanning(n(4)), lambda r: crack(r, 1500, 0.08) * 0.4],
+             0.003),
 }
 
 

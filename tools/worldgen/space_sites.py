@@ -13,6 +13,7 @@ from pathlib import Path
 
 from make_structures import AIR, LGREY, WHITE, S, Build
 from overhaul import bars, cylinder, disc, pane
+from big_structures import skeleton
 
 HULL, FOIL = S("station_hull"), S("station_foil")
 
@@ -638,11 +639,325 @@ def ark1_colony():
     return b
 
 
+# ---------------------------------------------------------------- mars
+def mpad(b, r, fill=3, clear=10):
+    """A patch of Martian ground at y = 0 with fill below and air above."""
+    for x in range(-r - 1, r + 2):
+        for z in range(-r - 1, r + 2):
+            if math.hypot(x, z) <= r + 0.5:
+                b.set(x, 0, z, S("mars_regolith") if b.rnd.random() < 0.7 else S("mars_dust"))
+                for y in range(1, fill + 1):
+                    b.set(x, -y, z, S("mars_rock"))
+                for y in range(1, clear + 1):
+                    b.set(x, y, z, AIR)
+
+
+def mtracks(b, x0, z0, x1, z1, width=1):
+    steps = max(abs(x1 - x0), abs(z1 - z0), 1)
+    for i in range(steps + 1):
+        x = round(x0 + (x1 - x0) * i / steps)
+        z = round(z0 + (z1 - z0) * i / steps)
+        for w in range(-width, width + 1, 2 * width if width else 1):
+            b.set(x + (w if abs(x1 - x0) < abs(z1 - z0) else 0), 0, z + (w if abs(x1 - x0) >= abs(z1 - z0) else 0),
+                  S("mars_dust"))
+
+
+def rover(b, cx, cz, length=3, width=2, mast=3, rtg=True, wings=False, colour="white_concrete", buried=0):
+    """A six-wheeled rover along x: wheels, the warm body box, the deck, the camera mast, the RTG at the back."""
+    for i, dx in enumerate((0, length // 2, length - 1)):
+        for dz in (-1, width):
+            b.set(cx + dx, 1 - (1 if buried and i < 2 else 0), cz + dz, S("rover_wheel", facing="east"))
+    for dx in range(length):
+        for dz in range(width):
+            b.set(cx + dx, 1, cz + dz, S(colour) if not buried else S("mars_dust"))
+            b.set(cx + dx, 2, cz + dz, S("smooth_stone_slab", type="bottom", waterlogged="false"))
+    for y in range(3, 3 + mast):
+        b.set(cx + length - 1, y, cz, bars())
+    b.set(cx + length - 1, 3 + mast, cz, S("observer", facing="east", powered="false"))
+    b.set(cx + length // 2, 3, cz + width - 1, S("antenna_dish"))
+    if rtg:
+        b.set(cx - 1, 2, cz, S("station_radiator"))
+    if wings:
+        for dz in range(-3, width + 3):
+            if dz < 0 or dz >= width:
+                for dx in range(length):
+                    b.set(cx + dx, 2, cz + dz, S("solar_panel"))
+
+
+def viking(n):
+    b = Build(f"mars/viking{n}", 4500 + n)
+    mpad(b, 7)
+    for (dx, dz) in ((0, -2), (-2, 2), (2, 2)):
+        b.set(dx, 1, dz, S("iron_trapdoor", facing="north", half="bottom", open="false", powered="false",
+                            waterlogged="false"))
+        b.set(dx, 2, dz, bars())
+    for x in range(-1, 2):
+        for z in range(-1, 2):
+            b.set(x, 3, z, S("light_gray_concrete") if (x + z) % 2 else S("white_concrete"))
+    b.set(0, 4, 0, bars())
+    b.set(0, 5, 0, S("antenna_dish"))
+    b.set(-2, 3, 0, S("station_radiator"))
+    b.set(2, 3, 0, S("station_radiator"))
+    b.set(1, 4, -1, S("observer", facing="north", powered="false"))
+    for k in range(1, 4):
+        b.set(1 + k, 3 if k < 3 else 2, -1, bars(east=True, west=True))
+    for x in range(3, 6):
+        b.set(x, 0, -2, S("mars_rock") if x % 2 else S("perchlorate_crust"))
+    sign(b, 4, 1, 4, ["VIKING %d" % n, "First pictures from" if n == 1 else "Frost on the plain",
+                      "the surface of Mars" if n == 1 else "of Utopia", "1976"])
+    return b
+
+
+def pathfinder():
+    b = Build("mars/pathfinder", 4510)
+    mpad(b, 9)
+    for (dx, dz, f) in ((0, -2, "north"), (-2, 1, "west"), (2, 1, "east")):
+        for k in (1, 2):
+            b.set(dx * k // 1 if dx else 0, 1, dz * k // 1 if dz else 0, S("iron_trapdoor", facing=f, half="bottom",
+                                                                         open="false", powered="false",
+                                                                         waterlogged="false"))
+    b.set(0, 1, 0, S("gold_block"))
+    b.set(0, 2, 0, bars())
+    b.set(0, 3, 0, S("observer", facing="south", powered="false"))
+    for (dx, dz) in ((-3, -3), (3, -3), (0, 4)):
+        b.set(dx, 1, dz, S("white_wool"))
+    # Sojourner, a microwave-oven-sized rover, nose against a rock ("Yogi").
+    b.set(5, 1, 3, S("rover_wheel", facing="east"))
+    b.set(6, 1, 3, S("solar_panel"))
+    b.set(7, 1, 3, S("mars_rock"))
+    b.set(7, 2, 3, S("mars_rock"))
+    mtracks(b, 2, 2, 5, 3, 0)
+    sign(b, -4, 1, 5, ["MARS PATHFINDER", "and Sojourner", "Ares Vallis", "1997"])
+    return b
+
+
+def mer(name, stuck):
+    b = Build(f"mars/{name}", 4520 + (1 if stuck else 2))
+    mpad(b, 9)
+    rover(b, -1, -1, length=3, width=2, mast=2, rtg=False, wings=True, buried=1 if stuck else 0)
+    if stuck:
+        for x in range(-3, 4):
+            for z in range(-4, 5):
+                if math.hypot(x, z) < 4 and b.rnd.random() < 0.6:
+                    b.set(x, 1, z, S("mars_dust")) if b.get(x, 1, z) in (None, AIR) else None
+        mtracks(b, -8, 0, -2, 0, 1)
+        sign(b, 5, 1, 4, ["SPIRIT", "Stuck in soft sand", "at Troy, 2009", "6 years, 7.7 km"])
+    else:
+        for (x, z) in ((0, 0), (1, 0), (0, 1), (1, 1)):
+            b.set(x, 3, z, S("mars_dust")) if b.get(x, 3, z) in (None, AIR) else None
+        mtracks(b, 8, 0, 2, 0, 1)
+        sign(b, 5, 1, -4, ["OPPORTUNITY", "Silenced by a dust", "storm, 2018", "15 years, 45 km"])
+    return b
+
+
+def curiosity():
+    b = Build("mars/curiosity", 4530)
+    mpad(b, 10)
+    for x in range(-10, 11):
+        for z in range(-10, 11):
+            if x > 3 and math.hypot(x, z) <= 10.5:
+                for y in range(1, 1 + (x - 3) // 2):
+                    b.set(x, y, z, S("mars_sandstone"))
+    rover(b, -3, -1, length=5, width=3, mast=3, rtg=True)
+    mtracks(b, -10, 0, -4, 0, 1)
+    b.set(-1, 0, -3, S("mars_rock"))
+    b.set(-1, 0, -4, S("mars_dust"))
+    sign(b, -6, 1, 5, ["CURIOSITY", "Climbing Mount Sharp,", "Gale crater", "since 2012"])
+    return b
+
+
+def perseverance():
+    b = Build("mars/perseverance", 4531)
+    mpad(b, 12)
+    rover(b, -3, -1, length=5, width=3, mast=3, rtg=True)
+    mtracks(b, -12, 2, -4, 0, 1)
+    # Sample tubes left in a row on the delta, and Ingenuity a little way off.
+    for k in range(0, 5):
+        b.set(4 + k * 2, 1, 5, S("end_rod", facing="east"))
+    hx, hz = 6, -6
+    b.set(hx, 1, hz, S("iron_bars", north="false", south="false", east="false", west="false", waterlogged="false"))
+    b.set(hx, 2, hz, S("gray_concrete"))
+    b.set(hx, 3, hz, bars())
+    for (dx, dz) in ((1, 0), (-1, 0), (2, 0), (-2, 0)):
+        b.set(hx + dx, 4, hz + dz, S("iron_trapdoor", facing="north", half="bottom", open="false", powered="false",
+                                     waterlogged="false"))
+    b.set(hx, 4, hz, S("solar_panel"))
+    sign(b, -6, 1, 6, ["PERSEVERANCE", "and Ingenuity, the", "first aircraft on", "another world, 2021"])
+    return b
+
+
+def zhurong():
+    b = Build("mars/zhurong", 4532)
+    mpad(b, 9)
+    for x in range(-2, 3):
+        for z in range(-2, 3):
+            b.set(x, 2, z, S("gold_block") if abs(x) == 2 or abs(z) == 2 else S("light_gray_concrete"))
+    legs(b, 0, 0, 2, 2, S("iron_bars", north="false", south="false", east="false", west="false", waterlogged="false"))
+    for k in range(0, 3):
+        b.set(3 + k, 2 - k // 2, 0, S("iron_trapdoor", facing="east", half="bottom", open="false", powered="false",
+                                      waterlogged="false"))
+    rover(b, 6, -1, length=3, width=2, mast=2, rtg=False)
+    for (dx, dz) in ((-1, -2), (3, -2), (-1, 3), (3, 3)):
+        b.set(6 + dx, 3, -1 + dz, S("solar_panel"))
+    sign(b, -4, 1, 4, ["ZHURONG", "Utopia Planitia", "2021", ""])
+    return b
+
+
+def insight():
+    b = Build("mars/insight", 4533)
+    mpad(b, 9)
+    for x in range(-1, 2):
+        for z in range(-1, 2):
+            b.set(x, 2, z, S("light_gray_concrete"))
+    legs(b, 0, 0, 2, 1, S("iron_bars", north="false", south="false", east="false", west="false", waterlogged="false"))
+    for (cx, cz) in ((-4, 0), (4, 0)):
+        disc(b, cx, cz, 2, 2.2, S("solar_panel"))
+    b.set(0, 1, 4, S("light_gray_concrete"))
+    b.set(0, 2, 4, S("smooth_stone_slab", type="bottom", waterlogged="false"))
+    b.set(2, 1, 3, S("lightning_rod", facing="up", powered="false", waterlogged="false"))
+    sign(b, -5, 1, 5, ["INSIGHT", "Listened to", "marsquakes", "2018-2022"])
+    return b
+
+
+def ark2_colony():
+    """ARK-2 at Jezero: the second Ark, set down on the old river delta. Its hull leans on a broken leg; the colony
+    domes stand dark, the greenhouse dead. North of the ship the dig: a pit with scaffolding and a crane, cut into
+    the delta sediments, and at its bottom something nobody built: a smooth black wall with a seam of light. The
+    colony rover lies on its side at the pit's edge. Its log has the rest."""
+    b = Build("mars/ark2_colony", 4600)
+    R = 56
+    for x in range(-R, R + 1):
+        for z in range(-R, R + 1):
+            if math.hypot(x, z) <= R:
+                b.set(x, 0, z, S("mars_regolith") if b.rnd.random() < 0.6 else S("mars_dust"))
+                for y in range(1, 4):
+                    b.set(x, -y, z, S("mars_sandstone") if y < 3 else S("mars_rock"))
+                for y in range(1, 14):
+                    b.set(x, y, z, AIR)
+    # The Ark, leaning: its keel along z, one side resting on the ground.
+    for z in range(-26, 18):
+        r = 6.0 if -20 < z < 12 else max(2.0, 6.0 - (abs(z) - (20 if z < 0 else 12)) * 0.75)
+        lean = (z + 26) // 12
+        for dx in range(-7, 8):
+            for dy in range(-7, 8):
+                d = math.hypot(dx, dy)
+                if d <= r:
+                    st = AIR
+                    if d > r - 1:
+                        st = HULL if (z + dx) % 7 else S("sooty_concrete")
+                        if b.rnd.random() < 0.05:
+                            st = AIR
+                    b.set(dx + lean, 9 + dy - lean, z, st)
+    for z in range(-18, 10):
+        for dx in range(-3, 4):
+            b.set(dx + (z + 26) // 12, 4 - (z + 26) // 12, z, S("metal_grating"))
+    b.set(1, 5, -16, S("mothership_helm", facing="north"))
+    b.set(-1, 5, -15, S("data_terminal", facing="north", log=16))
+    b.chest(2, 4, 4, "space_debris", "west")
+    # Habitat modules round the ship, joined to it by walkways; the greenhouse dome.
+    for (cx, cz, kind) in ((-30, -14, "dorm"), (-28, 18, "lab"), (30, 20, "greenhouse"), (32, -16, "workshop")):
+        if kind == "greenhouse":
+            for x in range(-8, 9):
+                for z in range(-8, 9):
+                    for y in range(1, 9):
+                        d = math.sqrt(x * x + (y * 1.1) ** 2 + z * z)
+                        if 7.4 <= d <= 8.2:
+                            b.set(cx + x, y, cz + z, S("station_glass") if b.rnd.random() > 0.12 else AIR)
+                    if math.hypot(x, z) < 7 and x % 3:
+                        b.set(cx + x, 0, cz + z, S("living_soil") if b.rnd.random() < 0.2 else S("dirt"))
+                        if b.rnd.random() < 0.4:
+                            b.set(cx + x, 1, cz + z, S("dead_bush"))
+            b.chest(cx, 1, cz, "seed_bank", "north")
+            continue
+        for x in range(cx - 6, cx + 7):
+            for z in range(cz - 4, cz + 5):
+                for y in range(0, 6):
+                    edge = x in (cx - 6, cx + 6) or z in (cz - 4, cz + 4) or y in (0, 5)
+                    b.set(x, y, z, (HULL if y else S("polished_andesite")) if edge else AIR)
+        for x in range(cx - 5, cx + 6, 3):
+            b.set(x, 3, cz - 4, S("station_window"))
+            b.set(x, 3, cz + 4, S("station_window"))
+        b.set(cx, 4, cz, S("station_light"))
+        door_side = -6 if cx > 0 else 6
+        b.set(cx + door_side, 1, cz, AIR)
+        b.set(cx + door_side, 2, cz, AIR)
+        if kind == "dorm":
+            for x in range(cx - 5, cx + 6, 2):
+                b.set(x, 1, cz - 3, S("bunk_bed", facing="south"))
+            b.chest(cx + 5, 1, cz + 3, "colony", "west")
+            b.set(cx - 2, 1, cz + 2, S("skeleton_suited", facing="east"))
+        elif kind == "lab":
+            for x in range(cx - 5, cx + 6, 2):
+                b.set(x, 1, cz + 3, S("lab_bench", facing="north"))
+                b.set(x, 1, cz - 3, S("specimen_tank"))
+            b.set(cx, 1, cz, S("data_terminal", facing="south", log=17))
+            b.chest(cx + 5, 1, cz, "lab", "west")
+        else:
+            b.set(cx - 5, 1, cz, S("repair_station", facing="east"))
+            b.set(cx + 5, 1, cz - 2, S("diesel_generator", facing="west"))
+            b.set(cx + 5, 1, cz + 2, S("battery_bank", facing="west"))
+            b.chest(cx, 1, cz + 3, "industrial", "north")
+    # The dig: a stepped pit north of the ship, scaffolding, a crane, and the black wall at the bottom.
+    px, pz = 0, -42
+    for x in range(-12, 13):
+        for z in range(-10, 11):
+            d = max(abs(x) / 12.0, abs(z) / 10.0)
+            if d <= 1:
+                depth = int(14 * (1 - d) + 2)
+                for y in range(-depth, 1):
+                    b.set(px + x, y, pz + z, AIR)
+                b.set(px + x, -depth - 1, pz + z, S("mars_sandstone"))
+                if d > 0.85:
+                    for y in range(-depth, 1):
+                        b.set(px + x, y, pz + z, S("mars_sandstone") if (y % 3) else S("mars_rock"))
+    for y in range(-15, 2):
+        for (x, z) in ((-6, -2), (-6, 2), (-2, -2), (-2, 2)):
+            b.set(px + x, y, pz + z, S("scaffolding", bottom="false", distance=0, waterlogged="false"))
+    for x in range(-6, 13):
+        b.set(px + x, 12, pz, S("iron_block") if x % 4 == 0 else S("truss"))
+    for y in range(1, 12):
+        b.set(px + 12, y, pz, S("truss"))
+    for y in range(-12, 12):
+        b.set(px + 2, y, pz, S("iron_chain", axis="y", waterlogged="false"))
+    # The wall: smooth black, curved, with a seam that glows.
+    for x in range(-5, 6):
+        for y in range(-16, -9):
+            b.set(px + x, y, pz - 9 + int((x * x) / 12), S("polished_blackstone") if x != 0 else
+                  S("crying_obsidian"))
+    for y in range(-16, -9):
+        b.set(px, y, pz - 8, S("end_rod", facing="up"))
+    # The rover on its side at the edge of the pit.
+    rx, rz = 14, -32
+    for dx in range(0, 5):
+        for dy in range(0, 3):
+            b.set(rx + dx, 1 + dy, rz, S("white_concrete") if dy < 2 else S("orange_concrete"))
+        b.set(rx + dx, 1, rz - 1, S("rover_wheel", facing="east") if dx % 2 == 0 else AIR)
+        b.set(rx + dx, 3, rz - 1, S("rover_wheel", facing="east") if dx % 2 == 0 else AIR)
+    b.chest(rx + 2, 1, rz + 1, "space_debris", "north", "barrel")
+    skeleton(b, rx - 2, 1, rz + 2, "east", "skeleton_suited")
+    # Solar arrays, comms mast, landing pad.
+    for row in range(0, 3):
+        for x in range(-50, -32, 2):
+            z = 30 + row * 3
+            b.set(x, 1, z, S("truss"))
+            b.set(x, 2, z, S("solar_panel") if b.rnd.random() > 0.15 else S("mars_dust"))
+            b.set(x + 1, 2, z, S("solar_panel") if b.rnd.random() > 0.15 else AIR)
+    for y in range(1, 22):
+        b.set(40, y, 36, bars() if y % 5 else S("iron_block"))
+    b.set(40, 22, 36, S("antenna_dish"))
+    disc(b, 0, 40, 0, 6, S("hazard_concrete"))
+    disc(b, 0, 40, 0, 4.5, S("gray_concrete"))
+    sign(b, 8, 1, 30, ["ARK-2 COLONY", "Jezero crater", "Last signal:", "day 1190"])
+    return b
+
+
 def main():
     builds = [halcyon(), dead_satellite(), upper_stage(), space_telescope(), capsule_adrift()] + \
         [debris_cloud(i) for i in range(1, 6)] + \
         [luna9(), surveyor3(), lunokhod(1), lunokhod(2), change(3), change(4), chandrayaan3(), slim(), luna24(),
-         ark1_colony()]
+         ark1_colony()] + \
+        [viking(1), viking(2), pathfinder(), mer("spirit", True), mer("opportunity", False), curiosity(),
+         perseverance(), zhurong(), insight(), ark2_colony()]
     index = {}
     for b in builds:
         size = b.save(b.name)

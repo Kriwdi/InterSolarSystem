@@ -121,8 +121,22 @@ public final class SpaceSites extends SavedData {
 		state.setDirty();
 	}
 
+	public static void ensureMars(ServerLevel mars) {
+		SpaceSites state = get(mars.getServer());
+		if (state.placed.contains("mars")) {
+			return;
+		}
+		for (MarsSites.Site s : MarsSites.SITES) {
+			BlockPos at = MarsSites.ground(mars, s);
+			SiteTemplates.place(mars, s.template(), at);
+			PLACED_AT.put(s.template(), at);
+		}
+		state.placed.add("mars");
+		state.setDirty();
+	}
+
 	/** The regolith layer a site stands on: the median surface over a few samples round the centre. */
-	static BlockPos ground(ServerLevel moon, int x, int z, int spread) {
+	public static BlockPos ground(ServerLevel moon, int x, int z, int spread) {
 		int[] ys = new int[9];
 		int i = 0;
 		for (int dx = -1; dx <= 1; dx++) {

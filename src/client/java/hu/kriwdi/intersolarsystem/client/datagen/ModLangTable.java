@@ -2470,6 +2470,46 @@ public final class ModLangTable {
 				"Fixed: %s. Back on course.",
 				"Behoben: %s. Wieder auf Kurs.",
 				"Megjavítva: %s. Folytatjuk az utat.");
+		add(rows, "block.intersolarsystem.mars_rock",
+				"Martian Basalt",
+				"Marsbasalt",
+				"Marsi bazalt");
+		add(rows, "block.intersolarsystem.mars_regolith",
+				"Martian Regolith",
+				"Mars-Regolith",
+				"Marsi regolit");
+		add(rows, "block.intersolarsystem.mars_dust",
+				"Martian Dust",
+				"Marsstaub",
+				"Marsi por");
+		add(rows, "block.intersolarsystem.mars_sandstone",
+				"Layered Martian Sandstone",
+				"Geschichteter Mars-Sandstein",
+				"Rétegzett marsi homokkő");
+		add(rows, "block.intersolarsystem.hematite_ore",
+				"Hematite Spherules",
+				"Hämatit-Kügelchen",
+				"Hematitgömböcskék");
+		add(rows, "block.intersolarsystem.perchlorate_crust",
+				"Perchlorate Crust",
+				"Perchloratkruste",
+				"Perklorátkéreg");
+		add(rows, "block.intersolarsystem.mars_ice",
+				"Polar Ice",
+				"Polareis",
+				"Sarki jég");
+		add(rows, "subtitles.intersolarsystem.ambient.mars",
+				"Dust devil whistles",
+				"Staubteufel pfeift",
+				"Porördög süvít");
+		add(rows, "message.intersolarsystem.mars.landed",
+				"Touchdown on Mars, Jezero crater. The Ark-2 colony is just to the north. Suit up: the air is a hundredth of Earth's, and carbon dioxide",
+				"Aufsetzen auf dem Mars, Jezero-Krater. Die Ark-2-Kolonie liegt nördlich. Raumanzug anlegen: die Luft ist ein Hundertstel der irdischen, und Kohlendioxid",
+				"Leszállás a Marson, a Jezero-kráterben. A Bárka-2 kolónia északra van. Vedd fel a ruhát: a levegő a földinek századrésze, és szén-dioxid");
+		add(rows, "message.intersolarsystem.nav.blocked.engine_tier",
+				"The ship's engines cannot make that journey: Mars needs the fusion drive (engine tier 3)",
+				"Die Triebwerke schaffen diese Reise nicht: Für den Mars braucht es den Fusionsantrieb (Triebwerksstufe 3)",
+				"A hajtóművek ezt az utat nem bírják: a Marshoz fúziós hajtómű kell (3-as szint)");
 		check(rows);
 		return List.copyOf(rows);
 	}

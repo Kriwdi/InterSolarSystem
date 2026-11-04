@@ -15,6 +15,9 @@
     "intersolarsystem:silica_sand",
     "intersolarsystem:tar_puddle",
     "intersolarsystem:oasis_grass",
-    "intersolarsystem:living_soil"
+    "intersolarsystem:living_soil",
+    "intersolarsystem:mars_regolith",
+    "intersolarsystem:mars_dust",
+    "intersolarsystem:perchlorate_crust"
   ]
 }

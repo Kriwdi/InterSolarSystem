@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/mars_ice"
+      }
+    ]
+  }
+}

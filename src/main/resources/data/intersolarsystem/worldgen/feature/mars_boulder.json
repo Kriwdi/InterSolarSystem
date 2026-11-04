@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:block_blob",
+  "state": "intersolarsystem:mars_rock",
+  "can_place_on": {
+    "type": "minecraft:matching_blocks",
+    "blocks": [
+      "intersolarsystem:mars_regolith",
+      "intersolarsystem:mars_dust",
+      "intersolarsystem:mars_rock"
+    ]
+  }
+}

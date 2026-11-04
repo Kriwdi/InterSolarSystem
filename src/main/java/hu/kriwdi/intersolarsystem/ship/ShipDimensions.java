@@ -16,6 +16,7 @@ public final class ShipDimensions {
 
 	/** The Moon (defined by datapack JSON). */
 	public static final ResourceKey<Level> MOON = ResourceKey.create(Registries.DIMENSION, ModIds.id("moon"));
+	public static final ResourceKey<Level> MARS = ResourceKey.create(Registries.DIMENSION, ModIds.id("mars"));
 
 	/** The mothership, once launched from a Kármán spaceport (defined by datapack JSON). */
 	public static final ResourceKey<Level> MOTHERSHIP = ResourceKey.create(Registries.DIMENSION, ModIds.id("mothership"));

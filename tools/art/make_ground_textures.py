@@ -253,11 +253,35 @@ def moon():
     return rgb
 
 
+def mars():
+    """Rusty plains from above: dark basalt patches, bright dust streaks, a few craters, dune fields."""
+    h = noise(151, 2.5)
+    rgb = palette(h, [(0, (112, 52, 30)), (0.45, (164, 85, 47)), (0.8, (196, 120, 70)), (1, (214, 150, 98))])
+    dark = noise(152, 3.0) > 0.66
+    rgb[dark] = rgb[dark] * 0.7
+    yy, xx = np.mgrid[0:N, 0:N]
+    dunes = (np.sin((xx * 0.9 + yy * 0.4) * 0.12 + noise(153, 2.0) * 6) > 0.6) & (noise(154, 3.2) > 0.6)
+    rgb[dunes] = rgb[dunes] * 1.12
+    rng = np.random.default_rng(155)
+    for _ in range(40):
+        x, y = rng.uniform(0, N, 2)
+        r = rng.uniform(4, 30)
+        for ox in (-N, 0, N):
+            for oy in (-N, 0, N):
+                d = np.hypot(xx - x - ox, yy - y - oy)
+                inside = d < r
+                rim = (d >= r) & (d < r * 1.15)
+                side = ((xx - x - ox) + (yy - y - oy)) / max(r, 1)
+                rgb[inside] = rgb[inside] * (0.82 + 0.15 * np.clip(side[inside], -1, 1))[..., None]
+                rgb[rim] = rgb[rim] * (1.06 - 0.1 * np.clip(side[rim], -1, 1))[..., None]
+    return np.clip(rgb, 0, 255)
+
+
 ALL = {
     "ash_desert": ash_desert, "dried_seabed": dried_seabed, "petrified_forest": petrified_forest,
     "irradiated_crater": irradiated_crater, "frozen_megalopolis": frozen_megalopolis, "acid_swamp": acid_swamp,
     "junk_mountains": junk_mountains, "salt_flats": salt_flats, "deep_canyons": deep_canyons, "oasis": oasis,
-    "abandoned_farmland": abandoned_farmland, "oil_field": oil_field, "moon": moon,
+    "abandoned_farmland": abandoned_farmland, "oil_field": oil_field, "moon": moon, "mars": mars,
 }
 
 if __name__ == "__main__":

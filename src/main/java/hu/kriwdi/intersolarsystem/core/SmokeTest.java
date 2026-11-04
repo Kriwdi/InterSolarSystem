@@ -42,6 +42,7 @@ public final class SmokeTest {
 			}
 			checkStation(server);
 			checkMoon(server);
+			checkMars(server);
 			checkEarth(server);
 			LOGGER.info("[SMOKETEST] server started, stopping");
 			server.halt(false);
@@ -78,6 +79,37 @@ public final class SmokeTest {
 	}
 
 	/** Generates the Moon around the landing zone, builds the sites and samples the surface materials. */
+	/** Generates Mars around the landing zone, builds the sites and samples the ground. */
+	private static void checkMars(MinecraftServer server) {
+		ServerLevel mars = server.getLevel(ShipDimensions.MARS);
+		if (mars == null) {
+			LOGGER.error("[SMOKETEST-FAIL] mars dimension is missing");
+			return;
+		}
+		hu.kriwdi.intersolarsystem.space.MarsSites.ensureBuilt(mars);
+		if (!hu.kriwdi.intersolarsystem.space.SpaceSites.PLACED_AT.containsKey("mars/ark2_colony")) {
+			LOGGER.error("[SMOKETEST-FAIL] the Ark-2 colony was not placed");
+		}
+		int[] zone = hu.kriwdi.intersolarsystem.space.MarsSites.LANDING_ZONE;
+		java.util.Map<String, Integer> tops = new java.util.TreeMap<>();
+		int lo = Integer.MAX_VALUE;
+		int hi = Integer.MIN_VALUE;
+		for (int dx = -48; dx <= 48; dx += 6) {
+			for (int dz = -48; dz <= 48; dz += 6) {
+				net.minecraft.core.BlockPos top = MoonSites.surface(mars, zone[0] + dx, zone[1] + dz);
+				lo = Math.min(lo, top.getY());
+				hi = Math.max(hi, top.getY());
+				tops.merge(net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(
+						mars.getBlockState(top.below()).getBlock()).toString(), 1, Integer::sum);
+			}
+		}
+		LOGGER.info("[SMOKETEST] Mars surface heights {}..{}, top blocks {}, border {}", lo, hi, tops,
+				mars.getWorldBorder().getSize());
+		if (!tops.keySet().stream().anyMatch(k -> k.startsWith("intersolarsystem:mars"))) {
+			LOGGER.error("[SMOKETEST-FAIL] Mars ground is not dressed");
+		}
+	}
+
 	private static void checkMoon(MinecraftServer server) {
 		ServerLevel moon = server.getLevel(ShipDimensions.MOON);
 		if (moon == null) {
@@ -231,6 +263,12 @@ public final class SmokeTest {
 				LOGGER.error("[SMOKETEST-FAIL] space site template {} is missing", moonSite.template());
 			}
 			sites.append(moonSite.template()).append(' ');
+		}
+		for (var marsSite : hu.kriwdi.intersolarsystem.space.MarsSites.SITES) {
+			if (!hu.kriwdi.intersolarsystem.space.SiteTemplates.exists(earth, marsSite.template())) {
+				LOGGER.error("[SMOKETEST-FAIL] space site template {} is missing", marsSite.template());
+			}
+			sites.append(marsSite.template()).append(' ');
 		}
 		LOGGER.info("[SMOKETEST] space site templates: {}", sites);
 		long missing = structures.values().stream().filter("MISSING"::equals).count();

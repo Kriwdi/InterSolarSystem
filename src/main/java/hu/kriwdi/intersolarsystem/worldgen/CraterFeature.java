@@ -20,13 +20,18 @@ import hu.kriwdi.intersolarsystem.content.ModBlocks;
  * also throw rays). A feature may only touch the chunks next to its own, so everything stays within
  * {@link #MAX_REACH} blocks of the centre: radius at most 9, rays only where they still fit.
  */
-public record CraterFeature(int minRadius, int maxRadius) implements Feature {
+public record CraterFeature(int minRadius, int maxRadius, java.util.Optional<BlockState> floor,
+		java.util.Optional<BlockState> freshEjecta, java.util.Optional<BlockState> rimRock) implements Feature {
 	public static final int LIMIT = 9;
 	/** The origin lies inside its chunk, and the neighbouring chunks reach 16 blocks further. */
 	public static final int MAX_REACH = 16;
 	public static final MapCodec<CraterFeature> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			Codec.intRange(2, LIMIT).fieldOf("min_radius").forGetter(CraterFeature::minRadius),
-			Codec.intRange(2, LIMIT).fieldOf("max_radius").forGetter(CraterFeature::maxRadius)
+			Codec.intRange(2, LIMIT).fieldOf("max_radius").forGetter(CraterFeature::maxRadius),
+			// Other bodies give their own ground (the Moon's regolith when left out).
+			BlockState.CODEC.optionalFieldOf("floor").forGetter(CraterFeature::floor),
+			BlockState.CODEC.optionalFieldOf("fresh").forGetter(CraterFeature::freshEjecta),
+			BlockState.CODEC.optionalFieldOf("rim").forGetter(CraterFeature::rimRock)
 	).apply(instance, CraterFeature::new));
 
 	/** Depth of the bowl and height of the rim, as a fraction of the radius. */
@@ -62,9 +67,10 @@ public record CraterFeature(int minRadius, int maxRadius) implements Feature {
 		boolean rays = young && rimReach + 3 <= MAX_REACH;
 		int reach = Math.min(MAX_REACH, rimReach + (rays ? 3 : 0));
 		int centreTop = origin.getY() - 1;
-		BlockState fresh = ModBlocks.FRESH_REGOLITH.defaultBlockState();
-		// Old craters are weathered back to ordinary regolith; only young ones keep bright ejecta.
-		BlockState rimBlock = young ? fresh : ModBlocks.LUNAR_REGOLITH.defaultBlockState();
+		BlockState fresh = freshEjecta.orElseGet(ModBlocks.FRESH_REGOLITH::defaultBlockState);
+		BlockState ground = floor.orElseGet(ModBlocks.LUNAR_REGOLITH::defaultBlockState);
+		// Old craters are weathered back to ordinary ground; only young ones keep bright ejecta.
+		BlockState rimBlock = young ? fresh : rimRock.orElse(ground);
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 		double rayPhase = random.nextDouble() * Math.PI;
 		for (int dx = -reach; dx <= reach; dx++) {
@@ -80,7 +86,7 @@ public record CraterFeature(int minRadius, int maxRadius) implements Feature {
 						level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
 					}
 					pos.set(x, floor, z);
-					level.setBlock(pos, young && d < 0.5 ? fresh : ModBlocks.LUNAR_REGOLITH.defaultBlockState(), 2);
+					level.setBlock(pos, young && d < 0.5 ? fresh : ground, 2);
 				} else if (d <= 1.0 + RIM_WIDTH) {
 					int height = (int) Math.round(rim(radius, d));
 					for (int y = top + 1; y <= top + height; y++) {

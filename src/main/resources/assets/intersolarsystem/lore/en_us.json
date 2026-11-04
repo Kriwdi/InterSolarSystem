@@ -444,6 +444,24 @@
     "> decision, day 240\nWithout Earth's supply runs the greenhouse cannot feed 380. Council vote: long sleep for everyone, one watch officer by rotation. The rotation ended on day 911.",
     "> wake order\nWake the colony on signal from ARK-5 or any Earth vessel. Wake codes are held by the cryo hall console. Bring seeds: ours did not survive the regolith."
    ]
+  },
+  "terminal_16": {
+   "title": "ARK-2 BRIDGE",
+   "subtitle": "Jezero / ship's log",
+   "pages": [
+    "> log, sol 1\nDown on the delta. Leg 4 buckled on touchdown; the hull will never fly again. It does not need to: we are home. 1,900 souls, 40 tonnes of seed, one river that dried up three billion years ago.",
+    "> log, sol 640\nPerchlorate leaching works. Greenhouse 1 gives potatoes. The geology team asks for the big rover to survey the delta front: ground radar shows a reflector 30 m down. Approved.",
+    "> log, sol 1102\nThe dig has reached it. It is not rock. Dr. Ferreira says it is not anything. I have ordered the pit closed until Earth answers. Earth does not answer."
+   ]
+  },
+  "terminal_17": {
+   "title": "ARK-2 GEOLOGY LAB",
+   "subtitle": "dig site / Dr. M. Ferreira",
+   "pages": [
+    "> dig 0412\nThe surface is smooth to the micrometre and colder than the sediment around it. A seam runs down the middle. Light comes from the seam. It pulses once every 24 h 39 min: one Martian day.",
+    "> dig 0419\nThe rover's arm touched the seam and the pulse changed. The rover's memory now holds 2.1 GB we did not put there. The commander wants the rover grounded. I agree. The rover has the key.",
+    "> dig 0421\nThe seam is wider this morning. Do not open it. Do not let the rover near it. If you are reading this, you came on a ship: take the rover's memory core to Earth, not to the wall."
+   ]
   }
  },
  "manuals": {

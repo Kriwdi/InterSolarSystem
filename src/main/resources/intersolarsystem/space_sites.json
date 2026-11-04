@@ -98,5 +98,55 @@
   -58,
   -3,
   -58
+ ],
+ "mars/viking1": [
+  -7,
+  -3,
+  -7
+ ],
+ "mars/viking2": [
+  -7,
+  -3,
+  -7
+ ],
+ "mars/pathfinder": [
+  -9,
+  -3,
+  -9
+ ],
+ "mars/spirit": [
+  -9,
+  -3,
+  -9
+ ],
+ "mars/opportunity": [
+  -9,
+  -3,
+  -9
+ ],
+ "mars/curiosity": [
+  -10,
+  -3,
+  -10
+ ],
+ "mars/perseverance": [
+  -12,
+  -3,
+  -12
+ ],
+ "mars/zhurong": [
+  -9,
+  -3,
+  -9
+ ],
+ "mars/insight": [
+  -9,
+  -3,
+  -9
+ ],
+ "mars/ark2_colony": [
+  -56,
+  -17,
+  -56
  ]
 }

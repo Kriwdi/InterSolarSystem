@@ -22,3 +22,5 @@ ambient.abandoned_farmland.loop
 ambient.abandoned_farmland.additions
 ambient.oil_field.loop
 ambient.oil_field.additions
+ambient.mars.loop
+ambient.mars.additions

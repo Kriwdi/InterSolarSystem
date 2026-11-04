@@ -36,6 +36,8 @@ public final class SpaceEnvironment {
 	/** One sixth of Earth's gravity. */
 	public static final double MOON_GRAVITY_FACTOR = -0.83;
 	public static final int MOON_SIZE = 5500;
+	/** Mars: 38% of Earth's gravity, 10 600 blocks round. */
+	public static final double MARS_GRAVITY_FACTOR = -0.62;
 	public static final double FAILED_STABILISER_GRAVITY_FACTOR = -0.6;
 	public static final int STABILISER_FAILURE = 20;
 	public static final int LIFE_SUPPORT_MINIMUM = 20;
@@ -56,6 +58,10 @@ public final class SpaceEnvironment {
 			if (moon != null) {
 				moon.getWorldBorder().setSize(MOON_SIZE);
 			}
+			ServerLevel mars = server.getLevel(ShipDimensions.MARS);
+			if (mars != null) {
+				mars.getWorldBorder().setSize(hu.kriwdi.intersolarsystem.worldgen.MarsSurfaceFeature.SIZE);
+			}
 			// The Earth is 20 000 blocks across. Only a border still at the vanilla default is changed, so a size an
 			// admin set on purpose stays.
 			var earthBorder = server.overworld().getWorldBorder();
@@ -72,9 +78,11 @@ public final class SpaceEnvironment {
 		for (ServerPlayer player : server.getPlayerList().getPlayers()) {
 			boolean orbit = player.level().dimension().equals(ShipDimensions.ORBIT);
 			boolean moon = player.level().dimension().equals(ShipDimensions.MOON);
+			boolean mars = player.level().dimension().equals(ShipDimensions.MARS);
 			boolean interior = player.level().dimension().equals(ShipDimensions.INTERIOR);
 			double gravity = orbit ? ORBIT_GRAVITY_FACTOR
 					: moon ? MOON_GRAVITY_FACTOR
+					: mars ? MARS_GRAVITY_FACTOR
 					: interior && ship.condition(ShipSubsystem.STABILIZER) < STABILISER_FAILURE
 							? FAILED_STABILISER_GRAVITY_FACTOR : 0.0;
 			setModifier(player, Attributes.GRAVITY, GRAVITY_ID, gravity, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
@@ -83,7 +91,8 @@ public final class SpaceEnvironment {
 			if (player.isCreative() || player.isSpectator()) {
 				continue;
 			}
-			if (orbit || moon) {
+			if (orbit || moon || mars) {
+				// Mars has air, but six millibars of carbon dioxide: as good as none.
 				VacuumBreathing.breathe(player, now);
 			} else {
 				VacuumBreathing.breatheAir(player, now);

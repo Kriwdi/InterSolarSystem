@@ -9,9 +9,10 @@ import java.util.Optional;
  * @param transferDays real-world one-way transfer time from Earth in days
  * @param synodicDays  real-world days between two launch windows from Earth (0: always open)
  * @param assist       a body whose gravity can be used on the way, if any
+ * @param minTier      the engine tier the ship needs to go there (1: any)
  */
 public record CelestialBody(String id, Kind kind, Optional<String> parent, double transferDays, double synodicDays,
-		Status status, Optional<String> assist) {
+		Status status, Optional<String> assist, int minTier) {
 	public enum Kind {
 		PLANET, ORBIT, MOON, DWARF_PLANET, GAS_GIANT, ICE_GIANT;
 

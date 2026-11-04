@@ -41,7 +41,7 @@ public final class ShipLanding {
 	 * world's minimum height, so the chunk is loaded first (the ship lands while everyone is inside the ship).
 	 */
 	private static int surfaceHeight(ServerLevel level, int x, int z) {
-		if (level.dimension() == ShipDimensions.MOON) {
+		if (level.dimension() == ShipDimensions.MOON || level.dimension() == ShipDimensions.MARS) {
 			return hu.kriwdi.intersolarsystem.space.MoonSites.surface(level, x, z).getY();
 		}
 		level.getChunk(x >> 4, z >> 4);
@@ -69,13 +69,17 @@ public final class ShipLanding {
 	}
 
 	/** Where the ship landed, and whether it had to fall back to the world spawn. */
-	public record Landing(BlockPos hatch, boolean usedSpawn, boolean docked, boolean moon) {
+	public record Landing(BlockPos hatch, boolean usedSpawn, boolean docked, boolean moon, boolean mars) {
 		public Landing(BlockPos hatch, boolean usedSpawn) {
-			this(hatch, usedSpawn, false, false);
+			this(hatch, usedSpawn, false, false, false);
 		}
 
 		public Landing(BlockPos hatch, boolean usedSpawn, boolean docked) {
-			this(hatch, usedSpawn, docked, false);
+			this(hatch, usedSpawn, docked, false, false);
+		}
+
+		public Landing(BlockPos hatch, boolean usedSpawn, boolean docked, boolean moon) {
+			this(hatch, usedSpawn, docked, moon, false);
 		}
 	}
 
@@ -109,6 +113,21 @@ public final class ShipLanding {
 				return new Landing(hatch, false, false, true);
 			}
 		}
+		if (ShipDimensions.MARS.identifier().toString().equals(state.travel().landIn())) {
+			ServerLevel mars = server.getLevel(ShipDimensions.MARS);
+			if (mars != null) {
+				hu.kriwdi.intersolarsystem.space.MarsSites.ensureBuilt(mars);
+				int[] zone = hu.kriwdi.intersolarsystem.space.MarsSites.LANDING_ZONE;
+				ShipState.Destination target = state.destination().orElse(new ShipState.Destination(zone[0], zone[1]));
+				BlockPos hatch = findHatchCell(mars, target.x(), target.z(), SEARCH_RADIUS)
+						.orElseGet(() -> new BlockPos(target.x(), surfaceHeight(mars, target.x(), target.z()), target.z()));
+				mars.setBlock(hatch, ModBlocks.SHIP_HATCH.defaultBlockState(), Block.UPDATE_ALL);
+				ShipShell.build(mars, hatch, Direction.NORTH);
+				state.setLandingSite(new ShipState.LandingSite(mars.dimension().identifier().toString(),
+						hatch.getX(), hatch.getY(), hatch.getZ()));
+				return new Landing(hatch, false, false, false, true);
+			}
+		}
 		ServerLevel overworld = server.overworld();
 		LevelData.RespawnData spawn = server.getRespawnData();
 		BlockPos spawnPos = spawn.pos();
@@ -131,7 +150,8 @@ public final class ShipLanding {
 	}
 
 	public static void announce(MinecraftServer server, Landing landing) {
-		String key = landing.moon() ? "message.intersolarsystem.moon.landed"
+		String key = landing.mars() ? "message.intersolarsystem.mars.landed"
+				: landing.moon() ? "message.intersolarsystem.moon.landed"
 				: landing.docked() ? "message.intersolarsystem.orbit.docked"
 				: landing.usedSpawn() ? "message.intersolarsystem.ship.landed_spawn" : "message.intersolarsystem.ship.landed";
 		ServerLevel interior = server.getLevel(ShipDimensions.INTERIOR);

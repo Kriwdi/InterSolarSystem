@@ -1,0 +1,8 @@
+{
+  "type": "intersolarsystem:mars_surface",
+  "top": "intersolarsystem:mars_regolith",
+  "alt": "intersolarsystem:perchlorate_crust",
+  "alt_chance": 0.04,
+  "under": "intersolarsystem:mars_sandstone",
+  "depth": 4
+}

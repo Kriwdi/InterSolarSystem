@@ -72,12 +72,15 @@ public record ShipViewPayload(int phase, int remainingTicks, int totalTicks, Str
 		String here = ShipNavigation.here(state);
 		String groundFrom = switch (here) {
 			case "moon" -> "moon";
+			case "mars" -> "mars";
 			case "earth" -> state.landingSite().map(s -> earthGround(server, s.x(), s.z())).orElse("ash_desert");
 			default -> "";
 		};
 		String groundTo = "";
 		if ("moon".equals(to)) {
 			groundTo = "moon";
+		} else if ("mars".equals(to)) {
+			groundTo = "mars";
 		} else if ("earth".equals(to)) {
 			groundTo = state.destination().map(d -> earthGround(server, d.x(), d.z()))
 					.orElseGet(() -> state.travel().surface().map(s -> earthGround(server, s.x(), s.z()))

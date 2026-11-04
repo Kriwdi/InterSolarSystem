@@ -27,6 +27,10 @@
     "intersolarsystem:deepslate_titanium_ore",
     "intersolarsystem:deepslate_uraninite_ore",
     "intersolarsystem:deepslate_spodumene_ore",
-    "intersolarsystem:deepslate_monazite_ore"
+    "intersolarsystem:deepslate_monazite_ore",
+    "intersolarsystem:mars_rock",
+    "intersolarsystem:mars_sandstone",
+    "intersolarsystem:hematite_ore",
+    "intersolarsystem:mars_ice"
   ]
 }

@@ -1,0 +1,67 @@
+{
+  "attributes": {
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "ambient": [],
+          "axolotls": [],
+          "creature": [],
+          "misc": [],
+          "monster": [],
+          "underground_water_creature": [],
+          "water_ambient": [],
+          "water_creature": []
+        }
+      },
+      "modifier": "overlay"
+    },
+    "minecraft:visual/sky_color": "#d9a57a",
+    "minecraft:visual/fog_color": "#c48c62",
+    "minecraft:visual/ambient_particles": {
+      "argument": [
+        {
+          "particle": {
+            "type": "minecraft:white_ash"
+          },
+          "probability": 0.004
+        }
+      ],
+      "modifier": "append"
+    },
+    "minecraft:audio/ambient_sounds": {
+      "loop": "intersolarsystem:ambient.mars.loop",
+      "additions": {
+        "sound": "intersolarsystem:ambient.mars.additions",
+        "tick_chance": 0.003
+      }
+    }
+  },
+  "carvers": [],
+  "downfall": 0.0,
+  "effects": {
+    "water_color": "#7a5a48"
+  },
+  "features": [
+    [
+      "intersolarsystem:mars_surface_plains"
+    ],
+    [],
+    [],
+    [
+      "intersolarsystem:mars_crater_large",
+      "intersolarsystem:mars_crater_small"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "intersolarsystem:mars_boulder"
+    ],
+    []
+  ],
+  "has_precipitation": false,
+  "temperature": 0.2
+}

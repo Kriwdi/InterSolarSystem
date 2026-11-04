@@ -96,7 +96,7 @@ public abstract class SkyRendererMixin {
 	@Inject(method = "renderMoon", at = @At("HEAD"), cancellable = true)
 	private void intersolarsystem$noMoonOnTheMoon(final RenderPass renderPass, final MoonPhase moonPhase,
 			final float rainBrightness, final PoseStack poseStack, final CallbackInfo ci) {
-		if (EarthInSky.current() == EarthInSky.View.FROM_MOON || ShipView.active()) {
+		if (EarthInSky.current() == EarthInSky.View.FROM_MOON || ShipView.active() || intersolarsystem$onMars()) {
 			ci.cancel();
 		}
 	}
@@ -117,7 +117,11 @@ public abstract class SkyRendererMixin {
 		if (mc.level != null && (mc.level.dimension().equals(hu.kriwdi.intersolarsystem.ship.ShipDimensions.ORBIT)
 				|| mc.level.dimension().equals(hu.kriwdi.intersolarsystem.ship.ShipDimensions.MOON)
 				|| mc.level.dimension().equals(hu.kriwdi.intersolarsystem.ship.ShipDimensions.MOTHERSHIP))) {
-			intersolarsystem$drawSpace(renderPass, poseStack, 1.0F, starAngle * 360.0F);
+			intersolarsystem$drawSpace(renderPass, poseStack, 1.0F, (float) Math.toDegrees(starAngle));
+		}
+		if (intersolarsystem$onMars()) {
+			intersolarsystem$drawMarsSky(renderPass, poseStack, (float) Math.toDegrees(sunAngle), (float) Math.toDegrees(starAngle));
+			return;
 		}
 		EarthInSky.View view = EarthInSky.current();
 		if (view == EarthInSky.View.NONE) {
@@ -184,6 +188,38 @@ public abstract class SkyRendererMixin {
 
 	@Unique
 	private GpuBuffer intersolarsystem$meteor;
+
+	@Unique
+	private static boolean intersolarsystem$onMars() {
+		net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
+		return mc.level != null && mc.level.dimension().equals(hu.kriwdi.intersolarsystem.ship.ShipDimensions.MARS)
+				&& !ShipView.active();
+	}
+
+	/**
+	 * The Martian sky by night: Phobos racing across (it rises in the west, three times a day), small Deimos, and the
+	 * Earth as a bright blue evening star near the sun. By day the butterscotch sky hides all but Phobos.
+	 */
+	@Unique
+	private void intersolarsystem$drawMarsSky(final RenderPass renderPass, final PoseStack poseStack, final float sunDegrees,
+			final float starDegrees) {
+		poseStack.pushPose();
+		poseStack.rotateDegrees(Axis.YP, -90.0F);
+		poseStack.pushPose();
+		poseStack.rotateDegrees(Axis.XP, -starDegrees * 3.2F + 40.0F);
+		intersolarsystem$sprite(renderPass, poseStack, "mars/phobos", 100.0F, 7.0F, 1.0F);
+		poseStack.popPose();
+		poseStack.pushPose();
+		poseStack.rotateDegrees(Axis.XP, starDegrees * 0.8F + 160.0F);
+		poseStack.rotateDegrees(Axis.ZP, 12.0F);
+		intersolarsystem$sprite(renderPass, poseStack, "mars/deimos", 100.0F, 2.0F, 0.9F);
+		poseStack.popPose();
+		poseStack.pushPose();
+		poseStack.rotateDegrees(Axis.XP, sunDegrees + 28.0F);
+		intersolarsystem$sprite(renderPass, poseStack, "mars/earth_star", 100.0F, 1.6F, 1.0F);
+		poseStack.popPose();
+		poseStack.popPose();
+	}
 
 	@Unique
 	private final java.util.Map<String, GpuBuffer> intersolarsystem$space = new java.util.HashMap<>();

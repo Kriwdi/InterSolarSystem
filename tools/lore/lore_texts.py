@@ -305,6 +305,24 @@ TERMINALS = {
             "> allapot\nTELEPESEK ........ 380\nÉBREN ............ 0\nHIBERNÁCIÓS CSARNOK  NÉVLEGES (NAPTORNYOK 61%)\nJÉGBÁNYA ......... ÁLL\nFÖLDI KAPCSOLAT .. NÉMA A 214. NAP ÓTA",
             "> dontes, 240. nap\nA földi utánpótlás nélkül az üvegház nem tud 380 embert etetni. A tanács döntése: hosszú alvás mindenkinek, egy ügyeletes forgásban. A forgás a 911. napon megszakadt.",
             "> ebresztesi parancs\nA kolóniát a BÁRKA-5 vagy bármely földi hajó jelére kell felébreszteni. Az ébresztőkódok a hibernációs csarnok konzolján vannak. Hozzatok magot: a mieink nem élték túl a regolitot."]}},
+    "terminal_16": {
+        "en": {"title": "ARK-2 BRIDGE", "subtitle": "Jezero / ship's log", "pages": [
+            "> log, sol 1\nDown on the delta. Leg 4 buckled on touchdown; the hull will never fly again. It does not need to: we are home. 1,900 souls, 40 tonnes of seed, one river that dried up three billion years ago.",
+            "> log, sol 640\nPerchlorate leaching works. Greenhouse 1 gives potatoes. The geology team asks for the big rover to survey the delta front: ground radar shows a reflector 30 m down. Approved.",
+            "> log, sol 1102\nThe dig has reached it. It is not rock. Dr. Ferreira says it is not anything. I have ordered the pit closed until Earth answers. Earth does not answer."]},
+        "hu": {"title": "BÁRKA-2 HÍD", "subtitle": "Jezero / hajónapló", "pages": [
+            "> naplo, 1. sol\nLent vagyunk a deltán. A 4-es láb leszálláskor megrogyott; a hajó soha többé nem repül. Nem is kell: itthon vagyunk. 1900 lélek, 40 tonna mag, egy folyó, amely hárommilliárd éve kiszáradt.",
+            "> naplo, 640. sol\nA perklorát-kilúgozás működik. Az 1-es üvegház krumplit ad. A geológusok a nagy rovert kérik a delta frontjának felméréséhez: a talajradar 30 méter mélyen visszaverődést mutat. Jóváhagyva.",
+            "> naplo, 1102. sol\nA feltárás elérte. Nem kőzet. Dr. Ferreira szerint nem is semmi, amit ismerünk. Elrendeltem, hogy zárják le a gödröt, amíg a Föld nem válaszol. A Föld nem válaszol."]}},
+    "terminal_17": {
+        "en": {"title": "ARK-2 GEOLOGY LAB", "subtitle": "dig site / Dr. M. Ferreira", "pages": [
+            "> dig 0412\nThe surface is smooth to the micrometre and colder than the sediment around it. A seam runs down the middle. Light comes from the seam. It pulses once every 24 h 39 min: one Martian day.",
+            "> dig 0419\nThe rover's arm touched the seam and the pulse changed. The rover's memory now holds 2.1 GB we did not put there. The commander wants the rover grounded. I agree. The rover has the key.",
+            "> dig 0421\nThe seam is wider this morning. Do not open it. Do not let the rover near it. If you are reading this, you came on a ship: take the rover's memory core to Earth, not to the wall."]},
+        "hu": {"title": "BÁRKA-2 GEOLÓGIAI LABOR", "subtitle": "feltárás / Dr. M. Ferreira", "pages": [
+            "> asatas 0412\nA felülete mikrométerre sima, és hidegebb a körülötte lévő üledéknél. Középen egy rés fut le. A résből fény jön. 24 óra 39 percenként lüktet egyet: egy marsi nap.",
+            "> asatas 0419\nA rover karja megérintette a rést, és a lüktetés megváltozott. A rover memóriájában most 2,1 GB van, amit nem mi tettünk oda. A parancsnok a rover leállítását kéri. Egyetértek. A roveren van a kulcs.",
+            "> asatas 0421\nMa reggelre szélesebb lett a rés. Ne nyissátok ki. Ne engedjétek a rovert a közelébe. Ha ezt olvasod, hajóval jöttél: a rover memóriamagját a Földre vidd, ne a falhoz."]}},
 }
 
 MANUALS = {

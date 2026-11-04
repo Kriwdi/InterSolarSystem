@@ -310,5 +310,26 @@
         "volume": 0.6
       }
     ]
+  },
+  "ambient.mars.loop": {
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/mars_loop",
+        "stream": true
+      }
+    ]
+  },
+  "ambient.mars.additions": {
+    "subtitle": "subtitles.intersolarsystem.ambient.mars",
+    "sounds": [
+      {
+        "name": "intersolarsystem:ambience/mars_add1",
+        "volume": 0.6
+      },
+      {
+        "name": "intersolarsystem:ambience/mars_add2",
+        "volume": 0.6
+      }
+    ]
   }
 }

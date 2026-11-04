@@ -1,0 +1,8 @@
+{
+  "type": "intersolarsystem:crater",
+  "min_radius": 3,
+  "max_radius": 6,
+  "floor": "intersolarsystem:mars_regolith",
+  "fresh": "intersolarsystem:mars_dust",
+  "rim": "intersolarsystem:mars_rock"
+}

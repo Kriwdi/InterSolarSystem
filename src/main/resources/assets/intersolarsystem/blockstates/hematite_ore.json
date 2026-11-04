@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/hematite_ore"
+      },
+      {
+        "model": "intersolarsystem:block/hematite_ore",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/hematite_ore",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/hematite_ore",
+        "y": 270
+      }
+    ]
+  }
+}

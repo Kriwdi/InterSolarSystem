@@ -47,7 +47,8 @@ public final class SolarSystem {
 			JsonObject o = e.getAsJsonObject();
 			list.add(new CelestialBody(o.get("id").getAsString(), CelestialBody.Kind.of(o.get("kind").getAsString()),
 					optional(o, "parent"), o.get("transfer_days").getAsDouble(), o.get("synodic_days").getAsDouble(),
-					CelestialBody.Status.of(o.get("status").getAsString()), optional(o, "assist")));
+					CelestialBody.Status.of(o.get("status").getAsString()), optional(o, "assist"),
+					o.has("min_tier") ? o.get("min_tier").getAsInt() : 1));
 		}
 		return List.copyOf(list);
 	}

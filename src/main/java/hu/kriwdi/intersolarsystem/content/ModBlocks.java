@@ -93,6 +93,29 @@ public final class ModBlocks {
 	public static final Block ILMENITE_ORE = register("ilmenite_ore", Block::new,
 			BlockBehaviour.Properties.of().strength(3.0F, 6.0F).sound(SoundType.BASALT).requiresCorrectToolForDrops());
 
+	// Mars: basaltic bedrock, rusty regolith, wind-blown dust, Gale's layered sandstone, hematite spherules, the
+	// perchlorate salt crust, and the layered water ice of the polar caps.
+	public static final Block MARS_ROCK = register("mars_rock", Block::new,
+			BlockBehaviour.Properties.of().strength(1.8F, 6.0F).sound(SoundType.STONE).requiresCorrectToolForDrops());
+
+	public static final Block MARS_REGOLITH = register("mars_regolith", Block::new,
+			BlockBehaviour.Properties.of().strength(0.6F).sound(SoundType.SAND));
+
+	public static final Block MARS_DUST = register("mars_dust", Block::new,
+			BlockBehaviour.Properties.of().strength(0.4F).sound(SoundType.SAND));
+
+	public static final Block MARS_SANDSTONE = register("mars_sandstone", Block::new,
+			BlockBehaviour.Properties.of().strength(1.2F, 4.0F).sound(SoundType.STONE).requiresCorrectToolForDrops());
+
+	public static final Block HEMATITE_ORE = register("hematite_ore", Block::new,
+			BlockBehaviour.Properties.of().strength(3.0F, 6.0F).sound(SoundType.STONE).requiresCorrectToolForDrops());
+
+	public static final Block PERCHLORATE_CRUST = register("perchlorate_crust", Block::new,
+			BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.CALCITE));
+
+	public static final Block MARS_ICE = register("mars_ice", Block::new,
+			BlockBehaviour.Properties.of().strength(1.0F).sound(SoundType.GLASS).friction(0.95F));
+
 	// Relics on the Moon.
 	public static final Block LANDER_ENGINE = register("lander_engine", Block::new,
 			BlockBehaviour.Properties.of().strength(3.0F, 6.0F).sound(SoundType.METAL));

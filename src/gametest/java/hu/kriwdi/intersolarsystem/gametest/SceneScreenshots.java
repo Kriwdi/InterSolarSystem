@@ -296,6 +296,41 @@ public class SceneScreenshots implements FabricClientGameTest {
 			context.waitTicks(120);
 			context.takeScreenshot("17c_moon_lunokhod1");
 
+			// Mars: the landing plain at noon, the Ark-2 colony and its dig, Curiosity on Mount Sharp, the night sky.
+			game.getServer().runOnServer(server -> hu.kriwdi.intersolarsystem.space.MarsSites.ensureBuilt(
+					server.getLevel(ShipDimensions.MARS)));
+			game.getServer().runCommand("time set 6000");
+			int[] mz = hu.kriwdi.intersolarsystem.space.MarsSites.LANDING_ZONE;
+			int my = game.getServer().computeOnServer(server -> MoonSites.surface(server.getLevel(ShipDimensions.MARS),
+					mz[0], mz[1]).getY());
+			game.getServer().runCommand("execute in intersolarsystem:mars run tp @a " + mz[0] + " " + (my + 3) + " "
+					+ mz[1] + " 180 5");
+			context.waitTicks(160);
+			context.takeScreenshot("18_mars_landing_plain");
+			BlockPos ark2 = hu.kriwdi.intersolarsystem.space.SpaceSites.PLACED_AT.get("mars/ark2_colony");
+			if (ark2 != null) {
+				game.getServer().runCommand("execute in intersolarsystem:mars run tp @a " + (ark2.getX() + 50) + " "
+						+ (ark2.getY() + 34) + " " + (ark2.getZ() + 50) + " 135 30");
+				context.waitTicks(160);
+				context.takeScreenshot("18b_mars_ark2_colony");
+				game.getServer().runCommand("execute in intersolarsystem:mars run tp @a " + (ark2.getX() + 4) + " "
+						+ (ark2.getY() + 2) + " " + (ark2.getZ() - 36) + " 180 40");
+				context.waitTicks(60);
+				context.takeScreenshot("18c_mars_dig");
+			}
+			BlockPos cur = hu.kriwdi.intersolarsystem.space.SpaceSites.PLACED_AT.get("mars/curiosity");
+			if (cur != null) {
+				game.getServer().runCommand("execute in intersolarsystem:mars run tp @a " + (cur.getX() - 9) + " "
+						+ (cur.getY() + 5) + " " + (cur.getZ() + 8) + " -135 20");
+				context.waitTicks(120);
+				context.takeScreenshot("18d_mars_curiosity");
+			}
+			game.getServer().runCommand("time set 18000");
+			game.getServer().runCommand("execute in intersolarsystem:mars run tp @a " + mz[0] + " " + (my + 3) + " "
+					+ mz[1] + " 0 -50");
+			context.waitTicks(40);
+			context.takeScreenshot("18e_mars_night_sky");
+
 			// The dead Earth: every biome and the main structures, at noon.
 			game.getServer().runCommand("time set 6000");
 			game.getServer().runCommand("effect give @a minecraft:night_vision infinite 0 true");

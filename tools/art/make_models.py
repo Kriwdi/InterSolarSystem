@@ -264,7 +264,7 @@ def moon_blocks():
     ])
     variants = {}
     for facing, y in (("north", 0), ("east", 90), ("south", 180), ("west", 270)):
-        for log in range(16):
+        for log in range(18):
             v = {"model": NS + "block/data_terminal"}
             if y:
                 v["y"] = y

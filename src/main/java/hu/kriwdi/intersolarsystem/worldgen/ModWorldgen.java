@@ -14,6 +14,7 @@ public final class ModWorldgen {
 		FlatSiteStructure.register();
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, ModIds.id("lunar_surface"), LunarSurfaceFeature.CODEC);
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, ModIds.id("crater"), CraterFeature.CODEC);
+		Registry.register(BuiltInRegistries.FEATURE_TYPE, ModIds.id("mars_surface"), MarsSurfaceFeature.CODEC);
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, ModIds.id("dead_tree"), DeadTreeFeature.CODEC);
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, ModIds.id("strata"), StrataFeature.CODEC);
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, ModIds.id("fallout_crater"), FalloutCraterFeature.CODEC);

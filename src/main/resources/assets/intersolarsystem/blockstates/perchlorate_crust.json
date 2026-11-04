@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/perchlorate_crust"
+      },
+      {
+        "model": "intersolarsystem:block/perchlorate_crust",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/perchlorate_crust",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/perchlorate_crust",
+        "y": 270
+      }
+    ]
+  }
+}

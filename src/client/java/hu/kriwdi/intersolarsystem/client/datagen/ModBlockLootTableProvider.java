@@ -24,7 +24,9 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
 		for (var block : new net.minecraft.world.level.block.Block[] {ModBlocks.STATION_HULL, ModBlocks.STATION_FOIL,
 				ModBlocks.STATION_WINDOW, ModBlocks.STATION_LIGHT, ModBlocks.TRUSS, ModBlocks.SOLAR_PANEL, ModBlocks.LUNAR_ROCK,
 				ModBlocks.LUNAR_REGOLITH, ModBlocks.MARE_REGOLITH, ModBlocks.FRESH_REGOLITH, ModBlocks.MARE_BASALT,
-				ModBlocks.HELIUM3_REGOLITH, ModBlocks.ILMENITE_ORE}) {
+				ModBlocks.HELIUM3_REGOLITH, ModBlocks.ILMENITE_ORE, ModBlocks.MARS_ROCK, ModBlocks.MARS_REGOLITH,
+				ModBlocks.MARS_DUST, ModBlocks.MARS_SANDSTONE, ModBlocks.HEMATITE_ORE, ModBlocks.PERCHLORATE_CRUST,
+				ModBlocks.MARS_ICE}) {
 			dropSelf(block);
 		}
 	}

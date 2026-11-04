@@ -51,6 +51,9 @@ public final class ShipNavigation {
 		if (ShipDimensions.MOON.identifier().toString().equals(dimension)) {
 			return "moon";
 		}
+		if (ShipDimensions.MARS.identifier().toString().equals(dimension)) {
+			return "mars";
+		}
 		return "earth";
 	}
 
@@ -105,6 +108,9 @@ public final class ShipNavigation {
 		if (!blocker.isEmpty()) {
 			return blocker;
 		}
+		if (state.travel().engineTier() < body.get().minTier()) {
+			return "message.intersolarsystem.nav.blocked.engine_tier";
+		}
 		long now = server.overworld().getGameTime();
 		long seed = server.overworld().getRandom().nextLong();
 		int tier = state.travel().engineTier();
@@ -114,9 +120,10 @@ public final class ShipNavigation {
 		switch (body.get().status()) {
 			case LANDING -> {
 				flightTicks = TravelMath.legTicks(here(state), body.get().id(), tier, now);
-				int[] zone = MoonSites.LANDING_ZONE;
+				boolean mars = "mars".equals(body.get().id());
+				int[] zone = mars ? hu.kriwdi.intersolarsystem.space.MarsSites.LANDING_ZONE : MoonSites.LANDING_ZONE;
 				started = state.beginTakeoff(zone[0], zone[1], now, seed, ShipFlightKind.NORMAL, body.get().id(),
-						flightTicks, ShipDimensions.MOON.identifier().toString());
+						flightTicks, (mars ? ShipDimensions.MARS : ShipDimensions.MOON).identifier().toString());
 			}
 			case ORBIT -> {
 				flightTicks = TravelMath.legTicks(here(state), body.get().id(), tier, now);

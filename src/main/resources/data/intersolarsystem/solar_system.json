@@ -43,7 +43,8 @@
       "kind": "planet",
       "transfer_days": 210,
       "synodic_days": 780,
-      "status": "locked"
+      "status": "landing",
+      "min_tier": 3
     },
     {
       "id": "ceres",

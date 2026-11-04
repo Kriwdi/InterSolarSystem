@@ -40,6 +40,8 @@ public final class ShipView {
 	private static final int EARTH_SKY = 0xB9AD9C;
 	private static final int EARTH_GROUND = 0x5E5244;
 	private static final int MOON_GROUND = 0x8D8B86;
+	private static final int MARS_SKY = 0xD9A57A;
+	private static final int MARS_GROUND = 0xA4552F;
 	/** In orbit: the planet fills the view ahead and below the bow. */
 	private static final Body EARTH_BELOW = new Body(0.0F, -150.0F, 170.0F, 0);
 	/** On the Moon: the Earth hangs above the southern horizon, in front of the bridge. */
@@ -98,6 +100,7 @@ public final class ShipView {
 	private static Scene place(String id, String ground) {
 		return switch (id) {
 			case "moon" -> new Scene(-1, MOON_GROUND, LANDED_DEPTH, 1.0F, 0.0F, EARTH_FROM_MOON, null, 0.0F, "moon");
+			case "mars" -> new Scene(MARS_SKY, MARS_GROUND, LANDED_DEPTH, 0.0F, 0.0F, null, null, 0.0F, "mars");
 			case "earth_orbit" -> new Scene(-1, -1, 0.0F, 1.0F, 0.0F, EARTH_BELOW, null, 0.0F);
 			case "earth" -> new Scene(EARTH_SKY, EARTH_GROUND, LANDED_DEPTH, 0.0F, 0.0F, null, null, 0.0F,
 					ground.isEmpty() ? "ash_desert" : ground);
@@ -141,7 +144,7 @@ public final class ShipView {
 	/** Where a journey's target leaves the ship ("earth_orbit" docks, "moon" lands, "earth" lands, others fly by). */
 	private static String destination(String target) {
 		return switch (target) {
-			case "moon", "earth_orbit", "earth" -> target;
+			case "moon", "earth_orbit", "earth", "mars" -> target;
 			default -> last.from();
 		};
 	}
@@ -151,7 +154,7 @@ public final class ShipView {
 		String to = last.to();
 		float shake = p < 0.08F ? 0.5F * (1.0F - p / 0.08F) + 0.06F : 0.05F;
 		float starAngle = time * 0.4F;
-		boolean fromSurface = "earth".equals(from) || "moon".equals(from);
+		boolean fromSurface = "earth".equals(from) || "moon".equals(from) || "mars".equals(from);
 		// First part: the ground falls away and the sky turns black.
 		if (fromSurface && p < 0.25F) {
 			Scene base = place(from);
@@ -167,7 +170,11 @@ public final class ShipView {
 		float leg = fromSurface ? (p - 0.25F) / 0.75F : p;
 		Body earth;
 		Body moon = null;
-		if ("moon".equals(from)) {
+		if ("mars".equals(from) || "mars".equals(to)) {
+			// Interplanetary: the planet left behind shrinks to a point; the stars and the Milky Way do the rest.
+			earth = "earth".equals(from) || "earth_orbit".equals(from)
+					? new Body(0.0F, -150.0F + 30.0F * leg, 170.0F * (1.0F - leg) * (1.0F - leg) + 3.0F, 0) : null;
+		} else if ("moon".equals(from)) {
 			// Leaving the Moon: it sinks away below the bow, the Earth grows ahead.
 			earth = new Body(0.0F, -60.0F, 38.0F + 132.0F * leg * leg, 0);
 			moon = new Body(0.0F, -150.0F, 60.0F * (1.0F - leg) + 4.0F, 0);
