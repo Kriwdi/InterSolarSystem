@@ -74,6 +74,8 @@ public final class SpaceSites extends SavedData {
 			CODEC, null);
 
 	private final Set<String> placed = new HashSet<>();
+	/** Where each site went in this session (tests look here). */
+	public static final java.util.Map<String, BlockPos> PLACED_AT = new java.util.concurrent.ConcurrentHashMap<>();
 
 	public static SpaceSites get(MinecraftServer server) {
 		return server.getDataStorage().computeIfAbsent(TYPE);
@@ -111,7 +113,9 @@ public final class SpaceSites extends SavedData {
 			return;
 		}
 		for (MoonSite s : MOON) {
-			SiteTemplates.place(moon, s.template(), ground(moon, s.x(), s.z(), s.template().endsWith("colony") ? 40 : 6));
+			BlockPos at = ground(moon, s.x(), s.z(), s.template().endsWith("colony") ? 40 : 6);
+			SiteTemplates.place(moon, s.template(), at);
+			PLACED_AT.put(s.template(), at);
 		}
 		state.placed.add("moon");
 		state.setDirty();

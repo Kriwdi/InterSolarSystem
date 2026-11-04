@@ -278,13 +278,14 @@ public class SceneScreenshots implements FabricClientGameTest {
 			// The Ark-1 colony at Shackleton and a historic mission (Lunokhod 1).
 			game.getServer().runCommand("time set 17700");
 			int arkZ = (int) Math.round(89.2 * MoonSites.BLOCKS_PER_DEGREE);
-			int arkY = surfaceY(game, 0, arkZ);
+			BlockPos arkAt = hu.kriwdi.intersolarsystem.space.SpaceSites.PLACED_AT.get("moon/ark1_colony");
+			int arkY = arkAt != null ? arkAt.getY() : surfaceY(game, 0, arkZ);
 			game.getServer().runCommand("execute in intersolarsystem:moon run tp @a 70 " + (arkY + 40) + " " + (arkZ - 70)
 					+ " 45 28");
 			context.waitTicks(200);
 			context.takeScreenshot("17_moon_ark1_colony");
-			game.getServer().runCommand("execute in intersolarsystem:moon run tp @a 0 " + (arkY + 9) + " " + (arkZ - 14)
-					+ " 0 10");
+			game.getServer().runCommand("execute in intersolarsystem:moon run tp @a 0 " + (arkY + 9) + " " + (arkZ - 12)
+					+ " 180 10");
 			context.waitTicks(60);
 			context.takeScreenshot("17b_moon_ark1_bridge");
 			int lx = (int) Math.round(-35.0 * MoonSites.BLOCKS_PER_DEGREE);
