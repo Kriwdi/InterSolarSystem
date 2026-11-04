@@ -85,3 +85,11 @@ A felhasználó kérése: később több bolygó, hold és objektum jön, a prog
 - **Anyahajó:** a szekciók berendezve (életfenntartás, farm, labor, kabinok, étkező, gyengélkedő, hangár, híd).
 - **Hátra van:** kutatóhajó-készlet és dokkolás; anyahajós utazási események valódi javítással; a Bárka–1 telepeseinek
   felébresztése (következő égitestek előtti horog).
+- **Új égitest: Mars (2026-11-04 hajnal):** fúziós hajtóművel (3-as szint) érhető el; saját dimenzió (10 600
+  blokk, 0,38 g, belélegezhetetlen légkör), síkság / dűne / felföld biome-ok, sarki jégsapkák, kráterek, kanyonok;
+  vajkaramell ég Phobosszal, Deimosszal és a Föld-csillaggal; valódi missziók (Viking 1–2, Pathfinder, Spirit,
+  Opportunity, Curiosity, Perseverance + Ingenuity, Zhurong, InSight); a Bárka–2 kolónia a Jezero-deltán a
+  feltárással (a „fal” és a rover „kulcsa” a következő történetszál horga); két új napló (16, 17).
+  Bővítés: új égitest = `solar_system.json` sor (`min_tier`), dimenzió + biome-ok (`tools/worldgen/make_mars.py`
+  mintájára), helyszínek a `space_sites.py`-ban és egy `*Sites` lista; a hajó nézete (`ShipView.place`) és a
+  leszállás (`ShipLanding`) egy-egy ággal bővül.

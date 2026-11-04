@@ -20,7 +20,7 @@ Ez az útmutató végigvezet a mod jelenlegi tartalmán: hogyan indulj, mit csin
 10. [Navigáció és utazás](#10-navigáció-és-utazás)
 11. [Űrruha és oxigén](#11-űrruha-és-oxigén)
 12. [Föld körüli pálya és az ISS](#12-föld-körüli-pálya-és-az-iss)
-13. [A Hold](#13-a-hold)
+13. [A Hold](#13-a-hold) · [A Mars](#13b-a-mars)
 14. [Hajtómű-fejlesztés](#14-hajtómű-fejlesztés)
 15. [Parancsok](#15-parancsok)
 16. [Tippek és gyakori kérdések](#16-tippek-és-gyakori-kérdések)
@@ -563,6 +563,19 @@ A Holdról a **Föld körüli pálya** vagy egyenesen a **Föld** felé indulhat
 
 ---
 
+## 13b. A Mars
+
+A **Mars** cél a **fúziós hajtóművel** (3-as szint) nyílik meg; az út hosszú (a startablaktól függően kb. 40–60 perc), közben a csillagok, a Tejút és az elsuhanó por kísér. A hajó a **Jezero-kráterben** száll le, a Bárka–2 kolóniától délre.
+
+- **A világ:** 10 600 blokk körbe. Rozsdás regolitsíkságok sötét bazaltfoltokkal, narancssárga **dűnetengerek**, kráteres **felföldek** kanyonokkal, a sarkokon (kb. ±4250-től) réteges **sarki jégsapkák**.
+- **Levegő és gravitáció:** a légkör a földinek századrésze, szén-dioxid: **űrruha kell**. A gravitáció 38%.
+- **Ég:** nappal vajkaramell színű, éjjel csillagos; a **Phobos** naponta háromszor átrohan az égen, a **Deimos** kis pont, a **Föld** kék esthajnalcsillag a nap közelében.
+- **Nyersanyag:** marsi bazalt, regolit, por, **rétegzett homokkő**, **hematitgömböcskék** (vas), **perklorátkéreg** (jövőbeli oxigéngyártáshoz), **sarki jég**.
+- **Relikviák** a valódi helyükön, táblával: Viking–1 és –2, Pathfinder a Sojournerrel, a homokba ragadt **Spirit**, a porvihar elnémította **Opportunity**, a **Curiosity** a Sharp-hegy rétegein, a **Perseverance** mintacsövekkel és az **Ingenuity** helikopterrel, a Zhurong, az InSight.
+- **A Bárka–2 kolónia:** a deltára leszállt, megdőlt Bárka (bejárható híd a hajónaplóval), lakómodulok, labor (a geológus naplója), halott üvegház, napelemek, antenna, leszállópálya – és északon a **feltárás**: lépcsőzetes gödör állvánnyal és daruval, az alján valami, amit nem ember épített. A szélén az oldalára borult kolóniarover. *A szalagok és a terminálok elmondják a többit.*
+
+---
+
 ## 14. Hajtómű-fejlesztés
 
 A hajtómű szintje osztja az utazási időt:
@@ -571,7 +584,7 @@ A hajtómű szintje osztja az utazási időt:
 |---|---|---|
 | 1 | ×1 | alap |
 | 2 | ×3 | **ionhajtómű-készlet** (Föld érceiből) |
-| 3 | ×10 | **fúziós hajtómű-készlet** (urán a Földről + hélium-3 a Holdról) |
+| 3 | ×10 | **fúziós hajtómű-készlet** (urán a Földről + hélium-3 a Holdról); **ez kell a Marshoz** |
 | 4 | ×30 | később (a külső bolygókhoz) |
 
 **Beszerelés:**
@@ -645,7 +658,8 @@ Ha a hajó terén kívülre kerülsz, a játék fél másodpercen belül visszat
 ## 17. Ami még nincs kész
 
 - **Saját élőlények** (mutánsok, drónok): most a világ üres.
-- A **többi bolygó** (Mars, Vénusz, Merkúr, aszteroidaöv, külső bolygók): a listában látszanak, de zárva vannak.
+- A **többi bolygó** (Vénusz, Merkúr, aszteroidaöv, külső bolygók): a listában látszanak, de zárva vannak. (A Mars már elérhető.)
+- A Jezero alatti fal és a rover „kulcsa”: a történet folytatása.
 - **Több hajóosztály** és bővíthető belső tér: most egy alap hajó van.
 - **Bányászdrónok megjavítása**, olajfinomítás üzemanyaggá, víz- és levegőszűrés.
 - **A 4-es hajtómű-szint** beszerezhető alkatrésze.
