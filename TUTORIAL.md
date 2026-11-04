@@ -726,6 +726,7 @@ A Föld–Hold rendszeren túl az **anyahajó hajtóműve** számít (alapból 3
 | `/iss ship fly <x> <z>` | operátor | repülés egy földi koordinátára (a hajóból) |
 | `/iss ship engine <1-4>` | operátor | hajtómű-szint beállítása (tesztelésre) |
 | `/iss ship meteors` | operátor | meteorraj indítása repülés közben (tesztelésre) |
+| `/iss goto <égitest>` | operátor | azonnal az égitest leszállóhelyére visz, hajó és utazás nélkül (tesztelésre); a célokat a Tab kiegészíti |
 | `/iss difficulty [szint]` | mindenki megnézheti, operátor állíthatja | nehézség: `easy`, `normal`, `realistic` |
 
 Alrendszer nevek: `engine`, `fuel_energy`, `hull_armor`, `life_support`, `navigation_comms`, `stabilizer`, `landing_launch`, `cargo`.

@@ -45,6 +45,7 @@ The world has one persistent ship (`ShipState`, saved in the world as `data/inte
 |---|---|---|
 | `/iss ship info` | everyone | Shows the hull class and the condition (0-100%) of the eight subsystems |
 | `/iss ship set <subsystem> <value>` | OP (level 2) | Sets a subsystem condition; `set` is a development tool and may become debug-only in phase 2 |
+| `/iss goto <body>` | OP (level 2) | Testing: teleports straight to a body's landing site (Earth, Earth orbit, Moon, mothership, Mars and every far world), no ship or travel |
 
 Subsystems: `engine`, `fuel_energy`, `hull_armor`, `life_support`, `navigation_comms`, `stabilizer`, `landing_launch`, `cargo`.
 
