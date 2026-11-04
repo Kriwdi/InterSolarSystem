@@ -1,6 +1,7 @@
 {
   "values": [
     "#minecraft:universal",
-    "minecraft:day"
+    "minecraft:day",
+    "intersolarsystem:mars_night"
   ]
 }

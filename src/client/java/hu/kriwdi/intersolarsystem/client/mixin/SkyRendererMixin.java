@@ -120,6 +120,7 @@ public abstract class SkyRendererMixin {
 			intersolarsystem$drawSpace(renderPass, poseStack, 1.0F, (float) Math.toDegrees(starAngle));
 		}
 		if (intersolarsystem$onMars()) {
+			intersolarsystem$drawSpace(renderPass, poseStack, starBrightness * 0.8F, (float) Math.toDegrees(starAngle));
 			intersolarsystem$drawMarsSky(renderPass, poseStack, (float) Math.toDegrees(sunAngle), (float) Math.toDegrees(starAngle));
 			return;
 		}

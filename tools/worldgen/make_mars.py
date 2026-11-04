@@ -34,7 +34,8 @@ def dimension():
     mars["attributes"]["minecraft:visual/cloud_color"] = "#00ffffff"
     mars["timelines"] = "#intersolarsystem:on_mars"
     write("intersolarsystem/dimension_type/mars.json", mars)
-    write("intersolarsystem/tags/timeline/on_mars.json", {"values": ["#minecraft:universal", "minecraft:day"]})
+    write("intersolarsystem/tags/timeline/on_mars.json", {"values": ["#minecraft:universal", "minecraft:day",
+                                                                         NS + "mars_night"]})
     biomes = [
         ("mars_plains", [-1.0, 0.2], [-1.0, 0.1]),
         ("mars_dunes", [0.2, 1.0], [-1.0, 0.1]),
