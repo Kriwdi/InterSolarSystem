@@ -48,7 +48,8 @@ public final class SolarSystem {
 			list.add(new CelestialBody(o.get("id").getAsString(), CelestialBody.Kind.of(o.get("kind").getAsString()),
 					optional(o, "parent"), o.get("transfer_days").getAsDouble(), o.get("synodic_days").getAsDouble(),
 					CelestialBody.Status.of(o.get("status").getAsString()), optional(o, "assist"),
-					o.has("min_tier") ? o.get("min_tier").getAsInt() : 1));
+					o.has("min_tier") ? o.get("min_tier").getAsInt() : 1,
+					o.has("via_mothership") && o.get("via_mothership").getAsBoolean()));
 		}
 		return List.copyOf(list);
 	}

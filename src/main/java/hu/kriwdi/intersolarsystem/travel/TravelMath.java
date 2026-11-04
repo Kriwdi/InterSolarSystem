@@ -8,6 +8,10 @@ public final class TravelMath {
 	public static final int REAL_DAY_TICKS = 2400;
 	public static final int[] ENGINE_MULTIPLIERS = {1, 3, 10, 30};
 	public static final double WORST_WINDOW_FACTOR = 1.5;
+	/** The hop between the mothership and the body under it, in real days. */
+	public static final double DOCK_DAYS = 0.25;
+	/** The Ark-class mothership crosses twice as fast as a small ship of the same engine tier. */
+	public static final int MOTHERSHIP_SPEEDUP = 2;
 
 	private TravelMath() {
 	}
@@ -62,11 +66,19 @@ public final class TravelMath {
 		if ("earth".equals(placeId)) {
 			return 0.0;
 		}
+		if (placeId.endsWith("_orbit") && !"earth_orbit".equals(placeId)) {
+			// A mothership station: the body's distance.
+			return placeDays(placeId.substring(0, placeId.length() - "_orbit".length()));
+		}
 		return SolarSystem.byId(placeId).map(CelestialBody::transferDays).orElse(0.0);
 	}
 
 	/** Ticks for a leg from one place to another, with the launch window of the farther one. */
 	public static long legTicks(String from, String to, int engineTier, long gameTime) {
+		if ("mothership".equals(from) || "mothership".equals(to)) {
+			// Between the mothership and the body it orbits (or a neighbour in the Earth-Moon system): a short hop.
+			return Math.max(1, Math.round(DOCK_DAYS * REAL_DAY_TICKS / multiplier(engineTier)));
+		}
 		double days = Math.abs(placeDays(to) - placeDays(from));
 		String far = placeDays(to) >= placeDays(from) ? to : from;
 		double window = SolarSystem.byId(far).map(b -> windowFactor(b, gameTime)).orElse(1.0);

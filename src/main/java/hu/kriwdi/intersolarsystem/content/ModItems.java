@@ -97,6 +97,10 @@ public final class ModItems {
 	public static final Item FUSION_DRIVE_KIT = register("fusion_drive_kit", Item::new,
 			new Item.Properties().stacksTo(1).rarity(Rarity.RARE));
 
+	/** Tier 4, for the mothership (installed at the helm): built from the asteroid belt's metals. */
+	public static final Item PLASMA_DRIVE_KIT = register("plasma_drive_kit", Item::new,
+			new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
+
 	// ---- Titanium tools: a little better than iron, much tougher.
 	public static final TagKey<Item> TITANIUM_TOOL_MATERIALS = TagKey.create(Registries.ITEM,
 			ModIds.id("titanium_tool_materials"));

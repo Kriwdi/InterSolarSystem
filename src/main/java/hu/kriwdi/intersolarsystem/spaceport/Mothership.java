@@ -30,10 +30,15 @@ import hu.kriwdi.intersolarsystem.space.MoonSites;
  * hall), orbits a body and travels between them from the helm on the bridge. The hangar lift takes the crew down to
  * the body below and back up. One mothership per world (the first one launched); a second launch is refused.
  *
- * <p>Places: "earth_orbit", "moon_orbit"; later worlds add theirs ({@link #DESTINATIONS}).
+ * <p>Places: "earth_orbit", "moon_orbit", and the parking orbit of every body that is reached only through the
+ * mothership ({@link #destinations()}, from solar_system.json). The mothership is the mobile base: the small ship docks
+ * at its side port ({@link #dockingPort()}) and lands on the body below from there.
  */
 public final class Mothership extends SavedData {
+	/** The Earth-Moon stations; the far ones come from the solar system catalogue. */
 	public static final List<String> DESTINATIONS = List.of("earth_orbit", "moon_orbit");
+	/** The Ark-class engines: fusion (tier 3) from the start; the belt's drive kit makes them tier 4. */
+	public static final int BASE_TIER = 3;
 	/** The crane console's place in the mothership dimension: the blueprints are laid out around it. */
 	public static final BlockPos ORIGIN = new BlockPos(5, 60, 48);
 	/** Travel time between two places (ticks). */
@@ -48,6 +53,7 @@ public final class Mothership extends SavedData {
 	private String target = "";
 	private long arrival;
 	private int selected;
+	private int driveTier = BASE_TIER;
 	/** A fault aboard during a journey ("" none): the ship holds its course until it is repaired at the helm. */
 	private String fault = "";
 	/** Faults the journey can throw, and the repair board each needs. */
@@ -67,6 +73,86 @@ public final class Mothership extends SavedData {
 
 	public boolean built() {
 		return built;
+	}
+
+	/** Where the small ship can find the mothership: its station, or "" while it travels (or before it exists). */
+	public String station() {
+		return built && target.isEmpty() ? location : "";
+	}
+
+	public int driveTier() {
+		return driveTier;
+	}
+
+	public void setDriveTier(int tier) {
+		driveTier = Math.max(driveTier, tier);
+		setDirty();
+	}
+
+	/** Every station the mothership can be sent to, nearest first. */
+	public static List<String> destinations() {
+		java.util.List<String> out = new java.util.ArrayList<>(DESTINATIONS);
+		hu.kriwdi.intersolarsystem.travel.SolarSystem.bodies().stream()
+				.filter(b -> b.viaMothership() && b.status() != hu.kriwdi.intersolarsystem.travel.CelestialBody.Status.LOCKED)
+				.sorted(java.util.Comparator.comparingDouble(hu.kriwdi.intersolarsystem.travel.CelestialBody::transferDays))
+				.map(hu.kriwdi.intersolarsystem.travel.CelestialBody::station)
+				.distinct().forEach(out::add);
+		return out;
+	}
+
+	/** The engine tier a station needs (the hardest body there). */
+	static int tierFor(String station) {
+		return hu.kriwdi.intersolarsystem.travel.SolarSystem.bodies().stream()
+				.filter(b -> b.viaMothership() && b.station().equals(station))
+				.mapToInt(hu.kriwdi.intersolarsystem.travel.CelestialBody::minTier).min().orElse(1);
+	}
+
+	/** Place id of a station for the travel maths ("moon_orbit" lies at the Moon). */
+	private static String placeOf(String station) {
+		return "moon_orbit".equals(station) ? "moon" : station;
+	}
+
+	/** Ticks the mothership takes between two stations. */
+	long legTicks(String from, String to, long now) {
+		long ticks = hu.kriwdi.intersolarsystem.travel.TravelMath.legTicks(placeOf(from), placeOf(to), driveTier, now)
+				/ hu.kriwdi.intersolarsystem.travel.TravelMath.MOTHERSHIP_SPEEDUP;
+		return Math.max(LEG_TICKS / 2, ticks);
+	}
+
+	/**
+	 * The side port where the small ship docks: on the lower deck's level, outside the hull on the starboard side, a
+	 * short gangway through the hull.
+	 */
+	public static BlockPos dockingPort() {
+		return ORIGIN.offset(270 - 235, 32 - 1, 80 + 26 - 132);
+	}
+
+	/** Docks the small ship at the port (hull built around the hatch); returns the hatch. */
+	public static BlockPos dockShip(ServerLevel space) {
+		BlockPos port = dockingPort();
+		net.minecraft.world.level.block.state.BlockState plating =
+				hu.kriwdi.intersolarsystem.content.ModBlocks.SHIP_PLATING.defaultBlockState();
+		// The gangway: a plated tube from inside the lower deck to the hatch.
+		for (int z = port.getZ() - 12; z < port.getZ(); z++) {
+			for (int dx = -1; dx <= 1; dx++) {
+				for (int dy = -1; dy <= 3; dy++) {
+					BlockPos p = new BlockPos(port.getX() + dx, port.getY() + dy, z);
+					space.getChunk(p.getX() >> 4, p.getZ() >> 4);
+					boolean inside = dx == 0 && (dy == 0 || dy == 1);
+					if (inside) {
+						space.setBlock(p, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), 2);
+					} else if (space.getBlockState(p).isAir()) {
+						space.setBlock(p, plating, 2);
+					}
+				}
+			}
+		}
+		space.setBlock(port, hu.kriwdi.intersolarsystem.content.ModBlocks.SHIP_HATCH.defaultBlockState()
+				.setValue(hu.kriwdi.intersolarsystem.content.ShipFacingBlock.FACING, net.minecraft.core.Direction.NORTH),
+				net.minecraft.world.level.block.Block.UPDATE_ALL);
+		hu.kriwdi.intersolarsystem.ship.ShipShell.build(space, port, net.minecraft.core.Direction.NORTH,
+				hu.kriwdi.intersolarsystem.ship.ShipShell.Mode.DOCKED);
+		return port;
 	}
 
 	/** Launch from a spaceport: builds the ship in its dimension and takes everybody near the console aboard. */
@@ -153,13 +239,30 @@ public final class Mothership extends SavedData {
 					Component.translatable("mothership.intersolarsystem.place." + target), Math.max(0, (arrival - now) / 1200)));
 			return;
 		}
-		String choice = DESTINATIONS.get(Math.floorMod(selected, DESTINATIONS.size()));
+		// A tier-4 drive kit in hand upgrades the engines.
+		net.minecraft.world.item.ItemStack kit = player.getMainHandItem();
+		if (kit.is(hu.kriwdi.intersolarsystem.content.ModItems.PLASMA_DRIVE_KIT) && driveTier < 4) {
+			kit.shrink(1);
+			setDriveTier(4);
+			level.playSound(null, pos, SoundEvents.BEACON_POWER_SELECT, SoundSource.BLOCKS, 1.0F, 0.6F);
+			broadcast(level.getServer(), Component.translatable("mothership.intersolarsystem.drive_upgraded", 4)
+					.withStyle(ChatFormatting.GREEN));
+			return;
+		}
+		List<String> all = destinations();
+		String choice = all.get(Math.floorMod(selected, all.size()));
 		if (player.isShiftKeyDown()) {
-			selected = Math.floorMod(selected + 1, DESTINATIONS.size());
+			selected = Math.floorMod(selected + 1, all.size());
 			setDirty();
-			choice = DESTINATIONS.get(selected);
-			player.sendOverlayMessage(Component.translatable("mothership.intersolarsystem.course",
-					Component.translatable("mothership.intersolarsystem.place." + choice)));
+			choice = all.get(selected);
+			player.sendOverlayMessage(Component.translatable("mothership.intersolarsystem.course_time",
+					Component.translatable("mothership.intersolarsystem.place." + choice),
+					hu.kriwdi.intersolarsystem.travel.TravelMath.formatDuration(legTicks(location, choice, now))));
+			return;
+		}
+		if (tierFor(choice) > driveTier) {
+			player.sendOverlayMessage(Component.translatable("mothership.intersolarsystem.needs_tier", tierFor(choice))
+					.withStyle(ChatFormatting.RED));
 			return;
 		}
 		if (choice.equals(location)) {
@@ -167,12 +270,13 @@ public final class Mothership extends SavedData {
 					Component.translatable("mothership.intersolarsystem.place." + location)));
 			return;
 		}
+		long leg = legTicks(location, choice, now);
 		target = choice;
-		arrival = now + LEG_TICKS;
+		arrival = now + leg;
 		setDirty();
 		level.playSound(null, pos, SoundEvents.BEACON_ACTIVATE, SoundSource.BLOCKS, 1.0F, 0.5F);
 		broadcast(level.getServer(), Component.translatable("mothership.intersolarsystem.departing",
-				Component.translatable("mothership.intersolarsystem.place." + target), LEG_TICKS / 1200));
+				Component.translatable("mothership.intersolarsystem.place." + target), Math.max(1, leg / 1200)));
 	}
 
 	private void tick(MinecraftServer server) {
@@ -235,7 +339,16 @@ public final class Mothership extends SavedData {
 			player.sendOverlayMessage(Component.translatable("mothership.intersolarsystem.lift_travelling"));
 			return;
 		}
-		if ("moon_orbit".equals(location)) {
+		if ("mars_orbit".equals(location)) {
+			ServerLevel mars = server.getLevel(ShipDimensions.MARS);
+			if (mars != null) {
+				hu.kriwdi.intersolarsystem.space.MarsSites.ensureBuilt(mars);
+				int[] zone = hu.kriwdi.intersolarsystem.space.MarsSites.LANDING_ZONE;
+				BlockPos at = MoonSites.surface(mars, zone[0] - 8, zone[1]);
+				player.teleport(new TeleportTransition(mars, Vec3.atBottomCenterOf(at), Vec3.ZERO, player.getYRot(), 0.0F,
+						TeleportTransition.DO_NOTHING));
+			}
+		} else if ("moon_orbit".equals(location)) {
 			ServerLevel moon = server.getLevel(ShipDimensions.MOON);
 			if (moon != null) {
 				int[] zone = MoonSites.LANDING_ZONE;
@@ -261,6 +374,7 @@ public final class Mothership extends SavedData {
 		m.arrival = t.getLongOr("arrival", 0L);
 		m.selected = t.getIntOr("selected", 0);
 		m.fault = t.getStringOr("fault", "");
+		m.driveTier = t.getIntOr("driveTier", BASE_TIER);
 		return m;
 	}
 
@@ -272,6 +386,7 @@ public final class Mothership extends SavedData {
 		t.putLong("arrival", arrival);
 		t.putInt("selected", selected);
 		t.putString("fault", fault);
+		t.putInt("driveTier", driveTier);
 		return t;
 	}
 }

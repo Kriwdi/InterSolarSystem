@@ -69,17 +69,22 @@ public final class ShipLanding {
 	}
 
 	/** Where the ship landed, and whether it had to fall back to the world spawn. */
-	public record Landing(BlockPos hatch, boolean usedSpawn, boolean docked, boolean moon, boolean mars) {
+	public record Landing(BlockPos hatch, boolean usedSpawn, boolean docked, boolean moon, boolean mars,
+			boolean mothership) {
+		public Landing(BlockPos hatch, boolean usedSpawn, boolean docked, boolean moon, boolean mars) {
+			this(hatch, usedSpawn, docked, moon, mars, false);
+		}
+
 		public Landing(BlockPos hatch, boolean usedSpawn) {
-			this(hatch, usedSpawn, false, false, false);
+			this(hatch, usedSpawn, false, false, false, false);
 		}
 
 		public Landing(BlockPos hatch, boolean usedSpawn, boolean docked) {
-			this(hatch, usedSpawn, docked, false, false);
+			this(hatch, usedSpawn, docked, false, false, false);
 		}
 
 		public Landing(BlockPos hatch, boolean usedSpawn, boolean docked, boolean moon) {
-			this(hatch, usedSpawn, docked, moon, false);
+			this(hatch, usedSpawn, docked, moon, false, false);
 		}
 	}
 
@@ -111,6 +116,15 @@ public final class ShipLanding {
 				state.setLandingSite(new ShipState.LandingSite(moon.dimension().identifier().toString(),
 						hatch.getX(), hatch.getY(), hatch.getZ()));
 				return new Landing(hatch, false, false, true);
+			}
+		}
+		if (ShipDimensions.MOTHERSHIP.identifier().toString().equals(state.travel().landIn())) {
+			ServerLevel space = server.getLevel(ShipDimensions.MOTHERSHIP);
+			if (space != null) {
+				BlockPos hatch = hu.kriwdi.intersolarsystem.spaceport.Mothership.dockShip(space);
+				state.setLandingSite(new ShipState.LandingSite(space.dimension().identifier().toString(),
+						hatch.getX(), hatch.getY(), hatch.getZ()));
+				return new Landing(hatch, false, true, false, false, true);
 			}
 		}
 		if (ShipDimensions.MARS.identifier().toString().equals(state.travel().landIn())) {
@@ -150,7 +164,8 @@ public final class ShipLanding {
 	}
 
 	public static void announce(MinecraftServer server, Landing landing) {
-		String key = landing.mars() ? "message.intersolarsystem.mars.landed"
+		String key = landing.mothership() ? "message.intersolarsystem.mothership.docked"
+				: landing.mars() ? "message.intersolarsystem.mars.landed"
 				: landing.moon() ? "message.intersolarsystem.moon.landed"
 				: landing.docked() ? "message.intersolarsystem.orbit.docked"
 				: landing.usedSpawn() ? "message.intersolarsystem.ship.landed_spawn" : "message.intersolarsystem.ship.landed";

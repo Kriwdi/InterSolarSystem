@@ -317,7 +317,8 @@ public final class ShipShell {
 			return;
 		}
 		Direction out = hatchState.getValue(ShipFacingBlock.FACING);
-		boolean docked = ShipDimensions.ORBIT.identifier().toString().equals(site.dimension());
+		boolean docked = ShipDimensions.ORBIT.identifier().toString().equals(site.dimension())
+				|| ShipDimensions.MOTHERSHIP.identifier().toString().equals(site.dimension());
 		// The hull is rebuilt every start: older hulls (the box-shaped one) get the current shape.
 		remove(level, hatch, out);
 		build(level, hatch, out, docked ? Mode.DOCKED : Mode.GROUND);

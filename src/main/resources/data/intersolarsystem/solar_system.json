@@ -1,5 +1,5 @@
 {
-  "__comment": "Travel data for the navigation console. transfer_days: real-world one-way transfer time from Earth (minimum-energy route, rounded); synodic_days: real-world time between launch windows from Earth. Times in game are divided by 10 and by the engine multiplier. Order = order on the console. status: surface (Earth), orbit (dock in Earth orbit), flyby (free-return loop), landing (has its own world), locked.",
+  "__comment": "Travel data for the navigation console. transfer_days: real-world one-way transfer time from Earth (minimum-energy route, rounded); synodic_days: real-world time between launch windows from Earth. Times in game are divided by 10 and by the engine multiplier. Order = order on the console. status: surface (Earth), orbit (dock in Earth orbit), flyby (free-return loop), landing (has its own world), locked. dock: the mothership's hangar (wherever it is). via_mothership: beyond the Earth-Moon system the small ship only goes from the mothership in that body's orbit; min_tier then is the mothership's engine tier.",
   "bodies": [
     {
       "id": "earth",
@@ -25,6 +25,13 @@
       "status": "landing"
     },
     {
+      "id": "mothership",
+      "kind": "orbit",
+      "transfer_days": 0.25,
+      "synodic_days": 0,
+      "status": "dock"
+    },
+    {
       "id": "venus",
       "kind": "planet",
       "transfer_days": 150,
@@ -44,7 +51,8 @@
       "transfer_days": 210,
       "synodic_days": 780,
       "status": "landing",
-      "min_tier": 3
+      "min_tier": 3,
+      "via_mothership": true
     },
     {
       "id": "ceres",

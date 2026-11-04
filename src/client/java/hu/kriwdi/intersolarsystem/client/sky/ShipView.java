@@ -101,6 +101,7 @@ public final class ShipView {
 		return switch (id) {
 			case "moon" -> new Scene(-1, MOON_GROUND, LANDED_DEPTH, 1.0F, 0.0F, EARTH_FROM_MOON, null, 0.0F, "moon");
 			case "mars" -> new Scene(MARS_SKY, MARS_GROUND, LANDED_DEPTH, 0.0F, 0.0F, null, null, 0.0F, "mars");
+			case "mothership" -> new Scene(-1, -1, 0.0F, 1.0F, 0.0F, null, null, 0.0F);
 			case "earth_orbit" -> new Scene(-1, -1, 0.0F, 1.0F, 0.0F, EARTH_BELOW, null, 0.0F);
 			case "earth" -> new Scene(EARTH_SKY, EARTH_GROUND, LANDED_DEPTH, 0.0F, 0.0F, null, null, 0.0F,
 					ground.isEmpty() ? "ash_desert" : ground);
@@ -144,7 +145,7 @@ public final class ShipView {
 	/** Where a journey's target leaves the ship ("earth_orbit" docks, "moon" lands, "earth" lands, others fly by). */
 	private static String destination(String target) {
 		return switch (target) {
-			case "moon", "earth_orbit", "earth", "mars" -> target;
+			case "moon", "earth_orbit", "earth", "mars", "mothership" -> target;
 			default -> last.from();
 		};
 	}

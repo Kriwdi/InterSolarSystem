@@ -5,6 +5,7 @@ import java.util.Optional;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -54,6 +55,9 @@ public final class ShipNavigation {
 		if (ShipDimensions.MARS.identifier().toString().equals(dimension)) {
 			return "mars";
 		}
+		if (ShipDimensions.MOTHERSHIP.identifier().toString().equals(dimension)) {
+			return "mothership";
+		}
 		return "earth";
 	}
 
@@ -65,20 +69,65 @@ public final class ShipNavigation {
 		return "earth_orbit".equals(here(state));
 	}
 
-	/** Whether a body can be chosen from {@code here}: anywhere but where the ship already is. */
+	/** The Earth-Moon system: the small ship's own range. */
+	public static final java.util.Set<String> LOCAL = java.util.Set.of("earth", "earth_orbit", "moon");
+	private static final java.util.Set<String> LOCAL_STATIONS = java.util.Set.of("earth_orbit", "moon_orbit");
+
+	/** Without a mothership (tests, old callers). */
 	public static boolean reachable(CelestialBody body, String here) {
+		return reachable(body, here, "");
+	}
+
+	/**
+	 * Whether a body can be chosen from {@code here}. The small ship flies within the Earth-Moon system; beyond it only
+	 * from the mothership when that orbits the body ({@code mothershipAt}: its station, "" when it is under way or
+	 * not built), and back up to it.
+	 */
+	public static boolean reachable(CelestialBody body, String here, String mothershipAt) {
+		if (body.id().equals(here) || body.status() == CelestialBody.Status.LOCKED) {
+			return false;
+		}
+		boolean dockedLocal = "mothership".equals(here) && LOCAL_STATIONS.contains(mothershipAt);
+		boolean local = LOCAL.contains(here) || dockedLocal;
+		if (body.status() == CelestialBody.Status.DOCK) {
+			if (mothershipAt.isEmpty()) {
+				return false;
+			}
+			if (LOCAL_STATIONS.contains(mothershipAt)) {
+				return LOCAL.contains(here);
+			}
+			return SolarSystem.byId(here).map(h -> h.station().equals(mothershipAt)).orElse(false);
+		}
+		if (body.viaMothership()) {
+			if (!body.station().equals(mothershipAt)) {
+				return false;
+			}
+			// From the mothership, or across from a neighbour in the same system (a moon of the same planet).
+			return "mothership".equals(here)
+					|| SolarSystem.byId(here).map(h -> h.viaMothership() && h.station().equals(mothershipAt)).orElse(false);
+		}
+		if (!local) {
+			// Stranded far away without the mothership: only the long burn home.
+			return body.status() == CelestialBody.Status.SURFACE && !mothershipAt.equals(
+					SolarSystem.byId(here).map(CelestialBody::station).orElse(""));
+		}
 		return switch (body.status()) {
 			case FLYBY -> "earth".equals(here) || "earth_orbit".equals(here);
-			case ORBIT, LANDING -> !body.id().equals(here);
+			case ORBIT, LANDING -> true;
 			case SURFACE -> !"earth".equals(here);
-			case LOCKED -> false;
+			default -> false;
 		};
+	}
+
+	/** Where the mothership is parked for the small ship ("" while it travels or before it is built). */
+	public static String mothershipAt(MinecraftServer server) {
+		return hu.kriwdi.intersolarsystem.spaceport.Mothership.get(server).station();
 	}
 
 	public static void open(MinecraftServer server, ServerPlayer player) {
 		ShipState state = ShipStateAccess.get(server);
 		ServerPlayNetworking.send(player, new NavigationPayloads.Open(state.travel().engineTier(),
-				server.overworld().getGameTime(), blocker(state), here(state)));
+				server.overworld().getGameTime(), blocker(state), here(state), mothershipAt(server)));
 	}
 
 	/**
@@ -101,14 +150,14 @@ public final class ShipNavigation {
 			return "message.intersolarsystem.nav.blocked.not_aboard";
 		}
 		Optional<CelestialBody> body = SolarSystem.byId(bodyId);
-		if (body.isEmpty() || !reachable(body.get(), here(state))) {
+		if (body.isEmpty() || !reachable(body.get(), here(state), mothershipAt(server))) {
 			return "message.intersolarsystem.nav.unreachable";
 		}
 		String blocker = blocker(state);
 		if (!blocker.isEmpty()) {
 			return blocker;
 		}
-		if (state.travel().engineTier() < body.get().minTier()) {
+		if (!body.get().viaMothership() && state.travel().engineTier() < body.get().minTier()) {
 			return "message.intersolarsystem.nav.blocked.engine_tier";
 		}
 		long now = server.overworld().getGameTime();
@@ -124,6 +173,12 @@ public final class ShipNavigation {
 				int[] zone = mars ? hu.kriwdi.intersolarsystem.space.MarsSites.LANDING_ZONE : MoonSites.LANDING_ZONE;
 				started = state.beginTakeoff(zone[0], zone[1], now, seed, ShipFlightKind.NORMAL, body.get().id(),
 						flightTicks, (mars ? ShipDimensions.MARS : ShipDimensions.MOON).identifier().toString());
+			}
+			case DOCK -> {
+				flightTicks = TravelMath.legTicks(here(state), "mothership", tier, now);
+				BlockPos port = hu.kriwdi.intersolarsystem.spaceport.Mothership.dockingPort();
+				started = state.beginTakeoff(port.getX(), port.getZ(), now, seed, ShipFlightKind.NORMAL, "mothership",
+						flightTicks, ShipDimensions.MOTHERSHIP.identifier().toString());
 			}
 			case ORBIT -> {
 				flightTicks = TravelMath.legTicks(here(state), body.get().id(), tier, now);

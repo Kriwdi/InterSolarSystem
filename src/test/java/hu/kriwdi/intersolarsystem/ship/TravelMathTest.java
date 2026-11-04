@@ -79,8 +79,16 @@ class TravelMathTest {
 		assertTrue(ShipNavigation.reachable(orbit, "moon"));
 		assertTrue(ShipNavigation.reachable(earth, "moon"));
 		assertTrue(!ShipNavigation.reachable(earth, "earth"));
-		assertTrue(ShipNavigation.reachable(body("mars"), "moon"));
-		assertTrue(!ShipNavigation.reachable(body("mars"), "mars"));
+		// Beyond the Moon only through the mothership.
+		assertTrue(!ShipNavigation.reachable(body("mars"), "moon"));
+		assertTrue(!ShipNavigation.reachable(body("mars"), "moon", "moon_orbit"));
+		assertTrue(ShipNavigation.reachable(body("mars"), "mothership", "mars_orbit"));
+		assertTrue(!ShipNavigation.reachable(body("mars"), "mars", "mars_orbit"));
+		assertTrue(ShipNavigation.reachable(body("mothership"), "mars", "mars_orbit"));
+		assertTrue(!ShipNavigation.reachable(body("mothership"), "mars", ""));
+		assertTrue(ShipNavigation.reachable(body("mothership"), "earth_orbit", "earth_orbit"));
+		assertTrue(ShipNavigation.reachable(moon, "mothership", "earth_orbit"));
+		assertTrue(!ShipNavigation.reachable(moon, "mothership", "mars_orbit"));
 		assertTrue(!ShipNavigation.reachable(body("jupiter"), "earth"));
 	}
 }

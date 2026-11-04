@@ -44,7 +44,8 @@ public final class FlightControls {
 	public static void plotCourse(MinecraftServer server, ServerPlayer player, String bodyId) {
 		ShipState state = ShipStateAccess.get(server);
 		Optional<CelestialBody> body = SolarSystem.byId(bodyId);
-		if (body.isEmpty() || !ShipNavigation.reachable(body.get(), ShipNavigation.here(state))) {
+		if (body.isEmpty() || !ShipNavigation.reachable(body.get(), ShipNavigation.here(state),
+				ShipNavigation.mothershipAt(server))) {
 			player.sendSystemMessage(Component.translatable("message.intersolarsystem.nav.unreachable")
 					.withStyle(ChatFormatting.RED));
 			return;

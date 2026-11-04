@@ -161,6 +161,14 @@ public class SceneScreenshots implements FabricClientGameTest {
 			game.getServer().runCommand("execute in intersolarsystem:mothership run tp @a 0 101 0 90 0");
 			context.waitTicks(40);
 			context.takeScreenshot("06m_mothership_inside");
+			// The small ship docked at the side port.
+			game.getServer().runOnServer(server -> hu.kriwdi.intersolarsystem.spaceport.Mothership.dockShip(
+					server.getLevel(ShipDimensions.MOTHERSHIP)));
+			BlockPos port = hu.kriwdi.intersolarsystem.spaceport.Mothership.dockingPort();
+			game.getServer().runCommand("execute in intersolarsystem:mothership run tp @a " + (port.getX() + 30) + " "
+					+ (port.getY() + 14) + " " + (port.getZ() + 30) + " 135 20");
+			context.waitTicks(60);
+			context.takeScreenshot("06n_ship_docked_at_mothership");
 			game.getServer().runCommand("gamemode creative @a");
 
 			// Earth orbit: the ISS, the Earth below, and the night sky.

@@ -18,9 +18,11 @@ public final class NavigationPayloads {
 	/**
 	 * Server -> client: open the console with the ship's engine tier, the server's game time, why it cannot launch
 	 * ({@code blocker}: a translation key, "" when it can) and where the ship is ({@code here}: "earth", "earth_orbit",
-	 * "moon").
+	 * "moon", "mars", "mothership") and where the mothership is parked ({@code mothershipAt}: "mars_orbit"; "" under
+	 * way or not built).
 	 */
-	public record Open(int engineTier, long gameTime, String blocker, String here) implements CustomPacketPayload {
+	public record Open(int engineTier, long gameTime, String blocker, String here, String mothershipAt)
+			implements CustomPacketPayload {
 		public static final CustomPacketPayload.Type<Open> TYPE = new CustomPacketPayload.Type<>(ModIds.id("nav_open"));
 		public static final StreamCodec<ByteBuf, Open> CODEC = StreamCodec.of(
 				(buf, p) -> {
@@ -28,14 +30,16 @@ public final class NavigationPayloads {
 					buf.writeLong(p.gameTime());
 					writeString(buf, p.blocker(), 128);
 					writeString(buf, p.here(), MAX_ID_LENGTH);
+					writeString(buf, p.mothershipAt(), MAX_ID_LENGTH);
 				},
 				buf -> {
 					int engine = VarInt.read(buf);
 					long time = buf.readLong();
 					String blocker = readString(buf, 128);
 					String here = readString(buf, MAX_ID_LENGTH);
+					String mothership = readString(buf, MAX_ID_LENGTH);
 					buf.skipBytes(buf.readableBytes());
-					return new Open(engine, time, blocker, here);
+					return new Open(engine, time, blocker, here, mothership);
 				});
 
 		public boolean canLaunch() {

@@ -2542,6 +2542,58 @@ public final class ModLangTable {
 				"The dust storm has passed.",
 				"Der Staubsturm ist vorüber.",
 				"A porvihar elvonult.");
+		add(rows, "body.intersolarsystem.mothership",
+				"Mothership (hangar)",
+				"Mutterschiff (Hangar)",
+				"Anyahajó (hangár)");
+		add(rows, "screen.intersolarsystem.nav.status.dock",
+				"dock",
+				"andocken",
+				"dokkolás");
+		add(rows, "screen.intersolarsystem.nav.dock",
+				"Dock at the mothership's side port: %s",
+				"Am Seitenport des Mutterschiffs andocken: %s",
+				"Dokkolás az anyahajó oldalsó dokkolóportján: %s");
+		add(rows, "screen.intersolarsystem.nav.docked_here",
+				"Docked at the mothership. Below: the body it orbits.",
+				"Am Mutterschiff angedockt. Darunter: der Himmelskörper, den es umkreist.",
+				"Az anyahajóhoz dokkolva. Alattad: az égitest, amely körül kering.");
+		add(rows, "screen.intersolarsystem.nav.no_mothership",
+				"No mothership in reach (not built, or under way).",
+				"Kein Mutterschiff in Reichweite (nicht gebaut oder unterwegs).",
+				"Nincs elérhető anyahajó (nincs megépítve, vagy úton van).");
+		add(rows, "screen.intersolarsystem.nav.mothership_elsewhere",
+				"The mothership orbits another body.",
+				"Das Mutterschiff umkreist einen anderen Himmelskörper.",
+				"Az anyahajó egy másik égitest körül kering.");
+		add(rows, "screen.intersolarsystem.nav.needs_mothership",
+				"Beyond the Moon the small ship only flies from the mothership: bring it into orbit of %s, dock, and land from there.",
+				"Jenseits des Mondes fliegt das kleine Schiff nur vom Mutterschiff aus: bring es in die Umlaufbahn von %s, docke an und lande von dort.",
+				"A Holdon túl a kishajó csak az anyahajóról repül: vidd az anyahajót %s pályájára, dokkolj, és onnan szállj le.");
+		add(rows, "message.intersolarsystem.mothership.docked",
+				"Docked at the mothership's side port. The gangway leads into the lower deck.",
+				"Am Seitenport des Mutterschiffs angedockt. Der Gang führt aufs Unterdeck.",
+				"Dokkoltunk az anyahajó oldalsó portjánál. Az átjáró az alsó fedélzetre vezet.");
+		add(rows, "mothership.intersolarsystem.place.mars_orbit",
+				"Mars orbit",
+				"Marsumlaufbahn",
+				"Mars körüli pálya");
+		add(rows, "mothership.intersolarsystem.course_time",
+				"Course: %s (%s)",
+				"Kurs: %s (%s)",
+				"Irány: %s (%s)");
+		add(rows, "mothership.intersolarsystem.needs_tier",
+				"The engines are not up to it: tier %s drive needed (install a drive kit at the helm)",
+				"Die Triebwerke schaffen das nicht: Antriebsstufe %s nötig (Antriebsset am Steuer einbauen)",
+				"A hajtóművek ezt nem bírják: %s. szintű hajtás kell (szereld be a készletet a kormánynál)");
+		add(rows, "mothership.intersolarsystem.drive_upgraded",
+				"Mothership drive upgraded to tier %s",
+				"Antrieb des Mutterschiffs auf Stufe %s verbessert",
+				"Az anyahajó hajtása %s. szintre fejlesztve");
+		add(rows, "item.intersolarsystem.plasma_drive_kit",
+				"Plasma Drive Kit (tier 4, mothership)",
+				"Plasmaantriebsset (Stufe 4, Mutterschiff)",
+				"Plazmahajtómű-készlet (4. szint, anyahajó)");
 		check(rows);
 		return List.copyOf(rows);
 	}
