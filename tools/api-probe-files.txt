@@ -1,4 +1,0 @@
-data/minecraft/dimension_type/overworld.json
-data/minecraft/tags/timeline/in_overworld.json
-data/minecraft/worldgen/configured_feature/ice_spike.json
-data/minecraft/worldgen/configured_feature/forest_rock.json

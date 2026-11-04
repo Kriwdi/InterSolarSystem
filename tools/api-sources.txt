@@ -1,1 +1,3 @@
-net.minecraft.client.renderer.SkyRenderer
+net.minecraft.world.level.biome.BiomeSource
+net.minecraft.world.level.biome.MultiNoiseBiomeSource
+net.minecraft.world.level.biome.BiomeResolver
