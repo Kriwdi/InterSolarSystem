@@ -48,6 +48,10 @@ public final class Mothership extends SavedData {
 	private String target = "";
 	private long arrival;
 	private int selected;
+	/** A fault aboard during a journey ("" none): the ship holds its course until it is repaired at the helm. */
+	private String fault = "";
+	/** Faults the journey can throw, and the repair board each needs. */
+	private static final List<String> FAULTS = List.of("coolant", "power", "air");
 
 	public static Mothership get(MinecraftServer server) {
 		return server.getDataStorage().computeIfAbsent(TYPE);
@@ -120,6 +124,30 @@ public final class Mothership extends SavedData {
 	// ---------------------------------------------------------------- helm
 	public void helm(ServerLevel level, BlockPos pos, ServerPlayer player) {
 		long now = level.getServer().overworld().getGameTime();
+		if (!fault.isEmpty()) {
+			net.minecraft.world.item.ItemStack held = player.getMainHandItem();
+			if (!held.is(hu.kriwdi.intersolarsystem.content.ModItems.REPAIR_KIT)) {
+				player.sendOverlayMessage(Component.translatable("mothership.intersolarsystem.fault_need_kit",
+						Component.translatable("mothership.intersolarsystem.fault." + fault)).withStyle(ChatFormatting.RED));
+				return;
+			}
+			hu.kriwdi.intersolarsystem.ship.RepairMinigame board = switch (fault) {
+				case "coolant" -> hu.kriwdi.intersolarsystem.ship.RepairMinigame.VALVE;
+				case "power" -> hu.kriwdi.intersolarsystem.ship.RepairMinigame.WIRING;
+				default -> hu.kriwdi.intersolarsystem.ship.RepairMinigame.PRESSURE;
+			};
+			MinecraftServer server = level.getServer();
+			hu.kriwdi.intersolarsystem.ship.ShipRepairBoards.openExternal(server, player, board, 5, ok -> {
+				if (ok && !fault.isEmpty()) {
+					player.getMainHandItem().shrink(1);
+					broadcast(server, Component.translatable("mothership.intersolarsystem.fault_fixed",
+							Component.translatable("mothership.intersolarsystem.fault." + fault)).withStyle(ChatFormatting.GREEN));
+					fault = "";
+					setDirty();
+				}
+			});
+			return;
+		}
 		if (!target.isEmpty()) {
 			player.sendOverlayMessage(Component.translatable("mothership.intersolarsystem.travelling",
 					Component.translatable("mothership.intersolarsystem.place." + target), Math.max(0, (arrival - now) / 1200)));
@@ -154,12 +182,30 @@ public final class Mothership extends SavedData {
 		long now = server.overworld().getGameTime();
 		long left = arrival - now;
 		ServerLevel space = server.getLevel(ShipDimensions.MOTHERSHIP);
+		if (!fault.isEmpty()) {
+			// Holding course until the fault is fixed: the arrival moves back with the clock.
+			arrival += 20;
+			setDirty();
+			if (now % 600 < 20) {
+				broadcast(server, Component.translatable("mothership.intersolarsystem.fault_reminder",
+						Component.translatable("mothership.intersolarsystem.fault." + fault)).withStyle(ChatFormatting.RED));
+			}
+			return;
+		}
 		if (space != null && left > 0 && now % 2400 < 20) {
-			// Something happens on the way.
+			// Something happens on the way; sometimes it breaks something that needs hands.
 			String event = List.of("micrometeors", "solar_flare", "drift", "systems")
 					.get(space.getRandom().nextInt(4));
 			broadcast(server, Component.translatable("mothership.intersolarsystem.event." + event)
 					.withStyle(ChatFormatting.GOLD));
+			if (!event.equals("drift") && space.getRandom().nextFloat() < 0.5F && !space.players().isEmpty()) {
+				fault = FAULTS.get(space.getRandom().nextInt(FAULTS.size()));
+				setDirty();
+				broadcast(server, Component.translatable("mothership.intersolarsystem.fault_new",
+						Component.translatable("mothership.intersolarsystem.fault." + fault)).withStyle(ChatFormatting.RED));
+				space.players().forEach(p -> space.playSound(null, p.blockPosition(),
+						hu.kriwdi.intersolarsystem.content.ModSounds.OXYGEN_ALARM, SoundSource.PLAYERS, 0.8F, 0.6F));
+			}
 		}
 		if (left <= 0) {
 			location = target;
@@ -214,6 +260,7 @@ public final class Mothership extends SavedData {
 		m.target = t.getStringOr("target", "");
 		m.arrival = t.getLongOr("arrival", 0L);
 		m.selected = t.getIntOr("selected", 0);
+		m.fault = t.getStringOr("fault", "");
 		return m;
 	}
 
@@ -224,6 +271,7 @@ public final class Mothership extends SavedData {
 		t.putString("target", target);
 		t.putLong("arrival", arrival);
 		t.putInt("selected", selected);
+		t.putString("fault", fault);
 		return t;
 	}
 }

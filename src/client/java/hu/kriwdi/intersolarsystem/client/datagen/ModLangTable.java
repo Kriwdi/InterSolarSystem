@@ -2442,6 +2442,34 @@ public final class ModLangTable {
 				"%1$s was shredded by orbital debris whilst fighting %2$s",
 				"%1$s wurde im Kampf gegen %2$s von Weltraumschrott zerfetzt",
 				"%1$s-t szétszaggatta az űrszemét %2$s ellen harcolva");
+		add(rows, "mothership.intersolarsystem.fault.coolant",
+				"reactor coolant leak",
+				"Kühlmittelleck am Reaktor",
+				"szivárog a reaktor hűtőköre");
+		add(rows, "mothership.intersolarsystem.fault.power",
+				"power bus burnt out",
+				"Energiebus durchgebrannt",
+				"kiégett az energiabusz");
+		add(rows, "mothership.intersolarsystem.fault.air",
+				"air scrubbers losing pressure",
+				"Luftwäscher verlieren Druck",
+				"a légtisztítók veszítik a nyomást");
+		add(rows, "mothership.intersolarsystem.fault_new",
+				"FAULT ABOARD: %s. The ship holds course until it is fixed: repair kit, at the helm.",
+				"STÖRUNG AN BORD: %s. Das Schiff hält an, bis sie behoben ist: Reparaturset, am Steuer.",
+				"HIBA A FEDÉLZETEN: %s. A hajó megáll, amíg meg nem javítják: javítókészlettel, a kormánynál.");
+		add(rows, "mothership.intersolarsystem.fault_reminder",
+				"Still holding course: %s. Repair kit at the helm.",
+				"Hält immer noch an: %s. Reparaturset am Steuer.",
+				"Még mindig áll a hajó: %s. Javítókészlet a kormánynál.");
+		add(rows, "mothership.intersolarsystem.fault_need_kit",
+				"%s: bring a repair kit to the helm",
+				"%s: ein Reparaturset zum Steuer bringen",
+				"%s: hozz javítókészletet a kormányhoz");
+		add(rows, "mothership.intersolarsystem.fault_fixed",
+				"Fixed: %s. Back on course.",
+				"Behoben: %s. Wieder auf Kurs.",
+				"Megjavítva: %s. Folytatjuk az utat.");
 		check(rows);
 		return List.copyOf(rows);
 	}

@@ -286,7 +286,7 @@ Minden szekrény körül **törmeléket** (törmelék, törött beton) kell elta
 - A **darukonzolnak** sorban add a készleteket: gerinc, törzs, hajtóművek, reaktor, életfenntartás, farm, labor, szállás, hangár, híd. A daru látványosan, blokkról blokkra építi fel a csarnokban (a törzs a legnagyobb, néhány perc).
 - Ha mind a tíz kész, és a telepen legalább 600 hajtóanyag van: **guggolás + jobb klikk üres kézzel a darukonzolra = indulás**. A közelben állók a fedélzetre kerülnek.
 - **A fedélzeten:**
-  - A hídon áll a **kormányállás**: guggolva irányt választasz (Föld körüli vagy Hold körüli pálya), sima kattintással indulsz. Az út kb. 10 perc, közben események történnek.
+  - A hídon áll a **kormányállás**: guggolva irányt választasz (Föld körüli vagy Hold körüli pálya), sima kattintással indulsz. Az út kb. 10 perc, közben események történnek; néha **meghibásodás** (hűtőkör, energiabusz, légtisztítók): a hajó megáll, amíg valaki **javítókészlettel a kormányhoz** nem megy és meg nem oldja a javítótáblát.
   - A hangárban a **hangárlift** levisz a pálya alatti égitestre. Egy lerakott hangárlift (recept: titán, antenna, áramkör, mágnes, akkumulátor) bárhonnan visszavisz a hangárba.
   - **Berendezett fedélzetek:** életfenntartó üzem (légtisztítók, oxigéngenerátorok, víztartályok, vezérlőterem), hidropónikus ágyások termő növényekkel és öntözőcsatornával, üvegfalú laborok (biológia, anyagvizsgálat, megfigyelő, a vezető kutató irodája), kabinsor (ágy, szekrény, íróasztal minden kabinban), étkező konyhával, gyengélkedő, társalgó, hangár leszállóbölcsőkkel és irányítófülkével, lépcsőzetes híd állomásokkal és hologram-asztallal.
   - A farmfedélzeten az élő talaj megművelhető.
@@ -649,7 +649,7 @@ Ha a hajó terén kívülre kerülsz, a játék fél másodpercen belül visszat
 - **Több hajóosztály** és bővíthető belső tér: most egy alap hajó van.
 - **Bányászdrónok megjavítása**, olajfinomítás üzemanyaggá, víz- és levegőszűrés.
 - **A 4-es hajtómű-szint** beszerezhető alkatrésze.
-- A **kutatóhajó** készlete és dokkolása az anyahajó hangárjába; az anyahajós utazás eseményeinél valódi javítási feladatok.
+- A **kutatóhajó** készlete és dokkolása az anyahajó hangárjába.
 - A **Bárka–1** telepeseinek felébresztése (a terminálok már utalnak rá).
 
 A fejlesztés állapota a [`docs/roadmap.md`](docs/roadmap.md)-ben követhető.
