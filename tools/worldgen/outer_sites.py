@@ -362,11 +362,15 @@ def ice_hauler_wreck():
 
 
 # ---------------------------------------------------------------- Titan
+TITAN_FOUNDATION = 14  # Titan's sites may stand over a sea basin: a deep foundation of their own rock
+
+
 def selk_habitat():
     """SELK HABITAT: by Selk crater, where Dragonfly was sent to look for the chemistry of life. Long modules on
     stilts above the tholin sand, a heated walkway, a sample lab, the airlock with its methane-frosted suits."""
     b = Build("titan/selk_habitat", 8500)
-    ground_pad(b, 26, "tholin_sand", "titan_bedrock_ice", alt="hydrocarbon_sludge", alt_chance=0.06)
+    ground_pad(b, 26, "tholin_sand", "titan_bedrock_ice", alt="hydrocarbon_sludge", alt_chance=0.06,
+               fill=TITAN_FOUNDATION)
     landing_pad(b, 0, 8)
     for (x0, x1, cz) in ((-22, -6, -16), (6, 22, -16)):
         for x in range(x0, x1 + 1, 4):
@@ -405,7 +409,8 @@ def huygens():
     """ESA's Huygens (2005): the first landing in the outer solar system. A little saucer on a bed of rounded ice
     pebbles, its parachute a faded heap beside it."""
     b = Build("titan/huygens", 8510)
-    ground_pad(b, 8, "titan_bedrock_ice", "titan_bedrock_ice", clear=6, alt="tholin_sand", alt_chance=0.3)
+    ground_pad(b, 8, "titan_bedrock_ice", "titan_bedrock_ice", clear=6, alt="tholin_sand", alt_chance=0.3,
+               fill=TITAN_FOUNDATION)
     disc(b, 0, 0, 1, 1.6, S("gold_block"))
     disc(b, 0, 0, 2, 1.1, S("white_concrete"))
     b.set(0, 3, 0, S("antenna_dish"))
@@ -421,7 +426,7 @@ def dragonfly():
     """NASA's Dragonfly (2028; on Titan from 2034): an eight-rotor lander the size of a car, sat where it last came
     down. Its flight computer still answers to a repair kit."""
     b = Build("titan/dragonfly", 8520)
-    ground_pad(b, 10, "tholin_sand", "titan_bedrock_ice", clear=10)
+    ground_pad(b, 10, "tholin_sand", "titan_bedrock_ice", clear=10, fill=TITAN_FOUNDATION)
     for x in range(-3, 4):
         for z in range(-2, 3):
             for y in range(2, 4):
@@ -446,7 +451,8 @@ def kraken_harbour():
     """KRAKEN HARBOUR: a jetty out into a lagoon of liquid methane and ethane off Kraken Mare, a sample skiff's empty
     berth, the boathouse with the last skiff kit in its locker, a buoy line."""
     b = Build("titan/kraken_harbour", 8530)
-    ground_pad(b, 22, "hydrocarbon_sludge", "titan_bedrock_ice", clear=12, alt="tholin_sand", alt_chance=0.2)
+    ground_pad(b, 22, "hydrocarbon_sludge", "titan_bedrock_ice", clear=12, alt="tholin_sand", alt_chance=0.2,
+               fill=TITAN_FOUNDATION)
     for x in range(-22, 23):
         for z in range(0, 23):
             d = math.hypot(x / 22.0, (z - 22) / 18.0)

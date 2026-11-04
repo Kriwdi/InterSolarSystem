@@ -25,9 +25,9 @@
           "left": {
             "type": "minecraft:gradient",
             "axis": "y",
-            "from_coordinate": 40,
+            "from_coordinate": 46,
             "from_value": 1.2,
-            "to_coordinate": 120,
+            "to_coordinate": 126,
             "to_value": -1.2
           },
           "right": {
@@ -62,6 +62,6 @@
     "temperature": 0.0,
     "vegetation": 0.0
   },
-  "sea_level": 72,
+  "sea_level": 70,
   "spawn_target": []
 }

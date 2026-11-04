@@ -162,6 +162,14 @@ public final class Worlds {
 		return new BlockPos(x, level.getMinY(), z);
 	}
 
+	/** Titan's seas of liquid methane (make_outer_planets.py): ground sites stand at least a block above them. */
+	public static final int TITAN_SEA = 70;
+
+	/** The lowest a ground site may sit in a world (its sea level, if it has one). */
+	public static int siteFloor(World w) {
+		return w == TITAN ? TITAN_SEA + 1 : Integer.MIN_VALUE;
+	}
+
 	/** Where ground sites look for the ground from: below the cloud base on Venus, the top elsewhere. */
 	public static int groundScanFrom(World w) {
 		return w == VENUS ? PlanetHazards.VENUS_CLOUD_BASE : Integer.MAX_VALUE;

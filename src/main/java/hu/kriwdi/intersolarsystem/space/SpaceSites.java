@@ -146,6 +146,10 @@ public final class SpaceSites extends SavedData {
 			int z = w.landZ() + s.dz();
 			BlockPos at = s.height() >= 0 ? new BlockPos(x, s.height(), z) : groundBelow(level, x, z, 8,
 					Worlds.groundScanFrom(w));
+			if (s.height() < 0 && at.getY() < Worlds.siteFloor(w)) {
+				// Titan: never below the methane seas (the site's own deep foundation fills the rest).
+				at = new BlockPos(at.getX(), Worlds.siteFloor(w), at.getZ());
+			}
 			SiteTemplates.place(level, s.template(), at);
 			PLACED_AT.put(s.template(), at);
 		}
