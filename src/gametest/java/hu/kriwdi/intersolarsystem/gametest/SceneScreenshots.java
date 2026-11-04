@@ -220,6 +220,34 @@ public class SceneScreenshots implements FabricClientGameTest {
 			game.getServer().runCommand("item replace entity @a armor.head with intersolarsystem:space_helmet");
 			game.getServer().runCommand("item replace entity @a armor.chest with intersolarsystem:space_suit");
 
+			// The wreck field round the ISS, the HALCYON lab inside, then a tethered spacewalk with the manoeuvring
+			// unit and a debris stream passing.
+			game.getServer().runOnServer(server -> hu.kriwdi.intersolarsystem.space.SpaceSites.ensureOrbit(
+					server.getLevel(ShipDimensions.ORBIT)));
+			game.getServer().runCommand("time set 6000");
+			game.getServer().runCommand("gamemode spectator @a");
+			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 62 132 -4 -110 8");
+			context.waitTicks(100);
+			context.takeScreenshot("11f_orbit_wreck_field");
+			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 110 128 -30 -90 10");
+			context.waitTicks(40);
+			context.takeScreenshot("11g_halcyon_inside");
+			game.getServer().runCommand("gamemode survival @a");
+			game.getServer().runCommand("effect give @a minecraft:resistance infinite 4 true");
+			game.getServer().runCommand("give @a intersolarsystem:mmu_pack");
+			game.getServer().runCommand("give @a intersolarsystem:safety_tether");
+			game.getServer().runCommand("execute in intersolarsystem:orbit run tp @a 70 126 2 200 15");
+			game.getServer().runOnServer(server -> hu.kriwdi.intersolarsystem.space.OrbitalEva.testClip(
+					server.getPlayerList().getPlayers().get(0), new BlockPos(75, 124, -10)));
+			context.waitTicks(40);
+			context.takeScreenshot("11h_eva_tether");
+			game.getServer().runOnServer(server -> hu.kriwdi.intersolarsystem.space.OrbitalEva.startStreamNow(
+					server.getLevel(ShipDimensions.ORBIT)));
+			context.waitTicks(40);
+			context.takeScreenshot("11i_debris_stream");
+			game.getServer().runCommand("effect clear @a");
+			game.getServer().runCommand("gamemode creative @a");
+
 			// The Moon: Apollo 11, Tranquility Base, the landscape and the Earth in the sky (lunar noon, then night).
 			game.getServer().runOnServer(server -> MoonSites.ensureBuilt(server.getLevel(ShipDimensions.MOON)));
 			game.getServer().runCommand("time set 17700");
@@ -247,6 +275,25 @@ public class SceneScreenshots implements FabricClientGameTest {
 			game.getServer().runCommand("time set 53100");
 			context.waitTicks(40);
 			context.takeScreenshot("16_moon_night_sky");
+			// The Ark-1 colony at Shackleton and a historic mission (Lunokhod 1).
+			game.getServer().runCommand("time set 17700");
+			int arkZ = (int) Math.round(89.2 * MoonSites.BLOCKS_PER_DEGREE);
+			int arkY = surfaceY(game, 0, arkZ);
+			game.getServer().runCommand("execute in intersolarsystem:moon run tp @a 70 " + (arkY + 40) + " " + (arkZ - 70)
+					+ " 45 28");
+			context.waitTicks(200);
+			context.takeScreenshot("17_moon_ark1_colony");
+			game.getServer().runCommand("execute in intersolarsystem:moon run tp @a 0 " + (arkY + 9) + " " + (arkZ - 14)
+					+ " 0 10");
+			context.waitTicks(60);
+			context.takeScreenshot("17b_moon_ark1_bridge");
+			int lx = (int) Math.round(-35.0 * MoonSites.BLOCKS_PER_DEGREE);
+			int lz = (int) Math.round(-38.28 * MoonSites.BLOCKS_PER_DEGREE);
+			int ly = surfaceY(game, lx, lz);
+			game.getServer().runCommand("execute in intersolarsystem:moon run tp @a " + (lx + 12) + " " + (ly + 7) + " "
+					+ (lz + 14) + " 140 25");
+			context.waitTicks(120);
+			context.takeScreenshot("17c_moon_lunokhod1");
 
 			// The dead Earth: every biome and the main structures, at noon.
 			game.getServer().runCommand("time set 6000");

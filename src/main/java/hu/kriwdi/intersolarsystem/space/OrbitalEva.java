@@ -284,6 +284,11 @@ public final class OrbitalEva {
 				.getType() != HitResult.Type.MISS;
 	}
 
+	/** Test hook: clip a player on. */
+	public static void testClip(ServerPlayer player, BlockPos anchor) {
+		clip(player, anchor);
+	}
+
 	/** Test hook: start a stream now (warning skipped). */
 	public static void startStreamNow(ServerLevel orbit) {
 		nextStream = orbit.getGameTime() + 1;
