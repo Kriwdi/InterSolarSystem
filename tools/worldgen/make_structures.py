@@ -1105,6 +1105,9 @@ def main():
         sizes[name] = b.save(name)
         single_pool(name, name)
         ground = max(0, -min(p[1] for p in b.blocks))  # the ground layer is y = 0 in the builder
+        if name in overhaul.BUILDERS and adaptation != "none":
+            # The reworked ruins: their ground layer (y = 0) replaces the top block of the terrain.
+            depth = -ground - 1
         structure(name, name, biomes, spacing, sep, salt, depth, adaptation=adaptation, ground_offset=ground)
     import city_structures
     for rel, b in city_structures.city_pieces().items():

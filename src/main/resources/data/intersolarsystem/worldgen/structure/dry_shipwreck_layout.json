@@ -38,7 +38,7 @@
     }
   },
   "start_height": {
-    "absolute": -1
+    "absolute": -2
   },
   "start_pool": "intersolarsystem:dry_shipwreck",
   "step": "surface_structures",

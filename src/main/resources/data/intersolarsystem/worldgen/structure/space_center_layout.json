@@ -38,7 +38,7 @@
     }
   },
   "start_height": {
-    "absolute": -4
+    "absolute": -5
   },
   "start_pool": "intersolarsystem:space_center",
   "step": "surface_structures",

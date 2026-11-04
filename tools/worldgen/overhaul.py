@@ -1856,6 +1856,615 @@ def dam():
     b.decay(0.02, cracked=CONCRETE)
     return b
 
+
+# ---------------------------------------------------------------- crash sites
+def crater(b, cx, cz, r, depth=2, glass=True):
+    """An impact crater: the floor scooped out (fused and scorched), a raised rim of ejecta, scattered clods."""
+    for x in range(int(cx - r - 3), int(cx + r + 4)):
+        for z in range(int(cz - r - 3), int(cz + r + 4)):
+            d = math.hypot(x - cx, z - cz)
+            if d <= r:
+                dd = int(round(depth * (1 - (d / r) ** 2)))
+                for y in range(-dd + 1, 1):
+                    b.set(x, y, z, AIR)
+                r_ = b.rnd.random()
+                b.set(x, -dd, z, S("trinitite") if glass and r_ < 0.25 else S("coal_block") if r_ < 0.4 else
+                      S("blackstone") if r_ < 0.75 else S("basalt", axis="y"))
+            elif d <= r + 2.2:
+                b.set(x, 0, z, S("coarse_dirt") if b.rnd.random() < 0.6 else S("gravel"))
+                if d <= r + 1.2 and b.rnd.random() < 0.6:
+                    b.set(x, 1, z, S("coarse_dirt") if b.rnd.random() < 0.7 else S("cinder_rock"))
+
+
+def furrow(b, x0, x1, z, half, depth=1):
+    """The skid mark a crashing object ploughed before it stopped (along x)."""
+    for x in range(min(x0, x1), max(x0, x1) + 1):
+        for dz in range(-half, half + 1):
+            for y in range(-depth + 1, 1):
+                b.set(x, y, z + dz, AIR)
+            b.set(x, -depth, z + dz, S("coarse_dirt") if b.rnd.random() < 0.6 else S("blackstone"))
+        for dz in (-half - 1, half + 1):
+            b.set(x, 1, z + dz, S("coarse_dirt")) if b.rnd.random() < 0.5 else None
+        if b.rnd.random() < 0.25:
+            b.set(x, -depth + 1, z + b.rnd.randint(-half, half), S("scrap_pile"))
+
+
+def cargo_capsule():
+    """A resupply capsule that came down hard: the scorched heat shield, the conical pressure hull on its side with
+    the hatch blown open, cargo racks inside; the furrow it ploughed, heat-shield fragments, the parachute spread
+    out behind with its rigging lines, and the scavenger who did not make it back."""
+    b = Build("cargo_capsule", 1016)
+    crater(b, 0, 0, 5, 2)
+    furrow(b, 6, 18, 0, 1)
+    # Capsule: axis along x, the heat shield facing west (-x), lying on its side.
+    for i in range(0, 8):
+        r = 3.6 - i * 0.32
+        for dy in range(-4, 5):
+            for dz in range(-4, 5):
+                d = math.hypot(dy, dz)
+                if d <= r:
+                    shell = d > r - 1.1 or i in (0, 7)
+                    if i == 0:
+                        st = S("coal_block") if (dy + dz) % 3 else S("blackstone")
+                    elif shell:
+                        st = S("station_foil") if i in (1, 4) else S("station_hull")
+                    else:
+                        st = AIR
+                    b.set(-2 + i, 2 + dy, dz, st)
+    for (dy, dz) in ((0, 0), (1, 0), (0, 1), (1, 1)):
+        b.set(5, 2 + dy, -3 + dz, AIR)
+    b.set(5, 1, -4, S("iron_trapdoor", facing="north", half="bottom", open="true", powered="false",
+                        waterlogged="false"))
+    # Inside: racks with crates, the cargo chest, a light still glowing.
+    for i in (0, 2):
+        for dz in (-2, 2):
+            b.set(1 + i, 1, dz, S("shipping_crate"))
+    b.chest(2, 0, 0, "cargo", "east")
+    b.set(3, 3, 0, S("station_light"))
+    b.set(1, 2, -2, S("sparking_panel"))
+    # Docking ring at the nose.
+    for (dy, dz) in ((-1, 0), (1, 0), (0, -1), (0, 1)):
+        b.set(6, 2 + dy, dz, S("iron_block"))
+    # Heat shield fragments along the furrow, the parachute and lines further east.
+    for x in range(-12, -4, 2):
+        b.set(x, 1, b.rnd.randint(-3, 3), S("coal_block") if b.rnd.random() < 0.5 else S("blackstone"))
+    for x in range(20, 36):
+        for z in range(-7, 8):
+            if ((x - 28) / 8.0) ** 2 + (z / 7.0) ** 2 <= 1 and b.rnd.random() < 0.92:
+                b.set(x, 1, z, S("white_carpet") if ((x + z) // 2) % 2 else S("orange_carpet"))
+    for k in range(0, 6):
+        for x in range(8, 20):
+            z = int(round((k - 2.5) * (x - 8) / 12.0 * 2))
+            if b.rnd.random() < 0.85:
+                b.set(x, 1, z, S("tripwire", attached="false", disarmed="false", east="true", west="true",
+                                 north="false", south="false", powered="false"))
+    skeleton(b, 9, 1, 3, "west", "skeleton_lying")
+    b.set(10, 1, 4, S("barrel", facing="up", open="true"))
+    return b
+
+
+def crashed_satellite():
+    """A big communications satellite brought down by the dying orbit: the gold-foiled bus split open, one solar wing
+    torn off and lying folded at the end of the debris line, the other buckled into the ground, the main dish
+    thrown aside, thruster pods, glassed sand round the impact."""
+    b = Build("crashed_satellite", 1017)
+    crater(b, 0, 0, 4, 2)
+    furrow(b, -16, -5, 0, 1)
+    # Bus: a 4x4x5 box, tilted (one corner dug in), gold foil, radiators, a thruster pod.
+    for x in range(-2, 3):
+        for z in range(-2, 2):
+            for y in range(0, 5):
+                yy = y + (1 if x > 0 else 0) - 1
+                edge = x in (-2, 2) or z in (-2, 1) or y in (0, 4)
+                b.set(x, yy, z, (S("station_foil") if (x + y) % 3 else S("station_radiator")) if edge else
+                      (S("sparking_panel") if (x, y, z) == (0, 2, 0) else S("server_rack", facing="north")
+                       if (x, y, z) == (-1, 1, -1) else AIR))
+    for y in range(0, 3):
+        b.set(2, y, 1, AIR)
+        b.set(2, y, 0, AIR)
+    b.chest(1, 0, -1, "space_debris", "east", "barrel")
+    for (x, z) in ((-3, -2), (3, -2)):
+        b.set(x, 2, z, S("lander_engine"))
+    # The buckled wing: panels zig-zagging into the ground on the south side.
+    for k in range(0, 9):
+        y = 2 - k // 3
+        for x in (-1, 0, 1):
+            b.set(x, max(-1, y), 2 + k, S("solar_panel"))
+        if k % 3 == 2:
+            b.set(0, max(-1, y) + 1, 2 + k, S("truss"))
+    # The torn wing at the end of the furrow, folded in three.
+    for k in range(0, 3):
+        for x in range(-22 + k * 4, -19 + k * 4):
+            for z in (-1, 0, 1):
+                b.set(x, 1 + (k == 1), z, S("solar_panel") if b.rnd.random() > 0.15 else S("glass"))
+    # The dish, thrown aside on its rim.
+    for dx in range(-3, 4):
+        for dy in range(-3, 4):
+            d = math.hypot(dx, dy)
+            if d <= 3.3:
+                b.set(7 + int(round(d * d / 6)), 3 + dy, -6 + dx, WHITE if d < 2.6 else LGREY)
+    b.set(9, 3, -6, bars())
+    for _ in range(14):
+        x, z = b.rnd.randint(-10, 10), b.rnd.randint(-8, 8)
+        if b.get(x, 1, z) in (None, AIR) and math.hypot(x, z) > 5:
+            b.set(x, 1, z, S("scrap_pile") if b.rnd.random() < 0.6 else S("station_foil"))
+    return b
+
+
+def rocket_stage():
+    """A spent first stage that fell back: thirty blocks of booster nose-down at a slant, its five engines in the air,
+    an interstage ring and a fairing half lying nearby, a burnt fuel stain; an access hatch leads into the
+    intertank, where the avionics bay still holds its boxes."""
+    b = Build("rocket_stage", 1018)
+    crater(b, 0, 0, 5, 3, glass=False)
+    # The booster: from (0, -2, 0) nose-down, rising east at about 30 degrees.
+    L = 30
+    for i in range(0, L):
+        cxv = i * 0.87
+        cyv = -2 + i * 0.5
+        for dy in range(-4, 5):
+            for dz in range(-4, 5):
+                d = math.hypot(dy, dz)
+                if d <= 3.3:
+                    x, y, z = int(round(cxv)), int(round(cyv + dy)), dz
+                    shell = d > 2.3
+                    st = AIR
+                    if shell:
+                        st = S("black_concrete") if i % 10 == 9 else S("station_foil") if 12 <= i <= 14 else \
+                            S("station_hull")
+                    if b.get(x, y, z) is None or b.get(x, y, z) == AIR or shell:
+                        b.set(x, y, z, st)
+    # Engines at the top end.
+    ex, ey = int(round((L - 1) * 0.87)) + 1, int(round(-2 + (L - 1) * 0.5))
+    for (dy, dz) in ((0, 0), (-2, 0), (2, 0), (0, -2), (0, 2)):
+        b.set(ex, ey + dy, dz, S("lander_engine"))
+        b.set(ex + 1, ey + dy, dz, S("sooty_concrete"))
+    for (dy, dz) in ((-2, -2), (2, 2), (-2, 2), (2, -2)):
+        for k in (1, 2):
+            b.set(ex - 1 + k, ey + dy, dz + (k if dz > 0 else -k), S("station_hull"))
+    # Hatch into the intertank (i ~ 13), the avionics bay.
+    hx = int(round(13 * 0.87))
+    hy = int(round(-2 + 13 * 0.5))
+    b.set(hx, hy, -3, AIR)
+    b.set(hx, hy + 1, -3, AIR)
+    b.set(hx, hy, -4, S("iron_trapdoor", facing="north", half="bottom", open="true", powered="false",
+                        waterlogged="false"))
+    b.chest(hx, hy - 1, -1, "space_debris", "north", "barrel")
+    b.set(hx + 1, hy - 1, 1, S("server_rack", facing="north"))
+    b.set(hx - 1, hy - 1, 1, S("sparking_panel"))
+    # Interstage ring and a fairing half on the ground.
+    disc(b, -14, 10, 1, 3.3, S("station_hull"), hollow=True)
+    for y in (2,):
+        disc(b, -14, 10, y, 3.3, S("station_foil"), hollow=True)
+    for k in range(0, 10):
+        for dz in range(-2, 3):
+            b.set(-12 + k, 1 + int(abs(dz) == 2), -12 + dz, WHITE)
+    # Fuel stain and fragments.
+    for _ in range(40):
+        x, z = b.rnd.randint(-10, 14), b.rnd.randint(-10, 10)
+        if b.get(x, 1, z) in (None, AIR) and b.get(x, 0, z) in (None,):
+            b.set(x, 1, z, S("tar_puddle") if b.rnd.random() < 0.6 else S("scrap_pile"))
+    return b
+
+
+# ---------------------------------------------------------------- automated mine (underground, surface at y = 12)
+def drone_site():
+    """An automated mine the drones kept working long after the people left: headframe with its winding wheel over
+    the shaft, the drone hangar with charging pads, ore conveyors to the spoil heaps, a control container; down the
+    shaft a gallery with rails, ore carts and drones frozen mid-task."""
+    SUR = 12
+    b = Build("drone_site", 1019)
+    ground(b, -6, -6, 26, 22, lambda x, z: S("gravel") if b.rnd.random() < 0.6 else S("coarse_dirt"))
+    for x in range(-6, 27):
+        for z in range(-6, 23):
+            b.set(x, SUR, z, b.get(x, 0, z))
+            b.blocks.pop((x, 0, z), None)
+    # Shaft (x 4..7, z 4..7) from the surface down to the gallery.
+    for y in range(1, SUR + 1):
+        for x in range(3, 9):
+            for z in range(3, 9):
+                edge = x in (3, 8) or z in (3, 8)
+                b.set(x, y, z, S("cobbled_deepslate") if edge else AIR)
+    for y in range(1, SUR + 1):
+        b.set(4, y, 4, S("ladder", facing="south"))
+    for y in range(2, SUR):
+        b.set(6, y, 6, CHAIN_Y)
+    b.set(6, 1, 6, S("iron_block"))
+    # Headframe: lattice legs and the wheel at the top.
+    for y in range(SUR + 1, SUR + 14):
+        for (x, z) in ((3, 3), (8, 3), (3, 8), (8, 8)):
+            k = (y - SUR) // 5
+            b.set(x + (k if x < 5 else -k), y, z + (k if z < 5 else -k), S("truss") if y % 4 else S("iron_block"))
+    for (dx, dy) in ((0, 2), (0, -2), (2, 0), (-2, 0), (1, 1), (-1, 1), (1, -1), (-1, -1)):
+        b.set(6 + dx, SUR + 14 + dy, 5, S("iron_block"))
+    for y in range(SUR + 1, SUR + 13):
+        b.set(6, y, 6, CHAIN_Y)
+    # Gallery at y 0..5 running east and south from the shaft.
+    for x in range(-2, 24):
+        for z in range(4, 8):
+            for y in range(0, 6):
+                edge = z in (4, 7) or y in (0, 5)
+                b.set(x, y, z, S("cobbled_deepslate") if edge and b.rnd.random() < 0.85 else
+                      S("deepslate_titanium_ore") if edge else AIR)
+        if x % 5 == 0:
+            b.set(x, 4, 5, S("dark_oak_planks"))
+            b.set(x, 4, 6, S("dark_oak_planks"))
+        b.set(x, 1, 6, S("rail", shape="east_west", waterlogged="false"))
+    for x in (10, 16):
+        b.set(x, 1, 5, S("mining_drone", facing="east"))
+    b.chest(20, 1, 5, "industrial", "north")
+    b.set(22, 1, 6, S("barrel", facing="up", open="false"))
+    for x in range(20, 24):
+        for z in (4, 7):
+            for y in (1, 2, 3):
+                b.set(x, y, z, S("deepslate_titanium_ore") if b.rnd.random() < 0.4 else S("deepslate_bauxite_ore")
+                      if b.rnd.random() < 0.3 else S("cobbled_deepslate"))
+    b.set(12, 4, 6, S("lantern", hanging="true", waterlogged="false"))
+    b.set(18, 4, 6, S("lantern", hanging="true", waterlogged="false"))
+    # Drone hangar on the surface: a carport roof, charging pads, two drones parked.
+    for x in range(12, 24):
+        for z in range(-4, 3):
+            b.set(x, SUR, z, S("hazard_concrete") if (x + z) % 5 == 0 else S("gray_concrete"))
+            b.set(x, SUR + 6, z, S("smooth_stone_slab", type="bottom", waterlogged="false"))
+    for x in (12, 18, 23):
+        for z in (-4, 2):
+            for y in range(SUR + 1, SUR + 6):
+                b.set(x, y, z, bars())
+    for x in (14, 17, 20):
+        b.set(x, SUR + 1, -1, S("mining_drone", facing="south") if x != 17 else S("battery_bank", facing="south"))
+        b.set(x, SUR + 1, -3, S("cable", east="true", west="true", north="false", south="false", up="false",
+                                down="false"))
+    b.set(21, SUR + 1, -3, S("diesel_generator", facing="west"))
+    # Conveyor from the headframe to the spoil heaps.
+    for x in range(9, 24):
+        b.set(x, SUR + 3, 6, S("iron_trapdoor", facing="east", half="top", open="false", powered="false",
+                               waterlogged="false"))
+        if x % 4 == 1:
+            for y in range(SUR + 1, SUR + 3):
+                b.set(x, y, 6, bars())
+    for (cx, cz, r) in ((24, 7, 3.5), (20, 14, 2.8)):
+        for x in range(int(cx - r), int(cx + r + 1)):
+            for z in range(int(cz - r), int(cz + r + 1)):
+                d = math.hypot(x - cx, z - cz)
+                for y in range(1, int(r - d) + 2):
+                    b.set(x, SUR + y, z, S("gravel") if b.rnd.random() < 0.7 else S("cobbled_deepslate"))
+    # Control container.
+    b.room(-5, SUR, 12, 3, SUR + 4, 17, S("rusted_panel"), S("dead_planks"))
+    door(b, 3, SUR + 1, 14)
+    b.set(-4, SUR + 1, 16, S("control_cabinet", facing="east"))
+    b.set(-4, SUR + 1, 13, S("server_rack", facing="east"))
+    b.set(1, SUR + 1, 16, S("office_desk", facing="north"))
+    b.set(1, SUR + 1, 15, S("office_chair", facing="north"))
+    b.chest(-1, SUR + 1, 16, "industrial", "north", "barrel")
+    b.set(-1, SUR + 3, 14, S("ceiling_light"))
+    b.set(0, SUR + 1, 12, AIR)
+    b.decay(0.02, keep=("minecraft:ladder", "minecraft:rail", "minecraft:iron_chain"), top_bias=False)
+    return b
+
+
+# ---------------------------------------------------------------- colonies
+def colony(fate):
+    """A failed settlement of the exodus years: the central dome (commons with the mess, a hydroponic garden ring,
+    the meeting circle), five prefab modules on tube corridors (dormitory, clinic, workshop, comms, storage), a
+    landing pad with a shuttle wreck, a rover, solar arrays. The fate decides the dressing: overgrown by the garden
+    that outlived them, burnt out, or frozen."""
+    b = Build("colony_" + fate, {"overgrown": 1020, "burnt": 1021, "frozen": 1022}[fate])
+    floor = {"overgrown": S("moss_block"), "burnt": S("blackstone"), "frozen": S("packed_ice")}[fate]
+    shell = {"overgrown": S("station_glass"), "burnt": S("tinted_glass"), "frozen": S("station_glass")}[fate]
+    ground(b, -30, -30, 30, 30, lambda x, z: floor if b.rnd.random() < 0.3 else dead_ground(b) if fate == "burnt"
+           else S("snow_block") if fate == "frozen" else S("coarse_dirt") if b.rnd.random() < 0.5 else S("moss_block"))
+    R = 11
+    for x in range(-R, R + 1):
+        for z in range(-R, R + 1):
+            if x * x + z * z <= R * R:
+                b.set(x, 0, z, S("polished_andesite") if x * x + z * z < 30 else S("living_soil") if fate ==
+                      "overgrown" else S("farmland", moisture=0))
+            for y in range(1, R):
+                d = math.sqrt(x * x + y * y * 1.3 + z * z)
+                if R - 0.7 <= d <= R + 0.3:
+                    rib = x % 4 == 0 or z % 4 == 0
+                    b.set(x, y, z, S("station_hull") if rib else shell if b.rnd.random() > 0.15 else AIR)
+                elif d < R - 0.7:
+                    b.set(x, y, z, AIR)
+    # Commons: a round table, benches, the noticeboard terminal.
+    disc(b, 0, 0, 1, 1.5, S("smooth_stone_slab", type="top", waterlogged="false"))
+    for (dx, dz, f) in ((0, -3, "south"), (0, 3, "north"), (-3, 0, "east"), (3, 0, "west")):
+        b.set(dx, 1, dz, S("park_bench", facing=f))
+    b.set(2, 1, -2, S("data_terminal", facing="south", log=4))
+    b.set(0, 8, 0, S("station_light"))
+    # Hydroponic ring between radius 6 and 9.
+    crops = [S("wheat", age=7), S("carrots", age=7), S("potatoes", age=7), S("beetroots", age=3)]
+    for x in range(-R, R + 1):
+        for z in range(-R, R + 1):
+            d = math.hypot(x, z)
+            if 6 <= d <= 9 and b.get(x, 1, z) == AIR:
+                if fate == "overgrown":
+                    b.set(x, 1, z, crops[(x + z) % 4] if b.rnd.random() < 0.6 else S("azalea"))
+                elif fate == "burnt":
+                    b.set(x, 1, z, S("dead_bush") if b.rnd.random() < 0.3 else AIR)
+                else:
+                    b.set(x, 1, z, S("snow", layers=2) if b.rnd.random() < 0.5 else S("dead_bush"))
+    # Modules on tube corridors.
+    mods = [("dormitory", 0, -20), ("clinic", 19, -7), ("workshop", 12, 16), ("comms", -12, 16), ("storage", -19, -7)]
+    for name, mx, mz in mods:
+        b.room(mx - 4, 0, mz - 3, mx + 4, 5, mz + 3, S("station_hull"), S("polished_andesite"))
+        for x in range(mx - 3, mx + 4, 2):
+            b.set(x, 3, mz - 3, S("station_window"))
+            b.set(x, 3, mz + 3, S("station_window"))
+        b.set(mx, 4, mz, S("station_light"))
+        # Corridor towards the dome: a 4-connected path of tube from the module to the dome shell.
+        x, z = mx, mz
+        while x * x + z * z >= (R - 1) ** 2:
+            if abs(x) >= abs(z):
+                x -= 1 if x > 0 else -1
+            else:
+                z -= 1 if z > 0 else -1
+            if abs(x - mx) <= 4 and abs(z - mz) <= 3 and not (abs(x - mx) == 4 or abs(z - mz) == 3):
+                continue
+            b.set(x, 0, z, S("metal_grating"))
+            b.set(x, 1, z, AIR)
+            b.set(x, 2, z, AIR)
+            b.set(x, 3, z, S("station_hull"))
+            for (dx, dz) in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                for y in (1, 2):
+                    if b.get(x + dx, y, z + dz) is None:
+                        b.set(x + dx, y, z + dz, S("station_window") if y == 2 else S("station_hull"))
+                if b.get(x + dx, 3, z + dz) is None:
+                    b.set(x + dx, 3, z + dz, S("station_hull"))
+        if name == "dormitory":
+            for x in range(mx - 3, mx + 4, 2):
+                b.set(x, 1, mz - 2, S("bunk_bed", facing="south"))
+            b.chest(mx + 3, 1, mz + 2, "colony", "west")
+            b.set(mx - 3, 1, mz + 2, S("locker", facing="east"))
+            skeleton(b, mx - 1, 2, mz - 2, "south", "skeleton_curled")
+        elif name == "clinic":
+            b.set(mx - 2, 1, mz - 2, S("hospital_bed", facing="south"))
+            b.set(mx + 1, 1, mz - 2, S("hospital_bed", facing="south"))
+            b.set(mx - 1, 1, mz - 2, S("iv_stand"))
+            b.set(mx + 3, 1, mz, S("medical_cabinet", facing="west"))
+            b.chest(mx + 3, 1, mz + 2, "medical", "west")
+            skeleton(b, mx + 1, 2, mz - 2, "south", "skeleton_lying")
+        elif name == "workshop":
+            b.set(mx - 3, 1, mz + 2, S("repair_station", facing="north"))
+            b.set(mx - 1, 1, mz + 2, S("anvil", facing="east"))
+            b.set(mx + 1, 1, mz + 2, S("crafting_table"))
+            b.set(mx + 3, 1, mz, S("diesel_generator", facing="west"))
+            b.chest(mx + 3, 1, mz - 2, "colony", "west", "barrel")
+        elif name == "comms":
+            b.set(mx - 3, 1, mz + 2, S("radio_set", facing="north"))
+            b.set(mx - 1, 1, mz + 2, S("server_rack", facing="north"))
+            b.set(mx + 1, 1, mz + 2, S("data_terminal", facing="north", log=4))
+            b.set(mx + 1, 1, mz + 1, S("office_chair", facing="north"))
+            skeleton(b, mx, 1, mz + 1, "north", "skeleton_sitting")
+            for y in range(6, 14):
+                b.set(mx + 3, y, mz - 2, bars())
+            b.set(mx + 3, 14, mz - 2, S("antenna_dish"))
+        else:
+            for x in range(mx - 3, mx + 4):
+                b.set(x, 1, mz + 2, S("shipping_crate") if x % 2 else S("barrel", facing="up", open="false"))
+                b.set(x, 2, mz + 2, S("shipping_crate") if x % 3 == 0 else AIR)
+            b.chest(mx - 3, 1, mz - 2, "colony", "east")
+    # Landing pad with a shuttle wreck, a rover, solar arrays.
+    disc(b, 22, 18, 0, 5, S("hazard_concrete"))
+    disc(b, 22, 18, 0, 3.6, S("gray_concrete"))
+    for i in range(0, 9):
+        w = 1 if i in (0, 8) else 2
+        for dz in range(-w, w + 1):
+            for y in (1, 2, 3):
+                if abs(dz) == w or y in (1, 3):
+                    b.set(18 + i, y, 18 + dz, S("station_hull") if (i + y) % 4 else S("station_foil"))
+                else:
+                    b.set(18 + i, y, 18 + dz, AIR)
+    b.set(26, 2, 18, S("ship_window"))
+    for dz in (-3, 3):
+        for k in range(0, 4):
+            b.set(19 + k, 2, 18 + dz, S("ship_plating_slab", type="bottom", waterlogged="false"))
+    b.set(17, 2, 18, S("lander_engine"))
+    for (x, z) in ((-22, 20), (-19, 20), (-22, 23), (-19, 23)):
+        b.set(x, 1, z, S("rover_wheel", facing="east"))
+    for x in range(-22, -18):
+        for z in range(21, 23):
+            b.set(x, 2, z, S("white_concrete"))
+    b.set(-21, 3, 21, S("spruce_stairs", facing="west", half="bottom", shape="straight", waterlogged="false"))
+    for row in range(0, 3):
+        for x in range(-26, -10, 2):
+            z = -24 + row * 3
+            b.set(x, 1, z, S("truss"))
+            b.set(x, 2, z, S("solar_panel") if b.rnd.random() > 0.2 else AIR)
+            b.set(x + 1, 2, z, S("solar_panel") if b.rnd.random() > 0.2 else AIR)
+    # Fate.
+    if fate == "overgrown":
+        for _ in range(140):
+            x, z = b.rnd.randint(-28, 28), b.rnd.randint(-28, 28)
+            if b.get(x, 1, z) in (None, AIR) and b.get(x, 0, z) not in (None, AIR):
+                b.set(x, 1, z, S("azalea") if b.rnd.random() < 0.25 else S("short_grass") if b.rnd.random() < 0.6
+                      else S("fern"))
+        for (x, z) in ((3, 4), (-4, -5), (6, -3)):
+            for y in range(1, 6):
+                b.set(x, y, z, S("oak_log", axis="y"))
+            for dx in range(-2, 3):
+                for dz in range(-2, 3):
+                    for y in (5, 6, 7):
+                        if abs(dx) + abs(dz) + (y - 6) * 1 <= 3 and b.get(x + dx, y, z + dz) in (None, AIR):
+                            b.set(x + dx, y, z + dz, S("oak_leaves", distance=1, persistent="true",
+                                                       waterlogged="false"))
+        for (x, y, z), st in list(b.blocks.items()):
+            if st[0].endswith("station_hull") and b.rnd.random() < 0.12 and b.get(x, y, z - 1) in (None, AIR):
+                b.set(x, y, z - 1, S("vine", north="false", south="true", east="false", west="false", up="false"))
+    elif fate == "burnt":
+        for _ in range(80):
+            x, z = b.rnd.randint(-28, 28), b.rnd.randint(-28, 28)
+            if b.get(x, 1, z) in (None, AIR) and b.get(x, 0, z) not in (None, AIR):
+                b.set(x, 1, z, S("rubble") if b.rnd.random() < 0.5 else S("coal_block"))
+        for (x, y, z), st in list(b.blocks.items()):
+            if st[0].endswith("station_hull") and b.rnd.random() < 0.3:
+                b.set(x, y, z, S("sooty_concrete"))
+        b.decay(0.05, keep=("intersolarsystem:data_terminal",))
+    else:
+        for _ in range(160):
+            x, z = b.rnd.randint(-28, 28), b.rnd.randint(-28, 28)
+            if b.get(x, 1, z) in (None, AIR) and b.get(x, 0, z) not in (None, AIR):
+                b.set(x, 1, z, S("snow", layers=b.rnd.randint(1, 4)))
+        for (x, y, z), st in list(b.blocks.items()):
+            if st == AIR and y == 1 and b.rnd.random() < 0.1:
+                b.set(x, y, z, S("snow", layers=3))
+        b.decay(0.015)
+    return b
+
+
+# ---------------------------------------------------------------- wrecks
+def dry_shipwreck():
+    """A container freighter stranded on the old sea floor, listing to port: a shaped hull (raked bow, round stern,
+    rudder and propeller in the air), the deck stacked with containers (some fallen), the superstructure with the
+    bridge, the mess and cabins, and the engine room below with its great diesel."""
+    b = Build("dry_shipwreck", 1023)
+    crater(b, 26, 0, 6, 1, glass=False)
+    L = 56
+    for x in range(0, L):
+        if x < 10:
+            half = 1 + int(x * 0.55)
+        elif x > L - 8:
+            half = max(2, 6 - (x - (L - 8)) // 2)
+        else:
+            half = 6
+        keel = 0 if 3 < x < L - 3 else 1
+        for z in range(-half, half + 1):
+            for y in range(keel, 10):
+                tilt = (z + half) // 5   # listing: the starboard side sits higher
+                edge = abs(z) == half or y == keel or (y == 9)
+                yy = y + tilt - 1
+                if edge:
+                    if y == 9:
+                        st = S("rusted_panel") if (x + z) % 7 else S("iron_block")
+                    else:
+                        st = S("red_concrete") if y < 3 else S("rusted_panel") if (x + y) % 5 else \
+                            S("black_concrete")
+                    if b.rnd.random() > 0.06:
+                        b.set(x, yy, z, st)
+                else:
+                    b.set(x, yy, z, AIR)
+    # Rudder and propeller at the stern (x = L).
+    for y in range(0, 7):
+        b.set(L, y, 0, S("iron_block"))
+    for (dy, dz) in ((0, 1), (0, -1), (1, 0), (-1, 0)):
+        b.set(L - 1, 3 + dy, dz, S("waxed_copper_block"))
+    # Containers on deck (some fallen to the ground on the port side).
+    colours = ("red", "blue", "green", "orange", "white", "cyan")
+    for i, x in enumerate(range(12, 38, 5)):
+        for row in (-4, 0):
+            for level in (0, 1):
+                if b.rnd.random() < 0.25:
+                    continue
+                c = S(colours[(i + row + level) % 6] + "_terracotta")
+                for dx in range(0, 4):
+                    for dz in range(0, 3):
+                        for dy in (0, 1):
+                            b.set(x + dx, 10 + level * 2 + dy + (row + 6) // 5, row + dz, c)
+    for x in range(14, 24):
+        for z in (-12, -11, -10):
+            b.set(x, 1, z, S("blue_terracotta") if x < 18 else S("orange_terracotta"))
+            b.set(x, 2, z, S("blue_terracotta") if x < 18 else S("orange_terracotta"))
+    b.chest(15, 1, -9, "cargo", "north", "barrel")
+    # Superstructure aft (x 42..51): three decks, the bridge on top with wings.
+    for y in range(10, 22):
+        for x in range(42, 52):
+            for z in range(-5, 6):
+                edge = x in (42, 51) or z in (-5, 5)
+                deck = (y - 10) % 4 == 0
+                yy = y + 1
+                if deck:
+                    b.set(x, yy, z, S("smooth_stone"))
+                elif edge:
+                    win = (y - 10) % 4 == 2 and x % 2 == 0
+                    b.set(x, yy, z, pane() if win else WHITE)
+                else:
+                    b.set(x, yy, z, AIR)
+    for z in range(-8, 9):
+        b.set(43, 23, z, S("smooth_stone"))
+        b.set(43, 24, z, bars(north=True, south=True)) if abs(z) > 5 else None
+    for z in range(-4, 5):
+        b.set(42, 24, z, pane())
+    b.set(44, 23, 0, S("navigation_console", facing="west"))
+    b.set(44, 23, -2, S("flight_panel", facing="west"))
+    b.set(44, 23, 2, S("radio_set", facing="west"))
+    b.set(46, 23, 0, S("office_chair", facing="west"))
+    skeleton(b, 45, 23, 1, "west", "skeleton_sitting")
+    b.chest(50, 23, 4, "wreck", "west")
+    for x in range(44, 51, 3):
+        b.set(x, 15, -4, S("bunk_bed", facing="south"))
+        b.set(x + 1, 15, -4, S("locker", facing="south"))
+    long_table(b, 45, 49, 19, 1)
+    b.set(50, 19, -3, S("smoker", facing="west", lit="false"))
+    b.chest(50, 19, -4, "bunker_food", "west", "barrel")
+    for y in range(11, 24):
+        b.set(51, y, 0, S("ladder", facing="west"))
+    for y in range(24, 30):
+        disc(b, 48, 0, y, 1.2, S("black_concrete") if y > 27 else S("red_concrete"))
+    # Engine room: the main diesel in the hull below the superstructure.
+    for x in range(42, 51):
+        for z in (-1, 0, 1):
+            for y in (1, 2, 3):
+                b.set(x, y, z, S("iron_block") if (x + y) % 3 else S("gray_concrete"))
+    for x in range(43, 50, 2):
+        b.set(x, 4, 0, S("pipe", up="true", down="true", north="false", south="false", east="false",
+                         west="false"))
+    b.set(45, 1, -3, S("control_cabinet", facing="south"))
+    b.chest(48, 1, 3, "wreck", "north")
+    b.set(47, 1, -3, S("leaking_pipe"))
+    b.decay(0.02, keep=("minecraft:chest", "minecraft:barrel", "minecraft:ladder"))
+    return b
+
+
+def whale_skeleton():
+    """A blue whale stranded when the sea left: the great skull with its jaw bones, the spine arching out of the silt,
+    ribs, the flipper bones, the tail vertebrae sinking into the ground."""
+    b = Build("whale_skeleton", 1024)
+    crater(b, 14, 0, 7, 1, glass=False)
+    for x in range(-2, 34):
+        for z in range(-6, 7):
+            if b.get(x, 0, z) is None:
+                b.set(x, 0, z, S("dried_silt") if b.rnd.random() < 0.7 else S("salt_crust"))
+    # Spine: an arch from the skull (x 0) to the tail (x 34), vertebrae with dorsal processes.
+    for x in range(4, 34):
+        y = int(round(4 - ((x - 16) / 9.0) ** 2)) if x < 26 else max(0, 3 - (x - 26) // 2)
+        b.set(x, max(0, y) + 1, 0, S("bone_block", axis="x"))
+        if x % 2 == 0 and x < 28:
+            b.set(x, max(0, y) + 2, 0, S("bone_block", axis="y"))
+        if x % 3 == 0 and x < 28:
+            b.set(x, max(0, y) + 1, -1, S("bone_block", axis="z"))
+            b.set(x, max(0, y) + 1, 1, S("bone_block", axis="z"))
+    # Ribs: arcs down to the ground on both sides.
+    for x in range(8, 22, 2):
+        top = int(round(4 - ((x - 16) / 9.0) ** 2)) + 1
+        for dz in range(1, 6):
+            y = int(round(top - (dz ** 2) / 4.5))
+            if y >= 0:
+                b.set(x, y, -dz, S("bone_block", axis="y"))
+                b.set(x, y, dz, S("bone_block", axis="y"))
+    # Skull: a long rostrum with jaw bones splayed outwards.
+    for x in range(-6, 5):
+        w = 2 if x > -3 else 1
+        for dz in range(-w, w + 1):
+            b.set(x, 1, dz, S("bone_block", axis="x"))
+            if x > -1:
+                b.set(x, 2, dz, S("bone_block", axis="x"))
+    for x in range(-8, 4):
+        spread = 3 + (4 - x) // 4
+        b.set(x, 1, -spread, S("bone_block", axis="x"))
+        b.set(x, 1, spread, S("bone_block", axis="x"))
+    # Flippers.
+    for k in range(0, 5):
+        b.set(10 + k, 1, -6 - k // 2, S("bone_block", axis="x"))
+        b.set(10 + k, 1, 6 + k // 2, S("bone_block", axis="x"))
+    # Tail flukes in the silt.
+    for dz in range(-4, 5):
+        b.set(34 + abs(dz) // 2, 1, dz, S("bone_block", axis="z"))
+    for _ in range(10):
+        x, z = b.rnd.randint(-6, 36), b.rnd.randint(-8, 8)
+        if b.get(x, 1, z) in (None, AIR):
+            b.set(x, 1, z, S("dead_bush") if b.rnd.random() < 0.5 else S("bone_block", axis="x"))
+    return b
+
 BUILDERS = {
     "bunker_small": bunker_small,
     "bunker_large": bunker_large,
@@ -1870,4 +2479,13 @@ BUILDERS = {
     "seed_bank": seed_bank,
     "terraformer": terraformer,
     "dam": dam,
+    "cargo_capsule": cargo_capsule,
+    "crashed_satellite": crashed_satellite,
+    "rocket_stage": rocket_stage,
+    "drone_site": drone_site,
+    "colony_overgrown": lambda: colony("overgrown"),
+    "colony_burnt": lambda: colony("burnt"),
+    "colony_frozen": lambda: colony("frozen"),
+    "dry_shipwreck": dry_shipwreck,
+    "whale_skeleton": whale_skeleton,
 }

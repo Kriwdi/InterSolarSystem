@@ -38,7 +38,7 @@
     }
   },
   "start_height": {
-    "absolute": -2
+    "absolute": -6
   },
   "start_pool": "intersolarsystem:rocket_stage",
   "step": "surface_structures",

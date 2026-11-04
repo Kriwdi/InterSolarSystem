@@ -322,7 +322,9 @@ public class SceneScreenshots implements FabricClientGameTest {
 		{"radio_tower", 29, 3, 22, 45}, {"barracks", 16, 3, 14, 90}, {"oil_pumpjack", 5, 3, 18, 90},
 		{"solar_farm", 49, 3, 25, -45}, {"space_center", 11, 7, 26, 0}, {"research_lab", 7, 3, 21, -45},
 		{"research_station", 13, 6, 8, -90}, {"seed_bank", 27, 3, 62, 0}, {"terraformer", 16, 3, 36, -45},
-		{"dam", 44, 4, 22, 0},
+		{"dam", 44, 4, 22, 0}, {"cargo_capsule", 16, 4, 8, 90}, {"crashed_satellite", 28, 6, 15, 135},
+		{"rocket_stage", 29, 9, 14, 90}, {"drone_site", 20, 2, 12, -90}, {"colony_overgrown", 25, 3, 25, -45},
+		{"colony_frozen", 25, 3, 25, -45}, {"dry_shipwreck", 47, 25, 12, 90}, {"whale_skeleton", 22, 4, 14, 180},
 	};
 
 	static void showcase(TestSingleplayerContext game, ClientGameTestContext context) {
