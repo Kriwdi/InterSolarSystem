@@ -79,6 +79,8 @@ class TravelMathTest {
 		assertTrue(ShipNavigation.reachable(orbit, "moon"));
 		assertTrue(ShipNavigation.reachable(earth, "moon"));
 		assertTrue(!ShipNavigation.reachable(earth, "earth"));
-		assertTrue(!ShipNavigation.reachable(body("mars"), "moon"));
+		assertTrue(ShipNavigation.reachable(body("mars"), "moon"));
+		assertTrue(!ShipNavigation.reachable(body("mars"), "mars"));
+		assertTrue(!ShipNavigation.reachable(body("jupiter"), "earth"));
 	}
 }
