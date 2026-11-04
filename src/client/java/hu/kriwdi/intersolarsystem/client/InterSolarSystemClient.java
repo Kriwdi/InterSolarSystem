@@ -38,7 +38,6 @@ public class InterSolarSystemClient implements ClientModInitializer {
 				}));
 		ClientPlayNetworking.registerGlobalReceiver(RepairBoardPayloads.Open.TYPE, (payload, context) -> {
 			Minecraft minecraft = context.client();
-			hu.kriwdi.intersolarsystem.travel.SolarSystem.setDiscovered(payload.discovered());
 			minecraft.execute(() -> minecraft.setScreenAndShow(switch (payload.kind()) {
 				case WIRING -> new WiringScreen(payload.seed(), payload.size());
 				case VALVE -> new ValveScreen(payload.seed(), payload.size());
@@ -47,6 +46,7 @@ public class InterSolarSystemClient implements ClientModInitializer {
 		});
 		ClientPlayNetworking.registerGlobalReceiver(NavigationPayloads.Open.TYPE, (payload, context) -> {
 			Minecraft minecraft = context.client();
+			hu.kriwdi.intersolarsystem.travel.SolarSystem.setDiscovered(payload.discovered());
 			minecraft.execute(() -> minecraft.setScreenAndShow(
 					new NavigationScreen(payload.engineTier(), payload.gameTime(), payload.blocker(),
 							payload.here(), payload.mothershipAt())));
