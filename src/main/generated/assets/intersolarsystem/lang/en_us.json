@@ -618,5 +618,8 @@
   "tooltip.intersolarsystem.oxygen_canister": "Use while wearing the space suit: refills a third of its tank. Made from perchlorate (Mars), ilmenite (the Moon) or polar ice.",
   "tooltip.intersolarsystem.rover_memory_core": "2.1 GB that nobody wrote. Warm to the touch. \"Take it to Earth, not to the wall.\"",
   "tooltip.intersolarsystem.safety_tether": "In orbit: use on a block to clip on (16 m of line, +16 m per spool carried). Sneak + use to unclip.",
-  "tooltip.intersolarsystem.tether_spool": "Extra line for the safety tether (up to 3 spools)."
+  "tooltip.intersolarsystem.tether_spool": "Extra line for the safety tether (up to 3 spools).",
+  "weather.intersolarsystem.mars.storm": "DUST STORM. Outside you are slowed and the panels give little power.",
+  "weather.intersolarsystem.mars.storm_coming": "A dust storm is coming in %s s. Solar power will drop to a quarter.",
+  "weather.intersolarsystem.mars.storm_over": "The dust storm has passed."
 }

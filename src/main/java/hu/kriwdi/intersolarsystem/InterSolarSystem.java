@@ -37,6 +37,7 @@ public class InterSolarSystem implements ModInitializer {
 		SpaceEnvironment.register();
 		hu.kriwdi.intersolarsystem.space.OrbitalEva.register();
 		hu.kriwdi.intersolarsystem.space.SpaceSites.register();
+		hu.kriwdi.intersolarsystem.space.MarsWeather.register();
 		hu.kriwdi.intersolarsystem.spaceport.Spaceports.register();
 		hu.kriwdi.intersolarsystem.spaceport.Mothership.register();
 		hu.kriwdi.intersolarsystem.salvage.Machines.register();

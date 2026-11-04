@@ -115,7 +115,7 @@ public final class PowerGrid {
 		float sun = 0;
 		for (BlockPos p : solar) {
 			if (day && level.canSeeSky(p.above())) {
-				sun += SOLAR_KW;
+				sun += SOLAR_KW * hu.kriwdi.intersolarsystem.space.MarsWeather.sunlight(level);
 			}
 		}
 		float need = demand - sun;
@@ -171,7 +171,7 @@ public final class PowerGrid {
 		float c = 0;
 		for (BlockPos p : solar) {
 			if (day && level.canSeeSky(p.above())) {
-				c += SOLAR_KW;
+				c += SOLAR_KW * hu.kriwdi.intersolarsystem.space.MarsWeather.sunlight(level);
 			}
 		}
 		for (BlockPos p : diesel) {

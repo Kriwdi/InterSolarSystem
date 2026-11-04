@@ -569,6 +569,7 @@ A **Mars** cél a **fúziós hajtóművel** (3-as szint) nyílik meg; az út hos
 
 - **A világ:** 10 600 blokk körbe. Rozsdás regolitsíkságok sötét bazaltfoltokkal, narancssárga **dűnetengerek**, kráteres **felföldek** kanyonokkal, a sarkokon (kb. ±4250-től) réteges **sarki jégsapkák**.
 - **Levegő és gravitáció:** a légkör a földinek századrésze, szén-dioxid: **űrruha kell**. A gravitáció 38%.
+- **Porviharok:** két-négy naponta porvihar kel fel néhány percre (előtte figyelmeztetés): a szabad ég alatt lassabban haladsz, a por sodródik, és a **napelemek csak negyed teljesítményt** adnak.
 - **Ég:** nappal vajkaramell színű, éjjel csillagos; a **Phobos** naponta háromszor átrohan az égen, a **Deimos** kis pont, a **Föld** kék esthajnalcsillag a nap közelében.
 - **Nyersanyag:** marsi bazalt, regolit, por, **rétegzett homokkő**, **hematitgömböcskék** (kiolvasztva vas), **perklorátkéreg**, **sarki jég**.
 - **Oxigén más világokon:** az **oxigénpalack** (perklorátból, holdi ilmenitből vagy sarki jégből + akkumulátor) felvett űrruhában használva a tartály harmadát tölti fel – így a hajótól távol is kitart a ruha.

@@ -618,5 +618,8 @@
   "tooltip.intersolarsystem.oxygen_canister": "Felvett űrruhában használd: a tartály harmadát tölti fel. Perklorátból (Mars), ilmenitből (Hold) vagy sarki jégből készül.",
   "tooltip.intersolarsystem.rover_memory_core": "2,1 GB, amit senki nem írt. Meleg tapintású. „A Földre vidd, ne a falhoz.”",
   "tooltip.intersolarsystem.safety_tether": "Pályán: blokkra használva rácsatolsz (16 m kötél, +16 m minden nálad lévő tekercsért). Lopakodás + használat: lecsatolás.",
-  "tooltip.intersolarsystem.tether_spool": "Plusz kötél a biztosítókötélhez (legfeljebb 3 tekercs)."
+  "tooltip.intersolarsystem.tether_spool": "Plusz kötél a biztosítókötélhez (legfeljebb 3 tekercs).",
+  "weather.intersolarsystem.mars.storm": "PORVIHAR. Odakint lassabb vagy, és a napelemek alig termelnek.",
+  "weather.intersolarsystem.mars.storm_coming": "%s mp múlva porvihar érkezik. A napelemek a negyedére esnek vissza.",
+  "weather.intersolarsystem.mars.storm_over": "A porvihar elvonult."
 }

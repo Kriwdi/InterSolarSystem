@@ -2530,6 +2530,18 @@ public final class ModLangTable {
 				"Suit oxygen: %s%%",
 				"Anzugsauerstoff: %s%%",
 				"Ruha oxigénje: %s%%");
+		add(rows, "weather.intersolarsystem.mars.storm_coming",
+				"A dust storm is coming in %s s. Solar power will drop to a quarter.",
+				"Ein Staubsturm zieht in %s s auf. Solarstrom sinkt auf ein Viertel.",
+				"%s mp múlva porvihar érkezik. A napelemek a negyedére esnek vissza.");
+		add(rows, "weather.intersolarsystem.mars.storm",
+				"DUST STORM. Outside you are slowed and the panels give little power.",
+				"STAUBSTURM. Draußen bist du langsamer und die Paneele liefern kaum Strom.",
+				"PORVIHAR. Odakint lassabb vagy, és a napelemek alig termelnek.");
+		add(rows, "weather.intersolarsystem.mars.storm_over",
+				"The dust storm has passed.",
+				"Der Staubsturm ist vorüber.",
+				"A porvihar elvonult.");
 		check(rows);
 		return List.copyOf(rows);
 	}

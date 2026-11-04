@@ -618,5 +618,8 @@
   "tooltip.intersolarsystem.oxygen_canister": "Mit angelegtem Raumanzug benutzen: füllt ein Drittel des Tanks. Aus Perchlorat (Mars), Ilmenit (Mond) oder Polareis.",
   "tooltip.intersolarsystem.rover_memory_core": "2,1 GB, die niemand geschrieben hat. Fühlt sich warm an. „Bring ihn zur Erde, nicht zur Wand.“",
   "tooltip.intersolarsystem.safety_tether": "Im Orbit: an einem Block benutzen zum Einklinken (16 m Leine, +16 m je mitgeführter Spule). Schleichen + benutzen zum Lösen.",
-  "tooltip.intersolarsystem.tether_spool": "Zusätzliche Leine für die Sicherungsleine (bis zu 3 Spulen)."
+  "tooltip.intersolarsystem.tether_spool": "Zusätzliche Leine für die Sicherungsleine (bis zu 3 Spulen).",
+  "weather.intersolarsystem.mars.storm": "STAUBSTURM. Draußen bist du langsamer und die Paneele liefern kaum Strom.",
+  "weather.intersolarsystem.mars.storm_coming": "Ein Staubsturm zieht in %s s auf. Solarstrom sinkt auf ein Viertel.",
+  "weather.intersolarsystem.mars.storm_over": "Der Staubsturm ist vorüber."
 }
