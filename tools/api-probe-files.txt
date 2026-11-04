@@ -1,0 +1,4 @@
+data/minecraft/worldgen/biome/basalt_deltas.json
+data/minecraft/worldgen/biome/pale_garden.json
+data/minecraft/worldgen/biome/deep_dark.json
+data/minecraft/worldgen/biome/snowy_plains.json

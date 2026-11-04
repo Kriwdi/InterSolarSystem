@@ -1,7 +1,3 @@
-net.minecraft.world.level.levelgen.structure.Structure
-net.minecraft.world.level.levelgen.structure.Structure$GenerationContext
-net.minecraft.world.level.levelgen.structure.Structure$GenerationStub
-net.minecraft.world.level.levelgen.structure.Structure$StructureSettings
-net.minecraft.world.level.levelgen.structure.StructureType
-net.minecraft.world.level.levelgen.structure.structures.JigsawStructure
-net.minecraft.world.level.levelgen.structure.TerrainAdjustment
+net.minecraft.world.attribute.EnvironmentAttributes
+net.minecraft.world.attribute.AmbientSounds
+net.minecraft.world.entity.Leashable
