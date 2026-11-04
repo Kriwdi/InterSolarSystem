@@ -63,8 +63,11 @@ def biome_source():
 
 
 def presets():
+    # The climate placement wrapped in the mod's biome source, which guarantees one oasis in every world
+    # (worldgen/OasisBiomeSource.java): the climate box above alone is so narrow that many seeds have none.
+    source = {"type": NS + "dead_earth", "climate": biome_source(), "oasis": NS + "oasis"}
     overworld = {"type": "minecraft:overworld", "generator": {
-        "type": "minecraft:noise", "biome_source": biome_source(), "settings": NS + "dead_earth"}}
+        "type": "minecraft:noise", "biome_source": source, "settings": NS + "dead_earth"}}
     for preset in ("normal", "large_biomes", "amplified"):
         write(f"minecraft/worldgen/world_preset/{preset}.json", {"dimensions": {"minecraft:overworld": overworld}})
 
