@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/enceladus_snow"
+      },
+      {
+        "model": "intersolarsystem:block/enceladus_snow",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/enceladus_snow",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/enceladus_snow",
+        "y": 270
+      }
+    ]
+  }
+}

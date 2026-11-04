@@ -1,0 +1,11 @@
+{
+  "type": "intersolarsystem:uranus",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "intersolarsystem:uranus_surface"
+    },
+    "settings": "intersolarsystem:uranus"
+  }
+}

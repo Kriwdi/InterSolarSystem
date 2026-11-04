@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "intersolarsystem:block/nitrogen_geyser_top",
+    "bottom": "intersolarsystem:block/cantaloupe_ice",
+    "side": "intersolarsystem:block/cantaloupe_ice"
+  }
+}

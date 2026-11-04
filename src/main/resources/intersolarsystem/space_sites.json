@@ -223,5 +223,120 @@
   -26,
   -34,
   -26
+ ],
+ "ganymede/uruk_camp": [
+  -24,
+  -4,
+  -24
+ ],
+ "ganymede/juice_crash": [
+  -16,
+  -4,
+  -16
+ ],
+ "callisto/hope_base": [
+  -39,
+  -4,
+  -30
+ ],
+ "callisto/fuel_depot": [
+  -16,
+  -4,
+  -16
+ ],
+ "saturn/kronos_aerostat": [
+  -34,
+  -111,
+  -34
+ ],
+ "saturn/storm_buoy": [
+  -4,
+  -2,
+  -4
+ ],
+ "rings/daphnis_depot": [
+  -18,
+  -29,
+  -18
+ ],
+ "rings/ice_hauler_wreck": [
+  -24,
+  -4,
+  -4
+ ],
+ "titan/selk_habitat": [
+  -26,
+  -14,
+  -26
+ ],
+ "titan/huygens": [
+  -8,
+  -14,
+  -8
+ ],
+ "titan/dragonfly": [
+  -10,
+  -14,
+  -10
+ ],
+ "titan/kraken_harbour": [
+  -22,
+  -14,
+  -22
+ ],
+ "titan/sotra_vent": [
+  -26,
+  -3,
+  -26
+ ],
+ "enceladus/baghdad_lab": [
+  -20,
+  -4,
+  -20
+ ],
+ "enceladus/ocean_borehole": [
+  -10,
+  -31,
+  -10
+ ],
+ "uranus/meridian_aerostat": [
+  -34,
+  -111,
+  -34
+ ],
+ "miranda/rupes_camp": [
+  -14,
+  -4,
+  -14
+ ],
+ "miranda/fallen_lander": [
+  -10,
+  -4,
+  -10
+ ],
+ "titania/messina_station": [
+  -20,
+  -30,
+  -20
+ ],
+ "neptune/le_verrier_aerostat": [
+  -34,
+  -111,
+  -34
+ ],
+ "triton/hili_outpost": [
+  -22,
+  -4,
+  -22
+ ],
+ "triton/geyser_field_camp": [
+  -12,
+  -4,
+  -12
+ ],
+ "nameless/survey_rig": [
+  -14,
+  -51,
+  -14
  ]
 }

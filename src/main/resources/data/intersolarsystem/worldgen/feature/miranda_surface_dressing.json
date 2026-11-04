@@ -1,0 +1,9 @@
+{
+  "type": "intersolarsystem:planet_surface",
+  "base": "intersolarsystem:miranda_ice",
+  "top": "intersolarsystem:miranda_ice",
+  "alt": "intersolarsystem:corona_ice",
+  "alt_chance": 0.05,
+  "under": "intersolarsystem:miranda_ice",
+  "depth": 3
+}

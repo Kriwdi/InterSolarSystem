@@ -1,0 +1,14 @@
+{
+  "type": "intersolarsystem:gas_decks",
+  "high": "intersolarsystem:neptune_methane_cloud",
+  "middle": "intersolarsystem:deep_sulfide_cloud",
+  "low": "intersolarsystem:water_cloud",
+  "storm_block": "intersolarsystem:dark_spot_cloud",
+  "underside": "intersolarsystem:diamond_hail",
+  "underside_rarity": 300,
+  "storm_x": 1800,
+  "storm_z": 1200,
+  "storm_rx": 420,
+  "storm_rz": 220,
+  "bands": 150.0
+}

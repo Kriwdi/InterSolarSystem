@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/titan_bedrock_ice"
+      },
+      {
+        "model": "intersolarsystem:block/titan_bedrock_ice",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/titan_bedrock_ice",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/titan_bedrock_ice",
+        "y": 270
+      }
+    ]
+  }
+}

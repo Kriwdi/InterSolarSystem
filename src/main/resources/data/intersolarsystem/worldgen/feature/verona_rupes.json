@@ -1,0 +1,10 @@
+{
+  "type": "intersolarsystem:moon_terrain",
+  "style": "escarpment",
+  "primary": "intersolarsystem:miranda_ice",
+  "secondary": "intersolarsystem:miranda_ice",
+  "accent": "intersolarsystem:scarp_ice",
+  "centre_x": 100,
+  "size": 500,
+  "height": 140
+}

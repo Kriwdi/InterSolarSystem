@@ -21,8 +21,8 @@ public final class NavigationPayloads {
 	 * "moon", "mars", "mothership") and where the mothership is parked ({@code mothershipAt}: "mars_orbit"; "" under
 	 * way or not built).
 	 */
-	public record Open(int engineTier, long gameTime, String blocker, String here, String mothershipAt)
-			implements CustomPacketPayload {
+	public record Open(int engineTier, long gameTime, String blocker, String here, String mothershipAt,
+			String discovered) implements CustomPacketPayload {
 		public static final CustomPacketPayload.Type<Open> TYPE = new CustomPacketPayload.Type<>(ModIds.id("nav_open"));
 		public static final StreamCodec<ByteBuf, Open> CODEC = StreamCodec.of(
 				(buf, p) -> {
@@ -31,6 +31,7 @@ public final class NavigationPayloads {
 					writeString(buf, p.blocker(), 128);
 					writeString(buf, p.here(), MAX_ID_LENGTH);
 					writeString(buf, p.mothershipAt(), MAX_ID_LENGTH);
+					writeString(buf, p.discovered(), 512);
 				},
 				buf -> {
 					int engine = VarInt.read(buf);
@@ -38,8 +39,9 @@ public final class NavigationPayloads {
 					String blocker = readString(buf, 128);
 					String here = readString(buf, MAX_ID_LENGTH);
 					String mothership = readString(buf, MAX_ID_LENGTH);
+					String discovered = readString(buf, 512);
 					buf.skipBytes(buf.readableBytes());
-					return new Open(engine, time, blocker, here, mothership);
+					return new Open(engine, time, blocker, here, mothership, discovered);
 				});
 
 		public boolean canLaunch() {

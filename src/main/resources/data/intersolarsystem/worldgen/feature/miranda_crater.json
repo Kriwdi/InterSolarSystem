@@ -1,0 +1,8 @@
+{
+  "type": "intersolarsystem:crater",
+  "min_radius": 4,
+  "max_radius": 7,
+  "floor": "intersolarsystem:miranda_ice",
+  "fresh": "intersolarsystem:corona_ice",
+  "rim": "intersolarsystem:miranda_ice"
+}

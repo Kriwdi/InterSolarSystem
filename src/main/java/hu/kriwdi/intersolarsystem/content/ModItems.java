@@ -109,6 +109,21 @@ public final class ModItems {
 	public static final Item PLASMA_DRIVE_KIT = register("plasma_drive_kit", Item::new,
 			new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
 
+	// ---- The outer system.
+	/** Life from Enceladus' sea floor: research material (and living soil for the farms). */
+	public static final Item BIOSAMPLE = register("biosample", Item::new, new Item.Properties());
+	/** Titan's tholin sand, baked: a tough organic resin. */
+	public static final Item THOLIN_RESIN = register("tholin_resin", Item::new, new Item.Properties());
+	/** Tier 5 for the mothership, from Jupiter's metallic hydrogen: Saturn's system. */
+	public static final Item METALLIC_HYDROGEN_DRIVE_KIT = register("metallic_hydrogen_drive_kit", Item::new,
+			new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
+	/** Tier 6, from Saturn's heavy-water ice and Titan's resin: the ice giants. */
+	public static final Item DEUTERIUM_DRIVE_KIT = register("deuterium_drive_kit", Item::new,
+			new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
+	/** Tier 7: the turbo drive. Nothing in this solar system needs it. */
+	public static final Item TURBO_DRIVE_KIT = register("turbo_drive_kit", Item::new,
+			new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
+
 	// ---- Titanium tools: a little better than iron, much tougher.
 	public static final TagKey<Item> TITANIUM_TOOL_MATERIALS = TagKey.create(Registries.ITEM,
 			ModIds.id("titanium_tool_materials"));

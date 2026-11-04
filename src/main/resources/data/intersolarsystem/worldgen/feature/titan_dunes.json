@@ -1,0 +1,8 @@
+{
+  "type": "intersolarsystem:moon_terrain",
+  "style": "dunes",
+  "primary": "intersolarsystem:titan_bedrock_ice",
+  "secondary": "intersolarsystem:tholin_sand",
+  "accent": "intersolarsystem:hydrocarbon_sludge",
+  "height": 70
+}

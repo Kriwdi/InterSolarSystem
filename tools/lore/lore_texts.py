@@ -417,6 +417,10 @@ TERMINALS = {
             "> asatas 0426\nÉjjelente valami kopog a túloldalon, solonként egyszer, a lüktetés ütemére. Nem megyek le többé. Azért írom ezt, hogy a következő megértse: a fal nem ajtó valahová. Ajtó valaminek."]}},
 }
 
+from outer_logs import OUTER_TERMINALS  # noqa: E402
+
+TERMINALS.update(OUTER_TERMINALS)
+
 MANUALS = {
     "nav_console": {
         "en": {"title": "Navigation console", "subtitle": "Manual N-1, Aurora tender class", "pages": [

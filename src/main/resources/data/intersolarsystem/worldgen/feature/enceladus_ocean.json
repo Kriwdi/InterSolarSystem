@@ -1,0 +1,9 @@
+{
+  "type": "intersolarsystem:subsurface_ocean",
+  "floor": "minecraft:tuff",
+  "life": "intersolarsystem:microbial_mat",
+  "colony": "intersolarsystem:vent_colony",
+  "vent": "minecraft:magma_block",
+  "floor_y": 12,
+  "shell": 26
+}

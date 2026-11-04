@@ -154,7 +154,7 @@ public class HelmetHudElement implements HudElement {
 		}
 		boolean open = mc.level.canSeeSky(player.blockPosition().above());
 		var zone = hu.kriwdi.intersolarsystem.space.PlanetHazards.zone(world.get().body(), player.blockPosition().getY(),
-				open, mc.level.isBrightOutside(), time);
+				player.blockPosition().getZ(), open, mc.level.isBrightOutside(), time);
 		if (zone == hu.kriwdi.intersolarsystem.space.PlanetHazards.Zone.NONE) {
 			return;
 		}

@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/nameless_rock"
+      },
+      {
+        "model": "intersolarsystem:block/nameless_rock",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/nameless_rock",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/nameless_rock",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+block.intersolarsystem.ganymede_dark_ice|Dark Ganymedean Ice|Dunkles Ganymed-Eis|Sötét ganümédészi jég
+block.intersolarsystem.grooved_ice|Grooved Ice|Rilleneis|Barázdás jég
+block.intersolarsystem.ganymede_frost|Polar Frost|Polarreif|Sarki dér
+block.intersolarsystem.callisto_regolith|Callistoan Regolith|Kallisto-Regolith|Kallisztói regolit
+block.intersolarsystem.callisto_ice|Callistoan Ice|Kallisto-Eis|Kallisztói jég
+block.intersolarsystem.pinnacle_frost|Pinnacle Frost|Zinnenreif|Tüskedér
+block.intersolarsystem.saturn_haze|Saturnian Haze|Saturn-Dunst|Szaturnuszi pára
+block.intersolarsystem.saturn_belt_cloud|Saturnian Belt Cloud|Saturn-Bandwolke|Szaturnuszi sávfelhő
+block.intersolarsystem.hexagon_storm_cloud|Hexagon Storm Cloud|Hexagon-Sturmwolke|Hatszögvihar-felhő
+block.intersolarsystem.ring_ice|Ring Ice|Ringeis|Gyűrűjég
+block.intersolarsystem.dusty_ring_ice|Dusty Ring Ice|Staubiges Ringeis|Poros gyűrűjég
+block.intersolarsystem.deuterium_ice|Heavy-Water Ice|Schwerwassereis|Nehézvízjég
+block.intersolarsystem.tholin_sand|Tholin Sand|Tholin-Sand|Tolinhomok
+block.intersolarsystem.titan_bedrock_ice|Titanian Ice Bedrock|Titan-Eisgestein|Titáni jég-alapkőzet
+block.intersolarsystem.hydrocarbon_sludge|Hydrocarbon Sludge|Kohlenwasserstoffschlamm|Szénhidrogén-iszap
+block.intersolarsystem.cryolava_ice|Cryolava Ice|Kryolava-Eis|Krioláva-jég
+block.intersolarsystem.enceladus_snow|Geyser Snow|Geysirschnee|Gejzírhó
+block.intersolarsystem.enceladus_ice|Enceladan Ice|Enceladus-Eis|Enceladusi jég
+block.intersolarsystem.fissure_ice|Tiger Stripe Ice|Tigerstreifen-Eis|Tigriscsík-jég
+block.intersolarsystem.vent_colony|Vent Colony|Schlotkolonie|Kürtőtelep
+block.intersolarsystem.uranus_methane_cloud|Uranian Methane Cloud|Uranus-Methanwolke|Uránuszi metánfelhő
+block.intersolarsystem.deep_sulfide_cloud|Hydrogen Sulfide Cloud|Schwefelwasserstoffwolke|Kén-hidrogén-felhő
+block.intersolarsystem.diamond_hail|Diamond Hail|Diamantenhagel|Gyémántjégeső
+block.intersolarsystem.miranda_ice|Mirandan Ice|Miranda-Eis|Mirandai jég
+block.intersolarsystem.corona_ice|Corona Ice|Koronaeis|Koronajég
+block.intersolarsystem.scarp_ice|Scarp Ice|Steilwandeis|Szirtjég
+block.intersolarsystem.titania_ice|Titania Ice|Titania-Eis|Titániai jég
+block.intersolarsystem.titania_frost|Carbon Dioxide Frost|Kohlendioxidreif|Szén-dioxid dér
+block.intersolarsystem.neptune_methane_cloud|Neptunian Methane Cloud|Neptun-Methanwolke|Neptunuszi metánfelhő
+block.intersolarsystem.dark_spot_cloud|Dark Spot Cloud|Wolke des Dunklen Flecks|A Sötét Folt felhője
+block.intersolarsystem.nitrogen_ice|Nitrogen Ice|Stickstoffeis|Nitrogénjég
+block.intersolarsystem.cantaloupe_ice|Cantaloupe Terrain Ice|Kantalupen-Eis|Sárgadinnyehéj-jég
+block.intersolarsystem.geyser_soot|Geyser Soot|Geysirruß|Gejzírkorom
+block.intersolarsystem.nameless_rock|Dark Moon Rock|Dunkles Mondgestein|Sötét holdkőzet
+block.intersolarsystem.silent_crystal|Silent Crystal|Stummer Kristall|Néma kristály
+block.intersolarsystem.geyser_vent|Geyser Vent|Geysirschlot|Gejzírkürtő
+block.intersolarsystem.nitrogen_geyser|Nitrogen Geyser|Stickstoffgeysir|Nitrogéngejzír
+block.intersolarsystem.dragonfly_flight_computer|Dragonfly Flight Computer|Dragonfly-Flugrechner|Dragonfly fedélzeti számítógép
+item.intersolarsystem.biosample|Enceladan Biosample|Enceladus-Bioprobe|Enceladusi biominta
+item.intersolarsystem.tholin_resin|Tholin Resin|Tholin-Harz|Tolingyanta
+item.intersolarsystem.metallic_hydrogen_drive_kit|Metallic Hydrogen Drive Kit (tier 5, mothership)|Metallwasserstoff-Antriebsset (Stufe 5, Mutterschiff)|Fémeshidrogén-hajtómű készlet (5. szint, anyahajó)
+item.intersolarsystem.deuterium_drive_kit|Deuterium Torch Drive Kit (tier 6, mothership)|Deuterium-Fackelantriebsset (Stufe 6, Mutterschiff)|Deutérium-fáklyahajtómű készlet (6. szint, anyahajó)
+item.intersolarsystem.turbo_drive_kit|Turbo Drive Kit (tier 7, mothership)|Turboantriebsset (Stufe 7, Mutterschiff)|Turbóhajtómű-készlet (7. szint, anyahajó)

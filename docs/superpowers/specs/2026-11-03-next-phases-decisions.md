@@ -150,3 +150,26 @@ Hátravan: képernyőképek ellenőrzése (Client screenshots workflow), az `oas
 - **Proxima (3. kör):** 3–4 bolygó: egy élettel teli, Minecraft-szerű világ sok faluval és nagyvárossal, a többi
   Mars-szerű, emberi maradványok nélkül.
 - **Tesztparancs:** paranccsal bármely égitestre el lehet jutni (teszteléshez).
+
+## Megvalósítás állapota: a külső Naprendszer (2026-11-04 délelőtt)
+
+CI-ben ellenőrizve (build, 65 egységteszt, szerveres smoke test minden világgal).
+
+- **Világok** (`space/Worlds.java`, `tools/worldgen/make_outer_planets.py`): Ganümédész 8340, Kallisztó 7630, Szaturnusz
+  20 000, gyűrűk 6000 (súlytalan), Titán 8150 (metántengerek, 70-es szint), Enceladus 2000, Uránusz 20 000, Miranda 2000,
+  Titánia 2500, Neptunusz 20 000, Triton 4290, és a névtelen hold (`nameless`, 2000; a konzolon „S/2041 N 1”).
+- **Domborzat** (`worldgen/MoonTerrainFeature`): barázdák, jégtüskék, Valhalla-gyűrűk, tigriscsíkok gejzírekkel,
+  sárgadinnyehéj nitrogéngejzírekkel, dűnék, koronák, a Verona Rupes szirt (140 blokk), Messina-hasadékok;
+  `GasDecksFeature` (Szaturnusz-hatszög, Nagy Sötét Folt, gyémántjégeső), `RingFieldFeature`, `SubsurfaceOceanFeature`
+  (Enceladus, kürtőtelepek).
+- **Blokkok** (`tools/art/make_outer_assets.py`, `content/OuterBlocks.java`): 35 talaj-/felhőblokk, gejzírkürtő,
+  nitrogéngejzír, Dragonfly fedélzeti számítógép (javítókészlettel javítható, utána ugrál a titáni helyszínek között).
+- **Veszélyek:** Ganümédész sugárzás 1000 blokkon túl, mélyhideg, szélsőséges hideg (Triton, névtelen hold),
+  gyűrűvihar menetrenddel, gázóriás-mélység és szelek (Neptunusz lökésekkel), Titán: lassú esés. Új sebzés: frostbite.
+- **Hajtómű:** 5 (fémes hidrogén), 6 (deutérium + tolingyanta), 7 = turbó (néma kristály a névtelen holdról);
+  szorzók ×60, ×100, ×300.
+- **Rejtett hold:** `solar_system.json` `hidden: true`; a 35-ös napló (Hili előőrs) felfedi (`travel/Discoveries`).
+  A kristály célját semmi sem mondja ki; a 30., 34., 35., 36. napló kerülgeti.
+- **Helyszínek** (`tools/worldgen/outer_sites.py`, 23 sablon), **naplók** 28–39 (`tools/lore/outer_logs.py`).
+
+Hátravan ebben a körben: az űrdaru és a négy anyahajó-modul; képernyőképek ellenőrzése.

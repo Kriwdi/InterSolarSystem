@@ -6,7 +6,7 @@ package hu.kriwdi.intersolarsystem.travel;
  */
 public final class TravelMath {
 	public static final int REAL_DAY_TICKS = 2400;
-	public static final int[] ENGINE_MULTIPLIERS = {1, 3, 10, 30};
+	public static final int[] ENGINE_MULTIPLIERS = {1, 3, 10, 30, 60, 100, 300};
 	public static final double WORST_WINDOW_FACTOR = 1.5;
 	/** The hop between the mothership and the body under it, in real days. */
 	public static final double DOCK_DAYS = 0.25;

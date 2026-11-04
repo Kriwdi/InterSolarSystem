@@ -42,13 +42,17 @@ public class NavigationScreen extends Screen {
 			Map.entry("earth", 0xFF3D7BD9), Map.entry("earth_orbit", 0xFF9FC4FF), Map.entry("moon", 0xFFC9C9C9), Map.entry("venus", 0xFFE3C27A),
 			Map.entry("mercury", 0xFF9E8F80), Map.entry("mars", 0xFFD0603A), Map.entry("ceres", 0xFF8A857C),
 			Map.entry("jupiter", 0xFFD9A877), Map.entry("saturn", 0xFFE8D29A), Map.entry("uranus", 0xFF9FE0E6),
-			Map.entry("neptune", 0xFF4C6FE0), Map.entry("mothership", 0xFFE3A22A));
+			Map.entry("neptune", 0xFF4C6FE0), Map.entry("mothership", 0xFFE3A22A), Map.entry("ganymede", 0xFF8A7E70),
+			Map.entry("callisto", 0xFF5A5046), Map.entry("saturn_rings", 0xFFD8E4EA), Map.entry("titan", 0xFFC8903C),
+			Map.entry("enceladus", 0xFFF4F8FA), Map.entry("miranda", 0xFFA7ACB0), Map.entry("titania", 0xFF948F86),
+			Map.entry("triton", 0xFFD8C6C2), Map.entry("nameless", 0xFF55504A));
 	/** Rough orbit radii in AU, only for placing the bodies on the map strip (log scale). */
 	private static final Map<String, Double> ORBIT_AU = Map.ofEntries(
 			Map.entry("mercury", 0.39), Map.entry("venus", 0.72), Map.entry("earth", 1.0), Map.entry("earth_orbit", 1.0),
 			Map.entry("moon", 1.0),
 			Map.entry("mars", 1.52), Map.entry("ceres", 2.77), Map.entry("jupiter", 5.2), Map.entry("saturn", 9.5),
-			Map.entry("uranus", 19.2), Map.entry("neptune", 30.1), Map.entry("mothership", 1.0));
+			Map.entry("uranus", 19.2), Map.entry("neptune", 30.1), Map.entry("mothership", 1.0),
+			Map.entry("asteroid_belt", 2.6));
 
 	private final int engineTier;
 	private final long serverTimeAtOpen;
@@ -56,7 +60,8 @@ public class NavigationScreen extends Screen {
 	private final boolean canLaunch;
 	private final String here;
 	private final String mothershipAt;
-	private final List<CelestialBody> bodies = SolarSystem.bodies();
+	/** The catalogue, without the bodies nobody has found yet. */
+	private final List<CelestialBody> bodies = SolarSystem.bodies().stream().filter(SolarSystem::visible).toList();
 	private final String version = FabricLoader.getInstance().getModContainer(ModIds.MOD_ID)
 			.map(c -> c.getMetadata().getVersion().getFriendlyString()).orElse("?");
 	private int ticks;
@@ -299,7 +304,9 @@ public class NavigationScreen extends Screen {
 		double max = Math.log(35);
 		for (int i = 0; i < bodies.size(); i++) {
 			CelestialBody b = bodies.get(i);
-			double au = ORBIT_AU.getOrDefault(b.id(), 1.0);
+			// Moons (and Saturn's rings) sit at their planet.
+			double au = ORBIT_AU.getOrDefault(b.id(),
+					b.parent().map(p -> ORBIT_AU.getOrDefault(p, 1.0)).orElse(1.0));
 			int bx = sunX + 14 + (int) ((Math.log(au) - min) / (max - min) * (w - 30));
 			int by = midY;
 			if (b.kind() == CelestialBody.Kind.MOON) {

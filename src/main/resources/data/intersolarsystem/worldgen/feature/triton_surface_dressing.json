@@ -1,0 +1,11 @@
+{
+  "type": "intersolarsystem:planet_surface",
+  "base": "intersolarsystem:cantaloupe_ice",
+  "top": "intersolarsystem:cantaloupe_ice",
+  "alt": "intersolarsystem:nitrogen_ice",
+  "alt_chance": 0.08,
+  "under": "intersolarsystem:cantaloupe_ice",
+  "depth": 3,
+  "cap": "intersolarsystem:nitrogen_ice",
+  "cap_from": 1500
+}

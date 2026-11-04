@@ -18,7 +18,9 @@ import net.minecraft.world.phys.BlockHitResult;
  */
 public class DataTerminalBlock extends ShipFacingBlock {
 	/** Logs 0..3 are the Moon base's (told in chat); 4 and up are Earth logs, shown on the terminal's screen. */
-	public static final int LOGS = 28;
+	public static final int LOGS = 40;
+	/** Triton's outpost: reading it gives the orbit of the moon nobody names (see travel.Discoveries). */
+	public static final int HIDDEN_MOON_LOG = 35;
 	public static final int MOON_LOGS = 4;
 	public static final IntegerProperty LOG = IntegerProperty.create("log", 0, LOGS - 1);
 
@@ -58,6 +60,9 @@ public class DataTerminalBlock extends ShipFacingBlock {
 			if (log == 26 && level instanceof net.minecraft.server.level.ServerLevel sl
 					&& hu.kriwdi.intersolarsystem.space.ArkWake.start(sl, pos, serverPlayer)) {
 				return InteractionResult.SUCCESS_SERVER;
+			}
+			if (log == HIDDEN_MOON_LOG && level instanceof net.minecraft.server.level.ServerLevel sl) {
+				hu.kriwdi.intersolarsystem.travel.Discoveries.discover(sl.getServer(), "nameless");
 			}
 			if (log >= MOON_LOGS) {
 				net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking.send(serverPlayer,

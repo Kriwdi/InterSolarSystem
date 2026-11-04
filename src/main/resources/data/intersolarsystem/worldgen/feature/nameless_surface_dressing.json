@@ -1,0 +1,9 @@
+{
+  "type": "intersolarsystem:planet_surface",
+  "base": "intersolarsystem:nameless_rock",
+  "top": "intersolarsystem:nameless_rock",
+  "alt": "intersolarsystem:callisto_regolith",
+  "alt_chance": 0.1,
+  "under": "intersolarsystem:nameless_rock",
+  "depth": 2
+}

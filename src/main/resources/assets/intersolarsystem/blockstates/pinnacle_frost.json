@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/pinnacle_frost"
+      },
+      {
+        "model": "intersolarsystem:block/pinnacle_frost",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/pinnacle_frost",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/pinnacle_frost",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "intersolarsystem:block/geyser_vent_top",
+    "bottom": "intersolarsystem:block/enceladus_ice",
+    "side": "intersolarsystem:block/enceladus_ice"
+  }
+}

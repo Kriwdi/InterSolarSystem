@@ -670,6 +670,69 @@ A Jupiter körüli pályáról mindkét holdra le lehet szállni (és át is leh
 - **A jég alatt óceán**: kb. 24 blokk jég alatt víz, a fenekén só, meleg kürtők, és **világító mikrobatelepek**.
 - **A Thera fúróállomás:** fúrótorony, akna létrával le egészen az óceánig, kupola mintatartályokkal. *Nézd meg.*
 
+## 13i. A Ganümédész és a Kallisztó
+
+Mindkettő a Jupiter körüli pályáról érhető el (4-es szintű anyahajó), egyikről a másikra át is lehet repülni.
+
+**A Ganümédész** (8340 blokk): sötét, régi jég és világos, **barázdás jégmezők** (párhuzamos gerincek, foltonként más irányban); a sarkokon dér.
+- **Saját mágneses tér:** az egyenlítőtől (z = 0) **1000 blokkon belül** véd a Jupiter sugárzásától. Ennél északabbra vagy délebbre sugárvédő modul kell. Az égen sarki fény jelzi, merre vékony a pajzs.
+- **Uruk Sulcus tábor:** magnetométer-vonal, rádió, rovergarázs. Kicsit odébb a lezuhant **JUICE** szonda (ESA, 2035).
+
+**A Kallisztó** (7630 blokk): a Naprendszer legkráteresebb teste, sötét regolit, **szublimációs jégtüskék**, nyugatra a **Valhalla** medence koncentrikus gyűrűi.
+- **Nincs sugárzás** (a Jupiter sugárövein kívül van): a külső Naprendszer biztonságos pihenője.
+- **HOPE bázis:** három kupola (szállás, üvegház, irányítás), reaktor. Nyugatra az **üzemanyagtelep**: oxigén, fűtőelemek, akkumulátorok, javítókészlet.
+
+## 13j. A Szaturnusz, a gyűrűk, a Titán és az Enceladus
+
+Ehhez **5-ös szintű anyahajó-hajtómű** kell (lásd a 14. fejezetet).
+
+**A Szaturnusz:** halvány aranyszínű felhőrétegek, mint a Jupiteren (minél mélyebbre, annál értékesebb és halálosabb), erős szelek. A kishajó a **Kronos aerosztátnál** köt ki. 2,5 km-re északra a **sarki hatszög**: hatoldalú viharfal, a közepén a felhőkön átlátó örvény. A falon egy halott **viharbója** ül.
+
+**A gyűrűk** (6000 blokk, súlytalan): vékony, sűrű jégmező. Kapaszkodás, kötél, MMU, mint a kisbolygóövben.
+- **Gyűrűjég, poros jég és nehézvíz-jég** (kéken világít, a nagy rögök magjában): a 6-os hajtóműhöz kell.
+- **Gyűrűviharok** menetrend szerint, előtte figyelmeztetés: menj fedél alá, vagy legyen **nyomásálló héjad**.
+- **Daphnis raktár:** egy jégholdacskába vájt galéria, fabrikátorral és nehézvízzel.
+
+**A Titán** (8150 blokk): narancssárga köd, metáneső, **folyékony metántengerek** (csónakkal járhatók), tolinhomok-dűnék.
+- **Sűrű levegő és kis gravitáció:** ha leugrasz valahonnan, lassan lebegsz le.
+- **Mélyhideg:** a szabad ég alatt hőpajzs kell.
+- **Selk lakóállomás**, a **Huygens** leszállóegység (2005), a **Kraken-kikötő** (a csónakházban egy csónak), a **Sotra kriovulkán**.
+- A **Dragonfly**: a fedélzeti számítógépét egy **javítókészlettel** megjavíthatod, utána minden használatkor átrepít a következő titáni helyszínre.
+- A **tolinhomokot** kiégetve **tolingyanta** lesz: a 6-os hajtóműhöz kell.
+
+**Az Enceladus** (2000 blokk): ragyogó gejzírhó, a **tigriscsíkok** mentén kék repedések, bennük **gejzírkürtők**. Ha egy kürtő fölött állsz, amikor kitör, magasra repít (a kis gravitáció miatt lassan érsz le).
+- A jég alatt **tenger**, a fenekén **kürtőtelepek**: élet. Belőlük **biominta** lesz, amiből vízzel és földdel **élő talaj** készíthető.
+- **Baghdad Sulcus labor** és a **2-es fúrólyuk**: harminc méter akna létrával le a tengerig.
+
+## 13k. Az Uránusz, a Miranda és a Titánia
+
+Ehhez **6-os szintű anyahajó-hajtómű** kell.
+
+**Az Uránusz:** ciánkék felhők, és mivel a bolygó az oldalán fekszik, **a Nap nem mozdul az égen**. Mélyen lent **gyémántjégeső**: a felhők alján gyémántkristályok. A kishajó a **Meridian aerosztátnál** köt ki.
+
+**A Miranda** (2000 blokk): különböző holdakból „összevarrt” foltos felszín, és a **Verona Rupes**, a Naprendszer legmagasabb szirtje. A leszállóhely a szirt tetején van, a pereme néhány tucat blokkra nyugatra. A szinte nulla gravitáció miatt **le lehet ugrani**: percekig zuhansz, és sértetlenül érsz földet. Lent egy lezuhant teherszállító.
+
+**A Titánia** (2500 blokk): a **Messina-hasadékok**, hosszú, mély V alakú kanyonok, az aljukon dér. **Messina állomás** a perem mellett.
+
+Mindhárom holdon **mélyhideg** van: hőpajzs kell.
+
+## 13l. A Neptunusz és a Triton
+
+**A Neptunusz:** mélykék felhők, és a **Naprendszer legerősebb szelei**, időnként lökésekkel. A fedélzeten guggolva kapaszkodhatsz meg. Valahol a felhőkben ott a **Nagy Sötét Folt**. A kishajó a **Le Verrier aerosztátnál** köt ki.
+
+**A Triton** (4290 blokk): „sárgadinnyehéj”-terep (gödröcskés cellák), nitrogénjég, a sarkokon nitrogénsapka, és **nitrogéngejzírek**, amelyek szélirányban sötét csíkot hagynak. **Szélsőséges hideg** (-235 °C): a hőpajzs nagyon keményen dolgozik.
+- **Hili előőrs:** az utolsó állomás. Olvasd el a terminálját.
+
+## 13m. Ruhamodulok a külső Naprendszerben
+
+| Veszély | Hol | Modul |
+|---|---|---|
+| Sugárzás | a Ganümédész sarki vidékei (1000 blokkon túl) | sugárvédelem |
+| Mélyhideg | Titán, Enceladus, Miranda, Titánia | hőpajzs |
+| Szélsőséges hideg | Triton | hőpajzs (gyorsabban fogy) |
+| Gyűrűvihar | a Szaturnusz gyűrűi | nyomásálló héj |
+| Mélység | Szaturnusz, Uránusz, Neptunusz (mint a Jupiteren) | hőpajzs és nyomásálló héj |
+
 ## 13h. Űrruha-modulok
 
 Egy ruha, amit a világok egyre keményebb körülményeihez szerelsz fel. A modult **felvett űrruhában jobb klikkel** szereled be; végleg a ruhán marad (a ruha adataiban), és a visor a nyomásjelző alatt listázza.
@@ -695,8 +758,11 @@ A hajtómű szintje osztja az utazási időt:
 | 2 | ×3 | **ionhajtómű-készlet** (Föld érceiből) |
 | 3 | ×10 | **fúziós hajtómű-készlet** (urán a Földről + hélium-3 a Holdról) |
 | 4 | ×30 | **plazmahajtómű-készlet** (irídium a kisbolygóövből): az **anyahajó** kormányára, a Jupiterhez |
+| 5 | ×60 | **fémeshidrogén-hajtómű készlet** (a plazmakészlet köré fémes hidrogén a Jupiterről): a Szaturnuszhoz |
+| 6 | ×100 | **deutériumfáklya-készlet** (nehézvíz-jég a gyűrűkből, tolingyanta a Titánról): az Uránuszhoz és a Neptunuszhoz |
+| 7 | ×300 | ? |
 
-A Föld–Hold rendszeren túl az **anyahajó hajtóműve** számít (alapból 3-as szint); a kishajóé csak a Föld és a Hold között.
+A Föld–Hold rendszeren túl az **anyahajó hajtóműve** számít (alapból 3-as szint); a kishajóé csak a Föld és a Hold között. Az anyahajó készleteit **kézben tartva a kormányra** kattintva szereled be; mindegyik az előző készlet köré épül.
 
 **Beszerelés:**
 
@@ -770,7 +836,8 @@ Ha a hajó terén kívülre kerülsz, a játék fél másodpercen belül visszat
 ## 17. Ami még nincs kész
 
 - **Saját élőlények** (mutánsok, drónok): most a világ üres.
-- A **külső bolygók** (Szaturnusz, Uránusz, Neptunusz) és további holdak: a listában látszanak, de zárva vannak.
+- A **Kuiper-öv, az Oort-felhő és a Plútó**, aztán a **Proxima-rendszer**: a következő körök.
+- Az **űrdaru** az anyahajó bővítéséhez: készül.
 - A Jezero alatti fal és a rover „kulcsa”: a történet folytatása (a fal már él).
 - **Több hajóosztály** és bővíthető belső tér: most egy alap hajó van.
 - **Bányászdrónok megjavítása**, olajfinomítás üzemanyaggá, víz- és levegőszűrés.

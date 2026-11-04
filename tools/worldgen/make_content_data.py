@@ -258,10 +258,32 @@ def tags():
     write("minecraft/tags/item/swords.json", {"replace": False, "values": [NS + "titanium_sword"]})
 
 
+def outer_recipes():
+    """The outer system: each mothership drive kit is built round the one before it, from the last system's harvest
+    (Jupiter's metallic hydrogen for tier 5, Saturn's heavy water and Titan's resin for tier 6, and for the turbo
+    drive, the silent crystals); oxygen from the outer ices; living soil from Enceladus' biosamples."""
+    shaped("metallic_hydrogen_drive_kit", ["HMH", "IPI", "HMH"],
+           {"H": "metallic_hydrogen", "M": "rare_earth_magnet", "I": "iridium_ingot", "P": "plasma_drive_kit"},
+           "metallic_hydrogen_drive_kit")
+    shaped("deuterium_drive_kit", ["DTD", "IKI", "DTD"],
+           {"D": "deuterium_ice", "T": "tholin_resin", "I": "iridium_ingot", "K": "metallic_hydrogen_drive_kit"},
+           "deuterium_drive_kit")
+    shaped("turbo_drive_kit", ["SGS", "DKD", "SGS"],
+           {"S": "silent_crystal", "G": "minecraft:diamond", "D": "deuterium_ice", "K": "deuterium_drive_kit"},
+           "turbo_drive_kit")
+    cook("tholin_resin", "tholin_sand", "tholin_resin", 0.5)
+    for ice in ("ring_ice", "enceladus_ice", "callisto_ice", "grooved_ice"):
+        shapeless(f"oxygen_canister_{ice}", [ice, ice, "minecraft:glass_bottle", "battery_cell"], "oxygen_canister",
+                  count=2)
+    shapeless("living_soil_from_biosample", ["biosample", "clean_water_canister", "minecraft:dirt", "minecraft:dirt"],
+              "living_soil", count=4)
+
+
 if __name__ == "__main__":
     loot()
     recipes()
     tags()
     salvage_recipes()
     far_recipes()
+    outer_recipes()
     print("content data written")

@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/hydrocarbon_sludge"
+      },
+      {
+        "model": "intersolarsystem:block/hydrocarbon_sludge",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/hydrocarbon_sludge",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/hydrocarbon_sludge",
+        "y": 270
+      }
+    ]
+  }
+}

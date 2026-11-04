@@ -1,0 +1,11 @@
+{
+  "type": "intersolarsystem:triton",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "intersolarsystem:triton_surface"
+    },
+    "settings": "intersolarsystem:triton"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "intersolarsystem:block/uranus_methane_cloud"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "intersolarsystem:moon_terrain",
+  "style": "basin_rings",
+  "primary": "intersolarsystem:callisto_regolith",
+  "secondary": "intersolarsystem:callisto_ice",
+  "accent": "intersolarsystem:pinnacle_frost",
+  "centre_x": -1600,
+  "centre_z": 300,
+  "size": 1100
+}

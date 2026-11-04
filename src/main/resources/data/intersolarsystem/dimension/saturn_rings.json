@@ -1,0 +1,11 @@
+{
+  "type": "intersolarsystem:saturn_rings",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "intersolarsystem:saturn_rings_surface"
+    },
+    "settings": "intersolarsystem:saturn_rings"
+  }
+}

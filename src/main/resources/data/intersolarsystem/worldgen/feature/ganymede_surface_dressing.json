@@ -1,0 +1,13 @@
+{
+  "type": "intersolarsystem:planet_surface",
+  "base": "intersolarsystem:ganymede_dark_ice",
+  "top": "intersolarsystem:ganymede_dark_ice",
+  "alt": "intersolarsystem:grooved_ice",
+  "alt_chance": 0.03,
+  "under": "intersolarsystem:ganymede_dark_ice",
+  "depth": 3,
+  "ore": "intersolarsystem:europa_salt",
+  "ore_chance": 60,
+  "cap": "intersolarsystem:ganymede_frost",
+  "cap_from": 2800
+}

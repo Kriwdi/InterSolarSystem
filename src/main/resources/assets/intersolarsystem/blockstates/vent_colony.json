@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/vent_colony"
+      },
+      {
+        "model": "intersolarsystem:block/vent_colony",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/vent_colony",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/vent_colony",
+        "y": 270
+      }
+    ]
+  }
+}

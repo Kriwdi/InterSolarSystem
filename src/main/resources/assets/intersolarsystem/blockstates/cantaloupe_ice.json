@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "intersolarsystem:block/cantaloupe_ice"
+      },
+      {
+        "model": "intersolarsystem:block/cantaloupe_ice",
+        "y": 90
+      },
+      {
+        "model": "intersolarsystem:block/cantaloupe_ice",
+        "y": 180
+      },
+      {
+        "model": "intersolarsystem:block/cantaloupe_ice",
+        "y": 270
+      }
+    ]
+  }
+}

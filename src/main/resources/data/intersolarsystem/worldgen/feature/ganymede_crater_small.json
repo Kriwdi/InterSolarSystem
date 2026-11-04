@@ -1,0 +1,8 @@
+{
+  "type": "intersolarsystem:crater",
+  "min_radius": 3,
+  "max_radius": 6,
+  "floor": "intersolarsystem:ganymede_dark_ice",
+  "fresh": "intersolarsystem:grooved_ice",
+  "rim": "intersolarsystem:ganymede_dark_ice"
+}

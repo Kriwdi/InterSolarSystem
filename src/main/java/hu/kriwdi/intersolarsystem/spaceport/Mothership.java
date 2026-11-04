@@ -37,7 +37,10 @@ import hu.kriwdi.intersolarsystem.space.MoonSites;
 public final class Mothership extends SavedData {
 	/** The Earth-Moon stations; the far ones come from the solar system catalogue. */
 	public static final List<String> DESTINATIONS = List.of("earth_orbit", "moon_orbit");
-	/** The Ark-class engines: fusion (tier 3) from the start; the belt's drive kit makes them tier 4. */
+	/**
+	 * The Ark-class engines: fusion (tier 3) from the start; the belt's drive kit makes them tier 4, Jupiter's metallic
+	 * hydrogen 5, Saturn's heavy water 6, and the turbo drive 7.
+	 */
 	public static final int BASE_TIER = 3;
 	/** The crane console's place in the mothership dimension: the blueprints are laid out around it. */
 	public static final BlockPos ORIGIN = new BlockPos(5, 60, 48);
@@ -87,6 +90,20 @@ public final class Mothership extends SavedData {
 	public void setDriveTier(int tier) {
 		driveTier = Math.max(driveTier, tier);
 		setDirty();
+	}
+
+	/** The engine tier a drive kit gives (0: not a drive kit). */
+	public static int kitTier(net.minecraft.world.item.ItemStack stack) {
+		if (stack.is(hu.kriwdi.intersolarsystem.content.ModItems.PLASMA_DRIVE_KIT)) {
+			return 4;
+		}
+		if (stack.is(hu.kriwdi.intersolarsystem.content.ModItems.METALLIC_HYDROGEN_DRIVE_KIT)) {
+			return 5;
+		}
+		if (stack.is(hu.kriwdi.intersolarsystem.content.ModItems.DEUTERIUM_DRIVE_KIT)) {
+			return 6;
+		}
+		return stack.is(hu.kriwdi.intersolarsystem.content.ModItems.TURBO_DRIVE_KIT) ? 7 : 0;
 	}
 
 	/** Every station the mothership can be sent to, nearest first. */
@@ -239,14 +256,19 @@ public final class Mothership extends SavedData {
 					Component.translatable("mothership.intersolarsystem.place." + target), Math.max(0, (arrival - now) / 1200)));
 			return;
 		}
-		// A tier-4 drive kit in hand upgrades the engines.
+		// A drive kit in hand upgrades the engines (each kit is built from the one before it).
 		net.minecraft.world.item.ItemStack kit = player.getMainHandItem();
-		if (kit.is(hu.kriwdi.intersolarsystem.content.ModItems.PLASMA_DRIVE_KIT) && driveTier < 4) {
+		int kitTier = kitTier(kit);
+		if (kitTier > driveTier) {
 			kit.shrink(1);
-			setDriveTier(4);
+			setDriveTier(kitTier);
 			level.playSound(null, pos, SoundEvents.BEACON_POWER_SELECT, SoundSource.BLOCKS, 1.0F, 0.6F);
-			broadcast(level.getServer(), Component.translatable("mothership.intersolarsystem.drive_upgraded", 4)
+			broadcast(level.getServer(), Component.translatable("mothership.intersolarsystem.drive_upgraded", kitTier)
 					.withStyle(ChatFormatting.GREEN));
+			if (kitTier >= 7) {
+				broadcast(level.getServer(), Component.translatable("mothership.intersolarsystem.turbo_installed")
+						.withStyle(ChatFormatting.LIGHT_PURPLE));
+			}
 			return;
 		}
 		List<String> all = destinations();

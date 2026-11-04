@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "intersolarsystem:block/geyser_vent"
+    },
+    "lit=true": {
+      "model": "intersolarsystem:block/geyser_vent"
+    }
+  }
+}

@@ -380,5 +380,6 @@ public final class ModBlocks {
 	public static void initialize() {
 		UrbanBlocks.initialize();
 		PlanetBlocks.initialize();
+		OuterBlocks.initialize();
 	}
 }

@@ -1,0 +1,61 @@
+{
+  "attributes": {
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {
+          "ambient": [],
+          "axolotls": [],
+          "creature": [],
+          "misc": [],
+          "monster": [],
+          "underground_water_creature": [],
+          "water_ambient": [],
+          "water_creature": []
+        }
+      },
+      "modifier": "overlay"
+    },
+    "minecraft:visual/sky_color": "#000000",
+    "minecraft:visual/fog_color": "#000000",
+    "minecraft:visual/ambient_particles": {
+      "argument": [
+        {
+          "particle": {
+            "type": "minecraft:snowflake"
+          },
+          "probability": 0.004
+        }
+      ],
+      "modifier": "append"
+    }
+  },
+  "carvers": [],
+  "downfall": 0.0,
+  "effects": {
+    "water_color": "#3f5a6a"
+  },
+  "features": [
+    [
+      "intersolarsystem:enceladus_surface_dressing"
+    ],
+    [
+      "intersolarsystem:enceladus_ocean"
+    ],
+    [
+      "intersolarsystem:tiger_stripes"
+    ],
+    [
+      "intersolarsystem:enceladus_crater"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ],
+  "has_precipitation": false,
+  "temperature": 0.5
+}

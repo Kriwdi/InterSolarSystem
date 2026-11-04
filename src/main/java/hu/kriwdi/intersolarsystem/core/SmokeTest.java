@@ -104,6 +104,12 @@ public final class SmokeTest {
 			if (land.getY() <= level.getMinY() + 1) {
 				LOGGER.error("[SMOKETEST-FAIL] nothing to land on at {}", w.body());
 			}
+			if (land.getY() < hu.kriwdi.intersolarsystem.space.Worlds.siteFloor(w)) {
+				LOGGER.error("[SMOKETEST-FAIL] {} lands below its sea", w.body());
+			}
+			if (hu.kriwdi.intersolarsystem.travel.SolarSystem.byId(w.body()).isEmpty()) {
+				LOGGER.error("[SMOKETEST-FAIL] {} has no row in solar_system.json", w.body());
+			}
 		}
 		if (hu.kriwdi.intersolarsystem.space.PlanetHazards.zone("venus", 80, true, true, 0)
 				!= hu.kriwdi.intersolarsystem.space.PlanetHazards.Zone.VENUS_SURFACE) {
@@ -201,6 +207,13 @@ public final class SmokeTest {
 		for (var key : hu.kriwdi.intersolarsystem.worldgen.DeadEarth.ALL) {
 			var hit = earth.findClosestBiome3d(h -> h.is(key), spawn, 6400, 32, 64);
 			found.put(key.identifier().getPath(), hit == null ? "MISSING" : hit.getFirst().toShortString());
+		}
+		// The moon nobody names stays off the console until Triton's log is read.
+		var nameless = hu.kriwdi.intersolarsystem.travel.SolarSystem.byId("nameless");
+		if (nameless.isEmpty() || !hu.kriwdi.intersolarsystem.travel.SolarSystem.hidden("nameless")
+				|| (hu.kriwdi.intersolarsystem.travel.SolarSystem.visible(nameless.get())
+						&& !hu.kriwdi.intersolarsystem.travel.SolarSystem.discovered().contains("nameless"))) {
+			LOGGER.error("[SMOKETEST-FAIL] the nameless moon is not hidden");
 		}
 		LOGGER.info("[SMOKETEST] Earth biomes nearest to spawn {}: {}", spawn.toShortString(), found);
 		if ("MISSING".equals(found.get("oasis"))) {

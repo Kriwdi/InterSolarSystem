@@ -1,0 +1,7 @@
+{
+  "type": "intersolarsystem:moon_terrain",
+  "style": "pinnacles",
+  "primary": "intersolarsystem:callisto_regolith",
+  "secondary": "intersolarsystem:callisto_ice",
+  "accent": "intersolarsystem:pinnacle_frost"
+}

@@ -23,5 +23,9 @@ public final class ModWorldgen {
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, ModIds.id("dead_tree"), DeadTreeFeature.CODEC);
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, ModIds.id("strata"), StrataFeature.CODEC);
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, ModIds.id("fallout_crater"), FalloutCraterFeature.CODEC);
+		Registry.register(BuiltInRegistries.FEATURE_TYPE, ModIds.id("gas_decks"), GasDecksFeature.CODEC);
+		Registry.register(BuiltInRegistries.FEATURE_TYPE, ModIds.id("ring_field"), RingFieldFeature.CODEC);
+		Registry.register(BuiltInRegistries.FEATURE_TYPE, ModIds.id("moon_terrain"), MoonTerrainFeature.CODEC);
+		Registry.register(BuiltInRegistries.FEATURE_TYPE, ModIds.id("subsurface_ocean"), SubsurfaceOceanFeature.CODEC);
 	}
 }

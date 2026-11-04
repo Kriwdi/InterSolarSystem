@@ -1,0 +1,7 @@
+{
+  "type": "intersolarsystem:moon_terrain",
+  "style": "coronae",
+  "primary": "intersolarsystem:miranda_ice",
+  "secondary": "intersolarsystem:corona_ice",
+  "accent": "intersolarsystem:scarp_ice"
+}
