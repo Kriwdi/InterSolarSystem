@@ -62,6 +62,40 @@ def ellipsoid(b, cx, cy, cz, rx, ry, rz, shell, inside=None, keep=lambda x, y, z
                         b.set(cx + x, cy + y, cz + z, inside)
 
 
+def module_x(b, x0, x1, cy, cz, r, shell=None, windows=True):
+    """A pressurised module lying along x: a cylinder with ribbed ends, a grated floor, a ring of windows."""
+    shell = shell or HULL
+    for x in range(x0, x1 + 1):
+        for dy in range(-int(r) - 1, int(r) + 2):
+            for dz in range(-int(r) - 1, int(r) + 2):
+                d = math.hypot(dy, dz)
+                if d <= r + 0.3:
+                    end = x in (x0, x1)
+                    if end or d > r - 0.9:
+                        st = shell
+                        if not end and (x - x0) % 4 == 0:
+                            st = FOIL
+                        if windows and not end and dy == 1 and abs(dz) >= int(r) - 1 and (x - x0) % 4 == 2:
+                            st = S("station_window")
+                        b.set(x, cy + dy, cz + dz, st)
+                    else:
+                        b.set(x, cy + dy, cz + dz, S("metal_grating") if dy == -int(r) + 1 else AIR)
+
+
+def module_z(b, z0, z1, cy, cx, r, shell=None, windows=True):
+    """The same along z (built along x and turned)."""
+    tmp = Build("tmp", 0)
+    module_x(tmp, z0, z1, cy, 0, r, shell, windows)
+    for (x, y, z), st in tmp.blocks.items():
+        b.set(cx + z, y, x, st)
+
+
+def door_x(b, x, y_floor, z):
+    """A doorway through a module's end wall (two blocks high)."""
+    b.set(x, y_floor, z, AIR)
+    b.set(x, y_floor + 1, z, AIR)
+
+
 def rock(b, cx, cy, cz, r, st, rng_scale=0.35):
     """A lumpy asteroid."""
     for x in range(-r - 2, r + 3):
@@ -85,7 +119,9 @@ def cloud_city():
         for z in range(-R, R + 1):
             d = math.hypot(x, z)
             if d <= R:
-                b.set(x, 0, z, S("metal_grating") if R - 3 < d or (d > 10 and (x + z) % 9 == 0) else HULL)
+                spoke = d > 10 and min(abs(math.degrees(math.atan2(z, x)) % 60 - 30), 99) > 27
+                b.set(x, 0, z, S("metal_grating") if R - 3 < d or spoke else
+                      S("light_gray_concrete") if (int(d) % 7 == 0 and d > 10) else HULL)
                 b.set(x, -1, z, FOIL if d > R - 1.5 or (x % 6 and z % 6) else S("truss"))
                 for y in range(1, 28):
                     b.set(x, y, z, AIR)
@@ -102,21 +138,47 @@ def cloud_city():
     for a in range(0, 360, 2):
         x, z = int(round(math.cos(math.radians(a)) * R)), int(round(math.sin(math.radians(a)) * R))
         b.set(x, 1, z, bars(north=True, south=True, east=True, west=True))
-    # Buoyancy lobes, hung on chains: four whole, the fifth torn and sagging.
-    lobes = [(0, -21), (20, -7), (12, 18), (-12, 18), (-20, -7)]
-    for i, (cx, cz) in enumerate(lobes):
+    # Buoyancy envelopes: five long airship hulls floating above the rim, tied down by fans of cables; the fourth
+    # is torn open and sags against its ties.
+    for i in range(5):
+        ang = math.radians(90 + i * 72)
+        cx, cz = int(round(math.cos(ang) * 19)), int(round(math.sin(ang) * 19))
+        tx, tz = -math.sin(ang), math.cos(ang)  # tangent: the envelope lies along the rim
         torn = i == 3
-        top = 30 if not torn else 18
-        ellipsoid(b, cx, top, cz, 7, 4.5 if not torn else 2.5, 7,
-                  S("white_concrete") if not torn else S("white_wool"),
-                  keep=(lambda x, y, z: True) if not torn else (lambda x, y, z: (x + z) % 4 != 0 or y < 0))
-        for (dx, dz) in ((-4, -4), (4, -4), (-4, 4), (4, 4)):
-            for y in range(1, top - (4 if not torn else 2)):
-                if not torn or y < 6 or (dx + dz) % 8:
-                    b.set(cx + dx, y, cz + dz, CHAIN)
+        top = 34 if not torn else 22
+        L, R2 = 11, 4.6
+        for k in range(-L - 1, L + 2):
+            rr = R2 * math.sqrt(max(0.0, 1 - (k / (L + 0.8)) ** 2))
+            for dy in range(-5, 6):
+                for dn in range(-5, 6):
+                    d = math.hypot(dy, dn)
+                    if d <= rr and d > rr - 1.1:
+                        if torn and (k > 2 and dy > -1 and (k + dn) % 3 != 0):
+                            continue
+                        x = int(round(cx + tx * k + (-tz) * dn))
+                        z = int(round(cz + tz * k + tx * dn))
+                        stripe = abs(k) in (L - 3, L - 4) or dy == 0 and abs(dn) >= int(rr) - 1
+                        b.set(x, top + dy - (k // 4 if torn and k > 0 else 0), z,
+                              S("orange_concrete") if stripe else S("white_concrete") if not torn else S("white_wool"))
+        # Tail fins.
+        for f in range(0, 4):
+            x = int(round(cx + tx * (L - 1)))
+            z = int(round(cz + tz * (L - 1)))
+            b.set(x, top + 5 + f // 2, z, S("white_concrete"))
+        # A fan of cables from the envelope's belly down to the deck.
+        for k in (-7, -2, 3, 8):
+            ex, ez = cx + tx * k, cz + tz * k
+            for (fx, fz) in ((ex * 0.7, ez * 0.7), (ex * 1.15, ez * 1.15)):
+                steps = top - 5
+                for j in range(1, steps):
+                    t = j / steps
+                    x = int(round(fx + (ex - fx) * t))
+                    z = int(round(fz + (ez - fz) * t))
+                    if math.hypot(x, z) <= 30 and not (torn and j > steps * 0.7 and k > 0):
+                        b.set(x, j, z, CHAIN)
         if torn:
-            for k in range(0, 8):
-                b.set(cx + b.rnd.randint(-6, 6), 1, cz + b.rnd.randint(-6, 6), S("white_carpet"))
+            for k in range(0, 10):
+                b.set(cx + b.rnd.randint(-5, 5), 1, cz + b.rnd.randint(-5, 5), S("white_carpet"))
     # Habitat domes on the rim: two dorms, the lab, the acid works.
     domes = [(22, 6, "dorm"), (-23, 4, "lab"), (6, -24, "acid"), (-8, -24, "dorm2")]
     for (cx, cz, kind) in domes:
@@ -345,7 +407,7 @@ def occator_station():
     """OCCATOR: a brine station by the bright salts of Occator crater. A drill rig over a brine well, the cold
     archive (specimen tanks of brine), the lab, salt crusted on everything, and the landing pad."""
     b = Build("ceres/occator_station", 7300)
-    ground_pad(b, 30, "ceres_clay", "ceres_clay", alt="carbonate_salt", alt_chance=0.25)
+    ground_pad(b, 30, "ceres_clay", "ceres_clay", alt="carbonate_salt", alt_chance=0.06)
     landing_pad(b, 0, 8)
     # The bright mound of salt to the east (Cerealia Facula in small).
     for x in range(-12, 13):
@@ -446,32 +508,37 @@ def mining_outpost():
             if math.hypot(x, z) <= 20:
                 b.set(x, 0, z, HULL if math.hypot(x, z) > 9 else b.get(x, 0, z) or HULL)
     landing_pad(b, 0, 9)
-    # The ore mill: a hall of grating over hoppers, east.
-    for x in range(11, 19):
-        for z in range(-6, 7):
-            for y in range(1, 7):
-                edge = x in (11, 18) or abs(z) == 6 or y == 6
-                b.set(x, y, z, FOIL if edge else AIR)
-    for z in (-4, -2, 0, 2, 4):
-        b.set(14, 1, z, S("shredder_module"))
-        b.set(16, 1, z, S("smelter_module"))
-    for y in (1, 2):
-        b.set(11, y, 0, AIR)
-    b.chest(17, 1, -5, "ore_mill", "west")
-    # The crew module, west: bunks, the log, a dead man still clipped to the rail outside.
-    for x in range(-19, -11):
-        for z in range(-4, 5):
-            for y in range(1, 6):
-                edge = x in (-19, -12) or abs(z) == 4 or y == 5
-                b.set(x, y, z, HULL if edge else AIR)
-    for y in (1, 2):
-        b.set(-12, y, 0, AIR)
-    for z in (-3, -1, 1, 3):
-        b.set(-18, 1, z, S("bunk_bed", facing="east"))
-    b.set(-14, 1, -3, S("data_terminal", facing="south", log=22))
-    b.set(-15, 1, 3, S("locker", facing="north"))
-    b.chest(-13, 1, 3, "far_station", "west")
-    b.set(-15, 4, 0, S("station_light"))
+    # The ore mill (east): a long drum on cradles fed by a crusher tower, its conveyor running to the quarry.
+    module_x(b, 11, 21, 4, 0, 3.6, shell=FOIL, windows=False)
+    for x in (12, 16, 20):
+        for dz in (-3, 3):
+            b.set(x, 1, dz, S("truss"))
+    for x in (13, 15, 17, 19):
+        b.set(x, 2, -1, S("shredder_module") if x < 16 else S("smelter_module"))
+    door_x(b, 11, 2, 0)
+    b.chest(20, 2, 1, "ore_mill", "west")
+    cylinder(b, 16, -8, 1, 9, 2, HULL, cap=FOIL)
+    for y in range(2, 9):
+        b.set(16, y, -8, S("chain", axis="y", waterlogged="false") if False else CHAIN)
+    for z in range(-6, 15):
+        b.set(16, 9 if z < 0 else max(1, 9 - z // 2), z, S("truss"))
+    # The crew module (west): two modules joined by a node, a dead man still clipped to the rail outside.
+    module_x(b, -22, -12, 4, -3, 3.4)
+    module_x(b, -22, -12, 4, 4, 3.4)
+    for x in range(-19, -15):
+        for y in range(2, 6):
+            b.set(x, y, 0, AIR if y < 5 else HULL)
+            b.set(x, y, 1, AIR if y < 5 else HULL)
+    door_x(b, -12, 2, -3)
+    for x in (-21, -19, -17):
+        b.set(x, 2, -5, S("bunk_bed", facing="north"))
+    b.set(-14, 2, -1, S("data_terminal", facing="south", log=22))
+    b.set(-20, 2, 6, S("locker", facing="north"))
+    b.chest(-14, 2, 6, "far_station", "north")
+    b.set(-17, 2, 4, S("lab_bench", facing="north"))
+    b.set(-9, 1, -6, S("skeleton_suited", facing="east"))
+    for x in range(-11, -5):
+        b.set(x, 1, -7, S("truss"))
     # The quarry face: a cut into the rock with the iridium core showing.
     for x in range(-6, 7):
         for y in range(-14, 0):
@@ -637,34 +704,59 @@ def volcano_observatory():
             elif d <= 9.5:
                 b.set(x, 0, z, S("basalt", axis="y"))
                 b.set(x, 1, z, S("sulfur_crust") if b.rnd.random() < 0.5 else AIR)
-    # The bunker (west), walls three thick, entered through a dog-leg.
-    for x in range(-26, -11):
-        for z in range(-8, 9):
-            for y in range(1, 9):
-                inner = -23 <= x <= -14 and -5 <= z <= 5 and y <= 5
+    # The bunker (west): a low vault of iron under a mound of silicate rubble, entered down a ramp through a blast
+    # door; three metres of rock over the living space against the radiation.
+    cx, cz = -24, 0
+    for x in range(-12, 13):
+        for z in range(-10, 11):
+            d = math.hypot(x / 12.0, z / 10.0)
+            if d > 1:
+                continue
+            mound = int(9 * math.sqrt(max(0.0, 1 - d * d)))
+            for y in range(1, mound + 1):
+                b.set(cx + x, y, cz + z, S("io_silicate") if b.rnd.random() > 0.15 else S("sulfur_plain"))
+            if mound > 0 and b.rnd.random() < 0.3:
+                b.set(cx + x, mound, cz + z, S("so2_frost"))
+    for x in range(-8, 9):
+        for z in range(-6, 7):
+            for y in range(1, 6):
+                vault = (x / 8.5) ** 2 + ((y - 0.5) / 5.0) ** 2 <= 1.0 and abs(z) <= 6
+                inner = (x / 7.5) ** 2 + ((y - 0.5) / 4.0) ** 2 <= 1.0 and abs(z) <= 5
                 if inner:
-                    b.set(x, y, z, AIR)
-                else:
-                    b.set(x, y, z, S("iron_block") if y == 6 or x in (-26, -11) else S("io_silicate"))
-    for x in range(-13, -10):
-        for y in (1, 2):
-            b.set(x, y, 0, AIR)
-    for y in (1, 2):
-        b.set(-13, y, 0, AIR)
-        b.set(-13, y, 1, AIR)
-    b.set(-11, 3, 0, S("blast_door", facing="east"))
-    b.set(-15, 1, -4, S("data_terminal", facing="west", log=24))
-    b.set(-16, 1, -4, S("radio_set", facing="south"))
-    b.set(-20, 1, -4, S("server_rack", facing="south"))
-    for z in (-1, 2, 4):
-        b.set(-22, 1, z, S("bunk_bed", facing="east"))
-    b.chest(-17, 1, 4, "shielded_rack", "north")
-    b.set(-19, 4, 0, S("station_light"))
+                    b.set(cx + x, y, cz + z, AIR)
+                elif vault:
+                    b.set(cx + x, y, cz + z, S("iron_block") if (x + z) % 5 else HULL)
+            b.set(cx + x, 0, cz + z, S("metal_grating"))
+    # The ramp and the blast door (east end).
+    for k in range(0, 6):
+        for z in (-1, 0, 1):
+            for y in range(1, 4):
+                b.set(cx + 8 + k, y, cz + z, AIR)
+            b.set(cx + 8 + k, 0, cz + z, S("metal_grating"))
+        for z in (-2, 2):
+            for y in range(1, 4):
+                b.set(cx + 8 + k, y, cz + z, S("iron_block"))
+        for z in (-1, 0, 1):
+            b.set(cx + 8 + k, 4, cz + z, S("iron_block"))
+    b.set(cx + 8, 1, cz, S("blast_door", facing="east"))
+    b.set(cx + 4, 1, cz - 4, S("data_terminal", facing="west", log=24))
+    b.set(cx + 3, 1, cz - 5, S("radio_set", facing="south"))
+    b.set(cx - 2, 1, cz - 5, S("server_rack", facing="south"))
+    for z in (-2, 1, 4):
+        b.set(cx - 6, 1, cz + z, S("bunk_bed", facing="east"))
+    b.chest(cx + 6, 1, cz + 4, "shielded_rack", "west")
+    b.set(cx, 4, cz, S("station_light"))
+    b.set(cx - 3, 1, cz + 2, S("skeleton_sitting", facing="east"))
     # The periscope dome on the roof, its glass towards the lake.
-    for y in range(9, 13):
-        b.set(-18, y, 0, S("truss"))
-    disc(b, -18, 0, 13, 2.2, S("station_glass"))
-    b.set(-18, 14, 0, S("antenna_dish"))
+    for y in range(5, 12):
+        b.set(cx, y, cz, S("truss"))
+    disc(b, cx, cz, 12, 2.2, S("station_glass"))
+    b.set(cx, 13, cz, S("antenna_dish"))
+    # Instrument masts round the lake, and the cable back to the bunker.
+    for (x, z) in ((14, -12), (12, 11), (31, 9)):
+        for y in range(1, 7):
+            b.set(x, y, z, bars() if y % 3 else S("iron_block"))
+        b.set(x, 7, z, S("observer", facing="east", powered="false"))
     b.set(-6, 1, 12, S("hangar_lift", facing="north"))
     sign(b, 0, 1, 10, ["LOKI OBSERVATORY", "Io", "radiation area", "shielding required"])
     return b
@@ -717,6 +809,33 @@ def drill_station():
     b.set(sx, -7, sz, S("crane_hook", facing="north"))
     b.set(sx + 3, 1, sz, S("power_cabinet", facing="east"))
     sign(b, sx - 3, 1, sz, ["THERA SHAFT", "ocean at 30 m", "the water is", "warm. Look."], "west")
+    # The habitat module (west) on skids, the RTG fenced off on its own, the submersible in its cradle by the shaft.
+    module_x(b, -22, -11, 4, -2, 3.4)
+    for x in (-21, -16, -12):
+        for dz in (-4, 0):
+            b.set(x, 1, -2 + dz + 2, S("truss"))
+    door_x(b, -11, 2, -2)
+    for x in (-20, -18):
+        b.set(x, 2, -4, S("bunk_bed", facing="south"))
+    b.set(-15, 2, 0, S("locker", facing="north"))
+    b.chest(-13, 2, 0, "far_station", "west")
+    b.set(-17, 2, 0, S("skeleton_lying", facing="east"))
+    for y in range(1, 4):
+        b.set(-6, y, 20, S("station_radiator"))
+    b.set(-6, 1, 19, S("toxic_barrel"))
+    for (dx, dz) in ((-2, -2), (2, -2), (-2, 2), (2, 2)):
+        b.set(-6 + dx, 1, 20 + dz, bars(north=True, south=True))
+    ellipsoid(b, 20, 3, 6, 3, 2, 1.8, S("yellow_concrete"), inside=AIR)
+    b.set(23, 3, 6, S("station_glass"))
+    b.set(17, 3, 6, S("ship_thruster"))
+    for x in (18, 22):
+        b.set(x, 1, 6, S("truss"))
+    # Cable drums and a row of marker poles along the nearest crack.
+    for (x, z) in ((10, -6), (10, 6)):
+        cylinder(b, x, z, 1, 2, 1.4, S("iron_block"), cap=None)
+    for k in range(0, 8):
+        b.set(-24 + k * 6, 1, 18, S("lightning_rod", facing="up", powered="false", waterlogged="false"))
+        b.set(-24 + k * 6, 2, 18, S("ship_light_red") if k % 2 else AIR)
     b.set(-12, 1, 6, S("hangar_lift", facing="east"))
     sign(b, 0, 1, 10, ["THERA STATION", "Europa", "Consortium", "ocean access"])
     return b
