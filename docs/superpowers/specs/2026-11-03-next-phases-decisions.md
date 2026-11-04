@@ -93,3 +93,22 @@ A felhasználó kérése: később több bolygó, hold és objektum jön, a prog
   Bővítés: új égitest = `solar_system.json` sor (`min_tier`), dimenzió + biome-ok (`tools/worldgen/make_mars.py`
   mintájára), helyszínek a `space_sites.py`-ban és egy `*Sites` lista; a hajó nézete (`ShipView.place`) és a
   leszállás (`ShipLanding`) egy-egy ággal bővül.
+
+## Döntések (2026-11-04 reggel): mozgó bázis, új égitestek
+- **Anyahajó = mozgó bázis.** A kishajó (a meglévő hajó) csak a Föld–Hold rendszerben repül (Föld, Föld körüli pálya,
+  Hold). Minden ezen túli célhoz az anyahajó kell: elviszi a célégitest pályájára, a kishajó a hangárban dokkol, onnan
+  száll le és oda tér vissza. A Mars is így érhető el (a korábbi „fúziós kishajóval a Marsra” megszűnik).
+- **Új égitestek most:** Vénusz, Merkúr, kisbolygóöv + Ceres, Jupiter (bejárható felhőrétegek), Io, Európa.
+- **Méretarány:** valós arányban (Hold = 5500 blokk), legalább 2000 blokk; ennél kisebb test csak akkor kap világot,
+  ha különleges tartalma van (ásványok, élet).
+- **Mechanikák:** minden égitest hoz valami újat (saját veszély) + **ruhamodulok** (egy ruha, felszerelhető modulok:
+  hőpajzs, nyomásálló réteg, sugárvédelem, nagyobb tartály; a HUD mutatja).
+  - Vénusz: felhőváros-romok ~50 km-en (savfelhők) + pokoli felszín (hő, nyomás, időkorlát), Venyera-szondák.
+  - Merkúr: napos oldal éget, árnyék/éjjel fagy, sarki kráterjég, napkitörések (fedezék).
+  - Kisbolygóöv: súlytalan űrdimenzió sok aszteroidával (MMU, kötél, bányászat); a Ceres külön világ. Innen a
+    **4-es hajtómű** anyaga.
+  - Jupiter: bejárható felhőrétegek, lejjebb értékesebb anyag, de nagyobb nyomás/szél/hő; Io (vulkánok, kén,
+    sugárzás), Európa (jégpáncél, alatta óceán).
+- **Bárka-1:** tragikus ébresztés (a kapszulák sorra kudarcot vallanak; csak naplók, utolsó üzenet, kézzelfogható
+  előny nélkül).
+- **A Jezero alatti fal:** fenyegetés/horror, és kapcsolata van a Szürke Virágzással.
