@@ -70,3 +70,18 @@ A felhasználó kérése: később több bolygó, hold és objektum jön, a prog
    (tervrajz: `resources/blueprints/*.txt`, Python generálja), látványosan, percek alatt.
 5. **Anyahajó**: ha minden szekció kész és tankolt, a hídon indítható; saját dimenzió (fedélzetek a szekciókból),
    a kishajó a hangárban dokkol; utazás égitestek között eseményekkel (a hajós rendszerek mintájára).
+
+## Állapot (2026-11-04 hajnal, felügyelet nélküli munka)
+- **4. Űrlátvány – kész:** Tejút-sáv (8 szegmens), 4 köd, 12 csillagmező a pályán, a Holdon, az anyahajón és a hajó
+  ablakain; utazás közben elsuhanó por.
+- **5. Átdolgozás – kész:** minden régi felszíni és föld alatti rom újraépítve berendezett belső terekkel
+  (`tools/worldgen/overhaul.py`), a nagyok a `flat_site` legsíkabb-hely kereséssel; a `flat_site` a tisztítás után
+  újra lerakja a darabokat, így a rom saját földje/hava/növényei megmaradnak. Biome-ok: szintetizált hangulat
+  (hurok + egyszeri hangok, `tools/audio/make_ambience.py`), részecskék, autóroncsok, halottak, ládák, kövületek,
+  jégtüskék.
+- **6. Pálya és Hold – kész:** súlytalanság (kapaszkodás, sodródás), biztosítókötél tekercsekkel, MMU, törmelékáramok,
+  roncsmező az ISS körül (`tools/worldgen/space_sites.py`, `space/SpaceSites.java`), történelmi holdmissziók és a
+  Bárka–1 kolónia a Shackleton-peremen; két új terminálnapló (14: HALCYON, 15: Bárka–1).
+- **Anyahajó:** a szekciók berendezve (életfenntartás, farm, labor, kabinok, étkező, gyengélkedő, hangár, híd).
+- **Hátra van:** kutatóhajó-készlet és dokkolás; anyahajós utazási események valódi javítással; a Bárka–1 telepeseinek
+  felébresztése (következő égitestek előtti horog).

@@ -127,6 +127,8 @@ A tengerek kiszáradtak, és nincs Nether és End (a portál nem visz sehová). 
 | **Elhagyott farmvidék** | barna fű, durva föld | szalmabálák, tanya silóval, kiszáradt földek | – |
 | **Olajmező** | kátrányos homok, olajpala | olajkutak tartállyal, kátránytócsák (lassítanak) | – |
 
+**Hangulat:** minden biome-nak saját hangja van (szél a hamusivatagban és a sóban, jégrepedés és nyögő tornyok a megapoliszban, Geiger-ketyegés a kráterben, bugyogó sav a mocsárban, csúszó fémhulladék a szeméthegyeken, a szivattyúk dobbanása az olajmezőn, madárcsicsergés az oázisban), saját részecskéi (hamu, hópelyhek, szentjánosbogarak), és mindenfelé ott a régi világ: **elhagyott autók**, **halottak**, elszabadult **rakományládák**, a tengerfenéken és a megkövült erdőben **kövületek**, a megapoliszban **jégtüskék**.
+
 **Veszélyek:**
 
 - **Savas mocsár:** a vízben sebződsz és megmérgeződsz.
@@ -181,25 +183,25 @@ A struktúrák ládáiban és hordóiban kimentett technológia, élelem és ala
 
 | Struktúra | Hol | Jellemző zsákmány |
 |---|---|---|
-| **Kis bunker** (föld alatt, kis betonbódé a felszínen) | szinte mindenhol | fémhulladék, vezeték, áramkör, javítókészlet, gyapjú, élelem |
-| **Nagy bunker** (kétszintes) | hamusivatag, megkövült erdő, kanyon, farmvidék, szeméthegyek, megapolisz | katonai felszerelés, javítóállomás, élelem |
-| **Űrközpont** (kilövőállás, kidőlt rakéta, irányítóbunker) | sósivatag, hamusivatag | titánlemez, alumínium, űrruhadarabok, mágnes, akkumulátor, **ritkán ionhajtómű-készlet** |
-| **Kutatólabor** | megkövült erdő, megapolisz, savas mocsár, sósivatag | áramkör, szilícium, ritkaföldfém, lítium, akkumulátor, napelem |
-| **Kutatóállomás** (gólyalábas modulok) | sósivatag, megapolisz, sugárzó kráter, tengerfenék | titán, alumínium, űrsisak, javítókészlet |
-| **Magbank** (Svalbard-szerű) | befagyott megapolisz | vetőmagok, csemeték, krumpli, répa, bogyó, csontliszt |
-| **Terraformáló kísérlet** (üvegkupola) | sugárzó kráter, savas mocsár, sósivatag, hamusivatag | laborzsákmány |
-| **Napelemfarm** | sósivatag, hamusivatag, farmvidék | ipari zsákmány |
-| **Gát** | mély kanyonok | ipari zsákmány |
-| **Rádiótorony** | szeméthegyek, megkövült erdő, megapolisz, farmvidék | áramkör, vezeték, mágnes, vörös por |
+| **Kis bunker** (betonbódé homokzsákokkal; lent zsilip, nappali hálófülkével, konyha, rádiósarok, generátorterem, raktár, mosdó, szellőzőakna) | szinte mindenhol | fémhulladék, vezeték, áramkör, javítókészlet, gyapjú, élelem |
+| **Nagy bunker** (kétszintes kormányzati óvóhely: parancsnoki terem térképasztallal, híradó, hálóterem, étkező, konyha, gyengélkedő; lent generátorcsarnok, víztisztító, fegyverraktár, archívum, műhely; felszíni blokkház) | hamusivatag, megkövült erdő, kanyon, farmvidék, szeméthegyek, megapolisz | katonai felszerelés, javítóállomás, élelem |
+| **Űrközpont** (kilövőállás lángárokkal, 45 m-es szervizto­rony, három darabba tört rakéta, villámhárító-tornyok, víztorony, üzemanyaggömbök, kupolás irányítóbunker lépcsőzetes konzolsorokkal, lelátó, rakétakert) | sósivatag, hamusivatag | titánlemez, alumínium, űrruhadarabok, mágnes, akkumulátor, **ritkán ionhajtómű-készlet** |
+| **Kutatólabor** (üvegfalú előcsarnok recepcióval és karanténkapuval, zsilipes BSL-3 labor, fülkék, mintatartályok, hibernációs kapszulák, emeleten irodák és pihenő, tetőgépház) | megkövült erdő, megapolisz, savas mocsár, sósivatag | áramkör, szilícium, ritkaföldfém, lítium, akkumulátor, napelem |
+| **Kutatóállomás** (gólyalábas modulok fedett átjárókkal: lakómodul, labor, energiamodul, garázs a hójáróval, meteorológiai árboc, antenna, zászlósor) | sósivatag, megapolisz, sugárzó kráter, tengerfenék | titán, alumínium, űrsisak, javítókészlet |
+| **Magbank** (Svalbard-szerű: ékportál fényművészeti panellel, föld- és jéghalom, hosszú alagút, irányítóterem, három trezor: egy lezárt, egy kifosztott, egy beomlott) | befagyott megapolisz | vetőmagok, csemeték, krumpli, répa, bogyó, csontliszt |
+| **Terraformáló kísérlet** (gyűrűs légkörfeldolgozó torony, repedt biokupola halott kerttel, kondenzátortartályok, tükörsorok, vezérlőépület, mérgező túlfolyótó) | sugárzó kráter, savas mocsár, sósivatag, hamusivatag | laborzsákmány |
+| **Napelemfarm** (panelsorok, inverterek, kerített alállomás transzformátorokkal, kidőlt távvezeték-oszlop, vezérlőépület, beragadt tisztítórobot) | sósivatag, hamusivatag, farmvidék | ipari zsákmány |
+| **Gát** (íves gátfal koronaúttal és lámpákkal, árapasztó zsilipek, vízkivételi tornyok, szelepház, turbinacsarnok három generátorral, kiszáradt tározó egy hajóval) | mély kanyonok | ipari zsákmány |
+| **Rádióállomás** (50 m-es rácsos árboc pihenőkkel, stúdió, adóterem, gépész szobája, generátorok, ledőlt parabolaantenna, drótkerítés) | szeméthegyek, megkövült erdő, megapolisz, farmvidék | áramkör, vezeték, mágnes, vörös por |
 | **St. Raphael kórházkomplexum** (hatszintes L alakú épület, sürgősségi bejárat mentőautókkal, kórtermek, intenzív osztály, műtők, helikopter-leszálló a tetőn, hullaház a pincében, drótkerítéses karanténtábor sátrakkal) | megapolisz, hamusivatag, farmvidék, savas mocsár | orvosi zsákmány, aranyalma, feljegyzések |
-| **Laktanya** (őrtoronnyal) | hamusivatag, kanyon, megkövült erdő, szeméthegyek | fegyver, páncél, TNT, titánlemez |
+| **Katonai tábor** (szögesdrót, kapu őrbódéval, két barakk, étkező konyhával, fegyverraktár, gépjárműszín teherautókkal és dzsippel, őrtornyok, helikopter-leszálló roncsolt helikopterrel) | hamusivatag, kanyon, megkövült erdő, szeméthegyek | fegyver, páncél, TNT, titánlemez |
 | **Aurora International repülőtér** (220 blokkos kifutó a végén kiégett, három darabra tört géppel, gurulóút, betonplatform parkoló utasszállítóval, háromszintes terminál utasbeszálló hidakkal és tábori kórházzal, 44 m-es irányítótorony, hangár, üzemanyagtelep, parkoló autóroncsokkal) | sósivatag, kiszáradt tengerfenék (nagyon ritka) | városi, rakomány-, ipari és labor-zsákmány |
-| **Olajkút** | olajmező | ipari zsákmány, bitumen |
-| **Tanya** (pajta, siló, kiszáradt földek) | farmvidék | vetőmag, bőr, gyapjú, eszközök |
-| **Lezuhant teherkapszula**, **műhold**, **rakétafokozat** | mindenhol | élelem, fémhulladék, alumínium, napelem |
-| **Bányászdrón-telep** (aknával) | szeméthegyek, kanyon, olajmező | ipari zsákmány; a drónokból áramkör, vezeték, akkumulátor |
-| **Kolóniák** (benőtt, leégett, befagyott) | oázis/savas mocsár, hamusivatag/kráter, megapolisz | élelem, titán, gyapjú, bőr, űrsisak |
-| **Hajóroncs**, **bálnacsontváz** | kiszáradt tengerfenék | rakomány, iránytű, térkép, arany |
+| **Olajkút** (valódi alakú himbás kút, tárolótartályok, csővezeték, kezelőfülke, kiömlött olaj) | olajmező | ipari zsákmány, bitumen |
+| **Tanya** (kétszintes lakóház tornáccal, konyhával, nappalival és hálószobákkal; pajta istállóval, szénapadlással és traktorral; siló, szélkerekes kút, madárijesztő, karám) | farmvidék | vetőmag, bőr, gyapjú, eszközök |
+| **Lezuhant teherkapszula** (kráterben, szétterült ejtőernyővel), **műhold** (széttört napelemszárnyak a csúszásnyom végén), **rakétafokozat** (orral a földbe fúródva, bejárható szerelvényrekesz) | mindenhol | élelem, fémhulladék, alumínium, napelem |
+| **Automata bánya** (szállítótorony kötélkerékkel, akna, sínes táró drónokkal, drónhangár töltőállásokkal, szalagszállító, meddőhányók, vezérlőkonténer) | szeméthegyek, kanyon, olajmező | ipari zsákmány; a drónokból áramkör, vezeték, akkumulátor |
+| **Kolóniák** (benőtt, leégett, befagyott; központi kupola közösségi térrel és hidropónikus gyűrűvel, öt modul csőfolyosókon: hálóterem, rendelő, műhely, rádió, raktár; leszállópálya egy kompronccsal, rover, napelemek) | oázis/savas mocsár, hamusivatag/kráter, megapolisz | élelem, titán, gyapjú, bőr, űrsisak |
+| **Konténerszállító hajó** (dőlt testtel, konténerekkel, felépítménnyel, híddal és gépházzal), **kékbálna-csontváz** | kiszáradt tengerfenék | rakomány, iránytű, térkép, arany |
 | **Holt megaváros** (kereszteződések közlekedési lámpákkal, sugárutak autóroncsokkal, katonai ellenőrzőpontok, leomlott épületek; 90–110 m-es üvegfelhőkarcolók szerverszinttel, irodaházak, panelházak, rendőrség cellákkal, természettudományi múzeum T-rex csontvázzal, üzletsor, park) | befagyott megapolisz, hamusivatag | városi, katonai és labor-zsákmány minden épületben |
 | **Bunkerhálózat** (föld alatt: parancsnoki központ őrházzal és aknával a felszínre, sínes alagutak kábeltálcákkal, hálótermek emeletes ágyakkal, étkező, hibernációs terem, gyengélkedő, fegyverraktár, hidropónia, víztisztító, archívum, beomlott alagútvégek) | bármely szárazföldi biome, világonként legalább 3 | bunker-, katonai, orvosi, élelmiszer- és labor-zsákmány |
 | **Verdant-laboratórium** (ahol a Szürke Virágzás kiszabadult: négy üvegházcsarnok, a 4-es betörve, háromszintes laborépület, elszigetelő blokk zsilippel, öntözőcsatorna, alatta mintatároló trezor) | savas mocsár, megkövült erdő, farmvidék, világonként legalább 2 | labor- és kutatóállomás-zsákmány, magok |
@@ -286,6 +288,7 @@ Minden szekrény körül **törmeléket** (törmelék, törött beton) kell elta
 - **A fedélzeten:**
   - A hídon áll a **kormányállás**: guggolva irányt választasz (Föld körüli vagy Hold körüli pálya), sima kattintással indulsz. Az út kb. 10 perc, közben események történnek.
   - A hangárban a **hangárlift** levisz a pálya alatti égitestre. Egy lerakott hangárlift (recept: titán, antenna, áramkör, mágnes, akkumulátor) bárhonnan visszavisz a hangárba.
+  - **Berendezett fedélzetek:** életfenntartó üzem (légtisztítók, oxigéngenerátorok, víztartályok, vezérlőterem), hidropónikus ágyások termő növényekkel és öntözőcsatornával, üvegfalú laborok (biológia, anyagvizsgálat, megfigyelő, a vezető kutató irodája), kabinsor (ágy, szekrény, íróasztal minden kabinban), étkező konyhával, gyengélkedő, társalgó, hangár leszállóbölcsőkkel és irányítófülkével, lépcsőzetes híd állomásokkal és hologram-asztallal.
   - A farmfedélzeten az élő talaj megművelhető.
 
 ## 7. Receptek
@@ -515,7 +518,15 @@ Az idő a **játékidővel** telik: ha a szerver megáll, az út is. Az indítá
 
 Válaszd a navigációs konzolon a **Föld körüli pálya (ISS)** célt. A hajó felmegy pályára, és dokkol a régi **Nemzetközi Űrállomáshoz**. A hajóajtó a dokkolóporton lesz; kilépve az állomáson vagy.
 
-- **Mikrogravitáció:** a gravitáció 15%, nincs esési sebzés. A hajóban a stabilizátor ad mesterséges gravitációt; ha 20% alá esik, a hajóban is csökken.
+- **Súlytalanság:** pályán nincs gravitáció és esési sebzés. A hajóban a stabilizátor ad mesterséges gravitációt; ha 20% alá esik, a hajóban is csökken.
+  - **Kapaszkodás:** ha egy blokk karnyújtásnyira van, a mozgásgombokkal húzod magad (előre a nézés irányába, ugrás fel, lopakodás le); ha elengeded, megállsz.
+  - **Sodródás:** ha minden messze van, semmi nem lassít: amerre ellökted magad, arra mész tovább. A sisak kiírja: **SODRÓDSZ – NINCS KÖTÉL**.
+  - **Biztosítókötél** (recept: vas + gumi): pályán egy blokkra használva rácsatolsz. 16 m kötél, minden nálad lévő **kötéltekercs** +16 m (legfeljebb 3, azaz 64 m). A kötél megállít és visszahúz; sárga vonal látszik. Lopakodás + használat: lecsatolás. Ha a rögzítési pontot kibontják, a kötél elszakad.
+  - **Manőverező egység (MMU)** (recept: alumínium, áramkör, titánlemez, akkumulátor, két nitrogéntartály): ha nálad van, kapaszkodó nélkül a mozgásgombok a fúvókákat működtetik. Hajtógázt fogyaszt (a sisak mutatja), két **nitrogéntartállyal** utántölthető.
+  - **Törmelékáram:** néhány percenként a pálya egy szétesett műholdak törmelékfelhőjét keresztezi. Előtte figyelmeztetés jön (sisak + chat), utána 20 másodpercig aki kint van, és nincs semmi takarásban a törmelék irányából, eltalálható: sebzés, és gyakran **kilyukad a ruha** (tömítőhab!). Bújj be az állomásba vagy egy roncs mögé.
+- **Roncsmező az ISS körül** (külön repülés nélkül, kötéllel és MMU-val érhető el): öt **törmelékfelhő** lépcsőként az állomás körül (mindegyikre rá lehet csatolni), mögöttük:
+  - a **HALCYON** régi orbitális labor (lakómodul, labormodul, letört napelemszárny; benne a parancsnok naplója és ellátmány),
+  - egy **halott közvetítőműhold**, egy **kiégett felsőfokozat**, egy **nagy űrtávcső** (kinyitott fedéllel, műszerekkel), egy **sodródó személyszállító kapszula**.
 - **Az ISS valódi méretben** (1 blokk = 1 méter, kb. 120 × 75 méter):
   - elöl a dokkolóadapter, ahová a hajód kapcsolódik, utána Harmony, Destiny, Unity, majd az aranyfóliás orosz szegmens (Zarja, Zvezda);
   - oldalt Columbus, Kibo a raktármodullal és a nyitott kísérleti platformmal, Tranquility az alatta lévő **Cupolával** (hét ablakos kilátókupola, lefelé a Földre), és a Quest zsilip;
@@ -525,6 +536,10 @@ Válaszd a navigációs konzolon a **Föld körüli pálya (ISS)** célt. A haj�
 - Régi világban a kis állomást a következő indításkor lecseréli a valódi méretű; ha a hajód épp ott dokkolt, átkerül az új dokkolóporthoz.
 - **Az állomás minden blokkja kibányászható** kimentett anyagnak.
 - Pályáról a **Föld** cél visszavisz az utolsó földi leszállóhelyedre, a **Hold** cél pedig a Holdra.
+
+---
+
+**Az űr látványa:** pályán, a Holdon, az anyahajón és a hajó ablakain át a Tejút sávja, színes ködök és sűrű csillagmezők látszanak; utazás közben por és jégszemcsék suhannak el a hajó orra előtt.
 
 ---
 
@@ -541,6 +556,8 @@ Válaszd a **Hold** célt a Földről vagy pályáról. A hajó a **Nyugalom ten
 - **Relikviák:**
   - az Apollo–11, 12, 14, 15, 16 és 17 valódi leszállóhelyén leszállóegységek, kifakult zászlók, műszercsomagok, a 15–17-nél holdjárók;
   - a **Tranquility bázis** romjai ellátmánnyal, napelemmezővel és adatterminálokkal, amelyek a bázis utolsó napjait mesélik.
+  - **további történelmi missziók** a valódi helyükön, táblával: Luna–9 (az első lágy leszállás), Surveyor–3 (az Apollo–12 mellett), Luna–17 a **Lunohod–1** holdjáróval és Luna–21 a **Lunohod–2**-vel (keréknyomokkal), Csang'o–3 a Jütu holdjáróval, Csang'o–4 a túlsó oldalon, Csandrajána–3 (Vikram és Pragján) a déli pólus közelében, SLIM (orral lefelé), Luna–24;
+  - a **Bárka–1 kolónia** a déli póluson, a Shackleton-kráter peremén: a leszállólábain álló Bárka (bejárható híd és raktér), regolittal fedett lakókupolák alagutakkal (hálóterem, **hibernációs csarnok 380 alvó telepessel**, üvegház, műhely), jégbánya fúrótoronnyal, poláris naptornyok, leszállópályák, tömegkatapult-sín és a Föld felé forduló antennaárboc. A terminálok elmondják, mi történt velük.
 
 A Holdról a **Föld körüli pálya** vagy egyenesen a **Föld** felé indulhatsz vissza.
 
@@ -632,6 +649,7 @@ Ha a hajó terén kívülre kerülsz, a játék fél másodpercen belül visszat
 - **Több hajóosztály** és bővíthető belső tér: most egy alap hajó van.
 - **Bányászdrónok megjavítása**, olajfinomítás üzemanyaggá, víz- és levegőszűrés.
 - **A 4-es hajtómű-szint** beszerezhető alkatrésze.
-- **Nagyobb, összefüggő földi struktúrák** sok új blokkal, és a **Kármán-űrkikötő** az anyahajóval (következő rész).
+- A **kutatóhajó** készlete és dokkolása az anyahajó hangárjába; az anyahajós utazás eseményeinél valódi javítási feladatok.
+- A **Bárka–1** telepeseinek felébresztése (a terminálok már utalnak rá).
 
 A fejlesztés állapota a [`docs/roadmap.md`](docs/roadmap.md)-ben követhető.
