@@ -1098,8 +1098,9 @@ SINGLES = [
 
 def main():
     sizes = {}
+    import overhaul
     for (name, builder, biomes, spacing, sep, salt, depth, adaptation) in SINGLES:
-        b = builder()
+        b = overhaul.BUILDERS.get(name, builder)()
         sizes[name] = b.save(name)
         single_pool(name, name)
         ground = max(0, -min(p[1] for p in b.blocks))  # the ground layer is y = 0 in the builder

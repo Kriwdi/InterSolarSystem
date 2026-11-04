@@ -114,6 +114,8 @@ public class SceneScreenshots implements FabricClientGameTest {
 				org.slf4j.LoggerFactory.getLogger("salvage-test").info("[SALVAGE] chest holds {} iron nuggets", nuggets);
 			});
 
+			showcase(game, context);
+
 			// The spaceport's crane builds the mothership's keel (facilities restored by hand here), then the finished
 			// ship launches into its own dimension.
 			game.getServer().runCommand("gamemode spectator @a");
@@ -308,6 +310,38 @@ public class SceneScreenshots implements FabricClientGameTest {
 					context.takeScreenshot("31_aerial_" + name + "_top");
 				}
 			}
+		}
+	}
+
+	/**
+	 * The reworked ruins placed side by side high above the ground (no terrain in the way), each shot from outside and
+	 * from one room inside. Rows: template, camera inside (template coordinates), yaw.
+	 */
+	private static final Object[][] SHOWCASE = {
+		{"bunker_small", 7, 3, 10, -45}, {"bunker_large", 2, 9, 8, -135}, {"farmhouse", 12, 3, 15, 90},
+		{"radio_tower", 29, 3, 22, 45}, {"barracks", 16, 3, 14, 90}, {"oil_pumpjack", 5, 3, 18, 90},
+		{"solar_farm", 49, 3, 25, -45},
+	};
+
+	static void showcase(TestSingleplayerContext game, ClientGameTestContext context) {
+		game.getServer().runCommand("time set noon");
+		game.getServer().runCommand("gamemode spectator @a");
+		for (int i = 0; i < SHOWCASE.length; i++) {
+			Object[] row = SHOWCASE[i];
+			String name = (String) row[0];
+			int x0 = 3000 + i * 100;
+			int z0 = 3000;
+			game.getServer().runCommand("forceload add " + x0 + " " + z0 + " " + (x0 + 80) + " " + (z0 + 60));
+			game.getServer().runCommand("place template intersolarsystem:" + name + " " + x0 + " 200 " + z0);
+			game.getServer().runCommand("execute in minecraft:overworld run tp @a " + (x0 - 14) + " 222 " + (z0 - 14)
+					+ " -45 30");
+			context.waitTicks(120);
+			context.takeScreenshot("32_show_" + name + "_out");
+			game.getServer().runCommand("execute in minecraft:overworld run tp @a " + (x0 + (int) row[1]) + " "
+					+ (200 + (int) row[2]) + " " + (z0 + (int) row[3]) + " " + row[4] + " 15");
+			context.waitTicks(60);
+			context.takeScreenshot("32_show_" + name + "_in");
+			game.getServer().runCommand("forceload remove " + x0 + " " + z0 + " " + (x0 + 80) + " " + (z0 + 60));
 		}
 	}
 
