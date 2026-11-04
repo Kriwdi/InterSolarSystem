@@ -203,6 +203,16 @@ public final class SmokeTest {
 			found.put(key.identifier().getPath(), hit == null ? "MISSING" : hit.getFirst().toShortString());
 		}
 		LOGGER.info("[SMOKETEST] Earth biomes nearest to spawn {}: {}", spawn.toShortString(), found);
+		if ("MISSING".equals(found.get("oasis"))) {
+			LOGGER.error("[SMOKETEST-FAIL] the guaranteed oasis is missing");
+		}
+		if (earth.getChunkSource().getGenerator().getBiomeSource()
+				instanceof hu.kriwdi.intersolarsystem.worldgen.OasisBiomeSource oasisSource) {
+			int[] c = oasisSource.centreBlock(earth.getChunkSource().randomState().sampler());
+			LOGGER.info("[SMOKETEST] guaranteed oasis centred at {} {}", c[0], c[1]);
+		} else {
+			LOGGER.error("[SMOKETEST-FAIL] the Earth does not use the oasis biome source");
+		}
 		if (found.values().stream().filter("MISSING"::equals).count() > 2) {
 			LOGGER.error("[SMOKETEST-FAIL] more than two dead Earth biomes are missing within 6400 blocks");
 		}
