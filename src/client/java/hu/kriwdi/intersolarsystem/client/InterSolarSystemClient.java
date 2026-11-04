@@ -55,8 +55,29 @@ public class InterSolarSystemClient implements ClientModInitializer {
 						.accept(payload)));
 		net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK
 				.register(hu.kriwdi.intersolarsystem.client.sky.ShipView::tick);
+		net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK.register(ZeroGravity::tick);
+		net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback.EVENT.register((stack, context, flag, lines) -> {
+			var item = stack.getItem();
+			String key = item == hu.kriwdi.intersolarsystem.content.ModItems.SAFETY_TETHER ? "safety_tether"
+					: item == hu.kriwdi.intersolarsystem.content.ModItems.TETHER_SPOOL ? "tether_spool"
+					: item == hu.kriwdi.intersolarsystem.content.ModItems.MMU_PACK ? "mmu_pack"
+					: item == hu.kriwdi.intersolarsystem.content.ModItems.NITROGEN_TANK ? "nitrogen_tank" : null;
+			if (key != null) {
+				lines.add(net.minecraft.network.chat.Component.translatable("tooltip.intersolarsystem." + key)
+						.withStyle(net.minecraft.ChatFormatting.GRAY));
+			}
+		});
+		ClientPlayNetworking.registerGlobalReceiver(hu.kriwdi.intersolarsystem.space.EvaPayloads.Tether.TYPE,
+				(payload, context) -> context.client().execute(() -> ZeroGravity.accept(payload)));
+		ClientPlayNetworking.registerGlobalReceiver(hu.kriwdi.intersolarsystem.space.EvaPayloads.Debris.TYPE,
+				(payload, context) -> context.client().execute(() -> {
+					if (context.client().level != null) {
+						ZeroGravity.accept(payload, context.client().level.getGameTime());
+					}
+				}));
 		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
 			ClientShipStatus.clear();
+			ZeroGravity.clear();
 			hu.kriwdi.intersolarsystem.client.sky.ShipView.clear();
 			hu.kriwdi.intersolarsystem.client.sky.ClientManeuver.clear();
 		});

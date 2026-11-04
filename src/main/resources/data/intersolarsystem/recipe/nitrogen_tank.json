@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "intersolarsystem:aluminium_ingot",
+    "G": "minecraft:glass_bottle"
+  },
+  "pattern": [
+    " A ",
+    "AGA",
+    " A "
+  ],
+  "result": {
+    "id": "intersolarsystem:nitrogen_tank",
+    "count": 2
+  }
+}

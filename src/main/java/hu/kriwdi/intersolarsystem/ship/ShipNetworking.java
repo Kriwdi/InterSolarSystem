@@ -22,6 +22,12 @@ public final class ShipNetworking {
 		PayloadTypeRegistry.clientboundPlay().register(hu.kriwdi.intersolarsystem.lore.TapePlayPayload.TYPE,
 				hu.kriwdi.intersolarsystem.lore.TapePlayPayload.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(RepairBoardPayloads.Result.TYPE, RepairBoardPayloads.Result.CODEC);
+		PayloadTypeRegistry.clientboundPlay().register(hu.kriwdi.intersolarsystem.space.EvaPayloads.Tether.TYPE,
+				hu.kriwdi.intersolarsystem.space.EvaPayloads.Tether.CODEC);
+		PayloadTypeRegistry.clientboundPlay().register(hu.kriwdi.intersolarsystem.space.EvaPayloads.Debris.TYPE,
+				hu.kriwdi.intersolarsystem.space.EvaPayloads.Debris.CODEC);
+		PayloadTypeRegistry.serverboundPlay().register(hu.kriwdi.intersolarsystem.space.EvaPayloads.Thrust.TYPE,
+				hu.kriwdi.intersolarsystem.space.EvaPayloads.Thrust.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(NavigationPayloads.Open.TYPE, NavigationPayloads.Open.CODEC);
 		PayloadTypeRegistry.serverboundPlay().register(NavigationPayloads.Launch.TYPE, NavigationPayloads.Launch.CODEC);
 		ServerPlayNetworking.registerGlobalReceiver(NavigationPayloads.Launch.TYPE, (payload, context) -> {

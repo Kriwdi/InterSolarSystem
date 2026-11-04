@@ -2350,6 +2350,98 @@ public final class ModLangTable {
 				"Oil gurgles / pump clanks",
 				"Öl gluckert / Pumpe klappert",
 				"Olaj bugyog / szivattyú csattog");
+		add(rows, "item.intersolarsystem.safety_tether",
+				"Safety Tether",
+				"Sicherungsleine",
+				"Biztosítókötél");
+		add(rows, "item.intersolarsystem.tether_spool",
+				"Tether Spool",
+				"Leinenspule",
+				"Kötéltekercs");
+		add(rows, "item.intersolarsystem.mmu_pack",
+				"Manned Maneuvering Unit",
+				"Bemannte Manövriereinheit",
+				"Manőverező egység (MMU)");
+		add(rows, "item.intersolarsystem.nitrogen_tank",
+				"Nitrogen Tank",
+				"Stickstofftank",
+				"Nitrogéntartály");
+		add(rows, "tooltip.intersolarsystem.safety_tether",
+				"In orbit: use on a block to clip on (16 m of line, +16 m per spool carried). Sneak + use to unclip.",
+				"Im Orbit: an einem Block benutzen zum Einklinken (16 m Leine, +16 m je mitgeführter Spule). Schleichen + benutzen zum Lösen.",
+				"Pályán: blokkra használva rácsatolsz (16 m kötél, +16 m minden nálad lévő tekercsért). Lopakodás + használat: lecsatolás.");
+		add(rows, "tooltip.intersolarsystem.tether_spool",
+				"Extra line for the safety tether (up to 3 spools).",
+				"Zusätzliche Leine für die Sicherungsleine (bis zu 3 Spulen).",
+				"Plusz kötél a biztosítókötélhez (legfeljebb 3 tekercs).");
+		add(rows, "tooltip.intersolarsystem.mmu_pack",
+				"In orbit, away from handholds: the movement keys fire its jets (jump up, sneak down). Refill: with two nitrogen tanks.",
+				"Im Orbit, fern von Haltegriffen: die Bewegungstasten zünden die Düsen (Springen hoch, Schleichen runter). Nachfüllen: mit zwei Stickstofftanks.",
+				"Pályán, kapaszkodóktól távol: a mozgásgombok a fúvókákat működtetik (ugrás fel, lopakodás le). Utántöltés: két nitrogéntartállyal.");
+		add(rows, "tooltip.intersolarsystem.nitrogen_tank",
+				"Propellant for the manoeuvring unit.",
+				"Treibgas für die Manövriereinheit.",
+				"Hajtógáz a manőverező egységhez.");
+		add(rows, "eva.intersolarsystem.tether_clipped",
+				"Tether clipped on: %s m of line",
+				"Leine eingeklinkt: %s m",
+				"Kötél rácsatolva: %s m");
+		add(rows, "eva.intersolarsystem.tether_unclipped",
+				"Tether unclipped",
+				"Leine gelöst",
+				"Kötél lecsatolva");
+		add(rows, "eva.intersolarsystem.tether_hint",
+				"Use the tether on a block to clip on",
+				"Die Leine an einem Block benutzen, um einzuklinken",
+				"Használd a kötelet egy blokkon a rácsatoláshoz");
+		add(rows, "eva.intersolarsystem.tether_snapped",
+				"The anchor broke away: tether lost!",
+				"Der Ankerpunkt ist abgerissen: Leine verloren!",
+				"A rögzítési pont leszakadt: a kötél elveszett!");
+		add(rows, "eva.intersolarsystem.mmu_empty",
+				"Manoeuvring unit: propellant exhausted",
+				"Manövriereinheit: Treibgas verbraucht",
+				"Manőverező egység: kifogyott a hajtógáz");
+		add(rows, "eva.intersolarsystem.debris_warning",
+				"DEBRIS STREAM in %s s. Get inside or behind the station!",
+				"TRÜMMERSTROM in %s s. Hinein oder hinter die Station!",
+				"TÖRMELÉKÁRAM %s mp múlva. Menj be, vagy húzódj az állomás mögé!");
+		add(rows, "eva.intersolarsystem.debris_clear",
+				"Debris stream passed",
+				"Trümmerstrom vorüber",
+				"A törmelékáram elvonult");
+		add(rows, "hud.intersolarsystem.eva.tether",
+				"TETHER %s / %s m",
+				"LEINE %s / %s m",
+				"KÖTÉL %s / %s m");
+		add(rows, "hud.intersolarsystem.eva.drift",
+				"ADRIFT - NO TETHER",
+				"TREIBEND - KEINE LEINE",
+				"SODRÓDSZ - NINCS KÖTÉL");
+		add(rows, "hud.intersolarsystem.eva.mmu",
+				"MMU %s%%",
+				"MMU %s%%",
+				"MMU %s%%");
+		add(rows, "hud.intersolarsystem.eva.mmu_firing",
+				"MMU %s%% >>",
+				"MMU %s%% >>",
+				"MMU %s%% >>");
+		add(rows, "hud.intersolarsystem.eva.debris_in",
+				"DEBRIS IN %s s",
+				"TRÜMMER IN %s s",
+				"TÖRMELÉK %s mp MÚLVA");
+		add(rows, "hud.intersolarsystem.eva.debris_now",
+				"DEBRIS STREAM - TAKE COVER",
+				"TRÜMMERSTROM - DECKUNG!",
+				"TÖRMELÉKÁRAM - FEDEZÉKBE!");
+		add(rows, "death.attack.intersolarsystem.orbital_debris",
+				"%1$s was shredded by orbital debris",
+				"%1$s wurde von Weltraumschrott zerfetzt",
+				"%1$s-t szétszaggatta az űrszemét");
+		add(rows, "death.attack.intersolarsystem.orbital_debris.player",
+				"%1$s was shredded by orbital debris whilst fighting %2$s",
+				"%1$s wurde im Kampf gegen %2$s von Weltraumschrott zerfetzt",
+				"%1$s-t szétszaggatta az űrszemét %2$s ellen harcolva");
 		check(rows);
 		return List.copyOf(rows);
 	}

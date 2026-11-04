@@ -168,6 +168,16 @@ def salvage_recipes():
     shaped("hangar_lift", ["TAT", "CRC", "TBT"], {"T": "titanium_plate", "A": "antenna_dish", "C": "salvaged_circuit",
                                                    "R": "rare_earth_magnet", "B": "battery_cell"}, "hangar_lift")
     cook("glass_from_shards", "glass_shards", "minecraft:glass", 0.1, kinds=("smelting",))
+    # Spacewalk gear.
+    shaped("safety_tether", ["II ", "S S", " SS"], {"I": "minecraft:iron_ingot", "S": "rubber_scrap"}, "safety_tether",
+           category="equipment")
+    shaped("tether_spool", ["SSS", "SIS", "SSS"], {"S": "minecraft:string", "I": "minecraft:iron_ingot"}, "tether_spool")
+    shaped("nitrogen_tank", [" A ", "AGA", " A "], {"A": "aluminium_ingot", "G": "minecraft:glass_bottle"},
+           "nitrogen_tank", count=2)
+    shaped("mmu_pack", ["ACA", "TBT", "N N"], {"A": "aluminium_ingot", "C": "salvaged_circuit", "T": "titanium_plate",
+                                               "B": "battery_cell", "N": "nitrogen_tank"}, "mmu_pack",
+           category="equipment")
+    shapeless("mmu_pack_refill", ["mmu_pack", "nitrogen_tank", "nitrogen_tank"], "mmu_pack")
 
 
 def tags():

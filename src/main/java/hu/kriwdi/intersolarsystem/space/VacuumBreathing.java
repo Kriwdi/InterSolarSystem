@@ -189,7 +189,17 @@ public final class VacuumBreathing {
 		}
 	}
 
-	private static DamageSource source(ServerLevel level, ResourceKey<DamageType> key) {
+	/** A hit that tore the suit (orbital debris): it leaks until sealed. */
+	public static void puncture(ServerPlayer player) {
+		ItemStack suit = player.getItemBySlot(EquipmentSlot.CHEST);
+		if (suit.getItem() == ModItems.SPACE_SUIT && !leaking(suit)) {
+			setLeak(suit, true);
+			player.sendOverlayMessage(Component.translatable("message.intersolarsystem.suit_punctured"));
+			player.level().playSound(null, player.blockPosition(), ModSounds.SUIT_LEAK, SoundSource.PLAYERS, 0.9F, 1.0F);
+		}
+	}
+
+	static DamageSource source(ServerLevel level, ResourceKey<DamageType> key) {
 		return new DamageSource(level.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(key));
 	}
 }

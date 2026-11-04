@@ -61,6 +61,11 @@ public final class ModItems {
 	public static final Item RUBBER_SCRAP = simple("rubber_scrap");
 	public static final Item GLASS_SHARDS = simple("glass_shards");
 	public static final Item CUTTING_TORCH = register("cutting_torch", Item::new, new Item.Properties().durability(160));
+	/** Spacewalk gear: the safety line (clip to a block in orbit), extra line, the manoeuvring unit and its gas. */
+	public static final Item SAFETY_TETHER = register("safety_tether", Item::new, new Item.Properties().stacksTo(1));
+	public static final Item TETHER_SPOOL = register("tether_spool", Item::new, new Item.Properties().stacksTo(3));
+	public static final Item MMU_PACK = register("mmu_pack", Item::new, new Item.Properties().durability(1200));
+	public static final Item NITROGEN_TANK = register("nitrogen_tank", Item::new, new Item.Properties().stacksTo(16));
 
 	// ---- Mothership section kits and ship kits, made by a spaceport's fabricator (see spaceport.Section).
 	public static final Item KEEL_KIT = kit("keel_kit");

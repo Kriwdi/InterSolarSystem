@@ -92,6 +92,44 @@ public class HelmetHudElement implements HudElement {
 		if (warning != null && (time / 8) % 2 == 0) {
 			centred(g, mc, warning, cx, h - 70, colour);
 		}
+		eva(g, mc, player, cx, cy + radius / 2 + 8, time);
+	}
+
+	/** Spacewalk readouts under the visor: tether, drift, the manoeuvring unit, debris streams. */
+	private static void eva(GuiGraphicsExtractor g, Minecraft mc, LocalPlayer player, int cx, int y, long time) {
+		if (!mc.level.dimension().equals(hu.kriwdi.intersolarsystem.ship.ShipDimensions.ORBIT)) {
+			return;
+		}
+		var tether = ZeroGravity.tether();
+		java.util.List<Component> lines = new java.util.ArrayList<>();
+		java.util.List<Integer> colours = new java.util.ArrayList<>();
+		if (tether.on()) {
+			double d = Math.sqrt(player.distanceToSqr(net.minecraft.world.phys.Vec3.atCenterOf(tether.anchor())));
+			lines.add(Component.translatable("hud.intersolarsystem.eva.tether", (int) Math.round(d), tether.length()));
+			colours.add(d > tether.length() - 2 ? 0xFFF2B233 : 0xFFF2C744);
+		} else if (ZeroGravity.drifting() && (time / 10) % 2 == 0) {
+			lines.add(Component.translatable("hud.intersolarsystem.eva.drift"));
+			colours.add(0xFFFF5A3C);
+		}
+		net.minecraft.world.item.ItemStack mmu = hu.kriwdi.intersolarsystem.space.OrbitalEva.findMmu(player);
+		if (!mmu.isEmpty()) {
+			int fuel = Math.round(100F * (mmu.getMaxDamage() - mmu.getDamageValue()) / mmu.getMaxDamage());
+			lines.add(Component.translatable(ZeroGravity.thrusting() ? "hud.intersolarsystem.eva.mmu_firing"
+					: "hud.intersolarsystem.eva.mmu", fuel));
+			colours.add(fuel > 20 ? 0xFF4FC3F7 : 0xFFF2B233);
+		}
+		int phase = ZeroGravity.debrisPhase(time);
+		if (phase == 1) {
+			lines.add(Component.translatable("hud.intersolarsystem.eva.debris_in", ZeroGravity.debrisLeft(time) / 20 + 1));
+			colours.add(0xFFF2B233);
+		} else if (phase == 2 && (time / 6) % 2 == 0) {
+			lines.add(Component.translatable("hud.intersolarsystem.eva.debris_now"));
+			colours.add(0xFFFF5A3C);
+		}
+		for (int i = 0; i < lines.size(); i++) {
+			var line = lines.get(i);
+			g.text(mc.font, line, cx - mc.font.width(line) / 2, y + i * 10, colours.get(i), true);
+		}
 	}
 
 	/** Dots along a circular arc (degrees, 0 = right, counter-clockwise up); the first {@code fill} part is lit. */

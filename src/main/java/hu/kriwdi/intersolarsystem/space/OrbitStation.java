@@ -47,6 +47,11 @@ public final class OrbitStation {
 		return CENTRE.offset(d[0], d[1], d[2]);
 	}
 
+	/** Whether the full-size station stands (the wreck field is placed with it). */
+	public static boolean present(ServerLevel orbit) {
+		return isCurrent(orbit);
+	}
+
 	private static boolean isCurrent(ServerLevel orbit) {
 		int[] m = IssLayout.MARKER;
 		BlockPos marker = CENTRE.offset(m[0], m[1], m[2]);
@@ -80,6 +85,7 @@ public final class OrbitStation {
 				}
 			}
 		}
+		SpaceSites.ensureOrbit(orbit);
 	}
 
 	/** Removes the blocks of the first, small station (only station and ship blocks; nothing else is touched). */

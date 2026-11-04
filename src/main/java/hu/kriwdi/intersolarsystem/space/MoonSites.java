@@ -69,13 +69,13 @@ public final class MoonSites {
 
 	/** Builds every site if Tranquility Base is not there yet. */
 	public static void ensureBuilt(ServerLevel moon) {
-		if (built(moon)) {
-			return;
+		if (!built(moon)) {
+			for (Apollo apollo : APOLLO) {
+				buildApollo(moon, apollo);
+			}
+			buildBase(moon);
 		}
-		for (Apollo apollo : APOLLO) {
-			buildApollo(moon, apollo);
-		}
-		buildBase(moon);
+		SpaceSites.ensureMoon(moon);
 	}
 
 	/**

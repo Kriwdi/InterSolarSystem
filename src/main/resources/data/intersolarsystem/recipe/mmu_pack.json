@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": "intersolarsystem:aluminium_ingot",
+    "C": "intersolarsystem:salvaged_circuit",
+    "T": "intersolarsystem:titanium_plate",
+    "B": "intersolarsystem:battery_cell",
+    "N": "intersolarsystem:nitrogen_tank"
+  },
+  "pattern": [
+    "ACA",
+    "TBT",
+    "N N"
+  ],
+  "result": {
+    "id": "intersolarsystem:mmu_pack",
+    "count": 1
+  }
+}

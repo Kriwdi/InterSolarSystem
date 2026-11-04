@@ -31,7 +31,8 @@ import hu.kriwdi.intersolarsystem.ship.ShipSubsystem;
  * vacuum without a sealed, filled suit, oxygen use, and refilling inside the ship.
  */
 public final class SpaceEnvironment {
-	public static final double ORBIT_GRAVITY_FACTOR = -0.85;
+	/** Weightless: the floating (handholds, drift, the manoeuvring unit) is done client-side, see ZeroGravity. */
+	public static final double ORBIT_GRAVITY_FACTOR = -1.0;
 	/** One sixth of Earth's gravity. */
 	public static final double MOON_GRAVITY_FACTOR = -0.83;
 	public static final int MOON_SIZE = 5500;
@@ -77,7 +78,7 @@ public final class SpaceEnvironment {
 					: interior && ship.condition(ShipSubsystem.STABILIZER) < STABILISER_FAILURE
 							? FAILED_STABILISER_GRAVITY_FACTOR : 0.0;
 			setModifier(player, Attributes.GRAVITY, GRAVITY_ID, gravity, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-			setModifier(player, Attributes.SAFE_FALL_DISTANCE, FALL_ID, gravity != 0.0 ? 64.0 : 0.0,
+			setModifier(player, Attributes.SAFE_FALL_DISTANCE, FALL_ID, gravity != 0.0 ? 256.0 : 0.0,
 					AttributeModifier.Operation.ADD_VALUE);
 			if (player.isCreative() || player.isSpectator()) {
 				continue;

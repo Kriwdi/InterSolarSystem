@@ -285,6 +285,26 @@ TERMINALS = {
             "> triage\nGREEN ........ 0\nYELLOW ....... 0\nRED .......... 312\nBLACK ........ 1904\n\n> order\nCamp gate closed by the military district. Patients may not leave. Staff may not leave."]},
         "hu": {"title": "ST. RAPHAEL KÓRHÁZ", "subtitle": "osztályozás", "pages": [
             "> osztalyozas\nZÖLD ......... 0\nSÁRGA ........ 0\nPIROS ........ 312\nFEKETE ....... 1904\n\n> parancs\nA tábor kapuját a katonai körzet lezárta. Beteg nem távozhat. Személyzet nem távozhat."]}},
+    "terminal_14": {
+        "en": {"title": "HALCYON ORBITAL LAB", "subtitle": "commander's log, Cmdr. A. Novak", "pages": [
+            "> log 4471\nThe last relief flight was cancelled. Kepler and Osei took the capsule down. I stayed: somebody has to keep the station's beacon on for the Arks.",
+            "> log 4502\nArk-1 passed overhead today, burning for the Moon. Beautiful. Ark-3 an hour later. I waved. Stupid.",
+            "> log 4560\nDebris streams every few hours now: the old satellites are breaking up. I go out on the line only. Never without the line.",
+            "> log 4611\nOxygen for nine days. Raised the orbit with the last fuel so HALCYON outlives me. Whoever reads this: the ISS has supplies. Clip on, and look at the Earth for me."]},
+        "hu": {"title": "HALCYON ORBITÁLIS LABOR", "subtitle": "parancsnoki napló, A. Novak parancsnok", "pages": [
+            "> naplo 4471\nAz utolsó váltójáratot törölték. Kepler és Osei lement a kapszulával. Én maradtam: valakinek égve kell tartania az állomás jeladóját a Bárkáknak.",
+            "> naplo 4502\nMa elhúzott fölöttem a Bárka-1, a Hold felé gyorsított. Gyönyörű. Egy órával később a Bárka-3. Integettem. Hülyeség.",
+            "> naplo 4560\nMár óránként jönnek a törmelékáramok: szétesnek a régi műholdak. Csak kötélen megyek ki. Soha kötél nélkül.",
+            "> naplo 4611\nKilenc napra való oxigén. Az utolsó üzemanyaggal megemeltem a pályát, hogy a HALCYON túléljen. Aki ezt olvassa: az ISS-en van készlet. Csatold be magad, és nézd meg helyettem a Földet."]}},
+    "terminal_15": {
+        "en": {"title": "ARK-1 COLONY", "subtitle": "Shackleton rim / colony status", "pages": [
+            "> status\nCOLONISTS ........ 380\nAWAKE ............ 0\nCRYO HALL ........ NOMINAL (SOLAR TOWERS 61%)\nICE MINE ......... IDLE\nEARTH LINK ....... SILENT SINCE DAY 214",
+            "> decision, day 240\nWithout Earth's supply runs the greenhouse cannot feed 380. Council vote: long sleep for everyone, one watch officer by rotation. The rotation ended on day 911.",
+            "> wake order\nWake the colony on signal from ARK-5 or any Earth vessel. Wake codes are held by the cryo hall console. Bring seeds: ours did not survive the regolith."]},
+        "hu": {"title": "BÁRKA-1 KOLÓNIA", "subtitle": "Shackleton-perem / a kolónia állapota", "pages": [
+            "> allapot\nTELEPESEK ........ 380\nÉBREN ............ 0\nHIBERNÁCIÓS CSARNOK  NÉVLEGES (NAPTORNYOK 61%)\nJÉGBÁNYA ......... ÁLL\nFÖLDI KAPCSOLAT .. NÉMA A 214. NAP ÓTA",
+            "> dontes, 240. nap\nA földi utánpótlás nélkül az üvegház nem tud 380 embert etetni. A tanács döntése: hosszú alvás mindenkinek, egy ügyeletes forgásban. A forgás a 911. napon megszakadt.",
+            "> ebresztesi parancs\nA kolóniát a BÁRKA-5 vagy bármely földi hajó jelére kell felébreszteni. Az ébresztőkódok a hibernációs csarnok konzolján vannak. Hozzatok magot: a mieink nem élték túl a regolitot."]}},
 }
 
 MANUALS = {

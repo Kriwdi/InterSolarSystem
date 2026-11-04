@@ -219,6 +219,20 @@ public final class SmokeTest {
 			}
 		}
 		LOGGER.info("[SMOKETEST] mothership blueprints: {}", blueprints);
+		StringBuilder sites = new StringBuilder();
+		for (var site : hu.kriwdi.intersolarsystem.space.SpaceSites.ORBIT) {
+			if (!hu.kriwdi.intersolarsystem.space.SiteTemplates.exists(earth, site.template())) {
+				LOGGER.error("[SMOKETEST-FAIL] space site template {} is missing", site.template());
+			}
+			sites.append(site.template()).append(' ');
+		}
+		for (var site : hu.kriwdi.intersolarsystem.space.SpaceSites.MOON) {
+			if (!hu.kriwdi.intersolarsystem.space.SiteTemplates.exists(earth, site.template())) {
+				LOGGER.error("[SMOKETEST-FAIL] space site template {} is missing", site.template());
+			}
+			sites.append(site.template()).append(' ');
+		}
+		LOGGER.info("[SMOKETEST] space site templates: {}", sites);
 		long missing = structures.values().stream().filter("MISSING"::equals).count();
 		if (structures.size() < 20 || missing > 0) {
 			LOGGER.error("[SMOKETEST-FAIL] {} of {} structures not found anywhere on the Earth", missing, structures.size());

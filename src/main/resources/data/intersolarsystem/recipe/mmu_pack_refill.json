@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "intersolarsystem:mmu_pack",
+    "intersolarsystem:nitrogen_tank",
+    "intersolarsystem:nitrogen_tank"
+  ],
+  "result": {
+    "id": "intersolarsystem:mmu_pack",
+    "count": 1
+  }
+}

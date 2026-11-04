@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": "minecraft:iron_ingot",
+    "S": "intersolarsystem:rubber_scrap"
+  },
+  "pattern": [
+    "II ",
+    "S S",
+    " SS"
+  ],
+  "result": {
+    "id": "intersolarsystem:safety_tether",
+    "count": 1
+  }
+}

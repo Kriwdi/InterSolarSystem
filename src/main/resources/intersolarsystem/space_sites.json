@@ -1,0 +1,102 @@
+{
+ "orbit/halcyon": [
+  -4,
+  -7,
+  -17
+ ],
+ "orbit/dead_satellite": [
+  -17,
+  -3,
+  -4
+ ],
+ "orbit/upper_stage": [
+  -2,
+  -2,
+  -3
+ ],
+ "orbit/space_telescope": [
+  -5,
+  -5,
+  -7
+ ],
+ "orbit/capsule_adrift": [
+  -3,
+  -3,
+  -8
+ ],
+ "orbit/debris_cloud_1": [
+  -9,
+  -5,
+  -9
+ ],
+ "orbit/debris_cloud_2": [
+  -7,
+  -5,
+  -9
+ ],
+ "orbit/debris_cloud_3": [
+  -8,
+  -5,
+  -9
+ ],
+ "orbit/debris_cloud_4": [
+  -9,
+  -5,
+  -9
+ ],
+ "orbit/debris_cloud_5": [
+  -9,
+  -5,
+  -8
+ ],
+ "moon/luna9": [
+  -5,
+  -2,
+  -5
+ ],
+ "moon/surveyor3": [
+  -6,
+  -2,
+  -6
+ ],
+ "moon/lunokhod1": [
+  -10,
+  -2,
+  -10
+ ],
+ "moon/lunokhod2": [
+  -10,
+  -2,
+  -10
+ ],
+ "moon/change3": [
+  -9,
+  -2,
+  -9
+ ],
+ "moon/change4": [
+  -9,
+  -2,
+  -9
+ ],
+ "moon/chandrayaan3": [
+  -8,
+  -2,
+  -8
+ ],
+ "moon/slim": [
+  -6,
+  -2,
+  -6
+ ],
+ "moon/luna24": [
+  -5,
+  -3,
+  -5
+ ],
+ "moon/ark1_colony": [
+  -58,
+  -3,
+  -58
+ ]
+}
